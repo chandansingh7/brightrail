@@ -18,7 +18,7 @@ When you add new planning topics, either extend the closest doc or add a new fil
 
 | Topic | Decision |
 |--------|----------|
-| Angular baseline | **20.x** ([LTS policy](https://angular.dev/reference/releases)) — workspace scaffolded with Angular CLI 20 |
+| Angular baseline | **21.x** ([support policy](https://angular.dev/reference/releases)) — workspace upgraded from 20 to 21 with `ng update` |
 | Product name | **Fun Angular Component Library** (FACL) |
 | Library project | **`facl`** |
 | Published import path | **`@facl/ui`** (`file:dist/facl` in this repo for Midway) |

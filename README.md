@@ -1,6 +1,6 @@
 # facl-ui
 
-**Fun Angular Component Library** — Angular workspace targeting **Angular 20.x** ([releases / LTS](https://angular.dev/reference/releases)).
+**Fun Angular Component Library** — Angular workspace targeting **Angular 21.x** ([releases / support](https://angular.dev/reference/releases)).
 
 | Script | Purpose |
 |--------|---------|
