@@ -2,7 +2,7 @@
 
 > Planning hub: [MASTER-PLAN.md](./MASTER-PLAN.md)
 
-This document **grades** [deep-research-report.md](./deep-research-report.md) and **maps** its recommendations to **Fun Angular Component Library** (`facl`) and **funfair** (see [PLAN.md](./PLAN.md) and [COMPONENT-VARIATIONS-PLAN.md](./COMPONENT-VARIATIONS-PLAN.md)).
+This document **grades** [deep-research-report.md](./deep-research-report.md) and **maps** its recommendations to **Fun Angular Component Library** (`brightrail`) and **funfair** (see [PLAN.md](./PLAN.md) and [COMPONENT-VARIATIONS-PLAN.md](./COMPONENT-VARIATIONS-PLAN.md)).
 
 ---
 
@@ -24,7 +24,7 @@ This document **grades** [deep-research-report.md](./deep-research-report.md) an
 
 1. **Design completeness rule** — A visual “pack” or theme is valid only if it covers the agreed component set and variants (matches your “variations per page” idea at platform scale).
 2. **Separate semantics from chrome** — Stable component names and variant enums; tokens (CSS custom properties) for look; behavior via native elements + CDK + (where you adopt it) Angular Aria.
-3. **APF-style packaging** — Secondary entry points (e.g. `@scope/facl/button`) when the library grows; `testing` entry for harnesses later.
+3. **APF-style packaging** — Secondary entry points (e.g. `brightrail/button`) when the library grows; `testing` entry for harnesses later.
 4. **Conformance over time** — Even a small team can start with a **JSON manifest** per theme/pack and a single CI test that fails if a required export is missing.
 5. **Adapters for hard domains** — Charts and rich text as wrappers, not from-scratch engines.
 6. **Layered quality** — Unit/component tests → a11y checks → visual regression when you have budget for baselines.
@@ -33,9 +33,9 @@ This document **grades** [deep-research-report.md](./deep-research-report.md) an
 
 ## What to adapt or defer
 
-| Report suggestion | For facl / funfair now |
+| Report suggestion | For brightrail / funfair now |
 |-------------------|-------------------------|
-| Full monorepo (`apps/docs-site`, `storybook-host`, many packages) | Start with **`projects/facl` + `projects/funfair`**; add Storybook or a docs app only when pain justifies it. |
+| Full monorepo (`apps/docs-site`, `storybook-host`, many packages) | Start with **`projects/brightrail` + `projects/funfair`**; add Storybook or a docs app only when pain justifies it. |
 | Storybook as *primary* catalog | Your plan uses **funfair** (one component per page + snippets). You can add Storybook later for Chromatic/isolated stories, or keep funfair as the public face. |
 | Angular 20/21 baseline | Pick **one** supported Angular version you actually use; confirm LTS/active dates on [angular.dev](https://angular.dev) at implementation time—do not rely on the report’s April 2026 snapshot alone. |
 | Vitest default | Align with **your** `ng new` / workspace test runner; upgrade when the CLI you use recommends it. |
@@ -53,11 +53,11 @@ Use this to grow from “fun library + showcase” toward “enterprise-grade”
 - [ ] Replace citation placeholders in the research doc with **real URLs** or move uncited bullets to an “unsupported opinion” section.
 - [ ] Choose **Angular major** and document support window.
 - [ ] Decide: **funfair-only** docs vs **Storybook** vs both (and when).
-- [ ] Rename alignment: report uses `Ui*` / `uiButton`; your plan uses `facl-*`. Pick **one** public naming convention and document it.
+- [ ] Rename alignment: report uses `Ui*` / `uiButton`; your plan uses `brightrail-*`. Pick **one** public naming convention and document it.
 
-### Phase 1 — “Publication-grade” facl (matches your existing MD plans)
+### Phase 1 — “Publication-grade” brightrail (matches your existing MD plans)
 
-- [ ] Workspace: `facl` library + `funfair` app; routes **one component per page**; **variants + use cases + usage snippets** (see [COMPONENT-VARIATIONS-PLAN.md](./COMPONENT-VARIATIONS-PLAN.md)).
+- [ ] Workspace: `brightrail` library + `funfair` app; routes **one component per page**; **variants + use cases + usage snippets** (see [COMPONENT-VARIATIONS-PLAN.md](./COMPONENT-VARIATIONS-PLAN.md)).
 - [ ] **Accessibility:** WCAG **AA** target documented; **keyboard** and **focus-visible** tokens; **APG-aligned** composites; funfair **Accessibility** block per page; manual screen-reader spot checks for new widgets; **voice-friendly** naming (visible labels aligned with accessible names).
 - [ ] Tokens: introduce **semantic CSS custom properties** for at least one pack (even if only “default”).
 - [ ] API rules from report: **semantic names**, **variant unions** (not free-form classes), **OnPush**, prefer **native control + directive** where it fits.
@@ -65,7 +65,7 @@ Use this to grow from “fun library + showcase” toward “enterprise-grade”
 
 ### Phase 2 — Multi-pack / conformance (research “design pack” core)
 
-- [ ] Define `UiDesignPackManifest` (or `FaclDesignPackManifest`) for each approved pack; extend as inventory grows.
+- [ ] Define `UiDesignPackManifest` (or `BrightrailDesignPackManifest`) for each approved pack; extend as inventory grows.
 - [ ] CI: script or test that **fails if manifest claims a variant the code does not implement** (or inverse: generated manifest from source—pick one direction).
 - [ ] funfair: **pack switcher** (e.g. `data-ui-pack`) so the same pages render under each approved pack.
 
@@ -82,10 +82,10 @@ Use this to grow from “fun library + showcase” toward “enterprise-grade”
 
 | Research section | Your repo |
 |------------------|-----------|
-| Multi-project workspace | [PLAN.md](./PLAN.md) — `facl` + `funfair` |
+| Multi-project workspace | [PLAN.md](./PLAN.md) — `brightrail` + `funfair` |
 | Variation axes + one component per page | [COMPONENT-VARIATIONS-PLAN.md](./COMPONENT-VARIATIONS-PLAN.md) (includes **Accessibility** section per page) |
 | WCAG / keyboard / AT / voice | [PLAN.md](./PLAN.md) baseline + [COMPONENT-VARIATIONS-PLAN.md](./COMPONENT-VARIATIONS-PLAN.md) § Accessibility |
-| Design-pack manifest + CI | Add under `tools/` or `projects/facl` when you reach Phase 2 |
+| Design-pack manifest + CI | Add under `tools/` or `projects/brightrail` when you reach Phase 2 |
 | Token bridge (CSS variables) | Document in library `tokens/` or global styles; funfair imports packs |
 | Storybook as catalog | Optional; funfair fills similar need for public demo |
 | Roadmap / Gantt | Use as **relative** sequencing only; re-estimate for your team size |
@@ -94,4 +94,4 @@ Use this to grow from “fun library + showcase” toward “enterprise-grade”
 
 ## Summary
 
-The deep research report is **strong systems thinking** and a credible **north star** for an enterprise Angular design system. Its **weak spot** is **non-human citations**—grade it as **internal strategy**, not referenced audit material, until fixed. For **Fun Angular Component Library**, **adopt the architecture in phases**: ship **facl + funfair + tokens + tests** first, then **manifests and CI conformance**, then **harnesses, visual/a11y gates, and schematics** as adoption grows.
+The deep research report is **strong systems thinking** and a credible **north star** for an enterprise Angular design system. Its **weak spot** is **non-human citations**—grade it as **internal strategy**, not referenced audit material, until fixed. For **Fun Angular Component Library**, **adopt the architecture in phases**: ship **brightrail + funfair + tokens + tests** first, then **manifests and CI conformance**, then **harnesses, visual/a11y gates, and schematics** as adoption grows.

@@ -2,24 +2,25 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": "ef3d093e-d336-4bad-a85b-7dcdccdb9d11"
   },
   "newProjectRoot": "projects",
   "projects": {
-    "facl": {
+    "brightrail": {
       "projectType": "library",
-      "root": "projects/facl",
-      "sourceRoot": "projects/facl/src",
-      "prefix": "facl",
+      "root": "projects/brightrail",
+      "sourceRoot": "projects/brightrail/src",
+      "prefix": "brightrail",
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
           "configurations": {
             "production": {
-              "tsConfig": "projects/facl/tsconfig.lib.prod.json"
+              "tsConfig": "projects/brightrail/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/facl/tsconfig.lib.json"
+              "tsConfig": "projects/brightrail/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -28,7 +29,7 @@
           "builder": "@angular/build:karma",
           "options": {
             "polyfills": ["zone.js", "zone.js/testing"],
-            "tsConfig": "projects/facl/tsconfig.spec.json"
+            "tsConfig": "projects/brightrail/tsconfig.spec.json"
           }
         }
       }
@@ -73,8 +74,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "12kB",
+                  "maximumError": "20kB"
                 }
               ],
               "outputHashing": "all"

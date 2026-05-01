@@ -1,6 +1,11 @@
 .shell {
   padding: 2rem;
-  max-width: 48rem;
+  max-width: 52rem;
+  margin: 0 auto;
+}
+
+.shell__hero {
+  margin-bottom: 2rem;
 }
 
 .shell__title {
@@ -11,4 +16,67 @@
 .shell__subtitle {
   margin: 0 0 1rem;
   color: #444;
+  line-height: 1.5;
+}
+
+.shell__subtitle code {
+  font-size: 0.85em;
+  padding: 0.1em 0.35em;
+  border-radius: 0.25rem;
+  background: #f1f5f9;
+}
+
+.demo__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+}
+
+.demo__lead {
+  margin: 0 0 1.5rem;
+  color: #525252;
+  font-size: 0.95rem;
+}
+
+.demo__block {
+  margin-bottom: 1.75rem;
+}
+
+.demo__block:last-child {
+  margin-bottom: 0;
+}
+
+.demo__h {
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.demo__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+}
+
+.demo__row + .demo__row {
+  margin-top: 0.75rem;
+}
+
+.demo__row--stretch {
+  align-items: stretch;
+}
+
+/* Match library tokens so Midway looks like the built package default */
+brightrail-button {
+  --br-btn-primary-bg: #1e6bdd;
+  --br-btn-primary-hover-bg: #1557b0;
+  --br-btn-secondary-bg: #e8eef7;
+  --br-btn-secondary-fg: #1a2b3c;
+  --br-btn-secondary-hover-bg: #d8e2f0;
+  --br-btn-outline-border: #1e6bdd;
+  --br-btn-outline-fg: #1e6bdd;
+  --br-btn-ghost-fg: #1a2b3c;
 }

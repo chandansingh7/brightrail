@@ -1,6 +1,58 @@
 <main class="shell">
-  <h1 class="shell__title">Midway</h1>
-  <p class="shell__subtitle">Consumer smoke — library resolved from node_modules (file:dist/facl)</p>
-  <facl-welcome />
-  <router-outlet />
+  <header class="shell__hero">
+    <h1 class="shell__title">Midway</h1>
+    <p class="shell__subtitle">
+      Consumer app: <code>brightrail</code> is loaded from <code>node_modules</code> via
+      <code>file:dist/brightrail</code> after <code>npm run build:lib</code> and
+      <code>npm install</code>.
+    </p>
+    <brightrail-welcome />
+  </header>
+
+  <section class="demo" aria-labelledby="demo-title">
+    <h2 id="demo-title" class="demo__title">Button (<code>BrightrailButtonComponent</code>)</h2>
+    <p class="demo__lead">
+      Same API as in Funfair; here it proves the published package shape works in a normal app.
+    </p>
+
+    <div class="demo__block">
+      <h3 class="demo__h">Variants</h3>
+      <div class="demo__row">
+        <brightrail-button variant="primary">Primary</brightrail-button>
+        <brightrail-button variant="secondary">Secondary</brightrail-button>
+        <brightrail-button variant="outline">Outline</brightrail-button>
+        <brightrail-button variant="ghost">Ghost</brightrail-button>
+      </div>
+    </div>
+
+    <div class="demo__block">
+      <h3 class="demo__h">Sizes</h3>
+      <div class="demo__row demo__row--stretch">
+        <brightrail-button variant="primary" size="sm">Small</brightrail-button>
+        <brightrail-button variant="primary" size="md">Medium</brightrail-button>
+        <brightrail-button variant="primary" size="lg">Large</brightrail-button>
+      </div>
+    </div>
+
+    <div class="demo__block">
+      <h3 class="demo__h">Icons &amp; state</h3>
+      <div class="demo__row">
+        <brightrail-button variant="primary" iconLeft="plus">Left icon</brightrail-button>
+        <brightrail-button variant="primary" iconRight="chevron">Right icon</brightrail-button>
+        <brightrail-button variant="primary" iconLeft="plus" iconRight="chevron"
+          >Both</brightrail-button
+        >
+      </div>
+      <div class="demo__row">
+        <brightrail-button variant="primary" [loading]="true">Loading</brightrail-button>
+        <brightrail-button variant="primary" [disabled]="true">Disabled</brightrail-button>
+        <brightrail-button variant="primary" visualState="active">Active look</brightrail-button>
+      </div>
+    </div>
+
+    <div class="demo__block">
+      <h3 class="demo__h">Full width</h3>
+      <brightrail-button variant="outline" [fullWidth]="true">Spans container</brightrail-button>
+    </div>
+  </section>
 </main>

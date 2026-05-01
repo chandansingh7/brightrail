@@ -1,14 +1,4 @@
-.shell {
-  padding: 2rem;
-  max-width: 48rem;
-}
-
-.shell__title {
-  margin: 0 0 0.25rem;
-  font-size: 1.75rem;
-}
-
-.shell__subtitle {
-  margin: 0 0 1rem;
-  color: #444;
+:host {
+  display: block;
+  min-height: 100vh;
 }

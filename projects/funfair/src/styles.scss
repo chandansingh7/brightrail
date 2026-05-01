@@ -1,1 +1,118 @@
-/* You can add global styles to this file, and also import other style files */
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+:root,
+html[data-theme='light'] {
+  --ff-bg: #eef2f7;
+  --ff-surface: #ffffff;
+  --ff-surface-2: #f8fafc;
+  --ff-sidebar: #ffffff;
+  --ff-border: #e2e8f0;
+  --ff-border-strong: #cbd5e1;
+  --ff-text-core: #0f172a;
+  --ff-muted: #64748b;
+  /* Logo / primary brand (matches header hex & button primary) */
+  --ff-brand: #1e6bdd;
+  --ff-brand-strong: #1557b0;
+  --ff-brand-soft: rgba(30, 107, 221, 0.12);
+  --ff-brand-ring: rgba(30, 107, 221, 0.45);
+  --ff-accent: var(--ff-brand);
+  --ff-hover: #f1f5f9;
+  --ff-active: #e8f1ff;
+  --ff-tip-bg: #f8fafc;
+  --ff-shadow-panel: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --ff-preview-bg: #fafafa;
+  --ff-code-surface: #0f172a;
+  --ff-code-head: #111c33;
+  --ff-code-fg: #e2e8f0;
+  --ff-code-title: #f1f5f9;
+  --ff-code-tab-active: var(--ff-brand);
+  --ff-code-tab-bg-active: #ffffff;
+  --ff-label: #475569;
+
+  brightrail-button {
+    --br-btn-primary-bg: var(--ff-brand);
+    --br-btn-primary-hover-bg: var(--ff-brand-strong);
+    --br-btn-secondary-bg: #e8eef7;
+    --br-btn-secondary-fg: #1a2b3c;
+    --br-btn-secondary-hover-bg: #d8e2f0;
+    --br-btn-outline-border: var(--ff-brand);
+    --br-btn-outline-fg: var(--ff-brand);
+    --br-btn-ghost-fg: #1a2b3c;
+  }
+}
+
+html[data-theme='dark'] {
+  --ff-bg: #0b1220;
+  --ff-surface: #111827;
+  --ff-surface-2: #1e293b;
+  --ff-sidebar: #0f172a;
+  --ff-border: #1f2937;
+  --ff-border-strong: #334155;
+  --ff-text-core: #e2e8f0;
+  --ff-muted: #94a3b8;
+  --ff-brand: #60a5fa;
+  --ff-brand-strong: #93c5fd;
+  --ff-brand-soft: rgba(96, 165, 250, 0.15);
+  --ff-brand-ring: rgba(96, 165, 250, 0.45);
+  --ff-accent: var(--ff-brand);
+  --ff-hover: rgba(148, 163, 184, 0.12);
+  --ff-active: rgba(96, 165, 250, 0.15);
+  --ff-tip-bg: #111827;
+  --ff-shadow-panel: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --ff-preview-bg: #0f172a;
+  --ff-code-surface: #020617;
+  --ff-code-head: #0f172a;
+  --ff-code-fg: #cbd5e1;
+  --ff-code-title: #f8fafc;
+  --ff-code-tab-active: var(--ff-brand);
+  --ff-code-tab-bg-active: #1e293b;
+  --ff-label: #94a3b8;
+
+  brightrail-button {
+    --br-btn-primary-bg: var(--ff-brand);
+    --br-btn-primary-hover-bg: var(--ff-brand-strong);
+    --br-btn-secondary-bg: #1e293b;
+    --br-btn-secondary-fg: #e2e8f0;
+    --br-btn-secondary-hover-bg: #334155;
+    --br-btn-outline-border: var(--ff-brand);
+    --br-btn-outline-fg: var(--ff-brand-strong);
+    --br-btn-outline-hover-bg: rgba(96, 165, 250, 0.1);
+    --br-btn-ghost-fg: #e2e8f0;
+    --br-btn-ghost-hover-bg: rgba(148, 163, 184, 0.12);
+  }
+}
+
+/* Shared focus ring — matches logo / primary brand */
+.pf-select,
+.bp-dropdown__select,
+.bp-dropdown__text {
+  outline: none;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.pf-select:focus-visible {
+  border-color: var(--ff-brand);
+  box-shadow: 0 0 0 3px var(--ff-brand-soft);
+}

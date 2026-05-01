@@ -17,9 +17,9 @@ This document builds on the main workspace plan (**Fun Angular Component Library
 
 ## Accessibility requirements
 
-People with **physical disabilities** and **motor limitations** often rely on **keyboard** or **switch** access instead of a mouse. People who are **blind** or have **low vision** often use **screen readers**—software that **speaks** the interface. People who use **voice control** or **speech input** (Dragon, Voice Access, etc.) need controls to have **recognizable names** that match what they can say aloud. FACL components and funfair examples should support all of these modes where the pattern allows.
+People with **physical disabilities** and **motor limitations** often rely on **keyboard** or **switch** access instead of a mouse. People who are **blind** or have **low vision** often use **screen readers**—software that **speaks** the interface. People who use **voice control** or **speech input** (Dragon, Voice Access, etc.) need controls to have **recognizable names** that match what they can say aloud. Brightrail components and funfair examples should support all of these modes where the pattern allows.
 
-### Library (`facl`) rules
+### Library (`brightrail`) rules
 
 1. **Prefer native interactive elements** (`button`, `a` with `href`, `input`, `select`) when behavior matches; add ARIA and keyboard support only when building a true custom widget.
 2. **Keyboard** — Every interactive control must be **focusable** (or reachably wired via a documented composite pattern). Implement **APG** guidance for composites: e.g. `aria-activedescendant` / roving tabindex for listbox, menu, grid, toolbar as needed.
@@ -60,14 +60,14 @@ Pick **one primary strategy** per component family so the API stays predictable.
 
 ### Option A — **Single component + variant inputs** (good for buttons, badges, alerts)
 
-- One selector (e.g. `facl-button`) with `@Input() variant`, `size`, `disabled`, etc.
+- One selector (e.g. `brightrail-button`) with `@Input() variant`, `size`, `disabled`, etc.
 - Styles use BEM-like classes or host bindings driven by inputs.
 - **Pros:** One place to maintain; easy to show all variations on one funfair page.  
 - **Cons:** Can grow large; guard against “god components” with too many inputs.
 
 ### Option B — **Thin wrappers or specialized components** (good when markup differs a lot)
 
-- e.g. `facl-button`, `facl-icon-button` or `facl-card`, `facl-card-media`.
+- e.g. `brightrail-button`, `brightrail-icon-button` or `brightrail-card`, `brightrail-card-media`.
 - Shared logic in a base class or composition (directives, shared styles).
 - **Pros:** Clear semantics; tree-shaking friendly if entry points are clean.  
 - **Cons:** More files; funfair needs a subsection per exported type if they’re separate.
@@ -118,7 +118,7 @@ Visitors (and future you) should see **code next to the demo**, not only the ren
 
 | Kind | Purpose | Typical content |
 |------|---------|-----------------|
-| **Usage snippet** | What consumers type in their apps | Angular template using your selector and `@Input()`s, e.g. `<facl-button variant="outline">Cancel</facl-button>`. Add a minimal TS snippet when bindings or `ControlValueAccessor` matter. |
+| **Usage snippet** | What consumers type in their apps | Angular template using your selector and `@Input()`s, e.g. `<brightrail-button variant="outline">Cancel</brightrail-button>`. Add a minimal TS snippet when bindings or `ControlValueAccessor` matter. |
 | **Implementation snippet** | How the library implements the component | Excerpt from the component `.ts` (class, key `@Input`s), template fragment, or SCSS—**short** and focused, not the entire file unless tiny. |
 
 Lead with **usage** on every variation and use case; add **implementation** in an expandable section or a lower “Implementation” block so experts can dive in without overwhelming beginners.
@@ -142,19 +142,19 @@ Whatever you choose, **update the snippet in the same change** as the live previ
 
 #### Library implementation and drift
 
-- Showing the **real** `.ts` / template from `projects/facl` is ideal for truthfulness; copying by hand **will** drift unless you enforce it in review or automation.
+- Showing the **real** `.ts` / template from `projects/brightrail` is ideal for truthfulness; copying by hand **will** drift unless you enforce it in review or automation.
 - Mitigations: link to **GitHub** with line anchors; or maintain one short **“implementation”** excerpt per component page and treat it like documentation; or later add a small codegen/docs pipeline—only if the manual cost hurts.
 
 ### Data and fakery
 
 - Use **static** strings and small in-page components for most demos.
-- When a use case needs async behavior, use a **fake service** in funfair only (never bake demo-only services into `facl`).
+- When a use case needs async behavior, use a **fake service** in funfair only (never bake demo-only services into `brightrail`).
 
 ---
 
 ## Naming and discovery
 
-- **Route path** — Prefer kebab-case matching the component name (`button` for `FaclButton`).
+- **Route path** — Prefer kebab-case matching the component name (`button` for `BrightrailButton`).
 - **Page module/component** — e.g. `ButtonShowcaseComponent` or `ButtonFunfairPageComponent` in `projects/funfair/src/app/pages/button/`.
 - **Sidebar / index** — Generate or maintain a **registry** (array of `{ path, label, icon? }`) so the home page and navigation stay in sync when you add components.
 
@@ -167,7 +167,7 @@ Whatever you choose, **update the snippet in the same change** as the live previ
 | **Library** | Unit tests per component for inputs → DOM/classes/**ARIA**; tests for **keyboard** handlers on custom widgets; tests for each **documented variant** including **disabled/loading** semantics. |
 | **Funfair** | Manual **keyboard-only** pass per new page; spot-check with a **screen reader**; optional **smoke e2e** (route loads, tab into main preview without errors); optional **axe** or Playwright **accessibility** assertions in CI. |
 
-Avoid relying on funfair for **library** correctness—keep assertions in `facl`.
+Avoid relying on funfair for **library** correctness—keep assertions in `brightrail`.
 
 ---
 
@@ -175,7 +175,7 @@ Avoid relying on funfair for **library** correctness—keep assertions in `facl`
 
 - Each component’s **public API** (inputs, outputs, slots) should match what funfair demonstrates **and** what the **usage snippets** show.
 - When you add a new variant in code, add a **variation block** plus **usage snippet** on that component’s funfair page in the same PR; update **implementation** excerpts or links if the internals changed in a way you document.
-- When behavior affects **keyboard or AT**, update the page’s **Accessibility** section and add or adjust **tests** in `facl` in the same PR.
+- When behavior affects **keyboard or AT**, update the page’s **Accessibility** section and add or adjust **tests** in `brightrail` in the same PR.
 
 ---
 
@@ -185,7 +185,7 @@ Avoid relying on funfair for **library** correctness—keep assertions in `facl`
 - [ ] Set up funfair routes: home + one route per component.
 - [ ] Create a **shared page shell** (title area, section headings, spacing) so all pages look consistent.
 - [ ] Add first component to the library with **at least two variants** and **at least two use cases** on its funfair page, each with **usage snippets** (and optional **implementation** section).
-- [ ] Add a small **code presentation** building block in funfair (e.g. `facl-showcase-code` or styled `pre` + copy button + highlighter).
+- [ ] Add a small **code presentation** building block in funfair (e.g. `brightrail-showcase-code` or styled `pre` + copy button + highlighter).
 - [ ] Add navigation registry (or generate routes from it) so new components are discoverable.
 - [ ] Add library tests covering variant inputs and **accessibility-relevant** outputs (roles, `aria-*`, focus behavior where testable); optional funfair smoke e2e and **automated a11y** scan.
 - [ ] Add **Accessibility** section template to the shared page shell so every new component page includes keyboard / screen reader / voice notes.
@@ -196,4 +196,4 @@ Avoid relying on funfair for **library** correctness—keep assertions in `facl`
 
 **Multiple variations** live in the **library** (inputs, tokens, maybe sibling components). **Different use cases** are composed in **funfair** on a **dedicated page per component**, using a **fixed page template**: variations and scenarios each pair **live preview** with **usage snippets**; each page documents **keyboard, screen-reader, and voice-access** behavior; optionally add **implementation** snippets or source links. That gives you a scalable, browsable, inclusive showcase without mixing unrelated components on the same route.
 
-For workspace-level setup (library project `facl`, app project `funfair`, builds, hosting), see [PLAN.md](./PLAN.md).
+For workspace-level setup (library project `brightrail`, app project `funfair`, builds, hosting), see [PLAN.md](./PLAN.md).

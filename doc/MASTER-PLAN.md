@@ -1,6 +1,6 @@
-# Master plan — Fun Angular Component Library (FACL)
+# Master plan — Fun Angular Component Library (Brightrail)
 
-**Start here.** This folder (`doc/`) holds all planning for **Fun Angular Component Library**: a publishable Angular library (`facl`), a static showcase app (**funfair**), and **Midway** (`projects/midway`) — used with **`verify:package`** to prove **npm-shaped** installs in one command.
+**Start here.** This folder (`doc/`) holds all planning for **Fun Angular Component Library**: a publishable Angular library (`brightrail`), a static showcase app (**funfair**), and **Midway** (`projects/midway`) — used with **`verify:package`** to prove **npm-shaped** installs in one command.
 
 ---
 
@@ -19,9 +19,10 @@ When you add new planning topics, either extend the closest doc or add a new fil
 | Topic | Decision |
 |--------|----------|
 | Angular baseline | **21.x** ([support policy](https://angular.dev/reference/releases)) — workspace upgraded from 20 to 21 with `ng update` |
-| Product name | **Fun Angular Component Library** (FACL) |
-| Library project | **`facl`** |
-| Published import path | **`@facl/ui`** (`file:dist/facl` in this repo for Midway) |
+| Product name | **Fun Angular Component Library** |
+| npm package name | **`brightrail`** (unscoped) |
+| Library project | **`brightrail`** |
+| Published import path | **`brightrail`** (`file:dist/brightrail` in this repo for Midway) |
 | Showcase app | **`funfair`** (not named “demo”) |
 | Consumer smoke app | **Midway** (`projects/midway`) + **`verify:package`** (see [PLAN.md](./PLAN.md)) |
 | Public API entry | **`public-api.ts`** (library barrel; rename only if you change `ng-package.json` entryFile) |
@@ -33,9 +34,9 @@ When you add new planning topics, either extend the closest doc or add a new fil
 
 ### Now — scaffold and first vertical slice
 
-- [ ] Angular workspace: `projects/facl` + `projects/funfair` + **`projects/midway`**.
-- [ ] Root script **`verify:package`**: `ng build facl && npm install && ng build midway`; path aliases for the library **only** on funfair; **`file:dist/facl`** for the smoke app (see [PLAN.md](./PLAN.md)).
-- [ ] First component in `facl`; funfair route (variations, use cases, snippets, a11y per [COMPONENT-VARIATIONS-PLAN.md](./COMPONENT-VARIATIONS-PLAN.md)) + **Midway** root using the same export.
+- [ ] Angular workspace: `projects/brightrail` + `projects/funfair` + **`projects/midway`**.
+- [ ] Root script **`verify:package`**: `ng build brightrail && npm install && ng build midway`; path aliases for the library **only** on funfair; **`file:dist/brightrail`** for the smoke app (see [PLAN.md](./PLAN.md)).
+- [ ] First component in `brightrail`; funfair route (variations, use cases, snippets, a11y per [COMPONENT-VARIATIONS-PLAN.md](./COMPONENT-VARIATIONS-PLAN.md)) + **Midway** root using the same export.
 - [ ] npm scripts: `serve:funfair`, `build:lib`, `build:funfair`, **`verify:package`**, optional `build:all`.
 - [ ] Document run/build in root **README** when the repo has code.
 
@@ -62,11 +63,11 @@ Detailed phased checklist: [ENTERPRISE-RESEARCH-ALIGNMENT.md § Phased plan](./E
 | [MASTER-PLAN.md](./MASTER-PLAN.md) | **This file** — entry point, roadmap, index. |
 | [PLAN.md](./PLAN.md) | Workspace goals, layout, workflow, testing, publishing, a11y baseline, checklist. |
 | [COMPONENT-VARIATIONS-PLAN.md](./COMPONENT-VARIATIONS-PLAN.md) | One component per funfair page; variants & use cases; snippets; a11y requirements; funfair UI patterns. |
-| [ENTERPRISE-RESEARCH-ALIGNMENT.md](./ENTERPRISE-RESEARCH-ALIGNMENT.md) | Grades the research report; maps enterprise ideas to FACL; phased adoption. |
+| [ENTERPRISE-RESEARCH-ALIGNMENT.md](./ENTERPRISE-RESEARCH-ALIGNMENT.md) | Grades the research report; maps enterprise ideas to this library; phased adoption. |
 | [deep-research-report.md](./deep-research-report.md) | Long enterprise reference (Angular Aria, APF, market comparison, inventory, governance). |
 
 ---
 
 ## Summary
 
-Use **`doc/MASTER-PLAN.md`** as the single navigation hub. Implement **`facl` + `funfair` + Midway** (`projects/midway`), run **`verify:package`** before release and in CI, document every component in funfair with **preview + snippets + accessibility notes**, and grow toward **pack conformance** only when the team needs that rigor.
+Use **`doc/MASTER-PLAN.md`** as the single navigation hub. Implement **`brightrail` + `funfair` + Midway** (`projects/midway`), run **`verify:package`** before release and in CI, document every component in funfair with **preview + snippets + accessibility notes**, and grow toward **pack conformance** only when the team needs that rigor.

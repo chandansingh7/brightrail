@@ -1,0 +1,307 @@
+<div class="bp">
+  <div class="bp-grid">
+    <section class="bp-panel bp-panel--settings" aria-labelledby="bp-settings-title">
+      <div class="bp-settings-head">
+        <svg
+          class="bp-settings-head__icon"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            fill="currentColor"
+            d="M4 6h2v2H4V6zm0 5h2v2H4v-2zm0 5h2v2H4v-2zm4-10h12v2H8V6zm0 5h12v2H8v-2zm0 5h12v2H8v-2z"
+          />
+          <circle cx="18" cy="7" r="1.25" fill="currentColor" />
+          <circle cx="18" cy="12" r="1.25" fill="currentColor" />
+          <circle cx="18" cy="17" r="1.25" fill="currentColor" />
+        </svg>
+        <h2 id="bp-settings-title" class="bp-settings-head__title">Component settings</h2>
+      </div>
+
+      <div class="bp-settings-block">
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="set-lbl-component">Component</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true">
+              <span class="bp-ico-pill"></span>
+            </span>
+            <select
+              class="bp-dropdown__select"
+              disabled
+              [attr.aria-labelledby]="'set-lbl-component'"
+              title="Component type"
+            >
+              <option>Button</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="set-lbl-text">Button text</span>
+          <div class="bp-dropdown bp-dropdown--text">
+            <input
+              type="text"
+              class="bp-dropdown__text"
+              [value]="label()"
+              (input)="onLabelInput($event)"
+              [attr.aria-labelledby]="'set-lbl-text'"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <span class="bp-dropdown__chev bp-dropdown__chev--muted" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="set-lbl-variant">Variant</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true">
+              <span class="bp-vdot" [attr.data-variant]="variant()"></span>
+            </span>
+            <select
+              class="bp-dropdown__select"
+              (change)="onVariantChange($event)"
+              [attr.aria-labelledby]="'set-lbl-variant'"
+            >
+              @for (v of variants; track v) {
+                <option [value]="v" [selected]="variant() === v">{{ v | titlecase }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="set-lbl-size">Size</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true">
+              <span class="bp-ico-ring"></span>
+            </span>
+            <select
+              class="bp-dropdown__select"
+              (change)="onSizeChange($event)"
+              [attr.aria-labelledby]="'set-lbl-size'"
+            >
+              @for (opt of sizeOptions; track opt.value) {
+                <option [value]="opt.value" [selected]="size() === opt.value">
+                  {{ opt.label }}
+                </option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="set-lbl-state">State</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true">
+              <span
+                class="bp-ico-state"
+                [attr.data-state]="visualState()"
+              ></span>
+            </span>
+            <select
+              class="bp-dropdown__select"
+              (change)="onStateChange($event)"
+              [attr.aria-labelledby]="'set-lbl-state'"
+            >
+              @for (opt of stateOptions; track opt.value) {
+                <option [value]="opt.value" [selected]="visualState() === opt.value">
+                  {{ opt.label }}
+                </option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="set-lbl-theme">Theme</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true">
+              <span class="bp-ico-theme"></span>
+            </span>
+            <select
+              class="bp-dropdown__select"
+              (change)="onThemeRowChange($event)"
+              [attr.aria-labelledby]="'set-lbl-theme'"
+            >
+              @for (opt of themeRowOptions; track opt.id) {
+                <option [value]="opt.id" [selected]="themeService.theme() === opt.id">
+                  {{ opt.label }}
+                </option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="bp-settings-rule" />
+
+      <div class="bp-settings-block">
+        <h3 class="bp-settings-block__title">Icon options</h3>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="set-lbl-iside">Icon side</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true">
+              <span class="bp-ico-side" [attr.data-side]="iconSide()"></span>
+            </span>
+            <select
+              class="bp-dropdown__select"
+              name="bf-playground-icon-side"
+              (change)="onIconSideChange($event)"
+              [attr.aria-labelledby]="'set-lbl-iside'"
+            >
+              @for (opt of iconSideOptions; track opt.value) {
+                <option [value]="opt.value" [selected]="iconSide() === opt.value">
+                  {{ opt.label }}
+                </option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="set-lbl-ikind">Icon</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true">
+              <span class="bp-ico-kind" [attr.data-kind]="iconKind()"></span>
+            </span>
+            <select
+              class="bp-dropdown__select"
+              name="bf-playground-icon-kind"
+              (change)="onIconKindChange($event)"
+              [attr.aria-labelledby]="'set-lbl-ikind'"
+            >
+              @for (ic of iconChoices; track 'ikind-' + ic) {
+                <option [value]="ic" [selected]="iconKind() === ic">
+                  {{ iconLabels[ic] }}
+                </option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="bp-settings-rule" />
+
+      <div class="bp-settings-block">
+        <h3 class="bp-settings-block__title">Behavior</h3>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="set-lbl-dis">Disabled</span>
+          <label class="bp-switch">
+            <input
+              type="checkbox"
+              role="switch"
+              [checked]="disabled()"
+              (change)="onToggleDisabled($event)"
+              [attr.aria-labelledby]="'set-lbl-dis'"
+            />
+            <span class="bp-switch__track" aria-hidden="true"></span>
+          </label>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="set-lbl-load">Loading</span>
+          <label class="bp-switch">
+            <input
+              type="checkbox"
+              role="switch"
+              [checked]="loading()"
+              (change)="onToggleLoading($event)"
+              [attr.aria-labelledby]="'set-lbl-load'"
+            />
+            <span class="bp-switch__track" aria-hidden="true"></span>
+          </label>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="set-lbl-fw">Full width</span>
+          <label class="bp-switch">
+            <input
+              type="checkbox"
+              role="switch"
+              [checked]="fullWidth()"
+              (change)="onToggleFullWidth($event)"
+              [attr.aria-labelledby]="'set-lbl-fw'"
+            />
+            <span class="bp-switch__track" aria-hidden="true"></span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <section class="bp-panel bp-panel--preview" aria-labelledby="bp-preview-title">
+      <h2 id="bp-preview-title" class="bp-panel__title bp-panel__title--live">
+        <span class="bp-live-dot" aria-hidden="true"></span>
+        Live preview
+      </h2>
+      <div class="bp-preview-surface" [class.bp-preview-surface--stretch]="fullWidth()">
+        <div class="bp-preview-inner">
+          <brightrail-button
+            [variant]="variant()"
+            [size]="size()"
+            [visualState]="visualState()"
+            [disabled]="disabled()"
+            [loading]="loading()"
+            [fullWidth]="fullWidth()"
+            [iconLeft]="leftIconForButton()"
+            [iconRight]="rightIconForButton()"
+          >
+            {{ label() }}
+          </brightrail-button>
+        </div>
+      </div>
+      <p class="bp-preview-caption">Preview updates from every control above.</p>
+    </section>
+  </div>
+
+  <section class="bp-code" aria-labelledby="bp-code-title">
+    <div class="bp-code__head">
+      <h2 id="bp-code-title" class="bp-code__title">Generated snippets</h2>
+      <div class="bp-code__tabs" role="tablist">
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'html'"
+          [attr.aria-selected]="activeTab() === 'html'"
+          (click)="selectTab('html')"
+        >
+          HTML
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'ts'"
+          [attr.aria-selected]="activeTab() === 'ts'"
+          (click)="selectTab('ts')"
+        >
+          TS
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'scss'"
+          [attr.aria-selected]="activeTab() === 'scss'"
+          (click)="selectTab('scss')"
+        >
+          SCSS
+        </button>
+      </div>
+      <button type="button" class="bp-copy" (click)="copySnippet()">Copy</button>
+    </div>
+    <pre class="bp-pre" role="tabpanel"><code>{{ activeSnippet() }}</code></pre>
+  </section>
+</div>

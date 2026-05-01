@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'facl-welcome',
+  selector: 'brightrail-welcome',
   standalone: true,
-  template: `<p class="facl-welcome" role="status">{{ label }}</p>`,
+  template: `<p class="brightrail-welcome" role="status">{{ label }}</p>`,
   styles: `
     :host {
       display: block;
@@ -11,6 +11,6 @@ import { Component } from '@angular/core';
     }
   `,
 })
-export class FaclWelcomeComponent {
+export class BrightrailWelcomeComponent {
   readonly label = 'Fun Angular Component Library';
 }

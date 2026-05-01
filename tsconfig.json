@@ -25,10 +25,10 @@
   "files": [],
   "references": [
     {
-      "path": "./projects/facl/tsconfig.lib.json"
+      "path": "./projects/brightrail/tsconfig.lib.json"
     },
     {
-      "path": "./projects/facl/tsconfig.spec.json"
+      "path": "./projects/brightrail/tsconfig.spec.json"
     },
     {
       "path": "./projects/funfair/tsconfig.app.json"

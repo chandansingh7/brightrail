@@ -1,15 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FaclWelcomeComponent } from './facl-welcome.component';
+import { BrightrailWelcomeComponent } from './brightrail-welcome.component';
 
-describe('FaclWelcomeComponent', () => {
-  let fixture: ComponentFixture<FaclWelcomeComponent>;
+describe('BrightrailWelcomeComponent', () => {
+  let fixture: ComponentFixture<BrightrailWelcomeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FaclWelcomeComponent],
+      imports: [BrightrailWelcomeComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(FaclWelcomeComponent);
+    fixture = TestBed.createComponent(BrightrailWelcomeComponent);
     fixture.detectChanges();
   });
 

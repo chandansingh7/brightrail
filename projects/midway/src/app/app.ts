@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { FaclWelcomeComponent } from '@facl/ui';
+import { BrightrailButtonComponent, BrightrailWelcomeComponent } from 'brightrail';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FaclWelcomeComponent],
+  imports: [BrightrailWelcomeComponent, BrightrailButtonComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

@@ -1,0 +1,84 @@
+<div class="pf">
+  <header class="pf-header">
+    <div class="pf-header__brand">
+      <div class="pf-logo" aria-hidden="true">B</div>
+      <div>
+        <div class="pf-header__name">Brightrail</div>
+        <div class="pf-header__ver">v{{ libraryVersion }}</div>
+      </div>
+    </div>
+
+    <div class="pf-header__hero">
+      <h1 class="pf-header__title">Angular component playground</h1>
+      <p class="pf-header__subtitle">
+        Configure a component and see the preview and generated snippets update live.
+      </p>
+    </div>
+
+    <div class="pf-header__actions">
+      <label class="pf-field pf-field--inline">
+        <span class="pf-field__label">Library theme</span>
+        <select
+          class="pf-select"
+          title="Preview theme"
+          (change)="themeService.setTheme($any($event.target).value)"
+        >
+          @for (opt of headerThemeOptions; track opt.id) {
+            <option [value]="opt.id" [selected]="themeService.theme() === opt.id">
+              {{ opt.label }}
+            </option>
+          }
+        </select>
+      </label>
+      <a class="pf-link-external" [href]="midwayHref" target="_blank" rel="noopener noreferrer">
+        Midway (packaged)
+      </a>
+    </div>
+  </header>
+
+  <div class="pf-body">
+    <aside class="pf-side" aria-label="Playground navigation">
+      <nav class="pf-nav">
+        <div class="pf-nav__group">
+          <div class="pf-nav__heading">Components</div>
+          <a
+            routerLink="button"
+            routerLinkActive="is-active"
+            class="pf-nav__item"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            Button
+          </a>
+          <span class="pf-nav__item pf-nav__item--soon" aria-disabled="true">Inputs</span>
+          <span class="pf-nav__item pf-nav__item--soon" aria-disabled="true">Selects</span>
+          <span class="pf-nav__item pf-nav__item--soon" aria-disabled="true">Tabs</span>
+          <span class="pf-nav__item pf-nav__item--soon" aria-disabled="true">Alerts</span>
+          <span class="pf-nav__item pf-nav__item--soon" aria-disabled="true">Cards</span>
+        </div>
+        <div class="pf-nav__group">
+          <div class="pf-nav__heading">Resources</div>
+          <a class="pf-nav__item" href="https://angular.dev" target="_blank" rel="noopener noreferrer"
+            >Angular docs</a
+          >
+          <a
+            class="pf-nav__item"
+            href="https://angular.dev/overview"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Overview</a
+          >
+        </div>
+      </nav>
+      <div class="pf-tip">
+        <div class="pf-tip__title">Pro tip</div>
+        <p class="pf-tip__text">
+          Tweak controls on the left — the preview and generated markup stay in sync.
+        </p>
+      </div>
+    </aside>
+
+    <main class="pf-main">
+      <router-outlet />
+    </main>
+  </div>
+</div>
