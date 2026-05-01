@@ -1,0 +1,14 @@
+/* Funfair resolves @facl/ui from library source for fast iteration (see doc/PLAN.md). */
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../out-tsc/app",
+    "types": [],
+    "baseUrl": "../../",
+    "paths": {
+      "@facl/ui": ["projects/facl/src/public-api.ts"]
+    }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.spec.ts"]
+}
