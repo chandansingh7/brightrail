@@ -51,4 +51,18 @@ describe('ButtonPlaygroundComponent', () => {
     expect(fixture.componentInstance.htmlSnippet()).not.toContain('iconLeft=');
     expect(fixture.componentInstance.htmlSnippet()).not.toContain('iconRight=');
   });
+
+  it('should map disabled state to snippet via State control', () => {
+    fixture.componentInstance.buttonState.set('disabled');
+    fixture.detectChanges();
+    expect(fixture.componentInstance.htmlSnippet()).toContain('[disabled]="true"');
+    expect(fixture.componentInstance.htmlSnippet()).not.toContain('visualState="active"');
+  });
+
+  it('should map active state to visualState in snippet', () => {
+    fixture.componentInstance.buttonState.set('active');
+    fixture.detectChanges();
+    expect(fixture.componentInstance.htmlSnippet()).toContain('visualState="active"');
+    expect(fixture.componentInstance.htmlSnippet()).not.toContain('[disabled]="true"');
+  });
 });

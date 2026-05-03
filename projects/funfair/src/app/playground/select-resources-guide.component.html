@@ -1,0 +1,58 @@
+<div class="ig">
+  <nav class="ig-breadcrumb" aria-label="Guide location">
+    <a routerLink=".." class="ig-breadcrumb__link">Select playground</a>
+    <span class="ig-breadcrumb__sep" aria-hidden="true">/</span>
+    <span class="ig-breadcrumb__here">Forms &amp; projection</span>
+  </nav>
+
+  <header class="ig-header">
+    <h1 class="ig-title">Select: forms and content projection</h1>
+    <p class="ig-lead">
+      Use <code>[ngModelOptions]</code> when you bind <code>ngModel</code> on
+      <code>brightrail-select</code> outside a <code>&lt;form&gt;</code> so Angular treats the control as
+      standalone. Customize the trigger and menu with the projection slots below.
+    </p>
+  </header>
+
+  <section class="ig-panel" aria-labelledby="srg-model">
+    <h2 id="srg-model" class="ig-h2"><code>ngModel</code> outside <code>&lt;form&gt;</code></h2>
+    <p class="ig-note">
+      Without this, Angular expects a <code>name</code> attribute or a parent
+      <code>NgForm</code>/<code>FormGroupDirective</code>. The playground defines
+      <code>readonly ngModelStandalone = &#123; standalone: true &#125;;</code> and passes
+      <code>[ngModelOptions]="ngModelStandalone"</code> on each select.
+    </p>
+    <pre class="ig-pre"><code>{{ exampleNgModel }}</code></pre>
+  </section>
+
+  <section class="ig-panel" aria-labelledby="srg-slots">
+    <h2 id="srg-slots" class="ig-h2">Projection slots</h2>
+    <dl class="ig-dl">
+      <div>
+        <dt><code>.br-select-prefix</code></dt>
+        <dd>Content before the value label (flags, icons, avatars).</dd>
+      </div>
+      <div>
+        <dt><code>.br-select-suffix</code></dt>
+        <dd>Content after the value, still inside the trigger (e.g. calendar icon before the chevron).</dd>
+      </div>
+      <div>
+        <dt><code>.br-select-value-slot</code></dt>
+        <dd>
+          Replaces the default single-line value with custom markup (e.g. multi-select pill row). Use this
+          class so the trigger hides the plain label (plain <code>brSelectValue</code> is unreliable in the
+          DOM because HTML lowercases attribute names).
+        </dd>
+      </div>
+      <div>
+        <dt><code>.br-select-panel</code></dt>
+        <dd>
+          The dropdown body: typically buttons or a list. Click handling is yours; wire
+          <code>ngModel</code> / <code>ngModelChange</code> from your options.
+        </dd>
+      </div>
+    </dl>
+    <h3 class="ig-h3">Skeleton</h3>
+    <pre class="ig-pre"><code>{{ exampleProjection }}</code></pre>
+  </section>
+</div>

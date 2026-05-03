@@ -1,0 +1,87 @@
+/* Same shell + settings UI as text field playground (settings | preview | snippets). */
+@use './text-field-playground.component.scss' as *;
+
+/* Native <select> option styling is limited; headers still read as section labels. */
+.demo-sel-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.demo-sel-panel__opt {
+  margin: 0;
+  padding: 0.45rem 0.55rem;
+  border: none;
+  border-radius: 0.35rem;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  color: var(--ff-text, #1c1c1c);
+}
+
+.demo-sel-panel__opt:hover {
+  background: color-mix(in srgb, var(--ff-brand, #0062ff) 12%, transparent);
+}
+
+.bp-code-inline {
+  font-size: 0.85em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  padding: 0.08em 0.28em;
+  border-radius: 0.25rem;
+  background: color-mix(in srgb, var(--ff-muted) 14%, transparent);
+}
+
+.sel-assignee-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: color-mix(in srgb, var(--ff-brand, #0062ff) 18%, transparent);
+  color: var(--ff-brand, #0062ff);
+}
+
+.sel-cat-prefix {
+  display: inline-flex;
+  align-items: center;
+}
+
+.sel-cat-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #8b5cf6;
+  flex-shrink: 0;
+}
+
+.sel-lang-prefix {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  line-height: 1;
+}
+
+.sel-tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.sel-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.12rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.2;
+  background: color-mix(in srgb, var(--ff-brand, #0062ff) 12%, var(--ff-surface, #fff));
+  border: 1px solid color-mix(in srgb, var(--ff-border, #ccc) 85%, transparent);
+  color: var(--ff-text, #1c1c1c);
+}

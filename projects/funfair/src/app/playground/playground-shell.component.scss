@@ -1,19 +1,23 @@
 :host {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .pf {
-  min-height: 100vh;
+  flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   background: var(--ff-bg);
   color: var(--ff-text-core);
 }
 
 .pf-header {
+  flex-shrink: 0;
   display: grid;
   grid-template-columns: minmax(11rem, 14rem) 1fr auto;
   gap: 1.5rem;
@@ -132,19 +136,25 @@
 
 .pf-body {
   flex: 1;
+  min-height: 0;
   display: grid;
   grid-template-columns: 15rem minmax(0, 1fr);
-  min-height: 0;
+  grid-template-rows: minmax(0, 1fr);
   align-items: stretch;
+  overflow: hidden;
 }
 
 @media (max-width: 720px) {
   .pf-body {
     grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
   }
 }
 
 .pf-side {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   background: var(--ff-sidebar);
   border-right: 1px solid var(--ff-border);
   padding: 1rem 0.75rem;
@@ -225,8 +235,10 @@
 .pf-main {
   min-width: 0;
   min-height: 0;
-  flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 1.25rem clamp(1rem, 2vw, 1.75rem) 2rem;
+  padding: 1rem clamp(1rem, 2vw, 1.75rem) 1rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }

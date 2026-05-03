@@ -10,43 +10,154 @@
   </header>
 
   <section class="demo" aria-labelledby="demo-title">
-    <h2 id="demo-title" class="demo__title">Button (<code>BrightrailButtonComponent</code>)</h2>
+    <h2 id="demo-title" class="demo__title">Button system</h2>
     <p class="demo__lead">
-      Same API as in Funfair; here it proves the published package shape works in a normal app.
+      Variants, sizes, icons, split button, and grouped patterns from the published package.
     </p>
 
     <div class="demo__block">
-      <h3 class="demo__h">Variants</h3>
+      <h3 class="demo__h">Core variants</h3>
       <div class="demo__row">
         <brightrail-button variant="primary">Primary</brightrail-button>
         <brightrail-button variant="secondary">Secondary</brightrail-button>
+        <brightrail-button variant="tertiary">Tertiary</brightrail-button>
         <brightrail-button variant="outline">Outline</brightrail-button>
         <brightrail-button variant="ghost">Ghost</brightrail-button>
+        <brightrail-button variant="link">Link</brightrail-button>
+      </div>
+    </div>
+
+    <div class="demo__block">
+      <h3 class="demo__h">Status</h3>
+      <div class="demo__row">
+        <brightrail-button variant="success" iconLeft="check">Success</brightrail-button>
+        <brightrail-button variant="warning" iconLeft="warning">Warning</brightrail-button>
+        <brightrail-button variant="danger" iconLeft="trash">Danger</brightrail-button>
+        <brightrail-button variant="info" iconLeft="info">Info</brightrail-button>
+      </div>
+    </div>
+
+    <div class="demo__block">
+      <h3 class="demo__h">Enterprise</h3>
+      <div class="demo__row">
+        <brightrail-button variant="approve" iconLeft="check">Approve</brightrail-button>
+        <brightrail-button variant="reject" iconLeft="trash">Reject</brightrail-button>
+        <brightrail-button variant="secondary" iconLeft="download">Download</brightrail-button>
+        <brightrail-button variant="outline" iconLeft="upload">Upload</brightrail-button>
+        <brightrail-button variant="outline" iconLeft="filter">Filter</brightrail-button>
+        <brightrail-button variant="outline" iconLeft="export">Export</brightrail-button>
+        <brightrail-button variant="primary" iconLeft="plus">Add New</brightrail-button>
       </div>
     </div>
 
     <div class="demo__block">
       <h3 class="demo__h">Sizes</h3>
       <div class="demo__row demo__row--stretch">
-        <brightrail-button variant="primary" size="sm">Small</brightrail-button>
-        <brightrail-button variant="primary" size="md">Medium</brightrail-button>
-        <brightrail-button variant="primary" size="lg">Large</brightrail-button>
+        <brightrail-button variant="primary" size="xs">XS</brightrail-button>
+        <brightrail-button variant="primary" size="sm">SM</brightrail-button>
+        <brightrail-button variant="primary" size="md">MD</brightrail-button>
+        <brightrail-button variant="primary" size="lg">LG</brightrail-button>
+        <brightrail-button variant="primary" size="xl">XL</brightrail-button>
       </div>
     </div>
 
     <div class="demo__block">
-      <h3 class="demo__h">Icons &amp; state</h3>
+      <h3 class="demo__h">Icons, dropdown, loading</h3>
       <div class="demo__row">
-        <brightrail-button variant="primary" iconLeft="plus">Left icon</brightrail-button>
-        <brightrail-button variant="primary" iconRight="chevron">Right icon</brightrail-button>
-        <brightrail-button variant="primary" iconLeft="plus" iconRight="chevron"
-          >Both</brightrail-button
-        >
-      </div>
-      <div class="demo__row">
+        <brightrail-button variant="primary" shape="circle" iconLeft="heart" ariaLabel="Like"></brightrail-button>
+        <brightrail-button variant="primary" iconLeft="download">Download</brightrail-button>
+        <brightrail-button variant="primary" iconRight="chevron">Next</brightrail-button>
+        <brightrail-button variant="primary" [dropdownIndicator]="true">Options</brightrail-button>
         <brightrail-button variant="primary" [loading]="true">Loading</brightrail-button>
         <brightrail-button variant="primary" [disabled]="true">Disabled</brightrail-button>
-        <brightrail-button variant="primary" visualState="active">Active look</brightrail-button>
+        <brightrail-button variant="primary" visualState="active">Toggle on</brightrail-button>
+      </div>
+    </div>
+
+    <div class="demo__block">
+      <h3 class="demo__h">FAB</h3>
+      <div class="demo__row">
+        <brightrail-button
+          variant="primary"
+          size="lg"
+          shape="circle"
+          iconLeft="plus"
+          ariaLabel="Create"
+        ></brightrail-button>
+      </div>
+    </div>
+
+    <div class="demo__block">
+      <h3 class="demo__h">Split button</h3>
+      <brightrail-split-button variant="primary" menuButtonAriaLabel="Open save options">
+        Save
+      </brightrail-split-button>
+    </div>
+
+    <div class="demo__block">
+      <h3 class="demo__h">Segmented group</h3>
+      <brightrail-button-group mode="segmented">
+        <brightrail-button variant="outline" visualState="active">Day</brightrail-button>
+        <brightrail-button variant="outline">Week</brightrail-button>
+        <brightrail-button variant="outline">Month</brightrail-button>
+        <brightrail-button variant="outline">Year</brightrail-button>
+      </brightrail-button-group>
+    </div>
+
+    <div class="demo__block">
+      <h3 class="demo__h">Pill group</h3>
+      <brightrail-button-group mode="pill">
+        <brightrail-button variant="secondary" visualState="active">List</brightrail-button>
+        <brightrail-button variant="secondary">Board</brightrail-button>
+        <brightrail-button variant="secondary">Timeline</brightrail-button>
+      </brightrail-button-group>
+    </div>
+
+    <div class="demo__block">
+      <h3 class="demo__h">Compact icon group</h3>
+      <brightrail-button-group mode="compact">
+        <brightrail-button variant="ghost" shape="icon" iconLeft="edit" ariaLabel="Edit"></brightrail-button>
+        <brightrail-button variant="ghost" shape="icon" iconLeft="copy" ariaLabel="Copy"></brightrail-button>
+        <brightrail-button variant="ghost" shape="icon" iconLeft="trash" ariaLabel="Delete"></brightrail-button>
+        <brightrail-button variant="ghost" shape="icon" iconLeft="more" ariaLabel="More"></brightrail-button>
+      </brightrail-button-group>
+    </div>
+
+    <div class="demo__block">
+      <h3 class="demo__h">Text field — status & validation</h3>
+      <p class="demo__lead demo__lead--compact">
+        Messages below each field come from built-in defaults for <code>status</code>. Set
+        <code>helperText</code> only when you need custom copy.
+      </p>
+      <div class="demo__stack">
+        <brightrail-text-field
+          label="Success"
+          labelPosition="top"
+          status="success"
+          placeholder="Valid input"
+          [(ngModel)]="statusDemoSuccess"
+        />
+        <brightrail-text-field
+          label="Warning"
+          labelPosition="top"
+          status="warning"
+          placeholder="Check this value"
+          [(ngModel)]="statusDemoWarning"
+        />
+        <brightrail-text-field
+          label="Error"
+          labelPosition="top"
+          status="error"
+          placeholder="Invalid input"
+          [(ngModel)]="statusDemoError"
+        />
+        <brightrail-text-field
+          label="Info / Help"
+          labelPosition="top"
+          status="info"
+          placeholder="Helpful information"
+          [(ngModel)]="statusDemoInfo"
+        />
       </div>
     </div>
 

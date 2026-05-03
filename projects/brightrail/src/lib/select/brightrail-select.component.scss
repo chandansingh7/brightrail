@@ -1,0 +1,86 @@
+@use '../text-field/brightrail-text-field.component.scss' as *;
+
+.br-select__control {
+  position: relative;
+  min-width: 0;
+  width: 100%;
+}
+
+.br-tf__field-row--inline .br-select__control {
+  flex: 1;
+  min-width: 0;
+}
+
+.br-select__trigger {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  cursor: pointer;
+  text-align: left;
+  align-items: center;
+}
+
+.br-select__trigger:focus {
+  outline: none;
+}
+
+.br-select__trigger:disabled {
+  cursor: not-allowed;
+}
+
+.br-select__trigger--readonly {
+  cursor: default;
+}
+
+button.br-tf__wrap:disabled {
+  background: var(--br-tf-disabled-bg);
+  border-color: var(--br-tf-border);
+  opacity: 0.92;
+  cursor: not-allowed;
+}
+
+.br-select__value-shell {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.br-select__value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.35;
+  padding: 0.25rem 0;
+}
+
+.br-select__value--placeholder {
+  color: var(--br-tf-placeholder);
+}
+
+.br-select__clear-host {
+  display: inline-flex;
+}
+
+.br-select__panel {
+  position: absolute;
+  z-index: 30;
+  left: 0;
+  right: 0;
+  top: calc(100% + 2px);
+  max-height: 16rem;
+  overflow: auto;
+  padding: 0.35rem;
+  border-radius: var(--br-tf-radius);
+  border: 1px solid var(--br-tf-border);
+  background: #fff;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(0, 0, 0, 0.04);
+}

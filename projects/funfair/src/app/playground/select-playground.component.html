@@ -1,0 +1,637 @@
+<div class="bp">
+  <div class="bp-grid">
+    <section class="bp-panel bp-panel--settings" aria-labelledby="sel-settings-title">
+      <div class="bp-settings-head">
+        <div class="bp-settings-head__start">
+          <svg
+            class="bp-settings-head__icon"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              fill="currentColor"
+              d="M4 6h2v2H4V6zm0 5h2v2H4v-2zm0 5h2v2H4v-2zm4-10h12v2H8V6zm0 5h12v2H8v-2zm0 5h12v2H8v-2z"
+            />
+            <circle cx="18" cy="7" r="1.25" fill="currentColor" />
+            <circle cx="18" cy="12" r="1.25" fill="currentColor" />
+            <circle cx="18" cy="17" r="1.25" fill="currentColor" />
+          </svg>
+          <h2 id="sel-settings-title" class="bp-settings-head__title">Component settings</h2>
+        </div>
+        <button
+          type="button"
+          class="bp-settings-reset"
+          (click)="resetToDefaults()"
+          title="Reset all settings"
+        >
+          <span class="bp-sr-only">Reset all component settings</span>
+          <svg
+            class="bp-settings-reset__icon"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              fill="currentColor"
+              d="M12 6V3L8 7l4 4V8c2.76 0 5 2.24 5 5 0 1.28-.48 2.45-1.26 3.35l1.41 1.41A6.96 6.96 0 0 0 19 13c0-3.87-3.13-7-7-7zm0 14c-2.76 0-5-2.24-5-5 0-1.28.48-2.45 1.26-3.35L6.85 10.24A6.96 6.96 0 0 0 5 13c0 3.87 3.13 7 7 7v3l4-4-4-4v3z"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div class="bp-settings-block">
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="sel-lbl-component">Component</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true">
+              <span class="bp-ico-pill"></span>
+            </span>
+            <select class="bp-dropdown__select" disabled aria-labelledby="sel-lbl-component" title="Component type">
+              <option>Select</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="sel-lbl-recipe-grp">Scenario group</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true">
+              <span class="bp-ico-ring"></span>
+            </span>
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="selectedRecipeGroup()"
+              (ngModelChange)="onRecipeGroupNgModelChange($event)"
+              [ngModelOptions]="ngModelStandalone"
+              aria-labelledby="sel-lbl-recipe-grp"
+              title="Basics, Popular app, Group layouts, …"
+            >
+              @for (g of recipeGroups; track g) {
+                <option [value]="g" [selected]="selectedRecipeGroup() === g">{{ g }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="sel-lbl-recipe">Scenario</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true">
+              <span class="bp-ico-pill"></span>
+            </span>
+            <select
+              class="bp-dropdown__select sel-recipe-select"
+              [ngModel]="previewRecipe()"
+              (ngModelChange)="onRecipeNgModelChange($event)"
+              [ngModelOptions]="ngModelStandalone"
+              aria-labelledby="sel-lbl-recipe"
+              title="Concrete preview inside the selected group"
+            >
+              @for (opt of recipesInGroup(selectedRecipeGroup()); track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="sel-lbl-label-pos">Label position</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true">
+              <span class="bp-ico-label-pos" [attr.data-pos]="labelPosition()"></span>
+            </span>
+            <select
+              class="bp-dropdown__select"
+              (change)="onLabelPositionChange($event)"
+              aria-labelledby="sel-lbl-label-pos"
+            >
+              @for (opt of labelPositionOptions; track opt.value) {
+                <option [value]="opt.value" [selected]="labelPosition() === opt.value">
+                  {{ opt.label }}
+                </option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="sel-lbl-appearance">Appearance</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true">
+              <span class="bp-ico-appearance" [attr.data-appearance]="appearance()"></span>
+            </span>
+            <select
+              class="bp-dropdown__select"
+              (change)="onAppearanceChange($event)"
+              aria-labelledby="sel-lbl-appearance"
+            >
+              @for (a of appearanceOptions; track a) {
+                <option [value]="a" [selected]="appearance() === a">{{ a | titlecase }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="sel-lbl-status">Status</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true">
+              <span class="bp-ico-tf-status" [attr.data-status]="status()"></span>
+            </span>
+            <select
+              class="bp-dropdown__select"
+              (change)="onStatusChange($event)"
+              aria-labelledby="sel-lbl-status"
+            >
+              @for (opt of statusOptions; track opt.value) {
+                <option [value]="opt.value" [selected]="status() === opt.value">
+                  {{ opt.label }}
+                </option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="sel-lbl-size">Size</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true">
+              <span class="bp-ico-ring"></span>
+            </span>
+            <select class="bp-dropdown__select" (change)="onSizeChange($event)" aria-labelledby="sel-lbl-size">
+              @for (opt of sizeOptions; track opt.value) {
+                <option [value]="opt.value" [selected]="size() === opt.value">
+                  {{ opt.label }}
+                </option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="sel-lbl-shape">Corners</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true">
+              <span class="bp-ico-tf-shape" [attr.data-shape]="shape()"></span>
+            </span>
+            <select class="bp-dropdown__select" (change)="onShapeChange($event)" aria-labelledby="sel-lbl-shape">
+              @for (opt of shapeOptions; track opt.value) {
+                <option [value]="opt.value" [selected]="shape() === opt.value">
+                  {{ opt.label }}
+                </option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="sel-lbl-state">State</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true">
+              <span class="bp-ico-state" [attr.data-state]="fieldState()"></span>
+            </span>
+            <select
+              class="bp-dropdown__select"
+              (change)="onFieldStateChange($event)"
+              aria-labelledby="sel-lbl-state"
+            >
+              @for (opt of stateOptions; track opt.value) {
+                <option [value]="opt.value" [selected]="fieldState() === opt.value">
+                  {{ opt.label }}
+                </option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="sel-lbl-theme">Theme</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true">
+              <span class="bp-ico-theme"></span>
+            </span>
+            <select
+              class="bp-dropdown__select"
+              (change)="onThemeRowChange($event)"
+              aria-labelledby="sel-lbl-theme"
+            >
+              @for (opt of themeRowOptions; track opt.id) {
+                <option [value]="opt.id" [selected]="themeService.theme() === opt.id">
+                  {{ opt.label }}
+                </option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="bp-settings-rule" />
+
+      <div class="bp-settings-block">
+        <h3 class="bp-settings-block__title">Icon options</h3>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="sel-lbl-iside">Icon side</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true">
+              <span class="bp-ico-side" [attr.data-side]="iconSide()"></span>
+            </span>
+            <select
+              class="bp-dropdown__select"
+              (change)="onIconSideChange($event)"
+              aria-labelledby="sel-lbl-iside"
+            >
+              @for (opt of iconSideOptions; track opt.value) {
+                <option [value]="opt.value" [selected]="iconSide() === opt.value">
+                  {{ opt.label }}
+                </option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="sel-lbl-ikind">Icon</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true">
+              <span class="bp-ico-kind" [attr.data-kind]="iconKind()"></span>
+            </span>
+            <select
+              class="bp-dropdown__select"
+              (change)="onIconKindChange($event)"
+              aria-labelledby="sel-lbl-ikind"
+            >
+              @for (ic of iconChoices; track ic) {
+                <option [value]="ic" [selected]="iconKind() === ic">
+                  {{ iconLabels[ic] }}
+                </option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="bp-settings-rule" />
+
+      <div class="bp-settings-block">
+        <h3 class="bp-settings-block__title">Behavior</h3>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="sel-lbl-loading">Loading</span>
+          <label class="bp-switch">
+            <input
+              type="checkbox"
+              role="switch"
+              [checked]="fieldLoading()"
+              (change)="onToggleLoading($event)"
+              aria-labelledby="sel-lbl-loading"
+            />
+            <span class="bp-switch__track" aria-hidden="true"></span>
+          </label>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="sel-lbl-clear">Clearable</span>
+          <label class="bp-switch">
+            <input
+              type="checkbox"
+              role="switch"
+              [checked]="clearable()"
+              (change)="onToggleClearable($event)"
+              aria-labelledby="sel-lbl-clear"
+            />
+            <span class="bp-switch__track" aria-hidden="true"></span>
+          </label>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="sel-lbl-fw">Full width</span>
+          <label class="bp-switch">
+            <input
+              type="checkbox"
+              role="switch"
+              [checked]="fullWidth()"
+              (change)="onToggleFullWidth($event)"
+              aria-labelledby="sel-lbl-fw"
+            />
+            <span class="bp-switch__track" aria-hidden="true"></span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <section class="bp-panel bp-panel--preview" aria-labelledby="sel-preview-title">
+      <h2 id="sel-preview-title" class="bp-panel__title bp-panel__title--live">
+        <span class="bp-live-dot" aria-hidden="true"></span>
+        Live preview
+      </h2>
+      <div class="bp-preview-surface" [class.bp-preview-surface--stretch]="fullWidth()">
+        <div class="bp-preview-inner">
+          @switch (previewRecipe()) {
+            @case ('cascade') {
+              <div class="sel-cascade">
+                <brightrail-select
+                  [ngModelOptions]="ngModelStandalone"
+                  [appearance]="appearance()"
+                  [status]="status()"
+                  size="sm"
+                  shape="default"
+                  labelPosition="none"
+                  ariaLabel="Country"
+                  [displayText]="cascadeParent() === 'us' ? 'United States' : 'Canada'"
+                  [ngModel]="cascadeParent()"
+                  (ngModelChange)="onCascadeParentPick($event)"
+                >
+                  <div class="br-select-panel demo-sel-panel">
+                    <button type="button" class="demo-sel-panel__opt" (click)="onCascadeParentPick('us')">
+                      United States
+                    </button>
+                    <button type="button" class="demo-sel-panel__opt" (click)="onCascadeParentPick('can')">
+                      Canada
+                    </button>
+                  </div>
+                </brightrail-select>
+                <span class="sel-cascade__arrow" aria-hidden="true">→</span>
+                <brightrail-select
+                  [ngModelOptions]="ngModelStandalone"
+                  [appearance]="appearance()"
+                  [status]="status()"
+                  size="sm"
+                  labelPosition="none"
+                  ariaLabel="Region"
+                  [displayText]="cascadeChildLabel()"
+                  [ngModel]="cascadeChild()"
+                  (ngModelChange)="cascadeChild.set($event)"
+                >
+                  <div class="br-select-panel demo-sel-panel">
+                    @for (opt of cascadeChildOptions(); track opt.id) {
+                      <button type="button" class="demo-sel-panel__opt" (click)="cascadeChild.set(opt.id)">
+                        {{ opt.label }}
+                      </button>
+                    }
+                  </div>
+                </brightrail-select>
+              </div>
+            }
+            @case ('selectPlusAction') {
+              <div class="sel-row-actions">
+                <brightrail-select
+                  class="sel-row-actions__grow"
+                  [ngModelOptions]="ngModelStandalone"
+                  [appearance]="appearance()"
+                  [status]="status()"
+                  [size]="size()"
+                  [shape]="shape()"
+                  [label]="effectiveFieldLabel()"
+                  [labelPosition]="labelPosition()"
+                  [placeholder]="effectivePlaceholder()"
+                  [displayText]="displayText()"
+                  [disabled]="disabledForField()"
+                  [loading]="fieldLoading()"
+                  [clearable]="clearable()"
+                  [ngModel]="previewValue()"
+                  (ngModelChange)="previewValue.set($event)"
+                >
+                  @if (selectLeadingButtonIcon(); as leadIc) {
+                    <span class="br-select-prefix" aria-hidden="true">
+                      <brightrail-button-icon [name]="leadIc" />
+                    </span>
+                  }
+                  @if (selectTrailingButtonIcon(); as trailIc) {
+                    <span class="br-select-suffix" aria-hidden="true">
+                      <brightrail-button-icon [name]="trailIc" />
+                    </span>
+                  }
+                  <div class="br-select-panel demo-sel-panel">
+                    @for (opt of demoOptions; track opt.id) {
+                      <button type="button" class="demo-sel-panel__opt" (click)="pick(opt.id)">
+                        {{ opt.label }}
+                      </button>
+                    }
+                  </div>
+                </brightrail-select>
+                <brightrail-button variant="primary" [size]="exportActionButtonSize()">Export</brightrail-button>
+              </div>
+            }
+            @case ('compactFilters') {
+              <div class="sel-filter-bar">
+                <brightrail-select
+                  [ngModelOptions]="ngModelStandalone"
+                  appearance="outlined"
+                  size="xs"
+                  labelPosition="none"
+                  ariaLabel="Status"
+                  [displayText]="filterStatusLabel()"
+                  [ngModel]="filterStatus()"
+                  (ngModelChange)="filterStatus.set($event)"
+                >
+                  <div class="br-select-panel demo-sel-panel">
+                    @for (opt of filterStatusOpts; track opt.id) {
+                      <button type="button" class="demo-sel-panel__opt" (click)="filterStatus.set(opt.id)">
+                        {{ opt.label }}
+                      </button>
+                    }
+                  </div>
+                </brightrail-select>
+                <brightrail-select
+                  [ngModelOptions]="ngModelStandalone"
+                  appearance="outlined"
+                  size="xs"
+                  labelPosition="none"
+                  ariaLabel="Assignee"
+                  [displayText]="filterAssigneeLabel()"
+                  [ngModel]="filterAssignee()"
+                  (ngModelChange)="filterAssignee.set($event)"
+                >
+                  <div class="br-select-panel demo-sel-panel">
+                    @for (opt of filterAssigneeOpts; track opt.id) {
+                      <button type="button" class="demo-sel-panel__opt" (click)="filterAssignee.set(opt.id)">
+                        {{ opt.label }}
+                      </button>
+                    }
+                  </div>
+                </brightrail-select>
+                <brightrail-select
+                  [ngModelOptions]="ngModelStandalone"
+                  appearance="outlined"
+                  size="xs"
+                  labelPosition="none"
+                  ariaLabel="Priority"
+                  [displayText]="filterPriorityLabel()"
+                  [ngModel]="filterPriority()"
+                  (ngModelChange)="filterPriority.set($event)"
+                >
+                  <div class="br-select-panel demo-sel-panel">
+                    @for (opt of filterPriorityOpts; track opt.id) {
+                      <button type="button" class="demo-sel-panel__opt" (click)="filterPriority.set(opt.id)">
+                        {{ opt.label }}
+                      </button>
+                    }
+                  </div>
+                </brightrail-select>
+              </div>
+            }
+            @case ('segmented') {
+              <div class="sel-seg-wrap">
+                <brightrail-button-group mode="segmented">
+                  <brightrail-button
+                    size="sm"
+                    variant="secondary"
+                    [visualState]="segment() === 'day' ? 'active' : 'default'"
+                    (click)="segment.set('day')"
+                    >Day</brightrail-button
+                  >
+                  <brightrail-button
+                    size="sm"
+                    variant="secondary"
+                    [visualState]="segment() === 'week' ? 'active' : 'default'"
+                    (click)="segment.set('week')"
+                    >Week</brightrail-button
+                  >
+                  <brightrail-button
+                    size="sm"
+                    variant="secondary"
+                    [visualState]="segment() === 'month' ? 'active' : 'default'"
+                    (click)="segment.set('month')"
+                    >Month</brightrail-button
+                  >
+                  <brightrail-button
+                    size="sm"
+                    variant="secondary"
+                    [visualState]="segment() === 'year' ? 'active' : 'default'"
+                    (click)="segment.set('year')"
+                    >Year</brightrail-button
+                  >
+                </brightrail-button-group>
+              </div>
+            }
+            @case ('inlineEditable') {
+              <div class="sel-inline-edit" role="group" aria-label="Editable owner">
+                <span class="sel-inline-edit__lbl">Owner</span>
+                <span class="sel-inline-edit__val">Alex Morgan</span>
+                <brightrail-button variant="ghost" size="sm" iconLeft="edit" ariaLabel="Edit owner" />
+              </div>
+            }
+            @default {
+              @if (showMainSelectRecipe()) {
+                <brightrail-select
+                  [ngModelOptions]="ngModelStandalone"
+                  [appearance]="appearance()"
+                  [status]="status()"
+                  [size]="size()"
+                  [shape]="shape()"
+                  [label]="effectiveFieldLabel()"
+                  [labelPosition]="labelPosition()"
+                  [placeholder]="effectivePlaceholder()"
+                  [displayText]="displayText()"
+                  [disabled]="disabledForField()"
+                  [loading]="fieldLoading()"
+                  [fullWidth]="fullWidth()"
+                  [clearable]="clearable()"
+                  [ngModel]="previewModelValue()"
+                  (ngModelChange)="onPreviewModelChange($event)"
+                >
+                  @if (selectLeadingButtonIcon(); as leadIc) {
+                    <span class="br-select-prefix" aria-hidden="true">
+                      <brightrail-button-icon [name]="leadIc" />
+                    </span>
+                  } @else {
+                    @if (previewRecipe() === 'country') {
+                      <span class="br-select-prefix" aria-hidden="true">🇺🇸</span>
+                    }
+                    @if (previewRecipe() === 'language') {
+                      <span class="br-select-prefix sel-lang-prefix" aria-hidden="true">
+                        <span>🇺🇸</span>
+                        <span>🌐</span>
+                      </span>
+                    }
+                    @if (previewRecipe() === 'assignee') {
+                      <span class="br-select-prefix sel-assignee-avatar" aria-hidden="true">O</span>
+                    }
+                    @if (previewRecipe() === 'category') {
+                      <span class="br-select-prefix sel-cat-prefix" aria-hidden="true">
+                        <span class="sel-cat-dot"></span>
+                      </span>
+                    }
+                  }
+                  @if (selectTrailingButtonIcon(); as trailIc) {
+                    <span class="br-select-suffix" aria-hidden="true">
+                      <brightrail-button-icon [name]="trailIc" />
+                    </span>
+                  }
+                  @if (previewRecipe() === 'tagMulti') {
+                    <span class="br-select-value-slot sel-tag-row">
+                      <span class="sel-tag-pill">Angular</span>
+                      <span class="sel-tag-pill">React</span>
+                      <span class="sel-tag-pill">Vue</span>
+                    </span>
+                  }
+                  <div class="br-select-panel demo-sel-panel">
+                    @for (opt of activePanelOptions(); track opt.id) {
+                      <button type="button" class="demo-sel-panel__opt" (click)="pick(opt.id)">
+                        {{ opt.label }}
+                      </button>
+                    }
+                  </div>
+                </brightrail-select>
+              }
+            }
+          }
+        </div>
+      </div>
+      <p class="bp-preview-caption">Preview updates from every control above.</p>
+    </section>
+  </div>
+
+  <section class="bp-code" aria-labelledby="sel-code-title">
+    <div class="bp-code__head">
+      <h2 id="sel-code-title" class="bp-code__title">Generated snippets</h2>
+      <div class="bp-code__tabs" role="tablist">
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'html'"
+          [attr.aria-selected]="activeTab() === 'html'"
+          (click)="selectTab('html')"
+        >
+          HTML
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'ts'"
+          [attr.aria-selected]="activeTab() === 'ts'"
+          (click)="selectTab('ts')"
+        >
+          TS
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'scss'"
+          [attr.aria-selected]="activeTab() === 'scss'"
+          (click)="selectTab('scss')"
+        >
+          SCSS
+        </button>
+      </div>
+      <button type="button" class="bp-copy" (click)="copySnippet()">Copy</button>
+    </div>
+    <pre class="bp-pre" role="tabpanel"><code>{{ activeSnippet() }}</code></pre>
+  </section>
+</div>

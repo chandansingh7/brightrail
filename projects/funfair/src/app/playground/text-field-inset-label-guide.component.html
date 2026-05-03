@@ -1,0 +1,89 @@
+<div class="ig">
+  <nav class="ig-breadcrumb" aria-label="Guide location">
+    <a routerLink=".." class="ig-breadcrumb__link">Text field playground</a>
+    <span class="ig-breadcrumb__sep" aria-hidden="true">/</span>
+    <span class="ig-breadcrumb__here">Inset label</span>
+  </nav>
+
+  <header class="ig-header">
+    <h1 class="ig-title">Inset label (border notch)</h1>
+    <p class="ig-lead">
+      Material-style <strong>outlined</strong> field where the label sits on the top border and the stroke
+      appears to break around the text. Pair <code>labelPosition="inset"</code> with
+      <code>appearance="outlined"</code> for the intended look.
+    </p>
+  </header>
+
+  <section class="ig-panel" aria-labelledby="ig-when">
+    <h2 id="ig-when" class="ig-h2">When to use</h2>
+    <ul class="ig-list">
+      <li>Dense forms where a separate label row would waste vertical space.</li>
+      <li>Designs that require a clear “outlined” affordance with the label tied to the field edge.</li>
+      <li>
+        Works best with <strong>single-line</strong> inputs; multiline (<code>rows &gt; 1</code>) is supported
+        but the notch reads less like Material’s default.
+      </li>
+    </ul>
+  </section>
+
+  <section class="ig-panel" aria-labelledby="ig-api">
+    <h2 id="ig-api" class="ig-h2">Key inputs</h2>
+    <dl class="ig-dl">
+      <div>
+        <dt><code>labelPosition="inset"</code></dt>
+        <dd>Renders the label inside the control chrome on the top border.</dd>
+      </div>
+      <div>
+        <dt><code>appearance="outlined"</code></dt>
+        <dd>Recommended; provides the white fill and stroke the notch is drawn against.</dd>
+      </div>
+      <div>
+        <dt><code>iconLeft="user"</code> (or any icon)</dt>
+        <dd>Optional leading icon inside the field, before the text.</dd>
+      </div>
+      <div>
+        <dt><code>[required]="true"</code></dt>
+        <dd>Shows an asterisk after the label, sets <code>required</code> and <code>aria-required</code> on the control.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="ig-panel" aria-labelledby="ig-theme">
+    <h2 id="ig-theme" class="ig-h2">Theming (CSS variables)</h2>
+    <p class="ig-note">
+      Override host tokens on <code>brightrail-text-field</code> (or a wrapper class). The live sample below uses
+      coral accents; defaults follow the library host variables in
+      <code>brightrail-text-field.component.scss</code>.
+    </p>
+    <ul class="ig-list ig-list--compact">
+      <li><code>--br-tf-border</code>, <code>--br-tf-border-hover</code> — rest / hover stroke</li>
+      <li><code>--br-tf-focus</code> — focus border and ring (ring uses <code>color-mix</code> with this token)</li>
+      <li><code>--br-tf-label</code> — inset label text color (and related label tone)</li>
+      <li><code>--br-tf-inset-label-bg</code> — optional notch “cut-out” fill (defaults by appearance)</li>
+    </ul>
+  </section>
+
+  <section class="ig-panel" aria-labelledby="ig-live">
+    <h2 id="ig-live" class="ig-h2">Live sample</h2>
+    <p class="ig-caption">Empty value, required inset label, leading user icon, themed border.</p>
+    <div class="ig-preview">
+      <brightrail-text-field
+        class="ig-demo-field"
+        appearance="outlined"
+        labelPosition="inset"
+        label="Username"
+        [required]="true"
+        iconLeft="user"
+        [ngModel]="demoValue()"
+        (ngModelChange)="demoValue.set($event)"
+      />
+    </div>
+  </section>
+
+  <section class="ig-panel" aria-labelledby="ig-code">
+    <h2 id="ig-code" class="ig-h2">Example markup</h2>
+    <pre class="ig-pre"><code>{{ exampleHtml }}</code></pre>
+    <h3 class="ig-h3">Example theme</h3>
+    <pre class="ig-pre"><code>{{ exampleScss }}</code></pre>
+  </section>
+</div>
