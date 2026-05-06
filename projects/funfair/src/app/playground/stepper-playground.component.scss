@@ -1,0 +1,16 @@
+@use './button-playground.component.scss' as *;
+
+.stp-preview {
+  min-height: 16rem;
+  display: grid;
+  place-items: center;
+}
+
+.stp-preview-inner {
+  width: min(100%, 46rem);
+  margin-inline: auto;
+}
+
+.stp-preview-inner--vertical {
+  width: fit-content;
+}

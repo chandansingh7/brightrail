@@ -82,6 +82,48 @@ export const routes: Routes = [
         ],
       },
       {
+        path: 'breadcrumb',
+        loadComponent: () =>
+          import('./playground/breadcrumb-section.component').then((m) => m.BreadcrumbSectionComponent),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./playground/breadcrumb-playground.component').then(
+                (m) => m.BreadcrumbPlaygroundComponent,
+              ),
+          },
+          {
+            path: 'catalog',
+            loadComponent: () =>
+              import('./playground/breadcrumb-catalog-overview.component').then(
+                (m) => m.BreadcrumbCatalogOverviewComponent,
+              ),
+          },
+        ],
+      },
+      {
+        path: 'stepper',
+        loadComponent: () =>
+          import('./playground/stepper-section.component').then((m) => m.StepperSectionComponent),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./playground/stepper-playground.component').then(
+                (m) => m.StepperPlaygroundComponent,
+              ),
+          },
+          {
+            path: 'catalog',
+            loadComponent: () =>
+              import('./playground/stepper-catalog-overview.component').then(
+                (m) => m.StepperCatalogOverviewComponent,
+              ),
+          },
+        ],
+      },
+      {
         path: 'card',
         loadComponent: () =>
           import('./playground/card-playground.component').then((m) => m.CardPlaygroundComponent),

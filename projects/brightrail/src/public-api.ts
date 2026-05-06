@@ -59,6 +59,7 @@ export * from './lib/drawer/brightrail-drawer-header.component';
 export * from './lib/drawer/brightrail-drawer-body.component';
 export * from './lib/drawer/brightrail-drawer-footer.component';
 export * from './lib/drawer/brightrail-drawer.directives';
+export * from './lib/breadcrumb/brightrail-breadcrumb.component';
 export * from './lib/table/brightrail-table.types';
 export * from './lib/table/brightrail-table.component';
 export * from './lib/table/brightrail-table-toolbar.component';

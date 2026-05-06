@@ -14,8 +14,12 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   },
 })
 export class BrightrailStepComponent {
-  /** Workflow title (e.g. "Verify Email"). */
+  /** Workflow / step title (e.g. "Verify Email"). */
   readonly label = input('');
-  /** Milestone caption (e.g. "Complete", "60%", "Pending"). */
+  /** Optional secondary label. */
+  readonly description = input('');
+  /** Milestone caption (legacy API). */
   readonly caption = input('');
+  /** Optional explicit status (otherwise inferred from currentStep). */
+  readonly status = input<'completed' | 'current' | 'pending' | 'error' | 'disabled' | 'inactive'>('pending');
 }

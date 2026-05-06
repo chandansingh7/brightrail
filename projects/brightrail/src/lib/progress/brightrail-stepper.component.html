@@ -1,46 +1,53 @@
-<div [class]="hostClass()" role="list" [attr.aria-label]="ariaLabel()">
+<div
+  [class]="hostClass()"
+  role="list"
+  [attr.aria-label]="ariaLabel()"
+  [style.--br-stepper-connector-gap]="normalizedConnectorGap()"
+  [style.--br-stepper-current]="currentColor() || null"
+  [style.--br-stepper-complete]="completedColor() || null"
+>
   <div class="br-stepper__rail" role="presentation">
     @for (step of steps(); track $index; let last = $last; let i = $index) {
       <div
         class="br-stepper__cell"
         role="listitem"
-        [attr.aria-current]="i === activeStep() ? 'step' : null"
+        [attr.aria-current]="i === resolvedCurrentStep() ? 'step' : null"
       >
         <div
           class="br-stepper__node"
-          [class.br-stepper__node--complete]="i < activeStep()"
-          [class.br-stepper__node--active]="i === activeStep()"
-          [class.br-stepper__node--upcoming]="i > activeStep()"
+          [class.br-stepper__node--complete]="stepState(step, i) === 'completed'"
+          [class.br-stepper__node--active]="stepState(step, i) === 'current'"
+          [class.br-stepper__node--upcoming]="stepState(step, i) === 'pending'"
+          [class.br-stepper__node--error]="stepState(step, i) === 'error'"
+          [class.br-stepper__node--disabled]="stepState(step, i) === 'disabled'"
         >
-          @if (preset() === 'milestone') {
+          @if (stepStyle() === 'numbered') {
             <span class="br-stepper__num">{{ i + 1 }}</span>
           } @else {
-            <span class="br-stepper__num">{{ i + 1 }}</span>
+            @if (stepState(step, i) === 'completed') {
+              <span class="br-stepper__num">✓</span>
+            } @else {
+              <span class="br-stepper__num">{{ i + 1 }}</span>
+            }
           }
         </div>
-        @if (preset() === 'milestone' && step.caption()) {
+        @if (step.label() || step.caption()) {
           <span
             class="br-stepper__caption"
-            [class.br-stepper__caption--complete]="i < activeStep()"
-            [class.br-stepper__caption--active]="i === activeStep()"
-            [class.br-stepper__caption--upcoming]="i > activeStep()"
-            >{{ step.caption() }}</span
+            [class.br-stepper__caption--complete]="stepState(step, i) === 'completed'"
+            [class.br-stepper__caption--active]="stepState(step, i) === 'current'"
+            [class.br-stepper__caption--upcoming]="stepState(step, i) === 'pending'"
+            >{{ step.label() || step.caption() }}</span
           >
         }
-        @if (preset() === 'workflow' && step.label()) {
-          <span
-            class="br-stepper__workflow-label"
-            [class.br-stepper__workflow-label--complete]="i < activeStep()"
-            [class.br-stepper__workflow-label--active]="i === activeStep()"
-            [class.br-stepper__workflow-label--upcoming]="i > activeStep()"
-            >{{ step.label() }}</span
-          >
+        @if (withDescriptions() && step.description()) {
+          <span class="br-stepper__workflow-label">{{ step.description() }}</span>
         }
       </div>
       @if (!last) {
         <div
           class="br-stepper__connector"
-          [class.br-stepper__connector--complete]="i < activeStep()"
+          [class.br-stepper__connector--complete]="stepState(step, i) === 'completed'"
           aria-hidden="true"
         ></div>
       }

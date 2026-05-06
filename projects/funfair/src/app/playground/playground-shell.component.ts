@@ -45,6 +45,10 @@ export class PlaygroundShellComponent {
           ? 'Radio settings support grouped choices, validation states, semantic tones, and size scaling.'
           : this.routeUrl().includes('/accordion')
             ? 'Accordion patterns cover appearances, multi-expand, icons, badges, nested panels, and header actions.'
+            : this.routeUrl().includes('/breadcrumb')
+              ? 'Breadcrumbs support separator styles, icon paths, truncation, and current-page emphasis for deep navigation.'
+              : this.routeUrl().includes('/stepper')
+                ? 'Steppers guide multi-step flows with orientation, status states, descriptions, and futuristic progress styles.'
             : this.routeUrl().includes('/pagination')
               ? 'Pagination supports summaries, page-size placement, ellipsis ranges, mobile layouts, and jump-to-page.'
               : this.routeUrl().includes('/drawer')
