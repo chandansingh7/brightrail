@@ -27,6 +27,17 @@ describe('TextFieldPlaygroundComponent', () => {
     expect(el.querySelector('brightrail-text-field')).toBeTruthy();
   });
 
+  it('disables suffix placement when multiline', () => {
+    fixture.componentInstance.rows.set(2);
+    fixture.detectChanges();
+    expect(fixture.componentInstance.textFieldSuffixPlacementEditable()).toBe(false);
+    const row = (fixture.nativeElement as HTMLElement)
+      .querySelector('#tf-lbl-suffix-placement')
+      ?.closest('.bp-setting-row');
+    const suffixSelect = row?.querySelector('select') as HTMLSelectElement;
+    expect(suffixSelect.disabled).toBe(true);
+  });
+
   it('should start with empty preview value and omit placeholder from snippet when default is empty', () => {
     expect(fixture.componentInstance.previewValue()).toBe('');
     const html = fixture.componentInstance.htmlSnippet();

@@ -1,0 +1,64 @@
+@use '../styles/tokens' as br;
+
+.br-drawer__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 1rem 0.9rem;
+  border-bottom: 1px solid br.$br-color-border;
+  background: br.$br-color-surface;
+}
+
+.br-drawer__header-main {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.br-drawer__header-title {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: br.$br-color-text-strong;
+}
+
+.br-drawer__header-subtitle {
+  margin-top: 0.3rem;
+  color: br.$br-color-muted;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.br-drawer__header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+}
+
+.br-drawer__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  padding: 1rem;
+  color: br.$br-color-text;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.br-drawer__body--flush {
+  padding: 0;
+}
+
+.br-drawer__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0.8rem 1rem 1rem;
+  border-top: 1px solid br.$br-color-border;
+  background: color-mix(in srgb, br.$br-color-surface-muted 55%, br.$br-color-surface);
+}

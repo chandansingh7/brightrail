@@ -29,6 +29,25 @@ describe('ButtonPlaygroundComponent', () => {
     expect(fixture.componentInstance.htmlSnippet()).toContain('>Go</brightrail-button>');
   });
 
+  it('disables boundary control when variant is link', () => {
+    fixture.componentInstance.variant.set('link');
+    fixture.detectChanges();
+    expect(fixture.componentInstance.buttonBoundaryEditable()).toBe(false);
+    const selects = (fixture.nativeElement as HTMLElement).querySelectorAll('.bp-dropdown__select');
+    const boundarySelect = selects[3] as HTMLSelectElement;
+    expect(boundarySelect.disabled).toBe(true);
+  });
+
+  it('disables icon side when no icon is selected', () => {
+    fixture.componentInstance.iconKind.set('none');
+    fixture.detectChanges();
+    expect(fixture.componentInstance.buttonIconSideEditable()).toBe(false);
+    const iconSideSelect = (fixture.nativeElement as HTMLElement).querySelector(
+      'select[name="bf-playground-icon-side"]',
+    ) as HTMLSelectElement;
+    expect(iconSideSelect.disabled).toBe(true);
+  });
+
   it('should map icon side and icon kind to button inputs', () => {
     fixture.componentInstance.iconKind.set('plus');
     fixture.componentInstance.iconSide.set('left');

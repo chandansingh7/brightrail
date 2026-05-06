@@ -1,0 +1,321 @@
+@if (sectionVisible(1)) {
+  <section class="alert-catalog__block">
+    <h4 class="alert-catalog__h">1. Core table types</h4>
+    <p class="alert-catalog__explain">
+      Uses your baseline <strong>variant</strong> and <strong>density</strong>; each tile highlights one visual chrome choice.
+    </p>
+    <div class="alert-catalog__grid alert-catalog__grid--3">
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Basic</span>
+        <brightrail-table
+          [variant]="'basic'"
+          [density]="mirrorDensity()"
+          [data]="miniRows"
+          [columns]="miniCols"
+          [ariaLabel]="'Basic table preview'"
+        />
+      </div>
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Bordered</span>
+        <brightrail-table
+          [variant]="'bordered'"
+          [density]="mirrorDensity()"
+          [data]="miniRows"
+          [columns]="miniCols"
+          [ariaLabel]="'Bordered table preview'"
+        />
+      </div>
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Striped</span>
+        <brightrail-table
+          [variant]="'striped'"
+          [density]="mirrorDensity()"
+          [data]="miniRows"
+          [columns]="miniCols"
+          [ariaLabel]="'Striped table preview'"
+        />
+      </div>
+    </div>
+  </section>
+}
+
+@if (sectionVisible(2)) {
+  <section class="alert-catalog__block">
+    <h4 class="alert-catalog__h">2. Row states</h4>
+    <p class="alert-catalog__explain">
+      Hover uses built‑in styling; <strong>selected</strong> and <strong>disabled</strong> rows demonstrate controlled highlights.
+    </p>
+    <div class="alert-catalog__cell">
+      <span class="alert-catalog__tag">Kitchen sink row chrome</span>
+      <brightrail-table
+        [variant]="mirrorVariant()"
+        [density]="mirrorDensity()"
+        [data]="statesDemoRows"
+        [columns]="statesCols"
+        [selectedIds]="statesSelectedIds"
+        [disabledRowIds]="statesDisabledIds"
+        [rowSelection]="'multiple'"
+        [ariaLabel]="'Row states'"
+      />
+    </div>
+  </section>
+}
+
+@if (sectionVisible(3)) {
+  <section class="alert-catalog__block">
+    <h4 class="alert-catalog__h">3. Density</h4>
+    <p class="alert-catalog__explain">
+      Uses your <strong>variant</strong>; each column swaps <strong>density</strong> only.
+    </p>
+    <div class="alert-catalog__grid alert-catalog__grid--3">
+      @for (d of densityVariants; track d) {
+        <div class="alert-catalog__cell">
+          <span class="alert-catalog__tag">{{
+            d === 'compact' ? 'Compact' : d === 'medium' ? 'Medium' : 'Comfortable'
+          }}</span>
+          <brightrail-table
+            [variant]="mirrorVariant()"
+            [density]="d"
+            [data]="miniRows"
+            [columns]="miniCols"
+            [ariaLabel]="'Density ' + d"
+          />
+        </div>
+      }
+    </div>
+  </section>
+}
+
+@if (sectionVisible(4)) {
+  <section class="alert-catalog__block">
+    <h4 class="alert-catalog__h">4. Interaction patterns</h4>
+    <p class="alert-catalog__explain">
+      Sorting, multi‑select, and expandable rows can be composed independently.
+    </p>
+    <div class="alert-catalog__stack">
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Sortable columns</span>
+        <brightrail-table
+          [variant]="mirrorVariant()"
+          [density]="mirrorDensity()"
+          [data]="miniRows"
+          [columns]="miniCols"
+          [sorting]="mirrorSorting()"
+          [ariaLabel]="'Sortable preview'"
+        />
+      </div>
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Selectable rows</span>
+        <brightrail-table
+          [variant]="mirrorVariant()"
+          [density]="mirrorDensity()"
+          [data]="miniRows"
+          [columns]="miniCols"
+          [rowSelection]="'multiple'"
+          [ariaLabel]="'Selectable preview'"
+        />
+      </div>
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Expandable rows</span>
+        <brightrail-table
+          [variant]="mirrorVariant()"
+          [density]="mirrorDensity()"
+          [data]="expandRows"
+          [columns]="expandCols"
+          [expandable]="true"
+          [expandedTemplate]="expandTplOrNull()"
+          [ariaLabel]="'Expandable preview'"
+        />
+      </div>
+    </div>
+  </section>
+}
+
+@if (sectionVisible(5)) {
+  <section class="alert-catalog__block">
+    <h4 class="alert-catalog__h">5. Popular app tables</h4>
+    <p class="alert-catalog__explain">
+      Opinionated column formats for dashboards and admin surfaces.
+    </p>
+    <div class="alert-catalog__stack">
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Data table</span>
+        <brightrail-table
+          [variant]="mirrorVariant()"
+          [density]="mirrorDensity()"
+          [data]="dataGridRows"
+          [columns]="dataGridCols"
+          [sorting]="mirrorSorting()"
+          [ariaLabel]="'Data table'"
+        />
+      </div>
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Report table</span>
+        <brightrail-table
+          [variant]="mirrorVariant()"
+          [density]="mirrorDensity()"
+          [data]="reportRows"
+          [columns]="reportCols"
+          [sorting]="mirrorSorting()"
+          [ariaLabel]="'Report table'"
+        />
+      </div>
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Audit log</span>
+        <brightrail-table
+          [variant]="mirrorVariant()"
+          [density]="mirrorDensity()"
+          [data]="auditRows"
+          [columns]="auditCols"
+          [ariaLabel]="'Audit log'"
+        />
+      </div>
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">User management</span>
+        <brightrail-table
+          [variant]="mirrorVariant()"
+          [density]="mirrorDensity()"
+          [data]="userMgmtRows"
+          [columns]="userMgmtCols"
+          [sorting]="mirrorSorting()"
+          [ariaLabel]="'User management'"
+        />
+      </div>
+    </div>
+  </section>
+}
+
+@if (sectionVisible(6)) {
+  <section class="alert-catalog__block">
+    <h4 class="alert-catalog__h">6. Enterprise patterns</h4>
+    <p class="alert-catalog__explain">
+      Currency / delta coloring and semantic badges map cleanly through column formats.
+    </p>
+    <div class="alert-catalog__stack">
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Financial table</span>
+        <brightrail-table
+          [variant]="mirrorVariant()"
+          [density]="mirrorDensity()"
+          [data]="financeRows"
+          [columns]="financeCols"
+          [sorting]="mirrorSorting()"
+          [ariaLabel]="'Financial table'"
+        />
+      </div>
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Approval queue</span>
+        <brightrail-table
+          [variant]="mirrorVariant()"
+          [density]="mirrorDensity()"
+          [data]="approvalRows"
+          [columns]="approvalCols"
+          [ariaLabel]="'Approval queue'"
+        />
+      </div>
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Inventory</span>
+        <brightrail-table
+          [variant]="mirrorVariant()"
+          [density]="mirrorDensity()"
+          [data]="inventoryRows"
+          [columns]="inventoryCols"
+          [ariaLabel]="'Inventory'"
+        />
+      </div>
+    </div>
+  </section>
+}
+
+@if (sectionVisible(7)) {
+  <section class="alert-catalog__block">
+    <h4 class="alert-catalog__h">7. Advanced patterns</h4>
+    <p class="alert-catalog__explain">
+      Sticky headers, empty placeholders, loading skeletons, and pagination footers.
+    </p>
+    <div class="alert-catalog__stack">
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Sticky header</span>
+        <brightrail-table
+          [variant]="mirrorVariant()"
+          [density]="mirrorDensity()"
+          [data]="stickyDemoRows"
+          [columns]="stickyCols"
+          [stickyHeader]="true"
+          stickyMaxHeight="14rem"
+          [sorting]="mirrorSorting()"
+          [pagination]="pagFive"
+          [ariaLabel]="'Sticky header demo'"
+        />
+      </div>
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Empty state</span>
+        <brightrail-table
+          [variant]="mirrorVariant()"
+          [density]="mirrorDensity()"
+          [data]="[]"
+          [columns]="miniCols"
+          emptyTitle="No data available"
+          emptyDescription="Create a record to populate this view."
+          [showEmptyAction]="true"
+          emptyActionLabel="Add record"
+          [ariaLabel]="'Empty table'"
+        />
+      </div>
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Loading skeleton</span>
+        <brightrail-table
+          [variant]="mirrorVariant()"
+          [density]="mirrorDensity()"
+          [data]="miniRows"
+          [columns]="miniCols"
+          [loading]="true"
+          [ariaLabel]="'Loading table'"
+        />
+      </div>
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Pagination</span>
+        <brightrail-table
+          [variant]="mirrorVariant()"
+          [density]="mirrorDensity()"
+          [data]="pagDemoRows"
+          [columns]="pagDemoCols"
+          [pagination]="pagFive"
+          [sorting]="mirrorSorting()"
+          [ariaLabel]="'Pagination demo'"
+        />
+      </div>
+    </div>
+  </section>
+}
+
+@if (sectionVisible(8)) {
+  <section class="alert-catalog__block alert-catalog__block--tips">
+    <h4 class="alert-catalog__h">8. Usage tips</h4>
+    <ul class="alert-catalog__tips">
+      <li>
+        Prefer semantic formats (<code>badge</code>, <code>currency</code>, <code>percentChange</code>,
+        <code>avatar</code>) instead of hand‑rolled markup inside cells.
+      </li>
+      <li>
+        Pair <code>pagination</code> with <code>(pageChange)</code> so the parent owns page index when you need server‑side paging.
+      </li>
+      <li>
+        Provide <code>ariaLabel</code> for standalone tables; expandable rows should supply meaningful detail templates.
+      </li>
+    </ul>
+  </section>
+}
+
+<ng-template #catalogExpandTpl let-row>
+  <div class="tc-expand-grid">
+    <div>
+      <strong>Email</strong>
+      <div>{{ row['email'] }}</div>
+    </div>
+    <div>
+      <strong>Department</strong>
+      <div>{{ row['dept'] }}</div>
+    </div>
+  </div>
+</ng-template>

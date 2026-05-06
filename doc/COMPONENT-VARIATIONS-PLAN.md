@@ -110,6 +110,10 @@ Each component page should follow the **same scaffold**:
 
 This keeps **one component per page** while still showing **many** variation and use-case blocks **on that page**.
 
+### Interactive playgrounds (settings-driven)
+
+Some components use a **three-panel playground**: **Component settings** (left), **Live preview** (right), and **Generated snippets** (full-width, HTML / TS / SCSS). Examples: **text field**, **select**. For those pages, follow the normative rules in **[PLAN.md — Funfair playground standard layout](./PLAN.md#funfair-playground-standard-layout)** in addition to this document: **scenario group + scenario** dropdowns, **icon options** (aligned with text field), **recipe-first** icon behavior, **matching size tokens** for adjacent controls, **stable projection hooks** (classes, not fragile attribute casing), snippet generation in sync with signals, optional **Resources** guides + routes. Button may stay on a denser grid; new interactive fields should converge on the PLAN layout.
+
 ### Showing implementation snippets
 
 Visitors (and future you) should see **code next to the demo**, not only the rendered UI.

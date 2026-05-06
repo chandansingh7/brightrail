@@ -129,10 +129,80 @@ Funfair proves **API usage** and docs UX; **`verify:package`** proves **installa
 | Piece | Responsibility |
 |--------|-----------------|
 | **Library** | Stable API (`public-api.ts`), theming/tokens, **accessible behavior and semantics**, unit tests (including checks for names/roles/states where feasible), changelog/versioning. |
-| **Funfair** | Routes per component, sample content, edge cases; **document keyboard and AT behavior** on each page; keep showcase itself keyboard-reachable (skip link, landmarks, focus-safe previews). |
+| **Funfair** | Routes per component, sample content, edge cases; **document keyboard and AT behavior** on each page; keep showcase itself keyboard-reachable (skip link, landmarks, focus-safe previews). For **settings-driven control playgrounds** (text field, select, and similar), follow **[Funfair playground standard layout](#funfair-playground-standard-layout)**. |
 | **Midway** | Minimal app: depends on **`file:dist/brightrail`**, no path mapping to source; ride-tests **`verify:package`**. |
 
 Keep **business logic and app-specific wiring** out of the library; funfair may use fake services to mimic real apps.
+
+---
+
+## Funfair playground standard layout
+
+Use this structure for **every Funfair playground** that is **settings-driven** and maps to design-kit **scenario groups** (today: **text field**, **select**; future: other inputs and complex controls). Simpler pages (e.g. button grid) can stay compact but should still align where it helps: **live preview + generated snippets**, **accessibility**, and **Resources** routes when the component has extra API or projection to document. The goal is one predictable layout for **field-like** demos so you do not restate requirements each time.
+
+### Page shell
+
+| Area | Requirement |
+|------|-------------|
+| **Grid** | Two columns: **Component settings** (left) and **Live preview** (right), matching the existing **`bp` / `bp-grid`** pattern shared with **text field** and **button** playgrounds (reuse `@use` of `text-field-playground.component.scss` or `button-playground.component.scss` as today). |
+| **Snippets** | Full-width block **below** the grid: **Generated snippets** with tabs **HTML**, **TS**, **SCSS**, and **Copy**. Snippet content must stay in sync with the live preview (signals + `computed` builders). |
+| **Caption** | Short preview caption only (e.g. one line). Long API notes (forms, projection, `ngModel`) belong in a **Resources** guide, not under the preview. |
+
+### Settings panel — required blocks (top to bottom)
+
+1. **Component** — Disabled dropdown showing the fixed component name (e.g. *Select*, *Text field*).
+2. **Scenario group** + **Scenario** — **Two** native `<select>` rows (not one endless list):
+   - First: **scenario group** (e.g. *Basics*, *Popular app*, *Icons & utility*, *Group layouts*, *Enterprise*).
+   - Second: **scenario** options filtered by that group (`recipesInGroup(selectedRecipeGroup())`).
+   - Changing group should keep the current scenario if it still belongs to that group; otherwise pick the first scenario in the group.
+   - Bind with **`[ngModel]`** + **`[ngModelOptions]="{ standalone: true }"`** (or a shared `ngModelStandalone` field) so the control works outside a `<form>`.
+3. **Core props** — The same categories text field already uses where they apply: **label position**, **appearance**, **status**, **size**, **shape** (if the component supports it), **field state** (e.g. default/disabled), **theme** row if the playground switches shell theme.
+4. **Icon options** (when the component has leading/trailing affordances) — Mirror **text field**:
+   - **Icon side**: Left / Right / Both.
+   - **Icon**: Full `BrightrailButtonIcon` list (excluding `loader` if loading is a separate toggle), with human-readable labels.
+   - Reuse **`effectiveLeftIcon` / `effectiveRightIcon`** (or equivalent) so “both” behaves the same everywhere.
+   - **Recipe-first rule:** If a **scenario** defines its own non-button prefix (flag, globe, avatar, dot, pills), those visuals **must not** be hidden by generic icon settings. Apply playground icons only for scenarios that use **button icons** or neutral layouts; document exceptions in code comments.
+5. **Behavior** — Toggles such as **loading**, **clearable**, **full width**, and any component-specific flags.
+
+Reset control should restore scenario group, scenario, icons, and behavior to defaults.
+
+### Live preview
+
+| Rule | Detail |
+|------|--------|
+| **Recipe switch** | Use `@switch (previewRecipe())` (or equivalent) for **composite** scenarios (e.g. cascading selects, select + action, filter bar, segmented control, inline row). Use a **default** branch for the single-control recipes. |
+| **Alignment** | Adjacent controls (e.g. select + primary button) must use the **same size token** from settings so heights match (no hard-coded `sm` on the button when the field is `lg`). |
+| **Projection / slots** | Prefer **stable class hooks** in the DOM for detection and docs (e.g. **`.br-select-value-slot`** for custom trigger bodies). Avoid relying on mixed-case attributes alone for logic — HTML lowercases attributes, which breaks `querySelector` for camelCase attribute names. |
+| **Realistic demos** | “Popular app” scenarios should show the same affordances as the design reference (prefix icons, avatars, chips, etc.). |
+
+### Generated snippets
+
+- **HTML** — Reflects current signals (appearance, size, projection snippets, `ngModel` / `ngModelOptions` as used in the preview).
+- **TS** — Minimal runnable stub: imports from `brightrail`, `FormsModule`, and any extra symbols **actually used** in the HTML tab (e.g. `BrightrailButtonIconComponent` when icons appear).
+- **SCSS** — Optional token overrides; mention layout wrapper classes when composite scenarios need them.
+
+### Routes and Resources
+
+| Pattern | Detail |
+|---------|--------|
+| **Section shell** | For components that also have long-form docs, use a thin **router shell** component with `<router-outlet />` (same idea as `text-field-section` / `select-section`): default child = playground, extra child = **resources** guide. |
+| **Sidebar** | Under **Resources**, link **Guide: …** routes (e.g. *Guide: inset label*, *Guide: select*) to those pages. |
+
+### Tests
+
+- **Library** — Unit tests for any **projection or CVA contract** (e.g. custom value slot hides default label when projected).
+- **Funfair** — Playground spec asserts snippet output contains key strings (`ngModelOptions`, scenario-specific markup) when scenarios or icons change.
+
+### Checklist — new component playground
+
+- [ ] `bp` shell: settings \| preview \| snippets + tabs.
+- [ ] Scenario **group** + **scenario** dropdowns with synced state and `ngModel` standalone.
+- [ ] Icon options block if applicable, with recipe-first behavior documented.
+- [ ] Live preview covers design-kit groups you care about (or a deliberate subset, documented).
+- [ ] Export row uses **matching size tokens** with adjacent controls.
+- [ ] Snippets updated via `computed` builders; TS imports match HTML.
+- [ ] Optional Resources guide + route + nav link.
+- [ ] Unit tests (library + playground) updated.
 
 ---
 
@@ -194,6 +264,7 @@ Optional: `build:all` can chain `funfair` + tests; CI should always include **`v
 - [ ] (Optional) Configure static hosting for funfair and document the publish directory.
 - [ ] Add an **ACCESSIBILITY.md** (or equivalent) in the repo stating WCAG target, keyboard/AT expectations, and how to test voice-control naming.
 - [ ] Wire **focus-visible** styles into tokens so keyboard focus is always visible across packs.
+- [ ] New or updated **component playgrounds** follow **[Funfair playground standard layout](#funfair-playground-standard-layout)** (scenario group + scenario, icons, snippets, Resources as needed).
 
 ---
 

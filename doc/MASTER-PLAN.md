@@ -6,7 +6,7 @@
 
 ## How to use these docs
 
-1. **Day-to-day implementation** — Follow [PLAN.md](./PLAN.md) for workspace layout, scripts, publishing, and accessibility baseline; follow [COMPONENT-VARIATIONS-PLAN.md](./COMPONENT-VARIATIONS-PLAN.md) for funfair page structure, variants vs use cases, snippets, and a11y per page.
+1. **Day-to-day implementation** — Follow [PLAN.md](./PLAN.md) for workspace layout, scripts, publishing, accessibility baseline, and **Funfair playground standard layout**; follow [COMPONENT-VARIATIONS-PLAN.md](./COMPONENT-VARIATIONS-PLAN.md) for funfair page structure, variants vs use cases, snippets, and a11y per page.
 2. **Strategic / enterprise alignment** — Use [ENTERPRISE-RESEARCH-ALIGNMENT.md](./ENTERPRISE-RESEARCH-ALIGNMENT.md) to phase in design packs, conformance, CI, and platform maturity without doing everything at once.
 3. **Deep background** — [deep-research-report.md](./deep-research-report.md) is the long-form enterprise Angular design-system survey (treat uncited placeholders as non-authoritative until replaced with real references; see alignment doc).
 
@@ -61,7 +61,7 @@ Detailed phased checklist: [ENTERPRISE-RESEARCH-ALIGNMENT.md § Phased plan](./E
 | File | Role |
 |------|------|
 | [MASTER-PLAN.md](./MASTER-PLAN.md) | **This file** — entry point, roadmap, index. |
-| [PLAN.md](./PLAN.md) | Workspace goals, layout, workflow, testing, publishing, a11y baseline, checklist. |
+| [PLAN.md](./PLAN.md) | Workspace goals, layout, workflow, testing, publishing, a11y baseline, checklist, **Funfair playground standard layout** (settings-driven pages). |
 | [COMPONENT-VARIATIONS-PLAN.md](./COMPONENT-VARIATIONS-PLAN.md) | One component per funfair page; variants & use cases; snippets; a11y requirements; funfair UI patterns. |
 | [ENTERPRISE-RESEARCH-ALIGNMENT.md](./ENTERPRISE-RESEARCH-ALIGNMENT.md) | Grades the research report; maps enterprise ideas to this library; phased adoption. |
 | [deep-research-report.md](./deep-research-report.md) | Long enterprise reference (Angular Aria, APF, market comparison, inventory, governance). |

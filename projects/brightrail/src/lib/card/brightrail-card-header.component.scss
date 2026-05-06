@@ -1,0 +1,68 @@
+:host {
+  display: block;
+  box-sizing: border-box;
+}
+
+.br-card-header__row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.br-card-header__row--with-leading {
+  grid-template-columns: auto 1fr auto;
+}
+
+.br-card-header__leading {
+  display: none;
+}
+
+.br-card-header__row--with-leading .br-card-header__leading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.br-card-header__leading:empty {
+  display: none !important;
+}
+
+.br-card-header__title {
+  min-width: 0;
+}
+
+.br-card-header__title ::ng-deep .br-card-header-heading,
+.br-card-header__title ::ng-deep :where(h1, h2, h3, h4) {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--br-card-title-fg, #202124);
+  line-height: 1.25;
+}
+
+.br-card-header__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem;
+}
+
+.br-card-header__actions:empty {
+  display: none;
+}
+
+/* Leading chart badge — wrap {@link BrightrailIconComponent} for team-dashboard cards. */
+:host ::ng-deep .br-card-header-chart-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #7c4dff 0%, #5c6bc0 100%);
+  color: #fff;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}

@@ -1,0 +1,178 @@
+@use '../styles/tokens' as br;
+
+.br-drawer-root {
+  --br-drawer-z: 1080;
+  position: fixed;
+  inset: 0;
+  z-index: var(--br-drawer-z);
+  pointer-events: none;
+}
+
+.br-drawer-root--contain {
+  position: absolute;
+}
+
+.br-drawer-root--has-backdrop {
+  pointer-events: auto;
+}
+
+.br-drawer__backdrop {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+}
+
+.br-drawer__backdrop--dim {
+  background: rgb(15 23 42 / 42%);
+}
+
+.br-drawer__backdrop--dim-strong {
+  background: rgb(15 23 42 / 70%);
+}
+
+.br-drawer__backdrop--blur {
+  background: rgb(15 23 42 / 24%);
+  backdrop-filter: blur(4px);
+}
+
+.br-drawer__backdrop--glass {
+  background: radial-gradient(circle at top left, rgb(59 130 246 / 22%), transparent 55%),
+    radial-gradient(circle at bottom right, rgb(236 72 153 / 20%), transparent 55%),
+    rgb(15 23 42 / 40%);
+  backdrop-filter: blur(9px);
+}
+
+.br-drawer__backdrop--none {
+  background: transparent;
+}
+
+.br-drawer__backdrop:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.br-drawer__panel {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-width: min(100%, 18rem);
+  max-width: min(100vw, var(--br-drawer-max-width, 60rem));
+  max-height: 100%;
+  background: br.$br-color-surface;
+  border: 1px solid br.$br-color-border-strong;
+  box-shadow:
+    0 24px 48px rgb(15 23 42 / 16%),
+    0 6px 16px rgb(15 23 42 / 10%);
+  outline: none;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.br-drawer__panel--glass {
+  background: rgb(255 255 255 / 85%);
+  backdrop-filter: blur(10px);
+}
+
+.br-drawer__panel--flat {
+  box-shadow: none;
+}
+
+.br-drawer__panel--gradient {
+  background:
+    radial-gradient(circle at top left, rgb(59 130 246 / 18%), transparent 60%),
+    radial-gradient(circle at bottom right, rgb(236 72 153 / 16%), transparent 60%),
+    br.$br-color-surface;
+  border-color: rgb(59 130 246 / 40%);
+}
+
+.br-drawer__panel--ai {
+  background:
+    linear-gradient(135deg, rgb(15 23 42), rgb(30 64 175)),
+    radial-gradient(circle at top right, rgb(168 85 247 / 45%), transparent 60%);
+  background-blend-mode: overlay;
+  border-color: rgb(129 140 248 / 70%);
+  box-shadow:
+    0 24px 60px rgb(15 23 42 / 70%),
+    0 0 0 1px rgb(56 189 248 / 55%);
+  color: #e5e7eb;
+}
+
+.br-drawer__panel--left,
+.br-drawer__panel--right {
+  top: 0;
+  bottom: 0;
+  width: var(--br-drawer-width, 30rem);
+}
+
+.br-drawer__panel--left {
+  left: 0;
+  border-radius: 0 br.$br-radius-md br.$br-radius-md 0;
+}
+
+.br-drawer__panel--right {
+  right: 0;
+  border-radius: br.$br-radius-md 0 0 br.$br-radius-md;
+}
+
+.br-drawer__panel--top,
+.br-drawer__panel--bottom {
+  left: 0;
+  right: 0;
+  height: var(--br-drawer-height, 20rem);
+}
+
+.br-drawer__panel--top {
+  top: 0;
+  border-radius: 0 0 br.$br-radius-md br.$br-radius-md;
+}
+
+.br-drawer__panel--bottom {
+  bottom: 0;
+  border-radius: br.$br-radius-md br.$br-radius-md 0 0;
+}
+
+.br-drawer__panel--size-narrow {
+  --br-drawer-width: min(100vw, 20rem);
+}
+
+.br-drawer__panel--size-medium {
+  --br-drawer-width: min(100vw, 30rem);
+}
+
+.br-drawer__panel--size-wide {
+  --br-drawer-width: min(100vw, 45rem);
+}
+
+.br-drawer__panel--size-xwide {
+  --br-drawer-width: min(100vw, 60rem);
+}
+
+.br-drawer__panel--size-full {
+  --br-drawer-width: 100vw;
+  --br-drawer-height: 100vh;
+  border-radius: 0;
+}
+
+.br-drawer__panel--sticky-header ::ng-deep .br-drawer__header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.br-drawer__panel--sticky-footer ::ng-deep .br-drawer__footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+}
+
+@media (width <= 720px) {
+  .br-drawer__panel--left,
+  .br-drawer__panel--right {
+    width: min(100vw, var(--br-drawer-width, 100vw));
+    border-radius: 0;
+  }
+}

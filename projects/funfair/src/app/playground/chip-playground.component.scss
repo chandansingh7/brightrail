@@ -1,0 +1,19 @@
+@use './button-playground.component.scss' as *;
+
+.bp-preview-inner--chip {
+  width: 100%;
+}
+
+.chip-play-preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 9rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.chip-play-context {
+  font-size: 0.82rem;
+  color: var(--ff-muted);
+}

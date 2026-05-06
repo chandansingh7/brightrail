@@ -1,8 +1,15 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
+  BrightrailAlertComponent,
+  BrightrailAlertMessageDirective,
+  BrightrailAlertTitleDirective,
   BrightrailButtonComponent,
   BrightrailButtonGroupComponent,
+  BrightrailCardActionsComponent,
+  BrightrailCardComponent,
+  BrightrailCardContentComponent,
+  BrightrailCardHeaderComponent,
   BrightrailSplitButtonComponent,
   BrightrailTextFieldComponent,
   BrightrailWelcomeComponent,
@@ -12,10 +19,17 @@ import {
   selector: 'app-root',
   imports: [
     BrightrailWelcomeComponent,
+    BrightrailAlertComponent,
+    BrightrailAlertTitleDirective,
+    BrightrailAlertMessageDirective,
     BrightrailButtonComponent,
     BrightrailSplitButtonComponent,
     BrightrailButtonGroupComponent,
     BrightrailTextFieldComponent,
+    BrightrailCardComponent,
+    BrightrailCardHeaderComponent,
+    BrightrailCardContentComponent,
+    BrightrailCardActionsComponent,
     FormsModule,
   ],
   templateUrl: './app.html',

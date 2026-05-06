@@ -1,0 +1,62 @@
+@use '../styles/tokens' as br;
+
+/* ----- Shared shell pieces (header / body / footer components) ----- */
+
+.br-modal__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 1.15rem 0.85rem;
+  border-bottom: 1px solid br.$br-color-border;
+}
+
+.br-modal__header-main {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.br-modal__header-aside:not(:has(.br-modal__header-actions-inner)) {
+  display: none;
+}
+
+.br-modal__header-aside {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+.br-modal__title-text {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+  color: br.$br-color-text-strong;
+}
+
+.br-modal__body {
+  padding: 1rem 1.15rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: br.$br-color-text;
+}
+
+.br-modal__body :first-child {
+  margin-top: 0;
+}
+
+.br-modal__body :last-child {
+  margin-bottom: 0;
+}
+
+.br-modal__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem 0.65rem;
+  padding: 0.85rem 1.15rem 1rem;
+  border-top: 1px solid br.$br-color-border;
+  background: color-mix(in srgb, br.$br-color-surface-muted 55%, br.$br-color-surface);
+}

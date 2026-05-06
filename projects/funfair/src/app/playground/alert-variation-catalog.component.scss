@@ -1,0 +1,119 @@
+:host {
+  display: block;
+}
+
+.alert-catalog__block {
+  margin-bottom: 1.35rem;
+}
+
+.alert-catalog__explain {
+  margin: -0.25rem 0 0.75rem;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--ff-muted);
+}
+
+.alert-catalog__block--tips {
+  padding: 1rem 1.1rem;
+  border-radius: 0.65rem;
+  border: 1px dashed var(--ff-border);
+  background: color-mix(in srgb, var(--ff-muted) 8%, transparent);
+}
+
+.alert-catalog__h {
+  margin: 0 0 0.65rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--ff-text-core);
+}
+
+.alert-catalog__grid {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.alert-catalog__grid--4 {
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+}
+
+.alert-catalog__grid--3 {
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+}
+
+.alert-catalog__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.alert-catalog__stack--dense {
+  gap: 0.55rem;
+}
+
+.alert-catalog__cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.alert-catalog__tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ff-muted);
+}
+
+.alert-catalog__toast-shell {
+  max-width: 22rem;
+  padding: 0.75rem;
+  border-radius: 0.65rem;
+  background: rgb(15 23 42 / 88%);
+  box-shadow: 0 12px 30px rgb(15 23 42 / 35%);
+}
+
+.alert-catalog__stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.alert-catalog__group-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ff-muted);
+  margin-top: 0.35rem;
+}
+
+.alert-catalog__tips {
+  margin: 0;
+  padding-left: 1.15rem;
+  font-size: 0.82rem;
+  color: var(--ff-text-core);
+  line-height: 1.5;
+}
+
+.alert-catalog__tips li + li {
+  margin-top: 0.35rem;
+}
+
+.alert-catalog__tips code {
+  font-size: 0.85em;
+}
+
+.alert-catalog-link {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: var(--ff-brand);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.alert-catalog-link:hover {
+  color: var(--ff-brand-strong);
+}

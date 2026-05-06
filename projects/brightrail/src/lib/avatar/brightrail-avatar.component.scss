@@ -1,0 +1,385 @@
+@use '../styles/tokens' as t;
+
+:host {
+  display: inline-flex;
+  vertical-align: middle;
+  --br-avatar-size: 2rem;
+  --br-avatar-ring: var(--br-color-primary, #{t.$br-color-primary});
+  --br-avatar-glow: #6366f1;
+  --br-avatar-badge-scale: 1;
+  /** Outer ring for status / enterprise dots (match surface in host apps, e.g. dark mode). */
+  --br-avatar-halo: #fff;
+}
+
+.br-avatar-root {
+  display: inline-flex;
+  align-items: flex-start;
+}
+
+.br-avatar-root.br-avatar--profile {
+  align-items: center;
+}
+
+.br-avatar-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.br-avatar-frame {
+  position: relative;
+  width: var(--br-avatar-size);
+  height: var(--br-avatar-size);
+  flex-shrink: 0;
+}
+
+.br-avatar__shell {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background: var(--br-avatar-fill, #{t.$br-color-surface-muted});
+  color: var(--br-avatar-ink, #{t.$br-color-text-strong});
+  transition:
+    box-shadow 0.18s ease,
+    filter 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.br-avatar-root.br-avatar--shape-circle .br-avatar__shell,
+.br-avatar-root.br-avatar--shape-circle .br-avatar-frame {
+  border-radius: 50%;
+}
+
+.br-avatar-root.br-avatar--shape-rounded-square .br-avatar__shell,
+.br-avatar-root.br-avatar--shape-rounded-square .br-avatar-frame {
+  border-radius: var(--br-radius-md, #{t.$br-radius-md});
+}
+
+.br-avatar-root.br-avatar--shape-square .br-avatar__shell,
+.br-avatar-root.br-avatar--shape-square .br-avatar-frame {
+  border-radius: 0.125rem;
+}
+
+/* Sizes */
+.br-avatar-root.br-avatar--size-xs {
+  --br-avatar-size: 1rem;
+}
+.br-avatar-root.br-avatar--size-sm {
+  --br-avatar-size: 1.5rem;
+}
+.br-avatar-root.br-avatar--size-md {
+  --br-avatar-size: 2rem;
+}
+.br-avatar-root.br-avatar--size-lg {
+  --br-avatar-size: 3rem;
+}
+.br-avatar-root.br-avatar--size-xl {
+  --br-avatar-size: 4rem;
+}
+
+/* Initials tone */
+.br-avatar-root.br-avatar--tone-primary .br-avatar__shell {
+  --br-avatar-fill: var(--br-color-primary, #{t.$br-color-primary});
+  --br-avatar-ink: #fff;
+}
+.br-avatar-root.br-avatar--tone-success .br-avatar__shell {
+  --br-avatar-fill: #{t.$br-color-success};
+  --br-avatar-ink: #fff;
+}
+.br-avatar-root.br-avatar--tone-warning .br-avatar__shell {
+  --br-avatar-fill: #{t.$br-color-warning};
+  --br-avatar-ink: #1c1c1c;
+}
+.br-avatar-root.br-avatar--tone-danger .br-avatar__shell {
+  --br-avatar-fill: #{t.$br-color-danger};
+  --br-avatar-ink: #fff;
+}
+.br-avatar-root.br-avatar--tone-info .br-avatar__shell {
+  --br-avatar-fill: #1e6bdd;
+  --br-avatar-ink: #fff;
+}
+.br-avatar-root.br-avatar--tone-neutral .br-avatar__shell {
+  --br-avatar-fill: #e8eaed;
+  --br-avatar-ink: #{t.$br-color-text-strong};
+}
+.br-avatar-root.br-avatar--tone-priority .br-avatar__shell {
+  --br-avatar-fill: #7c3aed;
+  --br-avatar-ink: #fff;
+}
+
+.br-avatar__media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.br-avatar__initials {
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  font-size: clamp(0.45rem, calc(var(--br-avatar-size) * 0.36), 1.25rem);
+}
+
+.br-avatar__icon {
+  display: inline-flex;
+  font-size: calc(var(--br-avatar-size) * 0.48);
+  color: var(--br-avatar-ink, #{t.$br-color-primary});
+}
+
+/* Border styles */
+.br-avatar-root.br-avatar--border-none .br-avatar__shell {
+  border: 1px solid transparent;
+}
+
+.br-avatar-root.br-avatar--border-subtle .br-avatar__shell {
+  border: 1px solid #{t.$br-color-border-strong};
+}
+
+.br-avatar-root.br-avatar--border-ring .br-avatar__shell {
+  border: 2px solid var(--br-avatar-ring);
+}
+
+.br-avatar-root.br-avatar--border-hard-edge .br-avatar__shell {
+  border: 2px solid #{t.$br-color-text-strong};
+  box-shadow: none;
+}
+
+.br-avatar-root.br-avatar--border-soft-glow .br-avatar__shell {
+  border: 1px solid rgb(99 102 241 / 35%);
+  box-shadow:
+    0 0 0 1px rgb(99 102 241 / 20%),
+    0 0 18px var(--br-avatar-glow),
+    0 0 36px rgb(99 102 241 / 18%);
+}
+
+/* Variants */
+.br-avatar-root.br-avatar--variant-presence-ring .br-avatar__shell {
+  box-shadow: 0 0 0 2px var(--br-avatar-halo), 0 0 0 4px var(--br-avatar-ring);
+}
+
+.br-avatar-root.br-avatar--variant-neon .br-avatar__shell {
+  border: 1px solid rgb(34 211 238 / 50%);
+  box-shadow:
+    0 0 12px rgb(34 211 238 / 55%),
+    0 0 28px var(--br-avatar-glow),
+    inset 0 0 12px rgb(99 102 241 / 15%);
+}
+
+.br-avatar-root.br-avatar--variant-ai-assistant .br-avatar__shell {
+  position: relative;
+  border: 1px solid rgb(59 130 246 / 45%);
+  background-image:
+    radial-gradient(circle at 30% 30%, rgb(59 130 246 / 35%), transparent 55%),
+    radial-gradient(circle at 70% 60%, rgb(147 51 234 / 30%), transparent 50%),
+    linear-gradient(135deg, rgb(15 23 42), rgb(30 41 59));
+  background-blend-mode: screen, screen, normal;
+}
+
+.br-avatar-root.br-avatar--variant-ai-assistant.br-avatar--kind-initials .br-avatar__shell,
+.br-avatar-root.br-avatar--variant-ai-assistant.br-avatar--kind-icon .br-avatar__shell {
+  background-image:
+    radial-gradient(circle at 30% 30%, rgb(59 130 246 / 45%), transparent 55%),
+    radial-gradient(circle at 70% 60%, rgb(147 51 234 / 35%), transparent 50%),
+    linear-gradient(135deg, #1e3a5f, #312e81);
+}
+
+.br-avatar-root.br-avatar--variant-glassmorphism .br-avatar__shell {
+  background: rgb(255 255 255 / 18%);
+  border: 1px solid rgb(255 255 255 / 35%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 35%);
+}
+
+.br-avatar-root.br-avatar--variant-cyber .br-avatar__shell {
+  border: 1px solid rgb(34 211 238 / 65%);
+  box-shadow:
+    inset 0 0 0 1px rgb(59 130 246 / 35%),
+    0 0 16px rgb(34 211 238 / 35%);
+  clip-path: inset(0 round var(--br-cyber-r, 2px));
+}
+
+.br-avatar-root.br-avatar--shape-circle.br-avatar--variant-cyber .br-avatar__shell {
+  --br-cyber-r: 50%;
+}
+
+.br-avatar-root.br-avatar--variant-sci-fi-badge .br-avatar-frame::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  z-index: 0;
+  background: linear-gradient(125deg, #a855f7, #6366f1, #22d3ee);
+  clip-path: polygon(28% 0%, 72% 0%, 100% 50%, 72% 100%, 28% 100%, 0% 50%);
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+.br-avatar-root.br-avatar--variant-sci-fi-badge .br-avatar-frame {
+  z-index: 1;
+}
+
+.br-avatar-root.br-avatar--variant-sci-fi-badge .br-avatar__shell {
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgb(168 85 247 / 40%);
+  box-shadow: 0 0 14px rgb(99 102 241 / 45%);
+}
+
+/* States */
+.br-avatar-root.br-avatar--state-hover .br-avatar__shell {
+  filter: brightness(1.03);
+  box-shadow:
+    0 0 0 3px rgb(0 98 255 / 12%),
+    0 6px 18px rgb(60 64 67 / 12%);
+}
+
+.br-avatar-root.br-avatar--state-active .br-avatar__shell {
+  box-shadow: 0 0 0 3px var(--br-avatar-ring);
+}
+
+.br-avatar-root.br-avatar--state-disabled .br-avatar__shell {
+  opacity: 0.48;
+  filter: grayscale(0.35);
+  pointer-events: none;
+}
+
+/* Kind hook for AI variant background exception */
+.br-avatar-root.br-avatar--kind-image .br-avatar__shell {
+  background: #000;
+}
+
+.br-avatar__status {
+  position: absolute;
+  width: calc(0.28em * var(--br-avatar-badge-scale));
+  height: calc(0.28em * var(--br-avatar-badge-scale));
+  min-width: 6px;
+  min-height: 6px;
+  max-width: 14px;
+  max-height: 14px;
+  font-size: var(--br-avatar-size);
+  border-radius: 50%;
+  box-sizing: border-box;
+  z-index: 2;
+  box-shadow: 0 0 0 2px var(--br-avatar-halo);
+}
+
+.br-avatar-root.br-avatar--status-bottom-right .br-avatar__status {
+  right: 0;
+  bottom: 0;
+  transform: translate(5%, 5%);
+}
+
+.br-avatar-root.br-avatar--status-bottom-left .br-avatar__status {
+  left: 0;
+  bottom: 0;
+  transform: translate(-5%, 5%);
+}
+
+.br-avatar-root.br-avatar--status-top-right .br-avatar__status {
+  right: 0;
+  top: 0;
+  transform: translate(5%, -5%);
+}
+
+.br-avatar-root.br-avatar--status-top-left .br-avatar__status {
+  left: 0;
+  top: 0;
+  transform: translate(-5%, -5%);
+}
+
+.br-avatar__status--online {
+  background: #{t.$br-color-success};
+}
+
+.br-avatar__status--away {
+  background: #eab308;
+}
+
+.br-avatar__status--busy {
+  background: #{t.$br-color-danger};
+}
+
+.br-avatar__status--offline {
+  background: var(--br-avatar-halo);
+  border: 2px solid #9ca3af;
+}
+
+.br-avatar__enterprise {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(0.42em * var(--br-avatar-badge-scale));
+  height: calc(0.42em * var(--br-avatar-badge-scale));
+  min-width: 14px;
+  min-height: 14px;
+  max-width: 22px;
+  max-height: 22px;
+  font-size: var(--br-avatar-size);
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 0 0 0 2px var(--br-avatar-halo);
+  background: var(--br-avatar-halo);
+}
+
+.br-avatar-root.br-avatar--status-bottom-right .br-avatar__enterprise {
+  right: 0;
+  bottom: 0;
+  transform: translate(6%, 6%);
+}
+
+.br-avatar-root.br-avatar--status-bottom-left .br-avatar__enterprise {
+  left: 0;
+  bottom: 0;
+  transform: translate(-6%, 6%);
+}
+
+.br-avatar-root.br-avatar--status-top-right .br-avatar__enterprise {
+  right: 0;
+  top: 0;
+  transform: translate(6%, -6%);
+}
+
+.br-avatar-root.br-avatar--status-top-left .br-avatar__enterprise {
+  left: 0;
+  top: 0;
+  transform: translate(-6%, -6%);
+}
+
+.br-avatar__enterprise--assignee {
+  color: #{t.$br-color-success};
+}
+
+.br-avatar__enterprise--team-member {
+  color: #ca8a04;
+}
+
+.br-avatar__enterprise--reviewer {
+  color: #2563eb;
+}
+
+.br-avatar__enterprise--comment {
+  color: #9333ea;
+}
+
+.br-avatar-meta__label {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--br-color-text-strong, #{t.$br-color-text-strong});
+  line-height: 1.25;
+}
+
+.br-avatar-meta__subtitle {
+  font-size: 0.8125rem;
+  color: var(--br-color-muted, #{t.$br-color-muted});
+  line-height: 1.3;
+}

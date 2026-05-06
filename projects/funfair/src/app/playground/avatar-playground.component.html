@@ -1,0 +1,673 @@
+<div class="bp">
+  <div class="bp-grid">
+    <section class="bp-panel bp-panel--settings" aria-labelledby="avatar-settings-title">
+      <div class="bp-settings-head">
+        <div class="bp-settings-head__start">
+          <h2 id="avatar-settings-title" class="bp-settings-head__title">Component settings</h2>
+        </div>
+        <button
+          type="button"
+          class="bp-settings-reset ap-settings-reset--labeled"
+          (click)="resetToDefaults()"
+          aria-label="Reset all component settings"
+          title="Reset all component settings"
+        >
+          <svg class="bp-settings-reset__icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M12 6V3L8 7l4 4V8c2.76 0 5 2.24 5 5 0 1.28-.48 2.45-1.26 3.35l1.41 1.41A6.96 6.96 0 0 0 19 13c0-3.87-3.13-7-7-7zm0 14c-2.76 0-5-2.24-5-5 0-1.28.48-2.45 1.26-3.35L6.85 10.24A6.96 6.96 0 0 0 5 13c0 3.87 3.13 7 7 7v3l4-4-4-4v3z"
+            />
+          </svg>
+          <span class="ap-settings-reset__label">Reset all</span>
+        </button>
+      </div>
+
+      <div class="bp-settings-block">
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Component</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" disabled>
+              <option>Avatar</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Scenario group</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="selectedRecipeGroup()"
+              (ngModelChange)="onRecipeGroupNgModelChange($event)"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              @for (g of recipeGroups; track g) {
+                <option [value]="g">{{ g }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Scenario</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="previewRecipe()"
+              (ngModelChange)="onRecipeNgModelChange($event)"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              @for (opt of recipesInGroup(selectedRecipeGroup()); track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Initials / image</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="kind()"
+              (ngModelChange)="kind.set($event)"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              @for (opt of kindUiOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Variant</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="variant()"
+              (ngModelChange)="variant.set($event)"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              @for (opt of variantUiOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Shape</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="shape()"
+              (ngModelChange)="shape.set($event)"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              @for (opt of shapeUiOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Size</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="size()"
+              (ngModelChange)="size.set($event)"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              @for (opt of sizeUiOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Status badge</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="status()"
+              (ngModelChange)="status.set($event)"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              @for (opt of statusUiOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Status position</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="statusPosition()"
+              (ngModelChange)="statusPosition.set($event)"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              @for (opt of statusPositionUiOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Enterprise badge</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="enterpriseRole()"
+              (ngModelChange)="enterpriseRole.set($event)"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              @for (opt of enterpriseUiOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Border style</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="borderStyle()"
+              (ngModelChange)="borderStyle.set($event)"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              @for (opt of borderUiOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">State</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="state()"
+              (ngModelChange)="state.set($event)"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              @for (opt of stateUiOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Tone (initials / icon)</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="tone()"
+              (ngModelChange)="tone.set($event)"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              @for (opt of toneUiOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        @if (kind() === 'image') {
+          <div class="bp-setting-row">
+            <span class="bp-setting-row__label">Image URL</span>
+            <div class="bp-dropdown bp-dropdown--text">
+              <input
+                class="bp-dropdown__text"
+                [ngModel]="imageSrc()"
+                (ngModelChange)="imageSrc.set($event)"
+                [ngModelOptions]="{ standalone: true }"
+                placeholder="/images/avatar/avatar-01.png"
+              />
+            </div>
+          </div>
+          <div class="bp-setting-row">
+            <span class="bp-setting-row__label">Image alt</span>
+            <div class="bp-dropdown bp-dropdown--text">
+              <input
+                class="bp-dropdown__text"
+                [ngModel]="imageAlt()"
+                (ngModelChange)="imageAlt.set($event)"
+                [ngModelOptions]="{ standalone: true }"
+              />
+            </div>
+          </div>
+        }
+        @if (kind() === 'initials') {
+          <div class="bp-setting-row">
+            <span class="bp-setting-row__label">Name (initials)</span>
+            <div class="bp-dropdown bp-dropdown--text">
+              <input
+                class="bp-dropdown__text"
+                [ngModel]="displayName()"
+                (ngModelChange)="displayName.set($event)"
+                [ngModelOptions]="{ standalone: true }"
+                placeholder="Derives initials when empty below"
+              />
+            </div>
+          </div>
+          <div class="bp-setting-row">
+            <span class="bp-setting-row__label">Initials override</span>
+            <div class="bp-dropdown bp-dropdown--text">
+              <input
+                class="bp-dropdown__text"
+                [ngModel]="initials()"
+                (ngModelChange)="initials.set($event)"
+                [ngModelOptions]="{ standalone: true }"
+                placeholder="Optional e.g. JD"
+              />
+            </div>
+          </div>
+        }
+        @if (kind() === 'icon') {
+          <div class="bp-setting-row">
+            <span class="bp-setting-row__label">Icon</span>
+            <div class="bp-dropdown">
+              <select
+                class="bp-dropdown__select"
+                [ngModel]="icon()"
+                (ngModelChange)="icon.set($event)"
+                [ngModelOptions]="{ standalone: true }"
+              >
+                @for (i of iconOptions; track i) {
+                  <option [value]="i">{{ i }}</option>
+                }
+              </select>
+              <span class="bp-dropdown__chev" aria-hidden="true"></span>
+            </div>
+          </div>
+        }
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Label</span>
+          <div class="bp-dropdown bp-dropdown--text">
+            <input
+              class="bp-dropdown__text"
+              [ngModel]="label()"
+              (ngModelChange)="label.set($event)"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Subtitle</span>
+          <div class="bp-dropdown bp-dropdown--text">
+            <input
+              class="bp-dropdown__text"
+              [ngModel]="subtitle()"
+              (ngModelChange)="subtitle.set($event)"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Show profile text</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="showProfileMeta() ? 'yes' : 'no'"
+              (ngModelChange)="showProfileMeta.set($event === 'yes')"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Theme</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="themeService.theme()"
+              (ngModelChange)="themeService.setTheme($event)"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              @for (opt of themeRowOptions; track opt.id) {
+                <option [value]="opt.id">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <details class="ap-advanced">
+          <summary class="ap-advanced__summary">More customization</summary>
+          <div class="ap-advanced__body">
+            <div class="bp-setting-row">
+              <span class="bp-setting-row__label">Theme token</span>
+              <div class="bp-dropdown bp-dropdown--text">
+                <input
+                  class="bp-dropdown__text"
+                  [ngModel]="themeToken()"
+                  (ngModelChange)="themeToken.set($event)"
+                  [ngModelOptions]="{ standalone: true }"
+                  placeholder="material-light"
+                />
+              </div>
+            </div>
+            <div class="bp-setting-row">
+              <span class="bp-setting-row__label">Diameter (CSS)</span>
+              <div class="bp-dropdown bp-dropdown--text">
+                <input
+                  class="bp-dropdown__text"
+                  [ngModel]="diameter()"
+                  (ngModelChange)="diameter.set($event)"
+                  [ngModelOptions]="{ standalone: true }"
+                  placeholder="e.g. 3.5rem — optional"
+                />
+              </div>
+            </div>
+            <div class="bp-setting-row">
+              <span class="bp-setting-row__label">Ring color</span>
+              <div class="bp-dropdown bp-dropdown--text">
+                <input
+                  class="bp-dropdown__text"
+                  [ngModel]="ringColor()"
+                  (ngModelChange)="ringColor.set($event)"
+                  [ngModelOptions]="{ standalone: true }"
+                  placeholder="optional CSS color"
+                />
+              </div>
+            </div>
+            <div class="bp-setting-row">
+              <span class="bp-setting-row__label">Glow color</span>
+              <div class="bp-dropdown bp-dropdown--text">
+                <input
+                  class="bp-dropdown__text"
+                  [ngModel]="glowColor()"
+                  (ngModelChange)="glowColor.set($event)"
+                  [ngModelOptions]="{ standalone: true }"
+                  placeholder="optional CSS color"
+                />
+              </div>
+            </div>
+            <div class="bp-setting-row">
+              <span class="bp-setting-row__label">Badge scale</span>
+              <div class="bp-dropdown bp-dropdown--text">
+                <input
+                  class="bp-dropdown__text"
+                  type="number"
+                  step="0.1"
+                  min="0.5"
+                  max="2"
+                  [ngModel]="badgeScale()"
+                  (ngModelChange)="badgeScale.set(+$event || 1)"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+              </div>
+            </div>
+            <div class="bp-setting-row ap-tooltip-row">
+              <span class="bp-setting-row__label">Tooltip (host)</span>
+              <div class="bp-dropdown bp-dropdown--text">
+                <input
+                  class="bp-dropdown__text"
+                  [ngModel]="avatarTooltip()"
+                  (ngModelChange)="avatarTooltip.set($event)"
+                  [ngModelOptions]="{ standalone: true }"
+                  placeholder="Empty = no tooltip"
+                />
+              </div>
+            </div>
+            @if (avatarTooltip().trim().length > 0) {
+              <div class="bp-setting-row">
+                <span class="bp-setting-row__label">Tooltip placement</span>
+                <div class="bp-dropdown">
+                  <select
+                    class="bp-dropdown__select"
+                    [ngModel]="avatarTooltipPlacement()"
+                    (ngModelChange)="avatarTooltipPlacement.set($event)"
+                    [ngModelOptions]="{ standalone: true }"
+                  >
+                    <option value="top">Top</option>
+                    <option value="bottom">Bottom</option>
+                    <option value="left">Left</option>
+                    <option value="right">Right</option>
+                  </select>
+                  <span class="bp-dropdown__chev" aria-hidden="true"></span>
+                </div>
+              </div>
+              <div class="bp-setting-row">
+                <span class="bp-setting-row__label">Tooltip trigger</span>
+                <div class="bp-dropdown">
+                  <select
+                    class="bp-dropdown__select"
+                    [ngModel]="avatarTooltipTrigger()"
+                    (ngModelChange)="avatarTooltipTrigger.set($event)"
+                    [ngModelOptions]="{ standalone: true }"
+                  >
+                    <option value="hover">Hover</option>
+                    <option value="focus">Focus</option>
+                    <option value="click">Click</option>
+                  </select>
+                  <span class="bp-dropdown__chev" aria-hidden="true"></span>
+                </div>
+              </div>
+              <div class="bp-setting-row">
+                <span class="bp-setting-row__label">Tooltip content tone</span>
+                <div class="bp-dropdown">
+                  <select
+                    class="bp-dropdown__select"
+                    [ngModel]="avatarTooltipContentVariant()"
+                    (ngModelChange)="avatarTooltipContentVariant.set($event)"
+                    [ngModelOptions]="{ standalone: true }"
+                  >
+                    <option value="default">Default</option>
+                    <option value="success">Success</option>
+                    <option value="warning">Warning</option>
+                    <option value="error">Error</option>
+                    <option value="info">Info</option>
+                    <option value="neutral">Neutral</option>
+                  </select>
+                  <span class="bp-dropdown__chev" aria-hidden="true"></span>
+                </div>
+              </div>
+              <div class="bp-setting-row">
+                <span class="bp-setting-row__label">Tooltip shell</span>
+                <div class="bp-dropdown">
+                  <select
+                    class="bp-dropdown__select"
+                    [ngModel]="avatarTooltipVariant()"
+                    (ngModelChange)="avatarTooltipVariant.set($event)"
+                    [ngModelOptions]="{ standalone: true }"
+                  >
+                    <option value="default">Default</option>
+                    <option value="neon">Neon</option>
+                    <option value="holographic">Holographic</option>
+                    <option value="glassmorphism">Glassmorphism</option>
+                    <option value="cyber-pulse">Cyber pulse</option>
+                  </select>
+                  <span class="bp-dropdown__chev" aria-hidden="true"></span>
+                </div>
+              </div>
+              <div class="bp-setting-row">
+                <span class="bp-setting-row__label">Tooltip size</span>
+                <div class="bp-dropdown">
+                  <select
+                    class="bp-dropdown__select"
+                    [ngModel]="avatarTooltipSize()"
+                    (ngModelChange)="avatarTooltipSize.set($event)"
+                    [ngModelOptions]="{ standalone: true }"
+                  >
+                    <option value="sm">Small</option>
+                    <option value="md">Medium</option>
+                    <option value="lg">Large</option>
+                  </select>
+                  <span class="bp-dropdown__chev" aria-hidden="true"></span>
+                </div>
+              </div>
+              <div class="bp-setting-row">
+                <span class="bp-setting-row__label">Tooltip width</span>
+                <div class="bp-dropdown">
+                  <select
+                    class="bp-dropdown__select"
+                    [ngModel]="avatarTooltipWidthMode()"
+                    (ngModelChange)="avatarTooltipWidthMode.set($event)"
+                    [ngModelOptions]="{ standalone: true }"
+                  >
+                    <option value="auto">Auto</option>
+                    <option value="min-content">Min content</option>
+                  </select>
+                  <span class="bp-dropdown__chev" aria-hidden="true"></span>
+                </div>
+              </div>
+              <div class="bp-setting-row">
+                <span class="bp-setting-row__label">Tooltip arrow</span>
+                <div class="bp-dropdown">
+                  <select
+                    class="bp-dropdown__select"
+                    [ngModel]="avatarTooltipShowArrow() ? 'yes' : 'no'"
+                    (ngModelChange)="avatarTooltipShowArrow.set($event === 'yes')"
+                    [ngModelOptions]="{ standalone: true }"
+                  >
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                  </select>
+                  <span class="bp-dropdown__chev" aria-hidden="true"></span>
+                </div>
+              </div>
+              <div class="bp-setting-row">
+                <span class="bp-setting-row__label">Tooltip delay (ms)</span>
+                <div class="bp-dropdown bp-dropdown--text">
+                  <input
+                    class="bp-dropdown__text"
+                    type="number"
+                    min="0"
+                    step="50"
+                    [ngModel]="avatarTooltipShowDelay()"
+                    (ngModelChange)="avatarTooltipShowDelay.set(+$event || 0)"
+                    [ngModelOptions]="{ standalone: true }"
+                  />
+                </div>
+              </div>
+              <div class="bp-setting-row">
+                <span class="bp-setting-row__label">Tooltip max width</span>
+                <div class="bp-dropdown bp-dropdown--text">
+                  <input
+                    class="bp-dropdown__text"
+                    type="number"
+                    min="80"
+                    step="10"
+                    [ngModel]="avatarTooltipMaxWidth()"
+                    (ngModelChange)="avatarTooltipMaxWidth.set(+$event || 260)"
+                    [ngModelOptions]="{ standalone: true }"
+                  />
+                </div>
+              </div>
+            }
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="bp-panel bp-panel--preview" aria-labelledby="avatar-preview-title">
+      <h2 id="avatar-preview-title" class="bp-panel__title bp-panel__title--live">
+        <span class="bp-live-dot" aria-hidden="true"></span>
+        Live preview
+      </h2>
+      <div class="bp-preview-surface bp-preview-surface--stretch">
+        <div class="bp-preview-inner ap-preview">
+          @if (previewLayout() === 'group') {
+            <brightrail-avatar-group [maxVisible]="3" ariaLabel="Team members">
+              <brightrail-avatar shape="circle" size="md" [imageSrc]="stackDemoImage" imageAlt="One" />
+              <brightrail-avatar kind="initials" initials="B" shape="circle" size="md" tone="success" />
+              <brightrail-avatar kind="initials" initials="C" shape="circle" size="md" tone="warning" />
+              <brightrail-avatar kind="initials" initials="D" shape="circle" size="md" tone="neutral" />
+            </brightrail-avatar-group>
+          } @else {
+            <brightrail-avatar
+              [kind]="kind()"
+              [shape]="shape()"
+              [size]="size()"
+              [variant]="variant()"
+              [borderStyle]="borderStyle()"
+              [status]="enterpriseRole() !== 'none' ? 'none' : status()"
+              [statusPosition]="statusPosition()"
+              [enterpriseRole]="enterpriseRole()"
+              [state]="state()"
+              [tone]="tone()"
+              [icon]="icon()"
+              [imageSrc]="imageSrc()"
+              [imageAlt]="imageAlt()"
+              [name]="displayName()"
+              [initials]="initials()"
+              [label]="label()"
+              [subtitle]="subtitle()"
+              [showProfileMeta]="showProfileMeta()"
+              [theme]="themeToken() || undefined"
+              [diameter]="diameter().trim() || undefined"
+              [ringColor]="ringColor().trim() || undefined"
+              [glowColor]="glowColor().trim() || undefined"
+              [badgeScale]="badgeScale()"
+              [tooltip]="avatarTooltip().trim() || undefined"
+              [tooltipPlacement]="avatarTooltipPlacement()"
+              [tooltipTrigger]="avatarTooltipTrigger()"
+              [tooltipContentVariant]="avatarTooltipContentVariant()"
+              [tooltipVariant]="avatarTooltipVariant()"
+              [tooltipSize]="avatarTooltipSize()"
+              [tooltipWidthMode]="avatarTooltipWidthMode()"
+              [tooltipShowArrow]="avatarTooltipShowArrow()"
+              [tooltipShowDelay]="avatarTooltipShowDelay()"
+              [tooltipMaxWidth]="avatarTooltipMaxWidth()"
+            />
+          }
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="bp-code" aria-labelledby="avatar-code-title">
+    <div class="bp-code__head">
+      <h2 id="avatar-code-title" class="bp-code__title">Generated snippets</h2>
+      <div class="bp-code__tabs" role="tablist">
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'html'"
+          [attr.aria-selected]="activeTab() === 'html'"
+          (click)="selectTab('html')"
+        >
+          HTML
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'ts'"
+          [attr.aria-selected]="activeTab() === 'ts'"
+          (click)="selectTab('ts')"
+        >
+          TS
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'scss'"
+          [attr.aria-selected]="activeTab() === 'scss'"
+          (click)="selectTab('scss')"
+        >
+          SCSS
+        </button>
+      </div>
+      <button type="button" class="bp-copy" (click)="copySnippet()">Copy</button>
+    </div>
+    <pre class="bp-pre" role="tabpanel"><code>{{ activeSnippet() }}</code></pre>
+  </section>
+</div>

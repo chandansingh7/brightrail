@@ -1,0 +1,108 @@
+@use '../styles/tokens' as br;
+
+.br-modal-root {
+  --br-modal-z: 1040;
+  position: fixed;
+  inset: 0;
+  z-index: var(--br-modal-z);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.75rem, 4vw, 1.75rem);
+  box-sizing: border-box;
+}
+
+.br-modal-root--contain {
+  position: absolute;
+}
+
+.br-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: inherit;
+  background: rgb(15 23 42 / 52%);
+  cursor: pointer;
+}
+
+.br-modal__backdrop:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.br-modal__align {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-height: min(92vh, 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.br-modal__panel {
+  pointer-events: auto;
+  box-sizing: border-box;
+  width: 100%;
+  max-height: min(88vh, 100%);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: br.$br-radius-md;
+  background: br.$br-color-surface;
+  box-shadow:
+    0 24px 48px rgb(15 23 42 / 18%),
+    0 4px 12px rgb(15 23 42 / 10%);
+  border: 1px solid br.$br-color-border-strong;
+  outline: none;
+}
+
+.br-modal__panel:focus-visible {
+  outline: 2px solid var(--br-color-primary, #{br.$br-color-primary});
+  outline-offset: 2px;
+}
+
+.br-modal__panel--sm {
+  max-width: 22.5rem;
+}
+
+.br-modal__panel--md {
+  max-width: 35rem;
+}
+
+.br-modal__panel--lg {
+  max-width: 50rem;
+}
+
+.br-modal__panel--xl {
+  max-width: 70rem;
+}
+
+.br-modal__panel--danger {
+  border-color: rgb(217 48 37 / 35%);
+  box-shadow:
+    0 24px 48px rgb(217 48 37 / 12%),
+    0 4px 12px rgb(15 23 42 / 10%);
+}
+
+/* Body scrolls; header/footer stay visible inside the panel */
+.br-modal__panel--scroll-body {
+  overflow: hidden;
+}
+
+.br-modal__panel--scroll-body ::ng-deep .br-modal__header {
+  flex-shrink: 0;
+}
+
+.br-modal__panel--scroll-body ::ng-deep .br-modal__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.br-modal__panel--scroll-body ::ng-deep .br-modal__footer {
+  flex-shrink: 0;
+}

@@ -1,0 +1,52 @@
+.dco {
+  display: grid;
+  gap: 1rem;
+}
+
+.dco-hero h1 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.dco-hero p {
+  margin: 0.35rem 0 0;
+  color: var(--ff-muted);
+}
+
+.dco-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.dco-card {
+  border: 1px solid var(--ff-border);
+  border-radius: 0.7rem;
+  background: var(--ff-surface);
+  padding: 0.85rem;
+}
+
+.dco-card h2 {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+}
+
+.dco-card ul {
+  margin: 0;
+  padding-left: 1rem;
+  color: var(--ff-text-core);
+}
+
+.dco-preview h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.dco-preview-shell {
+  margin-top: 0.6rem;
+  position: relative;
+  min-height: 18rem;
+  border: 1px solid var(--ff-border);
+  border-radius: 0.8rem;
+  overflow: hidden;
+}

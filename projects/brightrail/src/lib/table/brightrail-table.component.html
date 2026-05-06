@@ -1,0 +1,683 @@
+<div [class]="surfaceClass()">
+  <ng-content select="brightrail-table-toolbar" />
+
+  @if (bulkToolbarVisible() && rowSelection() === 'multiple' && selectionCount() > 0) {
+    <div
+      class="br-table__bulk"
+      [class.br-table__bulk--placement-inline]="bulkActionsPlacement() === 'inline'"
+      role="region"
+      [attr.aria-label]="selectionCount() + ' rows selected'"
+    >
+      <div class="br-table__bulk-leading">
+        <input
+          type="checkbox"
+          class="br-table__checkbox br-table__bulk-checkbox"
+          [checked]="pageSelectAllChecked()"
+          [attr.data-partial]="pageSelectAllIndeterminate() ? '' : null"
+          (change)="onToggleSelectAllPage($event)"
+          aria-label="Select all rows on this page"
+        />
+        <span class="br-table__bulk-count">{{ selectionCount() }} selected</span>
+      </div>
+      <div class="br-table__bulk-actions">
+        <ng-content select="brightrail-table-bulk-actions" />
+      </div>
+    </div>
+  }
+
+  @if (singleActionsToolbarVisible() && rowSelection() === 'single' && selectionCount() === 1) {
+    <div
+      class="br-table__single"
+      [class.br-table__single--placement-inline]="singleActionsPlacement() === 'inline'"
+      role="region"
+      aria-label="Row actions"
+    >
+      <div class="br-table__single-leading">
+        <span class="br-table__single-count">1 selected</span>
+      </div>
+      <div class="br-table__single-actions">
+        <ng-content select="brightrail-table-single-actions" />
+      </div>
+    </div>
+  }
+
+  @if (loading()) {
+    <div class="br-table__scroll" [class.br-table__scroll--sticky]="stickyHeader()" [style.max-height]="stickyMaxHeight()">
+      <table
+        class="br-table__table"
+        [class.br-table__table--integrated]="headerControlsEnabled()"
+        role="presentation"
+      >
+        <thead class="br-table__thead" [class.br-table__thead--integrated]="headerControlsEnabled()">
+          <tr>
+            @if (expandable()) {
+              <th class="br-table__th br-table__th--expand" aria-hidden="true">
+                @if (headerControlsEnabled()) {
+                  <div class="br-table__th-stack br-table__th-stack--inline">
+                    <span class="br-table__skeleton br-table__skeleton--icon"></span>
+                  </div>
+                } @else {
+                  <span class="br-table__skeleton br-table__skeleton--icon"></span>
+                }
+              </th>
+            }
+            @if (rowSelection() !== 'none') {
+              <th class="br-table__th br-table__th--select" aria-hidden="true">
+                @if (headerControlsEnabled()) {
+                  <div class="br-table__th-stack br-table__th-stack--inline br-table__th-stack--select">
+                    <span class="br-table__skeleton br-table__skeleton--checkbox"></span>
+                    @if (showGlobalFilterButton()) {
+                      <span class="br-table__skeleton br-table__skeleton--filter-btn"></span>
+                    }
+                  </div>
+                } @else {
+                  <span class="br-table__skeleton br-table__skeleton--checkbox"></span>
+                }
+              </th>
+            }
+            @if (leadFunnelColumn()) {
+              <th class="br-table__th br-table__th--lead-funnel" aria-hidden="true">
+                <div class="br-table__th-stack br-table__th-stack--inline br-table__th-stack--lead-funnel">
+                  <span class="br-table__skeleton br-table__skeleton--filter-btn"></span>
+                </div>
+              </th>
+            }
+            @for (col of columns(); track col.id) {
+              <th class="br-table__th" scope="col">
+                @if (headerControlsEnabled()) {
+                  <div class="br-table__th-stack br-table__th-stack--inline">
+                    <span class="br-table__skeleton br-table__skeleton--text br-table__th-skel-heading"></span>
+                    <span class="br-table__skeleton br-table__skeleton--control br-table__th-skel-control"></span>
+                    <span class="br-table__skeleton br-table__skeleton--icon"></span>
+                  </div>
+                } @else {
+                  <span class="br-table__skeleton br-table__skeleton--text"></span>
+                }
+              </th>
+            }
+          </tr>
+        </thead>
+        <tbody class="br-table__tbody">
+          @for (_ of skeletonRepeat(); track $index) {
+            <tr class="br-table__tr">
+              @if (expandable()) {
+                <td class="br-table__td"><span class="br-table__skeleton br-table__skeleton--icon"></span></td>
+              }
+              @if (rowSelection() !== 'none') {
+                <td class="br-table__td"><span class="br-table__skeleton br-table__skeleton--checkbox"></span></td>
+              }
+              @if (leadFunnelColumn()) {
+                <td class="br-table__td br-table__td--lead-gap" aria-hidden="true"></td>
+              }
+              @for (col of columns(); track col.id) {
+                <td class="br-table__td">
+                  <span class="br-table__skeleton br-table__skeleton--text"></span>
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else if (data().length && !filteredRows().length) {
+    <div class="br-table__empty" role="status">
+      <div class="br-table__empty-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="40" height="40">
+          <path
+            fill="currentColor"
+            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+          />
+        </svg>
+      </div>
+      <div class="br-table__empty-title">{{ filterEmptyTitle() }}</div>
+      @if (filterEmptyDescription()) {
+        <div class="br-table__empty-desc">{{ filterEmptyDescription() }}</div>
+      }
+      <button type="button" class="br-table__empty-action" (click)="clearFilters()">Clear filters</button>
+    </div>
+  } @else if (!data().length) {
+    <div class="br-table__empty" role="status">
+      <div class="br-table__empty-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="40" height="40">
+          <path
+            fill="currentColor"
+            d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7v-7zm4-3h2v10h-2V7zm4 6h2v4h-2v-4z"
+          />
+        </svg>
+      </div>
+      <div class="br-table__empty-title">{{ emptyTitle() }}</div>
+      @if (emptyDescription()) {
+        <div class="br-table__empty-desc">{{ emptyDescription() }}</div>
+      }
+      @if (showEmptyAction()) {
+        <button type="button" class="br-table__empty-action" (click)="emptyAction.emit()">
+          {{ emptyActionLabel() }}
+        </button>
+      }
+    </div>
+  } @else {
+    <div class="br-table__scroll" [class.br-table__scroll--sticky]="stickyHeader()" [style.max-height]="stickyMaxHeight()">
+      <table
+        class="br-table__table"
+        [class.br-table__table--integrated]="headerControlsEnabled()"
+        [attr.aria-label]="ariaLabel()"
+        [attr.aria-rowcount]="ariaRowCount()"
+      >
+        <thead class="br-table__thead" [class.br-table__thead--integrated]="headerControlsEnabled()">
+          <tr>
+            @if (expandable()) {
+              <th class="br-table__th br-table__th--expand" scope="col">
+                @if (headerControlsEnabled()) {
+                  <div class="br-table__th-stack br-table__th-stack--inline">
+                    <span class="br-table__sr-only">Expand row</span>
+                  </div>
+                } @else {
+                  <span class="br-table__sr-only">Expand row</span>
+                }
+              </th>
+            }
+            @if (rowSelection() !== 'none') {
+              <th class="br-table__th br-table__th--select" scope="col">
+                @if (headerControlsEnabled()) {
+                  <div class="br-table__th-stack br-table__th-stack--inline br-table__th-stack--select">
+                    @if (rowSelection() === 'multiple') {
+                      <input
+                        type="checkbox"
+                        class="br-table__checkbox"
+                        [checked]="pageSelectAllChecked()"
+                        [attr.data-partial]="pageSelectAllIndeterminate() ? '' : null"
+                        (change)="onToggleSelectAllPage($event)"
+                        aria-label="Select all rows on this page"
+                      />
+                    } @else {
+                      <span class="br-table__sr-only">Select row</span>
+                    }
+                    @if (showGlobalFilterButton()) {
+                      <button
+                        type="button"
+                        class="br-table__filter-global"
+                        (click)="onGlobalFilterButtonClick()"
+                        [attr.aria-label]="filterActive() ? 'Clear all filters' : 'Filters'"
+                        [class.is-active]="filterActive()"
+                      >
+                        <svg class="br-table__filter-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                          <path
+                            fill="currentColor"
+                            d="M22 3H2l10 12.83V22l4-2v-6.17L22 3z"
+                          />
+                        </svg>
+                      </button>
+                    }
+                  </div>
+                } @else {
+                  @if (rowSelection() === 'multiple') {
+                    <input
+                      type="checkbox"
+                      class="br-table__checkbox"
+                      [checked]="pageSelectAllChecked()"
+                      [attr.data-partial]="pageSelectAllIndeterminate() ? '' : null"
+                      (change)="onToggleSelectAllPage($event)"
+                      aria-label="Select all rows on this page"
+                    />
+                  } @else {
+                    <span class="br-table__sr-only">Select row</span>
+                  }
+                }
+              </th>
+            }
+            @if (leadFunnelColumn()) {
+              <th class="br-table__th br-table__th--lead-funnel" scope="col">
+                <div class="br-table__th-stack br-table__th-stack--inline br-table__th-stack--lead-funnel">
+                  @if (showGlobalFilterButton()) {
+                    <button
+                      type="button"
+                      class="br-table__filter-global"
+                      (click)="onGlobalFilterButtonClick()"
+                      [attr.aria-label]="filterActive() ? 'Clear all filters' : 'Filters'"
+                      [class.is-active]="filterActive()"
+                    >
+                      <svg class="br-table__filter-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                        <path fill="currentColor" d="M22 3H2l10 12.83V22l4-2v-6.17L22 3z" />
+                      </svg>
+                    </button>
+                  }
+                </div>
+              </th>
+            }
+            @for (col of columns(); track col.id) {
+              <th
+                class="br-table__th"
+                [class.br-table__th--sticky-left]="col.sticky === 'left'"
+                [class.br-table__th--sticky-right]="col.sticky === 'right'"
+                [class.br-table__th--sortable]="sorting() && col.sortable !== false && col.field"
+                [style.width]="col.width ?? null"
+                scope="col"
+                [attr.aria-sort]="ariaSortFor(col.id)"
+              >
+                @if (headerControlsEnabled()) {
+                  <div class="br-table__th-stack br-table__th-stack--inline">
+                    <span class="br-table__th-heading">
+                      {{ col.header }}
+                      @if (col.required && inlineEdit()) {
+                        <span class="br-table__required" aria-hidden="true">*</span>
+                      }
+                    </span>
+                    <div class="br-table__th-control-slot">
+                      @switch (columnControlKind(col)) {
+                        @case ('search') {
+                          <span class="br-table__control-wrap br-table__control-wrap--search">
+                            <input
+                              type="search"
+                              class="br-table__control br-table__control--search"
+                              [value]="filterValue(col.id)"
+                              (input)="patchFilter(col.id, ($any($event.target).value ?? ''))"
+                              [attr.aria-label]="'Filter ' + col.header"
+                              [attr.placeholder]="filterPlaceholder(col)"
+                            />
+                            <span class="br-table__control-suffix" aria-hidden="true">
+                              <svg class="br-table__suffix-icon" viewBox="0 0 24 24" width="15" height="15">
+                                <path
+                                  fill="currentColor"
+                                  d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                                />
+                              </svg>
+                            </span>
+                          </span>
+                        }
+                        @case ('select') {
+                          <select
+                            class="br-table__control br-table__control--select"
+                            [value]="filterValue(col.id)"
+                            (change)="patchFilter(col.id, ($any($event.target).value ?? ''))"
+                            [attr.aria-label]="'Filter ' + col.header"
+                          >
+                            @for (opt of col.filterOptions!; track opt.value) {
+                              <option [value]="opt.value">{{ opt.label }}</option>
+                            }
+                          </select>
+                        }
+                        @case ('date') {
+                          <span class="br-table__control-wrap br-table__control-wrap--date">
+                            <input
+                              type="date"
+                              class="br-table__control br-table__control--date"
+                              [value]="filterValue(col.id)"
+                              (change)="patchFilter(col.id, ($any($event.target).value ?? ''))"
+                              [attr.aria-label]="'Filter ' + col.header"
+                            />
+                            <span class="br-table__control-suffix" aria-hidden="true">
+                              <svg class="br-table__suffix-icon" viewBox="0 0 24 24" width="15" height="15">
+                                <path
+                                  fill="currentColor"
+                                  d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7v-5z"
+                                />
+                              </svg>
+                            </span>
+                          </span>
+                        }
+                        @default {
+                          <div class="br-table__filter-slot br-table__filter-slot--blank" aria-hidden="true"></div>
+                        }
+                      }
+                    </div>
+                    @if (sorting() && col.sortable !== false && col.field) {
+                      <button
+                        type="button"
+                        class="br-table__sort-btn br-table__sort-btn--icons-only"
+                        (click)="onSortClick(col)"
+                        [attr.aria-label]="'Sort by ' + col.header"
+                      >
+                        <span class="br-table__sort-icons" aria-hidden="true">
+                          <span class="br-table__sort-icon" [class.is-active]="sortActive(col.id, 'asc')">▲</span>
+                          <span class="br-table__sort-icon" [class.is-active]="sortActive(col.id, 'desc')">▼</span>
+                        </span>
+                      </button>
+                    }
+                  </div>
+                } @else {
+                  <button
+                    type="button"
+                    class="br-table__sort-btn"
+                    [disabled]="!(sorting() && col.sortable !== false && col.field)"
+                    (click)="onSortClick(col)"
+                  >
+                    <span class="br-table__th-label">{{ col.header }}</span>
+                    @if (col.required && inlineEdit()) {
+                      <span class="br-table__required" aria-hidden="true">*</span>
+                    }
+                    @if (sorting() && col.sortable !== false && col.field) {
+                      <span class="br-table__sort-icons" aria-hidden="true">
+                        <span class="br-table__sort-icon" [class.is-active]="sortActive(col.id, 'asc')">▲</span>
+                        <span class="br-table__sort-icon" [class.is-active]="sortActive(col.id, 'desc')">▼</span>
+                      </span>
+                    }
+                  </button>
+                }
+              </th>
+            }
+          </tr>
+        </thead>
+        <tbody class="br-table__tbody">
+          @for (row of pagedRows(); track trackRow($index, row)) {
+            <tr
+              class="br-table__tr"
+              [class.br-table__tr--clickable]="rowSelection() !== 'none'"
+              [class.br-table__tr--selected]="isSelected(row)"
+              [class.br-table__tr--disabled]="isDisabled(row)"
+              [class.br-table__tr--editing]="isRowBeingEdited(row)"
+              [attr.aria-selected]="rowSelection() === 'none' ? null : isSelected(row)"
+              (click)="onRowClick(row, $event)"
+            >
+              @if (expandable()) {
+                <td class="br-table__td br-table__td--expand">
+                  @if (isExpandableRow(row)) {
+                    <button
+                      type="button"
+                      class="br-table__expand-btn"
+                      [attr.aria-expanded]="isExpanded(row)"
+                      [disabled]="isDisabled(row)"
+                      (click)="onToggleExpand(row)"
+                      aria-label="Toggle row details"
+                    >
+                      <span class="br-table__chevron" [class.is-open]="isExpanded(row)" aria-hidden="true">⌄</span>
+                    </button>
+                  }
+                </td>
+              }
+              @if (rowSelection() !== 'none') {
+                <td class="br-table__td br-table__td--select">
+                  @if (rowSelection() === 'multiple') {
+                    <input
+                      type="checkbox"
+                      class="br-table__checkbox"
+                      [checked]="isSelected(row)"
+                      [disabled]="isDisabled(row)"
+                      (change)="onToggleRowCheckbox(row, $event)"
+                      [attr.aria-label]="'Select row ' + rowLabel(row)"
+                    />
+                  } @else {
+                    <input
+                      type="radio"
+                      class="br-table__radio"
+                      [attr.name]="radioGroupName"
+                      [checked]="isSelected(row)"
+                      [disabled]="isDisabled(row)"
+                      (click)="onSingleRadioClick(row, $event)"
+                      [attr.aria-label]="'Select row ' + rowLabel(row)"
+                    />
+                  }
+                </td>
+              }
+              @if (leadFunnelColumn()) {
+                <td class="br-table__td br-table__td--lead-gap" aria-hidden="true"></td>
+              }
+              @for (col of columns(); track col.id) {
+                <td
+                  class="br-table__td"
+                  [class.br-table__td--align-start]="(col.align ?? 'start') === 'start'"
+                  [class.br-table__td--align-center]="col.align === 'center'"
+                  [class.br-table__td--align-end]="col.align === 'end'"
+                  [class.br-table__td--sticky-left]="col.sticky === 'left'"
+                  [class.br-table__td--sticky-right]="col.sticky === 'right'"
+                  [class.br-table__td--editable-hover]="
+                    inlineEdit() &&
+                    inlineEditMode() === 'cell' &&
+                    col.editable &&
+                    !isActionsColumn(col) &&
+                    inlineEditHoverReveal()
+                  "
+                  (click)="onEditableCellClick(row, col, $event)"
+                >
+                  @if (isActionsColumn(col)) {
+                    @if (templateForColumn(col)) {
+                      <ng-container
+                        *ngTemplateOutlet="templateForColumn(col)!; context: { $implicit: row, column: col }"
+                      />
+                    } @else if (inlineEdit() && inlineEditMode() === 'row') {
+                      <div class="br-table__actions-cell">
+                        @if (isRowBeingEdited(row)) {
+                          <button
+                            type="button"
+                            class="br-table__btn-inline br-table__btn-inline--primary"
+                            (click)="commitInlineSave(row); $event.stopPropagation()"
+                          >
+                            Save
+                          </button>
+                          <button
+                            type="button"
+                            class="br-table__btn-inline br-table__btn-inline--ghost"
+                            (click)="cancelInlineEdit(); $event.stopPropagation()"
+                          >
+                            Cancel
+                          </button>
+                        } @else {
+                          <button
+                            type="button"
+                            class="br-table__btn-icon br-table__btn-icon--ghost"
+                            (click)="beginRowEdit(row); $event.stopPropagation()"
+                            aria-label="Edit row"
+                          >
+                            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                              <path
+                                fill="currentColor"
+                                d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                              />
+                            </svg>
+                          </button>
+                        }
+                      </div>
+                    }
+                  } @else if (templateForColumn(col) && !shouldShowCellEditor(row, col)) {
+                    <ng-container
+                      *ngTemplateOutlet="templateForColumn(col)!; context: { $implicit: row, column: col }"
+                    />
+                  } @else if (shouldShowCellEditor(row, col)) {
+                    <div class="br-table__inline-editor">
+                      @switch (col.editor ?? 'text') {
+                        @case ('number') {
+                          <input
+                            type="number"
+                            class="br-table__inline-input br-table__inline-input--number"
+                            [class.br-table__inline-input--invalid]="cellInlineError(row, col)"
+                            [value]="draftText(col)"
+                            (input)="patchDraftField(col, $any($event.target).value ?? '')"
+                            (keydown)="onInlineInputKeydown($event, row)"
+                          />
+                        }
+                        @case ('date') {
+                          <span class="br-table__inline-date-wrap">
+                            <input
+                              type="date"
+                              class="br-table__inline-input br-table__inline-input--date"
+                              [class.br-table__inline-input--invalid]="cellInlineError(row, col)"
+                              [value]="draftText(col)"
+                              (input)="patchDraftField(col, $any($event.target).value ?? '')"
+                              (keydown)="onInlineInputKeydown($event, row)"
+                            />
+                            <span class="br-table__inline-date-suffix" aria-hidden="true">
+                              <svg width="14" height="14" viewBox="0 0 24 24">
+                                <path
+                                  fill="currentColor"
+                                  d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7v-5z"
+                                />
+                              </svg>
+                            </span>
+                          </span>
+                        }
+                        @case ('select') {
+                          <select
+                            class="br-table__inline-select"
+                            [class.br-table__inline-input--invalid]="cellInlineError(row, col)"
+                            [value]="draftText(col)"
+                            (change)="patchDraftField(col, $any($event.target).value ?? '')"
+                            (keydown)="onInlineInputKeydown($event, row)"
+                          >
+                            @for (opt of col.editOptions ?? []; track opt.value) {
+                              <option [value]="opt.value">{{ opt.label }}</option>
+                            }
+                          </select>
+                        }
+                        @default {
+                          <input
+                            type="text"
+                            class="br-table__inline-input"
+                            [class.br-table__inline-input--invalid]="cellInlineError(row, col)"
+                            [value]="draftText(col)"
+                            (input)="patchDraftField(col, $any($event.target).value ?? '')"
+                            (keydown)="onInlineInputKeydown($event, row)"
+                          />
+                        }
+                      }
+                      @if (inlineEditMode() === 'cell') {
+                        <div class="br-table__inline-cell-tools">
+                          <button
+                            type="button"
+                            class="br-table__btn-icon br-table__btn-icon--save"
+                            (click)="commitInlineSave(row); $event.stopPropagation()"
+                            aria-label="Save"
+                          >
+                            ✓
+                          </button>
+                          <button
+                            type="button"
+                            class="br-table__btn-icon br-table__btn-icon--cancel"
+                            (click)="cancelInlineEdit(); $event.stopPropagation()"
+                            aria-label="Cancel"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      }
+                      @if (cellInlineError(row, col)) {
+                        <div class="br-table__inline-error">{{ cellInlineError(row, col) }}</div>
+                      }
+                    </div>
+                  } @else {
+                    <div
+                      class="br-table__cell-wrap"
+                      [class.br-table__cell-wrap--hover-edit]="
+                        inlineEdit() &&
+                        inlineEditMode() === 'cell' &&
+                        col.editable &&
+                        !isActionsColumn(col) &&
+                        inlineEditHoverReveal()
+                      "
+                    >
+                      @switch (col.format ?? 'text') {
+                        @case ('badge') {
+                          <span [class]="badgeClass(row, col)">{{ formatText(row, col) }}</span>
+                        }
+                        @case ('avatar') {
+                          <span
+                            class="br-table__avatar-cell"
+                            [class.br-table__avatar-cell--icon-only]="col.avatarIconOnly"
+                          >
+                            <span class="br-table__avatar" aria-hidden="true">{{ avatarInitials(row, col) }}</span>
+                            @if (col.avatarIconOnly) {
+                              <span class="br-table__sr-only">
+                                {{ formatText(row, col) }}
+                                @if (col.avatarSubtitleField) {
+                                  {{ formatField(row, col.avatarSubtitleField) }}
+                                }
+                              </span>
+                            } @else {
+                              <span class="br-table__avatar-text">
+                                <span class="br-table__avatar-name">{{ formatText(row, col) }}</span>
+                                @if (col.avatarSubtitleField) {
+                                  <span class="br-table__avatar-sub">{{ formatField(row, col.avatarSubtitleField) }}</span>
+                                }
+                              </span>
+                            }
+                          </span>
+                        }
+                        @case ('currency') {
+                          {{ formatCurrencyCell(row, col) }}
+                        }
+                        @case ('percentChange') {
+                          <span [class]="percentClass(row, col)">{{ formatPercentChange(row, col) }}</span>
+                        }
+                        @default {
+                          {{ formatText(row, col) }}
+                        }
+                      }
+                      @if (
+                        inlineEdit() &&
+                        inlineEditMode() === 'cell' &&
+                        col.editable &&
+                        !isActionsColumn(col) &&
+                        inlineEditHoverReveal()
+                      ) {
+                        <button
+                          type="button"
+                          class="br-table__cell-hover-edit"
+                          (click)="beginCellEdit(row, col); $event.stopPropagation()"
+                          aria-label="Edit cell"
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                              fill="currentColor"
+                              d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                            />
+                          </svg>
+                        </button>
+                      }
+                    </div>
+                  }
+                </td>
+              }
+            </tr>
+            @if (expandable() && expandedTemplate() && isExpandableRow(row) && isExpanded(row)) {
+              <tr class="br-table__tr br-table__tr--detail">
+                <td class="br-table__td br-table__td--detail" [attr.colspan]="detailColspan()">
+                  <div class="br-table__detail-panel">
+                    <ng-container *ngTemplateOutlet="expandedTemplate()!; context: detailContext(row)" />
+                  </div>
+                </td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    </div>
+
+    @if (pagination()) {
+      <div class="br-table__footer" role="navigation" aria-label="Table pagination">
+        <div class="br-table__footer-summary">{{ paginationSummaryText() }}</div>
+        <div class="br-table__footer-controls">
+          <label class="br-table__page-size">
+            <span class="br-table__page-size-label">Rows per page</span>
+            <select class="br-table__select" [value]="pageSizeStr()" (change)="onPageSizeChange($event)">
+              @for (opt of pageSizeOptionsResolved(); track opt) {
+                <option [value]="pageSizeOptionStr(opt)">{{ opt }}</option>
+              }
+            </select>
+          </label>
+          <div class="br-table__pager">
+            <button type="button" class="br-table__pager-btn" [disabled]="!canPrev()" (click)="goPrev()" aria-label="Previous page">
+              ‹
+            </button>
+            @for (p of pageNumberTiles(); track trackPageTile($index, p)) {
+              @if (p.kind === 'ellipsis') {
+                <span class="br-table__pager-ellipsis" aria-hidden="true">…</span>
+              } @else {
+                <button
+                  type="button"
+                  class="br-table__pager-btn"
+                  [class.is-active]="p.page === effectivePageIndex()"
+                  (click)="goToPage(p.page)"
+                  [attr.aria-label]="'Page ' + (p.page + 1)"
+                  [attr.aria-current]="p.page === effectivePageIndex() ? 'page' : null"
+                >
+                  {{ p.page + 1 }}
+                </button>
+              }
+            }
+            <button type="button" class="br-table__pager-btn" [disabled]="!canNext()" (click)="goNext()" aria-label="Next page">
+              ›
+            </button>
+          </div>
+        </div>
+      </div>
+    }
+  }
+</div>

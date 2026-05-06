@@ -1,0 +1,49 @@
+<div [class]="hostClass()" role="list" [attr.aria-label]="ariaLabel()">
+  <div class="br-stepper__rail" role="presentation">
+    @for (step of steps(); track $index; let last = $last; let i = $index) {
+      <div
+        class="br-stepper__cell"
+        role="listitem"
+        [attr.aria-current]="i === activeStep() ? 'step' : null"
+      >
+        <div
+          class="br-stepper__node"
+          [class.br-stepper__node--complete]="i < activeStep()"
+          [class.br-stepper__node--active]="i === activeStep()"
+          [class.br-stepper__node--upcoming]="i > activeStep()"
+        >
+          @if (preset() === 'milestone') {
+            <span class="br-stepper__num">{{ i + 1 }}</span>
+          } @else {
+            <span class="br-stepper__num">{{ i + 1 }}</span>
+          }
+        </div>
+        @if (preset() === 'milestone' && step.caption()) {
+          <span
+            class="br-stepper__caption"
+            [class.br-stepper__caption--complete]="i < activeStep()"
+            [class.br-stepper__caption--active]="i === activeStep()"
+            [class.br-stepper__caption--upcoming]="i > activeStep()"
+            >{{ step.caption() }}</span
+          >
+        }
+        @if (preset() === 'workflow' && step.label()) {
+          <span
+            class="br-stepper__workflow-label"
+            [class.br-stepper__workflow-label--complete]="i < activeStep()"
+            [class.br-stepper__workflow-label--active]="i === activeStep()"
+            [class.br-stepper__workflow-label--upcoming]="i > activeStep()"
+            >{{ step.label() }}</span
+          >
+        }
+      </div>
+      @if (!last) {
+        <div
+          class="br-stepper__connector"
+          [class.br-stepper__connector--complete]="i < activeStep()"
+          aria-hidden="true"
+        ></div>
+      }
+    }
+  </div>
+</div>

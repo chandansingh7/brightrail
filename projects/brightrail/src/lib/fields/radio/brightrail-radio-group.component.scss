@@ -1,0 +1,37 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.br-rg {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.br-rg__legend {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--br-color-text, #3c4043);
+  margin-bottom: 0.45rem;
+}
+
+.br-rg__list {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.br-rg--horizontal .br-rg__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.6rem 1.2rem;
+}
+
+.br-rg--segmented .br-rg__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+

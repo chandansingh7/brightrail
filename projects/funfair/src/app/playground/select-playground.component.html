@@ -57,7 +57,7 @@
         </div>
 
         <div class="bp-setting-row">
-          <span class="bp-setting-row__label" id="sel-lbl-recipe-grp">Scenario group</span>
+          <span class="bp-setting-row__label" id="sel-lbl-recipe-grp">Pattern category</span>
           <div class="bp-dropdown">
             <span class="bp-dropdown__lead" aria-hidden="true">
               <span class="bp-ico-ring"></span>
@@ -68,7 +68,7 @@
               (ngModelChange)="onRecipeGroupNgModelChange($event)"
               [ngModelOptions]="ngModelStandalone"
               aria-labelledby="sel-lbl-recipe-grp"
-              title="Basics, Popular app, Group layouts, …"
+              title="Core, Multi-select & editable, App patterns, …"
             >
               @for (g of recipeGroups; track g) {
                 <option [value]="g" [selected]="selectedRecipeGroup() === g">{{ g }}</option>
@@ -79,7 +79,7 @@
         </div>
 
         <div class="bp-setting-row">
-          <span class="bp-setting-row__label" id="sel-lbl-recipe">Scenario</span>
+          <span class="bp-setting-row__label" id="sel-lbl-recipe">Pattern</span>
           <div class="bp-dropdown">
             <span class="bp-dropdown__lead" aria-hidden="true">
               <span class="bp-ico-pill"></span>
@@ -90,7 +90,7 @@
               (ngModelChange)="onRecipeNgModelChange($event)"
               [ngModelOptions]="ngModelStandalone"
               aria-labelledby="sel-lbl-recipe"
-              title="Concrete preview inside the selected group"
+              title="Choose the exact behavior variant in this category"
             >
               @for (opt of recipesInGroup(selectedRecipeGroup()); track opt.value) {
                 <option [value]="opt.value">{{ opt.label }}</option>
@@ -108,6 +108,7 @@
             </span>
             <select
               class="bp-dropdown__select"
+              [disabled]="!selectFullFieldChromeEditable()"
               (change)="onLabelPositionChange($event)"
               aria-labelledby="sel-lbl-label-pos"
             >
@@ -129,6 +130,7 @@
             </span>
             <select
               class="bp-dropdown__select"
+              [disabled]="!selectAppearanceStatusEditable()"
               (change)="onAppearanceChange($event)"
               aria-labelledby="sel-lbl-appearance"
             >
@@ -148,6 +150,7 @@
             </span>
             <select
               class="bp-dropdown__select"
+              [disabled]="!selectAppearanceStatusEditable()"
               (change)="onStatusChange($event)"
               aria-labelledby="sel-lbl-status"
             >
@@ -167,7 +170,7 @@
             <span class="bp-dropdown__lead" aria-hidden="true">
               <span class="bp-ico-ring"></span>
             </span>
-            <select class="bp-dropdown__select" (change)="onSizeChange($event)" aria-labelledby="sel-lbl-size">
+            <select class="bp-dropdown__select" [disabled]="!selectFullFieldChromeEditable()" (change)="onSizeChange($event)" aria-labelledby="sel-lbl-size">
               @for (opt of sizeOptions; track opt.value) {
                 <option [value]="opt.value" [selected]="size() === opt.value">
                   {{ opt.label }}
@@ -184,7 +187,7 @@
             <span class="bp-dropdown__lead" aria-hidden="true">
               <span class="bp-ico-tf-shape" [attr.data-shape]="shape()"></span>
             </span>
-            <select class="bp-dropdown__select" (change)="onShapeChange($event)" aria-labelledby="sel-lbl-shape">
+            <select class="bp-dropdown__select" [disabled]="!selectFullFieldChromeEditable()" (change)="onShapeChange($event)" aria-labelledby="sel-lbl-shape">
               @for (opt of shapeOptions; track opt.value) {
                 <option [value]="opt.value" [selected]="shape() === opt.value">
                   {{ opt.label }}
@@ -203,6 +206,7 @@
             </span>
             <select
               class="bp-dropdown__select"
+              [disabled]="!selectFieldStateEditable()"
               (change)="onFieldStateChange($event)"
               aria-labelledby="sel-lbl-state"
             >
@@ -211,6 +215,62 @@
                   {{ opt.label }}
                 </option>
               }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="sel-lbl-overflow">Text overflow</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [disabled]="!selectFullFieldChromeEditable()"
+              [ngModel]="textOverflow()"
+              (ngModelChange)="textOverflow.set($event)"
+              [ngModelOptions]="ngModelStandalone"
+              aria-labelledby="sel-lbl-overflow"
+            >
+              @for (opt of textOverflowOptions; track opt.value) {
+                <option [value]="opt.value">
+                  {{ opt.label }}
+                </option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="sel-lbl-act-count">Inline action buttons</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [disabled]="previewRecipe() !== 'inlineEditActions'"
+              (change)="onActionButtonCountChange($event)"
+              aria-labelledby="sel-lbl-act-count"
+            >
+              <option value="1" [selected]="actionButtonCount() === 1">1</option>
+              <option value="2" [selected]="actionButtonCount() === 2">2</option>
+              <option value="3" [selected]="actionButtonCount() === 3">3</option>
+              <option value="4" [selected]="actionButtonCount() === 4">4</option>
+              <option value="5" [selected]="actionButtonCount() === 5">5</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="sel-lbl-sel-mode">Selection mode</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [disabled]="previewRecipe() !== 'multiSelect' && previewRecipe() !== 'multiSelectCheckboxCount'"
+              (change)="onSelectionModeChange($event)"
+              aria-labelledby="sel-lbl-sel-mode"
+            >
+              <option value="single" [selected]="selectionMode() === 'single'">Single</option>
+              <option value="multi" [selected]="selectionMode() === 'multi'">Multi</option>
             </select>
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
@@ -251,6 +311,7 @@
             </span>
             <select
               class="bp-dropdown__select"
+              [disabled]="!selectIconSideEditable()"
               (change)="onIconSideChange($event)"
               aria-labelledby="sel-lbl-iside"
             >
@@ -272,6 +333,7 @@
             </span>
             <select
               class="bp-dropdown__select"
+              [disabled]="!selectIconControlsEditable()"
               (change)="onIconKindChange($event)"
               aria-labelledby="sel-lbl-ikind"
             >
@@ -296,6 +358,7 @@
             <input
               type="checkbox"
               role="switch"
+              [disabled]="!selectBehaviorTogglesEditable()"
               [checked]="fieldLoading()"
               (change)="onToggleLoading($event)"
               aria-labelledby="sel-lbl-loading"
@@ -309,6 +372,7 @@
             <input
               type="checkbox"
               role="switch"
+              [disabled]="!selectBehaviorTogglesEditable()"
               [checked]="clearable()"
               (change)="onToggleClearable($event)"
               aria-labelledby="sel-lbl-clear"
@@ -322,6 +386,7 @@
             <input
               type="checkbox"
               role="switch"
+              [disabled]="!selectBehaviorTogglesEditable()"
               [checked]="fullWidth()"
               (change)="onToggleFullWidth($event)"
               aria-labelledby="sel-lbl-fw"
@@ -338,7 +403,7 @@
         Live preview
       </h2>
       <div class="bp-preview-surface" [class.bp-preview-surface--stretch]="fullWidth()">
-        <div class="bp-preview-inner">
+        <div class="bp-preview-inner" [class.bp-preview-inner--fixed-select]="showMainSelectRecipe() && !fullWidth()">
           @switch (previewRecipe()) {
             @case ('cascade') {
               <div class="sel-cascade">
@@ -346,6 +411,7 @@
                   [ngModelOptions]="ngModelStandalone"
                   [appearance]="appearance()"
                   [status]="status()"
+                  [textOverflow]="textOverflow()"
                   size="sm"
                   shape="default"
                   labelPosition="none"
@@ -355,10 +421,10 @@
                   (ngModelChange)="onCascadeParentPick($event)"
                 >
                   <div class="br-select-panel demo-sel-panel">
-                    <button type="button" class="demo-sel-panel__opt" (click)="onCascadeParentPick('us')">
+                    <button type="button" class="demo-sel-panel__opt br-select-option" [class.demo-sel-panel__opt--wrap]="textOverflow() === 'wrap'" (click)="onCascadeParentPick('us')">
                       United States
                     </button>
-                    <button type="button" class="demo-sel-panel__opt" (click)="onCascadeParentPick('can')">
+                    <button type="button" class="demo-sel-panel__opt br-select-option" [class.demo-sel-panel__opt--wrap]="textOverflow() === 'wrap'" (click)="onCascadeParentPick('can')">
                       Canada
                     </button>
                   </div>
@@ -368,6 +434,7 @@
                   [ngModelOptions]="ngModelStandalone"
                   [appearance]="appearance()"
                   [status]="status()"
+                  [textOverflow]="textOverflow()"
                   size="sm"
                   labelPosition="none"
                   ariaLabel="Region"
@@ -377,7 +444,7 @@
                 >
                   <div class="br-select-panel demo-sel-panel">
                     @for (opt of cascadeChildOptions(); track opt.id) {
-                      <button type="button" class="demo-sel-panel__opt" (click)="cascadeChild.set(opt.id)">
+                      <button type="button" class="demo-sel-panel__opt br-select-option" [class.demo-sel-panel__opt--wrap]="textOverflow() === 'wrap'" (click)="cascadeChild.set(opt.id)">
                         {{ opt.label }}
                       </button>
                     }
@@ -396,6 +463,7 @@
                   [shape]="shape()"
                   [label]="effectiveFieldLabel()"
                   [labelPosition]="labelPosition()"
+                  [textOverflow]="textOverflow()"
                   [placeholder]="effectivePlaceholder()"
                   [displayText]="displayText()"
                   [disabled]="disabledForField()"
@@ -416,7 +484,7 @@
                   }
                   <div class="br-select-panel demo-sel-panel">
                     @for (opt of demoOptions; track opt.id) {
-                      <button type="button" class="demo-sel-panel__opt" (click)="pick(opt.id)">
+                      <button type="button" class="demo-sel-panel__opt br-select-option" [class.demo-sel-panel__opt--wrap]="textOverflow() === 'wrap'" (click)="pick(opt.id)">
                         {{ opt.label }}
                       </button>
                     }
@@ -431,6 +499,7 @@
                   [ngModelOptions]="ngModelStandalone"
                   appearance="outlined"
                   size="xs"
+                  [textOverflow]="textOverflow()"
                   labelPosition="none"
                   ariaLabel="Status"
                   [displayText]="filterStatusLabel()"
@@ -439,7 +508,7 @@
                 >
                   <div class="br-select-panel demo-sel-panel">
                     @for (opt of filterStatusOpts; track opt.id) {
-                      <button type="button" class="demo-sel-panel__opt" (click)="filterStatus.set(opt.id)">
+                      <button type="button" class="demo-sel-panel__opt br-select-option" [class.demo-sel-panel__opt--wrap]="textOverflow() === 'wrap'" (click)="filterStatus.set(opt.id)">
                         {{ opt.label }}
                       </button>
                     }
@@ -449,6 +518,7 @@
                   [ngModelOptions]="ngModelStandalone"
                   appearance="outlined"
                   size="xs"
+                  [textOverflow]="textOverflow()"
                   labelPosition="none"
                   ariaLabel="Assignee"
                   [displayText]="filterAssigneeLabel()"
@@ -457,7 +527,7 @@
                 >
                   <div class="br-select-panel demo-sel-panel">
                     @for (opt of filterAssigneeOpts; track opt.id) {
-                      <button type="button" class="demo-sel-panel__opt" (click)="filterAssignee.set(opt.id)">
+                      <button type="button" class="demo-sel-panel__opt br-select-option" [class.demo-sel-panel__opt--wrap]="textOverflow() === 'wrap'" (click)="filterAssignee.set(opt.id)">
                         {{ opt.label }}
                       </button>
                     }
@@ -467,6 +537,7 @@
                   [ngModelOptions]="ngModelStandalone"
                   appearance="outlined"
                   size="xs"
+                  [textOverflow]="textOverflow()"
                   labelPosition="none"
                   ariaLabel="Priority"
                   [displayText]="filterPriorityLabel()"
@@ -475,7 +546,7 @@
                 >
                   <div class="br-select-panel demo-sel-panel">
                     @for (opt of filterPriorityOpts; track opt.id) {
-                      <button type="button" class="demo-sel-panel__opt" (click)="filterPriority.set(opt.id)">
+                      <button type="button" class="demo-sel-panel__opt br-select-option" [class.demo-sel-panel__opt--wrap]="textOverflow() === 'wrap'" (click)="filterPriority.set(opt.id)">
                         {{ opt.label }}
                       </button>
                     }
@@ -517,12 +588,173 @@
                 </brightrail-button-group>
               </div>
             }
-            @case ('inlineEditable') {
-              <div class="sel-inline-edit" role="group" aria-label="Editable owner">
-                <span class="sel-inline-edit__lbl">Owner</span>
-                <span class="sel-inline-edit__val">Alex Morgan</span>
-                <brightrail-button variant="ghost" size="sm" iconLeft="edit" ariaLabel="Edit owner" />
+            @case ('optionEditSave') {
+              <brightrail-select
+                [ngModelOptions]="ngModelStandalone"
+                [appearance]="appearance()"
+                [status]="status()"
+                [size]="size()"
+                [shape]="shape()"
+                [label]="effectiveFieldLabel()"
+                [labelPosition]="labelPosition()"
+                [textOverflow]="textOverflow()"
+                [placeholder]="effectivePlaceholder()"
+                [displayText]="optionEditorDisplayText()"
+                [disabled]="disabledForField()"
+                [loading]="fieldLoading()"
+                [fullWidth]="fullWidth()"
+                [clearable]="clearable()"
+                [ngModel]="optionEditorValue()"
+                (ngModelChange)="optionEditorValue.set($event)"
+              >
+                <div class="br-select-panel demo-sel-panel">
+                  @for (opt of editableOptions(); track opt.id) {
+                    <div class="sel-opt-row">
+                      @if (editingOptionId() === opt.id) {
+                        <input
+                          class="sel-opt-input"
+                          [ngModel]="editingOptionDraft()"
+                          (ngModelChange)="editingOptionDraft.set($event)"
+                          [ngModelOptions]="ngModelStandalone"
+                        />
+                      } @else {
+                        <button
+                          type="button"
+                          class="demo-sel-panel__opt br-select-option"
+                          [class.demo-sel-panel__opt--wrap]="textOverflow() === 'wrap'"
+                          (click)="optionEditorValue.set(opt.id)"
+                        >
+                          {{ opt.label }}
+                        </button>
+                      }
+                      <div class="sel-opt-actions">
+                        @if (editingOptionId() === opt.id) {
+                          <button type="button" class="sel-opt-btn sel-opt-btn--save" (click)="saveOptionLabel(opt.id)">Save</button>
+                        } @else {
+                          <button type="button" class="sel-opt-btn" (click)="beginEditOption(opt.id)">Edit</button>
+                        }
+                        <button type="button" class="sel-opt-btn sel-opt-btn--danger" (click)="deleteOption(opt.id)">Delete</button>
+                      </div>
+                    </div>
+                  }
+                </div>
+              </brightrail-select>
+            }
+            @case ('inlineEditActions') {
+              <div class="sel-inline-actions" role="group" aria-label="Inline editable options">
+                @for (opt of editableOptions(); track opt.id) {
+                  <div class="sel-opt-row">
+                    @if (inlineEditingId() === opt.id) {
+                      <input
+                        class="sel-opt-input"
+                        [ngModel]="inlineEditingDraft()"
+                        (ngModelChange)="inlineEditingDraft.set($event)"
+                        [ngModelOptions]="ngModelStandalone"
+                      />
+                    } @else {
+                      <button
+                        type="button"
+                        class="demo-sel-panel__opt br-select-option"
+                        [class.demo-sel-panel__opt--wrap]="textOverflow() === 'wrap'"
+                        (click)="optionEditorValue.set(opt.id)"
+                        (dblclick)="beginInlineEdit(opt.id)"
+                      >
+                        {{ opt.label }}
+                      </button>
+                    }
+                    <div class="sel-opt-actions">
+                      @if (inlineEditingId() === opt.id) {
+                        @for (act of inlineActionLabels(); track act) {
+                          @if (act === 'Save') {
+                            <button type="button" class="sel-opt-btn sel-opt-btn--save" (click)="saveInlineEdit(opt.id)">Save</button>
+                          } @else if (act === 'Delete') {
+                            <button type="button" class="sel-opt-btn sel-opt-btn--danger" (click)="deleteOption(opt.id)">Delete</button>
+                          } @else {
+                            <button type="button" class="sel-opt-btn">{{ act }}</button>
+                          }
+                        }
+                        <button type="button" class="sel-opt-btn" (click)="cancelInlineEdit()">Cancel</button>
+                      } @else {
+                        <span class="sel-inline-hint">Double-click value to edit</span>
+                      }
+                    </div>
+                  </div>
+                }
               </div>
+            }
+            @case ('multiSelect') {
+              <brightrail-select
+                [ngModelOptions]="ngModelStandalone"
+                [appearance]="appearance()"
+                [status]="status()"
+                [size]="size()"
+                [shape]="shape()"
+                [label]="effectiveFieldLabel()"
+                [labelPosition]="labelPosition()"
+                [textOverflow]="textOverflow()"
+                [placeholder]="effectivePlaceholder()"
+                [displayText]="displayText()"
+                [disabled]="disabledForField()"
+                [loading]="fieldLoading()"
+                [fullWidth]="fullWidth()"
+                [clearable]="clearable()"
+                [ariaLabel]="effectiveFieldLabel()"
+                [ngModel]="previewValue()"
+              >
+                @if (selectionMode() === 'multi') {
+                  <span class="br-select-value-slot sel-tag-row">
+                    @for (id of multiValues(); track id) {
+                      <span class="sel-tag-pill">{{ editableOptions().find((o) => o.id === id)?.label ?? id }}</span>
+                    }
+                  </span>
+                }
+                <div class="br-select-panel demo-sel-panel">
+                  @for (opt of editableOptions(); track opt.id) {
+                    <button
+                      type="button"
+                      class="demo-sel-panel__opt br-select-option"
+                      [class.demo-sel-panel__opt--active]="multiValues().includes(opt.id)"
+                      [class.demo-sel-panel__opt--wrap]="textOverflow() === 'wrap'"
+                      (click)="selectionMode() === 'multi' ? toggleMultiValue(opt.id) : pick(opt.id)"
+                    >
+                      {{ opt.label }}
+                    </button>
+                  }
+                </div>
+              </brightrail-select>
+            }
+            @case ('multiSelectCheckboxCount') {
+              <brightrail-select
+                [ngModelOptions]="ngModelStandalone"
+                [appearance]="appearance()"
+                [status]="status()"
+                [size]="size()"
+                [shape]="shape()"
+                [label]="effectiveFieldLabel()"
+                [labelPosition]="labelPosition()"
+                [textOverflow]="textOverflow()"
+                [placeholder]="effectivePlaceholder()"
+                [displayText]="effectiveFieldLabel() + ' (' + multiValues().length + ' selected)'"
+                [disabled]="disabledForField()"
+                [loading]="fieldLoading()"
+                [fullWidth]="fullWidth()"
+                [clearable]="clearable()"
+                [ariaLabel]="effectiveFieldLabel()"
+                [ngModel]="previewValue()"
+              >
+                <div class="br-select-panel demo-sel-panel">
+                  @for (opt of editableOptions(); track opt.id) {
+                    <label class="sel-check-opt">
+                      <input
+                        type="checkbox"
+                        [checked]="multiValues().includes(opt.id)"
+                        (change)="toggleMultiValue(opt.id)"
+                      />
+                      <span>{{ opt.label }}</span>
+                    </label>
+                  }
+                </div>
+              </brightrail-select>
             }
             @default {
               @if (showMainSelectRecipe()) {
@@ -534,6 +766,7 @@
                   [shape]="shape()"
                   [label]="effectiveFieldLabel()"
                   [labelPosition]="labelPosition()"
+                  [textOverflow]="textOverflow()"
                   [placeholder]="effectivePlaceholder()"
                   [displayText]="displayText()"
                   [disabled]="disabledForField()"
@@ -573,14 +806,14 @@
                   }
                   @if (previewRecipe() === 'tagMulti') {
                     <span class="br-select-value-slot sel-tag-row">
-                      <span class="sel-tag-pill">Angular</span>
-                      <span class="sel-tag-pill">React</span>
-                      <span class="sel-tag-pill">Vue</span>
+                      @for (id of multiValues(); track id) {
+                        <span class="sel-tag-pill">{{ editableOptions().find((o) => o.id === id)?.label ?? id }}</span>
+                      }
                     </span>
                   }
                   <div class="br-select-panel demo-sel-panel">
                     @for (opt of activePanelOptions(); track opt.id) {
-                      <button type="button" class="demo-sel-panel__opt" (click)="pick(opt.id)">
+                      <button type="button" class="demo-sel-panel__opt br-select-option" [class.demo-sel-panel__opt--active]="previewRecipe() === 'tagMulti' && multiValues().includes(opt.id)" [class.demo-sel-panel__opt--wrap]="textOverflow() === 'wrap'" (click)="previewRecipe() === 'tagMulti' ? toggleMultiValue(opt.id) : pick(opt.id)">
                         {{ opt.label }}
                       </button>
                     }

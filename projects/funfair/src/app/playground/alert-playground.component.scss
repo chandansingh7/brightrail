@@ -1,0 +1,111 @@
+@use './button-playground.component.scss' as *;
+
+/*
+ * Desktop: the routed shell gives this host a bounded flex height. Without containment, `.bp`
+ * can grow and push `.bp-code` below pf-main's fold — sticky fails because overflow ancestors differ.
+ * Clip to the slot and let only the preview/settings panes scroll.
+ */
+@media (min-width: 961px) {
+  :host {
+    overflow: hidden;
+  }
+
+  .bp {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .bp-grid {
+    flex: 1 1 0;
+    min-height: 0;
+  }
+}
+
+/* Override shared stretch alignment so the alert sits centered in the preview slot */
+:host .bp-preview-surface--stretch {
+  align-items: center;
+  justify-content: center;
+}
+
+:host .bp-preview-surface--stretch .bp-preview-inner--alert {
+  justify-content: center;
+  align-items: center;
+}
+
+:host .bp-preview-surface--stretch .bp-preview-inner--alert-dock {
+  justify-content: flex-end;
+  align-items: stretch;
+}
+
+.bp-preview-inner--alert {
+  width: 100%;
+  min-height: 0;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.bp-preview-inner--alert-dock {
+  min-height: min(22rem, 45vh);
+}
+
+/* Snippet dock sits after the grid; flex-shrink keeps it from being squeezed off-screen */
+:host .bp-code {
+  flex-shrink: 0;
+}
+
+.alert-play-live {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem 0;
+}
+
+.alert-play-live--dock-bottom {
+  transform: translateZ(0);
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  min-height: min(18rem, 40vh);
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 0.35rem;
+}
+
+.alert-play-live:not(.alert-play-live--full):not(.alert-play-live--dock-bottom) brightrail-alert {
+  width: 100%;
+  max-width: 42rem;
+}
+
+.alert-play-live--full brightrail-alert {
+  width: 100%;
+}
+
+.alert-play-link {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: var(--ff-brand);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.alert-play-link:hover {
+  color: var(--ff-brand-strong);
+}
+
+.alert-play-caption__more {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.8125rem;
+  color: var(--ff-muted);
+}

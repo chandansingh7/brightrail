@@ -125,6 +125,12 @@ export class TextFieldPlaygroundComponent {
     'eye',
     'eye-off',
     'error',
+    'help',
+    'gear',
+    'bell',
+    'headset',
+    'list',
+    'chevron-right',
   ];
   readonly iconLabels: Record<BrightrailButtonIcon, string> = {
     none: 'None',
@@ -150,6 +156,12 @@ export class TextFieldPlaygroundComponent {
     eye: 'Eye',
     'eye-off': 'Eye off',
     error: 'Error',
+    help: 'Help',
+    gear: 'Gear',
+    bell: 'Bell',
+    headset: 'Headset',
+    list: 'List',
+    'chevron-right': 'Chevron right',
     loader: 'Loading (spinner)',
   };
   readonly iconSideOptions: { value: IconSide; label: string }[] = [
@@ -173,6 +185,9 @@ export class TextFieldPlaygroundComponent {
   readonly iconSide = signal<IconSide>('left');
   readonly iconKind = signal<BrightrailButtonIcon>('none');
   readonly fieldLoading = signal(false);
+
+  readonly textFieldSuffixPlacementEditable = computed(() => this.rows() === 1);
+  readonly textFieldIconSideEditable = computed(() => this.iconKind() !== 'none');
 
   readonly previewValue = signal('');
 

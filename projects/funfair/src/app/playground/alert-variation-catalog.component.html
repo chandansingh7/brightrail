@@ -1,0 +1,294 @@
+@if (sectionVisible(1)) {
+  <section class="alert-catalog__block">
+    <h4 class="alert-catalog__h">1. Core alert types</h4>
+    <p class="alert-catalog__explain">
+      Uses your <strong>appearance</strong>, <strong>size</strong>, and <strong>corners</strong>; each tile swaps <strong>status</strong> only.
+    </p>
+    <div class="alert-catalog__grid alert-catalog__grid--4">
+      @for (st of coreStatuses; track st) {
+        <brightrail-alert [appearance]="mirrorAppearance()" [status]="st" [size]="mirrorSize()" [corners]="mirrorCorners()">
+          <div brightrailAlertTitle>{{ st === 'info' ? 'Info' : st === 'success' ? 'Success' : st === 'warning' ? 'Warning' : 'Error' }}</div>
+          <div brightrailAlertMessage>
+            {{
+              st === 'info'
+                ? 'This is an informational alert.'
+                : st === 'success'
+                  ? 'Your changes were saved successfully.'
+                  : st === 'warning'
+                    ? 'Please review before continuing.'
+                    : 'Something went wrong — try again.'
+            }}
+          </div>
+        </brightrail-alert>
+      }
+    </div>
+  </section>
+}
+
+@if (sectionVisible(2)) {
+  <section class="alert-catalog__block">
+    <h4 class="alert-catalog__h">2. Appearances</h4>
+    <p class="alert-catalog__explain">
+      Uses your <strong>status</strong>, <strong>size</strong>, and <strong>corners</strong>; each tile swaps <strong>appearance</strong> only.
+    </p>
+    <div class="alert-catalog__grid alert-catalog__grid--4">
+      @for (app of appearanceVariants; track app) {
+        <brightrail-alert [appearance]="app" [status]="mirrorStatus()" [size]="mirrorSize()" [corners]="mirrorCorners()">
+          <div brightrailAlertTitle>{{ app === 'filled' ? 'Filled' : app === 'soft' ? 'Soft' : app === 'outlined' ? 'Outlined' : 'Tonal' }}</div>
+          <div brightrailAlertMessage>
+            {{
+              app === 'filled'
+                ? 'Solid emphasis background.'
+                : app === 'soft'
+                  ? 'Low-contrast wash behind content.'
+                  : app === 'outlined'
+                    ? 'Surface stays neutral with a colored rim.'
+                    : 'Muted rail plus semantic accent stroke.'
+            }}
+          </div>
+        </brightrail-alert>
+      }
+    </div>
+  </section>
+}
+
+@if (sectionVisible(3)) {
+  <section class="alert-catalog__block">
+    <h4 class="alert-catalog__h">3. States</h4>
+    <p class="alert-catalog__explain">
+      Keeps your <strong>appearance</strong>, <strong>status</strong>, <strong>size</strong>, and <strong>corners</strong>; rows demonstrate dismiss, icon override, wrapping, and actions.
+    </p>
+    <div class="alert-catalog__stack">
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Default</span>
+        <brightrail-alert
+          [appearance]="mirrorAppearance()"
+          [status]="mirrorStatus()"
+          [size]="mirrorSize()"
+          [corners]="mirrorCorners()"
+        >
+          <div brightrailAlertTitle>Stay informed</div>
+          <div brightrailAlertMessage>No dismiss control on this surface.</div>
+        </brightrail-alert>
+      </div>
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Dismissible</span>
+        <brightrail-alert
+          [appearance]="mirrorAppearance()"
+          [status]="mirrorStatus()"
+          [size]="mirrorSize()"
+          [corners]="mirrorCorners()"
+          [dismissible]="true"
+        >
+          <div brightrailAlertTitle>Dismissible</div>
+          <div brightrailAlertMessage>Use the close affordance when feedback can be cleared.</div>
+        </brightrail-alert>
+      </div>
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Custom icon</span>
+        <brightrail-alert
+          [appearance]="mirrorAppearance()"
+          [status]="mirrorStatus()"
+          [size]="mirrorSize()"
+          [corners]="mirrorCorners()"
+          icon="heart"
+        >
+          <div brightrailAlertTitle>Favorite saved</div>
+          <div brightrailAlertMessage>The icon input overrides the status default glyph.</div>
+        </brightrail-alert>
+      </div>
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Multiline</span>
+        <brightrail-alert
+          [appearance]="mirrorAppearance()"
+          [status]="mirrorStatus()"
+          [size]="mirrorSize()"
+          [corners]="mirrorCorners()"
+        >
+          <div brightrailAlertTitle>Long message</div>
+          <div brightrailAlertMessage>
+            Wrap-friendly body copy demonstrates line-height and spacing across narrow layouts without clipping trailing sentences.
+          </div>
+        </brightrail-alert>
+      </div>
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">With actions</span>
+        <brightrail-alert
+          [appearance]="mirrorAppearance()"
+          [status]="mirrorStatus()"
+          [size]="mirrorSize()"
+          [corners]="mirrorCorners()"
+          [dismissible]="true"
+        >
+          <div brightrailAlertTitle>Optional actions</div>
+          <div brightrailAlertMessage>Pair guidance copy with lightweight controls.</div>
+          <brightrail-alert-actions>
+            <button type="button" class="alert-catalog-link">Learn more</button>
+            <button type="button" class="alert-catalog-link">Dismiss</button>
+          </brightrail-alert-actions>
+        </brightrail-alert>
+      </div>
+    </div>
+  </section>
+}
+
+@if (sectionVisible(4)) {
+  <section class="alert-catalog__block">
+    <h4 class="alert-catalog__h">4. Sizes</h4>
+    <p class="alert-catalog__explain">
+      Uses your <strong>appearance</strong>, <strong>status</strong>, and <strong>corners</strong>; each tile swaps <strong>size</strong> only.
+    </p>
+    <div class="alert-catalog__grid alert-catalog__grid--3">
+      <brightrail-alert [appearance]="mirrorAppearance()" [status]="mirrorStatus()" size="sm" [corners]="mirrorCorners()">
+        <div brightrailAlertTitle>Compact</div>
+        <div brightrailAlertMessage>Dense spacing for lists.</div>
+      </brightrail-alert>
+      <brightrail-alert [appearance]="mirrorAppearance()" [status]="mirrorStatus()" size="md" [corners]="mirrorCorners()">
+        <div brightrailAlertTitle>Medium</div>
+        <div brightrailAlertMessage>Default rhythm for forms.</div>
+      </brightrail-alert>
+      <brightrail-alert [appearance]="mirrorAppearance()" [status]="mirrorStatus()" size="lg" [corners]="mirrorCorners()">
+        <div brightrailAlertTitle>Large</div>
+        <div brightrailAlertMessage>Hero emphasis when alerts lead the fold.</div>
+      </brightrail-alert>
+    </div>
+  </section>
+}
+
+@if (sectionVisible(5)) {
+  <section class="alert-catalog__block">
+    <h4 class="alert-catalog__h">5. Popular app alerts</h4>
+    <p class="alert-catalog__explain">
+      Recipes keep recognizable roles (toast, banner…); your <strong>corners</strong> carry through where layout allows.
+    </p>
+    <div class="alert-catalog__stack">
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Toast shell</span>
+        <div class="alert-catalog__toast-shell">
+          <brightrail-alert [corners]="mirrorCorners()" appearance="filled" status="info" size="sm" [inverse]="true" [dismissible]="true">
+            <div brightrailAlertTitle>Toast notification</div>
+            <div brightrailAlertMessage>Short-lived summary stacked above chrome.</div>
+          </brightrail-alert>
+        </div>
+      </div>
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Inline validation</span>
+        <brightrail-alert [corners]="mirrorCorners()" appearance="outlined" status="error" [size]="mirrorSize()" [showIcon]="true">
+          <div brightrailAlertMessage>Enter an email address using name&#64;company.com.</div>
+        </brightrail-alert>
+      </div>
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Top banner</span>
+        <brightrail-alert [corners]="mirrorCorners()" appearance="filled" status="info" [size]="mirrorSize()" [fullWidth]="true" [dismissible]="true">
+          <div brightrailAlertTitle>Maintenance tonight</div>
+          <div brightrailAlertMessage>Expect a brief outage between 02:00–03:00 UTC.</div>
+          <brightrail-alert-actions>
+            <button type="button" class="alert-catalog-link">Learn more</button>
+          </brightrail-alert-actions>
+        </brightrail-alert>
+      </div>
+      <div class="alert-catalog__cell">
+        <span class="alert-catalog__tag">Section notice</span>
+        <brightrail-alert [corners]="mirrorCorners()" appearance="tonal" status="info" [size]="mirrorSize()">
+          <div brightrailAlertTitle>Section notice</div>
+          <div brightrailAlertMessage>Muted emphasis inside dense dashboards.</div>
+        </brightrail-alert>
+      </div>
+    </div>
+  </section>
+}
+
+@if (sectionVisible(6)) {
+  <section class="alert-catalog__block">
+    <h4 class="alert-catalog__h">6. Enterprise patterns</h4>
+    <p class="alert-catalog__explain">
+      Uses your <strong>appearance shell</strong>, <strong>size</strong>, and <strong>corners</strong> where semantics still read clearly.
+    </p>
+    <div class="alert-catalog__stack">
+      <brightrail-alert [appearance]="mirrorAppearance()" status="warning" [size]="mirrorSize()" [corners]="mirrorCorners()" [dismissible]="true">
+        <div brightrailAlertTitle>System maintenance</div>
+        <div brightrailAlertMessage>Sandbox URLs redirect during the upgrade window.</div>
+      </brightrail-alert>
+      <brightrail-alert appearance="tonal" status="info" [size]="mirrorSize()" [corners]="mirrorCorners()">
+        <div brightrailAlertTitle>Policy notice</div>
+        <div brightrailAlertMessage>Retention defaults changed — confirm compliance mapping.</div>
+      </brightrail-alert>
+      <brightrail-alert appearance="filled" status="info" accent="approval" [size]="mirrorSize()" [corners]="mirrorCorners()">
+        <div brightrailAlertTitle>Approval required</div>
+        <div brightrailAlertMessage>Your teammate must approve exports above 10k rows.</div>
+        <brightrail-alert-actions>
+          <brightrail-button variant="secondary" size="sm">View request</brightrail-button>
+        </brightrail-alert-actions>
+      </brightrail-alert>
+      <brightrail-alert [appearance]="mirrorAppearance()" status="error" [size]="mirrorSize()" [corners]="mirrorCorners()">
+        <div brightrailAlertTitle>Sync failed</div>
+        <div brightrailAlertMessage>Connection dropped — retry after reconnecting VPN.</div>
+        <brightrail-alert-actions>
+          <brightrail-button variant="primary" size="sm">Retry</brightrail-button>
+          <brightrail-button variant="outline" size="sm">View logs</brightrail-button>
+        </brightrail-alert-actions>
+      </brightrail-alert>
+    </div>
+  </section>
+}
+
+@if (sectionVisible(7)) {
+  <section class="alert-catalog__block">
+    <h4 class="alert-catalog__h">7. Alert group patterns</h4>
+    <p class="alert-catalog__explain">
+      Composition patterns using your shell sizing &mdash; statuses stay realistic for stacked scenarios.
+    </p>
+    <div class="alert-catalog__stack alert-catalog__stack--dense">
+      <div class="alert-catalog__group-title">Stacked alerts</div>
+      <div class="alert-catalog__stacked">
+        <brightrail-alert [appearance]="mirrorAppearance()" status="warning" [size]="mirrorSize()" [corners]="mirrorCorners()">
+          <div brightrailAlertTitle>Latency spike</div>
+          <div brightrailAlertMessage>Region us-east-1 is degraded.</div>
+        </brightrail-alert>
+        <brightrail-alert [appearance]="mirrorAppearance()" status="info" [size]="mirrorSize()" [corners]="mirrorCorners()">
+          <div brightrailAlertTitle>Follow-up</div>
+          <div brightrailAlertMessage>Automated failover engaged automatically.</div>
+        </brightrail-alert>
+      </div>
+      <div class="alert-catalog__group-title">Banner + inline</div>
+      <brightrail-alert [corners]="mirrorCorners()" appearance="filled" status="info" [size]="mirrorSize()" [fullWidth]="true">
+        <div brightrailAlertTitle>Release 42 rolling out</div>
+        <div brightrailAlertMessage>Dashboard filters refresh overnight.</div>
+      </brightrail-alert>
+      <brightrail-alert [appearance]="mirrorAppearance()" status="warning" [size]="mirrorSize()" [corners]="mirrorCorners()">
+        <div brightrailAlertMessage>Enable two-factor authentication before Friday.</div>
+      </brightrail-alert>
+      <div class="alert-catalog__group-title">Session CTAs</div>
+      <brightrail-alert [appearance]="mirrorAppearance()" status="warning" [size]="mirrorSize()" [corners]="mirrorCorners()">
+        <div brightrailAlertTitle>Session expires soon</div>
+        <div brightrailAlertMessage>Sensitive edits will pause until you extend your session.</div>
+        <brightrail-alert-actions>
+          <brightrail-button variant="primary" size="sm">Extend session</brightrail-button>
+          <brightrail-button variant="outline" size="sm">Log out</brightrail-button>
+        </brightrail-alert-actions>
+      </brightrail-alert>
+    </div>
+  </section>
+}
+
+@if (sectionVisible(8)) {
+  <section class="alert-catalog__block alert-catalog__block--tips">
+    <h4 class="alert-catalog__h">8. Usage tips & accessibility</h4>
+    <ul class="alert-catalog__tips">
+      <li>
+        Errors use <code>role="alert"</code>; informational banners default to <code>role="status"</code> with polite live messaging.
+      </li>
+      <li>
+        Provide concise titles plus supporting sentences — rely on visible labels for voice-control parity.
+      </li>
+      <li>
+        Pair destructive flows with explicit recovery actions inside <code>brightrail-alert-actions</code>.
+      </li>
+      <li>
+        Reference
+        <a href="https://www.w3.org/WAI/ARIA/apg/" target="_blank" rel="noopener noreferrer">ARIA APG</a>
+        when stacking alerts near landmarks so announcements stay predictable.
+      </li>
+    </ul>
+  </section>
+}

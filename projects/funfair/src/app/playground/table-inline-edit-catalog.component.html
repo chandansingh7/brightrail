@@ -1,0 +1,277 @@
+<div class="iec">
+  <header class="iec-hero">
+    <p class="iec-hero__eyebrow">Brightrail · Tables · Inline edit</p>
+    <h1 class="iec-hero__title">Table inline edit variations</h1>
+    <p class="iec-hero__lead">
+      Editing behavior is app-owned: listen to <code>(inlineSave)</code> and merge into your row model. Bulk delete / bulk field updates stay in Funfair —
+      swap handlers for APIs, undo stacks, or modals.
+    </p>
+    <p class="iec-hero__links">
+      <a routerLink=".." class="iec-hero__link">← Tables playground</a>
+      <a routerLink="../catalog" class="iec-hero__link">Variation catalog</a>
+    </p>
+  </header>
+
+  <div class="iec-grid">
+    <article class="iec-card">
+      <div class="iec-card__tag">1</div>
+      <h2 class="iec-card__title">Single-cell edit</h2>
+      <p class="iec-card__desc">Every data column is editable in cell mode — click a cell, then ✓ / ✕. Enter saves, Esc cancels.</p>
+      <div class="iec-card__preview">
+        <brightrail-table
+          class="iec-table"
+          variant="bordered"
+          density="compact"
+          [data]="cellDemoRows()"
+          [columns]="cellDemoCols"
+          [inlineEdit]="true"
+          [inlineEditMode]="'cell'"
+          [pagination]="{ pageSize: 10 }"
+          [sorting]="true"
+          ariaLabel="Single cell edit demo"
+          (inlineSave)="onCellSave($event)"
+        />
+      </div>
+    </article>
+
+    <article class="iec-card">
+      <div class="iec-card__tag">2–3</div>
+      <h2 class="iec-card__title">Row edit · Select fields</h2>
+      <p class="iec-card__desc">
+        Pencil opens the row; Role and Status use native <code>select</code> editors. Matches “row inline” + “editable selects” from the reference.
+      </p>
+      <div class="iec-card__preview">
+        <brightrail-table
+          class="iec-table"
+          variant="bordered"
+          density="compact"
+          [data]="rowEditRows()"
+          [columns]="rowEditCols"
+          [inlineEdit]="true"
+          [inlineEditMode]="'row'"
+          [pagination]="null"
+          [sorting]="false"
+          ariaLabel="Row inline edit demo"
+          (inlineSave)="onRowSave($event)"
+        />
+      </div>
+    </article>
+
+    <article class="iec-card">
+      <div class="iec-card__tag">4</div>
+      <h2 class="iec-card__title">Numeric &amp; date</h2>
+      <p class="iec-card__desc">Price right-aligned, quantity centered, due date with calendar control.</p>
+      <div class="iec-card__preview">
+        <brightrail-table
+          class="iec-table"
+          variant="bordered"
+          density="compact"
+          [data]="qtyRows()"
+          [columns]="qtyCols"
+          [inlineEdit]="true"
+          [inlineEditMode]="'row'"
+          [pagination]="null"
+          ariaLabel="Numeric and date edit demo"
+          (inlineSave)="onQtySave($event)"
+        />
+      </div>
+    </article>
+
+    <article class="iec-card">
+      <div class="iec-card__tag">5</div>
+      <h2 class="iec-card__title">Validation</h2>
+      <p class="iec-card__desc">
+        Required Name shows a header asterisk and inline error when empty. Implementation lives in <code>brightrail-table</code>; messaging is yours.
+      </p>
+      <div class="iec-card__preview">
+        <brightrail-table
+          class="iec-table"
+          variant="bordered"
+          density="compact"
+          [data]="validRows()"
+          [columns]="validCols"
+          [inlineEdit]="true"
+          [inlineEditMode]="'row'"
+          [pagination]="null"
+          ariaLabel="Validation demo"
+          (inlineSave)="onValidSave($event)"
+        />
+      </div>
+    </article>
+
+    <article class="iec-card iec-card--wide">
+      <div class="iec-card__tag">6</div>
+      <h2 class="iec-card__title">Bulk edit · Funfair-only logic</h2>
+      <p class="iec-card__desc">
+        Selection bar content is projected — wire Delete / Apply yourself (here: patch <code>status</code> or remove rows from a signal).
+      </p>
+      <div class="iec-card__preview">
+        <brightrail-table
+          class="iec-table"
+          variant="bordered"
+          density="compact"
+          [data]="bulkRows()"
+          [columns]="bulkCols"
+          [rowSelection]="'multiple'"
+          [selectedIds]="bulkSelectedIds()"
+          [bulkActionsPlacement]="'inline'"
+          [pagination]="{ pageSize: 6 }"
+          [sorting]="true"
+          ariaLabel="Bulk edit demo"
+          (selectionChange)="onBulkSelection($event)"
+        >
+          <brightrail-table-bulk-actions>
+            <label class="iec-bulk-field">
+              <span class="iec-bulk-field__lbl">Edit status</span>
+              <select
+                class="iec-bulk-field__select"
+                [ngModel]="bulkStatusDraft()"
+                (ngModelChange)="bulkStatusDraft.set($event)"
+                [ngModelOptions]="{ standalone: true }"
+              >
+                @for (s of ['Active', 'Pending', 'Inactive']; track s) {
+                  <option [value]="s">{{ s }}</option>
+                }
+              </select>
+            </label>
+            <button type="button" class="br-table__bulk-btn--primary" (click)="applyBulkStatusDemo()">Apply</button>
+            <button type="button" class="br-table__bulk-btn--ghost" (click)="clearBulkDemo()">Clear</button>
+            <button type="button" class="br-table__bulk-btn--danger" (click)="bulkDeleteDemo()">Delete</button>
+          </brightrail-table-bulk-actions>
+        </brightrail-table>
+      </div>
+    </article>
+
+    <article class="iec-card iec-card--wide">
+      <div class="iec-card__tag">7</div>
+      <h2 class="iec-card__title">Popular app layouts</h2>
+      <div class="iec-mini-grid">
+        <div class="iec-mini">
+          <h3 class="iec-mini__title">User management</h3>
+          <brightrail-table
+            class="iec-table"
+            variant="basic"
+            density="compact"
+            [data]="miniUsersRows"
+            [columns]="miniUsersCols"
+            [pagination]="null"
+          />
+        </div>
+        <div class="iec-mini">
+          <h3 class="iec-mini__title">Pricing / quantities</h3>
+          <brightrail-table
+            class="iec-table"
+            variant="basic"
+            density="compact"
+            [data]="miniPricingRows"
+            [columns]="miniPricingCols"
+            [pagination]="null"
+          />
+        </div>
+        <div class="iec-mini">
+          <h3 class="iec-mini__title">Tasks / status</h3>
+          <brightrail-table
+            class="iec-table"
+            variant="striped"
+            density="compact"
+            [data]="miniTaskRows"
+            [columns]="miniTaskCols"
+            [pagination]="null"
+          />
+        </div>
+      </div>
+    </article>
+
+    <article class="iec-card">
+      <div class="iec-card__tag">8</div>
+      <h2 class="iec-card__title">Custom actions column</h2>
+      <p class="iec-card__desc"><code>cellTemplateKey</code> + <code>[cellTemplates]</code> — full control over icons, menus, or Brightrail buttons.</p>
+      <div class="iec-card__preview">
+        <brightrail-table
+          class="iec-table"
+          variant="bordered"
+          density="compact"
+          [data]="tplRows()"
+          [columns]="tplCols"
+          [cellTemplates]="richActionTemplates()"
+          [pagination]="null"
+          ariaLabel="Template actions demo"
+        />
+      </div>
+    </article>
+
+    <article class="iec-card iec-card--wide">
+      <div class="iec-card__tag">9</div>
+      <h2 class="iec-card__title">Sticky actions · Keyboard</h2>
+      <p class="iec-card__desc">
+        Wide table with a sticky Actions column. Row inline edit: <kbd>Enter</kbd> saves, <kbd>Esc</kbd> cancels when focus is in an editor.
+      </p>
+      <p class="iec-kbd-tip" role="note">
+        Tip: Press <kbd>Enter</kbd> to save, <kbd>Esc</kbd> to cancel while editing.
+      </p>
+      <div class="iec-card__preview iec-card__preview--scroll">
+        <brightrail-table
+          class="iec-table"
+          variant="bordered"
+          density="compact"
+          [data]="stickyRows()"
+          [columns]="stickyCols"
+          [inlineEdit]="true"
+          [inlineEditMode]="'row'"
+          [stickyHeader]="false"
+          [pagination]="null"
+          [sorting]="false"
+          ariaLabel="Sticky actions demo"
+          (inlineSave)="onStickySave($event)"
+        />
+      </div>
+      <h3 class="iec-subh">Hover-to-edit pencil (cell mode)</h3>
+      <p class="iec-card__desc iec-card__desc--tight">
+        Pencil appears on hover; avoids accidental edits on row click.
+      </p>
+      <div class="iec-card__preview">
+        <brightrail-table
+          class="iec-table"
+          variant="bordered"
+          density="compact"
+          [data]="hoverCellRows()"
+          [columns]="hoverCellCols"
+          [inlineEdit]="true"
+          [inlineEditMode]="'cell'"
+          [inlineEditHoverReveal]="true"
+          [pagination]="null"
+          ariaLabel="Hover cell edit demo"
+          (inlineSave)="onHoverCellSave($event)"
+        />
+      </div>
+    </article>
+  </div>
+</div>
+
+<ng-template #richActionsTpl let-row let-column="column">
+  <div class="iec-rich-actions">
+    <button type="button" class="iec-icon-btn iec-icon-btn--ok" aria-label="Mark done">✓</button>
+    <button type="button" class="iec-icon-btn" aria-label="Dismiss">✕</button>
+    <button
+      type="button"
+      class="iec-icon-btn iec-icon-btn--danger"
+      aria-label="Delete row"
+      (click)="noopDemo(row, 'Delete')"
+    >
+      <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          fill="currentColor"
+          d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+        />
+      </svg>
+    </button>
+    <details class="iec-kebab">
+      <summary class="iec-kebab__btn" aria-label="More actions">⋮</summary>
+      <ul class="iec-kebab__menu">
+        <li><button type="button" (click)="noopDemo(row, 'View details')">View details</button></li>
+        <li><button type="button" (click)="noopDemo(row, 'Duplicate')">Duplicate</button></li>
+        <li><button type="button" (click)="noopDemo(row, 'Archive')">Archive</button></li>
+      </ul>
+    </details>
+  </div>
+</ng-template>

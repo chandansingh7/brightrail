@@ -1,0 +1,464 @@
+<div class="bp">
+  <div class="bp-grid">
+    <section class="bp-panel bp-panel--settings" aria-labelledby="alert-settings-title">
+      <div class="bp-settings-head">
+        <div class="bp-settings-head__start">
+          <svg
+            class="bp-settings-head__icon"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              fill="currentColor"
+              d="M4 6h2v2H4V6zm0 5h2v2H4v-2zm0 5h2v2H4v-2zm4-10h12v2H8V6zm0 5h12v2H8v-2zm0 5h12v2H8v-2z"
+            />
+            <circle cx="18" cy="7" r="1.25" fill="currentColor" />
+            <circle cx="18" cy="12" r="1.25" fill="currentColor" />
+            <circle cx="18" cy="17" r="1.25" fill="currentColor" />
+          </svg>
+          <h2 id="alert-settings-title" class="bp-settings-head__title">Component settings</h2>
+        </div>
+        <button type="button" class="bp-settings-reset" (click)="resetToDefaults()" title="Reset">
+          <span class="bp-sr-only">Reset all component settings</span>
+          <svg class="bp-settings-reset__icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M12 6V3L8 7l4 4V8c2.76 0 5 2.24 5 5 0 1.28-.48 2.45-1.26 3.35l1.41 1.41A6.96 6.96 0 0 0 19 13c0-3.87-3.13-7-7-7zm0 14c-2.76 0-5-2.24-5-5 0-1.28.48-2.45 1.26-3.35L6.85 10.24A6.96 6.96 0 0 0 5 13c0 3.87 3.13 7 7 7v3l4-4-4-4v3z"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div class="bp-settings-block">
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="alert-lbl-component">Component</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true"><span class="bp-ico-pill"></span></span>
+            <select class="bp-dropdown__select" disabled aria-labelledby="alert-lbl-component" title="Component">
+              <option>Alerts</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="alert-lbl-grp">Scenario group</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true"><span class="bp-ico-ring"></span></span>
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="selectedRecipeGroup()"
+              (ngModelChange)="onRecipeGroupNgModelChange($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="alert-lbl-grp"
+              title="Scenario group"
+            >
+              @for (g of recipeGroups; track g) {
+                <option [value]="g">{{ g }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="alert-lbl-recipe">Scenario</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true"><span class="bp-ico-pill"></span></span>
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="previewRecipe()"
+              (ngModelChange)="onRecipeNgModelChange($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="alert-lbl-recipe"
+              title="Scenario"
+            >
+              @for (opt of recipesInGroup(selectedRecipeGroup()); track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="alert-lbl-appearance">Appearance</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="appearance()"
+              (ngModelChange)="bindAppearance($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="alert-lbl-appearance"
+              title="Appearance"
+            >
+              @for (a of appearanceOptions; track a) {
+                <option [value]="a">{{ a | titlecase }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="alert-lbl-status">Status</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true">
+              <span
+                class="bp-vdot"
+                [attr.data-variant]="
+                  status() === 'success'
+                    ? 'success'
+                    : status() === 'warning'
+                      ? 'warning'
+                      : status() === 'error'
+                        ? 'danger'
+                        : 'info'
+                "
+              ></span>
+            </span>
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="status()"
+              (ngModelChange)="bindStatus($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="alert-lbl-status"
+              title="Status"
+            >
+              @for (s of statusOptions; track s.value) {
+                <option [value]="s.value">{{ s.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="alert-lbl-size">Size</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="size()"
+              (ngModelChange)="bindSize($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="alert-lbl-size"
+              title="Size"
+            >
+              @for (z of sizeOptions; track z.value) {
+                <option [value]="z.value">{{ z.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="alert-lbl-corners">Corners</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="corners()"
+              (ngModelChange)="bindCorners($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="alert-lbl-corners"
+              title="Corners"
+            >
+              @for (c of cornersOptions; track c.value) {
+                <option [value]="c.value">{{ c.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="alert-lbl-dismiss">State</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true"><span class="bp-ico-state" [attr.data-state]="dismissible() ? 'active' : 'default'"></span></span>
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="dismissible() ? 'yes' : 'no'"
+              (ngModelChange)="bindDismiss($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="alert-lbl-dismiss"
+              title="Dismissible"
+            >
+              <option value="yes">Dismissible</option>
+              <option value="no">Fixed</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="alert-lbl-icon">With icon</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true"><span class="bp-ico-kind" [attr.data-kind]="showIcon() ? 'check' : 'plus'"></span></span>
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="showIcon() ? 'yes' : 'no'"
+              (ngModelChange)="bindShowIcon($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="alert-lbl-icon"
+              title="With icon"
+            >
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="alert-lbl-actions">Actions</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="actionsPreset()"
+              (ngModelChange)="bindActionsPreset($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="alert-lbl-actions"
+              title="Actions"
+            >
+              @for (a of actionsPresetOptions; track a.value) {
+                <option [value]="a.value">{{ a.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="alert-lbl-multi">Multiline body</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="multilineBody() ? 'yes' : 'no'"
+              (ngModelChange)="bindMultiline($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="alert-lbl-multi"
+              title="Multiline body"
+            >
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="alert-lbl-fw">Full width</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="fullWidth() ? 'yes' : 'no'"
+              (ngModelChange)="bindFullWidth($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="alert-lbl-fw"
+              title="Full width banner"
+            >
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="alert-lbl-placement">Placement</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="placement()"
+              (ngModelChange)="bindPlacement($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="alert-lbl-placement"
+              title="Alert placement"
+            >
+              @for (p of placementOptions; track p.value) {
+                <option [value]="p.value">{{ p.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="alert-lbl-inv">Inverse surface</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="inverse() ? 'yes' : 'no'"
+              (ngModelChange)="bindInverse($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="alert-lbl-inv"
+              title="Inverse / toast shell"
+            >
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="alert-lbl-accent">Accent</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="accent()"
+              (ngModelChange)="bindAccent($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="alert-lbl-accent"
+              title="Accent palette"
+            >
+              @for (a of accentOptions; track a.value) {
+                <option [value]="a.value">{{ a.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="alert-lbl-ico-preset">Icon override</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="iconPreset()"
+              (ngModelChange)="bindIconPreset($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="alert-lbl-ico-preset"
+              title="Icon override"
+            >
+              @for (i of iconPresetOptions; track i.value) {
+                <option [value]="i.value">{{ i.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="alert-lbl-theme">Theme</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true"><span class="bp-ico-theme"></span></span>
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="themeService.theme()"
+              (ngModelChange)="bindTheme($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="alert-lbl-theme"
+              title="Theme"
+            >
+              @for (opt of themeRowOptions; track opt.id) {
+                <option [value]="opt.id">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bp-panel bp-panel--preview" aria-labelledby="alert-preview-title">
+      <h2 id="alert-preview-title" class="bp-panel__title bp-panel__title--live">
+        <span class="bp-live-dot" aria-hidden="true"></span>
+        Live preview
+      </h2>
+      <div class="bp-preview-surface bp-preview-surface--stretch">
+        <div
+          class="bp-preview-inner bp-preview-inner--alert"
+          [class.bp-preview-inner--alert-dock]="placement() === 'bottom'"
+        >
+          <section
+            class="alert-play-live"
+            [class.alert-play-live--full]="fullWidth()"
+            [class.alert-play-live--dock-bottom]="placement() === 'bottom'"
+            aria-label="Configured alert demo"
+          >
+            <brightrail-alert
+              [appearance]="appearance()"
+              [status]="status()"
+              [size]="size()"
+              [corners]="corners()"
+              [dismissible]="dismissible()"
+              [showIcon]="showIcon()"
+              [icon]="alertIconBinding()"
+              [fullWidth]="fullWidth()"
+              [placement]="placement()"
+              [inverse]="inverse()"
+              [accent]="accent()"
+            >
+              <div brightrailAlertTitle>{{ liveTitle() }}</div>
+              <div brightrailAlertMessage>{{ liveMessage() }}</div>
+              @if (actionsPreset() === 'links') {
+                <brightrail-alert-actions>
+                  <button type="button" class="alert-play-link">Learn more</button>
+                  <button type="button" class="alert-play-link">Dismiss</button>
+                </brightrail-alert-actions>
+              }
+              @if (actionsPreset() === 'buttons') {
+                <brightrail-alert-actions>
+                  <brightrail-button variant="primary" size="sm">Retry</brightrail-button>
+                  <brightrail-button variant="outline" size="sm">Cancel</brightrail-button>
+                </brightrail-alert-actions>
+              }
+            </brightrail-alert>
+          </section>
+        </div>
+      </div>
+      <p class="bp-preview-caption">
+        The §1–§8 variation catalog is on <strong>Resources → Guide: alerts</strong>.
+        <span class="alert-play-caption__more">Generated snippets stay below the workbench on desktop.</span>
+        @if (placement() === 'bottom') {
+          <span class="alert-play-caption__more">
+            Bottom dock uses <code>placement="bottom"</code> (fixed); this preview adds a transformed wrapper so it pins to the panel instead of the browser window.
+          </span>
+        }
+      </p>
+    </section>
+  </div>
+
+  <section class="bp-code" aria-labelledby="alert-code-title">
+    <div class="bp-code__head">
+      <h2 id="alert-code-title" class="bp-code__title">Generated snippets</h2>
+      <div class="bp-code__tabs" role="tablist">
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'html'"
+          [attr.aria-selected]="activeTab() === 'html'"
+          (click)="selectTab('html')"
+        >
+          HTML
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'ts'"
+          [attr.aria-selected]="activeTab() === 'ts'"
+          (click)="selectTab('ts')"
+        >
+          TS
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'scss'"
+          [attr.aria-selected]="activeTab() === 'scss'"
+          (click)="selectTab('scss')"
+        >
+          SCSS
+        </button>
+      </div>
+      <button type="button" class="bp-copy" (click)="copySnippet()">Copy</button>
+    </div>
+    <pre class="bp-pre" role="tabpanel"><code>{{ activeSnippet() }}</code></pre>
+  </section>
+</div>

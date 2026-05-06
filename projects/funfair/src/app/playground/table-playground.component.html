@@ -1,0 +1,651 @@
+<div class="bp">
+  <div class="bp-grid">
+    <section class="bp-panel bp-panel--settings" aria-labelledby="table-settings-title">
+      <div class="bp-settings-head">
+        <div class="bp-settings-head__start">
+          <svg class="bp-settings-head__icon" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M4 6h2v2H4V6zm0 5h2v2H4v-2zm0 5h2v2H4v-2zm4-10h12v2H8V6zm0 5h12v2H8v-2zm0 5h12v2H8v-2z"
+            />
+          </svg>
+          <h2 id="table-settings-title" class="bp-settings-head__title">Component settings</h2>
+        </div>
+        <button type="button" class="bp-settings-reset" (click)="resetToDefaults()" title="Reset all settings">
+          <span class="bp-sr-only">Reset all component settings</span>
+          <svg class="bp-settings-reset__icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M12 6V3L8 7l4 4V8c2.76 0 5 2.24 5 5 0 1.28-.48 2.45-1.26 3.35l1.41 1.41A6.96 6.96 0 0 0 19 13c0-3.87-3.13-7-7-7zm0 14c-2.76 0-5-2.24-5-5 0-1.28.48-2.45 1.26-3.35L6.85 10.24A6.96 6.96 0 0 0 5 13c0 3.87 3.13 7 7 7v3l4-4-4-4v3z"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div class="bp-settings-block">
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="table-lbl-component">Component</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" disabled aria-labelledby="table-lbl-component" title="Component">
+              <option>Table</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="table-lbl-grp">Scenario group</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [value]="selectedRecipeGroup()"
+              (change)="onScenarioGroupChange($event)"
+              aria-labelledby="table-lbl-grp"
+              title="Scenario group"
+            >
+              @for (g of recipeGroups; track g) {
+                <option [value]="g">{{ g }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="table-lbl-recipe">Scenario</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [value]="previewRecipe()"
+              (change)="onRecipeChange($event)"
+              aria-labelledby="table-lbl-recipe"
+              title="Scenario"
+            >
+              @for (opt of recipesInGroup(selectedRecipeGroup()); track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="table-lbl-cols">Columns</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" disabled aria-labelledby="table-lbl-cols" title="Columns">
+              <option>{{ columnCountLabel() }}</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="table-lbl-data">Data</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" disabled aria-labelledby="table-lbl-data" title="Data preset">
+              <option>{{ dataPresetLabel() }}</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="table-lbl-sort">Sorting</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [value]="sortingEnabled() ? 'on' : 'off'"
+              (change)="bindSortingEnabled(readSelectValue($event))"
+              aria-labelledby="table-lbl-sort"
+              title="Sorting"
+            >
+              <option value="on">Enabled</option>
+              <option value="off">Disabled</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="table-lbl-col-search">Header · search inputs</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [value]="playgroundColumnSearch() ? 'on' : 'off'"
+              (change)="bindPlaygroundColumnSearch(readSelectValue($event))"
+              aria-labelledby="table-lbl-col-search"
+              title="Show searchable columns as inline header inputs"
+            >
+              <option value="off">Off</option>
+              <option value="on">On</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="table-lbl-col-filters">Header · column filters</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [value]="playgroundColumnFilters() ? 'on' : 'off'"
+              (change)="bindPlaygroundColumnFilters(readSelectValue($event))"
+              aria-labelledby="table-lbl-col-filters"
+              title="Show dropdown filters where columns define filterOptions"
+            >
+              <option value="off">Off</option>
+              <option value="on">On</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="table-lbl-global-filter-btn">Header · filter funnel</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [value]="playgroundShowGlobalFilterButton() ? 'on' : 'off'"
+              (change)="bindPlaygroundGlobalFilterButton(readSelectValue($event))"
+              aria-labelledby="table-lbl-global-filter-btn"
+              title="Show funnel button next to selection header when filters are enabled"
+            >
+              <option value="off">Hidden</option>
+              <option value="on">Visible</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="table-lbl-page">Pagination</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [value]="paginationEnabled() ? 'on' : 'off'"
+              (change)="bindPaginationEnabled(readSelectValue($event))"
+              aria-labelledby="table-lbl-page"
+              title="Pagination"
+            >
+              <option value="on">Enabled</option>
+              <option value="off">Disabled</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="table-lbl-sel">Row selection</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [value]="rowSelection()"
+              (change)="bindRowSelection(readSelectValue($event))"
+              aria-labelledby="table-lbl-sel"
+              title="Row selection"
+            >
+              @for (opt of selectionOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="table-lbl-density">Density</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [value]="density()"
+              (change)="bindDensity(readSelectValue($event))"
+              aria-labelledby="table-lbl-density"
+              title="Density"
+            >
+              @for (d of densityOptions; track d.value) {
+                <option [value]="d.value">{{ d.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="table-lbl-variant">Variant</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [value]="variant()"
+              (change)="bindVariant(readSelectValue($event))"
+              aria-labelledby="table-lbl-variant"
+              title="Variant"
+            >
+              @for (v of variantOptions; track v) {
+                <option [value]="v">{{ v === 'basic' ? 'Basic' : v === 'bordered' ? 'Bordered' : 'Striped' }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="table-lbl-expand">Expandable rows</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [value]="expandableEnabled() ? 'on' : 'off'"
+              (change)="bindExpandableEnabled(readSelectValue($event))"
+              aria-labelledby="table-lbl-expand"
+              title="Expandable rows"
+            >
+              <option value="off">Off</option>
+              <option value="on">On</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="table-lbl-sticky">Sticky header</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [value]="stickyHeader() ? 'on' : 'off'"
+              (change)="bindSticky(readSelectValue($event))"
+              aria-labelledby="table-lbl-sticky"
+              title="Sticky header"
+            >
+              <option value="off">Off</option>
+              <option value="on">On</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="table-lbl-loading">Loading</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [value]="loadingEnabled() ? 'on' : 'off'"
+              (change)="bindLoading(readSelectValue($event))"
+              aria-labelledby="table-lbl-loading"
+              title="Loading skeleton"
+            >
+              <option value="off">Off</option>
+              <option value="on">On</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="table-lbl-toolbar">Toolbar</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [value]="showToolbar() ? 'on' : 'off'"
+              (change)="bindToolbar(readSelectValue($event))"
+              aria-labelledby="table-lbl-toolbar"
+              title="Toolbar"
+            >
+              <option value="on">Visible</option>
+              <option value="off">Hidden</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        @if (advancedScenarioActive()) {
+          <div class="bp-setting-row">
+            <span class="bp-setting-row__label" id="table-lbl-avatar-stack">Name · avatar</span>
+            <div class="bp-dropdown">
+              <select
+                class="bp-dropdown__select"
+                [value]="advancedAvatarPresentation()"
+                (change)="bindAdvancedAvatarPresentation(readSelectValue($event))"
+                aria-labelledby="table-lbl-avatar-stack"
+                title="Name column avatar layout"
+              >
+                <option value="full">Initials + name + subtitle</option>
+                <option value="nameOnly">Initials + name</option>
+                <option value="iconOnly">Initials only</option>
+              </select>
+              <span class="bp-dropdown__chev" aria-hidden="true"></span>
+            </div>
+          </div>
+
+          <div class="bp-setting-row">
+            <span class="bp-setting-row__label" id="table-lbl-role-format">Role · format</span>
+            <div class="bp-dropdown">
+              <select
+                class="bp-dropdown__select"
+                [value]="advancedRolePresentation()"
+                (change)="bindAdvancedRolePresentation(readSelectValue($event))"
+                aria-labelledby="table-lbl-role-format"
+                title="Role column cell format"
+              >
+                <option value="text">Plain text</option>
+                <option value="badge">Badge</option>
+              </select>
+              <span class="bp-dropdown__chev" aria-hidden="true"></span>
+            </div>
+          </div>
+
+          <div class="bp-setting-row">
+            <span class="bp-setting-row__label" id="table-lbl-status-tone">Status · badge tone</span>
+            <div class="bp-dropdown">
+              <select
+                class="bp-dropdown__select"
+                [value]="advancedStatusBadgeTone()"
+                (change)="bindAdvancedStatusBadgeTone(readSelectValue($event))"
+                aria-labelledby="table-lbl-status-tone"
+                title="Status badge semantic tone"
+              >
+                <option value="auto">Auto (from label)</option>
+                <option value="success">Success</option>
+                <option value="warning">Warning</option>
+                <option value="danger">Danger</option>
+                <option value="neutral">Neutral</option>
+              </select>
+              <span class="bp-dropdown__chev" aria-hidden="true"></span>
+            </div>
+          </div>
+        }
+
+        @if (playgroundBulkBarVisible()) {
+          <div class="bp-setting-row">
+            <span class="bp-setting-row__label" id="table-lbl-bulk-place">Bulk buttons</span>
+            <div class="bp-dropdown">
+              <select
+                class="bp-dropdown__select"
+                [value]="bulkActionsPlacement()"
+                (change)="bindBulkActionsPlacement(readSelectValue($event))"
+                aria-labelledby="table-lbl-bulk-place"
+                title="Bulk action button placement"
+              >
+                <option value="end">Right (end of bar)</option>
+                <option value="inline">After selection count</option>
+              </select>
+              <span class="bp-dropdown__chev" aria-hidden="true"></span>
+            </div>
+          </div>
+        }
+
+        @if (previewRecipe() === 'advancedSingle') {
+          <div class="bp-setting-row">
+            <span class="bp-setting-row__label" id="table-lbl-single-place">Row action buttons</span>
+            <div class="bp-dropdown">
+              <select
+                class="bp-dropdown__select"
+                [value]="singleActionsPlacement()"
+                (change)="bindSingleActionsPlacement(readSelectValue($event))"
+                aria-labelledby="table-lbl-single-place"
+                title="Single-select action bar placement"
+              >
+                <option value="end">Right (end of bar)</option>
+                <option value="inline">After selection count</option>
+              </select>
+              <span class="bp-dropdown__chev" aria-hidden="true"></span>
+            </div>
+          </div>
+        }
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="table-lbl-theme">Theme</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [value]="previewTheme()"
+              (change)="onPreviewThemeChange($event)"
+              aria-labelledby="table-lbl-theme"
+              title="Preview theme"
+            >
+              @for (t of themeRowOptions; track t.id) {
+                <option [value]="t.id">{{ t.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bp-panel bp-panel--preview" aria-labelledby="table-preview-title">
+      <h2 id="table-preview-title" class="bp-panel__title bp-panel__title--live">
+        <span class="bp-live-dot" aria-hidden="true"></span>
+        Live preview
+      </h2>
+      <div class="bp-preview-surface bp-preview-surface--stretch">
+        <div
+          class="bp-preview-inner bp-preview-inner--table tp-preview-frame"
+          [class.tp-preview--dark]="previewTheme() === 'dark'"
+        >
+          <brightrail-table
+            class="tp-table-host"
+            [data]="tableRows()"
+            [columns]="previewTableColumns()"
+            [variant]="variant()"
+            [density]="density()"
+            [sorting]="sortingEnabled()"
+            [pagination]="paginationBinding()"
+            [rowSelection]="rowSelection()"
+            [columnSearch]="playgroundColumnSearch()"
+            [columnFilters]="playgroundColumnFilters()"
+            [showGlobalFilterButton]="playgroundShowGlobalFilterButton()"
+            [(filterState)]="advancedFilter"
+            [bulkActionsPlacement]="bulkActionsPlacement()"
+            [singleActionsPlacement]="singleActionsPlacement()"
+            [selectedIds]="tableControlledSelectedIds()"
+            [inlineEdit]="playgroundInlineEdit()"
+            [inlineEditMode]="playgroundInlineEditMode()"
+            [expandable]="expandableEnabled()"
+            [expandedTemplate]="expandableEnabled() ? expandTemplate() : null"
+            [stickyHeader]="stickyHeader()"
+            [loading]="loadingEnabled()"
+            emptyTitle="No data available"
+            emptyDescription="Create a record to populate this view."
+            [showEmptyAction]="previewRecipe() === 'emptyCanvas'"
+            emptyActionLabel="Add record"
+            [ariaLabel]="ariaLabel()"
+            (pageChange)="onPageChange($event)"
+            (selectionChange)="onTableSelectionChange($event)"
+            (inlineSave)="onPlaygroundInlineSave($event)"
+          >
+            @if (playgroundBulkBarVisible()) {
+              <brightrail-table-bulk-actions>
+                <label class="tp-bulk-status">
+                  <span class="tp-bulk-status__lbl">Edit status</span>
+                  <select
+                    class="tp-bulk-status__select"
+                    [ngModel]="bulkEditStatusDraft()"
+                    (ngModelChange)="bulkEditStatusDraft.set($event)"
+                    [ngModelOptions]="{ standalone: true }"
+                  >
+                    <option value="Active">Active</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Inactive">Inactive</option>
+                  </select>
+                </label>
+                <button type="button" class="br-table__bulk-btn--primary" (click)="applyBulkStatusToSelection()">
+                  Apply
+                </button>
+                <button type="button" class="br-table__bulk-btn--ghost" (click)="clearBulkSelectionDemo()">
+                  Clear
+                </button>
+                <button type="button" class="br-table__bulk-btn--danger" (click)="bulkDeleteSelectedDemoRows()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+                    />
+                  </svg>
+                  Delete
+                </button>
+                <button type="button" class="br-table__bulk-btn--secondary">
+                  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M20.54 5.23l-1.39-1.68a1 1 0 0 0-1.45-.15L4 13.09v7.81h7.14L21.18 6.59a1 1 0 0 0-.64-1.36zM5 19v-5.91l9.04-7.34 4.86 5.91L13 19H5z"
+                    />
+                  </svg>
+                  Archive
+                </button>
+                <button type="button" class="br-table__bulk-btn--ghost">
+                  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9 2v-2H3v2H0v8h3v2h2v-2h14v2h2v-2h3v-8h-12z"
+                    />
+                  </svg>
+                  Assign
+                </button>
+                <button type="button" class="br-table__bulk-btn--primary">
+                  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"
+                    />
+                  </svg>
+                  Export
+                </button>
+              </brightrail-table-bulk-actions>
+            }
+            @if (previewRecipe() === 'advancedSingle') {
+              <brightrail-table-single-actions>
+                <button type="button" class="br-table__bulk-btn--primary" (click)="openEditSelectedRow()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                    />
+                  </svg>
+                  Edit
+                </button>
+                <button type="button" class="br-table__bulk-btn--ghost" (click)="viewSelectedRowDemo()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+                    />
+                  </svg>
+                  View
+                </button>
+                <button type="button" class="br-table__bulk-btn--danger" (click)="confirmDeleteSelectedRow()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+                    />
+                  </svg>
+                  Delete
+                </button>
+              </brightrail-table-single-actions>
+            }
+            @if (showToolbar()) {
+              <brightrail-table-toolbar>
+                <brightrail-table-toolbar-actions />
+              </brightrail-table-toolbar>
+            }
+          </brightrail-table>
+          <brightrail-modal
+            [isOpen]="editModalOpen()"
+            size="sm"
+            [contain]="true"
+            [labelledBy]="editModalTitleId"
+            (backdropDismiss)="closeEditModal()"
+            (closed)="closeEditModal()"
+          >
+            <brightrail-modal-header>
+              <h2 brightrailModalTitle [id]="editModalTitleId">Edit user</h2>
+            </brightrail-modal-header>
+            <brightrail-modal-body>
+              <p class="tp-edit-lead">
+                Row:
+                <strong>{{ selectedAdvancedSingleRow()?.['name'] }}</strong>
+              </p>
+              <label class="tp-edit-label" for="tp-table-edit-name">Display name</label>
+              <input
+                id="tp-table-edit-name"
+                class="tp-edit-input"
+                type="text"
+                [ngModel]="editNameDraft()"
+                (ngModelChange)="editNameDraft.set($event)"
+                [ngModelOptions]="{ standalone: true }"
+                autocomplete="off"
+              />
+            </brightrail-modal-body>
+            <brightrail-modal-footer>
+              <button type="button" class="tp-edit-foot-btn tp-edit-foot-btn--ghost" (click)="closeEditModal()">
+                Cancel
+              </button>
+              <button type="button" class="tp-edit-foot-btn tp-edit-foot-btn--primary" (click)="saveEditModalDemo()">
+                Save
+              </button>
+            </brightrail-modal-footer>
+          </brightrail-modal>
+        </div>
+      </div>
+      <p class="bp-preview-caption">
+        Preview sits in the same scroll shell as Cards — pagination stays pinned inside the table surface below the rows.
+      </p>
+    </section>
+  </div>
+
+  <section class="bp-code" aria-labelledby="table-code-title">
+    <div class="bp-code__head">
+      <h2 id="table-code-title" class="bp-code__title">Generated snippets</h2>
+      <div class="bp-code__tabs" role="tablist">
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'html'"
+          [attr.aria-selected]="activeTab() === 'html'"
+          (click)="selectTab('html')"
+        >
+          HTML
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'ts'"
+          [attr.aria-selected]="activeTab() === 'ts'"
+          (click)="selectTab('ts')"
+        >
+          TS
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'scss'"
+          [attr.aria-selected]="activeTab() === 'scss'"
+          (click)="selectTab('scss')"
+        >
+          SCSS
+        </button>
+      </div>
+      <button type="button" class="bp-copy" (click)="copySnippet()">Copy</button>
+    </div>
+    <pre class="bp-pre" role="tabpanel"><code>{{ activeSnippet() }}</code></pre>
+  </section>
+</div>
+
+<ng-template #rowExpand let-row>
+  <div class="tp-expand">
+    <div>
+      <span class="tp-expand__k">Email</span>
+      <div>{{ row['email'] }}</div>
+    </div>
+    <div>
+      <span class="tp-expand__k">Role</span>
+      <div>{{ row['role'] }}</div>
+    </div>
+    <div>
+      <span class="tp-expand__k">Created</span>
+      <div>{{ row['created'] }}</div>
+    </div>
+  </div>
+</ng-template>

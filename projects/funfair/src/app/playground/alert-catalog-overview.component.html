@@ -1,0 +1,123 @@
+<div class="aco">
+  <header class="aco-hero">
+    <p class="aco-hero__eyebrow">Brightrail · Alerts · Resource guide</p>
+    <h1 class="aco-hero__title">Variation catalog</h1>
+    <p class="aco-hero__lead">
+      Sections 1–8 mirror the reference mock — appearances, sizes, recipes, and accessibility notes.
+      The canonical API uses <code>status</code>, <code>appearance</code>, <code>brightrailAlertTitle</code> /
+      <code>brightrailAlertMessage</code>, and <code>brightrail-alert-actions</code> (not legacy <code>type</code> /
+      <code>alert-actions</code> from early mocks).
+    </p>
+    <a routerLink=".." class="aco-hero__link">← Alerts playground (live demo & snippets)</a>
+  </header>
+
+  <div class="aco-scroll">
+    <div class="aco-catalog-panel">
+      <p class="aco-var-intro">
+        Baseline Appearance / Status / Size / Corners apply everywhere each section keeps neutral — browse
+        <strong>one section at a time</strong> or enable “Show all sections”.
+      </p>
+
+      <div class="aco-var-toolbar">
+        @if (!catalogShowAllSections()) {
+          <div class="aco-var-toolbar__stepper">
+            <button type="button" class="aco-var-toolbar__btn" (click)="catalogSectionPrev()">
+              Previous section
+            </button>
+            <span class="aco-var-toolbar__step" aria-live="polite">
+              Section {{ catalogFocusSection() }} of 8 · {{ catalogSectionTitle() }}
+            </span>
+            <button type="button" class="aco-var-toolbar__btn" (click)="catalogSectionNext()">
+              Next section
+            </button>
+          </div>
+        }
+        <label class="aco-var-toolbar__all">
+          <input
+            type="checkbox"
+            [ngModel]="catalogShowAllSections()"
+            (ngModelChange)="catalogShowAllSections.set($event)"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          Show all sections at once
+        </label>
+      </div>
+
+      <div class="aco-mirror-grid" aria-label="Baseline dimensions for catalog tiles">
+        <label class="aco-mirror-field">
+          <span class="aco-mirror-field__lbl">Appearance</span>
+          <select
+            class="aco-mirror-select"
+            [ngModel]="mirrorAppearance()"
+            (ngModelChange)="bindMirrorAppearance($event)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            @for (a of appearanceOptions; track a) {
+              <option [value]="a">{{ a }}</option>
+            }
+          </select>
+        </label>
+        <label class="aco-mirror-field">
+          <span class="aco-mirror-field__lbl">Status</span>
+          <select
+            class="aco-mirror-select"
+            [ngModel]="mirrorStatus()"
+            (ngModelChange)="bindMirrorStatus($event)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            @for (s of statusOptions; track s.value) {
+              <option [value]="s.value">{{ s.label }}</option>
+            }
+          </select>
+        </label>
+        <label class="aco-mirror-field">
+          <span class="aco-mirror-field__lbl">Size</span>
+          <select
+            class="aco-mirror-select"
+            [ngModel]="mirrorSize()"
+            (ngModelChange)="bindMirrorSize($event)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            @for (z of sizeOptions; track z.value) {
+              <option [value]="z.value">{{ z.label }}</option>
+            }
+          </select>
+        </label>
+        <label class="aco-mirror-field">
+          <span class="aco-mirror-field__lbl">Corners</span>
+          <select
+            class="aco-mirror-select"
+            [ngModel]="mirrorCorners()"
+            (ngModelChange)="bindMirrorCorners($event)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            @for (c of cornersOptions; track c.value) {
+              <option [value]="c.value">{{ c.label }}</option>
+            }
+          </select>
+        </label>
+      </div>
+
+      <p class="aco-var-lead">
+        Tiles reuse these settings where each row teaches one dimension (see captions under each heading).
+        Turn off “Show all” to step through §1–§8 one panel at a time.
+      </p>
+
+      <app-alert-variation-catalog
+        [mirrorAppearance]="mirrorAppearance()"
+        [mirrorStatus]="mirrorStatus()"
+        [mirrorSize]="mirrorSize()"
+        [mirrorCorners]="mirrorCorners()"
+        [focusSection]="catalogEffectiveFocus()"
+      />
+    </div>
+  </div>
+
+  <section class="aco-snippet" aria-labelledby="aco-snippet-title">
+    <div class="aco-snippet__head">
+      <h2 id="aco-snippet-title" class="aco-snippet__title">Alert usage (canonical)</h2>
+      <span class="aco-snippet__note">HTML — copy into your host app</span>
+    </div>
+    <pre class="aco-snippet__pre"><code>{{ canonicalSnippet }}</code></pre>
+  </section>
+</div>

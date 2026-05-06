@@ -1,0 +1,179 @@
+@if (isCompactCard()) {
+  <div
+    class="br-prog__shell"
+    role="progressbar"
+    [attr.aria-valuenow]="ariaValueNow()"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    [attr.aria-label]="ariaLabelText()"
+  >
+    <div class="br-prog__card-head">
+      @if (showLabel() && label()) {
+        <span class="br-prog__card-title">{{ label() }}</span>
+      }
+      @if (showValueResolved()) {
+        <span class="br-prog__card-metric">{{ displayPercentText() }}</span>
+      }
+    </div>
+    <div class="br-prog__track br-prog__track--linear">
+      <div class="br-prog__track-bg" aria-hidden="true"></div>
+      @if (effectiveMode() === 'buffer') {
+        <div class="br-prog__buffer" [style.width.%]="bufferClamped()" aria-hidden="true"></div>
+      }
+      <div
+        class="br-prog__fill"
+        [class.br-prog__fill--indeterminate]="effectiveMode() === 'indeterminate'"
+        [class.br-prog__fill--query]="effectiveMode() === 'query'"
+        [style.width.%]="effectiveMode() === 'determinate' || effectiveMode() === 'buffer' ? valueClamped() : 100"
+        aria-hidden="true"
+      ></div>
+    </div>
+    @if (etaText()) {
+      <div class="br-prog__card-foot">{{ etaText() }}</div>
+    }
+  </div>
+} @else if (isCircular()) {
+  <div
+    class="br-prog__shell br-prog__shell--circular"
+    role="progressbar"
+    [attr.aria-valuenow]="ariaValueNow()"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    [attr.aria-label]="ariaLabelText()"
+    [attr.aria-busy]="effectiveMode() === 'indeterminate' ? true : null"
+  >
+    @if (kpiTitle()) {
+      <div class="br-prog__kpi-title">{{ kpiTitle() }}</div>
+    }
+    <div class="br-prog__ring-wrap">
+      @if (variant() === 'futuristic' || variant() === 'neon-arc') {
+        <svg class="br-prog__svg" viewBox="0 0 100 100" aria-hidden="true">
+          <defs>
+            <linearGradient [attr.id]="svgDefId + '-grad'" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--br-prog-accent, #0062ff)" />
+              <stop offset="100%" stop-color="var(--br-prog-accent-end, #7c4dff)" />
+            </linearGradient>
+          </defs>
+          <circle
+            class="br-prog__ring-bg"
+            cx="50"
+            cy="50"
+            [attr.r]="ringRadius()"
+            fill="none"
+            pathLength="100"
+          />
+          @if (effectiveMode() === 'indeterminate') {
+            <circle
+              class="br-prog__ring-indet"
+              cx="50"
+              cy="50"
+              [attr.r]="ringRadius()"
+              fill="none"
+              pathLength="100"
+              transform="rotate(-90 50 50)"
+            />
+          } @else {
+            <circle
+              class="br-prog__ring-fg br-prog__ring-fg--grad"
+              [class.br-prog__ring-fg--neon]="variant() === 'neon-arc'"
+              cx="50"
+              cy="50"
+              [attr.r]="ringRadius()"
+              fill="none"
+              [attr.stroke]="'url(#' + svgDefId + '-grad)'"
+              pathLength="100"
+              stroke-dasharray="100"
+              [attr.stroke-dashoffset]="100 - valueClamped()"
+              transform="rotate(-90 50 50)"
+            />
+          }
+        </svg>
+      } @else {
+        <svg class="br-prog__svg" viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="br-prog__ring-bg" cx="50" cy="50" [attr.r]="ringRadius()" fill="none" pathLength="100" />
+          @if (effectiveMode() === 'indeterminate') {
+            <circle
+              class="br-prog__ring-indet"
+              cx="50"
+              cy="50"
+              [attr.r]="ringRadius()"
+              fill="none"
+              pathLength="100"
+              transform="rotate(-90 50 50)"
+            />
+          } @else {
+            <circle
+              class="br-prog__ring-fg"
+              cx="50"
+              cy="50"
+              [attr.r]="ringRadius()"
+              fill="none"
+              pathLength="100"
+              stroke-dasharray="100"
+              [attr.stroke-dashoffset]="100 - valueClamped()"
+              transform="rotate(-90 50 50)"
+            />
+          }
+        </svg>
+      }
+      @if (showRingCompleteIcon() && valueClamped() >= 100) {
+        <span class="br-prog__ring-check" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24">
+            <path
+              fill="currentColor"
+              d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+            />
+          </svg>
+        </span>
+      }
+      <div class="br-prog__center">
+        @if (showValueResolved() && effectiveMode() !== 'indeterminate') {
+          <span class="br-prog__pct">{{ displayPercentText() }}</span>
+        }
+        @if (showLabel() && label()) {
+          <span class="br-prog__label">{{ label() }}</span>
+        }
+        @if (detailText()) {
+          <span class="br-prog__detail">{{ detailText() }}</span>
+        }
+        @if (kpiStatus()) {
+          <span class="br-prog__kpi-status">{{ kpiStatus() }}</span>
+        }
+      </div>
+    </div>
+  </div>
+} @else {
+  <div
+    class="br-prog__shell br-prog__shell--linear"
+    role="progressbar"
+    [attr.aria-valuenow]="ariaValueNow()"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    [attr.aria-label]="ariaLabelText()"
+    [attr.aria-busy]="effectiveMode() === 'indeterminate' || effectiveMode() === 'query' ? true : null"
+  >
+    @if ((showLabel() && label()) || (showValueResolved() && effectiveMode() === 'determinate')) {
+      <div class="br-prog__label-row">
+        @if (showLabel() && label()) {
+          <span class="br-prog__label-inline">{{ label() }}</span>
+        }
+        @if (showValueResolved() && effectiveMode() === 'determinate') {
+          <span class="br-prog__pct-inline">{{ displayPercentText() }}</span>
+        }
+      </div>
+    }
+    <div class="br-prog__track br-prog__track--linear">
+      <div class="br-prog__track-bg" aria-hidden="true"></div>
+      @if (effectiveMode() === 'buffer') {
+        <div class="br-prog__buffer" [style.width.%]="bufferClamped()" aria-hidden="true"></div>
+      }
+      <div
+        class="br-prog__fill"
+        [class.br-prog__fill--indeterminate]="effectiveMode() === 'indeterminate'"
+        [class.br-prog__fill--query]="effectiveMode() === 'query'"
+        [style.width.%]="effectiveMode() === 'determinate' || effectiveMode() === 'buffer' ? valueClamped() : 100"
+        aria-hidden="true"
+      ></div>
+    </div>
+  </div>
+}

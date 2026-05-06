@@ -1,43 +1,60 @@
+@use './playground-snippet-panel.scss' as *;
+
 :host {
   display: flex;
   flex-direction: column;
-  flex: 0 1 auto;
+  flex: 1 1 auto;
   width: 100%;
   min-height: 0;
 }
 
+/*
+ * Playground chrome layout — shared by every component playground via `@use` of this file.
+ * Three zones are sized independently:
+ *   • Workbench (settings | preview): capped by --bp-workbench-max-height; each panel scrolls inside.
+ *   • Snippets: fixed height --bp-snippet-panel-height; code scrolls inside .bp-pre.
+ * Override the custom properties on `.bp` (or :host) only when a screen truly needs an exception.
+ */
 .bp {
-  flex: 0 1 auto;
+  --bp-layout-gap: 0.85rem;
+  --bp-settings-column: minmax(22rem, 28rem);
+  --bp-workbench-max-height: min(44rem, 58vh);
+  --bp-snippet-panel-height: min(17rem, 32dvh);
+  --bp-snippet-panel-min-height: 10.5rem;
+
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: var(--bp-layout-gap);
+  box-sizing: border-box;
   width: 100%;
   max-width: 92rem;
   margin: 0 auto;
   min-height: 0;
-  overflow: visible;
 }
 
 .bp-grid {
-  flex: 0 1 auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: var(--bp-workbench-max-height);
   display: grid;
-  grid-template-columns: minmax(24rem, 30rem) minmax(0, 1fr);
+  grid-template-columns: var(--bp-settings-column) minmax(0, 1fr);
   gap: 1.35rem;
   align-items: stretch;
-  min-height: 0;
-  overflow: visible;
 }
 
 @media (max-width: 960px) {
   .bp-grid {
     grid-template-columns: 1fr;
+    max-height: none;
   }
 
   .bp-panel--settings {
-    max-height: min(28rem, 52dvh);
+    max-height: min(30rem, 48dvh);
   }
 
   .bp-panel--preview {
+    min-height: min(18rem, 36dvh);
     max-height: none;
   }
 }
@@ -54,17 +71,19 @@
   align-self: stretch;
 }
 
-/* Long settings list scrolls so preview + “Generated snippets” stay reachable */
+/* Settings scroll inside the workbench row; height comes from the grid, not a separate cap. */
 .bp-panel--settings {
+  min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
-  max-height: min(36rem, 62dvh);
 }
 
 .bp-panel--preview {
   flex: 1;
   min-height: 0;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ——— Component settings (reference layout) ——— */
@@ -605,6 +624,8 @@ html[data-theme='dark'] .bp-ico-theme {
   border: 1px dashed var(--ff-border);
   border-radius: 0.5rem;
   padding: 1rem 1.1rem;
+  overflow: auto;
+  overscroll-behavior: contain;
 }
 
 .bp-preview-surface--stretch {
@@ -631,112 +652,4 @@ html[data-theme='dark'] .bp-ico-theme {
   font-size: 0.8rem;
   color: var(--ff-muted);
   line-height: 1.4;
-}
-
-.bp-code {
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: column;
-  max-height: min(36rem, 55dvh);
-  background: var(--ff-code-surface);
-  border: 1px solid var(--ff-border);
-  border-radius: 0.75rem;
-  overflow: hidden;
-  box-shadow: var(--ff-shadow-panel);
-}
-
-.bp-code__head {
-  flex-shrink: 0;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 1rem;
-  padding: 0.65rem 0.9rem;
-  background: var(--ff-code-head);
-  border-bottom: 1px solid var(--ff-border-strong);
-}
-
-.bp-code__title {
-  margin: 0;
-  margin-right: auto;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--ff-code-title);
-}
-
-.bp-code__tabs {
-  display: flex;
-  gap: 0.2rem;
-  padding: 0.15rem;
-  border-radius: 0.45rem;
-  background: rgba(15, 23, 42, 0.35);
-}
-
-html[data-theme='dark'] .bp-code__tabs {
-  background: rgba(0, 0, 0, 0.25);
-}
-
-.bp-tab {
-  border: none;
-  background: transparent;
-  color: var(--ff-muted);
-  font: inherit;
-  font-size: 0.78rem;
-  font-weight: 600;
-  padding: 0.4rem 0.7rem;
-  border-radius: 0.35rem;
-  cursor: pointer;
-  letter-spacing: 0.02em;
-}
-
-.bp-tab:hover {
-  color: var(--ff-code-title);
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.bp-tab.is-active {
-  color: var(--ff-code-tab-active);
-  background: var(--ff-code-tab-bg-active);
-  box-shadow: 0 0 0 1px var(--ff-border-strong);
-}
-
-.bp-copy {
-  border: 1px solid var(--ff-border-strong);
-  background: transparent;
-  color: var(--ff-code-title);
-  font: inherit;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.4rem 0.75rem;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  transition:
-    color 0.15s ease,
-    border-color 0.15s ease,
-    background 0.15s ease;
-}
-
-.bp-copy:hover {
-  border-color: var(--ff-brand);
-  color: var(--ff-brand);
-  background: var(--ff-brand-soft);
-}
-
-.bp-pre {
-  flex: 0 0 auto;
-  margin: 0;
-  padding: 1rem 1.15rem;
-  overflow: auto;
-  max-height: min(32rem, 48dvh);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
-    monospace;
-  font-size: 0.8rem;
-  line-height: 1.55;
-  color: var(--ff-code-fg);
-}
-
-.bp-pre code {
-  white-space: pre;
-  font: inherit;
-  color: inherit;
 }

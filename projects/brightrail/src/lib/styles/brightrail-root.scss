@@ -1,0 +1,13 @@
+// -----------------------------------------------------------------------------
+// Global Brightrail theme defaults — import once in the app `styles` array:
+//   "node_modules/brightrail/styles/brightrail-root.scss"
+// (path after `npm install`; source lives at src/lib/styles in this repo.)
+// Override `--br-color-primary` etc. on `:root` before or after this import.
+// -----------------------------------------------------------------------------
+
+@use './tokens' as *;
+@use './tooltip-portal';
+
+:root {
+  @include br-root-theme;
+}

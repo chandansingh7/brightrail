@@ -86,3 +86,22 @@ brightrail-button {
   --br-btn-primary-bg: #0062ff;
   --br-btn-primary-hover-bg: #0050d8;
 }
+
+.demo__card-row {
+  max-width: 22rem;
+}
+
+.demo__card-title {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.demo__card-copy {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.demo__card-row brightrail-card-actions {
+  margin-top: 0;
+}

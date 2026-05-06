@@ -1,0 +1,127 @@
+<div class="cco">
+  <header class="cco-hero">
+    <h1>Progress types &amp; variations</h1>
+    <p>Enterprise progress patterns for loading, completion, workflows, and futuristic dashboards.</p>
+    <a routerLink=".." class="cco-link">← Progress playground</a>
+  </header>
+
+  <section class="cco-grid">
+    <article class="cco-card">
+      <h2>1. Core linear progress</h2>
+      <div class="cco-col">
+        <brightrail-progress type="linear" [value]="72" label="Default" [showPercentage]="true" />
+        <brightrail-progress type="linear" [value]="100" label="Success" statusColor="success" [showPercentage]="true" />
+        <brightrail-progress type="linear" [value]="45" label="Warning" statusColor="warning" [showPercentage]="true" />
+        <brightrail-progress type="linear" [value]="28" label="Danger" statusColor="danger" [showPercentage]="true" />
+      </div>
+    </article>
+
+    <article class="cco-card">
+      <h2>2. Circular progress rings</h2>
+      <div class="cco-row cco-row--rings">
+        <brightrail-progress type="circular" size="sm" [value]="48" [showLabel]="false" />
+        <brightrail-progress type="circular" size="md" [value]="75" [showLabel]="false" />
+        <brightrail-progress type="circular" size="lg" [value]="92" [showRingCompleteIcon]="true" [showLabel]="false" />
+      </div>
+    </article>
+
+    <article class="cco-card">
+      <h2>3. Indeterminate &amp; buffered</h2>
+      <div class="cco-col">
+        <brightrail-progress type="linear" [indeterminate]="true" label="Indeterminate" [showPercentage]="false" />
+        <brightrail-progress type="linear" [buffer]="true" [value]="64" [bufferValue]="85" label="Buffered" [showPercentage]="true" />
+        <brightrail-progress type="linear" mode="query" [value]="50" label="Query buffering" [showPercentage]="false" />
+      </div>
+    </article>
+
+    <article class="cco-card">
+      <h2>4. Segmented / milestone</h2>
+      <brightrail-stepper [activeStep]="2" preset="milestone" ariaLabel="Milestones">
+        <brightrail-step caption="Complete" />
+        <brightrail-step caption="Complete" />
+        <brightrail-step caption="60%" />
+        <brightrail-step caption="Pending" />
+        <brightrail-step caption="Pending" />
+      </brightrail-stepper>
+    </article>
+
+    <article class="cco-card">
+      <h2>5. Step workflow</h2>
+      <brightrail-stepper [activeStep]="2" preset="workflow" ariaLabel="Onboarding">
+        <brightrail-step label="Account Created" />
+        <brightrail-step label="Profile Setup" />
+        <brightrail-step label="Verify Email" />
+        <brightrail-step label="Payment Details" />
+        <brightrail-step label="Complete" />
+      </brightrail-stepper>
+    </article>
+
+    <article class="cco-card">
+      <h2>6. File upload progress</h2>
+      <div class="cco-file-block">
+        <brightrail-progress-file-row fileName="Project_Proposal.pdf" fileSizeLabel="2.4 MB" [value]="100" state="complete">
+          <span class="br-file-icon-slot">📄</span>
+          <span class="br-file-status-slot" aria-label="Done">✓</span>
+        </brightrail-progress-file-row>
+        <brightrail-progress-file-row fileName="Budget_2024.xlsx" fileSizeLabel="1.2 MB" [value]="78" state="active">
+          <span class="br-file-icon-slot">📊</span>
+        </brightrail-progress-file-row>
+        <brightrail-progress-file-row fileName="Dashboard.png" fileSizeLabel="3.1 MB" [value]="45" state="paused">
+          <span class="br-file-icon-slot">🖼</span>
+          <span class="br-file-status-slot">⏸</span>
+        </brightrail-progress-file-row>
+        <brightrail-progress-file-row fileName="data_export.csv" fileSizeLabel="650 KB" [value]="0" state="queued">
+          <span class="br-file-icon-slot">📑</span>
+          <span class="br-file-status-slot">⏱</span>
+        </brightrail-progress-file-row>
+      </div>
+    </article>
+
+    <article class="cco-card">
+      <h2>7. Table row progress</h2>
+      <table class="cco-mini-table">
+        <tbody>
+          <tr>
+            <td>Requirements</td>
+            <td><brightrail-progress type="linear" [value]="100" statusColor="success" [showLabel]="false" [showPercentage]="false" size="sm" /></td>
+            <td><span class="cco-tag cco-tag--ok">Complete</span></td>
+          </tr>
+          <tr>
+            <td>UI / UX</td>
+            <td><brightrail-progress type="linear" [value]="75" [showLabel]="false" [showPercentage]="false" size="sm" /></td>
+            <td><span class="cco-tag cco-tag--blue">In progress</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+
+    <article class="cco-card">
+      <h2>8. Dashboard KPI rings</h2>
+      <div class="cco-kpi">
+        <brightrail-progress type="circular" size="sm" kpiTitle="Revenue" [value]="82" detailText="$820K / $1M" kpiStatus="On track" [showLabel]="false" />
+        <brightrail-progress type="circular" size="sm" kpiTitle="Utilization" [value]="64" kpiStatus="Good" [showLabel]="false" />
+        <brightrail-progress type="circular" size="sm" kpiTitle="SLA" [value]="91" statusColor="success" kpiStatus="Excellent" [showLabel]="false" />
+        <brightrail-progress type="circular" size="sm" kpiTitle="NPS" [value]="68" statusColor="warning" kpiStatus="Improving" [showLabel]="false" />
+      </div>
+    </article>
+
+    <article class="cco-card cco-card--dark">
+      <h2>9. Futuristic progress</h2>
+      <div class="cco-col cco-col--dark">
+        <brightrail-progress
+          type="circular"
+          variant="futuristic"
+          surface="dark"
+          trackStyle="glow"
+          canvasBackground="rgba(24, 28, 40, 0.55)"
+          [value]="78"
+          label="Loading…"
+          [showPercentage]="true"
+        />
+        <brightrail-progress type="linear" variant="glass" surface="dark" [value]="65" label="Processing…" [showPercentage]="false" />
+        <brightrail-progress type="circular" variant="neon-arc" surface="dark" trackStyle="glow" [value]="60" label="Syncing data" />
+        <brightrail-progress variant="compact-card" [value]="60" label="Upload speed 1.2 GB / 2 GB" etaText="ETA 00:16" surface="dark" />
+      </div>
+    </article>
+  </section>
+</div>

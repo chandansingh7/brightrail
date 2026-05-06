@@ -1,0 +1,209 @@
+:host {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.br-chip {
+  --br-chip-bg: #e8f0fe;
+  --br-chip-fg: #1d4ed8;
+  --br-chip-border: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  border: 1px solid var(--br-chip-border);
+  border-radius: 999px;
+  background: var(--br-chip-bg);
+  color: var(--br-chip-fg);
+  font: inherit;
+  font-weight: 600;
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+.br-chip--small {
+  min-height: 1.2rem;
+  font-size: 0.675rem;
+  padding: 0.16rem 0.48rem;
+}
+
+.br-chip--medium {
+  min-height: 1.55rem;
+  font-size: 0.75rem;
+  padding: 0.24rem 0.62rem;
+}
+
+.br-chip--large {
+  min-height: 1.9rem;
+  font-size: 0.82rem;
+  padding: 0.3rem 0.78rem;
+}
+
+.br-chip--compact {
+  min-height: 1rem;
+  font-size: 0.62rem;
+  padding: 0.1rem 0.32rem;
+}
+
+.br-chip--outlined {
+  --br-chip-bg: transparent;
+}
+
+.br-chip--text {
+  --br-chip-bg: transparent;
+  --br-chip-border: transparent;
+}
+
+.br-chip--filled.br-chip--primary,
+.br-chip--outlined.br-chip--primary,
+.br-chip--soft.br-chip--primary,
+.br-chip--text.br-chip--primary {
+  --br-chip-fg: #1e40af;
+}
+.br-chip--filled.br-chip--success,
+.br-chip--outlined.br-chip--success,
+.br-chip--soft.br-chip--success,
+.br-chip--text.br-chip--success {
+  --br-chip-fg: #166534;
+}
+.br-chip--filled.br-chip--warning,
+.br-chip--outlined.br-chip--warning,
+.br-chip--soft.br-chip--warning,
+.br-chip--text.br-chip--warning {
+  --br-chip-fg: #92400e;
+}
+.br-chip--filled.br-chip--danger,
+.br-chip--outlined.br-chip--danger,
+.br-chip--soft.br-chip--danger,
+.br-chip--text.br-chip--danger {
+  --br-chip-fg: #b91c1c;
+}
+.br-chip--filled.br-chip--info,
+.br-chip--outlined.br-chip--info,
+.br-chip--soft.br-chip--info,
+.br-chip--text.br-chip--info {
+  --br-chip-fg: #1d4ed8;
+}
+.br-chip--filled.br-chip--neutral,
+.br-chip--outlined.br-chip--neutral,
+.br-chip--soft.br-chip--neutral,
+.br-chip--text.br-chip--neutral {
+  --br-chip-fg: #374151;
+}
+
+.br-chip--filled.br-chip--primary {
+  --br-chip-bg: #dbeafe;
+}
+.br-chip--filled.br-chip--success {
+  --br-chip-bg: #dcfce7;
+}
+.br-chip--filled.br-chip--warning {
+  --br-chip-bg: #fef3c7;
+}
+.br-chip--filled.br-chip--danger {
+  --br-chip-bg: #fee2e2;
+}
+.br-chip--filled.br-chip--info {
+  --br-chip-bg: #dbeafe;
+}
+.br-chip--filled.br-chip--neutral {
+  --br-chip-bg: #f3f4f6;
+}
+
+.br-chip--soft.br-chip--primary {
+  --br-chip-bg: #eef2ff;
+}
+.br-chip--soft.br-chip--success {
+  --br-chip-bg: #f0fdf4;
+}
+.br-chip--soft.br-chip--warning {
+  --br-chip-bg: #fffbeb;
+}
+.br-chip--soft.br-chip--danger {
+  --br-chip-bg: #fef2f2;
+}
+.br-chip--soft.br-chip--info {
+  --br-chip-bg: #eff6ff;
+}
+.br-chip--soft.br-chip--neutral {
+  --br-chip-bg: #f9fafb;
+}
+
+.br-chip--outlined.br-chip--primary {
+  --br-chip-border: #93c5fd;
+}
+.br-chip--outlined.br-chip--success {
+  --br-chip-border: #86efac;
+}
+.br-chip--outlined.br-chip--warning {
+  --br-chip-border: #fcd34d;
+}
+.br-chip--outlined.br-chip--danger {
+  --br-chip-border: #fca5a5;
+}
+.br-chip--outlined.br-chip--info {
+  --br-chip-border: #93c5fd;
+}
+.br-chip--outlined.br-chip--neutral {
+  --br-chip-border: #d1d5db;
+}
+
+.br-chip--state-hover {
+  filter: brightness(0.96);
+}
+
+.br-chip--state-focused {
+  box-shadow: 0 0 0 2px rgb(59 130 246 / 25%);
+}
+
+.br-chip--state-disabled {
+  opacity: 0.45;
+}
+
+.br-chip--selectable {
+  cursor: pointer;
+}
+
+.br-chip--selected {
+  box-shadow: inset 0 0 0 1px rgb(37 99 235 / 30%);
+}
+
+.br-chip__icon {
+  display: inline-flex;
+  font-size: 0.9em;
+}
+
+.br-chip__avatar {
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background: rgb(148 163 184 / 25%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62rem;
+  font-weight: 700;
+}
+
+.br-chip__avatar--img {
+  object-fit: cover;
+  padding: 0;
+  background: transparent;
+}
+
+.br-chip__label {
+  white-space: nowrap;
+}
+
+.br-chip__remove {
+  border: none;
+  background: transparent;
+  color: inherit;
+  width: 1rem;
+  height: 1rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

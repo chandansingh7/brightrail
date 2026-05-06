@@ -1,0 +1,98 @@
+<div class="cco">
+  <header class="cco-hero">
+    <h1>Chip types &amp; variations</h1>
+    <p>Reference catalog for chip styles, states, interactions, icons, avatars, and enterprise pattern composition.</p>
+    <a routerLink=".." class="cco-link">← Chip playground</a>
+  </header>
+
+  <section class="cco-grid">
+    <article class="cco-card">
+      <h2>1. Core chip types</h2>
+      <div class="cco-row">
+        <brightrail-chip variant="filled" color="primary" label="Product" />
+        <brightrail-chip variant="outlined" color="primary" label="Product" />
+        <brightrail-chip variant="soft" color="success" label="Active" />
+        <brightrail-chip variant="filled" color="info" size="compact" label="Prod" />
+      </div>
+    </article>
+    <article class="cco-card">
+      <h2>2. Chip appearances</h2>
+      <div class="cco-row">
+        <brightrail-chip variant="filled" color="primary" label="Primary" />
+        <brightrail-chip variant="outlined" color="primary" label="Primary" />
+        <brightrail-chip variant="soft" color="primary" label="Primary" />
+        <brightrail-chip variant="text" color="primary" label="Primary" />
+      </div>
+    </article>
+    <article class="cco-card">
+      <h2>3. Chip sizes</h2>
+      <div class="cco-row">
+        <brightrail-chip variant="filled" color="primary" size="small" label="Small" />
+        <brightrail-chip variant="filled" color="primary" size="medium" label="Medium" />
+        <brightrail-chip variant="filled" color="primary" size="large" label="Large" />
+      </div>
+    </article>
+    <article class="cco-card">
+      <h2>4. Chip states</h2>
+      <div class="cco-row">
+        <brightrail-chip variant="filled" color="neutral" state="default" label="Default" />
+        <brightrail-chip variant="filled" color="neutral" state="hover" label="Hover" />
+        <brightrail-chip variant="filled" color="neutral" state="focused" label="Focused" />
+        <brightrail-chip variant="filled" color="neutral" state="disabled" label="Disabled" />
+      </div>
+    </article>
+    <article class="cco-card">
+      <h2>5. Interactive chips</h2>
+      <div class="cco-row">
+        <brightrail-chip variant="outlined" color="neutral" icon="info" label="Email" />
+        <brightrail-chip variant="outlined" color="neutral" icon="info" label="Share" />
+        <brightrail-chip variant="text" color="primary" label="Learn more" />
+        <brightrail-chip variant="text" color="primary" label="View docs" />
+      </div>
+    </article>
+    <article class="cco-card">
+      <h2>6. Selectable filter chips</h2>
+      <div class="cco-row">
+        <brightrail-chip variant="filled" color="neutral" size="small" label="All" />
+        <brightrail-chip variant="filled" color="neutral" size="small" label="Active" />
+        <brightrail-chip variant="filled" color="neutral" size="small" label="Inactive" />
+        <brightrail-chip variant="filled" color="primary" size="small" [selectable]="true" [selected]="true" label="Selected" />
+      </div>
+    </article>
+    <article class="cco-card">
+      <h2>7. Removable chips</h2>
+      <div class="cco-row">
+        <brightrail-chip variant="outlined" color="neutral" [removable]="true" label="Marketing" />
+        <brightrail-chip variant="outlined" color="neutral" [removable]="true" label="Design" />
+        <brightrail-chip variant="outlined" color="neutral" [removable]="true" label="Product" />
+      </div>
+    </article>
+    <article class="cco-card">
+      <h2>8. Chips with icons & avatars</h2>
+      <div class="cco-row">
+        <brightrail-chip variant="outlined" color="neutral" icon="info" label="Docs" />
+        <brightrail-chip variant="outlined" color="neutral" icon="info" label="Users" />
+        <brightrail-chip variant="soft" color="neutral" avatarText="JN" label="James" />
+        <brightrail-chip variant="soft" color="neutral" avatarText="SP" label="Sophia" />
+      </div>
+    </article>
+    <article class="cco-card">
+      <h2>9. Enterprise patterns</h2>
+      <div class="cco-row">
+        <brightrail-chip variant="soft" color="primary" size="small" label="Finance" />
+        <brightrail-chip variant="soft" color="success" size="small" label="HR" />
+        <brightrail-chip variant="soft" color="success" size="small" label="Active" />
+        <brightrail-chip variant="soft" color="warning" size="small" label="Pending" />
+        <brightrail-chip variant="soft" color="neutral" size="small" label="Enterprise" />
+      </div>
+    </article>
+    <article class="cco-card">
+      <h2>10. Advanced patterns</h2>
+      <div class="cco-row">
+        <span class="cco-group"><brightrail-chip variant="outlined" color="neutral" size="small" label="Q1" /><brightrail-chip variant="outlined" color="primary" size="small" label="Q2" /><brightrail-chip variant="outlined" color="neutral" size="small" label="Q3" /></span>
+        <brightrail-chip variant="outlined" color="neutral" size="small" label="+3" />
+        <span class="cco-group"><brightrail-chip variant="outlined" color="neutral" size="small" [removable]="true" label="Important" /><brightrail-chip variant="outlined" color="warning" size="small" [removable]="true" label="Review" /></span>
+      </div>
+    </article>
+  </section>
+</div>

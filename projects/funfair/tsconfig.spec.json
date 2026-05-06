@@ -4,6 +4,10 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/spec",
+    "baseUrl": "../../",
+    "paths": {
+      "brightrail": ["projects/brightrail/src/public-api.ts"]
+    },
     "types": [
       "jasmine"
     ]

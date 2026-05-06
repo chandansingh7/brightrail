@@ -19,6 +19,8 @@ import { PlaygroundThemeId, PlaygroundThemeService } from './playground-theme.se
 export type CodeTabId = 'html' | 'ts' | 'scss';
 export type IconSide = 'left' | 'right' | 'both';
 export type PlaygroundFieldState = 'default' | 'disabled';
+export type SelectTextOverflow = 'truncate' | 'wrap';
+export type SelectSelectionMode = 'single' | 'multi';
 
 /** Drives the live preview + snippets — pick a scenario from the settings panel. */
 export type SelectPreviewRecipe =
@@ -36,7 +38,10 @@ export type SelectPreviewRecipe =
   | 'selectPlusAction'
   | 'compactFilters'
   | 'segmented'
-  | 'inlineEditable'
+  | 'optionEditSave'
+  | 'inlineEditActions'
+  | 'multiSelect'
+  | 'multiSelectCheckboxCount'
   | 'enterprise';
 
 @Component({
@@ -61,10 +66,10 @@ export class SelectPlaygroundComponent {
 
   readonly previewLabel = 'Label';
   readonly demoOptions: { id: string; label: string }[] = [
-    { id: 'us', label: 'United States' },
-    { id: 'ca', label: 'Canada' },
-    { id: 'mx', label: 'Mexico' },
-    { id: 'br', label: 'Brazil' },
+    { id: 'us', label: 'United States of America (North Region)' },
+    { id: 'ca', label: 'Canada - Eastern Territories' },
+    { id: 'mx', label: 'Mexico - Federal District and Coastal Zone' },
+    { id: 'br', label: 'Brazil - Sao Paulo Metropolitan Cluster' },
   ];
 
   readonly deptOptions: { id: string; label: string }[] = [
@@ -87,35 +92,46 @@ export class SelectPlaygroundComponent {
     { id: 'p3', label: 'P3' },
   ];
 
+  readonly editableOptions = signal<{ id: string; label: string }[]>([
+    { id: 'us', label: 'United States of America (North Region)' },
+    { id: 'ca', label: 'Canada - Eastern Territories' },
+    { id: 'mx', label: 'Mexico - Federal District and Coastal Zone' },
+    { id: 'br', label: 'Brazil - Sao Paulo Metropolitan Cluster' },
+  ]);
+
   readonly recipeOptions: { value: SelectPreviewRecipe; label: string; group: string }[] = [
-    { value: 'standard', label: 'Standard list', group: 'Basics' },
-    { value: 'country', label: 'Country / region', group: 'Popular app' },
-    { value: 'language', label: 'Language', group: 'Popular app' },
-    { value: 'assignee', label: 'Assignee + avatar', group: 'Popular app' },
-    { value: 'category', label: 'Category', group: 'Popular app' },
-    { value: 'commandPalette', label: 'Command palette', group: 'Popular app' },
-    { value: 'tagMulti', label: 'Tag multi-select (pills)', group: 'Popular app' },
-    { value: 'utilityFilter', label: 'Leading icon: filter', group: 'Icons & utility' },
-    { value: 'utilitySearch', label: 'Leading icon: search', group: 'Icons & utility' },
-    { value: 'utilityCalendarTrail', label: 'Trailing icon: calendar', group: 'Icons & utility' },
-    { value: 'cascade', label: 'Cascading selects', group: 'Group layouts' },
-    { value: 'selectPlusAction', label: 'Select + primary action', group: 'Group layouts' },
-    { value: 'compactFilters', label: 'Compact filter bar (×3)', group: 'Group layouts' },
-    { value: 'segmented', label: 'Segmented control', group: 'Group layouts' },
-    { value: 'inlineEditable', label: 'Inline editable row', group: 'Group layouts' },
+    { value: 'standard', label: 'Single-select: standard list', group: 'Core' },
+    { value: 'country', label: 'Single-select: country / region', group: 'App patterns' },
+    { value: 'language', label: 'Single-select: language', group: 'App patterns' },
+    { value: 'assignee', label: 'Single-select: assignee + avatar', group: 'App patterns' },
+    { value: 'category', label: 'Single-select: category', group: 'App patterns' },
+    { value: 'commandPalette', label: 'Single-select: command palette', group: 'App patterns' },
+    { value: 'tagMulti', label: 'Multi-select: tags (pills)', group: 'Multi-select & editable' },
+    { value: 'utilityFilter', label: 'Single-select: leading icon (filter)', group: 'Icon patterns' },
+    { value: 'utilitySearch', label: 'Single-select: leading icon (search)', group: 'Icon patterns' },
+    { value: 'utilityCalendarTrail', label: 'Single-select: trailing icon (calendar)', group: 'Icon patterns' },
+    { value: 'cascade', label: 'Single-select: cascading pair', group: 'Layout patterns' },
+    { value: 'selectPlusAction', label: 'Single-select: with primary action', group: 'Layout patterns' },
+    { value: 'compactFilters', label: 'Single-select: compact filter bar (x3)', group: 'Layout patterns' },
+    { value: 'segmented', label: 'Single-select: segmented control', group: 'Layout patterns' },
+    { value: 'optionEditSave', label: 'Editable options: save/delete', group: 'Multi-select & editable' },
+    { value: 'inlineEditActions', label: 'Editable options: inline edit (dbl-click)', group: 'Multi-select & editable' },
+    { value: 'multiSelect', label: 'Multi-select: chips', group: 'Multi-select & editable' },
+    { value: 'multiSelectCheckboxCount', label: 'Multi-select: checkbox count', group: 'Multi-select & editable' },
     { value: 'enterprise', label: 'Enterprise field (department)', group: 'Enterprise' },
   ];
 
   readonly recipeGroups: string[] = [
-    'Basics',
-    'Popular app',
-    'Icons & utility',
-    'Group layouts',
+    'Core',
+    'Multi-select & editable',
+    'App patterns',
+    'Icon patterns',
+    'Layout patterns',
     'Enterprise',
   ];
 
   /** First dropdown: narrows the second “Scenario” list (Popular app, Group layouts, …). */
-  readonly selectedRecipeGroup = signal<string>('Basics');
+  readonly selectedRecipeGroup = signal<string>('Core');
 
   recipesInGroup(group: string): { value: SelectPreviewRecipe; label: string }[] {
     return this.recipeOptions.filter((o) => o.group === group);
@@ -158,6 +174,10 @@ export class SelectPlaygroundComponent {
     { value: 'default', label: 'Default' },
     { value: 'disabled', label: 'Disabled' },
   ];
+  readonly textOverflowOptions: { value: SelectTextOverflow; label: string }[] = [
+    { value: 'truncate', label: 'Truncate (single line)' },
+    { value: 'wrap', label: 'Wrap (multiple lines)' },
+  ];
   readonly themeRowOptions: { id: PlaygroundThemeId; label: string }[] = [
     { id: 'light', label: 'Material light' },
     { id: 'dark', label: 'Material dark' },
@@ -188,6 +208,12 @@ export class SelectPlaygroundComponent {
     'eye',
     'eye-off',
     'error',
+    'help',
+    'gear',
+    'bell',
+    'headset',
+    'list',
+    'chevron-right',
   ];
   readonly iconLabels: Record<BrightrailButtonIcon, string> = {
     none: 'None',
@@ -213,6 +239,12 @@ export class SelectPlaygroundComponent {
     eye: 'Eye',
     'eye-off': 'Eye off',
     error: 'Error',
+    help: 'Help',
+    gear: 'Gear',
+    bell: 'Bell',
+    headset: 'Headset',
+    list: 'List',
+    'chevron-right': 'Chevron right',
     loader: 'Loading (spinner)',
   };
   readonly iconSideOptions: { value: IconSide; label: string }[] = [
@@ -232,6 +264,9 @@ export class SelectPlaygroundComponent {
   readonly fieldLoading = signal(false);
   readonly clearable = signal(false);
   readonly fullWidth = signal(false);
+  readonly textOverflow = signal<SelectTextOverflow>('truncate');
+  readonly selectionMode = signal<SelectSelectionMode>('single');
+  readonly actionButtonCount = signal(2);
   readonly iconSide = signal<IconSide>('left');
   readonly iconKind = signal<BrightrailButtonIcon>('none');
 
@@ -261,6 +296,21 @@ export class SelectPlaygroundComponent {
   );
 
   readonly tagModel = signal('tags');
+  readonly optionEditorValue = signal('us');
+  readonly multiValues = signal<string[]>(['us', 'ca']);
+  readonly editingOptionId = signal<string | null>(null);
+  readonly editingOptionDraft = signal('');
+  readonly inlineEditingId = signal<string | null>(null);
+  readonly inlineEditingDraft = signal('');
+  readonly optionEditorDisplayText = computed(
+    () => this.editableOptions().find((o) => o.id === this.optionEditorValue())?.label ?? '',
+  );
+  readonly multiDisplayText = computed(() =>
+    this.multiValues()
+      .map((id) => this.editableOptions().find((o) => o.id === id)?.label)
+      .filter((value): value is string => !!value)
+      .join(', '),
+  );
 
   /** Single-select panel options for the active (non-composite) recipe. */
   readonly activePanelOptions = computed(() =>
@@ -289,6 +339,9 @@ export class SelectPlaygroundComponent {
         return 'Date';
       case 'enterprise':
         return 'Department';
+      case 'multiSelect':
+      case 'multiSelectCheckboxCount':
+        return 'Countries';
       default:
         return this.previewLabel;
     }
@@ -322,6 +375,16 @@ export class SelectPlaygroundComponent {
     }
     if (r === 'commandPalette' || r === 'tagMulti') {
       return '';
+    }
+    if (r === 'multiSelect') {
+      if (this.selectionMode() === 'multi') {
+        return this.multiDisplayText();
+      }
+      const hit = this.editableOptions().find((o) => o.id === this.previewValue());
+      return hit?.label ?? '';
+    }
+    if (r === 'multiSelectCheckboxCount') {
+      return `${this.effectiveFieldLabel()} (${this.multiValues().length} selected)`;
     }
     if (r === 'enterprise') {
       const hit = this.deptOptions.find((o) => o.id === this.previewValue());
@@ -432,9 +495,33 @@ export class SelectPlaygroundComponent {
       r === 'utilityFilter' ||
       r === 'utilitySearch' ||
       r === 'utilityCalendarTrail' ||
+      r === 'optionEditSave' ||
+      r === 'inlineEditActions' ||
+      r === 'multiSelect' ||
+      r === 'multiSelectCheckboxCount' ||
       r === 'enterprise'
     );
   });
+
+  readonly selectRecipeIsCascade = computed(() => this.previewRecipe() === 'cascade');
+
+  readonly selectFullFieldChromeEditable = computed(
+    () => this.showMainSelectRecipe() || this.previewRecipe() === 'selectPlusAction',
+  );
+
+  readonly selectAppearanceStatusEditable = computed(
+    () => this.selectFullFieldChromeEditable() || this.selectRecipeIsCascade(),
+  );
+
+  readonly selectFieldStateEditable = computed(() => this.selectFullFieldChromeEditable());
+
+  readonly selectBehaviorTogglesEditable = computed(() => this.selectFullFieldChromeEditable());
+
+  readonly selectIconControlsEditable = computed(() => this.selectFullFieldChromeEditable());
+
+  readonly selectIconSideEditable = computed(
+    () => this.selectIconControlsEditable() && this.iconKind() !== 'none',
+  );
 
   selectTab(tab: CodeTabId): void {
     this.activeTab.set(tab);
@@ -451,6 +538,9 @@ export class SelectPlaygroundComponent {
     this.fieldLoading.set(false);
     this.clearable.set(false);
     this.fullWidth.set(false);
+    this.textOverflow.set('truncate');
+    this.selectionMode.set('single');
+    this.actionButtonCount.set(2);
     this.previewValue.set('us');
     this.cascadeParent.set('us');
     this.cascadeChild.set('ca-state');
@@ -459,9 +549,15 @@ export class SelectPlaygroundComponent {
     this.filterPriority.set('p2');
     this.segment.set('month');
     this.tagModel.set('tags');
+    this.optionEditorValue.set('us');
+    this.multiValues.set(['us', 'ca']);
+    this.editingOptionId.set(null);
+    this.editingOptionDraft.set('');
+    this.inlineEditingId.set(null);
+    this.inlineEditingDraft.set('');
     this.iconSide.set('left');
     this.iconKind.set('none');
-    this.selectedRecipeGroup.set('Basics');
+    this.selectedRecipeGroup.set('Core');
     this.themeService.setTheme('light');
   }
 
@@ -471,14 +567,17 @@ export class SelectPlaygroundComponent {
 
   onPreviewModelChange(value: string): void {
     if (this.previewRecipe() === 'tagMulti') {
-      this.tagModel.set(value);
+      this.previewValue.set(value);
     } else {
       this.previewValue.set(value);
     }
   }
 
   previewModelValue(): string {
-    return this.previewRecipe() === 'tagMulti' ? this.tagModel() : this.previewValue();
+    if (this.previewRecipe() === 'tagMulti') {
+      return this.multiValues()[0] ?? '';
+    }
+    return this.previewValue();
   }
 
   onRecipeNgModelChange(value: string): void {
@@ -490,7 +589,14 @@ export class SelectPlaygroundComponent {
     }
     if (v === 'enterprise') {
       this.previewValue.set('eng');
-    } else if (v !== 'tagMulti' && v !== 'commandPalette') {
+    } else if (v === 'multiSelect' || v === 'multiSelectCheckboxCount') {
+      this.selectionMode.set('multi');
+      this.multiValues.set(['us', 'ca']);
+    } else if (v === 'tagMulti') {
+      this.selectionMode.set('multi');
+      this.multiValues.set(['us', 'ca']);
+      this.previewValue.set('us');
+    } else if (v !== 'commandPalette') {
       this.previewValue.set('us');
     }
     if (v === 'cascade') {
@@ -556,12 +662,86 @@ export class SelectPlaygroundComponent {
     this.fullWidth.set((ev.target as HTMLInputElement).checked);
   }
 
+  onTextOverflowChange(ev: Event): void {
+    this.textOverflow.set((ev.target as HTMLSelectElement).value as SelectTextOverflow);
+  }
+
+  onSelectionModeChange(ev: Event): void {
+    const next = (ev.target as HTMLSelectElement).value as SelectSelectionMode;
+    this.selectionMode.set(next);
+    if (next === 'single') {
+      this.previewValue.set(this.multiValues()[0] ?? this.editableOptions()[0]?.id ?? '');
+    }
+  }
+
+  onActionButtonCountChange(ev: Event): void {
+    const n = Number((ev.target as HTMLSelectElement).value);
+    this.actionButtonCount.set(Number.isFinite(n) ? Math.min(5, Math.max(1, n)) : 2);
+  }
+
   onIconSideChange(ev: Event): void {
     this.iconSide.set((ev.target as HTMLSelectElement).value as IconSide);
   }
 
   onIconKindChange(ev: Event): void {
     this.iconKind.set((ev.target as HTMLSelectElement).value as BrightrailButtonIcon);
+  }
+
+  toggleMultiValue(id: string): void {
+    this.multiValues.update((selected) =>
+      selected.includes(id) ? selected.filter((v) => v !== id) : [...selected, id],
+    );
+  }
+
+  beginEditOption(id: string): void {
+    const hit = this.editableOptions().find((o) => o.id === id);
+    this.editingOptionId.set(id);
+    this.editingOptionDraft.set(hit?.label ?? '');
+    this.inlineEditingId.set(null);
+  }
+
+  saveOptionLabel(id: string): void {
+    const next = this.editingOptionDraft().trim();
+    if (!next) return;
+    this.editableOptions.update((items) =>
+      items.map((o) => (o.id === id ? { ...o, label: next } : o)),
+    );
+    this.editingOptionId.set(null);
+  }
+
+  deleteOption(id: string): void {
+    this.editableOptions.update((items) => items.filter((o) => o.id !== id));
+    if (this.optionEditorValue() === id) {
+      this.optionEditorValue.set(this.editableOptions()[0]?.id ?? '');
+    }
+    if (this.editingOptionId() === id) {
+      this.editingOptionId.set(null);
+    }
+  }
+
+  beginInlineEdit(id: string): void {
+    const hit = this.editableOptions().find((o) => o.id === id);
+    this.inlineEditingId.set(id);
+    this.inlineEditingDraft.set(hit?.label ?? '');
+    this.editingOptionId.set(null);
+  }
+
+  saveInlineEdit(id: string): void {
+    const next = this.inlineEditingDraft().trim();
+    if (!next) return;
+    this.editableOptions.update((items) =>
+      items.map((o) => (o.id === id ? { ...o, label: next } : o)),
+    );
+    this.inlineEditingId.set(null);
+  }
+
+  cancelInlineEdit(): void {
+    this.inlineEditingId.set(null);
+  }
+
+  inlineActionLabels(): string[] {
+    const base = ['Save', 'Delete', 'Archive', 'Clone', 'Assign'];
+    return base.slice(0, this.actionButtonCount());
   }
 
   async copySnippet(): Promise<void> {
@@ -602,13 +782,52 @@ export class SelectPlaygroundComponent {
           '  <!-- Week, Month, Year -->',
           '</brightrail-button-group>',
         ].join('\n');
-      case 'inlineEditable':
+      case 'optionEditSave':
         return [
-          '<div class="sel-inline-edit">',
-          '  <span class="sel-inline-edit__lbl">Owner</span>',
-          '  <span class="sel-inline-edit__val">Alex Morgan</span>',
-          '  <brightrail-button variant="ghost" size="sm" [iconLeft]="\'edit\'" ariaLabel="Edit" />',
+          '<brightrail-select ... [(ngModel)]="selectedId">',
+          '  <div class="br-select-panel demo-sel-panel">',
+          '    <div class="sel-opt-row">',
+          '      <span class="br-select-option">United States</span>',
+          '      <button type="button">Edit</button><button type="button">Save</button><button type="button">Delete</button>',
+          '    </div>',
+          '    <!-- Repeat rows / wire save + delete to your data source -->',
+          '  </div>',
+          '</brightrail-select>',
+        ].join('\n');
+      case 'inlineEditActions':
+        return [
+          '<div class="sel-inline-actions">',
+          '  <div class="sel-opt-row">',
+          '    <span class="br-select-option" (dblclick)="beginInlineEdit(row.id)">Canada</span>',
+          '    <div class="sel-opt-actions">',
+          '      <button type="button">Save</button>',
+          '      <button type="button">Delete</button>',
+          '      <!-- Add N actions via ngFor -->',
+          '    </div>',
+          '  </div>',
           '</div>',
+        ].join('\n');
+      case 'multiSelect':
+        return [
+          '<brightrail-select ... [displayText]="selectedLabels.join(\', \')" [ariaLabel]="\'Countries\'">',
+          '  <span class="br-select-value-slot sel-tag-row">',
+          '    <span class="sel-tag-pill" *ngFor="let id of selectedIds">{{ labelFor(id) }}</span>',
+          '  </span>',
+          '  <div class="br-select-panel demo-sel-panel">',
+          '    <button type="button" class="demo-sel-panel__opt br-select-option" (click)="toggleMultiValue(\'us\')">United States</button>',
+          '  </div>',
+          '</brightrail-select>',
+        ].join('\n');
+      case 'multiSelectCheckboxCount':
+        return [
+          '<brightrail-select ... [displayText]="`Countries (${selectedIds.length} selected)`">',
+          '  <div class="br-select-panel demo-sel-panel">',
+          '    <label class="sel-check-opt" *ngFor="let opt of options">',
+          '      <input type="checkbox" [checked]="selectedIds.includes(opt.id)" (change)="toggleMultiValue(opt.id)" />',
+          '      <span>{{ opt.label }}</span>',
+          '    </label>',
+          '  </div>',
+          '</brightrail-select>',
         ].join('\n');
       case 'tagMulti':
         return this.buildSingleSelectSnippet({
@@ -703,7 +922,7 @@ export class SelectPlaygroundComponent {
 
   private buildTs(): string {
     const r = this.previewRecipe();
-    const needsButtons = r === 'selectPlusAction' || r === 'segmented' || r === 'inlineEditable';
+    const needsButtons = r === 'selectPlusAction' || r === 'segmented';
     const usesIcons =
       this.selectLeadingButtonIcon() !== null ||
       this.selectTrailingButtonIcon() !== null ||
@@ -723,6 +942,118 @@ export class SelectPlaygroundComponent {
       `// Recipe: "${r}" — mirror the HTML tab in your template.`,
       `// With ngModel on a standalone control, use [ngModelOptions]="{ standalone: true }".`,
     ].filter((line): line is string => line !== null);
+
+    if (r === 'optionEditSave') {
+      return [
+        ...imports,
+        '',
+        `editableOptions = [`,
+        `  { id: 'us', label: 'United States' },`,
+        `  { id: 'ca', label: 'Canada' },`,
+        `];`,
+        `selectedId = 'us';`,
+        `editingId: string | null = null;`,
+        `editingDraft = '';`,
+        '',
+        `beginEditOption(id: string): void {`,
+        `  this.editingId = id;`,
+        `  this.editingDraft = this.editableOptions.find((o) => o.id === id)?.label ?? '';`,
+        `}`,
+        '',
+        `saveOptionLabel(id: string): void {`,
+        `  const next = this.editingDraft.trim();`,
+        `  if (!next) return;`,
+        `  this.editableOptions = this.editableOptions.map((o) =>`,
+        `    o.id === id ? { ...o, label: next } : o,`,
+        `  );`,
+        `  this.editingId = null;`,
+        `}`,
+        '',
+        `deleteOption(id: string): void {`,
+        `  this.editableOptions = this.editableOptions.filter((o) => o.id !== id);`,
+        `  if (this.selectedId === id) {`,
+        `    this.selectedId = this.editableOptions[0]?.id ?? '';`,
+        `  }`,
+        `  if (this.editingId === id) this.editingId = null;`,
+        `}`,
+      ].join('\n');
+    }
+
+    if (r === 'inlineEditActions') {
+      return [
+        ...imports,
+        '',
+        `rows = [`,
+        `  { id: 'ca', label: 'Canada' },`,
+        `  { id: 'mx', label: 'Mexico' },`,
+        `];`,
+        `actionButtonCount = 3; // any number`,
+        `inlineEditingId: string | null = null;`,
+        `inlineEditingDraft = '';`,
+        '',
+        `inlineActionLabels(): string[] {`,
+        `  const base = ['Save', 'Delete', 'Archive', 'Clone', 'Assign'];`,
+        `  return base.slice(0, this.actionButtonCount);`,
+        `}`,
+        '',
+        `beginInlineEdit(id: string): void {`,
+        `  this.inlineEditingId = id;`,
+        `  this.inlineEditingDraft = this.rows.find((r) => r.id === id)?.label ?? '';`,
+        `}`,
+        '',
+        `saveInlineEdit(id: string): void {`,
+        `  const next = this.inlineEditingDraft.trim();`,
+        `  if (!next) return;`,
+        `  this.rows = this.rows.map((r) => (r.id === id ? { ...r, label: next } : r));`,
+        `  this.inlineEditingId = null;`,
+        `}`,
+        '',
+        `deleteInlineRow(id: string): void {`,
+        `  this.rows = this.rows.filter((r) => r.id !== id);`,
+        `}`,
+      ].join('\n');
+    }
+
+    if (r === 'multiSelect') {
+      return [
+        ...imports,
+        '',
+        `selectedIds: string[] = ['us', 'ca'];`,
+        `options = [`,
+        `  { id: 'us', label: 'United States' },`,
+        `  { id: 'ca', label: 'Canada' },`,
+        `  { id: 'mx', label: 'Mexico' },`,
+        `];`,
+        '',
+        `toggleMultiValue(id: string): void {`,
+        `  this.selectedIds = this.selectedIds.includes(id)`,
+        `    ? this.selectedIds.filter((v) => v !== id)`,
+        `    : [...this.selectedIds, id];`,
+        `}`,
+      ].join('\n');
+    }
+
+    if (r === 'multiSelectCheckboxCount') {
+      return [
+        ...imports,
+        '',
+        `selectedIds: string[] = ['us', 'ca'];`,
+        `options = [`,
+        `  { id: 'us', label: 'United States' },`,
+        `  { id: 'ca', label: 'Canada' },`,
+        `  { id: 'mx', label: 'Mexico' },`,
+        `];`,
+        '',
+        `displayText = \`Countries (\${this.selectedIds.length} selected)\`;`,
+        '',
+        `toggleMultiValue(id: string): void {`,
+        `  this.selectedIds = this.selectedIds.includes(id)`,
+        `    ? this.selectedIds.filter((v) => v !== id)`,
+        `    : [...this.selectedIds, id];`,
+        `}`,
+      ].join('\n');
+    }
+
     return imports.join('\n');
   }
 
@@ -762,6 +1093,7 @@ export class SelectPlaygroundComponent {
     lines.push(`  size="${this.size()}"`);
     lines.push(`  label="${escapeAttr(this.effectiveFieldLabel())}"`);
     lines.push(`  labelPosition="${this.labelPosition()}"`);
+    lines.push(`  textOverflow="${this.textOverflow()}"`);
     lines.push(`  placeholder="${escapeAttr(this.effectivePlaceholder())}"`);
     lines.push(`  displayText="${escapeAttr(this.displayText())}"`);
     if (this.fieldState() === 'disabled') {
@@ -808,7 +1140,7 @@ export class SelectPlaygroundComponent {
     const optsList = this.previewRecipe() === 'enterprise' ? this.deptOptions : this.demoOptions;
     for (const opt of optsList) {
       lines.push(
-        `    <button type="button" class="demo-sel-panel__opt" (click)="selectCountry('${escapeForJsString(opt.id)}')">${escapeHtmlText(opt.label)}</button>`,
+        `    <button type="button" class="demo-sel-panel__opt br-select-option" (click)="selectCountry('${escapeForJsString(opt.id)}')">${escapeHtmlText(opt.label)}</button>`,
       );
     }
     lines.push('  </div>');

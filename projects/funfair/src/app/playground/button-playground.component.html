@@ -145,6 +145,7 @@
             </span>
             <select
               class="bp-dropdown__select"
+              [disabled]="!buttonBoundaryEditable()"
               (change)="onBoundaryChange($event)"
               [attr.aria-labelledby]="'set-lbl-boundary'"
             >
@@ -218,6 +219,7 @@
             <select
               class="bp-dropdown__select"
               name="bf-playground-icon-side"
+              [disabled]="!buttonIconSideEditable()"
               (change)="onIconSideChange($event)"
               [attr.aria-labelledby]="'set-lbl-iside'"
             >

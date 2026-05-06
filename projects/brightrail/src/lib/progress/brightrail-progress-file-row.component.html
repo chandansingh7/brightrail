@@ -1,0 +1,28 @@
+<div class="br-prog-file" [class.br-prog-file--queued]="state() === 'queued'">
+  <div class="br-prog-file__icon" aria-hidden="true">
+    <ng-content select=".br-file-icon-slot" />
+  </div>
+  <div class="br-prog-file__main">
+    <div class="br-prog-file__row1">
+      <span class="br-prog-file__name">{{ fileName() }}</span>
+      <span class="br-prog-file__size">{{ fileSizeLabel() }}</span>
+    </div>
+    @if (state() !== 'queued') {
+      <brightrail-progress
+        type="linear"
+        variant="default"
+        [value]="state() === 'complete' ? 100 : value()"
+        [statusColor]="state() === 'complete' ? 'success' : 'primary'"
+        [showLabel]="false"
+        [showPercentage]="false"
+        size="sm"
+        [attr.aria-label]="'Upload progress for ' + fileName()"
+      />
+    } @else {
+      <div class="br-prog-file__queued">{{ statusLabel() || 'Queued' }}</div>
+    }
+  </div>
+  <div class="br-prog-file__status">
+    <ng-content select=".br-file-status-slot" />
+  </div>
+</div>

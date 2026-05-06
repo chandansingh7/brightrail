@@ -1,0 +1,199 @@
+:host {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.br-badge {
+  --br-badge-bg: var(--br-color-primary, #0062ff);
+  --br-badge-fg: #fff;
+  --br-badge-border: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  border: 1px solid var(--br-badge-border);
+  border-radius: 999px;
+  background: var(--br-badge-bg);
+  color: var(--br-badge-fg);
+  font-family: inherit;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  box-sizing: border-box;
+  transition: filter 0.15s ease;
+}
+
+.br-badge--small {
+  min-height: 1rem;
+  font-size: 0.625rem;
+  padding: 0.125rem 0.4rem;
+}
+
+.br-badge--medium {
+  min-height: 1.25rem;
+  font-size: 0.6875rem;
+  padding: 0.1875rem 0.48rem;
+}
+
+.br-badge--large {
+  min-height: 1.5rem;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
+}
+
+.br-badge--dot {
+  width: 0.625rem;
+  min-width: 0.625rem;
+  min-height: 0.625rem;
+  height: 0.625rem;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.br-badge--dot.br-badge--small {
+  width: 0.5rem;
+  height: 0.5rem;
+  min-height: 0.5rem;
+}
+
+.br-badge--dot.br-badge--large {
+  width: 0.75rem;
+  height: 0.75rem;
+  min-height: 0.75rem;
+}
+
+.br-badge__icon {
+  display: inline-flex;
+  font-size: 0.9em;
+}
+
+.br-badge__text {
+  display: inline-flex;
+  align-items: center;
+}
+
+.br-badge--filled.br-badge--primary {
+  --br-badge-bg: var(--br-color-primary, #0062ff);
+}
+.br-badge--filled.br-badge--success {
+  --br-badge-bg: #0d9f4c;
+}
+.br-badge--filled.br-badge--warning {
+  --br-badge-bg: #e8710a;
+}
+.br-badge--filled.br-badge--danger {
+  --br-badge-bg: #d93025;
+}
+.br-badge--filled.br-badge--info {
+  --br-badge-bg: #1e6bdd;
+}
+.br-badge--filled.br-badge--neutral {
+  --br-badge-bg: #6b7280;
+}
+.br-badge--filled.br-badge--priority {
+  --br-badge-bg: #7c3aed;
+}
+
+.br-badge--outlined {
+  --br-badge-bg: transparent;
+}
+.br-badge--outlined.br-badge--primary {
+  --br-badge-fg: #1e6bdd;
+  --br-badge-border: #1e6bdd;
+}
+.br-badge--outlined.br-badge--success {
+  --br-badge-fg: #0d9f4c;
+  --br-badge-border: #0d9f4c;
+}
+.br-badge--outlined.br-badge--warning {
+  --br-badge-fg: #b45309;
+  --br-badge-border: #f59e0b;
+}
+.br-badge--outlined.br-badge--danger {
+  --br-badge-fg: #d93025;
+  --br-badge-border: #d93025;
+}
+.br-badge--outlined.br-badge--info {
+  --br-badge-fg: #1d4ed8;
+  --br-badge-border: #60a5fa;
+}
+.br-badge--outlined.br-badge--neutral {
+  --br-badge-fg: #4b5563;
+  --br-badge-border: #9ca3af;
+}
+.br-badge--outlined.br-badge--priority {
+  --br-badge-fg: #6d28d9;
+  --br-badge-border: #a78bfa;
+}
+
+.br-badge--tonal.br-badge--primary {
+  --br-badge-bg: #dbeafe;
+  --br-badge-fg: #1d4ed8;
+}
+.br-badge--tonal.br-badge--success {
+  --br-badge-bg: #dcfce7;
+  --br-badge-fg: #15803d;
+}
+.br-badge--tonal.br-badge--warning {
+  --br-badge-bg: #fef3c7;
+  --br-badge-fg: #b45309;
+}
+.br-badge--tonal.br-badge--danger {
+  --br-badge-bg: #fee2e2;
+  --br-badge-fg: #b91c1c;
+}
+.br-badge--tonal.br-badge--info {
+  --br-badge-bg: #dbeafe;
+  --br-badge-fg: #2563eb;
+}
+.br-badge--tonal.br-badge--neutral {
+  --br-badge-bg: #f3f4f6;
+  --br-badge-fg: #4b5563;
+}
+.br-badge--tonal.br-badge--priority {
+  --br-badge-bg: #ede9fe;
+  --br-badge-fg: #6d28d9;
+}
+
+.br-badge--soft.br-badge--primary {
+  --br-badge-bg: #eef2ff;
+  --br-badge-fg: #1e40af;
+}
+.br-badge--soft.br-badge--success {
+  --br-badge-bg: #f0fdf4;
+  --br-badge-fg: #166534;
+}
+.br-badge--soft.br-badge--warning {
+  --br-badge-bg: #fffbeb;
+  --br-badge-fg: #92400e;
+}
+.br-badge--soft.br-badge--danger {
+  --br-badge-bg: #fef2f2;
+  --br-badge-fg: #991b1b;
+}
+.br-badge--soft.br-badge--info {
+  --br-badge-bg: #eff6ff;
+  --br-badge-fg: #1d4ed8;
+}
+.br-badge--soft.br-badge--neutral {
+  --br-badge-bg: #f9fafb;
+  --br-badge-fg: #374151;
+}
+.br-badge--soft.br-badge--priority {
+  --br-badge-bg: #f5f3ff;
+  --br-badge-fg: #5b21b6;
+}
+
+.br-badge--state-hover {
+  filter: brightness(0.96);
+}
+
+.br-badge--state-active {
+  filter: brightness(0.9);
+}
+
+.br-badge--state-disabled {
+  opacity: 0.45;
+  filter: grayscale(0.12);
+}

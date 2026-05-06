@@ -61,9 +61,62 @@
             class="pf-nav__item"
             >Select</a
           >
-          <span class="pf-nav__item pf-nav__item--soon" aria-disabled="true">Tabs</span>
-          <span class="pf-nav__item pf-nav__item--soon" aria-disabled="true">Alerts</span>
-          <span class="pf-nav__item pf-nav__item--soon" aria-disabled="true">Cards</span>
+          <a routerLink="checkbox" routerLinkActive="is-active" class="pf-nav__item">Checkbox</a>
+          <a routerLink="radio" routerLinkActive="is-active" class="pf-nav__item">Radio</a>
+          <a
+            routerLink="tabs"
+            routerLinkActive="is-active"
+            class="pf-nav__item"
+            >Tabs</a
+          >
+          <a
+            routerLink="alerts"
+            routerLinkActive="is-active"
+            class="pf-nav__item"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Alerts</a
+          >
+          <a routerLink="modal" routerLinkActive="is-active" class="pf-nav__item">Modals</a>
+          <a routerLink="drawer" routerLinkActive="is-active" class="pf-nav__item">Drawer / Side Panel</a>
+          <a routerLink="card" routerLinkActive="is-active" class="pf-nav__item">Cards</a>
+          <a routerLink="table" routerLinkActive="is-active" class="pf-nav__item">Table</a>
+          <a routerLink="badge" routerLinkActive="is-active" class="pf-nav__item">Badge</a>
+          <a routerLink="chip" routerLinkActive="is-active" class="pf-nav__item">Chip</a>
+          <a
+            routerLink="avatar"
+            routerLinkActive="is-active"
+            class="pf-nav__item"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Avatar</a
+          >
+          <a
+            routerLink="tooltip"
+            routerLinkActive="is-active"
+            class="pf-nav__item"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Tooltip</a
+          >
+          <a
+            routerLink="accordion"
+            routerLinkActive="is-active"
+            class="pf-nav__item"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Accordion</a
+          >
+          <a
+            routerLink="pagination"
+            routerLinkActive="is-active"
+            class="pf-nav__item"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Pagination</a
+          >
+          <a
+            routerLink="progress"
+            routerLinkActive="is-active"
+            class="pf-nav__item"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Progress</a
+          >
         </div>
         <div class="pf-nav__group">
           <div class="pf-nav__heading">Resources</div>
@@ -79,6 +132,16 @@
             class="pf-nav__item"
             >Guide: select</a
           >
+          <a routerLink="alerts/catalog" routerLinkActive="is-active" class="pf-nav__item">Guide: alerts</a>
+          <a routerLink="table/catalog" routerLinkActive="is-active" class="pf-nav__item">Guide: table</a>
+          <a routerLink="badge/catalog" routerLinkActive="is-active" class="pf-nav__item">Guide: badge</a>
+          <a routerLink="chip/catalog" routerLinkActive="is-active" class="pf-nav__item">Guide: chip</a>
+          <a routerLink="avatar/catalog" routerLinkActive="is-active" class="pf-nav__item">Guide: avatars</a>
+          <a routerLink="tooltip/catalog" routerLinkActive="is-active" class="pf-nav__item">Guide: tooltips</a>
+          <a routerLink="accordion/catalog" routerLinkActive="is-active" class="pf-nav__item">Guide: accordion</a>
+          <a routerLink="pagination/catalog" routerLinkActive="is-active" class="pf-nav__item">Guide: pagination</a>
+          <a routerLink="progress/catalog" routerLinkActive="is-active" class="pf-nav__item">Guide: progress</a>
+          <a routerLink="drawer/catalog" routerLinkActive="is-active" class="pf-nav__item">Guide: drawer</a>
           <a class="pf-nav__item" href="https://angular.dev" target="_blank" rel="noopener noreferrer"
             >Angular docs</a
           >
@@ -93,9 +156,7 @@
       </nav>
       <div class="pf-tip">
         <div class="pf-tip__title">Pro tip</div>
-        <p class="pf-tip__text">
-          Tweak controls on the left — the preview and generated markup stay in sync.
-        </p>
+        <p class="pf-tip__text">{{ sidebarTip() }}</p>
       </div>
     </aside>
 

@@ -91,6 +91,12 @@ export class ButtonPlaygroundComponent {
     'eye',
     'eye-off',
     'error',
+    'help',
+    'gear',
+    'bell',
+    'headset',
+    'list',
+    'chevron-right',
     'loader',
   ];
   readonly iconLabels: Record<BrightrailButtonIcon, string> = {
@@ -117,6 +123,12 @@ export class ButtonPlaygroundComponent {
     eye: 'Eye',
     'eye-off': 'Eye off',
     error: 'Error',
+    help: 'Help',
+    gear: 'Gear',
+    bell: 'Bell',
+    headset: 'Headset',
+    list: 'List',
+    'chevron-right': 'Chevron right',
     loader: 'Loader',
   };
   readonly iconSideOptions: { value: IconSide; label: string }[] = [
@@ -136,6 +148,9 @@ export class ButtonPlaygroundComponent {
   readonly label = signal('Button');
   readonly iconSide = signal<IconSide>('left');
   readonly iconKind = signal<BrightrailButtonIcon>('none');
+
+  readonly buttonBoundaryEditable = computed(() => this.variant() !== 'link');
+  readonly buttonIconSideEditable = computed(() => this.iconKind() !== 'none');
 
   readonly leftIconForButton = computed(() => effectiveLeftIcon(this.iconKind(), this.iconSide()));
   readonly rightIconForButton = computed(() => effectiveRightIcon(this.iconKind(), this.iconSide()));

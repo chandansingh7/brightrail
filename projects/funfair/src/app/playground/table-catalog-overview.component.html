@@ -1,0 +1,108 @@
+<div class="aco">
+  <header class="aco-hero">
+    <p class="aco-hero__eyebrow">Brightrail · Tables · Resource guide</p>
+    <h1 class="aco-hero__title">Table types &amp; variations</h1>
+    <p class="aco-hero__lead">
+      Sections 1–8 mirror the reference mock — chrome variants, interaction patterns, enterprise recipes, and advanced states.
+      Compose density, sorting, pagination, selection, expandable rows, and toolbars through the canonical
+      <code>brightrail-table</code> API.
+    </p>
+    <p class="aco-hero__links">
+      <a routerLink=".." class="aco-hero__link">← Tables playground (live demo &amp; snippets)</a>
+      <a routerLink="inline-edit" class="aco-hero__link">Inline edit variations →</a>
+    </p>
+  </header>
+
+  <div class="aco-scroll">
+    <div class="aco-catalog-panel">
+      <p class="aco-var-intro">
+        Baseline variant / density / sorting tint many tiles — browse <strong>one section at a time</strong> or enable “Show all sections”.
+      </p>
+
+      <div class="aco-var-toolbar">
+        @if (!catalogShowAllSections()) {
+          <div class="aco-var-toolbar__stepper">
+            <button type="button" class="aco-var-toolbar__btn" (click)="catalogSectionPrev()">
+              Previous section
+            </button>
+            <span class="aco-var-toolbar__step" aria-live="polite">
+              Section {{ catalogFocusSection() }} of 8 · {{ catalogSectionTitle() }}
+            </span>
+            <button type="button" class="aco-var-toolbar__btn" (click)="catalogSectionNext()">
+              Next section
+            </button>
+          </div>
+        }
+        <label class="aco-var-toolbar__all">
+          <input
+            type="checkbox"
+            [ngModel]="catalogShowAllSections()"
+            (ngModelChange)="catalogShowAllSections.set($event)"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          Show all sections at once
+        </label>
+      </div>
+
+      <div class="aco-mirror-grid" aria-label="Baseline dimensions for catalog tiles">
+        <label class="aco-mirror-field">
+          <span class="aco-mirror-field__lbl">Variant</span>
+          <select
+            class="aco-mirror-select"
+            [ngModel]="mirrorVariant()"
+            (ngModelChange)="bindMirrorVariant($event)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            @for (v of variantOptions; track v) {
+              <option [value]="v">{{ v }}</option>
+            }
+          </select>
+        </label>
+        <label class="aco-mirror-field">
+          <span class="aco-mirror-field__lbl">Density</span>
+          <select
+            class="aco-mirror-select"
+            [ngModel]="mirrorDensity()"
+            (ngModelChange)="bindMirrorDensity($event)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            @for (d of densityOptions; track d.value) {
+              <option [value]="d.value">{{ d.label }}</option>
+            }
+          </select>
+        </label>
+        <label class="aco-mirror-field">
+          <span class="aco-mirror-field__lbl">Sorting</span>
+          <select
+            class="aco-mirror-select"
+            [ngModel]="mirrorSorting() ? 'on' : 'off'"
+            (ngModelChange)="mirrorSorting.set($event === 'on')"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            <option value="on">Enabled</option>
+            <option value="off">Disabled</option>
+          </select>
+        </label>
+      </div>
+
+      <app-table-variation-catalog
+        [mirrorVariant]="mirrorVariant()"
+        [mirrorDensity]="mirrorDensity()"
+        [mirrorSorting]="mirrorSorting()"
+        [focusSection]="catalogEffectiveFocus()"
+      />
+
+      <p class="aco-var-lead">
+        Canonical markup mirrors the playground wiring — adjust bindings to match your data layer.
+      </p>
+    </div>
+  </div>
+
+  <section class="aco-snippet" aria-label="Canonical snippet">
+    <div class="aco-snippet__head">
+      <h3 class="aco-snippet__title">Table usage</h3>
+      <span class="aco-snippet__note">HTML · illustrative baseline</span>
+    </div>
+    <pre class="aco-snippet__pre"><code>{{ canonicalSnippet }}</code></pre>
+  </section>
+</div>

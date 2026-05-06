@@ -1,0 +1,236 @@
+@use '../styles/tokens' as br;
+
+:host {
+  @include br.br-host-card;
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  max-width: 100%;
+  color: var(--br-card-fg);
+  background: var(--br-card-bg);
+  border: 1px solid var(--br-card-border);
+  border-radius: var(--br-card-radius);
+  transition:
+    box-shadow 0.18s ease,
+    border-color 0.18s ease,
+    background-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+:host(.br-host--full) {
+  width: 100%;
+}
+
+:host(.br-host--disabled) {
+  opacity: 0.72;
+}
+
+:host(.br-card--corners-square) {
+  --br-card-radius: 0.25rem;
+}
+
+:host(.br-card--size-sm) .br-card__inner {
+  padding: 0.65rem 0.75rem 0.7rem;
+}
+
+:host(.br-card--size-lg) .br-card__inner {
+  padding: 1.15rem 1.25rem 1.2rem;
+}
+
+:host(.br-card--elevated) {
+  border-color: transparent;
+  box-shadow: var(--br-card-shadow);
+}
+
+:host(.br-card--outlined) {
+  border-color: var(--br-card-border-strong);
+  box-shadow: none;
+}
+
+:host(.br-card--filled) {
+  background: var(--br-card-filled-bg);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+:host(.br-card--horizontal) .br-card__inner {
+  flex-direction: row;
+  align-items: stretch;
+}
+
+:host(.br-card--horizontal) ::ng-deep .br-card-media {
+  flex: 0 0 var(--br-card-media-width);
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: calc(var(--br-card-radius) - 4px);
+  background: var(--br-card-media-bg);
+}
+
+:host(.br-card--image) .br-card__inner {
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+
+:host(.br-card--image) .br-card__main {
+  padding: 1rem 1.1rem 1.05rem;
+}
+
+/* Image layout zeros inner padding; size tokens must target __main or they never show. */
+:host(.br-card--image.br-card--size-sm) .br-card__main {
+  padding: 0.65rem 0.75rem 0.7rem;
+}
+
+:host(.br-card--image.br-card--size-lg) .br-card__main {
+  padding: 1.15rem 1.25rem 1.2rem;
+}
+
+/* Keep dismiss inset when combining dismissible + image + non-default size (specificity). */
+:host(.br-card--dismissible.br-card--image.br-card--size-sm) .br-card__main {
+  padding: 0.65rem 2.15rem 0.7rem 0.75rem;
+}
+
+:host(.br-card--dismissible.br-card--image.br-card--size-lg) .br-card__main {
+  padding: 1.15rem 2.15rem 1.2rem 1.25rem;
+}
+
+:host(.br-card--image) ::ng-deep .br-card-media {
+  width: 100%;
+}
+
+:host(.br-host--interactive) {
+  cursor: pointer;
+}
+
+:host(.br-host--interactive.br-host--disabled) {
+  cursor: not-allowed;
+}
+
+:host(.br-host--interactive:not(.br-host--disabled):hover) {
+  border-color: rgba(0, 98, 255, 0.35);
+  box-shadow: 0 2px 10px rgba(60, 64, 67, 0.1);
+}
+
+:host(.br-host--interactive:not(.br-host--disabled):focus-visible) {
+  outline: none;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px var(--br-card-primary),
+    0 0 0 7px var(--br-card-focus-ring);
+}
+
+:host(.br-card--elevated.br-host--interactive:not(.br-host--disabled):hover) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(60, 64, 67, 0.14);
+}
+
+.br-card__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 1rem 1.1rem 1.05rem;
+  box-sizing: border-box;
+}
+
+.br-card__main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+:host(.br-card--dismissible) .br-card__main {
+  padding-right: 2.15rem;
+}
+
+:host(.br-card--stats) .br-card__inner {
+  gap: 0.35rem;
+}
+
+:host(.br-card--stats) ::ng-deep .br-card-header {
+  margin: 0;
+  padding: 0;
+}
+
+:host(.br-card--stats) ::ng-deep .br-card-content {
+  margin: 0;
+  padding: 0;
+}
+
+.br-card__dismiss {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.45rem;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: calc(var(--br-card-radius) - 2px);
+  background: transparent;
+  color: var(--br-card-dismiss-fg);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.br-card__dismiss:hover {
+  background: var(--br-card-dismiss-hover-bg);
+}
+
+.br-card__dismiss:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--br-card-focus-ring);
+}
+
+/* Optional helper classes for stats layout (use inside projected content). */
+:host(.br-card--stats) ::ng-deep .br-card-stat-label {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--br-card-title-fg);
+}
+
+:host(.br-card--stats) ::ng-deep .br-card-stat-value {
+  margin: 0.15rem 0 0;
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--br-card-title-fg);
+}
+
+:host(.br-card--stats) ::ng-deep .br-card-stat-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin: 0.35rem 0 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #0d9f4c;
+}
+
+/* Typography defaults inside structural regions */
+:host ::ng-deep .br-card-header :where(h1, h2, h3, h4) {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--br-card-title-fg);
+  line-height: 1.25;
+}
+
+:host ::ng-deep .br-card-content :where(p) {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+:host ::ng-deep .br-card-footer {
+  margin-top: 0.35rem;
+  padding-top: 0.55rem;
+}

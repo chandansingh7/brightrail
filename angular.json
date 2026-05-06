@@ -54,6 +54,9 @@
             ],
             "tsConfig": "projects/funfair/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "stylePreprocessorOptions": {
+              "includePaths": ["projects/brightrail/src/lib/styles"]
+            },
             "assets": [
               {
                 "glob": "**/*",
@@ -74,8 +77,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "20kB",
-                  "maximumError": "32kB"
+                  "maximumWarning": "28kB",
+                  "maximumError": "40kB"
                 }
               ],
               "outputHashing": "all"
@@ -112,6 +115,9 @@
             ],
             "tsConfig": "projects/funfair/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
+            "stylePreprocessorOptions": {
+              "includePaths": ["projects/brightrail/src/lib/styles"]
+            },
             "assets": [
               {
                 "glob": "**/*",
@@ -165,8 +171,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "30kB",
+                  "maximumError": "50kB"
                 }
               ],
               "outputHashing": "all"

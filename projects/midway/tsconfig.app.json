@@ -4,7 +4,11 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/app",
-    "types": []
+    "types": [],
+    "baseUrl": "../../",
+    "paths": {
+      "brightrail": ["projects/brightrail/src/public-api.ts"]
+    }
   },
   "include": [
     "src/**/*.ts"

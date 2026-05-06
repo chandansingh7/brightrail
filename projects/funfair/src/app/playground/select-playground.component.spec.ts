@@ -11,6 +11,38 @@ describe('SelectPlaygroundComponent', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
+  it('disables field chrome for layout-only recipes', () => {
+    TestBed.configureTestingModule({ imports: [SelectPlaygroundComponent] });
+    const fixture = TestBed.createComponent(SelectPlaygroundComponent);
+    const c = fixture.componentInstance;
+    c.previewRecipe.set('segmented');
+    fixture.detectChanges();
+    expect(c.selectFullFieldChromeEditable()).toBe(false);
+    expect(c.selectAppearanceStatusEditable()).toBe(false);
+
+    const row = (fixture.nativeElement as HTMLElement)
+      .querySelector('#sel-lbl-appearance')
+      ?.closest('.bp-setting-row');
+    const appearanceSelect = row?.querySelector('select') as HTMLSelectElement;
+    expect(appearanceSelect.disabled).toBe(true);
+  });
+
+  it('allows appearance on cascade while full chrome controls stay locked', () => {
+    TestBed.configureTestingModule({ imports: [SelectPlaygroundComponent] });
+    const fixture = TestBed.createComponent(SelectPlaygroundComponent);
+    const c = fixture.componentInstance;
+    c.previewRecipe.set('cascade');
+    fixture.detectChanges();
+    expect(c.selectAppearanceStatusEditable()).toBe(true);
+    expect(c.selectFullFieldChromeEditable()).toBe(false);
+
+    const sizeRow = (fixture.nativeElement as HTMLElement)
+      .querySelector('#sel-lbl-size')
+      ?.closest('.bp-setting-row');
+    const sizeSelect = sizeRow?.querySelector('select') as HTMLSelectElement;
+    expect(sizeSelect.disabled).toBe(true);
+  });
+
   it('should generate HTML that mirrors live props and ngModelOptions', () => {
     TestBed.configureTestingModule({ imports: [SelectPlaygroundComponent] });
     const fixture = TestBed.createComponent(SelectPlaygroundComponent);
@@ -81,5 +113,35 @@ describe('SelectPlaygroundComponent', () => {
     fixture.detectChanges();
     expect(c.htmlSnippet()).toContain('br-select-value-slot');
     expect(c.htmlSnippet()).toContain('sel-tag-pill');
+  });
+
+  it('should generate option editor snippet for save/delete variation', () => {
+    TestBed.configureTestingModule({ imports: [SelectPlaygroundComponent] });
+    const fixture = TestBed.createComponent(SelectPlaygroundComponent);
+    const c = fixture.componentInstance;
+    c.previewRecipe.set('optionEditSave');
+    fixture.detectChanges();
+    expect(c.htmlSnippet()).toContain('Option editor');
+    expect(c.htmlSnippet()).toContain('Save');
+    expect(c.htmlSnippet()).toContain('Delete');
+  });
+
+  it('inline edit actions should support N action buttons', () => {
+    TestBed.configureTestingModule({ imports: [SelectPlaygroundComponent] });
+    const fixture = TestBed.createComponent(SelectPlaygroundComponent);
+    const c = fixture.componentInstance;
+    c.actionButtonCount.set(4);
+    expect(c.inlineActionLabels().length).toBe(4);
+  });
+
+  it('should generate TS snippet with edit/save/delete handlers for editable dropdown', () => {
+    TestBed.configureTestingModule({ imports: [SelectPlaygroundComponent] });
+    const fixture = TestBed.createComponent(SelectPlaygroundComponent);
+    const c = fixture.componentInstance;
+    c.previewRecipe.set('optionEditSave');
+    fixture.detectChanges();
+    expect(c.tsSnippet()).toContain('beginEditOption');
+    expect(c.tsSnippet()).toContain('saveOptionLabel');
+    expect(c.tsSnippet()).toContain('deleteOption');
   });
 });

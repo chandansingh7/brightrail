@@ -1,0 +1,16 @@
+@use '../styles/tokens' as br;
+
+:host {
+  display: block;
+  flex-shrink: 0;
+}
+
+.br-table-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  padding: 0.35rem 0 0.65rem;
+  border-bottom: 1px solid var(--br-table-border, #{br.$br-color-border});
+}

@@ -1,0 +1,72 @@
+@use './button-playground.component.scss' as *;
+
+/* Stretch preview mode defaults to start-aligned inner flex; center avatars like accordion/chip. */
+:host .bp-preview-surface.bp-preview-surface--stretch {
+  align-items: center;
+  justify-content: center;
+}
+
+.bp-preview-surface--stretch .bp-preview-inner.ap-preview {
+  justify-content: center;
+  align-items: center;
+}
+
+.ap-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 12rem;
+  padding: 1.5rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ap-advanced {
+  margin-top: 0.35rem;
+  padding-top: 0.65rem;
+  border-top: 1px dashed var(--ff-border);
+}
+
+.ap-advanced__summary {
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ff-muted);
+  list-style: none;
+}
+
+.ap-advanced__summary::-webkit-details-marker {
+  display: none;
+}
+
+.ap-advanced__summary::after {
+  content: ' ▾';
+  font-size: 0.7rem;
+}
+
+.ap-advanced[open] .ap-advanced__summary::after {
+  content: ' ▴';
+}
+
+.ap-advanced__body {
+  margin-top: 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Reference layout: visible reset action next to “Component settings”. */
+.ap-settings-reset--labeled {
+  width: auto !important;
+  min-width: 2.35rem;
+  padding: 0.4rem 0.65rem !important;
+  gap: 0.45rem;
+}
+
+.ap-settings-reset__label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: inherit;
+  white-space: nowrap;
+}

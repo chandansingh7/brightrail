@@ -75,6 +75,22 @@
     </div>
 
     <div class="demo__block">
+      <h3 class="demo__h">Alert</h3>
+      <p class="demo__lead demo__lead--compact">
+        Inline alerts from <code>BrightrailAlertComponent</code> (published package).
+      </p>
+      <div class="demo__stack">
+        <brightrail-alert appearance="soft" status="success" size="md" [dismissible]="true">
+          <div brightrailAlertTitle>Synced</div>
+          <div brightrailAlertMessage>Workspace settings saved from Midway.</div>
+        </brightrail-alert>
+        <brightrail-alert appearance="outlined" status="info" size="sm">
+          <div brightrailAlertMessage>Use packaged imports like consumers after npm install.</div>
+        </brightrail-alert>
+      </div>
+    </div>
+
+    <div class="demo__block">
       <h3 class="demo__h">FAB</h3>
       <div class="demo__row">
         <brightrail-button
@@ -164,6 +180,31 @@
     <div class="demo__block">
       <h3 class="demo__h">Full width</h3>
       <brightrail-button variant="outline" [fullWidth]="true">Spans container</brightrail-button>
+    </div>
+
+    <div class="demo__block">
+      <h3 class="demo__h">Card</h3>
+      <p class="demo__lead demo__lead--compact">
+        Packaged import of <code>BrightrailCardComponent</code> with header, content, and footer
+        slots.
+      </p>
+      <div class="demo__card-row">
+        <brightrail-card appearance="elevated" size="md" corners="rounded" state="default">
+          <brightrail-card-header>
+            <h3 class="demo__card-title">Welcome</h3>
+          </brightrail-card-header>
+          <brightrail-card-content>
+            <p class="demo__card-copy">
+              Midway loads this card from the built library — same as consumers after
+              <code>npm install brightrail</code>.
+            </p>
+          </brightrail-card-content>
+          <brightrail-card-actions align="between">
+            <brightrail-button variant="primary" size="sm">View details</brightrail-button>
+            <span class="brightrail-text-secondary">Updated just now</span>
+          </brightrail-card-actions>
+        </brightrail-card>
+      </div>
     </div>
   </section>
 </main>

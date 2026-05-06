@@ -1,3 +1,6 @@
+/* Brightrail `:root` tokens — resolved via stylePreprocessorOptions.includePaths (angular.json). */
+@use 'brightrail-root';
+
 html {
   box-sizing: border-box;
   height: 100%;
@@ -62,6 +65,44 @@ html[data-theme='light'] {
     --br-btn-outline-fg: var(--ff-brand);
     --br-btn-ghost-fg: #1a2b3c;
   }
+
+  /* Pagination uses `--br-color-*` from brightrail-root; map to Funfair chrome so it matches buttons/panels. */
+  brightrail-pagination {
+    --br-color-primary: var(--ff-brand);
+    --br-color-primary-hover: var(--ff-brand-strong);
+    --br-color-on-primary: #ffffff;
+    --br-color-text: var(--ff-text-core);
+    --br-color-text-strong: var(--ff-text-core);
+    --br-color-muted: var(--ff-muted);
+    --br-color-border-strong: var(--ff-border-strong);
+    --br-color-border: var(--ff-border);
+    --br-color-surface: var(--ff-surface);
+    --br-pag-hover-surface: var(--ff-brand-soft);
+  }
+
+  brightrail-accordion {
+    --br-color-primary: var(--ff-brand);
+    --br-color-primary-hover: var(--ff-brand-strong);
+    --br-color-text: var(--ff-text-core);
+    --br-color-text-strong: var(--ff-text-core);
+    --br-color-muted: var(--ff-muted);
+    --br-color-border-strong: var(--ff-border-strong);
+    --br-color-border: var(--ff-border);
+    --br-color-surface: var(--ff-surface);
+  }
+
+  brightrail-avatar {
+    --br-color-primary: var(--ff-brand);
+    --br-color-primary-hover: var(--ff-brand-strong);
+    --br-color-text: var(--ff-text-core);
+    --br-color-text-strong: var(--ff-text-core);
+    --br-color-muted: var(--ff-muted);
+    --br-color-border-strong: var(--ff-border-strong);
+    --br-color-border: var(--ff-border);
+    --br-color-surface: var(--ff-surface);
+    --br-avatar-halo: var(--ff-surface);
+    --br-avatar-ring: var(--ff-brand);
+  }
 }
 
 html[data-theme='dark'] {
@@ -102,6 +143,43 @@ html[data-theme='dark'] {
     --br-btn-outline-hover-bg: rgba(96, 165, 250, 0.1);
     --br-btn-ghost-fg: #e2e8f0;
     --br-btn-ghost-hover-bg: rgba(148, 163, 184, 0.12);
+  }
+
+  brightrail-pagination {
+    --br-color-primary: var(--ff-brand);
+    --br-color-primary-hover: var(--ff-brand-strong);
+    --br-color-on-primary: #ffffff;
+    --br-color-text: var(--ff-text-core);
+    --br-color-text-strong: var(--ff-text-core);
+    --br-color-muted: var(--ff-muted);
+    --br-color-border-strong: var(--ff-border-strong);
+    --br-color-border: var(--ff-border);
+    --br-color-surface: var(--ff-surface);
+    --br-pag-hover-surface: var(--ff-brand-soft);
+  }
+
+  brightrail-accordion {
+    --br-color-primary: var(--ff-brand);
+    --br-color-primary-hover: var(--ff-brand-strong);
+    --br-color-text: var(--ff-text-core);
+    --br-color-text-strong: var(--ff-text-core);
+    --br-color-muted: var(--ff-muted);
+    --br-color-border-strong: var(--ff-border-strong);
+    --br-color-border: var(--ff-border);
+    --br-color-surface: var(--ff-surface);
+  }
+
+  brightrail-avatar {
+    --br-color-primary: var(--ff-brand);
+    --br-color-primary-hover: var(--ff-brand-strong);
+    --br-color-text: var(--ff-text-core);
+    --br-color-text-strong: var(--ff-text-core);
+    --br-color-muted: var(--ff-muted);
+    --br-color-border-strong: var(--ff-border-strong);
+    --br-color-border: var(--ff-border);
+    --br-color-surface: var(--ff-surface);
+    --br-avatar-halo: var(--ff-surface);
+    --br-avatar-ring: var(--ff-brand);
   }
 }
 

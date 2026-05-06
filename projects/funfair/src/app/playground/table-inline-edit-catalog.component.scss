@@ -1,0 +1,278 @@
+:host {
+  display: block;
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+}
+
+code {
+  font-size: 0.88em;
+}
+
+kbd {
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.12rem 0.35rem;
+  border-radius: 0.28rem;
+  border: 1px solid var(--ff-border);
+  background: color-mix(in srgb, var(--ff-muted) 22%, var(--ff-surface));
+}
+
+.iec {
+  box-sizing: border-box;
+  padding: 1rem 1.25rem 2rem;
+  max-width: 110rem;
+  margin: 0 auto;
+}
+
+.iec-hero__eyebrow {
+  margin: 0 0 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ff-muted);
+}
+
+.iec-hero__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.iec-hero__lead {
+  margin: 0 0 0.75rem;
+  max-width: 52rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--ff-text, #111) 88%, var(--ff-muted));
+}
+
+.iec-hero__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin: 0;
+}
+
+.iec-hero__link {
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--br-table-selected-bar, #1976d2);
+  text-decoration: none;
+}
+
+.iec-hero__link:hover {
+  text-decoration: underline;
+}
+
+.iec-grid {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: 1rem 1.25rem;
+  align-items: start;
+}
+
+.iec-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 1rem 1rem 1.1rem;
+  border-radius: 0.65rem;
+  border: 1px solid var(--ff-border);
+  background: var(--ff-surface);
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.iec-card--wide {
+  grid-column: 1 / -1;
+}
+
+.iec-card__tag {
+  align-self: flex-start;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--br-table-selected-bar, #1976d2);
+  background: color-mix(in srgb, var(--br-table-selected-bar, #1976d2) 12%, var(--ff-surface));
+  padding: 0.18rem 0.45rem;
+  border-radius: 0.35rem;
+}
+
+.iec-card__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.iec-card__desc {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--ff-muted);
+}
+
+.iec-card__desc--tight {
+  margin-top: -0.15rem;
+}
+
+.iec-subh {
+  margin: 0.65rem 0 0.25rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ff-muted);
+}
+
+.iec-kbd-tip {
+  margin: 0 0 0.35rem;
+  padding: 0.45rem 0.55rem;
+  border-radius: 0.45rem;
+  font-size: 0.8rem;
+  background: color-mix(in srgb, var(--br-table-selected-bar, #1976d2) 9%, var(--ff-surface));
+  border: 1px solid color-mix(in srgb, var(--br-table-selected-bar, #1976d2) 22%, var(--ff-border));
+}
+
+.iec-card__preview {
+  margin-top: 0.35rem;
+  min-height: 0;
+  min-width: 0;
+}
+
+.iec-card__preview--scroll {
+  overflow-x: auto;
+  padding-bottom: 0.15rem;
+}
+
+.iec-card__preview--scroll .iec-table {
+  min-width: 56rem;
+}
+
+.iec-table {
+  width: 100%;
+}
+
+.iec-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 1rem;
+}
+
+.iec-mini__title {
+  margin: 0 0 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--ff-muted);
+}
+
+.iec-bulk-field {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.45rem;
+}
+
+.iec-bulk-field__lbl {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--ff-muted);
+}
+
+.iec-bulk-field__select {
+  font: inherit;
+  font-size: 0.8125rem;
+  padding: 0.38rem 1.6rem 0.38rem 0.45rem;
+  border-radius: 0.45rem;
+  border: 1px solid var(--ff-border);
+  background: var(--ff-surface);
+}
+
+.iec-rich-actions {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.25rem;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.iec-icon-btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.4rem;
+  border: 1px solid var(--ff-border);
+  background: var(--ff-surface);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+}
+
+.iec-icon-btn--ok {
+  border-color: color-mix(in srgb, #16a34a 45%, var(--ff-border));
+  color: #15803d;
+}
+
+.iec-icon-btn--danger {
+  border-color: color-mix(in srgb, #dc2626 45%, var(--ff-border));
+  color: #991b1b;
+}
+
+.iec-kebab {
+  position: relative;
+}
+
+.iec-kebab__btn {
+  list-style: none;
+  cursor: pointer;
+  appearance: none;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.4rem;
+  border: 1px solid transparent;
+  background: transparent;
+  font-weight: 900;
+  color: var(--ff-muted);
+}
+
+.iec-kebab__btn::-webkit-details-marker {
+  display: none;
+}
+
+.iec-kebab__menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.2rem);
+  margin: 0;
+  padding: 0.35rem 0;
+  list-style: none;
+  min-width: 10rem;
+  border-radius: 0.45rem;
+  border: 1px solid var(--ff-border);
+  background: var(--ff-surface);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+  z-index: 5;
+}
+
+.iec-kebab__menu button {
+  appearance: none;
+  width: 100%;
+  text-align: left;
+  padding: 0.4rem 0.65rem;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.iec-kebab__menu button:hover {
+  background: color-mix(in srgb, var(--ff-muted) 18%, var(--ff-surface));
+}

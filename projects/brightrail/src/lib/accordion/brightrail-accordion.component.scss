@@ -1,0 +1,58 @@
+@use '../styles/tokens' as br;
+
+.br-acc {
+  @include br.br-host-card;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  color: var(--br-color-text, #{br.$br-color-text});
+}
+
+.br-acc--bordered {
+  border: 1px solid var(--br-color-border-strong, #{br.$br-color-border-strong});
+  border-radius: var(--br-radius-md, #{br.$br-radius-md});
+  overflow: hidden;
+}
+
+.br-acc--subtle .br-acc-item {
+  --br-acc-header-bg: transparent;
+}
+
+.br-acc--compact {
+  --br-acc-pad-y: 0.375rem;
+  --br-acc-pad-x: 0.5rem;
+}
+
+.br-acc--divided .br-acc-item + .br-acc-item {
+  border-top: 1px solid var(--br-color-border, #{br.$br-color-border});
+}
+
+.br-acc--disabled {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.br-acc--layout-enterprise {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.br-acc--layout-enterprise.br-acc--bordered {
+  border: none;
+}
+
+.br-acc--layout-enterprise.br-acc--divided .br-acc-item + .br-acc-item {
+  border-top: none;
+}
+
+.br-acc--layout-enterprise .br-acc-item--enterprise {
+  border: 1px solid var(--br-color-border, #{br.$br-color-border});
+  border-radius: var(--br-radius-md, #{br.$br-radius-md});
+  background: var(--br-color-surface, #{br.$br-color-surface});
+  box-shadow: 0 1px 2px rgb(15 23 42 / 6%);
+}

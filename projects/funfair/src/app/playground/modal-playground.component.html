@@ -1,0 +1,635 @@
+<div class="bp">
+  <div class="bp-grid">
+    <section class="bp-panel bp-panel--settings" aria-labelledby="modal-settings-title">
+      <div class="bp-settings-head">
+        <div class="bp-settings-head__start">
+          <svg
+            class="bp-settings-head__icon"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              fill="currentColor"
+              d="M4 6h2v2H4V6zm0 5h2v2H4v-2zm0 5h2v2H4v-2zm4-10h12v2H8V6zm0 5h12v2H8v-2zm0 5h12v2H8v-2z"
+            />
+            <circle cx="18" cy="7" r="1.25" fill="currentColor" />
+            <circle cx="18" cy="12" r="1.25" fill="currentColor" />
+            <circle cx="18" cy="17" r="1.25" fill="currentColor" />
+          </svg>
+          <h2 id="modal-settings-title" class="bp-settings-head__title">Component settings</h2>
+        </div>
+        <button type="button" class="bp-settings-reset" (click)="resetToDefaults()" title="Reset">
+          <span class="bp-sr-only">Reset all component settings</span>
+          <svg class="bp-settings-reset__icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M12 6V3L8 7l4 4V8c2.76 0 5 2.24 5 5 0 1.28-.48 2.45-1.26 3.35l1.41 1.41A6.96 6.96 0 0 0 19 13c0-3.87-3.13-7-7-7zm0 14c-2.76 0-5-2.24-5-5 0-1.28.48-2.45 1.26-3.35L6.85 10.24A6.96 6.96 0 0 0 5 13c0 3.87 3.13 7 7 7v3l4-4-4-4v3z"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div class="bp-settings-block">
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="modal-lbl-component">Component</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true"><span class="bp-ico-pill"></span></span>
+            <select class="bp-dropdown__select" disabled aria-labelledby="modal-lbl-component" title="Component">
+              <option>Modals</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="modal-lbl-grp">Scenario group</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="selectedRecipeGroup()"
+              (ngModelChange)="onRecipeGroupNgModelChange($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="modal-lbl-grp"
+              title="Scenario group"
+            >
+              @for (g of recipeGroups; track g) {
+                <option [value]="g">{{ g }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="modal-lbl-recipe">Scenario</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="previewRecipe()"
+              (ngModelChange)="onRecipeNgModelChange($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="modal-lbl-recipe"
+              title="Scenario"
+            >
+              @for (opt of recipesInGroup(selectedRecipeGroup()); track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="modal-lbl-open">State</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="modalOpen() ? 'open' : 'closed'"
+              (ngModelChange)="bindModalOpen($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="modal-lbl-open"
+              title="Modal visibility"
+            >
+              <option value="open">Open</option>
+              <option value="closed">Closed</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="modal-lbl-size">Size</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="size()"
+              (ngModelChange)="bindSize($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="modal-lbl-size"
+              title="Size"
+            >
+              @for (s of sizeOptions; track s) {
+                <option [value]="s">{{ s | titlecase }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="modal-lbl-appearance">Appearance</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="appearance()"
+              (ngModelChange)="bindAppearance($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="modal-lbl-appearance"
+              title="Appearance"
+            >
+              @for (a of appearanceOptions; track a) {
+                <option [value]="a">{{ a === 'danger' ? 'Danger accent' : 'Default' }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="modal-lbl-header">Header</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="headerMode()"
+              (ngModelChange)="bindHeaderMode($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="modal-lbl-header"
+              title="Header"
+            >
+              <option value="title">With title</option>
+              <option value="none">No header</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="modal-lbl-footer">Footer actions</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="footerPreset()"
+              (ngModelChange)="bindFooterPreset($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="modal-lbl-footer"
+              title="Footer actions"
+            >
+              @for (fp of footerPresetOptions; track fp) {
+                <option [value]="fp">{{ footerPresetLabels[fp] }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="modal-lbl-bd">Backdrop dismiss</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="backdropDismissAllowed() ? 'yes' : 'no'"
+              (ngModelChange)="bindBackdropDismiss($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="modal-lbl-bd"
+              title="Backdrop dismiss"
+            >
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="modal-lbl-close">Close button</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="closeButtonShown() ? 'yes' : 'no'"
+              (ngModelChange)="bindCloseButton($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="modal-lbl-close"
+              title="Close button"
+            >
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="modal-lbl-theme">Theme</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="themeService.theme()"
+              (ngModelChange)="bindTheme($event)"
+              [ngModelOptions]="{ standalone: true }"
+              aria-labelledby="modal-lbl-theme"
+              title="Theme"
+            >
+              @for (opt of themeRowOptions; track opt.id) {
+                <option [value]="opt.id">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bp-panel bp-panel--preview" aria-labelledby="modal-preview-title">
+      <h2 id="modal-preview-title" class="bp-panel__title bp-panel__title--live">
+        <span class="bp-live-dot" aria-hidden="true"></span>
+        Live preview
+      </h2>
+      <div class="bp-preview-surface bp-preview-surface--stretch mp-preview-frame">
+        <div class="bp-preview-inner bp-preview-inner--modal">
+          @if (!modalOpen()) {
+            <div class="mp-placeholder">
+              <p class="mp-placeholder__text">Modal is closed.</p>
+              <button type="button" class="mp-placeholder__btn" (click)="reopenModal()">Open modal</button>
+            </div>
+          }
+
+          <brightrail-modal
+            [isOpen]="modalOpen()"
+            [size]="size()"
+            [appearance]="appearance()"
+            [contain]="true"
+            [scrollBody]="scrollBody()"
+            [backdropDismissDisabled]="!backdropDismissAllowed()"
+            [closeOnEscape]="backdropDismissAllowed()"
+            [labelledBy]="headerMode() === 'title' ? TITLE_ID : undefined"
+            (backdropDismiss)="onBackdropDismiss()"
+            (closed)="onEscapeClose()"
+          >
+            @if (headerMode() === 'title') {
+              <brightrail-modal-header>
+                <div
+                  brightrailModalTitle
+                  [id]="TITLE_ID"
+                  [class.mp-title-stack]="
+                    templateRecipe() === 'autosaveDraft' || templateRecipe() === 'wizardAltHeader'
+                  "
+                >
+                  @if (templateRecipe() === 'autosaveDraft') {
+                    <div class="mp-draft-status">
+                      <brightrail-button-icon class="mp-draft-status__ico" name="check" />
+                      Draft saved 2 min ago
+                    </div>
+                  }
+                  <div class="mp-title-row">
+                    @if (titleIcon() !== 'none') {
+                      <brightrail-button-icon class="mp-title-icon" [name]="titleIcon()" />
+                    }
+                    {{ titleText() }}
+                  </div>
+                  @if (templateRecipe() === 'wizardAltHeader') {
+                    <p class="mp-step-caption">Step 3 of 4: Configure settings</p>
+                  }
+                </div>
+                @if (closeButtonShown()) {
+                  <div brightrailModalHeaderActions>
+                    <brightrail-icon-button aria-label="Close" (click)="dismissModal()">
+                      <brightrail-button-icon name="close" />
+                    </brightrail-icon-button>
+                  </div>
+                }
+              </brightrail-modal-header>
+            }
+
+            @switch (templateRecipe()) {
+              @case ('formInputSubmit') {
+                <form class="mp-modal-form" (submit)="onDemoFormSubmit($event)">
+                  <brightrail-modal-body>
+                    <p class="mp-form-lead">{{ bodyParagraph() }}</p>
+                    <label class="mp-field-label" for="modal-demo-field">Workspace name</label>
+                    <input
+                      id="modal-demo-field"
+                      type="text"
+                      name="workspaceName"
+                      class="mp-field-input"
+                      [ngModel]="demoFieldValue()"
+                      (ngModelChange)="demoFieldValue.set($event)"
+                      [ngModelOptions]="{ standalone: true }"
+                      autocomplete="off"
+                    />
+                  </brightrail-modal-body>
+                  <brightrail-modal-footer>
+                    <button type="button" class="mp-foot-btn mp-foot-btn--outline" (click)="dismissModal()">
+                      {{ secondaryLabel() }}
+                    </button>
+                    <button type="submit" class="mp-foot-btn mp-foot-btn--primary">
+                      {{ primaryLabel() }}
+                    </button>
+                  </brightrail-modal-footer>
+                </form>
+              }
+              @case ('wizardFlow') {
+                <brightrail-modal-body>
+                  <nav class="mp-wizard-steps" aria-label="Wizard progress">
+                    @for (step of wizardStepMarkers; track step) {
+                      <div class="mp-wizard-steps__segment">
+                        @if (step > 1) {
+                          <span
+                            class="mp-wizard-steps__rail"
+                            [class.mp-wizard-steps__rail--done]="wizardStep() > step - 1"
+                          ></span>
+                        }
+                        <span
+                          class="mp-wizard-steps__dot"
+                          [class.mp-wizard-steps__dot--todo]="wizardStep() < step"
+                          [class.mp-wizard-steps__dot--current]="wizardStep() === step"
+                          [class.mp-wizard-steps__dot--done]="wizardStep() > step || (wizardStep() === 3 && step === 3)"
+                        >
+                          @if (wizardStep() > step || (wizardStep() === 3 && step === 3)) {
+                            <brightrail-button-icon name="check" />
+                          } @else {
+                            {{ step }}
+                          }
+                        </span>
+                      </div>
+                    }
+                  </nav>
+
+                  @switch (wizardStep()) {
+                    @case (1) {
+                      <p class="mp-form-lead">Provide the basics for your new project.</p>
+                      <label class="mp-field-label" for="wiz-project-name">Project name</label>
+                      <input
+                        id="wiz-project-name"
+                        type="text"
+                        class="mp-field-input"
+                        [ngModel]="wizardProjectName()"
+                        (ngModelChange)="wizardProjectName.set($event)"
+                        [ngModelOptions]="{ standalone: true }"
+                        autocomplete="off"
+                      />
+                      <label class="mp-field-label" for="wiz-owner">Owner</label>
+                      <select
+                        id="wiz-owner"
+                        class="mp-field-input"
+                        [ngModel]="wizardOwner()"
+                        (ngModelChange)="wizardOwner.set($event)"
+                        [ngModelOptions]="{ standalone: true }"
+                      >
+                        <option value="you">Your account</option>
+                        <option value="team">Platform team</option>
+                        <option value="org">Org admin</option>
+                      </select>
+                    }
+                    @case (2) {
+                      <p class="mp-form-lead">Confirm details before we finalize provisioning.</p>
+                      <dl class="mp-wizard-summary">
+                        <div class="mp-wizard-summary__row">
+                          <dt>Project</dt>
+                          <dd>{{ wizardProjectName() }}</dd>
+                        </div>
+                        <div class="mp-wizard-summary__row">
+                          <dt>Owner</dt>
+                          <dd>{{ wizardOwnerLabel() }}</dd>
+                        </div>
+                      </dl>
+                    }
+                    @case (3) {
+                      <div class="mp-wizard-success">
+                        <span class="mp-wizard-success__badge" aria-hidden="true">
+                          <brightrail-button-icon name="check" />
+                        </span>
+                        <p class="mp-wizard-success__lead">
+                          You're ready to create <strong>{{ wizardProjectName() }}</strong>.
+                        </p>
+                        <p class="mp-wizard-success__sub">
+                          We'll provision directories and notify {{ wizardOwnerLabel() }} when finished.
+                        </p>
+                      </div>
+                    }
+                  }
+                </brightrail-modal-body>
+                <brightrail-modal-footer>
+                  @if (wizardStep() === 1) {
+                    <brightrail-button variant="outline" size="sm" (click)="dismissModal()">
+                      Cancel
+                    </brightrail-button>
+                  } @else {
+                    <brightrail-button variant="outline" size="sm" (click)="wizardGoBack()">
+                      Back
+                    </brightrail-button>
+                  }
+                  @if (wizardStep() === 3) {
+                    <brightrail-button variant="primary" size="sm" (click)="dismissModal()">
+                      Confirm
+                    </brightrail-button>
+                  } @else {
+                    <brightrail-button variant="primary" size="sm" (click)="wizardGoNext()">
+                      Next
+                    </brightrail-button>
+                  }
+                </brightrail-modal-footer>
+              }
+              @case ('destructivePhrase') {
+                <brightrail-modal-body>
+                  <p>{{ bodyParagraph() }}</p>
+                  <label class="mp-field-label" for="destructive-confirm">Type DELETE to confirm</label>
+                  <input
+                    id="destructive-confirm"
+                    type="text"
+                    class="mp-field-input"
+                    autocomplete="off"
+                    [ngModel]="destructivePhraseInput()"
+                    (ngModelChange)="destructivePhraseInput.set($event)"
+                    [ngModelOptions]="{ standalone: true }"
+                  />
+                </brightrail-modal-body>
+                <brightrail-modal-footer>
+                  <brightrail-button variant="outline" size="sm" (click)="dismissModal()">Cancel</brightrail-button>
+                  <brightrail-button
+                    variant="danger"
+                    size="sm"
+                    [disabled]="deleteActionDisabled()"
+                    (click)="dismissModal()"
+                  >
+                    Delete
+                  </brightrail-button>
+                </brightrail-modal-footer>
+              }
+              @case ('stickyLongForm') {
+                <brightrail-modal-body>
+                  @for (section of longFormSections; track section.heading; let idx = $index) {
+                    <h3 class="mp-long-form__h">{{ section.heading }}</h3>
+                    <p>{{ section.body }}</p>
+                    <label class="mp-field-label" [attr.for]="'long-' + idx">Field {{ idx + 1 }}</label>
+                    <input
+                      class="mp-field-input"
+                      type="text"
+                      [attr.id]="'long-' + idx"
+                      [attr.placeholder]="'Optional detail ' + (idx + 1)"
+                    />
+                  }
+                </brightrail-modal-body>
+                <brightrail-modal-footer>
+                  <brightrail-button variant="outline" size="sm" (click)="dismissModal()">{{
+                    secondaryLabel()
+                  }}</brightrail-button>
+                  <brightrail-button variant="primary" size="sm" (click)="dismissModal()">{{
+                    primaryLabel()
+                  }}</brightrail-button>
+                </brightrail-modal-footer>
+              }
+              @case ('wizardAltHeader') {
+                <brightrail-modal-body>
+                  <p>{{ bodyParagraph() }}</p>
+                </brightrail-modal-body>
+                <brightrail-modal-footer>
+                  <brightrail-button variant="outline" size="sm" (click)="dismissModal()">{{
+                    secondaryLabel()
+                  }}</brightrail-button>
+                  <brightrail-button variant="primary" size="sm" (click)="dismissModal()">{{
+                    primaryLabel()
+                  }}</brightrail-button>
+                </brightrail-modal-footer>
+              }
+              @case ('autosaveDraft') {
+                <brightrail-modal-body>
+                  <p>{{ bodyParagraph() }}</p>
+                </brightrail-modal-body>
+                <brightrail-modal-footer>
+                  <brightrail-button variant="outline" size="sm" (click)="dismissModal()">{{
+                    secondaryLabel()
+                  }}</brightrail-button>
+                  <brightrail-button variant="primary" size="sm" (click)="dismissModal()">{{
+                    primaryLabel()
+                  }}</brightrail-button>
+                </brightrail-modal-footer>
+              }
+              @case ('advancedOptions') {
+                <brightrail-modal-body>
+                  <label class="mp-field-label" for="adv-prio">Priority</label>
+                  <select
+                    id="adv-prio"
+                    class="mp-field-input"
+                    [ngModel]="advancedPriority()"
+                    (ngModelChange)="advancedPriority.set($event)"
+                    [ngModelOptions]="{ standalone: true }"
+                  >
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                  </select>
+                  <label class="mp-field-label" for="adv-due">Due date</label>
+                  <input
+                    id="adv-due"
+                    type="date"
+                    class="mp-field-input"
+                    [ngModel]="advancedDueDate()"
+                    (ngModelChange)="advancedDueDate.set($event)"
+                    [ngModelOptions]="{ standalone: true }"
+                  />
+                </brightrail-modal-body>
+                <brightrail-modal-footer>
+                  <brightrail-button variant="outline" size="sm" (click)="dismissModal()">{{
+                    secondaryLabel()
+                  }}</brightrail-button>
+                  <brightrail-button variant="primary" size="sm" (click)="dismissModal()">{{
+                    primaryLabel()
+                  }}</brightrail-button>
+                </brightrail-modal-footer>
+              }
+              @default {
+                <brightrail-modal-body>
+                  @if (templateRecipe() === 'loading') {
+                    <div class="mp-loading">
+                      <span class="mp-loading__spin" aria-hidden="true"></span>
+                      <p class="mp-loading__text">{{ bodyParagraph() }}</p>
+                    </div>
+                  } @else {
+                    <p>{{ bodyParagraph() }}</p>
+                  }
+                </brightrail-modal-body>
+
+                <brightrail-modal-footer>
+                  @switch (footerPreset()) {
+                    @case ('primaryOnly') {
+                      <brightrail-button
+                        variant="primary"
+                        size="sm"
+                        [disabled]="primaryDisabled()"
+                        (click)="dismissModal()"
+                      >
+                        {{ primaryLabel() }}
+                      </brightrail-button>
+                    }
+                    @case ('primarySecondary') {
+                      <brightrail-button variant="outline" size="sm" (click)="dismissModal()">
+                        {{ secondaryLabel() }}
+                      </brightrail-button>
+                      @if (templateRecipe() === 'confirmDelete') {
+                        <brightrail-button variant="danger" size="sm" (click)="dismissModal()">
+                          {{ primaryLabel() }}
+                        </brightrail-button>
+                      } @else {
+                        <brightrail-button variant="primary" size="sm" (click)="dismissModal()">
+                          {{ primaryLabel() }}
+                        </brightrail-button>
+                      }
+                    }
+                    @case ('destructive') {
+                      <brightrail-button variant="outline" size="sm" (click)="dismissModal()">
+                        Cancel
+                      </brightrail-button>
+                      <brightrail-button variant="danger" size="sm" (click)="dismissModal()">
+                        Delete
+                      </brightrail-button>
+                    }
+                    @case ('linkOnly') {
+                      <brightrail-button variant="link" size="sm" (click)="dismissModal()">
+                        Learn more →
+                      </brightrail-button>
+                    }
+                  }
+                </brightrail-modal-footer>
+              }
+            }
+          </brightrail-modal>
+        </div>
+      </div>
+      <p class="bp-preview-caption">
+        Preview uses <code>[contain]="true"</code> so the shell stays inside this panel; drop it for full-screen overlays.
+      </p>
+    </section>
+  </div>
+
+  <section class="bp-code" aria-labelledby="modal-code-title">
+    <div class="bp-code__head">
+      <h2 id="modal-code-title" class="bp-code__title">Generated snippets</h2>
+      <div class="bp-code__tabs" role="tablist">
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'html'"
+          [attr.aria-selected]="activeTab() === 'html'"
+          (click)="selectTab('html')"
+        >
+          HTML
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'ts'"
+          [attr.aria-selected]="activeTab() === 'ts'"
+          (click)="selectTab('ts')"
+        >
+          TS
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'scss'"
+          [attr.aria-selected]="activeTab() === 'scss'"
+          (click)="selectTab('scss')"
+        >
+          SCSS
+        </button>
+      </div>
+      <button type="button" class="bp-copy" (click)="copySnippet()">Copy</button>
+    </div>
+    <pre class="bp-pre" role="tabpanel"><code>{{ activeSnippet() }}</code></pre>
+  </section>
+</div>

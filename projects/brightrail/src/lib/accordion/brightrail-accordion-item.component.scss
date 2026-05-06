@@ -1,0 +1,207 @@
+@use '../styles/tokens' as br;
+
+:host {
+  display: block;
+  --br-acc-pad-y: 0.625rem;
+  --br-acc-pad-x: 0.75rem;
+  --br-acc-header-bg: var(--br-color-surface, #{br.$br-color-surface});
+}
+
+.br-acc-item {
+  background: var(--br-acc-header-bg);
+}
+
+.br-acc-item--size-sm {
+  --br-acc-pad-y: 0.45rem;
+  --br-acc-pad-x: 0.5rem;
+  font-size: 0.8125rem;
+}
+
+.br-acc-item--size-md {
+  font-size: 0.875rem;
+}
+
+.br-acc-item--size-lg {
+  --br-acc-pad-y: 0.85rem;
+  --br-acc-pad-x: 1rem;
+  font-size: 0.9375rem;
+}
+
+.br-acc-item__header-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0.25rem;
+}
+
+.br-acc-item__heading {
+  flex: 1 1 auto;
+  margin: 0;
+  min-width: 0;
+}
+
+.br-acc-item__actions {
+  display: flex;
+  align-items: center;
+  padding-inline-end: 0.25rem;
+}
+
+.br-acc-item__trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin: 0;
+  padding: var(--br-acc-pad-y) var(--br-acc-pad-x);
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  border-radius: var(--br-radius-sm, #{br.$br-radius-sm});
+  box-sizing: border-box;
+  min-height: 2.5rem;
+}
+
+.br-acc-item--size-sm .br-acc-item__trigger {
+  min-height: 2.125rem;
+}
+
+.br-acc-item--size-lg .br-acc-item__trigger {
+  min-height: 2.75rem;
+}
+
+.br-acc-item__trigger:focus-visible {
+  outline: 2px solid var(--br-color-primary, #{br.$br-color-primary});
+  outline-offset: 2px;
+}
+
+.br-acc-item__trigger:disabled {
+  cursor: not-allowed;
+  color: var(--br-color-placeholder, #{br.$br-color-placeholder});
+}
+
+.br-acc-item--demo-hover .br-acc-item__trigger:not(:disabled) {
+  background: rgb(0 98 255 / 8%);
+}
+
+.br-acc-item__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.125rem;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.br-acc-item__title {
+  width: 100%;
+  font-weight: 600;
+  color: var(--br-color-text-strong, #{br.$br-color-text-strong});
+}
+
+.br-acc-item__subtitle {
+  width: 100%;
+  font-size: 0.8125em;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--br-color-muted, #{br.$br-color-muted});
+}
+
+.br-acc-item__ico {
+  display: inline-flex;
+  color: var(--br-color-primary, #{br.$br-color-primary});
+}
+
+.br-acc-item__ico-shell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  border: 1px solid rgb(0 98 255 / 18%);
+  background: rgb(0 98 255 / 8%);
+}
+
+.br-acc-item--size-sm .br-acc-item__ico-shell {
+  width: 2.125rem;
+  height: 2.125rem;
+}
+
+.br-acc-item--size-lg .br-acc-item__ico-shell {
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+.br-acc-item--enterprise .br-acc-item__trigger {
+  align-items: flex-start;
+  padding-block: 0.85rem;
+}
+
+.br-acc-item--enterprise .br-acc-item__ico-shell {
+  margin-top: 0.1rem;
+}
+
+.br-acc-item__badge {
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+.br-acc-item__chev {
+  display: inline-flex;
+  flex: 0 0 auto;
+  color: var(--br-color-muted, #{br.$br-color-muted});
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+
+.br-acc-item__chev--glyph-down {
+  transform: rotate(0deg);
+}
+
+.br-acc-item--expanded .br-acc-item__chev--glyph-down {
+  transform: rotate(180deg);
+  color: var(--br-color-primary, #{br.$br-color-primary});
+}
+
+.br-acc-item__chev--glyph-arrow {
+  transform: rotate(0deg);
+}
+
+.br-acc-item--expanded .br-acc-item__chev--glyph-arrow {
+  transform: rotate(-90deg);
+  color: var(--br-color-primary, #{br.$br-color-primary});
+}
+
+.br-acc-item__region {
+  padding: 0 var(--br-acc-pad-x) var(--br-acc-pad-y);
+}
+
+.br-acc-item__panel {
+  padding-top: 0.25rem;
+  color: var(--br-color-text, #{br.$br-color-text});
+  line-height: 1.5;
+}
+
+.br-acc-item__panel :first-child {
+  margin-top: 0;
+}
+
+.br-acc-item__panel :last-child {
+  margin-bottom: 0;
+}
+
+.br-acc-item__panel .br-acc-panel-footer {
+  margin-top: 1rem;
+}
+
+.br-acc-panel-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--br-color-border, #{br.$br-color-border});
+}

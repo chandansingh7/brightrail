@@ -1,0 +1,98 @@
+@use './button-playground.component.scss' as *;
+
+.dr-preview-inner {
+  position: relative;
+  min-height: min(30rem, 58vh);
+}
+
+.dr-preview-shell {
+  position: relative;
+  width: min(100%, 60rem);
+  height: min(62vh, 34rem);
+  margin-inline: auto;
+  border: 1px solid var(--ff-border);
+  border-radius: 0.8rem;
+  overflow: hidden;
+  background: var(--ff-surface);
+}
+
+.dr-fake-app {
+  padding: 1rem;
+}
+
+.dr-fake-app__title {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.dr-fake-app__sub {
+  margin: 0.35rem 0 0;
+  font-size: 0.82rem;
+  color: var(--ff-muted);
+}
+
+.dr-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  gap: 0.6rem;
+  pointer-events: none;
+}
+
+.dr-placeholder p {
+  margin: 0;
+  color: var(--ff-muted);
+}
+
+.dr-placeholder button {
+  pointer-events: auto;
+  border: 1px solid var(--ff-border-strong);
+  background: var(--ff-surface);
+  color: var(--ff-text-core);
+  border-radius: 0.45rem;
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+}
+
+.dr-field + .dr-field {
+  margin-top: 0.75rem;
+}
+
+.dr-field label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ff-label);
+}
+
+.dr-field input,
+.dr-field select {
+  width: 100%;
+  border: 1px solid var(--ff-border-strong);
+  border-radius: 0.45rem;
+  padding: 0.45rem 0.55rem;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--ff-text-core);
+  background: var(--ff-surface);
+}
+
+.dr-advanced {
+  margin-top: 0.75rem;
+  border-top: 1px solid var(--ff-border);
+  padding-top: 0.75rem;
+}
+
+.dr-advanced__summary {
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ff-text-core);
+}
+
+.dr-advanced__body {
+  margin-top: 0.65rem;
+}

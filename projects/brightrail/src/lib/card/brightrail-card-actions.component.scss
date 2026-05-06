@@ -1,0 +1,36 @@
+:host {
+  display: block;
+  box-sizing: border-box;
+}
+
+.br-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+  padding-top: 0.55rem;
+}
+
+.br-card-actions--start {
+  justify-content: flex-start;
+}
+
+.br-card-actions--center {
+  justify-content: center;
+}
+
+.br-card-actions--end {
+  justify-content: flex-end;
+}
+
+.br-card-actions--between {
+  justify-content: space-between;
+}
+
+/* Documented helper for muted meta copy inside actions rows. */
+:host ::ng-deep .brightrail-text-secondary {
+  color: #80868b;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
