@@ -1,0 +1,7 @@
+@use '../button/button-playground.component.scss' as *;
+
+.bc-preview {
+  display: grid;
+  place-items: center;
+  min-height: 16rem;
+}

@@ -1,0 +1,16 @@
+@use '../button/button-playground.component.scss' as *;
+
+.bp-setting-row__label {
+  white-space: nowrap;
+}
+
+.dp-preview {
+  display: grid;
+  place-items: center;
+  min-height: 20rem;
+  padding: 1rem;
+}
+
+.dp-preview brightrail-date-picker {
+  width: min(30rem, 100%);
+}

@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
-# First-time setup + build + run for this Angular workspace.
-# - Installs Node (via nvm) if missing / wrong version
-# - Installs npm deps
-# - Builds the library and both apps
-# - Serves Funfair + Midway on separate ports
+# Build the library + both apps, then serve Funfair + Midway on separate ports.
 #
-# Default ports match projects/funfair/src/app/midway-dev-port.ts — change both if you remap MIDWAY_PORT.
+# Prerequisites: Node 24.x and npm — run ./scripts/setup.sh once if needed.
+# Default ports match projects/funfair/src/app/midway-dev-port.ts.
 
 set -euo pipefail
 
@@ -21,35 +18,30 @@ Usage:
   ./scripts/build-and-run.sh [options]
 
 Options:
-  --no-node      Skip Node/npm checks and installation
-  --no-install   Skip npm install/ci
-  --no-build     Skip builds (library + apps)
-  --no-serve     Skip ng serve (build only)
+  --install      Run npm ci (or npm install) before builds — use after lockfile / deps change
+  --no-build     Skip builds; only serve (assumes artifacts already built)
+  --no-serve     Build only; do not start dev servers
   -h, --help     Show this help
 
 Environment:
-  FUNFAIR_PORT=4200   Port for Funfair dev server
-  MIDWAY_PORT=4201    Port for Midway dev server
-  NVM_DIR=~/.nvm      Override nvm install directory
+  FUNFAIR_PORT   Port for Funfair (default: 4200)
+  MIDWAY_PORT    Port for Midway (default: 4201)
 EOF
 }
 
-NO_NODE=0
-NO_INSTALL=0
+DO_INSTALL=0
 NO_BUILD=0
 NO_SERVE=0
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --no-node) NO_NODE=1; shift ;;
-    --no-install) NO_INSTALL=1; shift ;;
+    --install) DO_INSTALL=1; shift ;;
     --no-build) NO_BUILD=1; shift ;;
     --no-serve) NO_SERVE=1; shift ;;
     -h|--help) usage; exit 0 ;;
     *)
-      echo "Unknown argument: $1"
-      echo ""
-      usage
+      echo "Unknown argument: $1" >&2
+      usage >&2
       exit 2
       ;;
   esac
@@ -62,19 +54,32 @@ die() {
 
 have() { command -v "$1" >/dev/null 2>&1; }
 
-ensure_cmd() {
-  local cmd="$1"
-  local hint="${2:-}"
-  if ! have "$cmd"; then
-    if [[ -n "$hint" ]]; then
-      die "Missing required command: ${cmd}. ${hint}"
-    fi
-    die "Missing required command: ${cmd}"
+free_port_if_busy() {
+  local port="$1"
+  if ! have lsof; then
+    echo "WARN: lsof not found; cannot auto-free port ${port}." >&2
+    return 0
+  fi
+
+  local pids
+  pids="$(lsof -ti tcp:"${port}" -sTCP:LISTEN 2>/dev/null || true)"
+  if [[ -z "${pids}" ]]; then
+    return 0
+  fi
+
+  echo "==> Port ${port} is in use. Stopping process(es): ${pids}"
+  kill ${pids} 2>/dev/null || true
+  sleep 1
+
+  local still_busy
+  still_busy="$(lsof -ti tcp:"${port}" -sTCP:LISTEN 2>/dev/null || true)"
+  if [[ -n "${still_busy}" ]]; then
+    echo "==> Forcing process(es) off port ${port}: ${still_busy}"
+    kill -9 ${still_busy} 2>/dev/null || true
   fi
 }
 
 node_major() {
-  # Prints major version number or empty string.
   if ! have node; then
     echo ""
     return 0
@@ -82,89 +87,28 @@ node_major() {
   node -p "process.versions.node.split('.')[0]" 2>/dev/null || echo ""
 }
 
-install_nvm_if_needed() {
-  # Installs nvm to $NVM_DIR (default ~/.nvm) if missing.
-  # Uses the official install script; requires curl + git.
-  : "${NVM_DIR:="$HOME/.nvm"}"
-
-  if [[ -s "${NVM_DIR}/nvm.sh" ]]; then
-    return 0
+ensure_runtime() {
+  if ! have node || ! have npm; then
+    die "Node.js and npm are required. Run ./scripts/setup.sh first."
   fi
-
-  echo "==> nvm not found. Installing nvm (Node Version Manager)"
-  ensure_cmd curl "Install curl first (macOS: xcode-select --install or brew install curl)"
-  ensure_cmd git "Install git first (macOS: xcode-select --install)"
-
-  # Official install script (pinned for reproducibility).
-  # https://github.com/nvm-sh/nvm
-  curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-
-  if [[ ! -s "${NVM_DIR}/nvm.sh" ]]; then
-    die "nvm install finished but ${NVM_DIR}/nvm.sh was not found. Open a new terminal and re-run."
-  fi
-}
-
-load_nvm() {
-  : "${NVM_DIR:="$HOME/.nvm"}"
-  # shellcheck disable=SC1090
-  [[ -s "${NVM_DIR}/nvm.sh" ]] && . "${NVM_DIR}/nvm.sh"
-  # shellcheck disable=SC1090
-  [[ -s "${NVM_DIR}/bash_completion" ]] && . "${NVM_DIR}/bash_completion"
-}
-
-ensure_node_24() {
-  # Repo requires Node >=24 <25 (see package.json engines).
   local major
   major="$(node_major)"
-  if [[ "$major" == "24" ]]; then
-    return 0
-  fi
-
-  install_nvm_if_needed
-  load_nvm
-  have nvm || die "nvm is installed but not available in this shell. Open a new terminal and re-run."
-
-  local desired="24"
-  if [[ -f "${ROOT}/.nvmrc" ]]; then
-    echo "==> Using Node version from .nvmrc"
-    nvm install
-    nvm use
-  else
-    echo "==> Installing Node ${desired}.x via nvm"
-    nvm install "${desired}"
-    nvm use "${desired}"
-  fi
-
-  major="$(node_major)"
   if [[ "$major" != "24" ]]; then
-    die "Node version is still not 24.x after install (found: $(node -v 2>/dev/null || echo 'none'))."
-  fi
-}
-
-ensure_npm_ok() {
-  ensure_cmd node "Node.js is required. Re-run without --no-node to auto-install via nvm."
-  ensure_cmd npm "npm should come with Node.js. Re-run without --no-node to auto-install via nvm."
-}
-
-ensure_prereqs() {
-  # Keep prereqs minimal; install_nvm_if_needed already checks curl/git when needed.
-  ensure_cmd bash
-  if [[ "$NO_NODE" -eq 0 ]]; then
-    ensure_node_24
-    ensure_npm_ok
-  else
-    ensure_npm_ok
+    die "This repo expects Node.js 24.x (see package.json engines). You have: $(node -v 2>/dev/null || echo none). Run ./scripts/setup.sh or switch with nvm."
   fi
 }
 
 run_ng() {
-  # Prefer local Angular CLI via npx (no global install required).
   npx --no-install ng "$@"
 }
 
-ensure_prereqs
+ensure_runtime
 
-if [[ "$NO_INSTALL" -eq 0 ]]; then
+if [[ ! -d "${ROOT}/node_modules" ]] && [[ "$DO_INSTALL" -eq 0 ]]; then
+  die "node_modules missing. Run ./scripts/setup.sh or ./scripts/build-and-run.sh --install"
+fi
+
+if [[ "$DO_INSTALL" -eq 1 ]]; then
   if [[ -f "${ROOT}/package-lock.json" ]]; then
     echo "==> Installing dependencies (npm ci)"
     npm ci
@@ -179,9 +123,7 @@ if [[ "$NO_BUILD" -eq 0 ]]; then
   npm run build:lib
 
   echo "==> npm install (refresh file:dist/brightrail for Midway)"
-  if [[ "$NO_INSTALL" -eq 0 ]]; then
-    npm install
-  fi
+  npm install
 
   echo "==> Building funfair and midway"
   npm run build:funfair
@@ -211,6 +153,8 @@ echo "==> Serving Funfair at http://localhost:${FUNFAIR_PORT}"
 echo "==> Serving Midway at  http://localhost:${MIDWAY_PORT}"
 echo "    (Funfair includes a link to Midway; set FUNFAIR_PORT / MIDWAY_PORT to override.)"
 echo ""
+
+free_port_if_busy "${FUNFAIR_PORT}"
 
 run_ng serve funfair --port "${FUNFAIR_PORT}" &
 FUNFAIR_PID=$!

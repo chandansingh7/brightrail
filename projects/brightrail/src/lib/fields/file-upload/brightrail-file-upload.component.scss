@@ -1,0 +1,376 @@
+:host {
+  display: block;
+}
+
+.br-fu {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.br-fu__label {
+  color: var(--br-fg, #1f2937);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.br-fu__required {
+  color: #dc2626;
+}
+
+.br-fu__dropzone {
+  border: 1px dashed #94a3b8;
+  border-radius: 0.75rem;
+  display: grid;
+  gap: 0.35rem;
+  justify-items: center;
+  padding: 1rem;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.br-fu--variant-compact .br-fu__dropzone {
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  justify-items: start;
+  padding: 0.55rem 0.7rem;
+  gap: 0.5rem;
+}
+
+.br-fu--variant-compact .br-fu__cloud {
+  display: none;
+}
+
+.br-fu--variant-button .br-fu__dropzone {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.35rem;
+  border-style: solid;
+  background: transparent;
+}
+
+.br-fu--variant-button .br-fu__button {
+  border-color: #94a3b8;
+}
+
+.br-fu--state-hover .br-fu__dropzone {
+  border-color: #3b82f6;
+  background: #f8fbff;
+}
+
+.br-fu--state-focused .br-fu__dropzone {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 15%);
+}
+
+.br-fu--state-disabled .br-fu__dropzone {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.br-fu__dropzone:hover {
+  border-color: #3b82f6;
+  background: #f8fbff;
+}
+
+.br-fu__dropzone--dragover {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+.br-fu__dropzone--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #f1f5f9;
+}
+
+.br-fu__input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.br-fu__placeholder {
+  font-size: 0.95rem;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.br-fu__button {
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.72rem;
+  color: #1e293b;
+  background: #fff;
+  cursor: pointer;
+}
+
+.br-fu__button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.br-fu__cloud {
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #2563eb;
+}
+
+.br-fu__cloud svg {
+  width: 100%;
+  height: 100%;
+  fill: currentcolor;
+}
+
+.br-fu__files {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.br-fu__list-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.br-fu__file {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  gap: 0.65rem;
+}
+
+.br-fu__file-meta {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.br-fu__file-name {
+  font-size: 0.8rem;
+  color: #0f172a;
+}
+
+.br-fu__file-size {
+  font-size: 0.7rem;
+  color: #64748b;
+}
+
+.br-fu__file-progress {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 7.5rem;
+}
+
+.br-fu__file-progress-bar {
+  width: 5.25rem;
+  height: 0.2rem;
+  border-radius: 999px;
+  background: #dbeafe;
+  overflow: hidden;
+}
+
+.br-fu__file-progress-bar i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #2563eb;
+}
+
+.br-fu__file-progress-value {
+  font-size: 0.68rem;
+  color: #334155;
+}
+
+.br-fu__file-progress-ok {
+  color: #16a34a;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.br-fu__file--uploading .br-fu__file-progress-bar {
+  background: #dbeafe;
+}
+
+.br-fu__file--uploading .br-fu__file-progress-bar i {
+  background: #2563eb;
+}
+
+.br-fu__file--error {
+  border-color: #fecaca;
+  background: #fff7f7;
+}
+
+.br-fu__file--error .br-fu__file-progress-bar i {
+  background: #dc2626;
+}
+
+.br-fu__remove,
+.br-fu__clear,
+.br-fu__add {
+  border: 0;
+  border-radius: 0.4rem;
+  background: transparent;
+  color: #64748b;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.br-fu__remove[disabled],
+.br-fu__clear[disabled] {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.br-fu__hint {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.br-fu__caption {
+  font-size: 0.72rem;
+  color: #64748b;
+}
+
+.br-fu__image-preview {
+  border: 1px solid #dbe2ea;
+  border-radius: 0.6rem;
+  overflow: hidden;
+  max-height: 10.5rem;
+}
+
+.br-fu__image-preview img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.br-fu__image-fallback {
+  min-height: 7.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(180deg, rgb(30 64 175 / 40%), rgb(15 23 42 / 55%)),
+    radial-gradient(circle at 35% 15%, #dbeafe 0%, #bfdbfe 28%, #1d4ed8 100%);
+  color: #f8fafc;
+  font-size: 0.8rem;
+}
+
+.br-fu__enterprise {
+  border: 1px solid #dbe2ea;
+  border-radius: 0.55rem;
+  padding: 0.45rem 0.6rem;
+  display: grid;
+  gap: 0.18rem;
+  background: #f8fafc;
+}
+
+.br-fu__enterprise-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.br-fu__enterprise-meta {
+  font-size: 0.66rem;
+  color: #64748b;
+}
+
+.br-fu__hint--success {
+  color: #15803d;
+}
+.br-fu__hint--warning {
+  color: #b45309;
+}
+.br-fu__hint--error {
+  color: #b91c1c;
+}
+.br-fu__hint--info {
+  color: #1d4ed8;
+}
+
+.br-fu--sm .br-fu__dropzone {
+  padding: 0.75rem;
+}
+
+.br-fu--sm.br-fu--variant-compact .br-fu__dropzone {
+  padding: 0.45rem 0.6rem;
+}
+
+.br-fu--lg .br-fu__dropzone {
+  padding: 1.25rem;
+}
+
+.br-fu--lg.br-fu--variant-compact .br-fu__dropzone {
+  padding: 0.65rem 0.8rem;
+}
+
+.br-fu--xl .br-fu__dropzone {
+  padding: 1.5rem;
+}
+
+.br-fu--xl.br-fu--variant-compact .br-fu__dropzone {
+  padding: 0.75rem 0.95rem;
+}
+
+.br-fu--filled .br-fu__dropzone {
+  background: #f8fafc;
+}
+
+.br-fu--soft .br-fu__dropzone {
+  background: #f9fbff;
+  border-color: #cbdcfb;
+}
+
+.br-fu--surface-enterprise .br-fu__dropzone {
+  border-style: solid;
+}
+
+.br-fu--surface-futuristic .br-fu__dropzone {
+  border-style: solid;
+  border-color: #c7d2fe;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgb(239 246 255 / 95%), rgb(245 243 255 / 95%));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.8rem;
+}
+
+.br-fu--surface-futuristic .br-fu__button {
+  border-color: #a5b4fc;
+  color: #4338ca;
+}
+
+.br-fu--surface-futuristic .br-fu__placeholder {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.br-fu--status-error .br-fu__dropzone {
+  border-color: #dc2626;
+}
+
+.br-fu--status-warning .br-fu__dropzone {
+  border-color: #d97706;
+}
+
+.br-fu--status-success .br-fu__dropzone {
+  border-color: #16a34a;
+}

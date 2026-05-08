@@ -1,0 +1,105 @@
+@use '../button/button-playground.component.scss' as *;
+
+.bp-preview-surface--progress {
+  align-items: stretch;
+  justify-content: center;
+}
+
+.bp-preview-inner--prog {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 12rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Shrink-wrap up to max width so `margin-inline: auto` centers the preview (e.g. compact card). */
+.prog-progress-single {
+  box-sizing: border-box;
+  width: min(100%, 28rem);
+  margin-inline: auto;
+}
+
+.prog-file-stack {
+  width: 100%;
+  max-width: 36rem;
+}
+
+.prog-file-stack--single {
+  max-width: 28rem;
+  margin-inline: auto;
+}
+
+.prog-demo-table {
+  width: 100%;
+  max-width: 44rem;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+
+.prog-demo-table th,
+.prog-demo-table td {
+  border-bottom: 1px solid var(--ff-border, #e8eaed);
+  padding: 0.5rem 0.65rem;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.prog-demo-table th {
+  font-weight: 700;
+  color: var(--ff-muted, #5f6368);
+}
+
+.prog-pill {
+  display: inline-block;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.prog-pill--success {
+  background: rgb(13 159 76 / 14%);
+  color: #0d9f4c;
+}
+
+.prog-pill--primary {
+  background: rgb(0 98 255 / 12%);
+  color: #0062ff;
+}
+
+.prog-pill--warning {
+  background: rgb(232 113 10 / 14%);
+  color: #e8710a;
+}
+
+.prog-pill--muted {
+  background: rgb(95 99 104 / 12%);
+  color: #5f6368;
+}
+
+.prog-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 1rem;
+  width: 100%;
+  max-width: 48rem;
+}
+
+.prog-kpi-grid--single {
+  grid-template-columns: minmax(11rem, 16rem);
+  justify-content: center;
+  max-width: 20rem;
+  margin-inline: auto;
+}
+
+.prog-kpi-card {
+  border: 1px solid var(--ff-border, #e8eaed);
+  border-radius: 0.65rem;
+  padding: 0.75rem;
+  background: var(--ff-surface, #fff);
+}
+

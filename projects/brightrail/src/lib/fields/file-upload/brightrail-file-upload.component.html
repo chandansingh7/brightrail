@@ -1,0 +1,160 @@
+<div class="br-fu" [class]="rootClass()">
+  @if (showLabel() && labelPosition() === 'top') {
+    <label class="br-fu__label" [attr.for]="controlId()">
+      {{ label() }}
+      @if (required()) {
+        <span class="br-fu__required" aria-hidden="true">*</span>
+      }
+    </label>
+  }
+
+  <label
+    class="br-fu__dropzone"
+    [class.br-fu__dropzone--disabled]="effectiveDisabled()"
+    [class.br-fu__dropzone--dragover]="dragOver()"
+    [attr.for]="controlId()"
+    [attr.aria-disabled]="effectiveDisabled() ? 'true' : null"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+  >
+    <input
+      #fileInput
+      class="br-fu__input"
+      type="file"
+      [id]="controlId()"
+      [disabled]="effectiveDisabled() || !canAddMoreFiles()"
+      [multiple]="multiple()"
+      [accept]="accept() ?? ''"
+      [attr.aria-required]="required() ? 'true' : null"
+      [attr.aria-describedby]="resolvedHintText() ? hintId() : null"
+      (change)="onFileInputChange($event)"
+    />
+    @if (showCloudIcon()) {
+      <span class="br-fu__cloud" aria-hidden="true">
+        <svg viewBox="0 0 24 24" focusable="false">
+          <path
+            d="M19 18a3 3 0 0 0 .4-6A5.5 5.5 0 0 0 8.4 9.8 4 4 0 0 0 8 18h11zm-7-8 3 3h-2v4h-2v-4H9l3-3z"
+          />
+        </svg>
+      </span>
+    }
+    @if (variant() !== 'button') {
+      <span class="br-fu__placeholder">{{ placeholder() }}</span>
+    }
+    <button
+      type="button"
+      class="br-fu__button"
+      [disabled]="effectiveDisabled() || !canAddMoreFiles()"
+      (click)="fileInput.click(); $event.preventDefault(); $event.stopPropagation()"
+    >
+      {{ buttonText() }}
+    </button>
+  </label>
+
+  @if (surface() === 'image-preview' && previewImageUrl().trim().length > 0) {
+    <div class="br-fu__image-preview">
+      @if (!imageLoadError()) {
+        <img
+          [src]="previewImageUrl()"
+          [alt]="previewImageAlt()"
+          (error)="onPreviewImageError()"
+          (load)="onPreviewImageLoad()"
+        />
+      } @else {
+        <div class="br-fu__image-fallback">
+          <span>Image preview unavailable</span>
+        </div>
+      }
+    </div>
+  } @else if (surface() === 'image-preview') {
+    <div class="br-fu__image-preview">
+      <div class="br-fu__image-fallback">
+        <span>Add a preview image URL</span>
+      </div>
+    </div>
+  }
+
+  @if (surface() === 'enterprise' && enterprisePattern() !== 'none') {
+    <div class="br-fu__enterprise">
+      <span class="br-fu__enterprise-title">
+        @if (enterprisePattern() === 'document-submission') {
+          Document submission
+        } @else if (enterprisePattern() === 'type-restrictions') {
+          File type restrictions
+        } @else if (enterprisePattern() === 'with-description') {
+          Upload with description
+        } @else {
+          Replace file
+        }
+      </span>
+      <span class="br-fu__enterprise-meta">
+        @if (enterpriseSecondaryText().trim().length > 0) {
+          {{ enterpriseSecondaryText() }}
+        } @else if (enterprisePattern() === 'type-restrictions') {
+          Allowed: PDF, DOCX, XLSX, PPTX
+        } @else if (enterprisePattern() === 'replace-file') {
+          Current: old-report.pdf
+        } @else {
+          Enterprise workflow
+        }
+      </span>
+    </div>
+  }
+
+  @if (shouldShowFiles()) {
+    <ul class="br-fu__files">
+      @for (item of visibleItems(); track item.id; let idx = $index) {
+        <li class="br-fu__file" [class]="itemStatusClass(item)">
+          <div class="br-fu__file-meta">
+            <span class="br-fu__file-name">{{ item.name }}</span>
+            <span class="br-fu__file-size">{{ item.sizeLabel }}</span>
+          </div>
+          @if (showUploadProgress()) {
+            <div class="br-fu__file-progress">
+              <span class="br-fu__file-progress-bar"><i [ngStyle]="progressStyle(item)"></i></span>
+              <span class="br-fu__file-progress-value">{{ item.progress ?? 0 }}%</span>
+              @if (item.status === 'success') {
+                <span class="br-fu__file-progress-ok" aria-hidden="true">✓</span>
+              }
+            </div>
+          }
+          <button
+            type="button"
+            class="br-fu__remove"
+            [disabled]="effectiveDisabled()"
+            [attr.aria-label]="'Remove ' + item.name"
+            (click)="removeFile(idx)"
+          >
+            {{ item.actionLabel || 'Remove' }}
+          </button>
+        </li>
+      }
+    </ul>
+
+    <div class="br-fu__list-actions">
+      @if (showFooterActions()) {
+        <button
+          type="button"
+          class="br-fu__add"
+          [disabled]="effectiveDisabled() || !canAddMoreFiles()"
+          (click)="fileInput.click()"
+        >
+          {{ addMoreText() }}
+        </button>
+      }
+      <button type="button" class="br-fu__clear" [disabled]="effectiveDisabled()" (click)="clearAll()">
+        {{ clearAllText() }}
+      </button>
+    </div>
+  }
+
+  @if (resolvedHintText()) {
+    <div [id]="hintId()" class="br-fu__hint" [class]="'br-fu__hint--' + resolvedStatus()">
+      {{ resolvedHintText() }}
+    </div>
+  }
+  @if (maxSizeCaption()) {
+    <div class="br-fu__caption">{{ maxSizeCaption() }}</div>
+  }
+</div>

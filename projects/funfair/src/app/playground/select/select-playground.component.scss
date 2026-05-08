@@ -1,0 +1,195 @@
+/* Same shell + snippet chrome as button playground; text-field affordances from shared partial. */
+@use '../button/button-playground.component.scss' as *;
+@use '../playground-text-field-extras.scss' as *;
+
+/* Native <select> option styling is limited; headers still read as section labels. */
+.demo-sel-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.demo-sel-panel__opt {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0.45rem 0.55rem;
+  border: none;
+  border-radius: 0.35rem;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  color: var(--ff-text, #1c1c1c);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.demo-sel-panel__opt--wrap {
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: clip;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.demo-sel-panel__opt--active {
+  background: color-mix(in srgb, var(--ff-brand, #0062ff) 14%, transparent);
+  outline: 1px solid color-mix(in srgb, var(--ff-brand, #0062ff) 45%, transparent);
+}
+
+.demo-sel-panel__opt:hover {
+  background: color-mix(in srgb, var(--ff-brand, #0062ff) 12%, transparent);
+}
+
+.sel-opt-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.sel-opt-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.sel-inline-hint {
+  font-size: 0.72rem;
+  color: color-mix(in srgb, var(--ff-text, #1c1c1c) 65%, transparent);
+}
+
+.sel-opt-btn {
+  border: 1px solid var(--ff-border, #d1d5db);
+  background: var(--ff-surface, #fff);
+  border-radius: 0.35rem;
+  font: inherit;
+  font-size: 0.72rem;
+  padding: 0.2rem 0.45rem;
+  cursor: pointer;
+}
+
+.sel-opt-btn--save {
+  border-color: color-mix(in srgb, var(--ff-brand, #0062ff) 45%, #d1d5db);
+}
+
+.sel-opt-btn--danger {
+  border-color: #fca5a5;
+  color: #b91c1c;
+}
+
+.sel-opt-input {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--ff-border, #d1d5db);
+  border-radius: 0.35rem;
+  font: inherit;
+  padding: 0.35rem 0.45rem;
+}
+
+.sel-inline-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  width: min(100%, 34rem);
+}
+
+.bp-code-inline {
+  font-size: 0.85em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  padding: 0.08em 0.28em;
+  border-radius: 0.25rem;
+  background: color-mix(in srgb, var(--ff-muted) 14%, transparent);
+}
+
+.sel-assignee-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: color-mix(in srgb, var(--ff-brand, #0062ff) 18%, transparent);
+  color: var(--ff-brand, #0062ff);
+}
+
+.sel-cat-prefix {
+  display: inline-flex;
+  align-items: center;
+}
+
+.sel-cat-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #8b5cf6;
+  flex-shrink: 0;
+}
+
+.sel-lang-prefix {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  line-height: 1;
+}
+
+.sel-tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.sel-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.12rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.2;
+  background: color-mix(in srgb, var(--ff-brand, #0062ff) 12%, var(--ff-surface, #fff));
+  border: 1px solid color-mix(in srgb, var(--ff-border, #ccc) 85%, transparent);
+  color: var(--ff-text, #1c1c1c);
+}
+
+.bp-preview-inner--fixed-select {
+  inline-size: min(24rem, 100%);
+}
+
+/* Keep preview select width stable across option changes. */
+.bp-preview-inner--fixed-select > brightrail-select:not(.br-select-host--full) {
+  /*
+   * Force a fixed preview width regardless of selected label length.
+   * `!important` is used intentionally to beat host-level defaults from shared field styles.
+   */
+  display: block !important;
+  --br-select-host-width: 100%;
+  inline-size: 100% !important;
+  min-inline-size: 100% !important;
+  max-inline-size: 100% !important;
+  flex: 0 0 100% !important;
+}
+
+.sel-check-opt {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.5rem;
+  align-items: start;
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.35rem;
+}
+
+.sel-check-opt:hover {
+  background: color-mix(in srgb, var(--ff-brand, #0062ff) 10%, transparent);
+}
+
+.sel-check-opt input[type='checkbox'] {
+  margin-top: 0.14rem;
+}

@@ -1,0 +1,300 @@
+<div class="bp">
+  <div class="bp-grid">
+    <section class="bp-panel bp-panel--settings" aria-labelledby="rd-settings-title">
+      <div class="bp-settings-head">
+        <h2 id="rd-settings-title" class="bp-settings-head__title">Component settings</h2>
+        <button type="button" class="bp-settings-reset" (click)="resetToDefaults()" title="Reset">
+          <span class="bp-sr-only">Reset radio settings</span>
+          <svg
+            class="bp-settings-reset__icon"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              fill="currentColor"
+              d="M12 6V3L8 7l4 4V8c2.76 0 5 2.24 5 5 0 1.28-.48 2.45-1.26 3.35l1.41 1.41A6.96 6.96 0 0 0 19 13c0-3.87-3.13-7-7-7zm0 14c-2.76 0-5-2.24-5-5 0-1.28.48-2.45 1.26-3.35L6.85 10.24A6.96 6.96 0 0 0 5 13c0 3.87 3.13 7 7 7v3l4-4-4-4v3z"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="bp-settings-block">
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Component</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" disabled>
+              <option>Radio</option></select
+            ><span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Pattern category</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="selectedRecipeGroup()"
+              (ngModelChange)="onRecipeGroupNgModelChange($event)"
+              [ngModelOptions]="ngModelStandalone"
+            >
+              @for (g of recipeGroups; track g) {
+                <option [value]="g">{{ g }}</option>
+              }</select
+            ><span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Pattern</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="recipe()"
+              (ngModelChange)="onRecipeNgModelChange($event)"
+              [ngModelOptions]="ngModelStandalone"
+            >
+              @for (opt of recipesInGroup(selectedRecipeGroup()); track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }</select
+            ><span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Variant</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="variant()"
+              (ngModelChange)="variant.set($event)"
+              [ngModelOptions]="ngModelStandalone"
+            >
+              @for (v of variantOptions; track v) {
+                <option [value]="v">{{ v }}</option>
+              }</select
+            ><span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Status</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="status()"
+              (ngModelChange)="status.set($event)"
+              [ngModelOptions]="ngModelStandalone"
+            >
+              @for (v of statusOptions; track v) {
+                <option [value]="v">{{ v }}</option>
+              }</select
+            ><span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Tone</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="tone()"
+              (ngModelChange)="tone.set($event)"
+              [ngModelOptions]="ngModelStandalone"
+            >
+              @for (v of toneOptions; track v) {
+                <option [value]="v">{{ v }}</option>
+              }</select
+            ><span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Label position</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="labelPosition()"
+              (ngModelChange)="labelPosition.set($event)"
+              [ngModelOptions]="ngModelStandalone"
+            >
+              @for (v of labelPositionOptions; track v) {
+                <option [value]="v">{{ v }}</option>
+              }</select
+            ><span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Size</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="size()"
+              (ngModelChange)="size.set($event)"
+              [ngModelOptions]="ngModelStandalone"
+            >
+              @for (v of sizeOptions; track v) {
+                <option [value]="v">{{ v }}</option>
+              }</select
+            ><span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">State</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="state()"
+              (ngModelChange)="state.set($event)"
+              [ngModelOptions]="ngModelStandalone"
+            >
+              @for (v of stateOptions; track v) {
+                <option [value]="v">{{ v }}</option>
+              }</select
+            ><span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Orientation</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="layout()"
+              (ngModelChange)="layout.set($event)"
+              [ngModelOptions]="ngModelStandalone"
+            >
+              @for (v of layoutOptions; track v) {
+                <option [value]="v">{{ v }}</option>
+              }</select
+            ><span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Icon</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="optionIcon()"
+              (ngModelChange)="optionIcon.set($event)"
+              [ngModelOptions]="ngModelStandalone"
+            >
+              @for (v of iconOptions; track v) {
+                <option [value]="v">{{ v }}</option>
+              }</select
+            ><span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Disabled</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="state() === 'disabled' ? 'yes' : 'no'"
+              (ngModelChange)="state.set($event === 'yes' ? 'disabled' : 'default')"
+              [ngModelOptions]="ngModelStandalone"
+            >
+              @for (opt of yesNo; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }</select
+            ><span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Theme</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="themeService.theme()"
+              (ngModelChange)="themeService.setTheme($event)"
+              [ngModelOptions]="ngModelStandalone"
+            >
+              @for (opt of themeRowOptions; track opt.id) {
+                <option [value]="opt.id">{{ opt.label }}</option>
+              }</select
+            ><span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bp-panel bp-panel--preview" aria-labelledby="rd-preview-title">
+      <h2 id="rd-preview-title" class="bp-panel__title bp-panel__title--live">
+        <span class="bp-live-dot" aria-hidden="true"></span>Live preview
+      </h2>
+      <div class="bp-preview-surface bp-preview-surface--stretch">
+        <div class="bp-preview-inner bp-preview-inner--radio">
+          @if (usesGroup()) {
+            <brightrail-radio-group
+              class="rd-preview-group"
+              name="notification-preference"
+              [groupLabel]="groupLabel()"
+              [options]="groupOptions()"
+              [selectedId]="selectedId()"
+              [layout]="layout()"
+              [tone]="tone()"
+              [variant]="variant()"
+              [status]="status()"
+              [labelPosition]="labelPosition()"
+              [size]="size()"
+              [state]="state()"
+              [invalid]="invalid()"
+              [required]="required()"
+              [errorText]="errorText()"
+              (selectedIdChange)="selectedId.set($event)"
+            />
+          } @else {
+            <brightrail-radio
+              [label]="label()"
+              [groupLabel]="groupLabel()"
+              [description]="description()"
+              [helperText]="description()"
+              [errorText]="errorText()"
+              [icon]="optionIcon()"
+              [tone]="tone()"
+              [variant]="variant()"
+              [status]="status()"
+              [labelPosition]="labelPosition()"
+              [size]="size()"
+              [state]="state()"
+              [required]="required()"
+              [invalid]="invalid()"
+              [checked]="checked()"
+              (checkedChange)="checked.set($event)"
+            />
+          }
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="bp-code" aria-labelledby="rd-code-title">
+    <div class="bp-code__head">
+      <h2 id="rd-code-title" class="bp-code__title">Generated snippets</h2>
+      <div class="bp-code__tabs" role="tablist">
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'html'"
+          (click)="selectTab('html')"
+        >
+          HTML
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'ts'"
+          (click)="selectTab('ts')"
+        >
+          TS
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="bp-tab"
+          [class.is-active]="activeTab() === 'scss'"
+          (click)="selectTab('scss')"
+        >
+          SCSS
+        </button>
+      </div>
+      <button type="button" class="bp-copy" (click)="copySnippet()">Copy</button>
+    </div>
+    <pre class="bp-pre" role="tabpanel"><code>{{ activeSnippet() }}</code></pre>
+  </section>
+</div>

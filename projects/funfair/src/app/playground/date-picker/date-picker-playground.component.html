@@ -1,0 +1,222 @@
+<div class="bp">
+  <div class="bp-grid">
+    <section class="bp-panel bp-panel--settings" aria-labelledby="dp-settings-title">
+      <div class="bp-settings-head">
+        <h2 id="dp-settings-title" class="bp-settings-head__title">Component settings</h2>
+        <button type="button" class="bp-settings-reset" (click)="resetToDefaults()" title="Reset">↻</button>
+      </div>
+      <div class="bp-settings-block">
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Component</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" disabled><option>Date picker</option></select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Scenario group</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="selectedRecipeGroup()" (ngModelChange)="onRecipeGroupNgModelChange($event)" [ngModelOptions]="ngModelStandalone">@for (g of recipeGroups; track g) {<option [value]="g">{{ g }}</option>}</select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Scenario</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="scenario()" (ngModelChange)="onScenarioNgModelChange($event)" [ngModelOptions]="ngModelStandalone">@for (opt of recipesInGroup(selectedRecipeGroup()); track opt.value) {<option [value]="opt.value">{{ opt.label }}</option>}</select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Appearance</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="appearance()" (ngModelChange)="appearance.set($event)" [ngModelOptions]="ngModelStandalone">@for (a of appearanceOptions; track a) {<option [value]="a">{{ a | titlecase }}</option>}</select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">State</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="status()" (ngModelChange)="status.set($event)" [ngModelOptions]="ngModelStandalone"><option value="none">Default</option><option value="error">Error</option><option value="success">Success</option><option value="warning">Warning</option></select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Size</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="size()" (ngModelChange)="size.set($event)" [ngModelOptions]="ngModelStandalone">@for (sz of sizeOptions; track sz) {<option [value]="sz">{{ sz | titlecase }}</option>}</select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Shape</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="shape()" (ngModelChange)="shape.set($event)" [ngModelOptions]="ngModelStandalone">@for (sh of shapeOptions; track sh) {<option [value]="sh">{{ sh | titlecase }}</option>}</select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Disabled</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="disabledToggle() ? 'yes' : 'no'" (ngModelChange)="disabledToggle.set($event === 'yes')" [ngModelOptions]="ngModelStandalone"><option value="no">No</option><option value="yes">Yes</option></select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Label position</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="labelPosition()" (ngModelChange)="labelPosition.set($event)" [ngModelOptions]="ngModelStandalone">@for (p of labelPosOptions; track p) {<option [value]="p">{{ p | titlecase }}</option>}</select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">With helper text</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="helperToggle() ? 'yes' : 'no'" (ngModelChange)="helperToggle.set($event === 'yes')" [ngModelOptions]="ngModelStandalone"><option value="yes">Yes</option><option value="no">No</option></select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Show icon</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="showIconToggle() ? 'yes' : 'no'" (ngModelChange)="showIconToggle.set($event === 'yes')" [ngModelOptions]="ngModelStandalone"><option value="yes">Yes</option><option value="no">No</option></select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Open popup</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="openPanel() ? 'yes' : 'no'" (ngModelChange)="openPanel.set($event === 'yes')" [ngModelOptions]="ngModelStandalone"><option value="yes">Yes</option><option value="no">No</option></select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Range commit mode</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="rangeCommitMode()" (ngModelChange)="rangeCommitMode.set($event)" [ngModelOptions]="ngModelStandalone"><option value="apply">Apply button</option><option value="instant">Instant</option></select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Range end style</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="rangeEndStyle()" (ngModelChange)="rangeEndStyle.set($event)" [ngModelOptions]="ngModelStandalone"><option value="outline">Outline</option><option value="pill">Pill</option></select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Range enabled</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="rangeEnabled() ? 'yes' : 'no'" (ngModelChange)="rangeEnabled.set($event === 'yes')" [ngModelOptions]="ngModelStandalone"><option value="yes">Yes</option><option value="no">No</option></select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Color tone</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="tone()" (ngModelChange)="tone.set($event)" [ngModelOptions]="ngModelStandalone">@for (t of toneOptions; track t) {<option [value]="t">{{ t | titlecase }}</option>}</select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Selected color</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="selectedDateColor()" (ngModelChange)="selectedDateColor.set($event)" [ngModelOptions]="ngModelStandalone">@for (opt of colorOptions; track opt.value) {<option [value]="opt.value">{{ opt.label }}</option>}</select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Selected text</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="selectedDateTextColor()" (ngModelChange)="selectedDateTextColor.set($event)" [ngModelOptions]="ngModelStandalone">@for (opt of colorOptions; track opt.value) {<option [value]="opt.value">{{ opt.label }}</option>}</select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Range fill</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="rangeColor()" (ngModelChange)="rangeColor.set($event)" [ngModelOptions]="ngModelStandalone">@for (opt of rangeColorOptions; track opt.value) {<option [value]="opt.value">{{ opt.label }}</option>}</select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Range text</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="rangeTextColor()" (ngModelChange)="rangeTextColor.set($event)" [ngModelOptions]="ngModelStandalone">@for (opt of colorOptions; track opt.value) {<option [value]="opt.value">{{ opt.label }}</option>}</select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Text align</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="textAlign()" (ngModelChange)="textAlign.set($event)" [ngModelOptions]="ngModelStandalone">@for (t of textAlignOptions; track t) {<option [value]="t">{{ t | titlecase }}</option>}</select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Field width</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="fieldWidth()" (ngModelChange)="fieldWidth.set($event)" [ngModelOptions]="ngModelStandalone"><option value="16rem">Small</option><option value="22rem">Medium</option><option value="28rem">Large</option><option value="100%">Full</option></select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Format</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="format()" (ngModelChange)="format.set($event)" [ngModelOptions]="ngModelStandalone">@for (f of formatOptions; track f) {<option [value]="f">{{ f }}</option>}</select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Week start</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="weekStartModel()" (ngModelChange)="weekStartModel.set($event)" [ngModelOptions]="ngModelStandalone">@for (w of weekOptions; track w) {<option [value]="w">{{ w | titlecase }}</option>}</select></div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Theme</span>
+          <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="themeService.theme()" (ngModelChange)="themeService.setTheme($event)" [ngModelOptions]="ngModelStandalone">@for (opt of themeRowOptions; track opt.id) {<option [value]="opt.id">{{ opt.label }}</option>}</select></div>
+        </div>
+      </div>
+    </section>
+    <section class="bp-panel bp-panel--preview" aria-labelledby="dp-preview-title">
+      <h2 id="dp-preview-title" class="bp-panel__title bp-panel__title--live"><span class="bp-live-dot" aria-hidden="true"></span>Live preview</h2>
+      <div class="bp-preview-surface bp-preview-surface--stretch dp-preview">
+        @if (effectiveType() === 'range') {
+          <brightrail-date-picker
+            type="range"
+            [appearance]="appearance()"
+            [status]="status()"
+            [size]="size()"
+            [shape]="shape()"
+            [disabled]="disabledToggle()"
+            [labelPosition]="labelPosition()"
+            [label]="effectiveLabel()"
+            [placeholder]="effectivePlaceholder()"
+            [helperText]="effectiveHelper()"
+            [showIcon]="showIconToggle()"
+            [format]="format()"
+            [weekStart]="weekStartModel()"
+            [disableWeekends]="disableWeekends()"
+            [open]="openPanel()"
+            [rangeCommitMode]="rangeCommitMode()"
+            [rangeEndStyle]="rangeEndStyle()"
+            [rangeEnabled]="rangeEnabled()"
+            [tone]="tone()"
+            [selectedDateColor]="selectedDateColor()"
+            [selectedDateTextColor]="selectedDateTextColor()"
+            [rangeColor]="rangeColor()"
+            [rangeTextColor]="rangeTextColor()"
+            [textAlign]="textAlign()"
+            [fieldWidth]="fieldWidth()"
+            [fullWidth]="false"
+            [(ngModel)]="rangeValue"
+            [ngModelOptions]="ngModelStandalone"
+          />
+        } @else if (effectiveType() === 'month') {
+          <brightrail-date-picker
+            type="month"
+            [appearance]="appearance()"
+            [status]="status()"
+            [size]="size()"
+            [shape]="shape()"
+            [disabled]="disabledToggle()"
+            [labelPosition]="labelPosition()"
+            [label]="effectiveLabel()"
+            [placeholder]="effectivePlaceholder()"
+            [helperText]="effectiveHelper()"
+            [showIcon]="showIconToggle()"
+            [format]="format()"
+            [weekStart]="weekStartModel()"
+            [open]="openPanel()"
+            [rangeCommitMode]="rangeCommitMode()"
+            [rangeEndStyle]="rangeEndStyle()"
+            [rangeEnabled]="rangeEnabled()"
+            [tone]="tone()"
+            [selectedDateColor]="selectedDateColor()"
+            [selectedDateTextColor]="selectedDateTextColor()"
+            [rangeColor]="rangeColor()"
+            [rangeTextColor]="rangeTextColor()"
+            [textAlign]="textAlign()"
+            [fieldWidth]="fieldWidth()"
+            [fullWidth]="false"
+            [(ngModel)]="monthValue"
+            [ngModelOptions]="ngModelStandalone"
+          />
+        } @else {
+          <brightrail-date-picker
+            [type]="effectiveType()"
+            [appearance]="appearance()"
+            [status]="status()"
+            [size]="size()"
+            [shape]="shape()"
+            [disabled]="disabledToggle()"
+            [labelPosition]="labelPosition()"
+            [label]="effectiveLabel()"
+            [placeholder]="effectivePlaceholder()"
+            [helperText]="effectiveHelper()"
+            [showIcon]="showIconToggle()"
+            [format]="format()"
+            [weekStart]="weekStartModel()"
+            [disableWeekends]="disableWeekends()"
+            [open]="openPanel()"
+            [rangeCommitMode]="rangeCommitMode()"
+            [rangeEndStyle]="rangeEndStyle()"
+            [rangeEnabled]="rangeEnabled()"
+            [tone]="tone()"
+            [selectedDateColor]="selectedDateColor()"
+            [selectedDateTextColor]="selectedDateTextColor()"
+            [rangeColor]="rangeColor()"
+            [rangeTextColor]="rangeTextColor()"
+            [textAlign]="textAlign()"
+            [fieldWidth]="fieldWidth()"
+            [fullWidth]="false"
+            [(ngModel)]="singleValue"
+            [ngModelOptions]="ngModelStandalone"
+          />
+        }
+      </div>
+    </section>
+  </div>
+  <section class="bp-code">
+    <div class="bp-code__head">
+      <h2 class="bp-code__title">Generated snippets</h2>
+      <div class="bp-code__tabs" role="tablist">
+        <button type="button" role="tab" class="bp-tab" [class.is-active]="activeTab() === 'html'" (click)="selectTab('html')">HTML</button>
+        <button type="button" role="tab" class="bp-tab" [class.is-active]="activeTab() === 'ts'" (click)="selectTab('ts')">TS</button>
+        <button type="button" role="tab" class="bp-tab" [class.is-active]="activeTab() === 'scss'" (click)="selectTab('scss')">SCSS</button>
+      </div>
+      <button type="button" class="bp-copy" (click)="copySnippet()">Copy</button>
+    </div>
+    <pre class="bp-pre"><code>{{ activeSnippet() }}</code></pre>
+  </section>
+</div>

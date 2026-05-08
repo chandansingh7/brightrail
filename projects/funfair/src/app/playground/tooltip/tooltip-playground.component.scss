@@ -1,0 +1,60 @@
+@use '../button/button-playground.component.scss' as *;
+
+.tp-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+:host .bp-preview-surface.bp-preview-surface--stretch .bp-preview-inner.tp-preview {
+  align-items: center;
+  justify-content: center;
+}
+
+.tp-trigger {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.85rem;
+  border: 1px solid var(--br-color-border, #e8eaed);
+  background: var(--br-color-surface, #fff);
+  color: var(--br-color-primary, #0062ff);
+  cursor: pointer;
+  font: inherit;
+}
+
+.tp-trigger:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.tp-trigger:focus-visible {
+  outline: 2px solid var(--br-color-primary, #0062ff);
+  outline-offset: 2px;
+}
+
+.tp-rich__title {
+  font-weight: 650;
+  margin-bottom: 0.35rem;
+}
+
+.tp-rich__body {
+  margin: 0 0 0.5rem;
+  color: inherit;
+  opacity: 0.92;
+}
+
+.tp-rich__link {
+  color: var(--br-color-primary, #0062ff);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.tp-rich__link:hover {
+  text-decoration: underline;
+}

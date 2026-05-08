@@ -1,0 +1,31 @@
+@use '../button/button-playground.component.scss' as *;
+
+.bp-preview-inner--badge {
+  width: 100%;
+}
+
+.badge-play-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 10rem;
+}
+
+.badge-anchor {
+  position: relative;
+  display: inline-flex;
+  color: #94a3b8;
+}
+
+.badge-anchor brightrail-badge {
+  position: absolute;
+  top: -0.45rem;
+  right: -0.55rem;
+}
+
+.badge-play-context {
+  margin: 0.6rem 0 0;
+  font-size: 0.78rem;
+  color: var(--ff-muted);
+}

@@ -43,7 +43,11 @@ export class PlaygroundShellComponent {
         ? 'Checkbox settings cover indeterminate, validation, tone, size, and enterprise bulk-select patterns.'
         : this.routeUrl().includes('/radio')
           ? 'Radio settings support grouped choices, validation states, semantic tones, and size scaling.'
-          : this.routeUrl().includes('/accordion')
+          : this.routeUrl().includes('/date-picker')
+            ? 'Date picker settings cover type, appearance, size, range, popup behavior, validation, and enterprise usage patterns.'
+            : this.routeUrl().includes('/file-upload')
+              ? 'File upload settings cover accepted types, limits, statuses, and enterprise intake workflows.'
+            : this.routeUrl().includes('/accordion')
             ? 'Accordion patterns cover appearances, multi-expand, icons, badges, nested panels, and header actions.'
             : this.routeUrl().includes('/breadcrumb')
               ? 'Breadcrumbs support separator styles, icon paths, truncation, and current-page emphasis for deep navigation.'

@@ -5,7 +5,7 @@
  *   lib/styles     — shared tokens & optional global theme entry
  *   lib/buttons    — buttons, split, group, icon glyph, icon button
  *   lib/icons      — standalone icons
- *   lib/fields     — text-field, select
+ *   lib/fields     — text-field, select, date-picker, file-upload
  *   lib/card       — card shell & slots
  *   lib/alert      — alerts & banners
  *   lib/tabs       — tab strip + panels
@@ -27,6 +27,8 @@ export * from './lib/buttons/brightrail-split-button.component';
 export * from './lib/buttons/brightrail-button-group.component';
 export * from './lib/fields/text-field/brightrail-text-field.component';
 export * from './lib/fields/select/brightrail-select.component';
+export * from './lib/fields/date-picker/brightrail-date-picker.component';
+export * from './lib/fields/file-upload/brightrail-file-upload.component';
 export * from './lib/fields/checkbox/brightrail-checkbox.component';
 export * from './lib/fields/checkbox/brightrail-checkbox-group.component';
 export * from './lib/fields/radio/brightrail-radio.component';

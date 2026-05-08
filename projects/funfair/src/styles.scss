@@ -91,6 +91,17 @@ html[data-theme='light'] {
     --br-color-surface: var(--ff-surface);
   }
 
+  brightrail-breadcrumb {
+    --br-color-primary: var(--ff-brand);
+    --br-color-primary-hover: var(--ff-brand-strong);
+    --br-color-text: var(--ff-text-core);
+    --br-color-text-strong: var(--ff-text-core);
+    --br-color-muted: var(--ff-muted);
+    --br-color-border-strong: var(--ff-border-strong);
+    --br-color-border: var(--ff-border);
+    --br-color-surface: var(--ff-surface);
+  }
+
   brightrail-avatar {
     --br-color-primary: var(--ff-brand);
     --br-color-primary-hover: var(--ff-brand-strong);
@@ -159,6 +170,17 @@ html[data-theme='dark'] {
   }
 
   brightrail-accordion {
+    --br-color-primary: var(--ff-brand);
+    --br-color-primary-hover: var(--ff-brand-strong);
+    --br-color-text: var(--ff-text-core);
+    --br-color-text-strong: var(--ff-text-core);
+    --br-color-muted: var(--ff-muted);
+    --br-color-border-strong: var(--ff-border-strong);
+    --br-color-border: var(--ff-border);
+    --br-color-surface: var(--ff-surface);
+  }
+
+  brightrail-breadcrumb {
     --br-color-primary: var(--ff-brand);
     --br-color-primary-hover: var(--ff-brand-strong);
     --br-color-text: var(--ff-text-core);

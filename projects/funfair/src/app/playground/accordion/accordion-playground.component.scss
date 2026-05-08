@@ -1,0 +1,136 @@
+@use '../button/button-playground.component.scss' as *;
+
+/*
+ * Shared `.bp-preview-surface--stretch` pulls items to the top-left (stretch).
+ * Center the accordion in the dashed preview like Chip playground.
+ */
+:host .bp-preview-surface.bp-preview-surface--stretch {
+  align-items: center;
+  justify-content: center;
+}
+
+:host .bp-preview-surface--stretch .bp-preview-inner.bp-preview-inner--acc {
+  flex: 1 1 auto;
+  align-self: stretch;
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  box-sizing: border-box;
+}
+
+.acc-play-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  flex: 0 1 auto;
+  box-sizing: border-box;
+}
+
+.bp-preview-inner--acc-wide .acc-play-preview {
+  max-width: min(36rem, 100%);
+}
+
+.acc-preview {
+  width: min(28rem, 100%);
+  max-width: 100%;
+}
+
+.bp-preview-inner--acc-wide .acc-preview {
+  width: min(36rem, 100%);
+}
+
+.acc-demo-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.acc-demo-links a {
+  color: var(--ff-accent, #0062ff);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.acc-demo-links a:hover {
+  text-decoration: underline;
+}
+
+.acc-demo-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.acc-demo-table th,
+.acc-demo-table td {
+  border: 1px solid var(--ff-border, #dadce0);
+  padding: 0.35rem 0.5rem;
+  text-align: left;
+}
+
+.acc-demo-action {
+  font: inherit;
+  font-weight: 600;
+  color: var(--ff-accent, #0062ff);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.35rem;
+}
+
+.acc-demo-action:hover {
+  background: rgb(0 98 255 / 10%);
+}
+
+.acc-demo-table--borderless th,
+.acc-demo-table--borderless td {
+  border: none;
+  padding: 0.45rem 0.65rem;
+}
+
+.acc-demo-table--borderless thead th {
+  border-bottom: 1px solid var(--ff-border, #dadce0);
+  font-weight: 600;
+}
+
+.acc-demo-footer-link {
+  font: inherit;
+  font-weight: 600;
+  color: var(--ff-accent, #0062ff);
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.acc-demo-footer-link:hover {
+  text-decoration: underline;
+}
+
+.acc-demo-footer-primary {
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: var(--ff-accent, #0062ff);
+  border: none;
+  border-radius: 0.35rem;
+  padding: 0.45rem 1rem;
+  cursor: pointer;
+}
+
+.acc-demo-footer-primary:hover {
+  filter: brightness(1.05);
+}
+
+.acc-preview--enterprise {
+  width: min(44rem, 100%);
+}

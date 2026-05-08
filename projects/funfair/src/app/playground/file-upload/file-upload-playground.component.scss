@@ -1,0 +1,23 @@
+@use '../button/button-playground.component.scss' as *;
+
+.bp-preview-inner--file-upload {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bp-panel--preview .bp-preview-surface--stretch {
+  align-items: center;
+  justify-content: center;
+}
+
+.bp-preview-surface--stretch .bp-preview-inner--file-upload {
+  justify-content: center;
+}
+
+.bp-preview-inner--file-upload brightrail-file-upload {
+  flex: 0 1 36rem;
+  width: 36rem;
+  max-width: 100%;
+}

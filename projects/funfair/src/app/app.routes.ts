@@ -10,24 +10,24 @@ export const routes: Routes = [
       {
         path: 'button',
         loadComponent: () =>
-          import('./playground/button-playground.component').then((m) => m.ButtonPlaygroundComponent),
+          import('./playground/button/button-playground.component').then((m) => m.ButtonPlaygroundComponent),
       },
       {
         path: 'text-field',
         loadComponent: () =>
-          import('./playground/text-field-section.component').then((m) => m.TextFieldSectionComponent),
+          import('./playground/text-field/text-field-section.component').then((m) => m.TextFieldSectionComponent),
         children: [
           {
             path: '',
             loadComponent: () =>
-              import('./playground/text-field-playground.component').then(
+              import('./playground/text-field/text-field-playground.component').then(
                 (m) => m.TextFieldPlaygroundComponent,
               ),
           },
           {
             path: 'inset-label',
             loadComponent: () =>
-              import('./playground/text-field-inset-label-guide.component').then(
+              import('./playground/text-field/text-field-inset-label-guide.component').then(
                 (m) => m.TextFieldInsetLabelGuideComponent,
               ),
           },
@@ -36,22 +36,22 @@ export const routes: Routes = [
       {
         path: 'tabs',
         loadComponent: () =>
-          import('./playground/tabs-playground.component').then((m) => m.TabsPlaygroundComponent),
+          import('./playground/tabs/tabs-playground.component').then((m) => m.TabsPlaygroundComponent),
       },
       {
         path: 'alerts',
         loadComponent: () =>
-          import('./playground/alert-section.component').then((m) => m.AlertSectionComponent),
+          import('./playground/alerts/alert-section.component').then((m) => m.AlertSectionComponent),
         children: [
           {
             path: '',
             loadComponent: () =>
-              import('./playground/alert-playground.component').then((m) => m.AlertPlaygroundComponent),
+              import('./playground/alerts/alert-playground.component').then((m) => m.AlertPlaygroundComponent),
           },
           {
             path: 'catalog',
             loadComponent: () =>
-              import('./playground/alert-catalog-overview.component').then(
+              import('./playground/alerts/alert-catalog-overview.component').then(
                 (m) => m.AlertCatalogOverviewComponent,
               ),
           },
@@ -60,22 +60,22 @@ export const routes: Routes = [
       {
         path: 'modal',
         loadComponent: () =>
-          import('./playground/modal-playground.component').then((m) => m.ModalPlaygroundComponent),
+          import('./playground/modal/modal-playground.component').then((m) => m.ModalPlaygroundComponent),
       },
       {
         path: 'drawer',
         loadComponent: () =>
-          import('./playground/drawer-section.component').then((m) => m.DrawerSectionComponent),
+          import('./playground/drawer/drawer-section.component').then((m) => m.DrawerSectionComponent),
         children: [
           {
             path: '',
             loadComponent: () =>
-              import('./playground/drawer-playground.component').then((m) => m.DrawerPlaygroundComponent),
+              import('./playground/drawer/drawer-playground.component').then((m) => m.DrawerPlaygroundComponent),
           },
           {
             path: 'catalog',
             loadComponent: () =>
-              import('./playground/drawer-catalog-overview.component').then(
+              import('./playground/drawer/drawer-catalog-overview.component').then(
                 (m) => m.DrawerCatalogOverviewComponent,
               ),
           },
@@ -84,19 +84,19 @@ export const routes: Routes = [
       {
         path: 'breadcrumb',
         loadComponent: () =>
-          import('./playground/breadcrumb-section.component').then((m) => m.BreadcrumbSectionComponent),
+          import('./playground/breadcrumb/breadcrumb-section.component').then((m) => m.BreadcrumbSectionComponent),
         children: [
           {
             path: '',
             loadComponent: () =>
-              import('./playground/breadcrumb-playground.component').then(
+              import('./playground/breadcrumb/breadcrumb-playground.component').then(
                 (m) => m.BreadcrumbPlaygroundComponent,
               ),
           },
           {
             path: 'catalog',
             loadComponent: () =>
-              import('./playground/breadcrumb-catalog-overview.component').then(
+              import('./playground/breadcrumb/breadcrumb-catalog-overview.component').then(
                 (m) => m.BreadcrumbCatalogOverviewComponent,
               ),
           },
@@ -105,19 +105,19 @@ export const routes: Routes = [
       {
         path: 'stepper',
         loadComponent: () =>
-          import('./playground/stepper-section.component').then((m) => m.StepperSectionComponent),
+          import('./playground/stepper/stepper-section.component').then((m) => m.StepperSectionComponent),
         children: [
           {
             path: '',
             loadComponent: () =>
-              import('./playground/stepper-playground.component').then(
+              import('./playground/stepper/stepper-playground.component').then(
                 (m) => m.StepperPlaygroundComponent,
               ),
           },
           {
             path: 'catalog',
             loadComponent: () =>
-              import('./playground/stepper-catalog-overview.component').then(
+              import('./playground/stepper/stepper-catalog-overview.component').then(
                 (m) => m.StepperCatalogOverviewComponent,
               ),
           },
@@ -126,29 +126,29 @@ export const routes: Routes = [
       {
         path: 'card',
         loadComponent: () =>
-          import('./playground/card-playground.component').then((m) => m.CardPlaygroundComponent),
+          import('./playground/card/card-playground.component').then((m) => m.CardPlaygroundComponent),
       },
       {
         path: 'table',
         loadComponent: () =>
-          import('./playground/table-section.component').then((m) => m.TableSectionComponent),
+          import('./playground/table/table-section.component').then((m) => m.TableSectionComponent),
         children: [
           {
             path: '',
             loadComponent: () =>
-              import('./playground/table-playground.component').then((m) => m.TablePlaygroundComponent),
+              import('./playground/table/table-playground.component').then((m) => m.TablePlaygroundComponent),
           },
           {
             path: 'catalog',
             loadComponent: () =>
-              import('./playground/table-catalog-overview.component').then(
+              import('./playground/table/table-catalog-overview.component').then(
                 (m) => m.TableCatalogOverviewComponent,
               ),
           },
           {
             path: 'inline-edit',
             loadComponent: () =>
-              import('./playground/table-inline-edit-catalog.component').then(
+              import('./playground/table/table-inline-edit-catalog.component').then(
                 (m) => m.TableInlineEditCatalogComponent,
               ),
           },
@@ -157,17 +157,17 @@ export const routes: Routes = [
       {
         path: 'badge',
         loadComponent: () =>
-          import('./playground/badge-section.component').then((m) => m.BadgeSectionComponent),
+          import('./playground/badge/badge-section.component').then((m) => m.BadgeSectionComponent),
         children: [
           {
             path: '',
             loadComponent: () =>
-              import('./playground/badge-playground.component').then((m) => m.BadgePlaygroundComponent),
+              import('./playground/badge/badge-playground.component').then((m) => m.BadgePlaygroundComponent),
           },
           {
             path: 'catalog',
             loadComponent: () =>
-              import('./playground/badge-catalog-overview.component').then(
+              import('./playground/badge/badge-catalog-overview.component').then(
                 (m) => m.BadgeCatalogOverviewComponent,
               ),
           },
@@ -176,17 +176,17 @@ export const routes: Routes = [
       {
         path: 'chip',
         loadComponent: () =>
-          import('./playground/chip-section.component').then((m) => m.ChipSectionComponent),
+          import('./playground/chip/chip-section.component').then((m) => m.ChipSectionComponent),
         children: [
           {
             path: '',
             loadComponent: () =>
-              import('./playground/chip-playground.component').then((m) => m.ChipPlaygroundComponent),
+              import('./playground/chip/chip-playground.component').then((m) => m.ChipPlaygroundComponent),
           },
           {
             path: 'catalog',
             loadComponent: () =>
-              import('./playground/chip-catalog-overview.component').then(
+              import('./playground/chip/chip-catalog-overview.component').then(
                 (m) => m.ChipCatalogOverviewComponent,
               ),
           },
@@ -195,17 +195,17 @@ export const routes: Routes = [
       {
         path: 'avatar',
         loadComponent: () =>
-          import('./playground/avatar-section.component').then((m) => m.AvatarSectionComponent),
+          import('./playground/avatar/avatar-section.component').then((m) => m.AvatarSectionComponent),
         children: [
           {
             path: '',
             loadComponent: () =>
-              import('./playground/avatar-playground.component').then((m) => m.AvatarPlaygroundComponent),
+              import('./playground/avatar/avatar-playground.component').then((m) => m.AvatarPlaygroundComponent),
           },
           {
             path: 'catalog',
             loadComponent: () =>
-              import('./playground/avatar-catalog-overview.component').then(
+              import('./playground/avatar/avatar-catalog-overview.component').then(
                 (m) => m.AvatarCatalogOverviewComponent,
               ),
           },
@@ -214,17 +214,17 @@ export const routes: Routes = [
       {
         path: 'tooltip',
         loadComponent: () =>
-          import('./playground/tooltip-section.component').then((m) => m.TooltipSectionComponent),
+          import('./playground/tooltip/tooltip-section.component').then((m) => m.TooltipSectionComponent),
         children: [
           {
             path: '',
             loadComponent: () =>
-              import('./playground/tooltip-playground.component').then((m) => m.TooltipPlaygroundComponent),
+              import('./playground/tooltip/tooltip-playground.component').then((m) => m.TooltipPlaygroundComponent),
           },
           {
             path: 'catalog',
             loadComponent: () =>
-              import('./playground/tooltip-catalog-overview.component').then(
+              import('./playground/tooltip/tooltip-catalog-overview.component').then(
                 (m) => m.TooltipCatalogOverviewComponent,
               ),
           },
@@ -233,18 +233,64 @@ export const routes: Routes = [
       {
         path: 'select',
         loadComponent: () =>
-          import('./playground/select-section.component').then((m) => m.SelectSectionComponent),
+          import('./playground/select/select-section.component').then((m) => m.SelectSectionComponent),
         children: [
           {
             path: '',
             loadComponent: () =>
-              import('./playground/select-playground.component').then((m) => m.SelectPlaygroundComponent),
+              import('./playground/select/select-playground.component').then((m) => m.SelectPlaygroundComponent),
           },
           {
             path: 'resources',
             loadComponent: () =>
-              import('./playground/select-resources-guide.component').then(
+              import('./playground/select/select-resources-guide.component').then(
                 (m) => m.SelectResourcesGuideComponent,
+              ),
+          },
+        ],
+      },
+      {
+        path: 'date-picker',
+        loadComponent: () =>
+          import('./playground/date-picker/date-picker-section.component').then(
+            (m) => m.DatePickerSectionComponent,
+          ),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./playground/date-picker/date-picker-playground.component').then(
+                (m) => m.DatePickerPlaygroundComponent,
+              ),
+          },
+          {
+            path: 'catalog',
+            loadComponent: () =>
+              import('./playground/date-picker/date-picker-catalog-overview.component').then(
+                (m) => m.DatePickerCatalogOverviewComponent,
+              ),
+          },
+        ],
+      },
+      {
+        path: 'file-upload',
+        loadComponent: () =>
+          import('./playground/file-upload/file-upload-section.component').then(
+            (m) => m.FileUploadSectionComponent,
+          ),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./playground/file-upload/file-upload-playground.component').then(
+                (m) => m.FileUploadPlaygroundComponent,
+              ),
+          },
+          {
+            path: 'catalog',
+            loadComponent: () =>
+              import('./playground/file-upload/file-upload-catalog-overview.component').then(
+                (m) => m.FileUploadCatalogOverviewComponent,
               ),
           },
         ],
@@ -252,31 +298,31 @@ export const routes: Routes = [
       {
         path: 'checkbox',
         loadComponent: () =>
-          import('./playground/checkbox-playground.component').then(
+          import('./playground/checkbox/checkbox-playground.component').then(
             (m) => m.CheckboxPlaygroundComponent,
           ),
       },
       {
         path: 'radio',
         loadComponent: () =>
-          import('./playground/radio-playground.component').then((m) => m.RadioPlaygroundComponent),
+          import('./playground/radio/radio-playground.component').then((m) => m.RadioPlaygroundComponent),
       },
       {
         path: 'accordion',
         loadComponent: () =>
-          import('./playground/accordion-section.component').then((m) => m.AccordionSectionComponent),
+          import('./playground/accordion/accordion-section.component').then((m) => m.AccordionSectionComponent),
         children: [
           {
             path: '',
             loadComponent: () =>
-              import('./playground/accordion-playground.component').then(
+              import('./playground/accordion/accordion-playground.component').then(
                 (m) => m.AccordionPlaygroundComponent,
               ),
           },
           {
             path: 'catalog',
             loadComponent: () =>
-              import('./playground/accordion-catalog-overview.component').then(
+              import('./playground/accordion/accordion-catalog-overview.component').then(
                 (m) => m.AccordionCatalogOverviewComponent,
               ),
           },
@@ -285,19 +331,19 @@ export const routes: Routes = [
       {
         path: 'pagination',
         loadComponent: () =>
-          import('./playground/pagination-section.component').then((m) => m.PaginationSectionComponent),
+          import('./playground/pagination/pagination-section.component').then((m) => m.PaginationSectionComponent),
         children: [
           {
             path: '',
             loadComponent: () =>
-              import('./playground/pagination-playground.component').then(
+              import('./playground/pagination/pagination-playground.component').then(
                 (m) => m.PaginationPlaygroundComponent,
               ),
           },
           {
             path: 'catalog',
             loadComponent: () =>
-              import('./playground/pagination-catalog-overview.component').then(
+              import('./playground/pagination/pagination-catalog-overview.component').then(
                 (m) => m.PaginationCatalogOverviewComponent,
               ),
           },
@@ -306,17 +352,17 @@ export const routes: Routes = [
       {
         path: 'progress',
         loadComponent: () =>
-          import('./playground/progress-section.component').then((m) => m.ProgressSectionComponent),
+          import('./playground/progress/progress-section.component').then((m) => m.ProgressSectionComponent),
         children: [
           {
             path: '',
             loadComponent: () =>
-              import('./playground/progress-playground.component').then((m) => m.ProgressPlaygroundComponent),
+              import('./playground/progress/progress-playground.component').then((m) => m.ProgressPlaygroundComponent),
           },
           {
             path: 'catalog',
             loadComponent: () =>
-              import('./playground/progress-catalog-overview.component').then(
+              import('./playground/progress/progress-catalog-overview.component').then(
                 (m) => m.ProgressCatalogOverviewComponent,
               ),
           },

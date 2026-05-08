@@ -1,7 +1,0 @@
-@use './alert-variation-catalog.component.scss' as *;
-
-.tc-expand-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-  gap: 0.35rem 1rem;
-}

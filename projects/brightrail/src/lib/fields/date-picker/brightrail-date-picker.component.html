@@ -1,0 +1,238 @@
+<div class="br-tf br-dp" [ngStyle]="hostStyleVars()">
+  @if (labelPosition() === 'top' && showLabel()) {
+    <label class="br-tf__label" [id]="externalLabelId()" [attr.for]="controlId()">
+      {{ label()
+      }}@if (required()) {
+        <span class="br-tf__req" aria-hidden="true">*</span>
+      }
+    </label>
+  }
+  <div
+    class="br-tf__field-row"
+    [class.br-tf__field-row--inline]="labelPosition() === 'left' || labelPosition() === 'right'"
+  >
+    @if (labelPosition() === 'left' && showLabel()) {
+      <label class="br-tf__label br-tf__label--side" [id]="externalLabelId()" [attr.for]="controlId()">
+        {{ label()
+        }}@if (required()) {
+          <span class="br-tf__req" aria-hidden="true">*</span>
+        }
+      </label>
+    }
+    <div class="br-dp__control">
+      @if (type() !== 'inline') {
+        <button
+          type="button"
+          [class]="triggerWrapClass()"
+          class="br-select__trigger"
+          [id]="controlId()"
+          [style.width]="triggerWidth()"
+          [disabled]="effectiveDisabled()"
+          [attr.aria-expanded]="open() || panelOpen()"
+          [attr.aria-haspopup]="'dialog'"
+          [attr.aria-label]="ariaLabel() || null"
+          [attr.aria-labelledby]="triggerAriaLabelledBy()"
+          [attr.aria-required]="required() ? 'true' : null"
+          [attr.aria-invalid]="status() === 'error' ? 'true' : null"
+          [attr.aria-describedby]="resolvedHintText() ? hintId() : null"
+          (click)="togglePanel($event)"
+        >
+          @if (labelPosition() === 'inset' && showLabel()) {
+            <span class="br-tf__label br-tf__label--inset" [id]="insetLabelId()">
+              {{ label()
+              }}@if (required()) {
+                <span class="br-tf__req" aria-hidden="true">*</span>
+              }
+            </span>
+          }
+          <span class="br-select__value-shell">
+            <span
+              class="br-select__value"
+              [class.br-select__value--placeholder]="showPlaceholder()"
+              [class.br-select__value--align-center]="textAlign() === 'center'"
+              [class.br-select__value--align-right]="textAlign() === 'right'"
+              >{{ showPlaceholder() ? placeholder() : triggerText() }}</span
+            >
+          </span>
+          @if (showClear()) {
+            <span class="br-select__clear-host" role="presentation" (click)="clearTrigger($event)">
+              <button type="button" class="br-tf__action" aria-label="Clear">
+                <brightrail-button-icon name="close" />
+              </button>
+            </span>
+          }
+          @if (statusTrailingIcon() !== 'none') {
+            <span
+              class="br-tf__icon br-tf__icon--trailing br-tf__status-icon"
+              [class]="'br-tf__status-icon--' + status()"
+              aria-hidden="true"
+            >
+              <brightrail-button-icon [name]="statusTrailingIcon()" />
+            </span>
+          } @else if (showIcon()) {
+            <span class="br-tf__icon br-tf__icon--trailing" aria-hidden="true">
+              <brightrail-button-icon name="calendar" />
+            </span>
+          }
+        </button>
+      }
+
+      @if (open() || panelOpen() || type() === 'inline') {
+        <div
+          class="br-dp__panel"
+          [class.br-dp__panel--inline]="type() === 'inline'"
+          role="dialog"
+          [attr.aria-label]="type() === 'month' ? 'Choose month' : 'Choose date'"
+        >
+          @if (type() === 'month') {
+            <div class="br-dp__month-pane">
+              <div class="br-dp__head">
+                <button type="button" class="br-dp__icon-btn" aria-label="Previous year" (click)="navYear(-1)">
+                  ‹
+                </button>
+                <span class="br-dp__title">{{ monthPickerYear() }}</span>
+                <button type="button" class="br-dp__icon-btn" aria-label="Next year" (click)="navYear(1)">
+                  ›
+                </button>
+              </div>
+              <div class="br-dp__months-grid" role="grid">
+                @for (m of monthNamesShort(); track $index) {
+                  <button
+                    type="button"
+                    class="br-dp__month-cell"
+                    role="gridcell"
+                    [class.br-dp__month-cell--active]="isSelectedMonth($index)"
+                    (click)="selectMonthCell($index)"
+                  >
+                    {{ m }}
+                  </button>
+                }
+              </div>
+              <div class="br-dp__footer">
+                <button type="button" class="br-dp__link" (click)="commitEmpty()">Clear</button>
+              </div>
+            </div>
+          } @else if (type() === 'range') {
+            <div class="br-dp__dual">
+              @for (
+                cal of [
+                  { cells: leftCells(), title: panelTitleLeft() },
+                  { cells: rightCells(), title: panelTitleRight() }
+                ];
+                track $index
+              ) {
+                <div class="br-dp__cal">
+                  <div class="br-dp__head">
+                    <button type="button" class="br-dp__icon-btn" aria-label="Previous month" (click)="navMonth(-1)">
+                      ‹
+                    </button>
+                    <span class="br-dp__title">{{ cal.title }}</span>
+                    <button type="button" class="br-dp__icon-btn" aria-label="Next month" (click)="navMonth(1)">
+                      ›
+                    </button>
+                  </div>
+                  <div class="br-dp__weekdays" role="row">
+                    @for (d of weekdayLabels(); track d) {
+                      <span class="br-dp__weekday" role="columnheader">{{ d }}</span>
+                    }
+                  </div>
+                  <div class="br-dp__cells" role="grid">
+                    @for (c of cal.cells; track c.date.getTime()) {
+                      <button
+                        type="button"
+                        class="br-dp__cell"
+                        [class.br-dp__cell--muted]="!c.inMonth"
+                        [class.br-dp__cell--today]="isToday(c.date)"
+                        [class.br-dp__cell--disabled]="isDayDisabled(c.date)"
+                        [class.br-dp__cell--range-start]="rangeState(c.date) === 'start'"
+                        [class.br-dp__cell--range-end]="rangeState(c.date) === 'end'"
+                        [class.br-dp__cell--range-end-pill]="rangeState(c.date) === 'end' && rangeEndStyle() === 'pill'"
+                        [class.br-dp__cell--range-end-outline]="rangeState(c.date) === 'end' && rangeEndStyle() === 'outline'"
+                        [class.br-dp__cell--range-between]="rangeState(c.date) === 'between'"
+                        [disabled]="!c.inMonth || isDayDisabled(c.date)"
+                        (click)="onDayClick(c.date)"
+                      >
+                        <span class="br-dp__cell-num">{{ c.date.getDate() }}</span>
+                      </button>
+                    }
+                  </div>
+                </div>
+              }
+            </div>
+            <div class="br-dp__footer br-dp__footer--spread">
+              <button type="button" class="br-dp__link" (click)="clearRangeCommittedAndClose()">
+                Clear
+              </button>
+              @if (rangeCommitMode() === 'apply') {
+                <button
+                  type="button"
+                  class="br-dp__primary"
+                  [disabled]="!rangeDraft().start || !rangeDraft().end"
+                  (click)="applyRange()"
+                >
+                  Apply
+                </button>
+              } @else {
+                <span class="br-dp__hint-inline">Auto apply</span>
+              }
+            </div>
+          } @else {
+            <div class="br-dp__single">
+              <div class="br-dp__head">
+                <button type="button" class="br-dp__icon-btn" aria-label="Previous month" (click)="navMonth(-1)">
+                  ‹
+                </button>
+                <span class="br-dp__title">{{ panelTitleLeft() }}</span>
+                <button type="button" class="br-dp__icon-btn" aria-label="Next month" (click)="navMonth(1)">
+                  ›
+                </button>
+              </div>
+              <div class="br-dp__weekdays" role="row">
+                @for (d of weekdayLabels(); track d) {
+                  <span class="br-dp__weekday" role="columnheader">{{ d }}</span>
+                }
+              </div>
+              <div class="br-dp__cells" role="grid">
+                @for (c of leftCells(); track c.date.getTime()) {
+                  <button
+                    type="button"
+                    class="br-dp__cell"
+                    [class.br-dp__cell--muted]="!c.inMonth"
+                    [class.br-dp__cell--today]="isToday(c.date)"
+                    [class.br-dp__cell--disabled]="isDayDisabled(c.date)"
+                    [class.br-dp__cell--selected]="isSelectedSingle(c.date)"
+                    [disabled]="!c.inMonth || isDayDisabled(c.date)"
+                    (click)="onDayClick(c.date)"
+                  >
+                    <span class="br-dp__cell-num">{{ c.date.getDate() }}</span>
+                  </button>
+                }
+              </div>
+            </div>
+            <div class="br-dp__footer br-dp__footer--spread">
+              <button type="button" class="br-dp__link" (click)="commitEmpty()">Clear</button>
+              <button type="button" class="br-dp__link" (click)="setTodaySingle()">Today</button>
+            </div>
+          }
+        </div>
+      }
+    </div>
+    @if (labelPosition() === 'right' && showLabel()) {
+      <label
+        class="br-tf__label br-tf__label--side br-tf__label--end"
+        [id]="externalLabelId()"
+        [attr.for]="controlId()"
+      >
+        {{ label()
+        }}@if (required()) {
+          <span class="br-tf__req" aria-hidden="true">*</span>
+        }
+      </label>
+    }
+  </div>
+  @if (resolvedHintText()) {
+    <div [id]="hintId()" class="br-tf__hint" [class]="'br-tf__hint--' + status()">
+      {{ resolvedHintText() }}
+    </div>
+  }
+</div>
