@@ -53,6 +53,32 @@ export class PlaygroundShellComponent {
     this.navOpen.set(false);
   }
 
+  readonly headerHero = computed(() => {
+    const url = this.routeUrl();
+    if (url.includes('resources/library-showcase')) {
+      return {
+        title: 'Brightrail library showcase',
+        subtitle: 'What Brightrail is, how it works, and how to implement it in your Angular 21 app.',
+      };
+    }
+    if (url.includes('resources/library-assessment')) {
+      return {
+        title: 'Library assessment',
+        subtitle: 'Maturity snapshot, gaps, and roadmap for enterprise adoption.',
+      };
+    }
+    if (url.includes('/resources/')) {
+      return {
+        title: 'Playground resources',
+        subtitle: 'Guides and reference pages for the Brightrail component library.',
+      };
+    }
+    return {
+      title: 'Angular component playground',
+      subtitle: 'Configure a component and see the preview and generated snippets update live.',
+    };
+  });
+
   readonly sidebarTip = computed(() =>
     this.routeUrl().includes('/table')
       ? 'Tables support sorting, pagination, selection, density, variants, toolbars, and rich row states.'
@@ -86,6 +112,10 @@ export class PlaygroundShellComponent {
                     ? 'Use avatars to represent people in lists, menus, and collaboration surfaces.'
                     : this.routeUrl().includes('/tooltip')
                       ? 'Use tooltips for short contextual help. Keep messages concise and avoid essential-only information.'
-                      : 'Tweak controls on the left — the preview and generated markup stay in sync.',
+                      : this.routeUrl().includes('resources/library-showcase')
+                        ? 'Start with the implementation guide, then open any component playground for live snippets.'
+                        : this.routeUrl().includes('resources/library-assessment')
+                          ? 'Use the assessment for honest gaps; use the showcase page for onboarding teammates.'
+                          : 'Tweak controls on the left — the preview and generated markup stay in sync.',
   );
 }

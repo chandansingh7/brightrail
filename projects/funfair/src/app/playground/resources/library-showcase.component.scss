@@ -1,0 +1,61 @@
+@use './resources-page';
+
+:host {
+  display: block;
+  width: 100%;
+  min-height: 0;
+}
+
+.ls-pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 0.85rem;
+}
+
+.ls-pillar__title {
+  margin: 0 0 0.35rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--ff-fg, #0f172a);
+}
+
+.ls-pillar__summary {
+  margin: 0 0 0.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ff-muted, #64748b);
+}
+
+.ls-pillar__list {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--ff-muted, #475569);
+}
+
+.ls-pillar__list li + li {
+  margin-top: 0.3rem;
+}
+
+.ls-checklist {
+  margin: 0 0 1rem;
+  padding-left: 1.15rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--ff-muted, #475569);
+}
+
+.ls-checklist li + li {
+  margin-top: 0.4rem;
+}
+
+.ls-checklist code {
+  font-size: 0.8125rem;
+}
+
+.ls-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

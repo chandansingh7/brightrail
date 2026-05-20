@@ -1,0 +1,138 @@
+<div class="res-page">
+  <brightrail-breadcrumb
+    [items]="breadcrumbItems"
+    separator="chevron"
+    size="sm"
+    currentItemStyle="accent"
+    [withIcons]="false"
+  />
+
+  <div class="res-page__related">
+    <span class="res-page__related-label">Also see</span>
+    <brightrail-button variant="link" size="sm" routerLink="/resources/library-assessment">
+      Library assessment
+    </brightrail-button>
+    <brightrail-button variant="link" size="sm" routerLink="/button">Button playground</brightrail-button>
+  </div>
+
+  <brightrail-page-header [bordered]="false">
+    <h1 brightrailPageTitle>Brightrail library showcase</h1>
+    <p brightrailPageSubtitle>{{ tagline }}</p>
+  </brightrail-page-header>
+
+  <div class="res-page__stats">
+    <brightrail-badge variant="soft" color="primary" size="small" label="Angular 21" />
+    <brightrail-badge variant="soft" color="info" size="small" [label]="'v' + version" />
+    <brightrail-badge variant="soft" color="success" size="small" label="Standalone components" />
+    <brightrail-badge variant="soft" color="success" size="small" label="Platform a11y built in" />
+  </div>
+
+  <div class="res-page__stack">
+    <brightrail-card appearance="outlined" [fullWidth]="true">
+      <brightrail-card-header [withTitle]="true">
+        <span brightrailCardHeaderTitle>At a glance</span>
+      </brightrail-card-header>
+      <brightrail-card-content>
+        <div class="ls-pillar-grid">
+          @for (pillar of pillars; track pillar.title) {
+            <brightrail-card appearance="filled" size="sm" [fullWidth]="true">
+              <brightrail-card-content>
+                <h3 class="ls-pillar__title">{{ pillar.title }}</h3>
+                <p class="ls-pillar__summary">{{ pillar.summary }}</p>
+                <ul class="ls-pillar__list">
+                  @for (bullet of pillar.bullets; track bullet) {
+                    <li>{{ bullet }}</li>
+                  }
+                </ul>
+              </brightrail-card-content>
+            </brightrail-card>
+          }
+        </div>
+      </brightrail-card-content>
+    </brightrail-card>
+
+    <brightrail-card appearance="outlined" [fullWidth]="true">
+      <brightrail-card-header [withTitle]="true">
+        <span brightrailCardHeaderTitle>Implementation guide</span>
+      </brightrail-card-header>
+      <brightrail-card-content>
+        <p class="res-page__section-lead">
+          Four steps from install to themed UI. Copy snippets into your app — Midway in this repo is a packaged
+          consumer smoke test.
+        </p>
+        <ol class="res-page__steps">
+          @for (step of steps; track step.title; let i = $index) {
+            <li class="res-page__step">
+              <span class="res-page__step-num" aria-hidden="true">{{ i + 1 }}</span>
+              <div>
+                <h3 class="res-page__step-title">{{ step.title }}</h3>
+                <p class="res-page__step-body">{{ step.body }}</p>
+                <pre class="res-page__pre"><code>{{ step.code }}</code></pre>
+              </div>
+            </li>
+          }
+        </ol>
+      </brightrail-card-content>
+    </brightrail-card>
+
+    <brightrail-card appearance="outlined" [fullWidth]="true">
+      <brightrail-card-header [withTitle]="true">
+        <span brightrailCardHeaderTitle>Quality &amp; governance</span>
+      </brightrail-card-header>
+      <brightrail-card-content>
+        <p class="res-page__section-lead">
+          Brightrail ships accessibility patterns in components and verifies them in CI — not only in manual
+          review.
+        </p>
+        <ul class="ls-checklist">
+          <li>
+            <strong>Platform registry</strong> — 100% CDK + WAI-ARIA adoption map across shipped components
+          </li>
+          <li>
+            <strong>axe CI</strong> — semantic rules on every Funfair <code>a11y-preview</code> route; known debt
+            is tracked explicitly
+          </li>
+          <li>
+            <strong>Visual baselines</strong> — Playwright screenshots per playground preview
+          </li>
+          <li>
+            <strong>Local gates</strong> — <code>npm run e2e:gates</code> or <code>./scripts/e2e-gates.sh</code>
+          </li>
+        </ul>
+        <div class="ls-actions">
+          <brightrail-button variant="outline" size="sm" (click)="navigate('resources/library-assessment')">
+            Read full assessment
+          </brightrail-button>
+        </div>
+      </brightrail-card-content>
+    </brightrail-card>
+
+    <brightrail-card appearance="outlined" [fullWidth]="true">
+      <brightrail-card-header [withTitle]="true">
+        <span brightrailCardHeaderTitle>Explore the catalog</span>
+      </brightrail-card-header>
+      <brightrail-card-content>
+        <div class="res-page__pill-grid">
+          @for (link of exploreLinks; track link.path) {
+            @if (isExternalExplore(link.path)) {
+              <a
+                class="res-page__pill"
+                [href]="link.path === '/midway' ? midwayHref : link.path"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="res-page__pill-title">{{ link.label }}</span>
+                <span class="res-page__pill-desc">{{ link.description }}</span>
+              </a>
+            } @else {
+              <a class="res-page__pill" [routerLink]="explorePath(link.path)">
+                <span class="res-page__pill-title">{{ link.label }}</span>
+                <span class="res-page__pill-desc">{{ link.description }}</span>
+              </a>
+            }
+          }
+        </div>
+      </brightrail-card-content>
+    </brightrail-card>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-<div class="la">
+<div class="res-page la">
   <brightrail-breadcrumb
     [items]="breadcrumbItems"
     separator="chevron"
@@ -7,32 +7,42 @@
     [withIcons]="false"
   />
 
+  <div class="res-page__related">
+    <span class="res-page__related-label">New here?</span>
+    <brightrail-button variant="link" size="sm" routerLink="/resources/library-showcase">
+      Library showcase
+    </brightrail-button>
+    <brightrail-button variant="link" size="sm" routerLink="/button">Try a playground</brightrail-button>
+  </div>
+
   <brightrail-page-header [bordered]="false">
     <h1 brightrailPageTitle>Brightrail library assessment</h1>
     <p brightrailPageSubtitle>
       An honest snapshot of brightrail v{{ version }} — what works well today, what is still missing, and
       what is needed for enterprise-grade applications.
     </p>
-    <div brightrailPageHeaderActions class="la-stats">
-      <brightrail-badge variant="soft" color="primary" size="small" [label]="stats.exportCount + ' public exports'" />
-      <brightrail-badge variant="soft" color="info" size="small" [label]="stats.playgroundCount + ' playgrounds'" />
-      <brightrail-badge
-        variant="soft"
-        color="info"
-        size="small"
-        [label]="stats.variationCatalogCount + ' variation catalogs'"
-      />
-      <brightrail-badge
-        variant="soft"
-        color="success"
-        size="small"
-        [label]="stats.platformCoveragePercent + '% platform a11y coverage'"
-      />
-      <span class="la-stats__reviewed">Last reviewed {{ lastReviewed }}</span>
-    </div>
   </brightrail-page-header>
 
-  <div class="la-stack">
+  <div class="res-page__stats la-stats">
+    <brightrail-badge variant="soft" color="primary" size="small" [label]="stats.exportCount + ' public exports'" />
+    <brightrail-badge variant="soft" color="info" size="small" [label]="stats.playgroundCount + ' playgrounds'" />
+    <brightrail-badge
+      variant="soft"
+      color="info"
+      size="small"
+      [label]="stats.variationCatalogCount + ' variation catalogs'"
+    />
+    <brightrail-badge
+      variant="soft"
+      color="success"
+      size="small"
+      [label]="stats.platformCoveragePercent + '% platform a11y coverage'"
+    />
+    <brightrail-badge variant="soft" color="primary" size="small" label="axe + visual CI gates" />
+    <span class="res-page__stats-reviewed">Last reviewed {{ lastReviewed }}</span>
+  </div>
+
+  <div class="res-page__stack la-stack">
     <brightrail-card appearance="outlined" [fullWidth]="true">
       <brightrail-card-header [withTitle]="true">
         <span brightrailCardHeaderTitle>Overall rating</span>
@@ -89,7 +99,7 @@
         <span brightrailCardHeaderTitle>What you have today</span>
       </brightrail-card-header>
       <brightrail-card-content>
-        <p class="la-section-lead">
+        <p class="res-page__section-lead la-section-lead">
           Jump into any playground or open its variation catalog from the links below.
         </p>
         <ul class="la-shipped-list">
@@ -120,7 +130,9 @@
         <span brightrailCardHeaderTitle>Production gaps</span>
       </brightrail-card-header>
       <brightrail-card-content>
-        <p class="la-section-lead">Components needed for typical enterprise admin and content workflows.</p>
+        <p class="res-page__section-lead la-section-lead">
+          Components needed for typical enterprise admin and content workflows.
+        </p>
         <brightrail-table
           variant="bordered"
           density="compact"
@@ -136,7 +148,7 @@
         <span brightrailCardHeaderTitle>Concept &amp; showcase ideas</span>
       </brightrail-card-header>
       <brightrail-card-content>
-        <p class="la-section-lead">
+        <p class="res-page__section-lead la-section-lead">
           Futuristic patterns previewed in
           <brightrail-button variant="link" size="sm" (click)="navigate('variations')">variation catalogs</brightrail-button>
           — not shipped as library components yet.

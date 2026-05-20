@@ -20,6 +20,11 @@ export const routes: Routes = [
           import('./playground/variations/variations-hub.component').then((m) => m.VariationsHubComponent),
       },
       {
+        path: 'resources/library-showcase',
+        loadComponent: () =>
+          import('./playground/resources/library-showcase.component').then((m) => m.LibraryShowcaseComponent),
+      },
+      {
         path: 'resources/library-assessment',
         loadComponent: () =>
           import('./playground/resources/library-assessment.component').then((m) => m.LibraryAssessmentComponent),

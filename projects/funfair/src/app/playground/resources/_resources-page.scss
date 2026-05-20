@@ -1,0 +1,158 @@
+@use 'breakpoints' as bp;
+
+// Shared layout for Funfair resource / guide pages (assessment, showcase, …).
+
+.res-page {
+  width: 100%;
+  max-width: min(72rem, 100%);
+  margin: 0 auto;
+  padding: 0 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.res-page__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.res-page__related {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.625rem;
+  border: 1px solid var(--ff-border, #e2e8f0);
+  background: var(--ff-surface-2, #f8fafc);
+  font-size: 0.8125rem;
+  color: var(--ff-muted, #64748b);
+}
+
+.res-page__related-label {
+  font-weight: 600;
+  color: var(--ff-fg, #0f172a);
+}
+
+.res-page__stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.65rem 0;
+}
+
+.res-page__stats-reviewed {
+  font-size: 0.75rem;
+  color: var(--ff-muted, #64748b);
+  margin-left: auto;
+
+  @include bp.br-down(sm) {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+.res-page__section-lead {
+  margin: 0 0 0.85rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--ff-muted, #64748b);
+}
+
+.res-page__pre {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--ff-code-bg, #0f172a);
+  color: var(--ff-code-fg, #e2e8f0);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.res-page__pre code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.res-page__steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.res-page__step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.85rem 1rem;
+  align-items: start;
+}
+
+.res-page__step-num {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  background: var(--ff-brand, #2563eb);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.res-page__step-title {
+  margin: 0 0 0.25rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--ff-fg, #0f172a);
+}
+
+.res-page__step-body {
+  margin: 0 0 0.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--ff-muted, #475569);
+}
+
+.res-page__pill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 0.65rem;
+}
+
+.res-page__pill {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--ff-border, #e2e8f0);
+  background: var(--ff-surface, #fff);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.res-page__pill:hover {
+  border-color: var(--ff-brand, #2563eb);
+  box-shadow: 0 2px 8px rgb(37 99 235 / 12%);
+}
+
+.res-page__pill-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--ff-fg, #0f172a);
+}
+
+.res-page__pill-desc {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--ff-muted, #64748b);
+}

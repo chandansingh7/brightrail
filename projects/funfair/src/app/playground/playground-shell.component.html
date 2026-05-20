@@ -21,10 +21,8 @@
     </div>
 
     <div class="pf-header__hero">
-      <h1 class="pf-header__title">Angular component playground</h1>
-      <p class="pf-header__subtitle">
-        Configure a component and see the preview and generated snippets update live.
-      </p>
+      <h1 class="pf-header__title">{{ headerHero().title }}</h1>
+      <p class="pf-header__subtitle">{{ headerHero().subtitle }}</p>
     </div>
 
     <div class="pf-header__actions">
@@ -162,6 +160,9 @@
         </div>
         <div class="pf-nav__group">
           <div class="pf-nav__heading">Resources</div>
+          <a routerLink="resources/library-showcase" routerLinkActive="is-active" class="pf-nav__item"
+            >Library showcase</a
+          >
           <a routerLink="resources/library-assessment" routerLinkActive="is-active" class="pf-nav__item"
             >Library assessment</a
           >

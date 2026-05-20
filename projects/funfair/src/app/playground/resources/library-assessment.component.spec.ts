@@ -29,6 +29,8 @@ describe('LibraryAssessmentComponent', () => {
   it('renders stats badges and shipped playground links', () => {
     const el = fixture.nativeElement as HTMLElement;
     expect(el.textContent).toContain('public exports');
+    expect(el.textContent).toContain('Library showcase');
+    expect(el.querySelector('.res-page__stats')).toBeTruthy();
     expect(el.querySelectorAll('.la-chip-link').length).toBeGreaterThan(0);
     expect(el.textContent).toContain('Production gaps');
     expect(el.querySelectorAll('.la-pros-cons__list li').length).toBeGreaterThan(0);
