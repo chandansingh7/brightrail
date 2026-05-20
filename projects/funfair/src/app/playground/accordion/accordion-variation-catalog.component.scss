@@ -1,0 +1,41 @@
+:host {
+  display: block;
+}
+
+.avc-block {
+  margin-bottom: 1.35rem;
+}
+
+.avc-block__h {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.avc-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.avc-row {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 720px) {
+  .avc-row {
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  }
+}
+
+.avc-mini-btn {
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.35rem;
+  border: 1px solid var(--ff-border, #e2e8f0);
+  background: var(--ff-surface, #fff);
+  cursor: pointer;
+}

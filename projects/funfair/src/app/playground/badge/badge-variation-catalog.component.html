@@ -1,0 +1,229 @@
+<section class="bvc-block">
+  <h2 class="bvc-block__h">1. Core badge types</h2>
+  <div class="bvc-grid">
+    <app-catalog-variation-tile label="Soft · New" [snippet]="s.coreSoftNew">
+      <brightrail-badge variant="soft" color="primary" label="New" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Tonal · count" [snippet]="s.coreTonalCount">
+      <brightrail-badge variant="tonal" color="neutral" label="47" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Outlined · Product" [snippet]="s.coreOutlinedProduct">
+      <brightrail-badge variant="outlined" color="primary" label="Product" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Filled · Primary" [snippet]="s.coreFilledPrimary">
+      <brightrail-badge variant="filled" color="primary" label="Primary" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">2. Badge appearances</h2>
+  <div class="bvc-grid">
+    <app-catalog-variation-tile label="Filled" [snippet]="s.appearanceFilled">
+      <brightrail-badge variant="filled" color="primary" label="Filled" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Outlined" [snippet]="s.appearanceOutlined">
+      <brightrail-badge variant="outlined" color="primary" label="Outlined" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Tonal" [snippet]="s.appearanceTonal">
+      <brightrail-badge variant="tonal" color="primary" label="Tonal" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Soft" [snippet]="s.appearanceSoft">
+      <brightrail-badge variant="soft" color="primary" label="Soft" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">3. Badge sizes</h2>
+  <div class="bvc-grid bvc-grid--sizes">
+    <app-catalog-variation-tile label="Small" [snippet]="s.sizeSmall">
+      <brightrail-badge variant="filled" color="primary" size="small" label="Small" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Medium" [snippet]="s.sizeMedium">
+      <brightrail-badge variant="filled" color="primary" size="medium" label="Medium" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Large" [snippet]="s.sizeLarge">
+      <brightrail-badge variant="filled" color="primary" size="large" label="Large" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">4. Badge states</h2>
+  <div class="bvc-grid">
+    <app-catalog-variation-tile label="Default" [snippet]="s.stateDefault">
+      <brightrail-badge variant="filled" color="primary" state="default" label="Default" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Hover" [snippet]="s.stateHover">
+      <brightrail-badge variant="filled" color="primary" state="hover" label="Hover" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Active" [snippet]="s.stateActive">
+      <brightrail-badge variant="filled" color="primary" state="active" label="Active" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Disabled" [snippet]="s.stateDisabled">
+      <brightrail-badge variant="filled" color="primary" state="disabled" label="Disabled" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">5. Notification counts</h2>
+  <div class="bvc-grid">
+    <app-catalog-variation-tile label="Bell · 12" [snippet]="s.notifBell">
+      <span class="bco-pill bco-pill--icon">
+        <span class="bco-ico bco-ico--bell" aria-hidden="true"></span>
+        <brightrail-badge variant="filled" color="primary" label="12" />
+      </span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Alert · 3" [snippet]="s.notifAlert">
+      <span class="bco-pill bco-pill--icon">
+        <span class="bco-ico bco-ico--alert" aria-hidden="true"></span>
+        <brightrail-badge variant="filled" color="warning" label="3" />
+      </span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Mail · 99+" [snippet]="s.notifMail">
+      <span class="bco-pill bco-pill--icon">
+        <span class="bco-ico bco-ico--mail" aria-hidden="true"></span>
+        <brightrail-badge variant="filled" color="primary" label="99+" />
+      </span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Task · 7" [snippet]="s.notifTask">
+      <span class="bco-pill bco-pill--icon">
+        <span class="bco-ico bco-ico--task" aria-hidden="true"></span>
+        <brightrail-badge variant="filled" color="info" label="7" />
+      </span>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">6. Status badges</h2>
+  <div class="bvc-grid">
+    <app-catalog-variation-tile label="Active" [snippet]="s.statusActive">
+      <brightrail-badge variant="tonal" color="success" label="Active" icon="check" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Pending" [snippet]="s.statusPending">
+      <brightrail-badge variant="tonal" color="warning" label="Pending" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="In progress" [snippet]="s.statusInProgress">
+      <brightrail-badge variant="tonal" color="info" label="In progress" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Inactive" [snippet]="s.statusInactive">
+      <brightrail-badge variant="tonal" color="neutral" label="Inactive" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Disabled" [snippet]="s.statusDisabled">
+      <brightrail-badge variant="tonal" color="neutral" state="disabled" label="Disabled" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">7. Dot badges</h2>
+  <div class="bvc-grid">
+    <app-catalog-variation-tile label="Online" [snippet]="s.dotOnline">
+      <brightrail-badge variant="filled" color="success" [dot]="true" label="Online" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Away" [snippet]="s.dotAway">
+      <brightrail-badge variant="filled" color="warning" [dot]="true" label="Away" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Do not disturb" [snippet]="s.dotDnd">
+      <brightrail-badge variant="filled" color="danger" [dot]="true" label="Do not disturb" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Offline" [snippet]="s.dotOffline">
+      <brightrail-badge variant="filled" color="neutral" [dot]="true" label="Offline" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Custom" [snippet]="s.dotCustom">
+      <brightrail-badge variant="filled" color="primary" [dot]="true" label="Custom" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">8. Enterprise patterns</h2>
+  <div class="bvc-grid bvc-grid--enterprise">
+    <app-catalog-variation-tile label="Dashboard · 5" [snippet]="s.enterpriseDashboard">
+      <span class="bco-pill">Dashboard <brightrail-badge variant="filled" color="primary" size="small" label="5" /></span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Alerts · 3" [snippet]="s.enterpriseAlerts">
+      <span class="bco-pill">Alerts <brightrail-badge variant="filled" color="danger" size="small" label="3" /></span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Messages · 12" [snippet]="s.enterpriseMessages">
+      <span class="bco-pill">Messages <brightrail-badge variant="filled" color="primary" size="small" label="12" /></span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Avatar stack · +5" [snippet]="s.enterpriseAvatarsOverflow">
+      <span class="bco-pill bco-pill--avatars">
+        <span class="bco-avatars" aria-hidden="true">
+          <span class="bco-avatar">A</span><span class="bco-avatar">R</span><span class="bco-avatar">M</span
+          ><span class="bco-avatar">J</span>
+        </span>
+        <brightrail-badge variant="soft" color="neutral" size="small" label="+5" />
+      </span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Priority · High" [snippet]="s.enterprisePriorityHigh">
+      <span class="bco-pill"><brightrail-badge variant="tonal" color="warning" size="small" label="High" /></span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Priority · Medium" [snippet]="s.enterprisePriorityMedium">
+      <span class="bco-pill"><brightrail-badge variant="tonal" color="warning" size="small" label="Medium" /></span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Priority · Low" [snippet]="s.enterprisePriorityLow">
+      <span class="bco-pill"><brightrail-badge variant="tonal" color="success" size="small" label="Low" /></span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Approved" [snippet]="s.enterpriseApproved">
+      <span class="bco-pill"><brightrail-badge variant="tonal" color="success" size="small" label="Approved" /></span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Pending" [snippet]="s.enterprisePending">
+      <span class="bco-pill"><brightrail-badge variant="tonal" color="warning" size="small" label="Pending" /></span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Rejected" [snippet]="s.enterpriseRejected">
+      <span class="bco-pill"><brightrail-badge appearance="tonal" color="critical" size="small" label="Rejected" /></span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Draft" [snippet]="s.enterpriseDraft">
+      <span class="bco-pill"><brightrail-badge variant="soft" color="neutral" size="small" label="Draft" /></span>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">9. Advanced patterns</h2>
+  <div class="bvc-grid bvc-grid--enterprise">
+    <app-catalog-variation-tile label="Production" [snippet]="s.advancedProduction">
+      <span class="bco-pill"><brightrail-badge variant="tonal" color="success" size="small" label="Production" /></span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Staging" [snippet]="s.advancedStaging">
+      <span class="bco-pill"><brightrail-badge variant="tonal" color="info" size="small" label="Staging" /></span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Development" [snippet]="s.advancedDevelopment">
+      <span class="bco-pill"><brightrail-badge variant="tonal" color="priority" size="small" label="Development" /></span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Sandbox" [snippet]="s.advancedSandbox">
+      <span class="bco-pill"><brightrail-badge variant="soft" color="neutral" size="small" label="Sandbox" /></span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Finance" [snippet]="s.advancedFinance">
+      <span class="bco-pill"><brightrail-badge variant="soft" color="primary" size="small" label="Finance" /></span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="HR" [snippet]="s.advancedHr">
+      <span class="bco-pill"><brightrail-badge variant="soft" color="success" size="small" label="HR" /></span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="IT" [snippet]="s.advancedIt">
+      <span class="bco-pill"><brightrail-badge variant="soft" color="priority" size="small" label="IT" /></span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Ops" [snippet]="s.advancedOps">
+      <span class="bco-pill"><brightrail-badge variant="soft" color="neutral" size="small" label="Ops" /></span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Grouped counts" [snippet]="s.advancedGroupedCounts">
+      <span class="bco-pill bco-pill--grouped">
+        <brightrail-badge variant="soft" color="success" size="small" label="3" />
+        <brightrail-badge variant="soft" color="warning" size="small" label="1" />
+        <brightrail-badge variant="soft" color="danger" size="small" label="2" />
+        <brightrail-badge variant="soft" color="neutral" size="small" label="+4" />
+      </span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Order status" [snippet]="s.advancedOrderStatus">
+      <span class="bco-pill">Order #12345 <brightrail-badge variant="tonal" color="primary" size="small" label="In progress" /></span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Critical · High" [snippet]="s.advancedCriticalHigh">
+      <span class="bco-pill"><brightrail-badge appearance="tonal" color="critical" size="small" label="High" /></span>
+    </app-catalog-variation-tile>
+  </div>
+</section>

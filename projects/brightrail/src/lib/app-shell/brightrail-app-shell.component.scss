@@ -1,0 +1,69 @@
+@use '../styles/tokens' as br;
+
+:host {
+  display: block;
+  block-size: 100%;
+  min-block-size: 100%;
+}
+
+.br-app-shell {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  block-size: 100%;
+  min-block-size: 100%;
+  background: var(--br-color-surface, #{br.$br-color-surface});
+  color: br.$br-color-text;
+}
+
+.br-app-shell--no-topbar {
+  grid-template-rows: 1fr;
+}
+
+.br-app-shell__top {
+  border-block-end: 1px solid var(--br-color-border, #{br.$br-color-border});
+  background: var(--br-color-surface, #{br.$br-color-surface});
+}
+
+.br-app-shell__body {
+  display: grid;
+  grid-template-columns: var(--br-app-shell-sidebar-width, 16rem) minmax(0, 1fr);
+  min-block-size: 0;
+  block-size: 100%;
+}
+
+.br-app-shell--no-sidebar .br-app-shell__body {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.br-app-shell--sidebar-right .br-app-shell__body {
+  grid-template-columns: minmax(0, 1fr) var(--br-app-shell-sidebar-width, 16rem);
+}
+
+.br-app-shell--sidebar-right .br-app-shell__sidebar {
+  order: 2;
+}
+
+.br-app-shell__sidebar {
+  border-inline-end: 1px solid var(--br-color-border, #{br.$br-color-border});
+  background: var(--br-color-surface-muted, #{br.$br-color-surface-muted});
+  overflow: auto;
+}
+
+.br-app-shell--sidebar-right .br-app-shell__sidebar {
+  border-inline-end: none;
+  border-inline-start: 1px solid var(--br-color-border, #{br.$br-color-border});
+}
+
+.br-app-shell__main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-block-size: 0;
+  overflow: auto;
+}
+
+.br-app-shell__content {
+  flex: 1 1 auto;
+  padding: 1.25rem 1.5rem;
+  min-block-size: 0;
+}

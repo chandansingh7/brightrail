@@ -8,6 +8,21 @@
   padding: 1rem 1.25rem 1.5rem;
 }
 
+.aco-hero__eyebrow {
+  margin: 0 0 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ff-muted, #64748b);
+}
+
+.aco-hero__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+}
+
 .aco-hero h1 {
   margin: 0;
   font-size: 1.5rem;
@@ -24,47 +39,3 @@
   font-weight: 600;
 }
 
-.aco-grid {
-  margin-top: 1rem;
-  display: grid;
-  gap: 0.85rem;
-}
-
-.aco-card {
-  border: 1px solid var(--ff-border);
-  border-radius: 0.65rem;
-  background: var(--ff-surface);
-  padding: 0.9rem;
-}
-
-.aco-card h2 {
-  margin: 0 0 0.65rem;
-  font-size: 1rem;
-}
-
-.aco-stack {
-  display: block;
-  margin-top: 0.65rem;
-}
-
-.aco-row {
-  display: grid;
-  gap: 0.75rem;
-}
-
-@media (min-width: 720px) {
-  .aco-row {
-    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-  }
-}
-
-.aco-mini-btn {
-  font: inherit;
-  font-weight: 600;
-  font-size: 0.8125rem;
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.35rem;
-  border: 1px solid var(--ff-border);
-  background: var(--ff-surface);
-  cursor: pointer;
-}

@@ -1,0 +1,13 @@
+@use '../button/button-playground.component.scss' as *;
+@use '../playground-preview-fixes.scss' as *;
+
+.bp-preview-inner--textarea {
+  width: 100%;
+  max-width: 22rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.bp-preview-inner--textarea.ta-play--full {
+  max-width: 100%;
+}

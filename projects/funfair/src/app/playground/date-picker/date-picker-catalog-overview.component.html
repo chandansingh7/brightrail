@@ -1,110 +1,22 @@
 <div class="cco">
   <header class="cco-hero">
-    <h1>Date Picker Types &amp; Variations</h1>
-    <p>Explore date selection patterns, appearances, states, and enterprise use cases.</p>
-    <a routerLink=".." class="cco-link">← Date picker playground</a>
+    <p class="cco-hero__eyebrow">Brightrail · Date picker · Variation catalog</p>
+    <h1>Date picker types &amp; variations</h1>
+    <p>
+      Ten reference sections with live ngModel demos, open calendar states, and enterprise patterns. Click any tile for
+      <strong>View code</strong>, then <strong>Copy code</strong> (import from <code>brightrail</code>).
+    </p>
+    <p class="cco-hero__links">
+      <a routerLink=".." class="cco-link">← Date picker playground (live settings)</a>
+      <a routerLink="/variations" class="cco-link">All variation catalogs</a>
+    </p>
   </header>
 
-  <section class="cco-grid">
-    <article class="cco-card">
-      <h2>1. Core date picker types</h2>
-      <div class="cco-row">
-        <div class="cco-row__label">Inline calendar</div>
-        <brightrail-date-picker type="inline" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
-      </div>
-      <div class="cco-row">
-        <div class="cco-row__label">Input with popup</div>
-        <brightrail-date-picker [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
-      </div>
-      <div class="cco-row">
-        <div class="cco-row__label">Range picker</div>
-        <brightrail-date-picker type="range" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="rangeDate" />
-      </div>
-      <div class="cco-row">
-        <div class="cco-row__label">Month picker</div>
-        <brightrail-date-picker type="month" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="monthDate" />
-      </div>
-    </article>
+  <app-date-picker-variation-catalog />
 
-    <article class="cco-card">
-      <h2>2. Appearances</h2>
-      <div class="cco-row"><div class="cco-row__label">Filled</div><brightrail-date-picker appearance="filled" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" /></div>
-      <div class="cco-row"><div class="cco-row__label">Soft</div><brightrail-date-picker appearance="soft" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" /></div>
-      <div class="cco-row"><div class="cco-row__label">Outlined</div><brightrail-date-picker appearance="outlined" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" /></div>
-      <div class="cco-row"><div class="cco-row__label">Tonal</div><brightrail-date-picker appearance="tonal" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" /></div>
-    </article>
-
-    <article class="cco-card">
-      <h2>3. Sizes</h2>
-      <div class="cco-row"><div class="cco-row__label">Compact</div><brightrail-date-picker size="sm" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" /></div>
-      <div class="cco-row"><div class="cco-row__label">Medium (default)</div><brightrail-date-picker size="md" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" /></div>
-      <div class="cco-row"><div class="cco-row__label">Large</div><brightrail-date-picker size="lg" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" /></div>
-    </article>
-
-    <article class="cco-card">
-      <h2>4. States</h2>
-      <div class="cco-row"><div class="cco-row__label">Default</div><brightrail-date-picker [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" /></div>
-      <div class="cco-row"><div class="cco-row__label">Hover</div><brightrail-date-picker class="cco-hover" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" /></div>
-      <div class="cco-row"><div class="cco-row__label">Focused</div><brightrail-date-picker class="cco-focus" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" /></div>
-      <div class="cco-row"><div class="cco-row__label">Disabled</div><brightrail-date-picker [disabled]="true" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" /></div>
-    </article>
-
-    <article class="cco-card cco-card--wide">
-      <h2>5. Single date</h2>
-      <brightrail-date-picker [labelPosition]="'none'" [open]="true" [fullWidth]="true" [ngModel]="singleDate" />
-    </article>
-
-    <article class="cco-card cco-card--wide">
-      <h2>6. Date range</h2>
-      <brightrail-date-picker
-        type="range"
-        [labelPosition]="'none'"
-        [open]="true"
-        [fullWidth]="true"
-        [ngModel]="rangeDate"
-      />
-    </article>
-
-    <article class="cco-card">
-      <h2>7. With time / date &amp; time</h2>
-      <div class="cco-mock-field"><span>Time picker</span><span>10:30 AM</span></div>
-      <div class="cco-mock-field"><span>Date &amp; time picker</span><span>May 20, 2026 • 10:30 AM</span></div>
-      <div class="cco-mock-field"><span>24-hour time</span><span>22:30</span></div>
-    </article>
-
-    <article class="cco-card">
-      <h2>8. Validation &amp; disabled dates</h2>
-      <div class="cco-row">
-        <div class="cco-row__label">Error state</div>
-        <brightrail-date-picker status="error" helperText="Please enter a valid date." [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
-      </div>
-      <div class="cco-row">
-        <div class="cco-row__label">Helper text</div>
-        <brightrail-date-picker helperText="Select a check-out date." [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
-      </div>
-      <div class="cco-row">
-        <div class="cco-row__label">Disabled dates</div>
-        <brightrail-date-picker [disableWeekends]="true" [open]="true" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
-      </div>
-    </article>
-
-    <article class="cco-card">
-      <h2>9. Enterprise patterns</h2>
-      <div class="cco-row"><div class="cco-row__label">Booking form</div><brightrail-date-picker type="range" label="Check-in / Check-out" helperText="7 nights selected" [fullWidth]="true" [ngModel]="bookingRange" /></div>
-      <div class="cco-row"><div class="cco-row__label">Report filters</div><brightrail-date-picker type="range" label="From / To" [fullWidth]="true" [ngModel]="rangeDate" /></div>
-      <div class="cco-row"><div class="cco-row__label">Subscription / renewal</div><brightrail-date-picker type="month" label="Next renewal" helperText="You will be billed on this date." [fullWidth]="true" [ngModel]="monthDate" /></div>
-    </article>
-
-    <article class="cco-card">
-      <h2>10. Futuristic date picker designs (exploratory)</h2>
-      <div class="cco-future cco-future--glass">
-        <div class="cco-future__title">Glassmorphism</div>
-        <brightrail-date-picker [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
-      </div>
-      <div class="cco-future cco-future--gradient">
-        <div class="cco-future__title">Gradient accent</div>
-        <brightrail-date-picker [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
-      </div>
-    </article>
+  <section class="cco-code-block" aria-labelledby="cco-dp-html">
+    <h2 id="cco-dp-html">Date picker HTML examples</h2>
+    <p class="cco-code-block__hint">Typical booking range picker with helper text and open calendar.</p>
+    <pre class="cco-pre"><code>{{ htmlExamples }}</code></pre>
   </section>
 </div>

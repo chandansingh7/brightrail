@@ -1,0 +1,198 @@
+@use '../styles/tokens' as br;
+
+:host {
+  display: block;
+  width: 100%;
+  --br-graph-height: 280px;
+}
+
+.br-graph__shell {
+  position: relative;
+  width: 100%;
+  min-height: var(--br-graph-height);
+  background: var(--br-color-surface, #{br.$br-color-surface});
+  border: 1px solid var(--br-color-border, #{br.$br-color-border});
+  border-radius: var(--br-radius-md, #{br.$br-radius-md});
+  padding: 0.75rem 0.75rem 0.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+:host.br-graph--legend-right .br-graph__shell {
+  flex-direction: row;
+  align-items: stretch;
+}
+
+:host.br-graph--legend-right .br-graph__svg {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+:host.br-graph--legend-right .br-graph__legend {
+  flex: 0 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  padding-left: 0.5rem;
+  min-width: 6rem;
+}
+
+.br-graph__svg {
+  display: block;
+  width: 100%;
+  height: var(--br-graph-height);
+}
+
+.br-graph__grid {
+  stroke: var(--br-color-border, #{br.$br-color-border});
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.br-graph__tick {
+  fill: var(--br-color-muted, #{br.$br-color-muted});
+  font-size: 10px;
+  font-family: system-ui, sans-serif;
+}
+
+.br-graph__axis-label {
+  fill: var(--br-color-text, #{br.$br-color-text});
+  font-size: 11px;
+  font-weight: 500;
+  font-family: system-ui, sans-serif;
+}
+
+.br-graph__axis-label--y {
+  letter-spacing: 0.02em;
+}
+
+.br-graph__area {
+  opacity: var(--br-graph-area-opacity, 0.15);
+}
+
+.br-graph__line {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.br-graph__point,
+.br-graph__scatter,
+.br-graph__bubble {
+  cursor: default;
+}
+
+.br-graph--interactive .br-graph__point,
+.br-graph--interactive .br-graph__scatter,
+.br-graph--interactive .br-graph__bubble,
+.br-graph--interactive .br-graph__bar {
+  cursor: pointer;
+}
+
+.br-graph__bar {
+  rx: 2;
+}
+
+.br-graph__radial-track,
+.br-graph__gauge-track {
+  fill: none;
+  stroke: var(--br-color-border, #{br.$br-color-border});
+  stroke-width: 10;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.br-graph__radial-fill,
+.br-graph__gauge-fill {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.br-graph__radial-label,
+.br-graph__gauge-label {
+  fill: var(--br-color-text-strong, #{br.$br-color-text-strong});
+  font-size: 18px;
+  font-weight: 600;
+  font-family: system-ui, sans-serif;
+}
+
+.br-graph__gauge-needle {
+  stroke: var(--br-color-text-strong, #{br.$br-color-text-strong});
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.br-graph__gauge-hub {
+  fill: var(--br-color-text-strong, #{br.$br-color-text-strong});
+}
+
+.br-graph__wick {
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.br-graph__funnel {
+  stroke: var(--br-graph-funnel-stroke, #fff);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+:host.br-graph--surface-dark .br-graph__shell {
+  background: var(--br-color-surface, #{br.$br-color-surface});
+  border-color: var(--br-color-border, #{br.$br-color-border});
+}
+
+:host.br-graph--surface-dark .br-graph__tooltip {
+  background: var(--br-graph-tooltip-bg, var(--br-color-text-strong, #{br.$br-color-text-strong}));
+  color: var(--br-graph-tooltip-fg, #fff);
+}
+
+.br-graph__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.br-graph__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  color: var(--br-color-muted, #{br.$br-color-muted});
+}
+
+.br-graph__legend-swatch {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.br-graph__tooltip {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  min-width: 7rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: var(--br-radius-sm, #{br.$br-radius-sm});
+  background: var(--br-color-text-strong, #{br.$br-color-text-strong});
+  color: #fff;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 18%);
+}
+
+.br-graph__tooltip-title {
+  font-size: 0.6875rem;
+  opacity: 0.85;
+}
+
+.br-graph__tooltip-value {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}

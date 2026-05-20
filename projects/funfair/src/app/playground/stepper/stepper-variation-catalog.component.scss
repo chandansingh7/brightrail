@@ -1,0 +1,71 @@
+:host {
+  display: block;
+}
+
+.stvc-block {
+  margin-bottom: 1.35rem;
+}
+
+.stvc-block__h {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.stvc-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  align-items: start;
+}
+
+.stvc-grid--wide {
+  grid-template-columns: 1fr;
+}
+
+.stvc-a11y {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--ff-border, #e2e8f0);
+  border-radius: 0.65rem;
+  background: var(--ff-surface-muted, #f8fafc);
+  font-size: 0.8rem;
+}
+
+.stvc-a11y ul {
+  margin: 0 0 0.5rem;
+  padding-left: 1rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.stvc-a11y__title {
+  margin: 0 0 0.45rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.stvc-note {
+  margin: 0.45rem 0 0;
+  border: 1px solid rgb(26 115 232 / 25%);
+  background: rgb(26 115 232 / 8%);
+  color: #1a73e8;
+  border-radius: 0.4rem;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.74rem;
+}
+
+.stvc-size-host--compact {
+  --br-stepper-node-size: 1.65rem;
+}
+
+.stvc-size-host--mini {
+  --br-stepper-node-size: 1.35rem;
+}
+
+.stvc-futuristic {
+  padding: 0.45rem 0.55rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(90deg, rgb(255 255 255 / 95%), rgb(235 243 255 / 92%));
+  border: 1px solid var(--ff-border, #e2e8f0);
+}

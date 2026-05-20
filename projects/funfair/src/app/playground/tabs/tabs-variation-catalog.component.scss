@@ -1,0 +1,37 @@
+:host {
+  display: block;
+}
+
+.tbvc-block {
+  margin-bottom: 1.35rem;
+}
+
+.tbvc-block__h {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.tbvc-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+}
+
+.tbvc-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tbvc-scroll-wrap {
+  max-width: 22rem;
+}
+
+:host ::ng-deep .tbvc-vertical-demo.br-tabs--vertical {
+  min-height: 10rem;
+}
+
+:host ::ng-deep .tbvc-vertical-demo .br-tabs__shell {
+  min-height: 9rem;
+}

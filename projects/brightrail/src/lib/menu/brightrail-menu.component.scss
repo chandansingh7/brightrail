@@ -1,0 +1,23 @@
+@use '../styles/tokens' as br;
+
+:host {
+  display: inline-block;
+  position: relative;
+}
+
+.br-menu {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  z-index: 1000;
+  min-width: 10rem;
+  padding: 0.35rem;
+  border: 1px solid var(--br-menu-border, #{br.$br-color-border-strong});
+  border-radius: var(--br-radius-md, #{br.$br-radius-md});
+  background: var(--br-menu-bg, #{br.$br-color-surface});
+  box-shadow: 0 8px 24px rgb(60 64 67 / 16%);
+}
+
+.br-menu[hidden] {
+  display: none !important;
+}

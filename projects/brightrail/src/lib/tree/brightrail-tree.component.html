@@ -1,0 +1,49 @@
+<ul class="br-tree__list" role="group" [attr.aria-label]="ariaLabel() || null">
+  @for (node of visibleNodes(); track node.id) {
+    <li
+      class="br-tree__item"
+      role="treeitem"
+      [attr.aria-expanded]="node.hasChildren ? isExpanded(node.id) : null"
+      [attr.aria-selected]="selectionEnabled() ? isSelected(node.id) : null"
+      [attr.aria-disabled]="node.disabled ? true : null"
+      [style.padding-inline-start]="indent(node.depth)"
+    >
+      <div class="br-tree__row" [class.br-tree__row--selected]="isSelected(node.id)">
+        @if (node.hasChildren) {
+          <button
+            type="button"
+            class="br-tree__toggle"
+            [disabled]="node.disabled"
+            [attr.aria-label]="(isExpanded(node.id) ? 'Collapse' : 'Expand') + ' ' + node.label"
+            (click)="onToggle($event, node)"
+          >
+            <span class="br-tree__chevron" [class.br-tree__chevron--expanded]="isExpanded(node.id)" aria-hidden="true">
+              <svg viewBox="0 0 16 16" width="1em" height="1em">
+                <path
+                  d="M6 4l4 4-4 4"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </button>
+        } @else {
+          <span class="br-tree__toggle-spacer" aria-hidden="true"></span>
+        }
+
+        <button
+          type="button"
+          class="br-tree__label-btn"
+          [class.br-tree__label-btn--disabled]="node.disabled"
+          [disabled]="node.disabled || !selectionEnabled()"
+          (click)="onSelect($event, node)"
+        >
+          {{ node.label }}
+        </button>
+      </div>
+    </li>
+  }
+</ul>

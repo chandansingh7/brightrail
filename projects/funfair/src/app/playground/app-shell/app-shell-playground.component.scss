@@ -1,0 +1,23 @@
+@use '../button/button-playground.component.scss' as *;
+@use '../playground-preview-fixes.scss' as *;
+
+.bp-preview-inner--app-shell {
+  width: 100%;
+  min-height: 20rem;
+  block-size: 22rem;
+  display: flex;
+  flex-direction: column;
+}
+
+:host ::ng-deep brightrail-app-shell {
+  flex: 1 1 auto;
+  min-height: 0;
+  block-size: 100%;
+}
+
+.app-shell-play-content {
+  margin: 0;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: var(--ff-muted, #64748b);
+}

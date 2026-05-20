@@ -1,0 +1,42 @@
+<section class="vsvc-block">
+  <h2 class="vsvc-block__h">1. String errors</h2>
+  <app-catalog-variation-tile label="Default list" [snippet]="s.coreStrings">
+    <brightrail-validation-summary [errors]="stringErrors" />
+  </app-catalog-variation-tile>
+</section>
+
+<section class="vsvc-block">
+  <h2 class="vsvc-block__h">2. Field errors</h2>
+  <app-catalog-variation-tile label="Field labels" [snippet]="s.fieldErrors">
+    <brightrail-validation-summary [errors]="fieldErrors" />
+  </app-catalog-variation-tile>
+</section>
+
+<section class="vsvc-block">
+  <h2 class="vsvc-block__h">3. Custom title</h2>
+  <app-catalog-variation-tile label="Profile review" [snippet]="s.customTitle">
+    <brightrail-validation-summary title="Review your profile details" [errors]="fieldErrors" />
+  </app-catalog-variation-tile>
+</section>
+
+<section class="vsvc-block">
+  <h2 class="vsvc-block__h">4. Single error</h2>
+  <app-catalog-variation-tile label="One message" [snippet]="s.singleError">
+    <brightrail-validation-summary [errors]="['You must accept the terms']" />
+  </app-catalog-variation-tile>
+</section>
+
+<section class="vsvc-block">
+  <h2 class="vsvc-block__h">5. Many errors</h2>
+  <app-catalog-variation-tile label="Long list" [snippet]="s.manyErrors">
+    <brightrail-validation-summary title="Unable to submit the form" [errors]="manyErrors" />
+  </app-catalog-variation-tile>
+</section>
+
+<section class="vsvc-block">
+  <h2 class="vsvc-block__h">6. Empty state</h2>
+  <app-catalog-variation-tile label="Hidden when empty" [snippet]="s.hiddenWhenEmpty">
+    <p class="vsvc-empty-hint">No summary rendered when errors is empty.</p>
+    <brightrail-validation-summary [errors]="[]" />
+  </app-catalog-variation-tile>
+</section>

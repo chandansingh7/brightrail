@@ -1,0 +1,13 @@
+@if (variant() === 'text' && lines() > 1) {
+  <div class="br-skel__stack" role="presentation">
+    @for (line of lineIndices(); track line) {
+      <span
+        class="br-skel__block"
+        [class.br-skel__block--last]="isLastLine(line)"
+        aria-hidden="true"
+      ></span>
+    }
+  </div>
+} @else {
+  <span class="br-skel__block" aria-hidden="true"></span>
+}

@@ -114,6 +114,19 @@ html[data-theme='light'] {
     --br-avatar-halo: var(--ff-surface);
     --br-avatar-ring: var(--ff-brand);
   }
+
+  brightrail-graph {
+    --br-color-primary: var(--ff-brand);
+    --br-color-text: var(--ff-text-core);
+    --br-color-text-strong: var(--ff-text-core);
+    --br-color-muted: var(--ff-muted);
+    --br-color-border: var(--ff-border);
+    --br-color-border-strong: var(--ff-border-strong);
+    --br-color-surface: var(--ff-surface);
+    --br-graph-funnel-stroke: var(--ff-border);
+    --br-graph-tooltip-bg: var(--ff-text-core);
+    --br-graph-tooltip-fg: #fff;
+  }
 }
 
 html[data-theme='dark'] {
@@ -202,6 +215,19 @@ html[data-theme='dark'] {
     --br-color-surface: var(--ff-surface);
     --br-avatar-halo: var(--ff-surface);
     --br-avatar-ring: var(--ff-brand);
+  }
+
+  brightrail-graph {
+    --br-color-primary: var(--ff-brand);
+    --br-color-text: var(--ff-text-core);
+    --br-color-text-strong: var(--ff-text-core);
+    --br-color-muted: var(--ff-muted);
+    --br-color-border: var(--ff-border);
+    --br-color-border-strong: var(--ff-border-strong);
+    --br-color-surface: var(--ff-surface-2);
+    --br-graph-funnel-stroke: var(--ff-border-strong);
+    --br-graph-tooltip-bg: #1e293b;
+    --br-graph-tooltip-fg: #f8fafc;
   }
 }
 

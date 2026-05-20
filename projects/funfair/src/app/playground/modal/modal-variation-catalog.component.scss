@@ -1,0 +1,101 @@
+:host {
+  display: block;
+}
+
+.mvc-block {
+  margin-bottom: 1.35rem;
+}
+
+.mvc-block__h {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.mvc-block__hint {
+  margin: -0.15rem 0 0.65rem;
+  font-size: 0.78rem;
+  color: var(--ff-muted, #64748b);
+}
+
+.mvc-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+}
+
+.mvc-grid--modals {
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+}
+
+.mvc-shell {
+  position: relative;
+  width: 100%;
+  min-height: 11rem;
+  border: 1px solid var(--ff-border, #e2e8f0);
+  border-radius: 0.55rem;
+  overflow: hidden;
+  background: var(--ff-surface-muted, #f8fafc);
+}
+
+.mvc-shell--tall {
+  min-height: 13rem;
+}
+
+.mvc-shell--sm {
+  min-height: 9rem;
+}
+
+.mvc-shell--example {
+  min-height: 14rem;
+}
+
+.mvc-body-line {
+  margin: 0 0 0.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ff-text-core, #334155);
+}
+
+.mvc-field-label {
+  display: block;
+  margin: 0.65rem 0 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ff-label, #475569);
+}
+
+.mvc-field-input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.45rem 0.55rem;
+  border-radius: 0.45rem;
+  border: 1px solid var(--ff-border-strong, #cbd5e1);
+  font: inherit;
+  font-size: 0.875rem;
+  color: var(--ff-text-core, #334155);
+  background: var(--ff-surface, #fff);
+}
+
+.mvc-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.5rem 0;
+}
+
+.mvc-loading__spin {
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 2px solid var(--ff-border, #e2e8f0);
+  border-top-color: var(--ff-brand, #2563eb);
+  border-radius: 50%;
+  animation: mvc-spin 0.8s linear infinite;
+}
+
+@keyframes mvc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

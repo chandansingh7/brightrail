@@ -1,0 +1,48 @@
+:host {
+  display: block;
+}
+
+.tvc-block {
+  margin-bottom: 1.35rem;
+}
+
+.tvc-block__h {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.tvc-block__hint {
+  margin: -0.15rem 0 0.65rem;
+  font-size: 0.78rem;
+  color: var(--ff-muted, #64748b);
+}
+
+.tvc-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  align-items: start;
+}
+
+.tvc-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tvc-stack-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.tvc-code-sample {
+  margin: 0;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+  text-align: left;
+}

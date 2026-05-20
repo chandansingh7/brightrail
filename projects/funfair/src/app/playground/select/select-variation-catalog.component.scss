@@ -1,0 +1,50 @@
+:host {
+  display: block;
+}
+
+.svc-block {
+  margin-bottom: 1.35rem;
+}
+
+.svc-block__h {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.svc-block__hint {
+  margin: -0.15rem 0 0.65rem;
+  font-size: 0.78rem;
+  color: var(--ff-muted, #64748b);
+}
+
+.svc-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+}
+
+.svc-grid--selects {
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+}
+
+.svc-grid--sizes {
+  align-items: end;
+}
+
+.svc-tile-body {
+  width: 100%;
+  padding: 0.35rem 0.15rem;
+}
+
+.svc-tile-body--narrow {
+  max-width: 11rem;
+}
+
+.svc-tile-body--wide {
+  max-width: 18rem;
+}
+
+.svc-panel {
+  display: none;
+}

@@ -5,7 +5,6 @@ import { AvatarCatalogOverviewComponent } from './avatar-catalog-overview.compon
 
 describe('AvatarCatalogOverviewComponent', () => {
   let fixture: ComponentFixture<AvatarCatalogOverviewComponent>;
-  let component: AvatarCatalogOverviewComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -14,16 +13,20 @@ describe('AvatarCatalogOverviewComponent', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(AvatarCatalogOverviewComponent);
-    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('groupStackTenSrcs should list ten avatar URLs for dense overflow demo', () => {
-    expect(component.groupStackTenSrcs.length).toBe(10);
-    expect(component.groupStackTenSrcs.every((u) => u.startsWith('/images/avatar/'))).toBeTrue();
+  it('renders the variation catalog with copy tiles', () => {
+    expect(fixture.nativeElement.querySelector('app-avatar-variation-catalog')).toBeTruthy();
+    expect(fixture.nativeElement.querySelector('app-catalog-variation-tile')).toBeTruthy();
+  });
+
+  it('shows HTML examples footer from the reference mock', () => {
+    expect(fixture.nativeElement.querySelector('#cco-html-examples')).toBeTruthy();
+    expect(fixture.nativeElement.querySelector('.cco-pre')?.textContent).toContain('brightrail-avatar-group');
   });
 });

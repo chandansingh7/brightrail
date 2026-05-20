@@ -1,156 +1,23 @@
 <div class="pco">
   <header class="pco-hero">
+    <p class="pco-hero__eyebrow">Brightrail · Pagination · Variation catalog</p>
     <h1>Pagination types &amp; variations</h1>
-    <p>Enterprise pagination patterns for lists, tables, and search results.</p>
-    <a routerLink=".." class="pco-link">← Pagination playground</a>
+    <p>
+      Enterprise pagination patterns for lists, tables, and search results. Click any tile for
+      <strong>View code</strong>, then <strong>Copy code</strong> to paste into your app (import from
+      <code>brightrail</code>).
+    </p>
+    <p class="pco-hero__links">
+      <a routerLink=".." class="pco-link">← Pagination playground (live settings)</a>
+      <a routerLink="/variations" class="pco-link">All variation catalogs</a>
+    </p>
   </header>
 
-  <section class="pco-grid" aria-label="Pagination variation gallery">
-    <article class="pco-card">
-      <h2>1. Core types</h2>
-      <p class="pco-card__hint">Numbered (default), minimal window, compact spacing, and text prev/next.</p>
-      <brightrail-pagination [length]="120" [pageIndex]="2" [pageSize]="10" variant="numbered" />
-      <brightrail-pagination class="pco-stack" [length]="120" [pageIndex]="4" [pageSize]="10" variant="minimal" [maxPageButtons]="5" />
-      <brightrail-pagination class="pco-stack" [length]="120" [pageIndex]="1" [pageSize]="10" variant="numbered" [compact]="true" />
-      <brightrail-pagination class="pco-stack" [length]="120" [pageIndex]="0" [pageSize]="10" variant="simple" [showFirstLast]="false" />
-    </article>
+  <app-pagination-variation-catalog />
 
-    <article class="pco-card">
-      <h2>2. Interaction states</h2>
-      <p class="pco-card__hint">Hover uses the primary tint on buttons; active is the selected page; disabled greys out controls.</p>
-      <div class="pco-row">
-        <figure class="pco-fig">
-          <figcaption>Default</figcaption>
-          <brightrail-pagination [length]="50" [pageIndex]="0" [pageSize]="10" variant="numbered" />
-        </figure>
-        <figure class="pco-fig">
-          <figcaption>Active (page 3)</figcaption>
-          <brightrail-pagination [length]="50" [pageIndex]="2" [pageSize]="10" variant="numbered" />
-        </figure>
-        <figure class="pco-fig">
-          <figcaption>Disabled</figcaption>
-          <brightrail-pagination [length]="50" [pageIndex]="2" [pageSize]="10" variant="numbered" state="disabled" />
-        </figure>
-      </div>
-    </article>
-
-    <article class="pco-card">
-      <h2>3. Sizes</h2>
-      <div class="pco-col">
-        <brightrail-pagination [length]="80" [pageIndex]="1" [pageSize]="10" size="sm" />
-        <brightrail-pagination [length]="80" [pageIndex]="1" [pageSize]="10" size="md" />
-        <brightrail-pagination [length]="80" [pageIndex]="1" [pageSize]="10" size="lg" />
-      </div>
-    </article>
-
-    <article class="pco-card">
-      <h2>4. Range patterns</h2>
-      <p class="pco-card__hint">Ellipsis for long sets; full sequence when the window fits; short totals.</p>
-      <brightrail-pagination [length]="500" [pageIndex]="24" [pageSize]="10" variant="numbered" />
-      <brightrail-pagination
-        class="pco-stack"
-        [length]="100"
-        [pageIndex]="4"
-        [pageSize]="10"
-        variant="numbered"
-        [maxPageButtons]="15"
-      />
-      <brightrail-pagination class="pco-stack" [length]="25" [pageIndex]="1" [pageSize]="10" variant="numbered" [maxPageButtons]="7" />
-    </article>
-
-    <article class="pco-card">
-      <h2>5. Page size placement</h2>
-      <p class="pco-card__hint">Selector on the start, end, or both sides of the pager.</p>
-      <brightrail-pagination
-        [length]="200"
-        [pageIndex]="3"
-        [pageSize]="25"
-        [showPageSize]="true"
-        [pageSizeOptions]="[10, 25, 50]"
-        pageSizePosition="start"
-      />
-      <brightrail-pagination
-        class="pco-stack"
-        [length]="200"
-        [pageIndex]="3"
-        [pageSize]="25"
-        [showPageSize]="true"
-        [pageSizeOptions]="[10, 25, 50]"
-        pageSizePosition="end"
-      />
-      <brightrail-pagination
-        class="pco-stack"
-        [length]="200"
-        [pageIndex]="3"
-        [pageSize]="25"
-        [showPageSize]="true"
-        [pageSizeOptions]="[10, 25, 50]"
-        pageSizePosition="both"
-      />
-    </article>
-
-    <article class="pco-card">
-      <h2>6. Table &amp; dense toolbars</h2>
-      <p class="pco-card__hint">Row summary on the left, controls on the right; compact + page size; server-driven label.</p>
-      <brightrail-pagination [length]="128" [pageIndex]="0" [pageSize]="10" summaryMode="range" />
-      <brightrail-pagination
-        class="pco-stack"
-        [length]="128"
-        [pageIndex]="0"
-        [pageSize]="10"
-        [showPageSize]="true"
-        [pageSizeOptions]="[10, 25, 50, 100]"
-        [compact]="true"
-        summaryMode="range"
-        pageSizePosition="end"
-      />
-      <brightrail-pagination class="pco-stack" [length]="128" [pageIndex]="0" [pageSize]="10" summaryMode="server" />
-    </article>
-
-    <article class="pco-card">
-      <h2>7. Search &amp; results</h2>
-      <p class="pco-card__hint">Total results, filtered results, and empty data (controls disabled automatically).</p>
-      <brightrail-pagination [length]="128" [pageIndex]="0" [pageSize]="10" summaryMode="results" summaryItemsLabel="results" />
-      <brightrail-pagination
-        class="pco-stack"
-        [length]="26"
-        [pageIndex]="0"
-        [pageSize]="10"
-        summaryMode="filtered"
-        summaryItemsLabel="results"
-      />
-      <brightrail-pagination class="pco-stack" [length]="0" [pageIndex]="0" [pageSize]="10" variant="numbered" summaryMode="results" summaryItemsLabel="results" />
-    </article>
-
-    <article class="pco-card">
-      <h2>8. Mobile-friendly</h2>
-      <p class="pco-card__hint">Stacked label, icon-only arrows, and bottom-sheet affordance.</p>
-      <brightrail-pagination [length]="100" [pageIndex]="4" [pageSize]="10" variant="mobile" [showFirstLast]="false" />
-      <brightrail-pagination class="pco-stack" [length]="100" [pageIndex]="4" [pageSize]="10" variant="icon-only" [showFirstLast]="false" />
-      <brightrail-pagination class="pco-stack" [length]="100" [pageIndex]="4" [pageSize]="10" variant="mobile-sheet" [showFirstLast]="false" />
-    </article>
-
-    <article class="pco-card">
-      <h2>9. Advanced</h2>
-      <p class="pco-card__hint">Jump to page, explicit totals, and a sticky-style footer strip.</p>
-      <brightrail-pagination
-        [length]="500"
-        [pageIndex]="12"
-        [pageSize]="10"
-        [showJumpToPage]="true"
-        [totalPages]="50"
-      />
-      <brightrail-pagination
-        class="pco-stack"
-        [length]="1248"
-        [pageIndex]="0"
-        [pageSize]="10"
-        summaryMode="range"
-        summaryItemsLabel="items"
-      />
-      <div class="pco-sticky-strip">
-        <brightrail-pagination [length]="200" [pageIndex]="4" [pageSize]="10" variant="numbered" />
-      </div>
-    </article>
+  <section class="pco-code-block" aria-labelledby="pco-html-examples">
+    <h2 id="pco-html-examples">Pagination HTML examples</h2>
+    <p class="pco-code-block__hint">Typical table footer and jump-to-page markup.</p>
+    <pre class="pco-pre"><code>{{ htmlExamples }}</code></pre>
   </section>
 </div>

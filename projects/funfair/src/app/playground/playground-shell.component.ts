@@ -59,6 +59,8 @@ export class PlaygroundShellComponent {
                 ? 'Drawer settings cover placements, sizes, behavior modes, overlay styles, sticky regions, and action footers.'
               : this.routeUrl().includes('/progress')
                 ? 'Progress supports determinate, indeterminate, and buffer states with rich theming, rings, steppers, and futuristic variants.'
+                : this.routeUrl().includes('/graph')
+                  ? 'Graph settings cover chart kind, datasets, area fill, legends, grids, axes labels, tooltips, and color schemes for analytics dashboards.'
                 : this.routeUrl().includes('/badge')
                 ? 'Use badge settings to switch between count, status, dot, and notification patterns quickly.'
                 : this.routeUrl().includes('/chip')

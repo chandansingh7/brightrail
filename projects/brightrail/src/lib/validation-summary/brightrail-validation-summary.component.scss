@@ -1,0 +1,43 @@
+@use '../styles/tokens' as br;
+
+:host {
+  display: block;
+}
+
+.br-val-sum {
+  padding: 0.75rem 0.9rem;
+  border: 1px solid color-mix(in srgb, #{br.$br-color-danger} 35%, #{br.$br-color-border});
+  border-radius: var(--br-radius-sm, #{br.$br-radius-sm});
+  background: color-mix(in srgb, #{br.$br-color-danger} 8%, #{br.$br-color-surface});
+}
+
+.br-val-sum__title {
+  margin: 0 0 0.4rem;
+  font-size: 0.875rem;
+  font-weight: 650;
+  color: var(--br-color-danger, #{br.$br-color-danger});
+}
+
+.br-val-sum__list {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.br-val-sum__item {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--br-color-text, #{br.$br-color-text});
+}
+
+.br-val-sum__item + .br-val-sum__item {
+  margin-top: 0.2rem;
+}
+
+.br-val-sum__field {
+  font-weight: 600;
+  margin-right: 0.25rem;
+}
+
+.br-val-sum__message {
+  color: var(--br-color-text-strong, #{br.$br-color-text-strong});
+}

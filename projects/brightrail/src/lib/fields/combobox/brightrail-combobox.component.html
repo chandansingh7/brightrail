@@ -1,0 +1,58 @@
+<div class="br-combobox">
+  <div class="br-combobox__control">
+    <input
+      class="br-combobox__input"
+      type="text"
+      role="combobox"
+      [id]="controlId()"
+      [value]="displayValue()"
+      [placeholder]="placeholder()"
+      [disabled]="effectiveDisabled()"
+      [readOnly]="!filterable()"
+      [attr.aria-label]="ariaLabel() || null"
+      [attr.aria-expanded]="isOpen()"
+      [attr.aria-controls]="isOpen() ? listboxId() : null"
+      [attr.aria-autocomplete]="filterable() ? 'list' : 'none'"
+      (focus)="onInputFocus()"
+      (input)="onInputInput($any($event.target).value)"
+      (keydown)="onInputKeydown($event)"
+      (blur)="onBlur()"
+    />
+    <button
+      type="button"
+      class="br-combobox__toggle"
+      aria-label="Toggle options"
+      [disabled]="effectiveDisabled()"
+      (mousedown)="$event.preventDefault()"
+      (click)="togglePanel($event)"
+    >
+      <brightrail-button-icon name="chevron-down" />
+    </button>
+
+    @if (isOpen()) {
+      <div
+        class="br-combobox__panel"
+        [id]="listboxId()"
+        role="listbox"
+        (keydown)="onPanelKeydown($event)"
+      >
+        @for (option of filteredOptions(); track option.value) {
+          <button
+            type="button"
+            class="br-combobox__option"
+            role="option"
+            [class.br-combobox__option--selected]="isSelected(option)"
+            [disabled]="option.disabled"
+            [attr.aria-selected]="isSelected(option)"
+            (mousedown)="$event.preventDefault()"
+            (click)="selectOption(option)"
+          >
+            {{ option.label }}
+          </button>
+        } @empty {
+          <p class="br-combobox__empty">No matches</p>
+        }
+      </div>
+    }
+  </div>
+</div>

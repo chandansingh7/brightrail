@@ -1,0 +1,148 @@
+<section class="mvc-block">
+  <h2 class="mvc-block__h">1. Core action menus</h2>
+  <div class="mvc-grid">
+    <app-catalog-variation-tile label="Actions" [snippet]="s.coreActions">
+      <button type="button" [brightrailMenuTrigger]="actionsMenu">Actions</button>
+      <brightrail-menu #actionsMenu>
+        <brightrail-menu-item label="Edit" />
+        <brightrail-menu-item label="Duplicate" />
+        <brightrail-menu-item label="Archive" />
+      </brightrail-menu>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Overflow" [snippet]="s.coreOverflow">
+      <button type="button" [brightrailMenuTrigger]="overflowMenu" aria-label="More options">⋯</button>
+      <brightrail-menu #overflowMenu>
+        <brightrail-menu-item label="Rename" />
+        <brightrail-menu-item label="Move" />
+        <brightrail-menu-item label="Delete" />
+      </brightrail-menu>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Account" [snippet]="s.coreAccount">
+      <button type="button" [brightrailMenuTrigger]="accountMenu">Account</button>
+      <brightrail-menu #accountMenu>
+        <brightrail-menu-item label="Profile" />
+        <brightrail-menu-item label="Settings" />
+        <brightrail-menu-item label="Sign out" />
+      </brightrail-menu>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="mvc-block">
+  <h2 class="mvc-block__h">2. Selected &amp; disabled items</h2>
+  <div class="mvc-grid">
+    <app-catalog-variation-tile label="Selected item" [snippet]="s.stateSelected">
+      <button type="button" [brightrailMenuTrigger]="viewMenu">View</button>
+      <brightrail-menu #viewMenu>
+        <brightrail-menu-item label="List" [selected]="true" />
+        <brightrail-menu-item label="Board" />
+        <brightrail-menu-item label="Calendar" />
+      </brightrail-menu>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Disabled item" [snippet]="s.stateDisabled">
+      <button type="button" [brightrailMenuTrigger]="rowMenu">Row actions</button>
+      <brightrail-menu #rowMenu>
+        <brightrail-menu-item label="Edit" />
+        <brightrail-menu-item label="Share" />
+        <brightrail-menu-item label="Delete" [disabled]="true" />
+      </brightrail-menu>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Mixed states" [snippet]="s.stateMixed">
+      <button type="button" [brightrailMenuTrigger]="sortMenu">Sort</button>
+      <brightrail-menu #sortMenu>
+        <brightrail-menu-item label="Name (A–Z)" [selected]="true" />
+        <brightrail-menu-item label="Last updated" />
+        <brightrail-menu-item label="Custom order" [disabled]="true" />
+      </brightrail-menu>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="mvc-block">
+  <h2 class="mvc-block__h">3. Context menus</h2>
+  <p class="mvc-block__hint">Row overflow, bulk actions, and guarded destructive items.</p>
+  <div class="mvc-grid">
+    <app-catalog-variation-tile label="Row menu" [snippet]="s.contextRow">
+      <button type="button" [brightrailMenuTrigger]="ctxRowMenu" aria-label="Row menu">⋯</button>
+      <brightrail-menu #ctxRowMenu>
+        <brightrail-menu-item label="Open" />
+        <brightrail-menu-item label="Assign" />
+        <brightrail-menu-item label="Remove" />
+      </brightrail-menu>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Bulk actions" [snippet]="s.contextBulk">
+      <button type="button" [brightrailMenuTrigger]="bulkMenu">Bulk actions</button>
+      <brightrail-menu #bulkMenu>
+        <brightrail-menu-item label="Export CSV" />
+        <brightrail-menu-item label="Add tag" />
+        <brightrail-menu-item label="Delete selected" />
+      </brightrail-menu>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Guarded delete" [snippet]="s.contextDanger">
+      <button type="button" [brightrailMenuTrigger]="manageMenu">Manage</button>
+      <brightrail-menu #manageMenu>
+        <brightrail-menu-item label="Edit details" />
+        <brightrail-menu-item label="Deactivate" />
+        <brightrail-menu-item label="Delete workspace" [disabled]="true" />
+      </brightrail-menu>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="mvc-block">
+  <h2 class="mvc-block__h">4. Layout patterns</h2>
+  <div class="mvc-grid">
+    <app-catalog-variation-tile label="Split save" [snippet]="s.layoutSplit">
+      <span class="mco-split">
+        <button type="button" class="mco-split__primary">Save</button>
+        <button type="button" class="mco-split__menu" [brightrailMenuTrigger]="splitMenu" aria-label="More save options">▾</button>
+      </span>
+      <brightrail-menu #splitMenu>
+        <brightrail-menu-item label="Save and continue" />
+        <brightrail-menu-item label="Save as draft" />
+      </brightrail-menu>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Toolbar pair" [snippet]="s.layoutToolbar">
+      <span class="mco-toolbar">
+        <button type="button" [brightrailMenuTrigger]="filterMenu">Filter</button>
+        <button type="button" [brightrailMenuTrigger]="sortToolbarMenu">Sort</button>
+      </span>
+      <brightrail-menu #filterMenu>
+        <brightrail-menu-item label="Active only" [selected]="true" />
+        <brightrail-menu-item label="Archived" />
+      </brightrail-menu>
+      <brightrail-menu #sortToolbarMenu>
+        <brightrail-menu-item label="Newest" [selected]="true" />
+        <brightrail-menu-item label="Oldest" />
+      </brightrail-menu>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="mvc-block">
+  <h2 class="mvc-block__h">5. Activate handlers</h2>
+  <p class="mvc-block__hint">Listen to <code>(activate)</code> on items to run commands and close the panel.</p>
+  <div class="mvc-grid">
+    <app-catalog-variation-tile label="File menu" [snippet]="s.advancedActivate">
+      <button type="button" [brightrailMenuTrigger]="fileMenu">File</button>
+      <brightrail-menu #fileMenu>
+        <brightrail-menu-item label="Download" />
+        <brightrail-menu-item label="Print" />
+      </brightrail-menu>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="mvc-block">
+  <h2 class="mvc-block__h">6. Accessibility</h2>
+  <p class="mvc-block__hint">Triggers expose <code>aria-expanded</code>, <code>aria-controls</code>, and <code>aria-haspopup</code> via <code>brightrailMenuTrigger</code>.</p>
+  <div class="mvc-grid">
+    <app-catalog-variation-tile label="Icon-only trigger" [snippet]="s.coreOverflow">
+      <button type="button" [brightrailMenuTrigger]="a11yMenu" aria-label="More options">⋯</button>
+      <brightrail-menu #a11yMenu>
+        <brightrail-menu-item label="Details" />
+        <brightrail-menu-item label="Copy link" />
+      </brightrail-menu>
+    </app-catalog-variation-tile>
+  </div>
+</section>

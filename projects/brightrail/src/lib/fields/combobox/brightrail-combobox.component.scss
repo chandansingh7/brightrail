@@ -1,0 +1,111 @@
+@use '../../styles/tokens' as br;
+
+:host {
+  @include br.br-host-text-field;
+  display: block;
+  width: var(--br-combobox-host-width, 100%);
+  max-width: 100%;
+}
+
+:host(.br-combobox-host--full) {
+  width: 100%;
+}
+
+.br-combobox__control {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+
+.br-combobox__input {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--br-tf-border);
+  border-right: 0;
+  border-radius: var(--br-tf-radius) 0 0 var(--br-tf-radius);
+  background: var(--br-color-surface, #{br.$br-color-surface});
+  color: var(--br-tf-fg);
+  font: inherit;
+}
+
+.br-combobox__input:focus {
+  outline: 2px solid var(--br-tf-focus);
+  outline-offset: 0;
+  z-index: 1;
+}
+
+.br-combobox__input:disabled {
+  background: var(--br-tf-disabled-bg);
+  color: var(--br-tf-disabled-fg);
+  cursor: not-allowed;
+}
+
+.br-combobox__toggle {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0 0.65rem;
+  border: 1px solid var(--br-tf-border);
+  border-radius: 0 var(--br-tf-radius) var(--br-tf-radius) 0;
+  background: var(--br-color-surface-muted, #{br.$br-color-surface-muted});
+  color: var(--br-tf-label);
+  cursor: pointer;
+}
+
+.br-combobox__toggle:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.br-combobox__panel {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  max-height: 14rem;
+  overflow: auto;
+  padding: 0.35rem;
+  border: 1px solid var(--br-tf-border);
+  border-radius: var(--br-tf-radius);
+  background: var(--br-color-surface, #{br.$br-color-surface});
+  box-shadow: 0 8px 24px rgb(60 64 67 / 16%);
+}
+
+.br-combobox__option {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0.45rem 0.6rem;
+  border: 0;
+  border-radius: var(--br-radius-sm, #{br.$br-radius-sm});
+  background: transparent;
+  color: var(--br-tf-fg);
+  font: inherit;
+  font-size: 0.875rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.br-combobox__option:hover:not(:disabled) {
+  background: rgb(0 98 255 / 8%);
+}
+
+.br-combobox__option--selected {
+  font-weight: 600;
+  color: var(--br-color-primary, #{br.$br-color-primary});
+}
+
+.br-combobox__option:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.br-combobox__empty {
+  margin: 0;
+  padding: 0.45rem 0.6rem;
+  font-size: 0.8125rem;
+  color: var(--br-tf-label);
+}

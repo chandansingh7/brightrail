@@ -1,0 +1,103 @@
+<section class="esvc-block">
+  <h2 class="esvc-block__h">1. Core empty states</h2>
+  <div class="esvc-grid">
+    <app-catalog-variation-tile label="Default" [snippet]="s.coreDefault">
+      <brightrail-empty-state title="No results found" description="Try adjusting your filters or search terms." />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Compact" [snippet]="s.coreCompact">
+      <brightrail-empty-state title="No items" description="Add your first record to get started." [compact]="true" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="esvc-block">
+  <h2 class="esvc-block__h">2. Compact density</h2>
+  <div class="esvc-grid">
+    <app-catalog-variation-tile label="Inbox zero" [snippet]="s.compactDense">
+      <brightrail-empty-state title="Inbox zero" description="You are all caught up." [compact]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Table empty" [snippet]="s.compactTable">
+      <brightrail-empty-state title="No rows" description="Import a CSV or create a row manually." [compact]="true" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="esvc-block">
+  <h2 class="esvc-block__h">3. Icon slot</h2>
+  <div class="esvc-grid">
+    <app-catalog-variation-tile label="Search" [snippet]="s.iconSearch">
+      <brightrail-empty-state title="No matches" description="We could not find anything for that query.">
+        <span brightrailEmptyStateIcon aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="1.5rem" height="1.5rem" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="7" />
+            <path d="M20 20 L16 16" />
+          </svg>
+        </span>
+      </brightrail-empty-state>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Inbox" [snippet]="s.iconInbox">
+      <brightrail-empty-state title="Inbox empty" description="New messages will appear here.">
+        <span brightrailEmptyStateIcon aria-hidden="true">📭</span>
+      </brightrail-empty-state>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="esvc-block">
+  <h2 class="esvc-block__h">4. Action slot</h2>
+  <div class="esvc-grid">
+    <app-catalog-variation-tile label="Primary CTA" [snippet]="s.actionPrimary">
+      <brightrail-empty-state title="No projects yet" description="Create a workspace to collaborate with your team.">
+        <brightrail-button brightrailEmptyStateAction variant="primary">Create project</brightrail-button>
+      </brightrail-empty-state>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Outline CTA" [snippet]="s.actionSecondary">
+      <brightrail-empty-state title="No files" description="Upload documents to share with reviewers.">
+        <brightrail-button brightrailEmptyStateAction variant="outline">Upload file</brightrail-button>
+      </brightrail-empty-state>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="esvc-block">
+  <h2 class="esvc-block__h">5. Icon + action</h2>
+  <div class="esvc-stack">
+    <app-catalog-variation-tile label="Search empty" [snippet]="s.fullSearch">
+      <brightrail-empty-state title="No results found" description="Try different keywords or clear filters.">
+        <span brightrailEmptyStateIcon aria-hidden="true">🔍</span>
+        <brightrail-button brightrailEmptyStateAction variant="primary">Clear filters</brightrail-button>
+      </brightrail-empty-state>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Error" [snippet]="s.fullError">
+      <brightrail-empty-state title="Something went wrong" description="We could not load this view. Please try again.">
+        <span brightrailEmptyStateIcon aria-hidden="true">⚠️</span>
+        <brightrail-button brightrailEmptyStateAction variant="secondary">Retry</brightrail-button>
+      </brightrail-empty-state>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="esvc-block">
+  <h2 class="esvc-block__h">6. Advanced patterns</h2>
+  <div class="esvc-stack">
+    <app-catalog-variation-tile label="Permissions" [snippet]="s.advancedPermissions">
+      <brightrail-empty-state
+        title="No access"
+        description="Ask an administrator to grant you permission for this resource."
+        [compact]="true"
+      >
+        <span brightrailEmptyStateIcon aria-hidden="true">🔒</span>
+        <brightrail-button brightrailEmptyStateAction variant="link">Request access</brightrail-button>
+      </brightrail-empty-state>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Onboarding" [snippet]="s.advancedOnboarding">
+      <brightrail-empty-state title="Welcome" description="Complete setup to unlock dashboards and reports.">
+        <span brightrailEmptyStateIcon aria-hidden="true">✨</span>
+        <div brightrailEmptyStateAction class="esvc-actions">
+          <brightrail-button variant="primary">Get started</brightrail-button>
+          <brightrail-button variant="ghost">View guide</brightrail-button>
+        </div>
+      </brightrail-empty-state>
+    </app-catalog-variation-tile>
+  </div>
+</section>

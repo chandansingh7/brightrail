@@ -1,0 +1,123 @@
+<section class="cbvc-block">
+  <h2 class="cbvc-block__h">1. Core checkbox types</h2>
+  <div class="cbvc-grid">
+    <app-catalog-variation-tile label="Unchecked" [snippet]="s.coreUnchecked">
+      <brightrail-checkbox label="Option label" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Checked" [snippet]="s.coreChecked">
+      <brightrail-checkbox label="Option label" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Indeterminate" [snippet]="s.coreIndeterminate">
+      <brightrail-checkbox label="Option label" [indeterminate]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="With helper text" [snippet]="s.coreWithHelper">
+      <brightrail-checkbox label="Option label" helperText="Optional helper text" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="cbvc-block">
+  <h2 class="cbvc-block__h">2. Tones</h2>
+  <div class="cbvc-grid">
+    <app-catalog-variation-tile label="Primary" [snippet]="s.tonePrimary">
+      <brightrail-checkbox label="Primary" tone="primary" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Success" [snippet]="s.toneSuccess">
+      <brightrail-checkbox label="Success" tone="success" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Warning" [snippet]="s.toneWarning">
+      <brightrail-checkbox label="Warning" tone="warning" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Danger" [snippet]="s.toneDanger">
+      <brightrail-checkbox label="Danger" tone="danger" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neutral" [snippet]="s.toneNeutral">
+      <brightrail-checkbox label="Neutral" tone="neutral" [checked]="true" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="cbvc-block">
+  <h2 class="cbvc-block__h">3. Variants (default / outlined / filled)</h2>
+  <div class="cbvc-grid">
+    <app-catalog-variation-tile label="Default" [snippet]="s.variantDefault">
+      <brightrail-checkbox label="Default" variant="default" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Outlined" [snippet]="s.variantOutlined">
+      <brightrail-checkbox label="Outlined" variant="outlined" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Filled" [snippet]="s.variantFilled">
+      <brightrail-checkbox label="Filled" variant="filled" [checked]="true" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="cbvc-block">
+  <h2 class="cbvc-block__h">4. Sizes</h2>
+  <p class="cbvc-block__hint">sm · md (default) · lg</p>
+  <div class="cbvc-grid cbvc-grid--sizes">
+    <app-catalog-variation-tile label="Small" [snippet]="s.sizeSm">
+      <brightrail-checkbox label="Small" size="sm" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Medium" [snippet]="s.sizeMd">
+      <brightrail-checkbox label="Medium" size="md" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Large" [snippet]="s.sizeLg">
+      <brightrail-checkbox label="Large" size="lg" [checked]="true" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="cbvc-block">
+  <h2 class="cbvc-block__h">5. States (checked, indeterminate, disabled, invalid)</h2>
+  <div class="cbvc-grid">
+    <app-catalog-variation-tile label="Checked" [snippet]="s.stateChecked">
+      <brightrail-checkbox label="Checked" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Indeterminate" [snippet]="s.stateIndeterminate">
+      <brightrail-checkbox label="Indeterminate" [indeterminate]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Disabled" [snippet]="s.stateDisabled">
+      <brightrail-checkbox label="Disabled" state="disabled" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Invalid" [snippet]="s.stateInvalid">
+      <brightrail-checkbox
+        label="I agree to the terms"
+        [invalid]="true"
+        status="error"
+        errorText="This field is required"
+      />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="cbvc-block">
+  <h2 class="cbvc-block__h">6. Groups</h2>
+  <div class="cbvc-stack">
+    <app-catalog-variation-tile label="Vertical group" [snippet]="s.groupVertical">
+      <brightrail-checkbox-group
+        layout="vertical"
+        [options]="verticalOptions"
+        [selectedIds]="verticalSelected()"
+        (selectedIdsChange)="onVerticalChange($event)"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Horizontal group" [snippet]="s.groupHorizontal">
+      <brightrail-checkbox-group
+        layout="horizontal"
+        [options]="horizontalOptions"
+        [selectedIds]="horizontalSelected()"
+        (selectedIdsChange)="onHorizontalChange($event)"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Select all" [snippet]="s.groupSelectAll">
+      <brightrail-checkbox-group
+        [showSelectAll]="true"
+        selectAllLabel="Select all items"
+        [options]="selectAllOptions"
+        [selectedIds]="selectAllSelected()"
+        (selectedIdsChange)="onSelectAllChange($event)"
+      />
+    </app-catalog-variation-tile>
+  </div>
+</section>

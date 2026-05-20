@@ -1,0 +1,124 @@
+<section class="asvc-block">
+  <h2 class="asvc-block__h">1. Core layout</h2>
+  <div class="asvc-row">
+    <app-catalog-variation-tile label="Full shell" [snippet]="s.coreFull">
+      <div class="asvc-shell-frame">
+        <brightrail-app-shell>
+          <brightrail-top-bar>
+            <span brightrailTopBarStart>Acme</span>
+            <span brightrailTopBarCenter>Dashboard</span>
+            <span brightrailTopBarEnd>Help</span>
+          </brightrail-top-bar>
+          <brightrail-sidebar>
+            <li><a href="#" aria-current="page">Overview</a></li>
+            <li><a href="#">Projects</a></li>
+          </brightrail-sidebar>
+          <brightrail-page-header>
+            <h1 brightrailPageTitle>Overview</h1>
+            <p brightrailPageSubtitle>Workspace summary</p>
+            <div brightrailPageHeaderActions>
+              <button type="button">New</button>
+            </div>
+          </brightrail-page-header>
+          <p class="asvc-content">Main content</p>
+        </brightrail-app-shell>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Right sidebar" [snippet]="s.sidebarRight">
+      <div class="asvc-shell-frame">
+        <brightrail-app-shell sidebarPosition="right">
+          <brightrail-sidebar>
+            <li><a href="#">Settings</a></li>
+          </brightrail-sidebar>
+          <p class="asvc-content">Content</p>
+        </brightrail-app-shell>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="asvc-block">
+  <h2 class="asvc-block__h">2. Optional regions</h2>
+  <div class="asvc-row">
+    <app-catalog-variation-tile label="No sidebar" [snippet]="s.noSidebar">
+      <div class="asvc-shell-frame">
+        <brightrail-app-shell [showSidebar]="false">
+          <brightrail-top-bar>
+            <span brightrailTopBarStart>Acme</span>
+          </brightrail-top-bar>
+          <p class="asvc-content">Full-width content</p>
+        </brightrail-app-shell>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="No top bar" [snippet]="s.noTopBar">
+      <div class="asvc-shell-frame">
+        <brightrail-app-shell [showTopBar]="false">
+          <brightrail-sidebar>
+            <li><a href="#">Home</a></li>
+          </brightrail-sidebar>
+          <p class="asvc-content">Sidebar only</p>
+        </brightrail-app-shell>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="asvc-block">
+  <h2 class="asvc-block__h">3. Page header</h2>
+  <app-catalog-variation-tile label="Header with actions" [snippet]="s.pageHeaderOnly">
+    <div class="asvc-shell-frame">
+      <brightrail-app-shell [showSidebar]="false" [showTopBar]="false">
+        <brightrail-page-header>
+          <h1 brightrailPageTitle>Reports</h1>
+          <p brightrailPageSubtitle>Q1 summary</p>
+          <div brightrailPageHeaderActions>
+            <button type="button">Export</button>
+          </div>
+        </brightrail-page-header>
+        <p class="asvc-content">Report table</p>
+      </brightrail-app-shell>
+    </div>
+  </app-catalog-variation-tile>
+</section>
+
+<section class="asvc-block">
+  <h2 class="asvc-block__h">4. Top bar slots</h2>
+  <app-catalog-variation-tile label="Start / center / end" [snippet]="s.topBarSlots">
+    <brightrail-top-bar>
+      <span brightrailTopBarStart>☰</span>
+      <span brightrailTopBarCenter>Search</span>
+      <span brightrailTopBarEnd><button type="button">Profile</button></span>
+    </brightrail-top-bar>
+  </app-catalog-variation-tile>
+</section>
+
+<section class="asvc-block">
+  <h2 class="asvc-block__h">5. Sidebar navigation</h2>
+  <app-catalog-variation-tile label="Active link" [snippet]="s.advancedCompact">
+    <div class="asvc-shell-frame">
+      <brightrail-app-shell sidebarWidth="12rem">
+        <brightrail-sidebar>
+          <li><a href="#" class="br-sidebar__active">Inbox</a></li>
+          <li><a href="#">Archive</a></li>
+        </brightrail-sidebar>
+        <brightrail-page-header [bordered]="false">
+          <h1 brightrailPageTitle>Inbox</h1>
+        </brightrail-page-header>
+      </brightrail-app-shell>
+    </div>
+  </app-catalog-variation-tile>
+</section>
+
+<section class="asvc-block">
+  <h2 class="asvc-block__h">6. Compact shell</h2>
+  <app-catalog-variation-tile label="Narrow sidebar" [snippet]="s.advancedCompact">
+    <div class="asvc-shell-frame asvc-shell-frame--compact">
+      <brightrail-app-shell sidebarWidth="12rem" sidebarAriaLabel="Primary navigation">
+        <brightrail-sidebar>
+          <li><a href="#">Dashboard</a></li>
+        </brightrail-sidebar>
+        <p class="asvc-content">Embedded panel</p>
+      </brightrail-app-shell>
+    </div>
+  </app-catalog-variation-tile>
+</section>

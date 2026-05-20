@@ -1,0 +1,245 @@
+<div class="bp">
+  <div class="bp-grid">
+    <section class="bp-panel bp-panel--settings" aria-labelledby="ff-settings-title">
+      <div class="bp-settings-head">
+        <h2 id="ff-settings-title" class="bp-settings-head__title">Component settings</h2>
+        <button type="button" class="bp-settings-reset" (click)="resetToDefaults()" title="Reset">
+          <span class="bp-sr-only">Reset form field settings</span>
+          <svg class="bp-settings-reset__icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M12 6V3L8 7l4 4V8c2.76 0 5 2.24 5 5 0 1.28-.48 2.45-1.26 3.35l1.41 1.41A6.96 6.96 0 0 0 19 13c0-3.87-3.13-7-7-7zm0 14c-2.76 0-5-2.24-5-5 0-1.28.48-2.45 1.26-3.35L6.85 10.24A6.96 6.96 0 0 0 5 13c0 3.87 3.13 7 7 7v3l4-4-4-4v3z"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="bp-settings-block">
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Component</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" disabled><option>Form field</option></select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Scenario group</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="selectedRecipeGroup()"
+              (ngModelChange)="onRecipeGroupNgModelChange($event)"
+              [ngModelOptions]="ngModelStandalone"
+            >
+              @for (g of recipeGroups; track g) {
+                <option [value]="g">{{ g }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Scenario</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="recipe()"
+              (ngModelChange)="onRecipeNgModelChange($event)"
+              [ngModelOptions]="ngModelStandalone"
+            >
+              @for (opt of recipesInGroup(selectedRecipeGroup()); track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Label</span>
+          <div class="bp-dropdown bp-dropdown--text">
+            <input
+              class="bp-dropdown__text"
+              [ngModel]="label()"
+              (ngModelChange)="label.set($event)"
+              [ngModelOptions]="ngModelStandalone"
+            />
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Hint</span>
+          <div class="bp-dropdown bp-dropdown--text">
+            <input
+              class="bp-dropdown__text"
+              [ngModel]="hint()"
+              (ngModelChange)="hint.set($event)"
+              [ngModelOptions]="ngModelStandalone"
+            />
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Error message</span>
+          <div class="bp-dropdown bp-dropdown--text">
+            <input
+              class="bp-dropdown__text"
+              [ngModel]="error()"
+              (ngModelChange)="error.set($event)"
+              [ngModelOptions]="ngModelStandalone"
+            />
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Required</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="required() ? 'yes' : 'no'"
+              (ngModelChange)="required.set($event === 'yes')"
+              [ngModelOptions]="ngModelStandalone"
+            >
+              @for (opt of yesNoOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Invalid</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="invalid() ? 'yes' : 'no'"
+              (ngModelChange)="invalid.set($event === 'yes')"
+              [ngModelOptions]="ngModelStandalone"
+            >
+              @for (opt of yesNoOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Control slot</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="controlSlot()"
+              (ngModelChange)="controlSlot.set($event)"
+              [ngModelOptions]="ngModelStandalone"
+            >
+              @for (opt of controlSlotOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Text appearance</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [disabled]="controlSlot() !== 'text-field'"
+              [ngModel]="textAppearance()"
+              (ngModelChange)="textAppearance.set($event)"
+              [ngModelOptions]="ngModelStandalone"
+            >
+              <option value="outlined">outlined</option>
+              <option value="filled">filled</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Theme</span>
+          <div class="bp-dropdown">
+            <select
+              class="bp-dropdown__select"
+              [ngModel]="themeService.theme()"
+              (ngModelChange)="themeService.setTheme($event)"
+              [ngModelOptions]="ngModelStandalone"
+            >
+              @for (opt of themeRowOptions; track opt.id) {
+                <option [value]="opt.id">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bp-panel bp-panel--preview" aria-labelledby="ff-preview-title">
+      <h2 id="ff-preview-title" class="bp-panel__title bp-panel__title--live">
+        <span class="bp-live-dot" aria-hidden="true"></span>
+        Live preview
+      </h2>
+      <div class="bp-preview-surface bp-preview-surface--stretch">
+        <div class="bp-preview-inner bp-preview-inner--form-field">
+          @if (showStackedPreview()) {
+            <div class="ff-play-stack">
+              <brightrail-form-field label="First name" [required]="true">
+                <brightrail-text-field
+                  appearance="outlined"
+                  labelPosition="none"
+                  placeholder="Jane"
+                  [(ngModel)]="textValue"
+                  [ngModelOptions]="ngModelStandalone"
+                />
+              </brightrail-form-field>
+              <brightrail-form-field label="Last name" [required]="true">
+                <brightrail-text-field
+                  appearance="outlined"
+                  labelPosition="none"
+                  placeholder="Doe"
+                  [(ngModel)]="lastNameValue"
+                  [ngModelOptions]="ngModelStandalone"
+                />
+              </brightrail-form-field>
+            </div>
+          } @else {
+            <div class="ff-play-wrap">
+              <brightrail-form-field
+                [label]="label()"
+                [hint]="hint()"
+                [error]="error()"
+                [required]="required()"
+                [invalid]="invalid()"
+              >
+                @if (controlSlot() === 'switch') {
+                  <brightrail-switch
+                    [label]="recipe() === 'switch-terms' ? 'I accept the terms' : 'Enable'"
+                    [(ngModel)]="switchValue"
+                    [ngModelOptions]="ngModelStandalone"
+                  />
+                } @else {
+                  <brightrail-text-field
+                    [appearance]="textAppearance()"
+                    labelPosition="none"
+                    [placeholder]="recipe() === 'error-state' ? '••••••••' : 'Enter value'"
+                    [inputType]="recipe() === 'error-state' ? 'password' : 'text'"
+                    [(ngModel)]="textValue"
+                    [ngModelOptions]="ngModelStandalone"
+                  />
+                }
+              </brightrail-form-field>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="bp-code" aria-labelledby="ff-code-title">
+    <div class="bp-code__head">
+      <h2 id="ff-code-title" class="bp-code__title">Generated snippets</h2>
+      <div class="bp-code__tabs" role="tablist">
+        <button type="button" role="tab" class="bp-tab" [class.is-active]="activeTab() === 'html'" [attr.aria-selected]="activeTab() === 'html'" (click)="selectTab('html')">HTML</button>
+        <button type="button" role="tab" class="bp-tab" [class.is-active]="activeTab() === 'ts'" [attr.aria-selected]="activeTab() === 'ts'" (click)="selectTab('ts')">TS</button>
+        <button type="button" role="tab" class="bp-tab" [class.is-active]="activeTab() === 'scss'" [attr.aria-selected]="activeTab() === 'scss'" (click)="selectTab('scss')">SCSS</button>
+      </div>
+      <button type="button" class="bp-copy" (click)="copySnippet()">Copy</button>
+    </div>
+    <pre class="bp-pre" role="tabpanel"><code>{{ activeSnippet() }}</code></pre>
+  </section>
+</div>

@@ -1,0 +1,41 @@
+@use '../styles/tokens' as br;
+
+:host {
+  display: block;
+}
+
+.br-menu-item {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  border: 0;
+  border-radius: var(--br-radius-sm, #{br.$br-radius-sm});
+  background: transparent;
+  color: var(--br-menu-item-fg, #{br.$br-color-text});
+  font: inherit;
+  font-size: 0.875rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.br-menu-item:hover:not(:disabled) {
+  background: rgb(0 98 255 / 8%);
+}
+
+:host(.br-menu-item-host--active) .br-menu-item {
+  background: rgb(0 98 255 / 12%);
+  outline: 2px solid var(--br-color-primary, #{br.$br-color-primary});
+  outline-offset: -2px;
+}
+
+.br-menu-item--selected {
+  font-weight: 600;
+  color: var(--br-color-primary, #{br.$br-color-primary});
+}
+
+.br-menu-item--disabled,
+.br-menu-item:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}

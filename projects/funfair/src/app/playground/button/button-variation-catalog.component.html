@@ -1,0 +1,113 @@
+<section class="bvc-block">
+  <h2 class="bvc-block__h">1. Core button variants</h2>
+  <div class="bvc-grid">
+    <app-catalog-variation-tile label="Primary" [snippet]="s.corePrimary">
+      <brightrail-button variant="primary">Save changes</brightrail-button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Secondary" [snippet]="s.coreSecondary">
+      <brightrail-button variant="secondary">Cancel</brightrail-button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Outline" [snippet]="s.coreOutline">
+      <brightrail-button variant="outline">Learn more</brightrail-button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Ghost" [snippet]="s.coreGhost">
+      <brightrail-button variant="ghost">Skip</brightrail-button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Link" [snippet]="s.coreLink">
+      <brightrail-button variant="link">View details</brightrail-button>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">2. Semantic variants</h2>
+  <div class="bvc-grid">
+    <app-catalog-variation-tile label="Success" [snippet]="s.semanticSuccess">
+      <brightrail-button variant="success">Approve</brightrail-button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Warning" [snippet]="s.semanticWarning">
+      <brightrail-button variant="warning">Review</brightrail-button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Danger" [snippet]="s.semanticDanger">
+      <brightrail-button variant="danger">Delete</brightrail-button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Info" [snippet]="s.semanticInfo">
+      <brightrail-button variant="info">Info</brightrail-button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Approve" [snippet]="s.semanticApprove">
+      <brightrail-button variant="approve">Confirm</brightrail-button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Reject" [snippet]="s.semanticReject">
+      <brightrail-button variant="reject">Reject</brightrail-button>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">3. Button sizes</h2>
+  <div class="bvc-grid bvc-grid--sizes">
+    <app-catalog-variation-tile label="XS" [snippet]="s.sizeXs">
+      <brightrail-button variant="primary" size="xs">Extra small</brightrail-button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Small" [snippet]="s.sizeSm">
+      <brightrail-button variant="primary" size="sm">Small</brightrail-button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Medium" [snippet]="s.sizeMd">
+      <brightrail-button variant="primary" size="md">Medium</brightrail-button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Large" [snippet]="s.sizeLg">
+      <brightrail-button variant="primary" size="lg">Large</brightrail-button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="XL" [snippet]="s.sizeXl">
+      <brightrail-button variant="primary" size="xl">Extra large</brightrail-button>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">4. Shapes</h2>
+  <div class="bvc-grid">
+    <app-catalog-variation-tile label="Default" [snippet]="s.shapeDefault">
+      <brightrail-button variant="primary" shape="default">Default</brightrail-button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Pill" [snippet]="s.shapePill">
+      <brightrail-button variant="primary" shape="pill">Pill</brightrail-button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Icon square" [snippet]="s.shapeIcon">
+      <brightrail-button variant="primary" shape="icon" iconLeft="plus" ariaLabel="Add" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Circle FAB" [snippet]="s.shapeCircle">
+      <brightrail-button variant="primary" shape="circle" iconLeft="plus" ariaLabel="Create" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">5. Icons &amp; affordances</h2>
+  <div class="bvc-grid">
+    <app-catalog-variation-tile label="Icon left" [snippet]="s.iconLeft">
+      <brightrail-button variant="primary" iconLeft="download">Download</brightrail-button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Icon right" [snippet]="s.iconRight">
+      <brightrail-button variant="primary" iconRight="chevron-right">Next</brightrail-button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Dropdown" [snippet]="s.iconDropdown">
+      <brightrail-button variant="primary" [dropdownIndicator]="true">Options</brightrail-button>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">6. States &amp; layout</h2>
+  <div class="bvc-grid">
+    <app-catalog-variation-tile label="Loading" [snippet]="s.stateLoading">
+      <brightrail-button variant="primary" [loading]="true">Saving…</brightrail-button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Disabled" [snippet]="s.stateDisabled">
+      <brightrail-button variant="primary" [disabled]="true">Disabled</brightrail-button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Full width" [snippet]="s.stateFullWidth">
+      <brightrail-button variant="primary" [fullWidth]="true">Continue</brightrail-button>
+    </app-catalog-variation-tile>
+  </div>
+</section>

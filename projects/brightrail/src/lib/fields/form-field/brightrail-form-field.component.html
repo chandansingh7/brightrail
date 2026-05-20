@@ -1,0 +1,21 @@
+<div class="br-form-field">
+  @if (showLabel()) {
+    <label class="br-form-field__label" [attr.for]="controlId()">
+      {{ label() }}
+      @if (required()) {
+        <span class="br-form-field__req" aria-hidden="true">*</span>
+      }
+    </label>
+  }
+
+  <div class="br-form-field__control" [attr.aria-describedby]="describedBy()">
+    <ng-content />
+  </div>
+
+  @if (showHint()) {
+    <p [id]="hintId()" class="br-form-field__hint">{{ hint() }}</p>
+  }
+  @if (showError()) {
+    <p [id]="errorId()" class="br-form-field__error" role="alert">{{ error() }}</p>
+  }
+</div>

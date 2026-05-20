@@ -1,0 +1,28 @@
+@use '../button/button-playground.component.scss' as *;
+@use '../playground-preview-fixes.scss' as *;
+
+.bp-preview-inner--command-palette {
+  width: 100%;
+  min-height: 12rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0.75rem;
+}
+
+.cmd-play-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.cmd-play-open {
+  align-self: flex-start;
+}
+
+.cmd-play-last {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--ff-muted, #64748b);
+}

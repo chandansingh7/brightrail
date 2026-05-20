@@ -1,0 +1,50 @@
+<div class="vh">
+  <header class="vh-hero">
+    <p class="vh-hero__eyebrow">Brightrail · Variation catalog</p>
+    <h1 class="vh-hero__title">Copy-ready component variations</h1>
+    <p class="vh-hero__lead">
+      Each catalog page mirrors <code>doc/</code> reference mocks. Click a tile to reveal markup you can paste into
+      any app that imports <code>brightrail</code>. Interactive settings stay on each component playground.
+    </p>
+    <p class="vh-hero__meta">
+      {{ catalogCoveragePercent }}% of components have a dedicated catalog route —
+      others use the live playground until their guide ships.
+    </p>
+  </header>
+
+  <section class="vh-grid" aria-label="Component variation catalogs">
+    @for (entry of entries; track entry.playgroundRoute) {
+      <article class="vh-card" [class.vh-card--muted]="entry.catalogStatus === 'playground-only'">
+        <h2 class="vh-card__title">{{ entry.label }}</h2>
+        <p class="vh-card__selector"><code>{{ entry.selector }}</code></p>
+        @if (entry.docFolder) {
+          <p class="vh-card__doc">Doc: <code>doc/{{ entry.docFolder }}/</code></p>
+        }
+        <p class="vh-card__status">
+          @switch (entry.catalogStatus) {
+            @case ('full') {
+              Catalog + click-to-copy tiles
+            }
+            @case ('partial') {
+              Catalog (adding copy tiles)
+            }
+            @default {
+              Playground only — catalog planned
+            }
+          }
+        </p>
+        <div class="vh-card__links">
+          <a [routerLink]="['/', entry.playgroundRoute]" class="vh-card__link">Playground</a>
+          @if (entry.catalogRoute) {
+            <a
+              [routerLink]="catalogRouteSegments(entry.catalogRoute)"
+              class="vh-card__link vh-card__link--primary"
+            >
+              Variation catalog →
+            </a>
+          }
+        </div>
+      </article>
+    }
+  </section>
+</div>

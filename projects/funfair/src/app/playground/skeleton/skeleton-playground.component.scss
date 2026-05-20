@@ -1,0 +1,53 @@
+@use '../button/button-playground.component.scss' as *;
+@use '../playground-preview-fixes.scss' as *;
+
+:host .bp-preview-surface.bp-preview-surface--stretch {
+  align-items: center;
+  justify-content: center;
+}
+
+:host .bp-preview-inner--skel {
+  width: 100%;
+  max-width: 28rem;
+  padding: 0.75rem 1rem;
+  box-sizing: border-box;
+}
+
+.sk-play-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  width: 100%;
+}
+
+.sk-play-row__copy {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.sk-play-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  width: 100%;
+}
+
+.sk-play-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.sk-play-table__row {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  gap: 0.5rem;
+}
+
+.sk-preview-hint {
+  margin: 0.75rem 0 0;
+  text-align: center;
+}

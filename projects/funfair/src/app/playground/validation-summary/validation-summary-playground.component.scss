@@ -1,0 +1,11 @@
+@use '../button/button-playground.component.scss' as *;
+@use '../playground-preview-fixes.scss' as *;
+
+.bp-preview-inner--validation-summary {
+  width: 100%;
+  max-width: 28rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0.75rem;
+}

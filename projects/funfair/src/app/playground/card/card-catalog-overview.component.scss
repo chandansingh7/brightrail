@@ -1,0 +1,67 @@
+:host {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+}
+
+.crco {
+  padding: 1rem 1.25rem 1.5rem;
+}
+
+.crco-hero__eyebrow {
+  margin: 0 0 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ff-muted, #64748b);
+}
+
+.crco-hero h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.crco-hero p {
+  margin: 0.35rem 0 0.5rem;
+  color: var(--ff-muted, #64748b);
+}
+
+.crco-hero__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+}
+
+.crco-link {
+  color: var(--ff-accent, #2563eb);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.crco-code-block {
+  margin: 1.5rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ff-border, #e2e8f0);
+}
+
+.crco-code-block h2 {
+  font-size: 1.1rem;
+  margin: 0 0 0.35rem;
+}
+
+.crco-code-block__hint {
+  margin: 0 0 0.65rem;
+  font-size: 0.8125rem;
+  color: var(--ff-muted, #64748b);
+}
+
+.crco-pre {
+  margin: 0;
+  padding: 0.85rem;
+  border-radius: 0.5rem;
+  background: var(--ff-surface-muted, #f1f3f4);
+  border: 1px solid var(--ff-border, #e2e8f0);
+  overflow: auto;
+  font-size: 0.8rem;
+}

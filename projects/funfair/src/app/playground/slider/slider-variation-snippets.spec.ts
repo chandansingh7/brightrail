@@ -1,0 +1,23 @@
+import {
+  SLIDER_DOC_SECTION_COUNT,
+  SLIDER_HTML_EXAMPLES,
+  SLIDER_VARIATION_SNIPPETS,
+} from './slider-variation-snippets';
+
+describe('slider-variation-snippets', () => {
+  it('exports copy-ready snippets for core types and ranges', () => {
+    expect(SLIDER_VARIATION_SNIPPETS.coreWithValue).toContain('[showValue]="true"');
+    expect(SLIDER_VARIATION_SNIPPETS.rangeTemperature).toContain('[min]="16"');
+    expect(SLIDER_VARIATION_SNIPPETS.formNgModel).toContain('[(ngModel)]');
+  });
+
+  it('documents six reference sections', () => {
+    expect(SLIDER_DOC_SECTION_COUNT).toBe(6);
+  });
+
+  it('includes footer HTML examples', () => {
+    expect(SLIDER_HTML_EXAMPLES).toContain('brightrail-slider');
+    expect(SLIDER_HTML_EXAMPLES).toContain('[showValue]="true"');
+    expect(SLIDER_HTML_EXAMPLES).toContain('[disabled]="true"');
+  });
+});

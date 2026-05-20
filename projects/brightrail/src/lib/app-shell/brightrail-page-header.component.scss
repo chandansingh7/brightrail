@@ -1,0 +1,52 @@
+@use '../styles/tokens' as br;
+
+:host {
+  display: block;
+}
+
+.br-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.5rem 0.75rem;
+}
+
+.br-page-header--bordered {
+  border-block-end: 1px solid var(--br-color-border, #{br.$br-color-border});
+}
+
+.br-page-header__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+:host ::ng-deep .br-page-header__title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: br.$br-color-text-strong;
+}
+
+:host ::ng-deep .br-page-header__subtitle {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: br.$br-color-muted;
+}
+
+.br-page-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 0 0 auto;
+}
+
+:host ::ng-deep .br-page-header__actions-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}

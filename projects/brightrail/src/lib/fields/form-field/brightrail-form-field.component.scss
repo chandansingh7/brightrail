@@ -1,0 +1,47 @@
+@use '../../styles/tokens' as br;
+
+:host {
+  @include br.br-host-text-field;
+  display: block;
+  max-width: 100%;
+}
+
+.br-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.br-form-field__label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--br-tf-label);
+}
+
+.br-form-field__req {
+  margin-left: 0.06em;
+  font-weight: 700;
+  color: var(--br-tf-error);
+}
+
+.br-form-field__control {
+  min-width: 0;
+}
+
+.br-form-field__hint {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--br-tf-label);
+}
+
+.br-form-field__error {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--br-tf-error);
+}
+
+:host(.br-form-field--invalid) .br-form-field__label {
+  color: var(--br-tf-error);
+}

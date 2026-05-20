@@ -1,0 +1,60 @@
+@use '../styles/tokens' as br;
+
+:host {
+  display: block;
+  block-size: 100%;
+}
+
+.br-sidebar {
+  padding: 0.75rem;
+  block-size: 100%;
+}
+
+.br-sidebar__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.br-sidebar__list ::ng-deep > * {
+  display: block;
+}
+
+.br-sidebar__list ::ng-deep a,
+.br-sidebar__list ::ng-deep button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  border: none;
+  border-radius: var(--br-radius-sm, #{br.$br-radius-sm});
+  background: transparent;
+  color: br.$br-color-text;
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: start;
+  text-decoration: none;
+  padding: 0.55rem 0.7rem;
+  cursor: pointer;
+}
+
+.br-sidebar__list ::ng-deep a:hover,
+.br-sidebar__list ::ng-deep button:hover {
+  background: rgb(60 64 67 / 8%);
+}
+
+.br-sidebar__list ::ng-deep a:focus-visible,
+.br-sidebar__list ::ng-deep button:focus-visible {
+  outline: 2px solid br.$br-focus-ring-alpha;
+  outline-offset: 1px;
+}
+
+.br-sidebar__list ::ng-deep [aria-current='page'],
+.br-sidebar__list ::ng-deep .br-sidebar__active {
+  background: rgb(0 98 255 / 10%);
+  color: var(--br-color-primary, #{br.$br-color-primary});
+  font-weight: 600;
+}

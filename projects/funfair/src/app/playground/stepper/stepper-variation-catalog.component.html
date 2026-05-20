@@ -1,0 +1,234 @@
+<section class="stvc-block">
+  <h2 class="stvc-block__h">1. Core stepper types</h2>
+  <div class="stvc-grid">
+    <app-catalog-variation-tile label="Linear stepper" [snippet]="s.coreLinear">
+      <brightrail-stepper [currentStep]="0">
+        <brightrail-step label="Account" />
+        <brightrail-step label="Profile" />
+        <brightrail-step label="Confirm" />
+      </brightrail-stepper>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Progress stepper" [snippet]="s.coreProgress">
+      <brightrail-stepper stepStyle="progress" [currentStep]="1">
+        <brightrail-step label="Upload" />
+        <brightrail-step label="Process" />
+        <brightrail-step label="Complete" />
+      </brightrail-stepper>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Numbered stepper" [snippet]="s.coreNumbered">
+      <brightrail-stepper stepStyle="numbered" [currentStep]="0">
+        <brightrail-step label="Step one" />
+        <brightrail-step label="Step two" />
+        <brightrail-step label="Step three" />
+      </brightrail-stepper>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="stvc-block">
+  <h2 class="stvc-block__h">2. Orientations</h2>
+  <div class="stvc-grid">
+    <app-catalog-variation-tile label="Horizontal" [snippet]="s.orientHorizontal">
+      <brightrail-stepper [currentStep]="1">
+        <brightrail-step label="Shipping" />
+        <brightrail-step label="Payment" />
+        <brightrail-step label="Review" />
+      </brightrail-stepper>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Vertical" [snippet]="s.orientVertical">
+      <brightrail-stepper orientation="vertical" [currentStep]="1">
+        <brightrail-step label="Details" description="Enter your information" />
+        <brightrail-step label="Shipping" description="Choose shipping method" />
+        <brightrail-step label="Payment" description="Add payment details" />
+        <brightrail-step label="Review" description="Confirm and place order" />
+      </brightrail-stepper>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="stvc-block">
+  <h2 class="stvc-block__h">3. Sizes</h2>
+  <div class="stvc-grid">
+    <app-catalog-variation-tile label="Default" [snippet]="s.sizeDefault">
+      <brightrail-stepper [currentStep]="0">
+        <brightrail-step label=" " />
+        <brightrail-step label=" " />
+        <brightrail-step label=" " />
+      </brightrail-stepper>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Compact" [snippet]="s.sizeCompact">
+      <div class="stvc-size-host--compact">
+        <brightrail-stepper [currentStep]="1">
+          <brightrail-step label=" " />
+          <brightrail-step label=" " />
+          <brightrail-step label=" " />
+        </brightrail-stepper>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Small" [snippet]="s.sizeSmall">
+      <div class="stvc-size-host--mini">
+        <brightrail-stepper [currentStep]="2">
+          <brightrail-step label=" " />
+          <brightrail-step label=" " />
+          <brightrail-step label=" " />
+        </brightrail-stepper>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="stvc-block">
+  <h2 class="stvc-block__h">4. Step states</h2>
+  <div class="stvc-grid">
+    <app-catalog-variation-tile label="Completed" [snippet]="s.stateCompleted">
+      <brightrail-stepper [currentStep]="2">
+        <brightrail-step label=" " status="completed" />
+        <brightrail-step label=" " status="completed" />
+        <brightrail-step label=" " status="inactive" />
+      </brightrail-stepper>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Current" [snippet]="s.stateCurrent">
+      <brightrail-stepper [currentStep]="1">
+        <brightrail-step label=" " status="completed" />
+        <brightrail-step label=" " status="current" />
+        <brightrail-step label=" " status="pending" />
+      </brightrail-stepper>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Inactive / Error / Disabled" [snippet]="s.stateErrorDisabled">
+      <brightrail-stepper [currentStep]="0">
+        <brightrail-step label=" " status="inactive" />
+        <brightrail-step label=" " status="error" />
+        <brightrail-step label=" " status="disabled" />
+      </brightrail-stepper>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="stvc-block">
+  <h2 class="stvc-block__h">5. Label placements</h2>
+  <div class="stvc-grid">
+    <app-catalog-variation-tile label="Bottom labels" [snippet]="s.labelsBelow">
+      <brightrail-stepper labelPlacement="below" [currentStep]="0">
+        <brightrail-step label="Details" />
+        <brightrail-step label="Shipping" />
+        <brightrail-step label="Review" />
+      </brightrail-stepper>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Top labels" [snippet]="s.labelsTop">
+      <brightrail-stepper labelPlacement="top" [currentStep]="1">
+        <brightrail-step label="Details" />
+        <brightrail-step label="Shipping" />
+        <brightrail-step label="Review" />
+      </brightrail-stepper>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Alternating (vertical)" [snippet]="s.labelsAlternatingVertical">
+      <brightrail-stepper orientation="vertical" [currentStep]="0">
+        <brightrail-step label="Details" description="Enter your information" />
+        <brightrail-step label="Shipping" description="Choose shipping method" />
+        <brightrail-step label="Review" description="Confirm and place order" />
+      </brightrail-stepper>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="stvc-block">
+  <h2 class="stvc-block__h">6. Workflow examples</h2>
+  <div class="stvc-grid">
+    <app-catalog-variation-tile label="Onboarding flow" [snippet]="s.workflowOnboarding">
+      <brightrail-stepper stepStyle="progress" [currentStep]="1">
+        <brightrail-step label="Welcome" />
+        <brightrail-step label="Profile" />
+        <brightrail-step label="Preferences" />
+        <brightrail-step label="Finish" />
+      </brightrail-stepper>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Checkout flow" [snippet]="s.workflowCheckout">
+      <brightrail-stepper stepStyle="progress" [currentStep]="2">
+        <brightrail-step label="Cart" />
+        <brightrail-step label="Shipping" />
+        <brightrail-step label="Payment" />
+        <brightrail-step label="Confirm" />
+      </brightrail-stepper>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Approval workflow" [snippet]="s.workflowApproval">
+      <brightrail-stepper stepStyle="progress" [currentStep]="3">
+        <brightrail-step label="Submit" />
+        <brightrail-step label="Review" />
+        <brightrail-step label="Approve" />
+        <brightrail-step label="Complete" />
+      </brightrail-stepper>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="stvc-block">
+  <h2 class="stvc-block__h">7. Form / wizard patterns</h2>
+  <div class="stvc-grid">
+    <app-catalog-variation-tile label="Multi-step form" [snippet]="s.formMultiStep">
+      <brightrail-stepper [currentStep]="1">
+        <brightrail-step label="Account" />
+        <brightrail-step label="Address" />
+        <brightrail-step label="Details" />
+        <brightrail-step label="Confirm" />
+      </brightrail-stepper>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Wizard with validation" [snippet]="s.formWizardValidation">
+      <brightrail-stepper [currentStep]="1">
+        <brightrail-step label="Basics" status="completed" />
+        <brightrail-step label="Settings" status="current" />
+        <brightrail-step label="Review" status="pending" />
+      </brightrail-stepper>
+      <p class="stvc-note">Please complete all required fields to continue.</p>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="stvc-block" aria-labelledby="stvc-a11y-title">
+  <h2 id="stvc-a11y-title" class="stvc-block__h">8. Accessibility tips</h2>
+  <aside class="stvc-a11y">
+    <ul>
+      <li>Use clear, short labels users can scan quickly.</li>
+      <li>Keep keyboard focus visible on active step controls.</li>
+      <li>Expose active step state with <code>aria-current="step"</code>.</li>
+    </ul>
+    <p class="stvc-a11y__link-hint">
+      See the stepper playground for live keyboard and screen-reader guidance.
+    </p>
+  </aside>
+</section>
+
+<section class="stvc-block">
+  <h2 class="stvc-block__h">9. Futuristic stepper designs</h2>
+  <div class="stvc-grid stvc-grid--wide">
+    <app-catalog-variation-tile label="Glowing progress" [snippet]="s.futuristicGlowing">
+      <div class="stvc-futuristic">
+        <brightrail-stepper [currentStep]="1" connectorGap="2px">
+          <brightrail-step label="Discover" />
+          <brightrail-step label="Configure" />
+          <brightrail-step label="Preview" />
+          <brightrail-step label="Launch" />
+        </brightrail-stepper>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Pill indicator" [snippet]="s.futuristicPill">
+      <div class="stvc-futuristic">
+        <brightrail-stepper [currentStep]="1" stepStyle="progress" connectorGap="0.2rem">
+          <brightrail-step label="Plan" />
+          <brightrail-step label="Build" />
+          <brightrail-step label="Test" />
+          <brightrail-step label="Deploy" />
+        </brightrail-stepper>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Minimal line" [snippet]="s.futuristicMinimalLine">
+      <div class="stvc-futuristic">
+        <brightrail-stepper [currentStep]="1" connectorGap="0">
+          <brightrail-step label="Start" />
+          <brightrail-step label="Configure" />
+          <brightrail-step label="Review" />
+          <brightrail-step label="Done" />
+        </brightrail-stepper>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

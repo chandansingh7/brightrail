@@ -1,0 +1,18 @@
+.gvc-block {
+  margin-bottom: 2rem;
+}
+
+.gvc-block__h {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+}
+
+.gvc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+:host ::ng-deep brightrail-graph {
+  width: 100%;
+}

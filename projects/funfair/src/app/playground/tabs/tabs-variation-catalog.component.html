@@ -1,0 +1,210 @@
+<section class="tbvc-block">
+  <h2 class="tbvc-block__h">1. Appearances</h2>
+  <div class="tbvc-stack">
+    <app-catalog-variation-tile label="Underline" [snippet]="s.appearanceUnderline">
+      <brightrail-tabs appearance="underline" size="md">
+        <brightrail-tab label="Overview" [active]="true">
+          <ng-template brightrailTabContent>
+            <p>Track profile details and recent updates.</p>
+          </ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Details">
+          <ng-template brightrailTabContent><p>Owners and metadata.</p></ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Activity">
+          <ng-template brightrailTabContent><p>Audit events.</p></ng-template>
+        </brightrail-tab>
+      </brightrail-tabs>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Contained (default)" [snippet]="s.appearanceContained">
+      <brightrail-tabs appearance="contained" size="md">
+        <brightrail-tab label="Overview" [active]="true">
+          <ng-template brightrailTabContent><p>Contained tabs with filled active trigger.</p></ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Details">
+          <ng-template brightrailTabContent><p>Secondary panel.</p></ng-template>
+        </brightrail-tab>
+      </brightrail-tabs>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Pill" [snippet]="s.appearancePill">
+      <brightrail-tabs appearance="pill" size="md">
+        <brightrail-tab label="All" [active]="true">
+          <ng-template brightrailTabContent><p>Filter: all items.</p></ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Active">
+          <ng-template brightrailTabContent><p>Filter: active.</p></ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Archived">
+          <ng-template brightrailTabContent><p>Filter: archived.</p></ng-template>
+        </brightrail-tab>
+      </brightrail-tabs>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tbvc-block">
+  <h2 class="tbvc-block__h">2. Orientations</h2>
+  <div class="tbvc-stack">
+    <app-catalog-variation-tile label="Horizontal" [snippet]="s.orientationHorizontal">
+      <brightrail-tabs appearance="underline" orientation="horizontal" size="md">
+        <brightrail-tab label="Overview" [active]="true">
+          <ng-template brightrailTabContent><p>Horizontal tab strip.</p></ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Settings">
+          <ng-template brightrailTabContent><p>Settings panel.</p></ng-template>
+        </brightrail-tab>
+      </brightrail-tabs>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Vertical" [snippet]="s.orientationVertical">
+      <brightrail-tabs appearance="underline" orientation="vertical" size="md" class="tbvc-vertical-demo">
+        <brightrail-tab label="Overview" [active]="true">
+          <ng-template brightrailTabContent><p>Vertical navigation layout.</p></ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Members">
+          <ng-template brightrailTabContent><p>Seat usage and roles.</p></ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Billing">
+          <ng-template brightrailTabContent><p>Invoices and payment method.</p></ng-template>
+        </brightrail-tab>
+      </brightrail-tabs>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tbvc-block">
+  <h2 class="tbvc-block__h">3. Sizes</h2>
+  <div class="tbvc-grid">
+    <app-catalog-variation-tile label="Small" [snippet]="s.sizeSm">
+      <brightrail-tabs appearance="underline" size="sm">
+        <brightrail-tab label="All" [active]="true">
+          <ng-template brightrailTabContent><p>Compact density.</p></ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Open">
+          <ng-template brightrailTabContent><p>Open items.</p></ng-template>
+        </brightrail-tab>
+      </brightrail-tabs>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Medium" [snippet]="s.sizeMd">
+      <brightrail-tabs appearance="underline" size="md">
+        <brightrail-tab label="Overview" [active]="true">
+          <ng-template brightrailTabContent><p>Medium (default) size.</p></ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Details">
+          <ng-template brightrailTabContent><p>Details panel.</p></ng-template>
+        </brightrail-tab>
+      </brightrail-tabs>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Large" [snippet]="s.sizeLg">
+      <brightrail-tabs appearance="underline" size="lg">
+        <brightrail-tab label="Overview" [active]="true">
+          <ng-template brightrailTabContent><p>Large triggers for touch targets.</p></ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Reports">
+          <ng-template brightrailTabContent><p>Reports panel.</p></ng-template>
+        </brightrail-tab>
+      </brightrail-tabs>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tbvc-block">
+  <h2 class="tbvc-block__h">4. Icon-only &amp; icon + label</h2>
+  <div class="tbvc-stack">
+    <app-catalog-variation-tile label="Icon-only" [snippet]="s.iconOnlyCalendar">
+      <brightrail-tabs appearance="underline" size="md">
+        <brightrail-tab label="Overview" icon="calendar" [iconOnly]="true" [active]="true">
+          <ng-template brightrailTabContent><p>Calendar view.</p></ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Search" icon="search" [iconOnly]="true">
+          <ng-template brightrailTabContent><p>Search view.</p></ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="People" icon="user" [iconOnly]="true">
+          <ng-template brightrailTabContent><p>People view.</p></ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Filter" icon="filter" [iconOnly]="true">
+          <ng-template brightrailTabContent><p>Filter view.</p></ng-template>
+        </brightrail-tab>
+      </brightrail-tabs>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Icon + label" [snippet]="s.iconLabel">
+      <brightrail-tabs appearance="contained" size="md">
+        <brightrail-tab label="Overview" icon="calendar" [active]="true">
+          <ng-template brightrailTabContent><p>Icon + label tab.</p></ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Library" icon="copy">
+          <ng-template brightrailTabContent><p>Library panel.</p></ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Alerts" icon="warning">
+          <ng-template brightrailTabContent><p>Alerts panel.</p></ng-template>
+        </brightrail-tab>
+      </brightrail-tabs>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tbvc-block">
+  <h2 class="tbvc-block__h">5. Badges &amp; closable</h2>
+  <div class="tbvc-stack">
+    <app-catalog-variation-tile label="Badges" [snippet]="s.badgeAlerts">
+      <brightrail-tabs appearance="pill" size="md">
+        <brightrail-tab label="Inbox" [active]="true">
+          <ng-template brightrailTabContent><p>Unread threads.</p></ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Alerts" [badge]="3">
+          <ng-template brightrailTabContent><p>Three open alerts.</p></ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Messages" [badge]="12">
+          <ng-template brightrailTabContent><p>Direct messages backlog.</p></ng-template>
+        </brightrail-tab>
+      </brightrail-tabs>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Closable" [snippet]="s.closable">
+      <brightrail-tabs appearance="underline" size="md">
+        @for (t of closableTabs(); track t.label) {
+          <brightrail-tab
+            [label]="t.label"
+            [active]="t.active ?? false"
+            [closable]="true"
+            (close)="onClosableClose(t.label)"
+          >
+            <ng-template brightrailTabContent>
+              <p>Closable document tab — {{ t.label }}.</p>
+            </ng-template>
+          </brightrail-tab>
+        }
+      </brightrail-tabs>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tbvc-block">
+  <h2 class="tbvc-block__h">6. Scrollable &amp; vertical</h2>
+  <div class="tbvc-stack">
+    <app-catalog-variation-tile label="Scrollable strip" [snippet]="s.scrollableStrip">
+      <div class="tbvc-scroll-wrap">
+        <brightrail-tabs appearance="underline" size="sm" [scrollable]="true">
+          @for (seg of scrollableSegments; track seg.label) {
+            <brightrail-tab [label]="seg.label" [active]="seg.active">
+              <ng-template brightrailTabContent>
+                <p>{{ seg.body }}</p>
+              </ng-template>
+            </brightrail-tab>
+          }
+        </brightrail-tabs>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Vertical navigation" [snippet]="s.verticalNav">
+      <brightrail-tabs appearance="underline" orientation="vertical" size="md" class="tbvc-vertical-demo">
+        <brightrail-tab label="Overview" [active]="true">
+          <ng-template brightrailTabContent><p>Primary workspace snapshot.</p></ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Members">
+          <ng-template brightrailTabContent><p>Seat usage and roles.</p></ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Security">
+          <ng-template brightrailTabContent><p>SSO and session policy.</p></ng-template>
+        </brightrail-tab>
+      </brightrail-tabs>
+    </app-catalog-variation-tile>
+  </div>
+</section>

@@ -1,0 +1,113 @@
+@use '../styles/tokens' as br;
+
+:host {
+  display: block;
+}
+
+.br-tree__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.br-tree__list--nested {
+  margin-block-start: 0.15rem;
+}
+
+.br-tree__item {
+  margin: 0;
+  padding: 0;
+}
+
+.br-tree__row {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  min-block-size: 2rem;
+  border-radius: var(--br-radius-sm, #{br.$br-radius-sm});
+}
+
+.br-tree__row--selected {
+  background: rgb(0 98 255 / 8%);
+}
+
+.br-tree__row:hover:not(:has(.br-tree__label-btn--disabled)) {
+  background: var(--br-color-surface-muted, #{br.$br-color-surface-muted});
+}
+
+.br-tree__toggle,
+.br-tree__toggle-spacer {
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  flex: 0 0 auto;
+}
+
+.br-tree__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--br-radius-sm, #{br.$br-radius-sm});
+  background: transparent;
+  color: br.$br-color-muted;
+  cursor: pointer;
+  padding: 0;
+}
+
+.br-tree__toggle:hover:not(:disabled) {
+  background: rgb(60 64 67 / 8%);
+  color: br.$br-color-text-strong;
+}
+
+.br-tree__toggle:focus-visible {
+  outline: 2px solid br.$br-focus-ring-alpha;
+  outline-offset: 1px;
+}
+
+.br-tree__toggle:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.br-tree__chevron {
+  display: inline-flex;
+  transition: transform 0.15s ease;
+}
+
+.br-tree__chevron--expanded {
+  transform: rotate(90deg);
+}
+
+.br-tree__label-btn {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  text-align: start;
+  font: inherit;
+  font-size: 0.9rem;
+  color: br.$br-color-text-strong;
+  cursor: pointer;
+  padding: 0.35rem 0.5rem;
+  border-radius: var(--br-radius-sm, #{br.$br-radius-sm});
+}
+
+.br-tree__label-btn:hover:not(:disabled) {
+  color: var(--br-color-primary, #{br.$br-color-primary});
+}
+
+.br-tree__label-btn:focus-visible {
+  outline: 2px solid br.$br-focus-ring-alpha;
+  outline-offset: 1px;
+}
+
+.br-tree__label-btn--disabled,
+.br-tree__label-btn:disabled {
+  color: br.$br-color-placeholder;
+  cursor: not-allowed;
+}
+
+.br-tree__row--selected .br-tree__label-btn {
+  color: var(--br-color-primary, #{br.$br-color-primary});
+  font-weight: 600;
+}

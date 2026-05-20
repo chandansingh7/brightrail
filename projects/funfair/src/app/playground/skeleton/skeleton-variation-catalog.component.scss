@@ -1,0 +1,84 @@
+:host {
+  display: block;
+}
+
+.skvc-block {
+  margin-bottom: 1.35rem;
+}
+
+.skvc-block__h {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.skvc-block__hint {
+  margin: -0.15rem 0 0.65rem;
+  font-size: 0.78rem;
+  color: var(--ff-muted, #64748b);
+}
+
+.skvc-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  align-items: start;
+}
+
+.skvc-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.skvc-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  width: 100%;
+}
+
+.skvc-row__copy {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.skvc-card,
+.skvc-profile,
+.skvc-article {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  width: 100%;
+}
+
+.skvc-profile {
+  align-items: center;
+}
+
+.skvc-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  width: 100%;
+}
+
+.skvc-table__row {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  gap: 0.5rem;
+}
+
+.skvc-dashboard__grid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 520px) {
+  .skvc-dashboard__grid {
+    grid-template-columns: 1fr;
+  }
+}

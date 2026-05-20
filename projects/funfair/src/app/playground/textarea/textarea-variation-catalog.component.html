@@ -1,0 +1,126 @@
+<section class="tavc-block">
+  <h2 class="tavc-block__h">1. Appearances</h2>
+  <div class="tavc-stack">
+    <app-catalog-variation-tile label="Filled" [snippet]="s.appearanceFilled">
+      <brightrail-textarea appearance="filled" label="Description" placeholder="Enter details…" [(ngModel)]="demoDescription" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Outlined" [snippet]="s.appearanceOutlined">
+      <brightrail-textarea appearance="outlined" label="Description" placeholder="Enter details…" [(ngModel)]="demoDescription" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Underline" [snippet]="s.appearanceUnderline">
+      <brightrail-textarea appearance="underline" label="Notes" placeholder="Add notes…" [(ngModel)]="demoNotes" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Ghost" [snippet]="s.appearanceGhost">
+      <brightrail-textarea appearance="ghost" label="Comments" placeholder="Optional comments…" [(ngModel)]="demoMessage" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Read-only" [snippet]="s.appearanceReadonly">
+      <brightrail-textarea appearance="readonly" label="Terms" [rows]="3" [(ngModel)]="demoTerms" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tavc-block">
+  <h2 class="tavc-block__h">2. Labels &amp; rows</h2>
+  <div class="tavc-stack">
+    <app-catalog-variation-tile label="With helper text" [snippet]="s.labelWithHelper">
+      <brightrail-textarea
+        appearance="outlined"
+        label="Bio"
+        helperText="Brief summary shown on your profile."
+        [rows]="4"
+        [(ngModel)]="demoBio"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Required" [snippet]="s.labelRequired">
+      <brightrail-textarea appearance="outlined" label="Feedback" [required]="true" [rows]="4" [(ngModel)]="demoFeedback" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Compact (2 rows)" [snippet]="s.labelCompact">
+      <brightrail-textarea appearance="outlined" label="Short note" [rows]="2" placeholder="Quick note…" [(ngModel)]="demoShortNote" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="No label" [snippet]="s.labelNoLabel">
+      <brightrail-textarea appearance="outlined" placeholder="Write a message…" [rows]="4" [(ngModel)]="demoMessage" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tavc-block">
+  <h2 class="tavc-block__h">3. Sizes</h2>
+  <p class="tavc-block__hint">xs · sm · md · lg · xl</p>
+  <div class="tavc-stack">
+    <app-catalog-variation-tile label="Extra small" [snippet]="s.sizeXs">
+      <brightrail-textarea appearance="outlined" size="xs" label="Extra small" [rows]="3" [(ngModel)]="demoValue" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Small" [snippet]="s.sizeSm">
+      <brightrail-textarea appearance="outlined" size="sm" label="Small" [rows]="3" [(ngModel)]="demoValue" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Medium" [snippet]="s.sizeMd">
+      <brightrail-textarea appearance="outlined" size="md" label="Medium" [rows]="4" [(ngModel)]="demoValue" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Large" [snippet]="s.sizeLg">
+      <brightrail-textarea appearance="outlined" size="lg" label="Large" [rows]="4" [(ngModel)]="demoValue" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Extra large" [snippet]="s.sizeXl">
+      <brightrail-textarea appearance="outlined" size="xl" label="Extra large" [rows]="5" [(ngModel)]="demoValue" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tavc-block">
+  <h2 class="tavc-block__h">4. Status states</h2>
+  <div class="tavc-stack">
+    <app-catalog-variation-tile label="Success" [snippet]="s.statusSuccess">
+      <brightrail-textarea appearance="outlined" label="Summary" status="success" helperText="Looks good!" [(ngModel)]="demoSummary" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Warning" [snippet]="s.statusWarning">
+      <brightrail-textarea appearance="outlined" label="Address" status="warning" [(ngModel)]="demoAddress" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Error" [snippet]="s.statusError">
+      <brightrail-textarea
+        appearance="outlined"
+        label="Reason"
+        status="error"
+        helperText="This field is required."
+        [(ngModel)]="demoReason"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Info" [snippet]="s.statusInfo">
+      <brightrail-textarea appearance="outlined" label="Instructions" status="info" [(ngModel)]="demoInstructions" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Disabled" [snippet]="s.statusDisabled">
+      <brightrail-textarea appearance="outlined" label="Locked field" [disabled]="true" [(ngModel)]="demoLocked" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tavc-block">
+  <h2 class="tavc-block__h">5. Resize options</h2>
+  <div class="tavc-stack">
+    <app-catalog-variation-tile label="None" [snippet]="s.resizeNone">
+      <brightrail-textarea appearance="outlined" label="Fixed height" resize="none" [rows]="4" [(ngModel)]="demoFixed" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Vertical" [snippet]="s.resizeVertical">
+      <brightrail-textarea appearance="outlined" label="Vertical resize" resize="vertical" [rows]="4" [(ngModel)]="demoVertical" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Horizontal" [snippet]="s.resizeHorizontal">
+      <brightrail-textarea appearance="outlined" label="Horizontal resize" resize="horizontal" [rows]="3" [(ngModel)]="demoHorizontal" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Both" [snippet]="s.resizeBoth">
+      <brightrail-textarea appearance="outlined" label="Both axes" resize="both" [rows]="3" [(ngModel)]="demoBoth" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tavc-block">
+  <h2 class="tavc-block__h">6. Form patterns</h2>
+  <div class="tavc-stack">
+    <app-catalog-variation-tile label="Full width" [snippet]="s.formFullWidth">
+      <brightrail-textarea appearance="outlined" label="Project description" [fullWidth]="true" [rows]="5" [(ngModel)]="demoProject" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Loading" [snippet]="s.formLoading">
+      <brightrail-textarea appearance="outlined" label="Draft" [loading]="true" [rows]="4" [(ngModel)]="demoDraft" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Reactive form" [snippet]="s.formReactive">
+      <brightrail-textarea appearance="outlined" label="Comments" [rows]="4" [(ngModel)]="demoMessage" />
+    </app-catalog-variation-tile>
+  </div>
+</section>

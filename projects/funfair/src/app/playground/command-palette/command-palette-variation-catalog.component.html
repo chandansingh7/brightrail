@@ -1,0 +1,49 @@
+<section class="cpvc-block">
+  <h2 class="cpvc-block__h">1. Open &amp; closed</h2>
+  <div class="cpvc-row">
+    <app-catalog-variation-tile label="Open" [snippet]="s.coreOpen">
+      <div class="cpvc-palette-wrap">
+        <button type="button" (click)="openPalette()">Open palette</button>
+        <brightrail-command-palette [isOpen]="paletteOpen()" [commands]="demoCommands" placeholder="Search commands…" (closed)="paletteOpen.set(false)" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Closed" [snippet]="s.coreClosed">
+      <brightrail-command-palette [isOpen]="false" [commands]="demoCommands" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="cpvc-block">
+  <h2 class="cpvc-block__h">2. Grouped commands</h2>
+  <app-catalog-variation-tile label="Navigation + actions" [snippet]="s.groupedCommands">
+    <brightrail-command-palette [isOpen]="true" [commands]="groupedCommands" placeholder="Jump to…" />
+  </app-catalog-variation-tile>
+</section>
+
+<section class="cpvc-block">
+  <h2 class="cpvc-block__h">3. Keyboard shortcuts</h2>
+  <app-catalog-variation-tile label="Shortcuts" [snippet]="s.withShortcuts">
+    <brightrail-command-palette [isOpen]="true" [commands]="demoCommands" />
+  </app-catalog-variation-tile>
+</section>
+
+<section class="cpvc-block">
+  <h2 class="cpvc-block__h">4. Empty state</h2>
+  <app-catalog-variation-tile label="No matches" [snippet]="s.emptyQuery">
+    <brightrail-command-palette [isOpen]="true" [commands]="[]" emptyLabel="No matching commands" />
+  </app-catalog-variation-tile>
+</section>
+
+<section class="cpvc-block">
+  <h2 class="cpvc-block__h">5. Disabled items</h2>
+  <app-catalog-variation-tile label="Disabled rows" [snippet]="s.disabledItems">
+    <brightrail-command-palette [isOpen]="true" [commands]="disabledCommands" />
+  </app-catalog-variation-tile>
+</section>
+
+<section class="cpvc-block">
+  <h2 class="cpvc-block__h">6. Advanced filtering</h2>
+  <app-catalog-variation-tile label="Keywords &amp; aria" [snippet]="s.advancedKeywords">
+    <brightrail-command-palette [isOpen]="true" [commands]="demoCommands" placeholder="Type to filter…" ariaLabel="Workspace command palette" />
+  </app-catalog-variation-tile>
+</section>

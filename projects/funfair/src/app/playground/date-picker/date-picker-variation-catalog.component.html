@@ -1,0 +1,145 @@
+<section class="dpvc-block">
+  <h2 class="dpvc-block__h">1. Core date picker types</h2>
+  <div class="dpvc-grid">
+    <app-catalog-variation-tile label="Inline calendar" [snippet]="s.typeInline">
+      <brightrail-date-picker type="inline" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Input with popup" [snippet]="s.typePopup">
+      <brightrail-date-picker [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Range picker" [snippet]="s.typeRange">
+      <brightrail-date-picker type="range" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="rangeDate" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Month picker" [snippet]="s.typeMonth">
+      <brightrail-date-picker type="month" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="monthDate" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="dpvc-block">
+  <h2 class="dpvc-block__h">2. Appearances</h2>
+  <div class="dpvc-grid">
+    <app-catalog-variation-tile label="Filled" [snippet]="s.appearanceFilled">
+      <brightrail-date-picker appearance="filled" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Soft" [snippet]="s.appearanceSoft">
+      <brightrail-date-picker appearance="soft" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Outlined" [snippet]="s.appearanceOutlined">
+      <brightrail-date-picker appearance="outlined" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Tonal" [snippet]="s.appearanceTonal">
+      <brightrail-date-picker appearance="tonal" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="dpvc-block">
+  <h2 class="dpvc-block__h">3. Sizes</h2>
+  <div class="dpvc-grid">
+    <app-catalog-variation-tile label="Compact" [snippet]="s.sizeSm">
+      <brightrail-date-picker size="sm" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Medium (default)" [snippet]="s.sizeMd">
+      <brightrail-date-picker size="md" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Large" [snippet]="s.sizeLg">
+      <brightrail-date-picker size="lg" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="dpvc-block">
+  <h2 class="dpvc-block__h">4. States</h2>
+  <div class="dpvc-grid">
+    <app-catalog-variation-tile label="Default" [snippet]="s.stateDefault">
+      <brightrail-date-picker [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Hover" [snippet]="s.stateHover" hint="Simulated hover class">
+      <brightrail-date-picker class="dpvc-hover" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Focused" [snippet]="s.stateFocused" hint="Simulated focus class">
+      <brightrail-date-picker class="dpvc-focus" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Disabled" [snippet]="s.stateDisabled">
+      <brightrail-date-picker [disabled]="true" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="dpvc-block">
+  <h2 class="dpvc-block__h">5. Single date</h2>
+  <app-catalog-variation-tile label="Open calendar" [snippet]="s.singleOpen">
+    <brightrail-date-picker [labelPosition]="'none'" [open]="true" [fullWidth]="true" [ngModel]="singleDate" />
+  </app-catalog-variation-tile>
+</section>
+
+<section class="dpvc-block">
+  <h2 class="dpvc-block__h">6. Date range</h2>
+  <app-catalog-variation-tile label="Open range calendar" [snippet]="s.rangeOpen">
+    <brightrail-date-picker type="range" [labelPosition]="'none'" [open]="true" [fullWidth]="true" [ngModel]="rangeDate" />
+  </app-catalog-variation-tile>
+</section>
+
+<section class="dpvc-block">
+  <h2 class="dpvc-block__h">7. With time / date &amp; time</h2>
+  <div class="dpvc-grid">
+    <app-catalog-variation-tile label="Time picker" [snippet]="s.timePickerMock">
+      <div class="dpvc-mock-field"><span>Time picker</span><span>10:30 AM</span></div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Date &amp; time picker" [snippet]="s.dateTimeMock">
+      <div class="dpvc-mock-field"><span>Date &amp; time picker</span><span>May 20, 2026 · 10:30 AM</span></div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="24-hour time" [snippet]="s.time24HourMock">
+      <div class="dpvc-mock-field"><span>24-hour time</span><span>22:30</span></div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="dpvc-block">
+  <h2 class="dpvc-block__h">8. Validation &amp; disabled dates</h2>
+  <div class="dpvc-grid dpvc-grid--wide">
+    <app-catalog-variation-tile label="Error state" [snippet]="s.validationError">
+      <brightrail-date-picker status="error" helperText="Please enter a valid date." [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Helper text" [snippet]="s.validationHelper">
+      <brightrail-date-picker helperText="Select a check-out date." [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Disabled dates" [snippet]="s.validationDisabledDates">
+      <brightrail-date-picker [disableWeekends]="true" [open]="true" [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="dpvc-block">
+  <h2 class="dpvc-block__h">9. Enterprise patterns</h2>
+  <div class="dpvc-stack">
+    <app-catalog-variation-tile label="Booking form" [snippet]="s.enterpriseBooking">
+      <brightrail-date-picker type="range" label="Check-in / Check-out" helperText="7 nights selected" [fullWidth]="true" [ngModel]="bookingRange" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Report filters" [snippet]="s.enterpriseReportFilters">
+      <brightrail-date-picker type="range" label="From / To" [fullWidth]="true" [ngModel]="rangeDate" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Subscription / renewal" [snippet]="s.enterpriseRenewal">
+      <brightrail-date-picker type="month" label="Next renewal" helperText="You will be billed on this date." [fullWidth]="true" [ngModel]="monthDate" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="dpvc-block">
+  <h2 class="dpvc-block__h">10. Futuristic date picker designs</h2>
+  <div class="dpvc-grid">
+    <app-catalog-variation-tile label="Glassmorphism" [snippet]="s.futuristicGlass">
+      <div class="dpvc-future dpvc-future--glass">
+        <div class="dpvc-future__title">Glassmorphism</div>
+        <brightrail-date-picker [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Gradient accent" [snippet]="s.futuristicGradient">
+      <div class="dpvc-future dpvc-future--gradient">
+        <div class="dpvc-future__title">Gradient accent</div>
+        <brightrail-date-picker [labelPosition]="'none'" [fullWidth]="true" [ngModel]="singleDate" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

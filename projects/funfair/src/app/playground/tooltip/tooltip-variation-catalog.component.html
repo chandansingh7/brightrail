@@ -1,0 +1,290 @@
+<ng-template #catalogRich>
+  <div class="tvc-rich">
+    <div class="tvc-rich__title">System update</div>
+    <p class="tvc-rich__body">Version 2.4.0 is now available with collaboration fixes.</p>
+    <span class="tvc-rich__link">Learn more →</span>
+  </div>
+</ng-template>
+
+<section class="tvc-block">
+  <h2 class="tvc-block__h">1. Core tooltip types</h2>
+  <div class="tvc-row">
+    <app-catalog-variation-tile label="Default info" [snippet]="s.defaultInfo">
+      <button
+        type="button"
+        class="tvc-chip"
+        brightrailTooltip="Helpful information about this item."
+        brightrailTooltipPlacement="top"
+      >
+        <brightrail-button-icon name="info" />
+        <span>Default info</span>
+      </button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Helper" [snippet]="s.helper">
+      <button
+        type="button"
+        class="tvc-chip"
+        brightrailTooltip="This helps you complete the task."
+        brightrailTooltipPlacement="top"
+      >
+        <span class="tvc-q" aria-hidden="true">?</span>
+        <span>Helper</span>
+      </button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Rich content" [snippet]="s.richContent">
+      <button
+        type="button"
+        class="tvc-chip"
+        [brightrailTooltip]="catalogRich"
+        brightrailTooltipPlacement="top"
+        [brightrailTooltipMaxWidth]="280"
+      >
+        <span aria-hidden="true">🚀</span>
+        <span>Rich content</span>
+      </button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Icon tooltip" [snippet]="s.iconTooltip">
+      <button
+        type="button"
+        class="tvc-chip"
+        brightrailTooltip="Add to favorites"
+        brightrailTooltipPlacement="top"
+      >
+        <span aria-hidden="true">♥</span>
+        <span>Icon tooltip</span>
+      </button>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tvc-block">
+  <h2 class="tvc-block__h">2. Placements</h2>
+  <div class="tvc-row tvc-row--wrap">
+    <app-catalog-variation-tile label="Top" [snippet]="s.placementTop">
+      <button type="button" class="tvc-pill" brightrailTooltip="Top" brightrailTooltipPlacement="top">Top</button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Bottom" [snippet]="s.placementBottom">
+      <button type="button" class="tvc-pill" brightrailTooltip="Bottom" brightrailTooltipPlacement="bottom">
+        Bottom
+      </button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Left" [snippet]="s.placementLeft">
+      <button type="button" class="tvc-pill" brightrailTooltip="Left" brightrailTooltipPlacement="left">Left</button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Right" [snippet]="s.placementRight">
+      <button type="button" class="tvc-pill" brightrailTooltip="Right" brightrailTooltipPlacement="right">Right</button>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tvc-block">
+  <h2 class="tvc-block__h">3. Triggers</h2>
+  <div class="tvc-row tvc-row--wrap">
+    <app-catalog-variation-tile label="Hover" [snippet]="s.triggerHover">
+      <button type="button" class="tvc-pill" brightrailTooltip="Hover to open" brightrailTooltipTrigger="hover">
+        Hover
+      </button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Focus" [snippet]="s.triggerFocus">
+      <button type="button" class="tvc-pill" brightrailTooltip="Focused state" brightrailTooltipTrigger="focus">
+        Focus
+      </button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Click" [snippet]="s.triggerClick">
+      <button type="button" class="tvc-pill" brightrailTooltip="Click outside to dismiss" brightrailTooltipTrigger="click">
+        Click
+      </button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Delayed" [snippet]="s.triggerDelayed">
+      <button
+        type="button"
+        class="tvc-pill"
+        brightrailTooltip="Opens after 600ms"
+        brightrailTooltipTrigger="hover"
+        [brightrailTooltipShowDelay]="600"
+      >
+        Delayed
+      </button>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tvc-block">
+  <h2 class="tvc-block__h">4. Sizes</h2>
+  <div class="tvc-row">
+    <app-catalog-variation-tile label="Small" [snippet]="s.sizeSm">
+      <button type="button" class="tvc-chip" brightrailTooltip="Small tooltip copy." brightrailTooltipSize="sm">
+        <brightrail-button-icon name="info" />
+        Small
+      </button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Medium" [snippet]="s.sizeMd">
+      <button
+        type="button"
+        class="tvc-chip"
+        brightrailTooltip="Medium is the default density for most enterprise surfaces."
+        brightrailTooltipSize="md"
+      >
+        <brightrail-button-icon name="info" />
+        Medium
+      </button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Large" [snippet]="s.sizeLg">
+      <button
+        type="button"
+        class="tvc-chip"
+        brightrailTooltip="Large tooltips give you room for multi-line guidance without feeling cramped in the layout."
+        brightrailTooltipSize="lg"
+        [brightrailTooltipMaxWidth]="320"
+      >
+        <brightrail-button-icon name="info" />
+        Large
+      </button>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tvc-block">
+  <h2 class="tvc-block__h">5. Status / semantic</h2>
+  <div class="tvc-row tvc-row--wrap">
+    <app-catalog-variation-tile label="Success" [snippet]="s.semanticSuccess">
+      <span
+        class="tvc-status tvc-status--success"
+        tabindex="0"
+        brightrailTooltip="Everything looks good!"
+        brightrailTooltipContentVariant="success"
+        brightrailTooltipTrigger="focus"
+      >
+        Success
+      </span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Warning" [snippet]="s.semanticWarning">
+      <span
+        class="tvc-status tvc-status--warning"
+        tabindex="0"
+        brightrailTooltip="Be careful with this action."
+        brightrailTooltipContentVariant="warning"
+        brightrailTooltipTrigger="focus"
+      >
+        Warning
+      </span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Error" [snippet]="s.semanticError">
+      <span
+        class="tvc-status tvc-status--error"
+        tabindex="0"
+        brightrailTooltip="Action failed. Please retry."
+        brightrailTooltipContentVariant="error"
+        brightrailTooltipTrigger="focus"
+      >
+        Error
+      </span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Info" [snippet]="s.semanticInfo">
+      <span
+        class="tvc-status tvc-status--info"
+        tabindex="0"
+        brightrailTooltip="Here's some information."
+        brightrailTooltipContentVariant="info"
+        brightrailTooltipTrigger="focus"
+      >
+        Info
+      </span>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tvc-block">
+  <h2 class="tvc-block__h">6. Avatars &amp; density</h2>
+  <p class="tvc-block__hint">
+    Pass <code>tooltip</code> and related inputs directly on <code>brightrail-avatar</code> — they forward to the
+    tooltip host directive.
+  </p>
+  <div class="tvc-row tvc-row--baseline">
+    <app-catalog-variation-tile label="Avatar roster" [snippet]="s.avatarRoster">
+      <brightrail-avatar
+        kind="image"
+        shape="circle"
+        size="md"
+        [imageSrc]="avatarImg.a02"
+        imageAlt="Olivia"
+        borderStyle="subtle"
+        tooltip="Olivia Rhye · Product designer · London"
+        tooltipPlacement="top"
+        [tooltipMaxWidth]="260"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Initials avatar" [snippet]="s.avatarInitials">
+      <brightrail-avatar
+        kind="initials"
+        name="Noah Williams"
+        shape="circle"
+        size="sm"
+        tone="primary"
+        borderStyle="subtle"
+        tooltip="Noah Williams — click profile to edit"
+        tooltipTrigger="hover"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Metric density" [snippet]="s.metricDensity">
+      <span
+        class="tvc-metric"
+        tabindex="0"
+        brightrailTooltip="CPU utilization across the fleet"
+        brightrailTooltipPlacement="top"
+      >
+        CPU: 68%
+      </span>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tvc-block tvc-block--dark">
+  <h2 class="tvc-block__h">7. Futuristic shells</h2>
+  <div class="tvc-row tvc-row--wrap">
+    <app-catalog-variation-tile label="Neon glow" [snippet]="s.variantNeon">
+      <button
+        type="button"
+        class="tvc-ghost"
+        brightrailTooltip="Neon glow tooltip"
+        brightrailTooltipVariant="neon"
+        brightrailTooltipPlacement="top"
+      >
+        Neon glow
+      </button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holographic" [snippet]="s.variantHolographic">
+      <button
+        type="button"
+        class="tvc-ghost"
+        brightrailTooltip="Holographic readout"
+        brightrailTooltipVariant="holographic"
+        brightrailTooltipPlacement="top"
+      >
+        Holographic
+      </button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Glassmorphism" [snippet]="s.variantGlass">
+      <button
+        type="button"
+        class="tvc-ghost"
+        brightrailTooltip="Glassmorphism layer"
+        brightrailTooltipVariant="glassmorphism"
+        brightrailTooltipPlacement="top"
+      >
+        Glassmorphism
+      </button>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber pulse" [snippet]="s.variantCyber">
+      <button
+        type="button"
+        class="tvc-ghost"
+        brightrailTooltip="Cyber pulse frame"
+        brightrailTooltipVariant="cyber-pulse"
+        brightrailTooltipPlacement="top"
+      >
+        Cyber pulse
+      </button>
+    </app-catalog-variation-tile>
+  </div>
+</section>

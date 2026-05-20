@@ -1,0 +1,197 @@
+<div class="br-graph__shell" [attr.aria-label]="ariaLabel() ?? 'Chart'">
+  <svg
+    class="br-graph__svg"
+    [attr.viewBox]="viewBox()"
+    role="img"
+    [attr.aria-label]="ariaLabel() ?? 'Chart visualization'"
+  >
+    <defs>
+      @for (grad of gradientDefs(); track grad.id) {
+        <linearGradient [attr.id]="grad.id" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" [attr.stop-color]="grad.color" stop-opacity="0.35" />
+          <stop offset="100%" [attr.stop-color]="grad.color" stop-opacity="0.02" />
+        </linearGradient>
+      }
+    </defs>
+
+    @if (showGrid()) {
+      @for (line of gridLines(); track $index) {
+        <line
+          class="br-graph__grid"
+          [attr.x1]="line.x1"
+          [attr.y1]="line.y1"
+          [attr.x2]="line.x2"
+          [attr.y2]="line.y2"
+        />
+      }
+    }
+
+    @if (yAxisLabel() && showYAxis()) {
+      <text
+        class="br-graph__axis-label br-graph__axis-label--y"
+        [attr.x]="yAxisLabelPos().x"
+        [attr.y]="yAxisLabelPos().y"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        [attr.transform]="'rotate(-90 ' + yAxisLabelPos().x + ' ' + yAxisLabelPos().y + ')'"
+      >
+        {{ yAxisLabel() }}
+      </text>
+    }
+
+    @if (xAxisLabel() && showXAxis()) {
+      <text
+        class="br-graph__axis-label br-graph__axis-label--x"
+        [attr.x]="xAxisLabelPos().x"
+        [attr.y]="xAxisLabelPos().y"
+        text-anchor="middle"
+      >
+        {{ xAxisLabel() }}
+      </text>
+    }
+
+    @for (tick of yTicks(); track tick.label + tick.y) {
+      <text class="br-graph__tick br-graph__tick--y" [attr.x]="tick.x" [attr.y]="tick.y" text-anchor="end">
+        {{ tick.label }}
+      </text>
+    }
+
+    @for (tick of xTicks(); track tick.label + tick.x) {
+      <text class="br-graph__tick br-graph__tick--x" [attr.x]="tick.x" [attr.y]="tick.y" text-anchor="middle">
+        {{ tick.label }}
+      </text>
+    }
+
+    @for (bar of bars(); track $index) {
+      <rect
+        class="br-graph__bar"
+        [attr.x]="bar.x"
+        [attr.y]="bar.y"
+        [attr.width]="bar.width"
+        [attr.height]="bar.height"
+        [attr.fill]="bar.color"
+        (mouseenter)="onBarEnter(bar, $event)"
+        (mouseleave)="onPointLeave()"
+      />
+    }
+
+    @for (layer of lineLayers(); track layer.label; let i = $index) {
+      @if (layer.areaPath) {
+        <path
+          class="br-graph__area"
+          [attr.d]="layer.areaPath"
+          [attr.fill]="kind().includes('gradient') ? 'url(#' + svgDefId + '-grad-' + i + ')' : layer.color"
+          [attr.fill-opacity]="kind().includes('gradient') ? 1 : areaOpacity()"
+        />
+      }
+      <path
+        class="br-graph__line"
+        [attr.d]="layer.path"
+        [attr.stroke]="layer.color"
+        [attr.stroke-width]="lineWidth()"
+        fill="none"
+      />
+      @for (pt of layer.points; track pt.x + pt.label) {
+        <circle
+          class="br-graph__point"
+          [attr.cx]="pt.x"
+          [attr.cy]="pt.y"
+          [attr.r]="pointRadius()"
+          [attr.fill]="layer.color"
+          (mouseenter)="onPointEnter(pt, $event)"
+          (mouseleave)="onPointLeave()"
+        />
+      }
+    }
+
+    @for (slice of arcSlices(); track slice.label) {
+      <path class="br-graph__slice" [attr.d]="slice.path" [attr.fill]="slice.color" />
+    }
+
+    @if (radial(); as r) {
+      <path class="br-graph__radial-track" [attr.d]="r.track" />
+      <path class="br-graph__radial-fill" [attr.d]="r.fill" [attr.stroke]="colors()[0]" />
+      <text class="br-graph__radial-label" [attr.x]="layout().plotLeft + layout().plotWidth / 2" [attr.y]="layout().plotTop + layout().plotHeight / 2 + 6" text-anchor="middle">
+        {{ r.pct }}%
+      </text>
+    }
+
+    @if (gauge(); as g) {
+      <path class="br-graph__gauge-track" [attr.d]="g.arcTrack" />
+      <path class="br-graph__gauge-fill" [attr.d]="g.arcFill" [attr.stroke]="colors()[0]" />
+      <line class="br-graph__gauge-needle" [attr.x1]="g.cx" [attr.y1]="g.cy" [attr.x2]="g.needleX" [attr.y2]="g.needleY" />
+      <circle class="br-graph__gauge-hub" [attr.cx]="g.cx" [attr.cy]="g.cy" r="5" />
+      <text class="br-graph__gauge-label" [attr.x]="g.cx" [attr.y]="g.cy - 14" text-anchor="middle">{{ g.pct }}</text>
+    }
+
+    @for (pt of scatterPoints(); track pt.x + pt.label) {
+      <circle
+        class="br-graph__scatter"
+        [attr.cx]="pt.x"
+        [attr.cy]="pt.y"
+        r="5"
+        [attr.fill]="pt.color"
+        (mouseenter)="onPointEnter(pt, $event)"
+        (mouseleave)="onPointLeave()"
+      />
+    }
+
+    @for (pt of bubblePoints(); track pt.x + pt.label) {
+      <circle
+        class="br-graph__bubble"
+        [attr.cx]="pt.x"
+        [attr.cy]="pt.y"
+        [attr.r]="pt.r"
+        [attr.fill]="pt.color"
+        fill-opacity="0.65"
+        (mouseenter)="onPointEnter(pt, $event)"
+        (mouseleave)="onPointLeave()"
+      />
+    }
+
+    @for (c of candles(); track c.label) {
+      <line class="br-graph__wick" [attr.x1]="c.x" [attr.x2]="c.x" [attr.y1]="c.highY" [attr.y2]="c.lowY" [attr.stroke]="c.color" />
+      <rect
+        class="br-graph__candle"
+        [attr.x]="c.x - c.bodyWidth / 2"
+        [attr.y]="c.bodyTop"
+        [attr.width]="c.bodyWidth"
+        [attr.height]="c.bodyHeight"
+        [attr.fill]="c.color"
+      />
+    }
+
+    @for (cell of heatRects(); track cell.row + cell.col) {
+      <rect
+        class="br-graph__heat"
+        [attr.x]="cell.x"
+        [attr.y]="cell.y"
+        [attr.width]="cell.width"
+        [attr.height]="cell.height"
+        [attr.fill]="cell.color"
+      />
+    }
+
+    @for (stage of funnelStages(); track stage.label) {
+      <path class="br-graph__funnel" [attr.d]="stage.path" [attr.fill]="stage.color" />
+    }
+  </svg>
+
+  @if (showLegend() && legendItems().length) {
+    <ul class="br-graph__legend" aria-label="Chart legend">
+      @for (item of legendItems(); track item.label) {
+        <li class="br-graph__legend-item">
+          <span class="br-graph__legend-swatch" [style.background]="item.color"></span>
+          <span class="br-graph__legend-text">{{ item.label }}</span>
+        </li>
+      }
+    </ul>
+  }
+
+  @if (activeTooltip(); as tip) {
+    <div class="br-graph__tooltip" [style.left.px]="tip.x + 12" [style.top.px]="tip.y - 8">
+      <div class="br-graph__tooltip-title">{{ tip.title }}</div>
+      <div class="br-graph__tooltip-value">{{ tip.value }}</div>
+    </div>
+  }
+</div>

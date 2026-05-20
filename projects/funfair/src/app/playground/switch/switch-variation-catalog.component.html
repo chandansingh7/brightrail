@@ -1,0 +1,105 @@
+<section class="swvc-block">
+  <h2 class="swvc-block__h">1. Core switch types</h2>
+  <div class="swvc-grid">
+    <app-catalog-variation-tile label="Unchecked" [snippet]="s.coreUnchecked">
+      <brightrail-switch label="Enable notifications" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Checked" [snippet]="s.coreChecked">
+      <brightrail-switch label="Enable notifications" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Aria label only" [snippet]="s.coreNoLabel">
+      <brightrail-switch ariaLabel="Toggle feature" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Disabled" [snippet]="s.coreDisabled">
+      <brightrail-switch label="Disabled switch" [disabled]="true" [checked]="true" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="swvc-block">
+  <h2 class="swvc-block__h">2. Tones</h2>
+  <div class="swvc-grid">
+    <app-catalog-variation-tile label="Primary" [snippet]="s.tonePrimary">
+      <brightrail-switch label="Primary" tone="primary" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Success" [snippet]="s.toneSuccess">
+      <brightrail-switch label="Success" tone="success" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Warning" [snippet]="s.toneWarning">
+      <brightrail-switch label="Warning" tone="warning" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Danger" [snippet]="s.toneDanger">
+      <brightrail-switch label="Danger" tone="danger" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neutral" [snippet]="s.toneNeutral">
+      <brightrail-switch label="Neutral" tone="neutral" [checked]="true" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="swvc-block">
+  <h2 class="swvc-block__h">3. Sizes</h2>
+  <p class="swvc-block__hint">sm · md (default) · lg</p>
+  <div class="swvc-grid swvc-grid--sizes">
+    <app-catalog-variation-tile label="Small" [snippet]="s.sizeSm">
+      <brightrail-switch label="Small" size="sm" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Medium" [snippet]="s.sizeMd">
+      <brightrail-switch label="Medium" size="md" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Large" [snippet]="s.sizeLg">
+      <brightrail-switch label="Large" size="lg" [checked]="true" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="swvc-block">
+  <h2 class="swvc-block__h">4. States</h2>
+  <div class="swvc-grid">
+    <app-catalog-variation-tile label="Off" [snippet]="s.stateOff">
+      <brightrail-switch label="Off" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="On" [snippet]="s.stateOn">
+      <brightrail-switch label="On" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Disabled off" [snippet]="s.stateDisabledOff">
+      <brightrail-switch label="Disabled off" [disabled]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Disabled on" [snippet]="s.stateDisabledOn">
+      <brightrail-switch label="Disabled on" [disabled]="true" [checked]="true" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="swvc-block">
+  <h2 class="swvc-block__h">5. Settings patterns</h2>
+  <div class="swvc-stack">
+    <app-catalog-variation-tile label="Email notifications" [snippet]="s.settingsNotifications">
+      <brightrail-switch label="Email notifications" tone="primary" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Dark mode" [snippet]="s.settingsDarkMode">
+      <brightrail-switch label="Dark mode" tone="neutral" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Auto-save drafts" [snippet]="s.settingsAutoSave">
+      <brightrail-switch label="Auto-save drafts" tone="success" [checked]="true" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="swvc-block">
+  <h2 class="swvc-block__h">6. Form integration</h2>
+  <div class="swvc-stack">
+    <app-catalog-variation-tile label="ngModel binding" [snippet]="s.formNgModel">
+      <brightrail-switch label="I agree to marketing emails" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Reactive form" [snippet]="s.formReactive">
+      <brightrail-switch label="Two-factor authentication" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Settings row" [snippet]="s.formSettingsRow">
+      <div class="swco-row">
+        <span>Push notifications</span>
+        <brightrail-switch ariaLabel="Push notifications" size="sm" [checked]="true" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

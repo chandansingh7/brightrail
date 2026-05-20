@@ -1,0 +1,186 @@
+<section class="ffvc-block">
+  <h2 class="ffvc-block__h">1. Label &amp; hint</h2>
+  <div class="ffvc-grid">
+    <app-catalog-variation-tile label="Label + hint" [snippet]="s.coreLabelHint">
+      <div class="ffvc-tile-body">
+        <brightrail-form-field label="Email" hint="We will never share your email.">
+          <brightrail-text-field
+            appearance="outlined"
+            labelPosition="none"
+            placeholder="you@example.com"
+            [(ngModel)]="email"
+            [ngModelOptions]="ngModelStandalone"
+          />
+        </brightrail-form-field>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Label only" [snippet]="s.coreLabelOnly">
+      <div class="ffvc-tile-body">
+        <brightrail-form-field label="Display name">
+          <brightrail-text-field
+            appearance="outlined"
+            labelPosition="none"
+            placeholder="Jane Doe"
+            [(ngModel)]="displayName"
+            [ngModelOptions]="ngModelStandalone"
+          />
+        </brightrail-form-field>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Hint only" [snippet]="s.coreHintOnly">
+      <div class="ffvc-tile-body">
+        <brightrail-form-field hint="Optional — shown when the field is valid.">
+          <brightrail-text-field
+            appearance="outlined"
+            labelPosition="none"
+            placeholder="Reference code"
+            [(ngModel)]="reference"
+            [ngModelOptions]="ngModelStandalone"
+          />
+        </brightrail-form-field>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="ffvc-block">
+  <h2 class="ffvc-block__h">2. Required fields</h2>
+  <div class="ffvc-grid">
+    <app-catalog-variation-tile label="Required" [snippet]="s.requiredField">
+      <div class="ffvc-tile-body">
+        <brightrail-form-field label="Workspace name" [required]="true">
+          <brightrail-text-field
+            appearance="outlined"
+            labelPosition="none"
+            placeholder="Acme Corp"
+            [(ngModel)]="workspace"
+            [ngModelOptions]="ngModelStandalone"
+          />
+        </brightrail-form-field>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="ffvc-block">
+  <h2 class="ffvc-block__h">3. Error &amp; validation</h2>
+  <div class="ffvc-grid">
+    <app-catalog-variation-tile label="Invalid + error" [snippet]="s.errorInvalid">
+      <div class="ffvc-tile-body">
+        <brightrail-form-field
+          label="Password"
+          [required]="true"
+          [invalid]="true"
+          error="Password must be at least 8 characters."
+        >
+          <brightrail-text-field
+            appearance="outlined"
+            labelPosition="none"
+            inputType="password"
+            placeholder="••••••••"
+            [(ngModel)]="password"
+            [ngModelOptions]="ngModelStandalone"
+          />
+        </brightrail-form-field>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Hint hidden when invalid" [snippet]="s.errorWithHint">
+      <div class="ffvc-tile-body">
+        <brightrail-form-field
+          label="API key"
+          hint="Rotate keys from the admin console."
+          [invalid]="showApiKeyError"
+          error="API key is required."
+        >
+          <brightrail-text-field
+            appearance="outlined"
+            labelPosition="none"
+            placeholder="sk_live_…"
+            [(ngModel)]="apiKey"
+            [ngModelOptions]="ngModelStandalone"
+          />
+        </brightrail-form-field>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="ffvc-block">
+  <h2 class="ffvc-block__h">4. With text field</h2>
+  <div class="ffvc-grid">
+    <app-catalog-variation-tile label="Filled appearance" [snippet]="s.withTextField">
+      <div class="ffvc-tile-body">
+        <brightrail-form-field label="Company" hint="Legal entity name on invoices.">
+          <brightrail-text-field
+            appearance="filled"
+            labelPosition="none"
+            placeholder="Brightrail Inc."
+            [(ngModel)]="company"
+            [ngModelOptions]="ngModelStandalone"
+          />
+        </brightrail-form-field>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Outlined appearance" [snippet]="s.withTextFieldOutlined">
+      <div class="ffvc-tile-body">
+        <brightrail-form-field label="Job title">
+          <brightrail-text-field
+            appearance="outlined"
+            labelPosition="none"
+            placeholder="Product designer"
+            [(ngModel)]="title"
+            [ngModelOptions]="ngModelStandalone"
+          />
+        </brightrail-form-field>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="ffvc-block">
+  <h2 class="ffvc-block__h">5. With switch</h2>
+  <div class="ffvc-grid">
+    <app-catalog-variation-tile label="Notifications" [snippet]="s.withSwitch">
+      <div class="ffvc-tile-body">
+        <brightrail-form-field label="Email notifications" hint="Receive product updates and security alerts.">
+          <brightrail-switch label="Enable notifications" [(ngModel)]="notificationsOn" [ngModelOptions]="ngModelStandalone" />
+        </brightrail-form-field>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Terms acceptance" [snippet]="s.withSwitchRequired">
+      <div class="ffvc-tile-body">
+        <brightrail-form-field
+          label="Terms of service"
+          [required]="true"
+          [invalid]="!acceptedTerms"
+          error="You must accept the terms to continue."
+        >
+          <brightrail-switch label="I accept the terms" [(ngModel)]="acceptedTerms" [ngModelOptions]="ngModelStandalone" />
+        </brightrail-form-field>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="ffvc-block">
+  <h2 class="ffvc-block__h">6. Layout patterns</h2>
+  <div class="ffvc-grid">
+    <app-catalog-variation-tile label="Stacked fields" [snippet]="s.layoutStack">
+      <div class="ffco-stack">
+        <brightrail-form-field label="First name" [required]="true">
+          <brightrail-text-field appearance="outlined" labelPosition="none" [(ngModel)]="firstName" [ngModelOptions]="ngModelStandalone" />
+        </brightrail-form-field>
+        <brightrail-form-field label="Last name" [required]="true">
+          <brightrail-text-field appearance="outlined" labelPosition="none" [(ngModel)]="lastName" [ngModelOptions]="ngModelStandalone" />
+        </brightrail-form-field>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Settings row" [snippet]="s.layoutSettings">
+      <div class="ffvc-tile-body">
+        <brightrail-form-field label="Public profile" hint="Visible to anyone with the link.">
+          <brightrail-switch label="Make profile public" [(ngModel)]="isPublic" [ngModelOptions]="ngModelStandalone" />
+        </brightrail-form-field>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

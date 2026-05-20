@@ -11,6 +11,15 @@
   box-sizing: border-box;
 }
 
+.pco-hero__eyebrow {
+  margin: 0 0 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ff-muted, #64748b);
+}
+
 .pco-hero h1 {
   margin: 0;
   font-size: 1.5rem;
@@ -18,83 +27,44 @@
 
 .pco-hero p {
   margin: 0.35rem 0 0.5rem;
-  color: var(--ff-muted);
+  color: var(--ff-muted, #64748b);
+}
+
+.pco-hero__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
 }
 
 .pco-link {
-  color: var(--ff-accent);
+  color: var(--ff-accent, #2563eb);
   text-decoration: none;
   font-weight: 600;
 }
 
-.pco-grid {
-  margin-top: 1rem;
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
-  align-items: start;
+.pco-code-block {
+  margin: 1.5rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ff-border, #e2e8f0);
 }
 
-.pco-card {
-  border: 1px solid var(--ff-border);
-  border-radius: 0.65rem;
-  background: var(--ff-surface);
-  padding: 0.9rem;
+.pco-code-block h2 {
+  font-size: 1.1rem;
+  margin: 0 0 0.35rem;
 }
 
-.pco-card h2 {
-  margin: 0 0 0.65rem;
-  font-size: 1rem;
-}
-
-.pco-stack {
-  display: block;
-  margin-top: 0.65rem;
-}
-
-.pco-col {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
-
-.pco-card__hint {
+.pco-code-block__hint {
   margin: 0 0 0.65rem;
   font-size: 0.8125rem;
-  line-height: 1.45;
-  color: var(--ff-muted);
+  color: var(--ff-muted, #64748b);
 }
 
-.pco-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.85rem;
-}
-
-.pco-fig {
+.pco-pre {
   margin: 0;
-  flex: 1 1 12rem;
-  min-width: 0;
-}
-
-.pco-fig figcaption {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--ff-muted);
-  margin-bottom: 0.35rem;
-}
-
-.pco-sticky-strip {
-  margin-top: 0.65rem;
-  padding: 0.65rem 0.75rem;
-  border: 1px solid var(--ff-border);
+  padding: 0.85rem;
   border-radius: 0.5rem;
-  background: color-mix(in srgb, var(--ff-surface) 92%, var(--ff-muted) 8%);
-  box-shadow: 0 1px 0 rgb(0 0 0 / 6%);
-}
-
-.pco-sticky-strip brightrail-pagination {
-  display: block;
-  max-width: 28rem;
-  margin-inline: auto;
+  background: var(--ff-surface-muted, #f1f3f4);
+  border: 1px solid var(--ff-border, #e2e8f0);
+  overflow: auto;
+  font-size: 0.8rem;
 }

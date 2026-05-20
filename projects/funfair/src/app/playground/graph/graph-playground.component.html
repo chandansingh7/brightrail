@@ -1,0 +1,373 @@
+<div class="bp">
+  <div class="bp-grid">
+    <section class="bp-panel bp-panel--settings" aria-labelledby="graph-settings-title">
+      <div class="bp-settings-head">
+        <div class="bp-settings-head__start">
+          <svg
+            class="bp-settings-head__icon"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              fill="currentColor"
+              d="M4 6h2v2H4V6zm0 5h2v2H4v-2zm0 5h2v2H4v-2zm4-10h12v2H8V6zm0 5h12v2H8v-2zm0 5h12v2H8v-2z"
+            />
+            <circle cx="18" cy="7" r="1.25" fill="currentColor" />
+            <circle cx="18" cy="12" r="1.25" fill="currentColor" />
+            <circle cx="18" cy="17" r="1.25" fill="currentColor" />
+          </svg>
+          <h2 id="graph-settings-title" class="bp-settings-head__title">Component settings</h2>
+        </div>
+        <button type="button" class="bp-settings-reset" (click)="resetToDefaults()" title="Reset">
+          <span class="bp-sr-only">Reset all component settings</span>
+          <svg class="bp-settings-reset__icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M12 6V3L8 7l4 4V8c2.76 0 5 2.24 5 5 0 1.28-.48 2.45-1.26 3.35l1.41 1.41A6.96 6.96 0 0 0 19 13c0-3.87-3.13-7-7-7zm0 14c-2.76 0-5-2.24-5-5 0-1.28.48-2.45 1.26-3.35L6.85 10.24A6.96 6.96 0 0 0 5 13c0 3.87 3.13 7 7 7v3l4-4-4-4v3z"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div class="bp-settings-block">
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="graph-lbl-component">Component</span>
+          <div class="bp-dropdown">
+            <span class="bp-dropdown__lead" aria-hidden="true"><span class="bp-ico-pill"></span></span>
+            <select class="bp-dropdown__select" disabled aria-labelledby="graph-lbl-component" title="Component">
+              <option>Graph</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label" id="graph-lbl-grp">Scenario group</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" [ngModel]="selectedRecipeGroup()" (ngModelChange)="onRecipeGroupChange($event)" [ngModelOptions]="{ standalone: true }">
+              @for (g of recipeGroups; track g) {
+                <option [value]="g">{{ g }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Scenario</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" [ngModel]="previewRecipe()" (ngModelChange)="onRecipeChange($event)" [ngModelOptions]="{ standalone: true }">
+              @for (opt of recipesInGroup(selectedRecipeGroup()); track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        @if (usesSeries()) {
+          <div class="bp-setting-row">
+            <span class="bp-setting-row__label" id="graph-lbl-dataset">Dataset</span>
+            <div class="bp-dropdown">
+              <select class="bp-dropdown__select" [ngModel]="datasetId()" (ngModelChange)="datasetId.set($event)" [ngModelOptions]="{ standalone: true }">
+                @for (opt of datasetOptions; track opt.value) {
+                  <option [value]="opt.value">{{ opt.label }}</option>
+                }
+              </select>
+              <span class="bp-dropdown__chev" aria-hidden="true"></span>
+            </div>
+          </div>
+          <div class="bp-setting-row">
+            <span class="bp-setting-row__label">Data points</span>
+            <div class="bp-dropdown">
+              <select class="bp-dropdown__select" [ngModel]="dataPoints()" (ngModelChange)="dataPoints.set(+$event)" [ngModelOptions]="{ standalone: true }">
+                @for (n of dataPointOptions; track n) {
+                  <option [value]="n">{{ n }} months</option>
+                }
+              </select>
+              <span class="bp-dropdown__chev" aria-hidden="true"></span>
+            </div>
+          </div>
+        }
+      </div>
+
+      <hr class="bp-settings-rule" />
+
+      <div class="bp-settings-block">
+        <h3 class="bp-settings-block__title">Appearance</h3>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Chart kind</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" [ngModel]="kind()" (ngModelChange)="onKindChange($event)" [ngModelOptions]="{ standalone: true }">
+              @for (opt of kindOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Line style</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" [ngModel]="lineStyle()" (ngModelChange)="lineStyle.set($event)" [ngModelOptions]="{ standalone: true }">
+              @for (opt of lineStyleOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Legend position</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" [ngModel]="legendPosition()" (ngModelChange)="legendPosition.set($event)" [ngModelOptions]="{ standalone: true }">
+              @for (opt of legendPositionOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Show area</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" [ngModel]="showArea() ? 'yes' : 'no'" (ngModelChange)="showArea.set($event === 'yes')" [ngModelOptions]="{ standalone: true }">
+              @for (opt of yesNoOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Show legend</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" [ngModel]="showLegend() ? 'yes' : 'no'" (ngModelChange)="showLegend.set($event === 'yes')" [ngModelOptions]="{ standalone: true }">
+              @for (opt of yesNoOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Show grid</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" [ngModel]="showGrid() ? 'yes' : 'no'" (ngModelChange)="showGrid.set($event === 'yes')" [ngModelOptions]="{ standalone: true }">
+              @for (opt of yesNoOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Color scheme</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" [ngModel]="colorScheme()" (ngModelChange)="colorScheme.set($event)" [ngModelOptions]="{ standalone: true }">
+              @for (scheme of colorSchemeOptions; track scheme.id) {
+                <option [value]="scheme.id">{{ scheme.id }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Line width</span>
+          <div class="bp-dropdown bp-dropdown--text">
+            <input class="bp-dropdown__text" type="number" min="1" max="6" [ngModel]="lineWidth()" (ngModelChange)="lineWidth.set(+$event)" [ngModelOptions]="{ standalone: true }" />
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Point radius</span>
+          <div class="bp-dropdown bp-dropdown--text">
+            <input class="bp-dropdown__text" type="number" min="2" max="10" [ngModel]="pointRadius()" (ngModelChange)="pointRadius.set(+$event)" [ngModelOptions]="{ standalone: true }" />
+          </div>
+        </div>
+      </div>
+
+      <hr class="bp-settings-rule" />
+
+      <div class="bp-settings-block">
+        <h3 class="bp-settings-block__title">Axes</h3>
+        @if (usesSeries()) {
+          <div class="bp-setting-row">
+            <span class="bp-setting-row__label">X-axis label</span>
+            <div class="bp-dropdown bp-dropdown--text">
+              <input class="bp-dropdown__text" [ngModel]="xAxisLabel()" (ngModelChange)="xAxisLabel.set($event)" [ngModelOptions]="{ standalone: true }" />
+            </div>
+          </div>
+          <div class="bp-setting-row">
+            <span class="bp-setting-row__label">Y-axis label</span>
+            <div class="bp-dropdown bp-dropdown--text">
+              <input class="bp-dropdown__text" [ngModel]="yAxisLabel()" (ngModelChange)="yAxisLabel.set($event)" [ngModelOptions]="{ standalone: true }" />
+            </div>
+          </div>
+          <div class="bp-setting-row">
+            <span class="bp-setting-row__label">Show X-axis</span>
+            <div class="bp-dropdown">
+              <select class="bp-dropdown__select" [ngModel]="showXAxis() ? 'yes' : 'no'" (ngModelChange)="showXAxis.set($event === 'yes')" [ngModelOptions]="{ standalone: true }">
+                @for (opt of yesNoOptions; track opt.value) {
+                  <option [value]="opt.value">{{ opt.label }}</option>
+                }
+              </select>
+              <span class="bp-dropdown__chev" aria-hidden="true"></span>
+            </div>
+          </div>
+          <div class="bp-setting-row">
+            <span class="bp-setting-row__label">Show Y-axis</span>
+            <div class="bp-dropdown">
+              <select class="bp-dropdown__select" [ngModel]="showYAxis() ? 'yes' : 'no'" (ngModelChange)="showYAxis.set($event === 'yes')" [ngModelOptions]="{ standalone: true }">
+                @for (opt of yesNoOptions; track opt.value) {
+                  <option [value]="opt.value">{{ opt.label }}</option>
+                }
+              </select>
+              <span class="bp-dropdown__chev" aria-hidden="true"></span>
+            </div>
+          </div>
+        }
+        @if (kind() === 'radial') {
+          <div class="bp-setting-row">
+            <span class="bp-setting-row__label">Radial value</span>
+            <div class="bp-dropdown bp-dropdown--text">
+              <input class="bp-dropdown__text" type="number" min="0" max="100" [ngModel]="radialValue()" (ngModelChange)="radialValue.set(+$event)" [ngModelOptions]="{ standalone: true }" />
+            </div>
+          </div>
+        }
+        @if (kind() === 'gauge') {
+          <div class="bp-setting-row">
+            <span class="bp-setting-row__label">Gauge value</span>
+            <div class="bp-dropdown bp-dropdown--text">
+              <input class="bp-dropdown__text" type="number" min="0" max="100" [ngModel]="gaugeValue()" (ngModelChange)="gaugeValue.set(+$event)" [ngModelOptions]="{ standalone: true }" />
+            </div>
+          </div>
+        }
+      </div>
+
+      <hr class="bp-settings-rule" />
+
+      <div class="bp-settings-block">
+        <h3 class="bp-settings-block__title">Interactions</h3>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Show tooltip</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" [ngModel]="showTooltip() ? 'yes' : 'no'" (ngModelChange)="showTooltip.set($event === 'yes')" [ngModelOptions]="{ standalone: true }">
+              @for (opt of yesNoOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Tooltip prefix</span>
+          <div class="bp-dropdown bp-dropdown--text">
+            <input class="bp-dropdown__text" [ngModel]="tooltipPrefix()" (ngModelChange)="tooltipPrefix.set($event)" [ngModelOptions]="{ standalone: true }" placeholder="e.g. $" />
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Enable zoom</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" [ngModel]="enableZoom() ? 'yes' : 'no'" (ngModelChange)="enableZoom.set($event === 'yes')" [ngModelOptions]="{ standalone: true }">
+              @for (opt of yesNoOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Enable pan</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" [ngModel]="enablePan() ? 'yes' : 'no'" (ngModelChange)="enablePan.set($event === 'yes')" [ngModelOptions]="{ standalone: true }">
+              @for (opt of yesNoOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bp-panel bp-panel--preview" aria-labelledby="graph-preview-title">
+      <h2 id="graph-preview-title" class="bp-panel__title bp-panel__title--live">
+        <span class="bp-live-dot" aria-hidden="true"></span>
+        Live preview
+      </h2>
+      <div class="bp-preview-surface bp-preview-surface--stretch">
+        <div class="gp-preview">
+          <brightrail-graph
+            [kind]="kind()"
+            [series]="usesSeries() ? series() : []"
+            [segments]="kind() === 'donut' || kind() === 'pie' || kind() === 'funnel' ? segments() : []"
+            [heatmapCells]="kind() === 'heatmap' ? heatmapCells() : []"
+            [radialValue]="radialValue()"
+            [gaugeValue]="gaugeValue()"
+            [lineStyle]="lineStyle() || undefined"
+            [legendPosition]="legendPosition()"
+            [showArea]="showArea()"
+            [showLegend]="showLegend()"
+            [showGrid]="showGrid()"
+            [showXAxis]="showXAxis()"
+            [showYAxis]="showYAxis()"
+            [showTooltip]="showTooltip()"
+            [enableZoom]="enableZoom()"
+            [enablePan]="enablePan()"
+            [lineWidth]="lineWidth()"
+            [pointRadius]="pointRadius()"
+            [areaOpacity]="areaOpacity()"
+            [colors]="colors()"
+            [xAxisLabel]="xAxisLabel()"
+            [yAxisLabel]="yAxisLabel()"
+            [tooltipValuePrefix]="tooltipPrefix()"
+            [tooltipValueSuffix]="tooltipSuffix()"
+            [surface]="themeService.theme()"
+            [height]="320"
+            ariaLabel="Graph playground preview"
+          />
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="gp-code-grid">
+    <section class="bp-code" aria-labelledby="graph-code-title">
+      <div class="bp-code__head">
+        <div class="gp-code-head__text">
+          <h2 id="graph-code-title" class="bp-code__title">Generated snippets</h2>
+          <p class="gp-code-note">Data is bound in your component — open the <strong>TS</strong> tab to copy the live <code>chartSeries</code> / <code>chartSegments</code> assignment.</p>
+        </div>
+        <div class="bp-code__tabs" role="tablist">
+          <button type="button" role="tab" class="bp-tab" [class.is-active]="activeTab() === 'html'" (click)="selectTab('html')">HTML</button>
+          <button type="button" role="tab" class="bp-tab" [class.is-active]="activeTab() === 'ts'" (click)="selectTab('ts')">TS</button>
+          <button type="button" role="tab" class="bp-tab" [class.is-active]="activeTab() === 'scss'" (click)="selectTab('scss')">SCSS</button>
+        </div>
+        <button type="button" class="bp-copy" (click)="copySnippet()">Copy</button>
+      </div>
+      <pre class="bp-pre" role="tabpanel"><code>{{ activeSnippet() }}</code></pre>
+    </section>
+
+    <section class="gp-props" aria-labelledby="graph-props-title">
+      <h2 id="graph-props-title" class="gp-props__title">Properties</h2>
+      <dl class="gp-props__list">
+        <div class="gp-props__row gp-props__row--highlight">
+          <dt>Data binding</dt>
+          <dd>{{ dataBindingLabel() }}</dd>
+        </div>
+        @if (dataBindingDetail()) {
+          <div class="gp-props__row">
+            <dt>Preview data</dt>
+            <dd>{{ dataBindingDetail() }}</dd>
+          </div>
+        }
+        @for (row of propertySummary(); track row.label) {
+          <div class="gp-props__row">
+            <dt>{{ row.label }}</dt>
+            <dd>{{ row.value }}</dd>
+          </div>
+        }
+      </dl>
+    </section>
+  </div>
+</div>

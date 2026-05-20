@@ -1,0 +1,23 @@
+:host {
+  display: block;
+}
+
+.bvc-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr));
+}
+
+.bvc-grid--sizes {
+  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+}
+
+.bvc-block {
+  margin-bottom: 1.35rem;
+}
+
+.bvc-block__h {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}

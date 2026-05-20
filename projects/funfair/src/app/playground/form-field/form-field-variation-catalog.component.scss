@@ -1,0 +1,7 @@
+:host { display: block; }
+.ffvc-grid { display: grid; gap: 0.65rem; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); }
+.ffvc-block { margin-bottom: 1.35rem; }
+.ffvc-block__h { margin: 0 0 0.5rem; font-size: 0.95rem; font-weight: 700; }
+.ffvc-block__hint { margin: 0 0 0.5rem; font-size: 0.8125rem; color: var(--ff-muted, #64748b); }
+.ffvc-tile-body { width: 100%; max-width: 18rem; }
+.ffco-stack { display: grid; gap: 0.65rem; width: 100%; max-width: 18rem; }

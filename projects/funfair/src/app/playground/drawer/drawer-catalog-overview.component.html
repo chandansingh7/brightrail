@@ -1,79 +1,22 @@
-<div class="dco">
-  <header class="dco-hero">
+<div class="cco">
+  <header class="cco-hero">
+    <p class="cco-hero__eyebrow">Brightrail · Drawer · Variation catalog</p>
     <h1>Drawer / side panel types &amp; variations</h1>
-    <p>Reference view for placements, sizes, behavior modes, and footer action patterns.</p>
+    <p>
+      Live tile previews for placements, sizes, modes, backdrop styles, and surfaces. Click any tile for
+      <strong>View code</strong>, then <strong>Copy code</strong> (import from <code>brightrail</code>).
+    </p>
+    <p class="cco-hero__links">
+      <a routerLink=".." class="cco-link">← Drawer playground (live settings)</a>
+      <a routerLink="/variations" class="cco-link">All variation catalogs</a>
+    </p>
   </header>
 
-  <section class="dco-grid">
-    <article class="dco-card">
-      <h2>Core types</h2>
-      <ul>
-        <li>Navigation drawer</li>
-        <li>Settings panel</li>
-        <li>Detail inspector</li>
-        <li>Bottom sheet</li>
-      </ul>
-    </article>
-    <article class="dco-card">
-      <h2>Placements</h2>
-      <ul>
-        <li>Left</li>
-        <li>Right</li>
-        <li>Bottom</li>
-        <li>Top</li>
-      </ul>
-    </article>
-    <article class="dco-card">
-      <h2>Sizes</h2>
-      <ul>
-        <li>Narrow (320px)</li>
-        <li>Medium (480px)</li>
-        <li>Wide (720px)</li>
-        <li>Extra wide / full</li>
-      </ul>
-    </article>
-    <article class="dco-card">
-      <h2>Overlay &amp; behavior</h2>
-      <ul>
-        <li>Modal (dim, strong dim, blur, glass)</li>
-        <li>Dismissible (no backdrop, page stays interactive)</li>
-        <li>Persistent (always visible, no overlay)</li>
-      </ul>
-    </article>
-    <article class="dco-card">
-      <h2>Futuristic surfaces</h2>
-      <ul>
-        <li>Glassmorphism panel (<code>surface="glass"</code>)</li>
-        <li>Gradient accent edge (<code>surface="gradient"</code>)</li>
-        <li>AI command shell (<code>surface="ai"</code>)</li>
-      </ul>
-    </article>
-  </section>
+  <app-drawer-variation-catalog />
 
-  <section class="dco-preview">
-    <h2>Example drawer markup</h2>
-    <div class="dco-preview-shell">
-      <brightrail-drawer
-        [isOpen]="true"
-        [contain]="true"
-        placement="right"
-        size="medium"
-        mode="modal"
-        [showBackdrop]="true"
-        backdropStyle="glass"
-        surface="gradient"
-      >
-        <brightrail-drawer-header [showCloseButton]="true">
-          <div brightrailDrawerTitle>Edit project details</div>
-        </brightrail-drawer-header>
-        <brightrail-drawer-body>
-          <p>Use this baseline markup and tune placement, size, mode, overlay, and surface for your app.</p>
-        </brightrail-drawer-body>
-        <brightrail-drawer-footer>
-          <brightrail-button variant="outline" size="sm">Cancel</brightrail-button>
-          <brightrail-button variant="primary" size="sm">Save changes</brightrail-button>
-        </brightrail-drawer-footer>
-      </brightrail-drawer>
-    </div>
+  <section class="cco-code-block" aria-labelledby="cco-drawer-html">
+    <h2 id="cco-drawer-html">Drawer HTML examples</h2>
+    <p class="cco-code-block__hint">Typical modal drawer with header, body, and footer actions.</p>
+    <pre class="cco-pre"><code>{{ htmlExamples }}</code></pre>
   </section>
 </div>

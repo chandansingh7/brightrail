@@ -1,0 +1,352 @@
+<section class="svc-block">
+  <h2 class="svc-block__h">1. Appearances</h2>
+  <div class="svc-grid svc-grid--selects">
+    <app-catalog-variation-tile label="Filled" [snippet]="s.appearanceFilled">
+      <div class="svc-tile-body">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="filled"
+          size="md"
+          label="Country"
+          labelPosition="top"
+          placeholder="Select country"
+          [displayText]="displayUs"
+          [(ngModel)]="countryCode"
+        >
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Outlined" [snippet]="s.appearanceOutlined">
+      <div class="svc-tile-body">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="outlined"
+          size="md"
+          label="Country"
+          labelPosition="top"
+          placeholder="Select country"
+          [displayText]="displayUs"
+          [(ngModel)]="countryCode"
+        >
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Readonly" [snippet]="s.appearanceReadonly">
+      <div class="svc-tile-body">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="readonly"
+          size="md"
+          label="Country"
+          labelPosition="top"
+          [displayText]="displayReadonly"
+          [(ngModel)]="countryCode"
+        >
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="svc-block">
+  <h2 class="svc-block__h">2. Sizes</h2>
+  <div class="svc-grid svc-grid--selects svc-grid--sizes">
+    <app-catalog-variation-tile label="Extra small (xs)" [snippet]="s.sizeXs">
+      <div class="svc-tile-body svc-tile-body--narrow">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="outlined"
+          size="xs"
+          labelPosition="none"
+          ariaLabel="Status"
+          displayText="Open"
+          [(ngModel)]="statusCode"
+        >
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Small (sm)" [snippet]="s.sizeSm">
+      <div class="svc-tile-body svc-tile-body--narrow">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="outlined"
+          size="sm"
+          labelPosition="none"
+          ariaLabel="Status"
+          displayText="Open"
+          [(ngModel)]="statusCode"
+        >
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Medium (md)" [snippet]="s.sizeMd">
+      <div class="svc-tile-body">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="outlined"
+          size="md"
+          label="Country"
+          [displayText]="displayUs"
+          [(ngModel)]="countryCode"
+        >
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Large (lg)" [snippet]="s.sizeLg">
+      <div class="svc-tile-body">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="outlined"
+          size="lg"
+          label="Country"
+          [displayText]="displayUs"
+          [(ngModel)]="countryCode"
+        >
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Extra large (xl)" [snippet]="s.sizeXl">
+      <div class="svc-tile-body">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="outlined"
+          size="xl"
+          label="Country"
+          [displayText]="displayUs"
+          [(ngModel)]="countryCode"
+        >
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="svc-block">
+  <h2 class="svc-block__h">3. Statuses</h2>
+  <div class="svc-grid svc-grid--selects">
+    <app-catalog-variation-tile label="None" [snippet]="s.statusNone">
+      <div class="svc-tile-body">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="outlined"
+          status="none"
+          label="Country"
+          [displayText]="displayUs"
+          [(ngModel)]="countryCode"
+        >
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Success" [snippet]="s.statusSuccess">
+      <div class="svc-tile-body">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="outlined"
+          status="success"
+          label="Country"
+          [displayText]="displayUs"
+          [(ngModel)]="countryCode"
+        >
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Warning" [snippet]="s.statusWarning">
+      <div class="svc-tile-body">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="outlined"
+          status="warning"
+          label="Country"
+          [displayText]="displayUs"
+          [(ngModel)]="countryCode"
+        >
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Error" [snippet]="s.statusError">
+      <div class="svc-tile-body">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="outlined"
+          status="error"
+          label="Country"
+          [displayText]="displayUs"
+          [(ngModel)]="countryCode"
+        >
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Info" [snippet]="s.statusInfo">
+      <div class="svc-tile-body">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="outlined"
+          status="info"
+          label="Country"
+          [displayText]="displayUs"
+          [(ngModel)]="countryCode"
+        >
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="svc-block">
+  <h2 class="svc-block__h">4. With icons</h2>
+  <div class="svc-grid svc-grid--selects">
+    <app-catalog-variation-tile label="Leading filter" [snippet]="s.iconFilter">
+      <div class="svc-tile-body">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="outlined"
+          label="Filter"
+          [displayText]="displayFilter"
+          [(ngModel)]="filterCode"
+        >
+          <span class="br-select-prefix"><brightrail-button-icon name="filter" /></span>
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Leading search" [snippet]="s.iconSearch">
+      <div class="svc-tile-body">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="outlined"
+          label="Search"
+          placeholder="Search options…"
+          displayText=""
+          [(ngModel)]="queryCode"
+        >
+          <span class="br-select-prefix"><brightrail-button-icon name="search" /></span>
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Trailing calendar" [snippet]="s.iconCalendar">
+      <div class="svc-tile-body">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="outlined"
+          label="Date"
+          [displayText]="displayDate"
+          [(ngModel)]="dateCode"
+        >
+          <span class="br-select-suffix"><brightrail-button-icon name="calendar" /></span>
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="svc-block">
+  <h2 class="svc-block__h">5. Multi-line &amp; truncate</h2>
+  <p class="svc-block__hint">Use <code>textOverflow</code> to control how long labels render in the trigger.</p>
+  <div class="svc-grid svc-grid--selects">
+    <app-catalog-variation-tile label="Truncate" [snippet]="s.textTruncate">
+      <div class="svc-tile-body svc-tile-body--narrow">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="outlined"
+          textOverflow="truncate"
+          label="Country"
+          [displayText]="displayUsLong"
+          [(ngModel)]="countryCode"
+        >
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Wrap" [snippet]="s.textWrap">
+      <div class="svc-tile-body svc-tile-body--wide">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="outlined"
+          textOverflow="wrap"
+          label="Country"
+          [displayText]="displayUsLong"
+          [(ngModel)]="countryCode"
+        >
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Multi-line value" [snippet]="s.multiLineValue">
+      <div class="svc-tile-body svc-tile-body--wide">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="outlined"
+          textOverflow="wrap"
+          label="Region"
+          [displayText]="displayRegionLong"
+          [(ngModel)]="regionCode"
+        >
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="svc-block">
+  <h2 class="svc-block__h">6. Loading &amp; disabled</h2>
+  <div class="svc-grid svc-grid--selects">
+    <app-catalog-variation-tile label="Loading" [snippet]="s.stateLoading">
+      <div class="svc-tile-body">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="outlined"
+          label="Country"
+          [displayText]="displayUs"
+          [loading]="true"
+          [(ngModel)]="countryCode"
+        >
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Disabled" [snippet]="s.stateDisabled">
+      <div class="svc-tile-body">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="outlined"
+          label="Country"
+          [displayText]="displayUs"
+          [disabled]="true"
+          [(ngModel)]="countryCode"
+        >
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Clearable" [snippet]="s.stateClearable">
+      <div class="svc-tile-body">
+        <brightrail-select
+          [ngModelOptions]="ngModelStandalone"
+          appearance="outlined"
+          label="Country"
+          [displayText]="displayUs"
+          [clearable]="true"
+          [(ngModel)]="countryCode"
+        >
+          <div class="br-select-panel svc-panel"></div>
+        </brightrail-select>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

@@ -1,0 +1,125 @@
+<section class="skvc-block">
+  <h2 class="skvc-block__h">1. Core variants</h2>
+  <p class="skvc-block__hint">Text lines, circles, rectangles, and rounded pills.</p>
+  <div class="skvc-grid">
+    <app-catalog-variation-tile label="Text" [snippet]="s.coreText">
+      <brightrail-skeleton variant="text" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Circular" [snippet]="s.coreCircular">
+      <brightrail-skeleton variant="circular" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Rectangular" [snippet]="s.coreRectangular">
+      <brightrail-skeleton variant="rectangular" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Rounded" [snippet]="s.coreRounded">
+      <brightrail-skeleton variant="rounded" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="skvc-block">
+  <h2 class="skvc-block__h">2. Animations</h2>
+  <div class="skvc-grid">
+    <app-catalog-variation-tile label="Pulse" [snippet]="s.animPulse">
+      <brightrail-skeleton variant="text" animation="pulse" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Wave" [snippet]="s.animWave">
+      <brightrail-skeleton variant="text" animation="wave" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="None" [snippet]="s.animNone">
+      <brightrail-skeleton variant="text" animation="none" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="skvc-block">
+  <h2 class="skvc-block__h">3. Multiline text</h2>
+  <div class="skvc-stack">
+    <app-catalog-variation-tile label="Single line" [snippet]="s.linesSingle">
+      <brightrail-skeleton variant="text" [lines]="1" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Three lines" [snippet]="s.linesTriple">
+      <brightrail-skeleton variant="text" [lines]="3" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Five lines" [snippet]="s.linesFive">
+      <brightrail-skeleton variant="text" [lines]="5" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="skvc-block">
+  <h2 class="skvc-block__h">4. Custom dimensions</h2>
+  <div class="skvc-grid">
+    <app-catalog-variation-tile label="Avatar" [snippet]="s.sizeAvatar">
+      <brightrail-skeleton variant="circular" width="3rem" height="3rem" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Banner" [snippet]="s.sizeBanner">
+      <brightrail-skeleton variant="rectangular" width="100%" height="8rem" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Chip pill" [snippet]="s.sizeChip">
+      <brightrail-skeleton variant="rounded" width="5rem" height="1.75rem" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="skvc-block">
+  <h2 class="skvc-block__h">5. Composed patterns</h2>
+  <div class="skvc-stack">
+    <app-catalog-variation-tile label="List row" [snippet]="s.patternListRow">
+      <div class="skvc-row">
+        <brightrail-skeleton variant="circular" width="2.5rem" height="2.5rem" />
+        <div class="skvc-row__copy">
+          <brightrail-skeleton variant="text" width="40%" />
+          <brightrail-skeleton variant="text" width="70%" />
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Card" [snippet]="s.patternCard">
+      <div class="skvc-card">
+        <brightrail-skeleton variant="rectangular" width="100%" height="6rem" />
+        <brightrail-skeleton variant="text" [lines]="2" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Profile" [snippet]="s.patternProfile">
+      <div class="skvc-profile">
+        <brightrail-skeleton variant="circular" width="4rem" height="4rem" />
+        <brightrail-skeleton variant="text" width="55%" />
+        <brightrail-skeleton variant="text" width="35%" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="skvc-block">
+  <h2 class="skvc-block__h">6. Advanced layouts</h2>
+  <div class="skvc-stack">
+    <app-catalog-variation-tile label="Table rows" [snippet]="s.advancedTable">
+      <div class="skvc-table">
+        @for (row of tableRows; track row) {
+          <div class="skvc-table__row">
+            <brightrail-skeleton variant="text" width="18%" />
+            <brightrail-skeleton variant="text" width="32%" />
+            <brightrail-skeleton variant="text" width="24%" />
+          </div>
+        }
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Dashboard" [snippet]="s.advancedDashboard">
+      <div class="skvc-dashboard">
+        <brightrail-skeleton variant="rectangular" width="100%" height="4.5rem" />
+        <div class="skvc-dashboard__grid">
+          <brightrail-skeleton variant="rounded" width="100%" height="5rem" />
+          <brightrail-skeleton variant="rounded" width="100%" height="5rem" />
+          <brightrail-skeleton variant="rounded" width="100%" height="5rem" />
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Article" [snippet]="s.advancedArticle">
+      <div class="skvc-article">
+        <brightrail-skeleton variant="text" width="60%" height="1.25rem" />
+        <brightrail-skeleton variant="text" [lines]="4" />
+        <brightrail-skeleton variant="rectangular" width="100%" height="10rem" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

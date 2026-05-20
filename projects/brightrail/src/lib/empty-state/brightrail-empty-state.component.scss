@@ -1,0 +1,79 @@
+@use '../styles/tokens' as br;
+
+:host {
+  display: block;
+}
+
+.br-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem 1.25rem;
+  text-align: center;
+  color: var(--br-color-text, #{br.$br-color-text});
+}
+
+.br-empty__icon-slot:empty {
+  display: none;
+}
+
+.br-empty__icon-slot:not(:empty) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--br-color-primary, #{br.$br-color-primary}) 10%, #fff);
+  color: var(--br-color-primary, #{br.$br-color-primary});
+  font-size: 1.5rem;
+}
+
+.br-empty__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-width: 28rem;
+}
+
+.br-empty__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 650;
+  color: var(--br-color-text-strong, #{br.$br-color-text-strong});
+  line-height: 1.3;
+}
+
+.br-empty__desc {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--br-color-muted, #{br.$br-color-muted});
+  line-height: 1.45;
+}
+
+.br-empty__action-slot:empty {
+  display: none;
+}
+
+.br-empty__action-slot:not(:empty) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 0.25rem;
+}
+
+.br-empty--compact {
+  padding: 1.25rem 1rem;
+  gap: 0.5rem;
+}
+
+.br-empty--compact .br-empty__title {
+  font-size: 0.95rem;
+}
+
+.br-empty--compact .br-empty__desc {
+  font-size: 0.84rem;
+}

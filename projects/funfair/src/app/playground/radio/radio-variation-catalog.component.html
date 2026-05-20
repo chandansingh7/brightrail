@@ -1,0 +1,126 @@
+<section class="rvc-block">
+  <h2 class="rvc-block__h">1. Core radio</h2>
+  <div class="rvc-grid">
+    <app-catalog-variation-tile label="Default" [snippet]="s.coreDefault">
+      <brightrail-radio name="rvc-core" value="default" label="Option" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Selected" [snippet]="s.coreSelected">
+      <brightrail-radio name="rvc-core-selected" value="selected" label="Option" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Disabled" [snippet]="s.coreDisabled">
+      <brightrail-radio name="rvc-core-disabled" value="disabled" label="Option" state="disabled" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="rvc-block">
+  <h2 class="rvc-block__h">2. Tones</h2>
+  <div class="rvc-grid">
+    <app-catalog-variation-tile label="Primary" [snippet]="s.tonePrimary">
+      <brightrail-radio name="rvc-tone-primary" value="primary" label="Primary" tone="primary" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Success" [snippet]="s.toneSuccess">
+      <brightrail-radio name="rvc-tone-success" value="success" label="Success" tone="success" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Warning" [snippet]="s.toneWarning">
+      <brightrail-radio name="rvc-tone-warning" value="warning" label="Warning" tone="warning" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Danger" [snippet]="s.toneDanger">
+      <brightrail-radio name="rvc-tone-danger" value="danger" label="Danger" tone="danger" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neutral" [snippet]="s.toneNeutral">
+      <brightrail-radio name="rvc-tone-neutral" value="neutral" label="Neutral" tone="neutral" [checked]="true" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="rvc-block">
+  <h2 class="rvc-block__h">3. Sizes</h2>
+  <p class="rvc-block__hint">sm · md (default) · lg</p>
+  <div class="rvc-grid rvc-grid--sizes">
+    <app-catalog-variation-tile label="Small" [snippet]="s.sizeSm">
+      <brightrail-radio name="rvc-size-sm" value="sm" label="Small" size="sm" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Medium" [snippet]="s.sizeMd">
+      <brightrail-radio name="rvc-size-md" value="md" label="Medium" size="md" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Large" [snippet]="s.sizeLg">
+      <brightrail-radio name="rvc-size-lg" value="lg" label="Large" size="lg" [checked]="true" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="rvc-block">
+  <h2 class="rvc-block__h">4. States</h2>
+  <div class="rvc-grid">
+    <app-catalog-variation-tile label="Default" [snippet]="s.stateDefault">
+      <brightrail-radio name="rvc-state-default" value="default" label="Default" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Hover" [snippet]="s.stateHover">
+      <brightrail-radio name="rvc-state-hover" value="hover" label="Hover" state="hover" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Focused" [snippet]="s.stateFocused">
+      <brightrail-radio name="rvc-state-focused" value="focused" label="Focused" state="focused" [checked]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Disabled" [snippet]="s.stateDisabled">
+      <brightrail-radio name="rvc-state-disabled" value="disabled" label="Disabled" state="disabled" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Invalid" [snippet]="s.stateInvalid">
+      <brightrail-radio name="rvc-state-invalid" value="invalid" label="Invalid" [invalid]="true" status="error" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="rvc-block">
+  <h2 class="rvc-block__h">5. Vertical / horizontal groups</h2>
+  <div class="rvc-stack">
+    <app-catalog-variation-tile label="Vertical group" [snippet]="s.groupVertical">
+      <brightrail-radio-group
+        name="notification-preference"
+        groupLabel="Notification preference"
+        layout="vertical"
+        [options]="verticalOptions"
+        [selectedId]="verticalSelected()"
+        (selectedIdChange)="onVerticalChange($event)"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Horizontal group" [snippet]="s.groupHorizontal">
+      <brightrail-radio-group
+        name="plan-choice"
+        layout="horizontal"
+        [options]="horizontalOptions"
+        [selectedId]="horizontalSelected()"
+        (selectedIdChange)="onHorizontalChange($event)"
+      />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="rvc-block">
+  <h2 class="rvc-block__h">6. Validation / error</h2>
+  <div class="rvc-stack">
+    <app-catalog-variation-tile label="Invalid option" [snippet]="s.validationSingle">
+      <brightrail-radio
+        name="consent"
+        value="no"
+        label="No"
+        [invalid]="true"
+        status="error"
+        errorText="Please select an option."
+        [checked]="true"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Invalid group" [snippet]="s.validationGroup">
+      <brightrail-radio-group
+        name="approval"
+        groupLabel="Approval choice"
+        layout="vertical"
+        [invalid]="true"
+        errorText="Please select an option."
+        [options]="validationOptions"
+        [selectedId]="validationSelected()"
+        (selectedIdChange)="onValidationChange($event)"
+      />
+    </app-catalog-variation-tile>
+  </div>
+</section>

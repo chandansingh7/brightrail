@@ -1,0 +1,40 @@
+:host {
+  display: block;
+}
+
+.pgvc-block {
+  margin-bottom: 1.35rem;
+}
+
+.pgvc-block__h {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.pgvc-block__hint {
+  margin: -0.15rem 0 0.65rem;
+  font-size: 0.78rem;
+  color: var(--ff-muted, #64748b);
+}
+
+.pgvc-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  align-items: start;
+}
+
+.pgvc-sticky-strip {
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--ff-border, #e2e8f0);
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--ff-surface, #fff) 92%, var(--ff-muted, #64748b) 8%);
+  box-shadow: 0 1px 0 rgb(0 0 0 / 6%);
+}
+
+.pgvc-sticky-strip brightrail-pagination {
+  display: block;
+  max-width: 28rem;
+  margin-inline: auto;
+}

@@ -1,137 +1,22 @@
 <div class="bco">
   <header class="bco-hero">
+    <p class="bco-hero__eyebrow">Brightrail · Badge · Variation catalog</p>
     <h1>Badge types &amp; variations</h1>
-    <p>Reference page for the badge gallery in `doc/badge`: core styles, states, counts, status, dots, and enterprise patterns.</p>
-    <a routerLink=".." class="bco-link">← Badge playground</a>
+    <p>
+      Reference page for the badge gallery in <code>doc/badge</code>. Click any tile for <strong>View code</strong>, then
+      <strong>Copy code</strong> to paste into your app (import from <code>brightrail</code>).
+    </p>
+    <p class="bco-hero__links">
+      <a routerLink=".." class="bco-link">← Badge playground (live settings)</a>
+      <a routerLink="/variations" class="bco-link">All variation catalogs</a>
+    </p>
   </header>
 
-  <section class="bco-grid">
-    <article class="bco-card">
-      <h2>1. Core badge types</h2>
-      <div class="bco-row">
-        <brightrail-badge variant="soft" color="primary" label="New" />
-        <brightrail-badge variant="tonal" color="neutral" label="47" />
-        <brightrail-badge variant="outlined" color="primary" label="Product" />
-        <brightrail-badge variant="filled" color="primary" label="Primary" />
-      </div>
-    </article>
+  <app-badge-variation-catalog />
 
-    <article class="bco-card">
-      <h2>2. Badge appearances</h2>
-      <div class="bco-row">
-        <brightrail-badge variant="filled" color="primary" label="Filled" />
-        <brightrail-badge variant="outlined" color="primary" label="Outlined" />
-        <brightrail-badge variant="tonal" color="primary" label="Tonal" />
-        <brightrail-badge variant="soft" color="primary" label="Soft" />
-      </div>
-    </article>
-
-    <article class="bco-card">
-      <h2>3. Badge sizes</h2>
-      <div class="bco-row">
-        <brightrail-badge variant="filled" color="primary" size="small" label="Small" />
-        <brightrail-badge variant="filled" color="primary" size="medium" label="Medium" />
-        <brightrail-badge variant="filled" color="primary" size="large" label="Large" />
-      </div>
-    </article>
-
-    <article class="bco-card">
-      <h2>4. Badge states</h2>
-      <div class="bco-row">
-        <brightrail-badge variant="filled" color="primary" state="default" label="Default" />
-        <brightrail-badge variant="filled" color="primary" state="hover" label="Hover" />
-        <brightrail-badge variant="filled" color="primary" state="active" label="Active" />
-        <brightrail-badge variant="filled" color="primary" state="disabled" label="Disabled" />
-      </div>
-    </article>
-
-    <article class="bco-card">
-      <h2>5. Notification counts</h2>
-      <div class="bco-row">
-        <span class="bco-pill bco-pill--icon">
-          <span class="bco-ico bco-ico--bell" aria-hidden="true"></span>
-          <brightrail-badge variant="filled" color="primary" label="12" />
-        </span>
-        <span class="bco-pill bco-pill--icon">
-          <span class="bco-ico bco-ico--alert" aria-hidden="true"></span>
-          <brightrail-badge variant="filled" color="warning" label="3" />
-        </span>
-        <span class="bco-pill bco-pill--icon">
-          <span class="bco-ico bco-ico--mail" aria-hidden="true"></span>
-          <brightrail-badge variant="filled" color="primary" label="99+" />
-        </span>
-        <span class="bco-pill bco-pill--icon">
-          <span class="bco-ico bco-ico--task" aria-hidden="true"></span>
-          <brightrail-badge variant="filled" color="info" label="7" />
-        </span>
-      </div>
-    </article>
-
-    <article class="bco-card">
-      <h2>6. Status badges</h2>
-      <div class="bco-row">
-        <brightrail-badge variant="tonal" color="success" label="Active" icon="check" />
-        <brightrail-badge variant="tonal" color="warning" label="Pending" />
-        <brightrail-badge variant="tonal" color="info" label="In progress" />
-        <brightrail-badge variant="tonal" color="neutral" label="Inactive" />
-        <brightrail-badge variant="tonal" color="neutral" state="disabled" label="Disabled" />
-      </div>
-    </article>
-
-    <article class="bco-card">
-      <h2>7. Dot badges</h2>
-      <div class="bco-row">
-        <brightrail-badge variant="filled" color="success" [dot]="true" label="Online" />
-        <brightrail-badge variant="filled" color="warning" [dot]="true" label="Away" />
-        <brightrail-badge variant="filled" color="danger" [dot]="true" label="Do not disturb" />
-        <brightrail-badge variant="filled" color="neutral" [dot]="true" label="Offline" />
-        <brightrail-badge variant="filled" color="primary" [dot]="true" label="Custom" />
-      </div>
-    </article>
-
-    <article class="bco-card">
-      <h2>8. Enterprise patterns</h2>
-      <div class="bco-row">
-        <span class="bco-pill">Dashboard <brightrail-badge variant="filled" color="primary" size="small" label="5" /></span>
-        <span class="bco-pill">Alerts <brightrail-badge variant="filled" color="danger" size="small" label="3" /></span>
-        <span class="bco-pill">Messages <brightrail-badge variant="filled" color="primary" size="small" label="12" /></span>
-        <span class="bco-pill bco-pill--avatars">
-          <span class="bco-avatars" aria-hidden="true">
-            <span class="bco-avatar">A</span><span class="bco-avatar">R</span><span class="bco-avatar">M</span
-            ><span class="bco-avatar">J</span>
-          </span>
-          <brightrail-badge variant="soft" color="neutral" size="small" label="+5" />
-        </span>
-        <span class="bco-pill"><brightrail-badge variant="tonal" color="warning" size="small" label="High" /></span>
-        <span class="bco-pill"><brightrail-badge variant="tonal" color="warning" size="small" label="Medium" /></span>
-        <span class="bco-pill"><brightrail-badge variant="tonal" color="success" size="small" label="Low" /></span>
-        <span class="bco-pill"><brightrail-badge variant="tonal" color="success" size="small" label="Approved" /></span>
-        <span class="bco-pill"><brightrail-badge variant="tonal" color="warning" size="small" label="Pending" /></span>
-        <span class="bco-pill"><brightrail-badge appearance="tonal" color="critical" size="small" label="Rejected" /></span>
-        <span class="bco-pill"><brightrail-badge variant="soft" color="neutral" size="small" label="Draft" /></span>
-      </div>
-    </article>
-
-    <article class="bco-card">
-      <h2>9. Advanced patterns</h2>
-      <div class="bco-row">
-        <span class="bco-pill"><brightrail-badge variant="tonal" color="success" size="small" label="Production" /></span>
-        <span class="bco-pill"><brightrail-badge variant="tonal" color="info" size="small" label="Staging" /></span>
-        <span class="bco-pill"><brightrail-badge variant="tonal" color="priority" size="small" label="Development" /></span>
-        <span class="bco-pill"><brightrail-badge variant="soft" color="neutral" size="small" label="Sandbox" /></span>
-        <span class="bco-pill"><brightrail-badge variant="soft" color="primary" size="small" label="Finance" /></span>
-        <span class="bco-pill"><brightrail-badge variant="soft" color="success" size="small" label="HR" /></span>
-        <span class="bco-pill"><brightrail-badge variant="soft" color="priority" size="small" label="IT" /></span>
-        <span class="bco-pill"><brightrail-badge variant="soft" color="neutral" size="small" label="Ops" /></span>
-        <span class="bco-pill bco-pill--grouped">
-          <brightrail-badge variant="soft" color="success" size="small" label="3" />
-          <brightrail-badge variant="soft" color="warning" size="small" label="1" />
-          <brightrail-badge variant="soft" color="danger" size="small" label="2" />
-          <brightrail-badge variant="soft" color="neutral" size="small" label="+4" />
-        </span>
-        <span class="bco-pill">Order #12345 <brightrail-badge variant="tonal" color="primary" size="small" label="In progress" /></span>
-        <span class="bco-pill"><brightrail-badge appearance="tonal" color="critical" size="small" label="High" /></span>
-      </div>
-    </article>
+  <section class="bco-code-block" aria-labelledby="bco-html-examples">
+    <h2 id="bco-html-examples">Badge HTML examples</h2>
+    <p class="bco-code-block__hint">Typical markup for a primary badge, nav count, and status badge.</p>
+    <pre class="bco-pre"><code>{{ htmlExamples }}</code></pre>
   </section>
 </div>

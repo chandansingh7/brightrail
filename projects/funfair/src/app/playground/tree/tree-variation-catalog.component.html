@@ -1,0 +1,75 @@
+<section class="trvc-block">
+  <h2 class="trvc-block__h">1. Core hierarchy</h2>
+  <div class="trvc-row">
+    <app-catalog-variation-tile label="Workspace" [snippet]="s.coreWorkspace">
+      <brightrail-tree [nodes]="workspaceNodes" selectionMode="single" selectedId="alpha" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Files" [snippet]="s.coreFiles">
+      <brightrail-tree [nodes]="fileNodes" selectionMode="single" selectedId="app" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Flat list" [snippet]="s.coreFlat">
+      <brightrail-tree [nodes]="flatNodes" selectionMode="single" selectedId="inbox" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="trvc-block">
+  <h2 class="trvc-block__h">2. Selection modes</h2>
+  <div class="trvc-row">
+    <app-catalog-variation-tile label="Single select" [snippet]="s.selectionSingle">
+      <brightrail-tree [nodes]="workspaceNodes" selectionMode="single" selectedId="settings" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="None" [snippet]="s.selectionNone">
+      <brightrail-tree [nodes]="fileNodes" selectionMode="none" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="trvc-block">
+  <h2 class="trvc-block__h">3. Expand states</h2>
+  <div class="trvc-row">
+    <app-catalog-variation-tile label="Expanded" [snippet]="s.expandedDefault">
+      <brightrail-tree [nodes]="expandedNodes" selectionMode="none" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Collapsed" [snippet]="s.expandedCollapsed">
+      <brightrail-tree [nodes]="collapsedNodes" selectionMode="none" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="trvc-block">
+  <h2 class="trvc-block__h">4. Disabled nodes</h2>
+  <div class="trvc-row">
+    <app-catalog-variation-tile label="Disabled leaf" [snippet]="s.disabledNode">
+      <brightrail-tree [nodes]="disabledNodes" selectionMode="single" selectedId="ok" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Disabled parent" [snippet]="s.disabledBranch">
+      <brightrail-tree [nodes]="disabledParentNodes" selectionMode="none" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="trvc-block">
+  <h2 class="trvc-block__h">5. Enterprise navigation</h2>
+  <app-catalog-variation-tile label="Primary nav" [snippet]="s.enterpriseNav">
+    <brightrail-tree ariaLabel="Primary navigation" [nodes]="workspaceNodes" selectionMode="single" selectedId="projects" />
+  </app-catalog-variation-tile>
+  <app-catalog-variation-tile label="Org chart" [snippet]="s.enterpriseOrg">
+    <brightrail-tree [nodes]="orgNodes" selectionMode="single" selectedId="platform" />
+  </app-catalog-variation-tile>
+</section>
+
+<section class="trvc-block">
+  <h2 class="trvc-block__h">6. Advanced patterns</h2>
+  <div class="trvc-row">
+    <app-catalog-variation-tile label="Deep nesting" [snippet]="s.advancedDeep">
+      <brightrail-tree [nodes]="deepNodes" selectionMode="single" selectedId="l3" levelIndent="1.5rem" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Dual trees" [snippet]="s.advancedMultiBranch">
+      <span class="trco-split">
+        <brightrail-tree [nodes]="leftNodes" selectionMode="single" selectedId="docs" />
+        <brightrail-tree [nodes]="rightNodes" selectionMode="single" selectedId="queue" />
+      </span>
+    </app-catalog-variation-tile>
+  </div>
+</section>

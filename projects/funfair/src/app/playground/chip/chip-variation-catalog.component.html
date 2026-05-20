@@ -1,0 +1,180 @@
+<section class="cvc-block">
+  <h2 class="cvc-block__h">1. Core chip types</h2>
+  <div class="cvc-grid">
+    <app-catalog-variation-tile label="Filled · Product" [snippet]="s.coreFilledProduct">
+      <brightrail-chip variant="filled" color="primary" label="Product" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Outlined · Product" [snippet]="s.coreOutlinedProduct">
+      <brightrail-chip variant="outlined" color="primary" label="Product" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Soft · Active" [snippet]="s.coreSoftActive">
+      <brightrail-chip variant="soft" color="success" label="Active" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Compact · Prod" [snippet]="s.coreCompactProd">
+      <brightrail-chip variant="filled" color="info" size="compact" label="Prod" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="cvc-block">
+  <h2 class="cvc-block__h">2. Chip appearances</h2>
+  <div class="cvc-grid">
+    <app-catalog-variation-tile label="Filled" [snippet]="s.appearanceFilled">
+      <brightrail-chip variant="filled" color="primary" label="Primary" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Outlined" [snippet]="s.appearanceOutlined">
+      <brightrail-chip variant="outlined" color="primary" label="Primary" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Soft" [snippet]="s.appearanceSoft">
+      <brightrail-chip variant="soft" color="primary" label="Primary" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Text" [snippet]="s.appearanceText">
+      <brightrail-chip variant="text" color="primary" label="Primary" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="cvc-block">
+  <h2 class="cvc-block__h">3. Chip sizes</h2>
+  <div class="cvc-grid cvc-grid--sizes">
+    <app-catalog-variation-tile label="Small" [snippet]="s.sizeSmall">
+      <brightrail-chip variant="filled" color="primary" size="small" label="Small" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Medium" [snippet]="s.sizeMedium">
+      <brightrail-chip variant="filled" color="primary" size="medium" label="Medium" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Large" [snippet]="s.sizeLarge">
+      <brightrail-chip variant="filled" color="primary" size="large" label="Large" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="cvc-block">
+  <h2 class="cvc-block__h">4. Chip states</h2>
+  <div class="cvc-grid">
+    <app-catalog-variation-tile label="Default" [snippet]="s.stateDefault">
+      <brightrail-chip variant="filled" color="neutral" state="default" label="Default" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Hover" [snippet]="s.stateHover">
+      <brightrail-chip variant="filled" color="neutral" state="hover" label="Hover" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Focused" [snippet]="s.stateFocused">
+      <brightrail-chip variant="filled" color="neutral" state="focused" label="Focused" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Disabled" [snippet]="s.stateDisabled">
+      <brightrail-chip variant="filled" color="neutral" state="disabled" label="Disabled" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="cvc-block">
+  <h2 class="cvc-block__h">5. Interactive chips</h2>
+  <div class="cvc-grid">
+    <app-catalog-variation-tile label="Email" [snippet]="s.interactiveEmail">
+      <brightrail-chip variant="outlined" color="neutral" icon="info" label="Email" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Share" [snippet]="s.interactiveShare">
+      <brightrail-chip variant="outlined" color="neutral" icon="info" label="Share" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Learn more" [snippet]="s.interactiveLearnMore">
+      <brightrail-chip variant="text" color="primary" label="Learn more" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="View docs" [snippet]="s.interactiveViewDocs">
+      <brightrail-chip variant="text" color="primary" label="View docs" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="cvc-block">
+  <h2 class="cvc-block__h">6. Selectable filter chips</h2>
+  <div class="cvc-grid">
+    <app-catalog-variation-tile label="All" [snippet]="s.filterAll">
+      <brightrail-chip variant="filled" color="neutral" size="small" label="All" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Active" [snippet]="s.filterActive">
+      <brightrail-chip variant="filled" color="neutral" size="small" label="Active" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Inactive" [snippet]="s.filterInactive">
+      <brightrail-chip variant="filled" color="neutral" size="small" label="Inactive" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Selected" [snippet]="s.filterSelected">
+      <brightrail-chip variant="filled" color="primary" size="small" [selectable]="true" [selected]="true" label="Selected" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="cvc-block">
+  <h2 class="cvc-block__h">7. Removable chips</h2>
+  <div class="cvc-grid">
+    <app-catalog-variation-tile label="Marketing" [snippet]="s.removableMarketing">
+      <brightrail-chip variant="outlined" color="neutral" [removable]="true" label="Marketing" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Design" [snippet]="s.removableDesign">
+      <brightrail-chip variant="outlined" color="neutral" [removable]="true" label="Design" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Product" [snippet]="s.removableProduct">
+      <brightrail-chip variant="outlined" color="neutral" [removable]="true" label="Product" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="cvc-block">
+  <h2 class="cvc-block__h">8. Chips with icons &amp; avatars</h2>
+  <div class="cvc-grid">
+    <app-catalog-variation-tile label="Docs" [snippet]="s.iconDocs">
+      <brightrail-chip variant="outlined" color="neutral" icon="info" label="Docs" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Users" [snippet]="s.iconUsers">
+      <brightrail-chip variant="outlined" color="neutral" icon="info" label="Users" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="James" [snippet]="s.avatarJames">
+      <brightrail-chip variant="soft" color="neutral" avatarText="JN" label="James" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Sophia" [snippet]="s.avatarSophia">
+      <brightrail-chip variant="soft" color="neutral" avatarText="SP" label="Sophia" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="cvc-block">
+  <h2 class="cvc-block__h">9. Enterprise patterns</h2>
+  <div class="cvc-grid">
+    <app-catalog-variation-tile label="Finance" [snippet]="s.enterpriseFinance">
+      <brightrail-chip variant="soft" color="primary" size="small" label="Finance" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="HR" [snippet]="s.enterpriseHr">
+      <brightrail-chip variant="soft" color="success" size="small" label="HR" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Active" [snippet]="s.enterpriseActive">
+      <brightrail-chip variant="soft" color="success" size="small" label="Active" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Pending" [snippet]="s.enterprisePending">
+      <brightrail-chip variant="soft" color="warning" size="small" label="Pending" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Enterprise" [snippet]="s.enterpriseEnterprise">
+      <brightrail-chip variant="soft" color="neutral" size="small" label="Enterprise" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="cvc-block">
+  <h2 class="cvc-block__h">10. Advanced patterns</h2>
+  <div class="cvc-grid">
+    <app-catalog-variation-tile label="Quarter group" [snippet]="s.advancedQuarterGroup">
+      <span class="cco-group">
+        <brightrail-chip variant="outlined" color="neutral" size="small" label="Q1" />
+        <brightrail-chip variant="outlined" color="primary" size="small" label="Q2" />
+        <brightrail-chip variant="outlined" color="neutral" size="small" label="Q3" />
+      </span>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Overflow · +3" [snippet]="s.advancedOverflow">
+      <brightrail-chip variant="outlined" color="neutral" size="small" label="+3" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Removable group" [snippet]="s.advancedRemovableGroup">
+      <span class="cco-group">
+        <brightrail-chip variant="outlined" color="neutral" size="small" [removable]="true" label="Important" />
+        <brightrail-chip variant="outlined" color="warning" size="small" [removable]="true" label="Review" />
+      </span>
+    </app-catalog-variation-tile>
+  </div>
+</section>

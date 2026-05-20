@@ -1,0 +1,36 @@
+<div class="cvt" [class.cvt--expanded]="expanded()">
+  <button
+    type="button"
+    class="cvt__preview"
+    (click)="toggle()"
+    [attr.aria-expanded]="expanded()"
+  >
+    <span class="cvt__label">{{ label() }}</span>
+    @if (hint()) {
+      <span class="cvt__hint">{{ hint() }}</span>
+    }
+    <span class="cvt__live">
+      <ng-content />
+    </span>
+    <span class="cvt__action">{{ expanded() ? 'Hide code' : 'View code' }}</span>
+  </button>
+
+  @if (expanded()) {
+    <div class="cvt__code" role="region" [attr.aria-label]="'Code for ' + label()">
+      <pre class="cvt__pre"><code>{{ snippet() }}</code></pre>
+      <button type="button" class="cvt__copy" (click)="copySnippet(); $event.stopPropagation()">
+        @switch (copyState()) {
+          @case ('copied') {
+            Copied
+          }
+          @case ('failed') {
+            Copy failed
+          }
+          @default {
+            Copy code
+          }
+        }
+      </button>
+    </div>
+  }
+</div>

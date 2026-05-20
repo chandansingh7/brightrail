@@ -1,0 +1,190 @@
+<section class="fuvc-block">
+  <h2 class="fuvc-block__h">1. Core upload types</h2>
+  <div class="fuvc-grid">
+    <app-catalog-variation-tile label="Compact file picker" [snippet]="s.coreCompact">
+      <brightrail-file-upload variant="compact" placeholder="Compact file picker" [showCloudIcon]="false" [showFileList]="false" [maxFileSizeMb]="10" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Outlined file picker" [snippet]="s.coreOutlined">
+      <brightrail-file-upload appearance="outlined" [showFileList]="false" [maxFileSizeMb]="10" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Icon button upload" [snippet]="s.coreButton">
+      <brightrail-file-upload variant="button" buttonText="Upload" [showCloudIcon]="false" [showFileList]="false" [maxFileSizeMb]="10" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="fuvc-block">
+  <h2 class="fuvc-block__h">2. Appearances</h2>
+  <div class="fuvc-grid">
+    <app-catalog-variation-tile label="Filled" [snippet]="s.appearanceFilled">
+      <brightrail-file-upload appearance="filled" [showFileList]="false" [maxFileSizeMb]="10" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Outlined" [snippet]="s.appearanceOutlined">
+      <brightrail-file-upload appearance="outlined" [showFileList]="false" [maxFileSizeMb]="10" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Soft" [snippet]="s.appearanceSoft">
+      <brightrail-file-upload appearance="soft" [showFileList]="false" [maxFileSizeMb]="10" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="fuvc-block">
+  <h2 class="fuvc-block__h">3. Sizes</h2>
+  <div class="fuvc-grid">
+    <app-catalog-variation-tile label="Compact" [snippet]="s.sizeSm">
+      <brightrail-file-upload size="sm" [showFileList]="false" [maxFileSizeMb]="10" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Medium (default)" [snippet]="s.sizeMd">
+      <brightrail-file-upload size="md" [showFileList]="false" [maxFileSizeMb]="10" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Large" [snippet]="s.sizeLg">
+      <brightrail-file-upload size="lg" [showFileList]="false" [maxFileSizeMb]="10" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Extra large" [snippet]="s.sizeXl">
+      <brightrail-file-upload size="xl" [showFileList]="false" [maxFileSizeMb]="10" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="fuvc-block">
+  <h2 class="fuvc-block__h">4. States</h2>
+  <div class="fuvc-grid">
+    <app-catalog-variation-tile label="Default" [snippet]="s.stateDefault">
+      <brightrail-file-upload state="default" [showFileList]="false" [maxFileSizeMb]="10" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Hover" [snippet]="s.stateHover">
+      <brightrail-file-upload state="hover" [showFileList]="false" [maxFileSizeMb]="10" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Focus" [snippet]="s.stateFocused">
+      <brightrail-file-upload state="focused" [showFileList]="false" [maxFileSizeMb]="10" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Disabled" [snippet]="s.stateDisabled">
+      <brightrail-file-upload state="disabled" [showFileList]="false" [maxFileSizeMb]="10" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="fuvc-block">
+  <h2 class="fuvc-block__h">5. Single file upload</h2>
+  <app-catalog-variation-tile label="Progress &amp; status list" [snippet]="s.singleFile">
+    <brightrail-file-upload
+      label="Upload one file"
+      [multiple]="false"
+      [maxFiles]="1"
+      [maxFileSizeMb]="5"
+      helperText="Uploads a single file with progress and status."
+      [fileItems]="singleFileItems"
+    />
+  </app-catalog-variation-tile>
+</section>
+
+<section class="fuvc-block">
+  <h2 class="fuvc-block__h">6. Multi-file upload</h2>
+  <app-catalog-variation-tile label="Individual progress rows" [snippet]="s.multiFile">
+    <brightrail-file-upload
+      label="Requirements"
+      [multiple]="true"
+      [maxFiles]="4"
+      [maxFileSizeMb]="10"
+      helperText="Upload multiple files with individual progress."
+      [fileItems]="multiFileItems"
+    />
+  </app-catalog-variation-tile>
+</section>
+
+<section class="fuvc-block">
+  <h2 class="fuvc-block__h">7. Drag and drop</h2>
+  <app-catalog-variation-tile label="Browse + drop zone" [snippet]="s.dragDrop">
+    <brightrail-file-upload
+      label="Drag file here"
+      placeholder="Drag file here or click to browse."
+      buttonText="Browse Files"
+      accept=".pdf,.docx,.png,.jpg,.zip"
+      [maxFileSizeMb]="5"
+      helperText="Supports: PDF, DOCX, PNG, JPG, ZIP"
+    />
+  </app-catalog-variation-tile>
+</section>
+
+<section class="fuvc-block">
+  <h2 class="fuvc-block__h">8. Image upload / preview</h2>
+  <app-catalog-variation-tile label="Avatar upload mock" [snippet]="s.imagePreview">
+    <div class="fuvc-image-preview">
+      <div class="fuvc-image-preview__frame"></div>
+      <div class="fuvc-image-preview__meta">
+        <strong>Avatar upload</strong>
+        <span>JPG, PNG up to 5MB</span>
+        <div class="fuvc-image-preview__actions">
+          <button type="button">Crop</button>
+          <button type="button">Reset</button>
+          <button type="button" class="is-primary">Apply</button>
+        </div>
+      </div>
+    </div>
+    <brightrail-file-upload
+      label="Avatar upload"
+      variant="button"
+      buttonText="Upload image"
+      [showCloudIcon]="false"
+      [showFileList]="false"
+      accept=".jpg,.png"
+      [maxFileSizeMb]="5"
+    />
+  </app-catalog-variation-tile>
+</section>
+
+<section class="fuvc-block">
+  <h2 class="fuvc-block__h">9. Enterprise patterns</h2>
+  <div class="fuvc-enterprise-grid">
+    <app-catalog-variation-tile label="Document submission" [snippet]="s.enterpriseDocument">
+      <brightrail-file-upload
+        surface="enterprise"
+        enterprisePattern="document-submission"
+        enterpriseSecondaryText="NDA_Agreement.pdf"
+        helperText="Document submission"
+        [showFileList]="false"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Type restrictions" [snippet]="s.enterpriseTypeRestrictions">
+      <brightrail-file-upload
+        surface="enterprise"
+        enterprisePattern="type-restrictions"
+        enterpriseSecondaryText="Max file size: 25MB"
+        helperText="File type restrictions"
+        accept=".pdf,.docx,.xlsx,.pptx"
+        [showFileList]="false"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="With description" [snippet]="s.enterpriseWithDescription">
+      <brightrail-file-upload
+        surface="enterprise"
+        enterprisePattern="with-description"
+        enterpriseSecondaryText="Add description (optional)..."
+        helperText="Upload with description"
+        [showFileList]="false"
+        [fileItems]="descriptionFileItems"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Replace file" [snippet]="s.enterpriseReplace">
+      <brightrail-file-upload
+        surface="enterprise"
+        enterprisePattern="replace-file"
+        enterpriseSecondaryText="Current: old-report.pdf"
+        helperText="Replace file"
+        buttonText="Replace file"
+        [showFileList]="false"
+      />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="fuvc-block">
+  <h2 class="fuvc-block__h">10. Futuristic upload designs</h2>
+  <app-catalog-variation-tile label="AI-powered drop zone" [snippet]="s.futuristicGlass">
+    <div class="fuvc-future fuvc-future--glass">
+      <span>Choose file</span>
+      <span>or drop here</span>
+      <span>AI-powered upload · Secure · Fast</span>
+    </div>
+  </app-catalog-variation-tile>
+</section>

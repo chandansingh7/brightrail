@@ -1,0 +1,28 @@
+@use '../button/button-playground.component.scss' as *;
+@use '../playground-preview-fixes.scss' as *;
+
+.bp-preview-inner--combobox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 9rem;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.combobox-play-wrap {
+  width: 100%;
+  max-width: 22rem;
+}
+
+.combobox-play-wrap--inline {
+  max-width: 12rem;
+}
+
+.combobox-play-pair {
+  display: grid;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 22rem;
+}

@@ -1,0 +1,71 @@
+<section class="tvc-block">
+  <h2 class="tvc-block__h">1. Core variants</h2>
+  <div class="tvc-grid">
+    <app-catalog-variation-tile label="Info" [snippet]="s.coreInfo">
+      <brightrail-toast variant="info" title="Heads up" message="Your draft was saved." />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Success" [snippet]="s.coreSuccess">
+      <brightrail-toast variant="success" title="Saved" message="Changes published successfully." />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Warning" [snippet]="s.coreWarning">
+      <brightrail-toast variant="warning" title="Review needed" message="Some fields need attention." />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Danger" [snippet]="s.coreDanger">
+      <brightrail-toast variant="danger" title="Error" message="We could not complete the request." />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tvc-block">
+  <h2 class="tvc-block__h">2. Title &amp; message</h2>
+  <div class="tvc-stack">
+    <app-catalog-variation-tile label="Title + message" [snippet]="s.titleWithHeadline">
+      <brightrail-toast variant="info" title="Sync complete" message="3 files uploaded to the workspace." />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Message only" [snippet]="s.titleMessageOnly">
+      <brightrail-toast variant="info" message="Link copied to clipboard." />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tvc-block">
+  <h2 class="tvc-block__h">3. Dismissible</h2>
+  <div class="tvc-grid">
+    <app-catalog-variation-tile label="Dismissible" [snippet]="s.dismissibleYes">
+      <brightrail-toast variant="success" title="Profile updated" message="Your preferences were saved." [dismissible]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Not dismissible" [snippet]="s.dismissibleNo">
+      <brightrail-toast variant="warning" title="Maintenance" message="Read-only mode until 2:00 AM UTC." [dismissible]="false" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tvc-block">
+  <h2 class="tvc-block__h">4. Toast service</h2>
+  <p class="tvc-block__hint">Mount <code>brightrail-toast-container</code> once, then call <code>BrightrailToastService.show()</code>.</p>
+  <app-catalog-variation-tile label="show() config" [snippet]="s.serviceShow">
+    <pre class="tvc-code-sample">{{ s.serviceShow }}</pre>
+  </app-catalog-variation-tile>
+</section>
+
+<section class="tvc-block">
+  <h2 class="tvc-block__h">5. Stacking</h2>
+  <app-catalog-variation-tile label="Multiple toasts" [snippet]="s.stackMultiple">
+    <div class="tvc-stack-preview">
+      <brightrail-toast variant="info" message="First notification" />
+      <brightrail-toast variant="success" title="Saved" message="Second notification" />
+    </div>
+  </app-catalog-variation-tile>
+</section>
+
+<section class="tvc-block">
+  <h2 class="tvc-block__h">6. Advanced timing</h2>
+  <div class="tvc-grid">
+    <app-catalog-variation-tile label="Auto-dismiss" [snippet]="s.advancedDuration">
+      <pre class="tvc-code-sample">{{ s.advancedDuration }}</pre>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Persistent" [snippet]="s.advancedPersistent">
+      <pre class="tvc-code-sample">{{ s.advancedPersistent }}</pre>
+    </app-catalog-variation-tile>
+  </div>
+</section>

@@ -1,0 +1,35 @@
+:host {
+  display: block;
+}
+
+.rvc-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr));
+}
+
+.rvc-grid--sizes {
+  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+}
+
+.rvc-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.rvc-block {
+  margin-bottom: 1.35rem;
+}
+
+.rvc-block__h {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.rvc-block__hint {
+  margin: 0 0 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--ff-muted, #64748b);
+}

@@ -1,0 +1,27 @@
+// Layout fixes for playgrounds that @use button-playground layout.
+// Include after `@use '../button/button-playground.component.scss' as *;`
+
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+}
+
+.bp-grid {
+  min-height: min(22rem, 45vh);
+}
+
+.bp-panel--preview {
+  min-height: min(16rem, 38dvh);
+}
+
+.bp-preview-surface {
+  min-height: 11rem;
+}
+
+.bp-preview-surface--stretch .bp-preview-inner {
+  justify-content: center;
+  align-items: center;
+}

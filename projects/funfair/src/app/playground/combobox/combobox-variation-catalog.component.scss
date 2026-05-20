@@ -1,0 +1,7 @@
+:host { display: block; }
+.cbvc-grid { display: grid; gap: 0.65rem; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); }
+.cbvc-block { margin-bottom: 1.35rem; }
+.cbvc-block__h { margin: 0 0 0.5rem; font-size: 0.95rem; font-weight: 700; }
+.cbvc-block__hint { margin: 0 0 0.5rem; font-size: 0.8125rem; color: var(--ff-muted, #64748b); }
+.cbvc-tile-body { width: 100%; max-width: 16rem; }
+.cbco-form-row { display: grid; gap: 0.65rem; width: 100%; max-width: 16rem; }

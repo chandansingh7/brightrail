@@ -1,0 +1,167 @@
+<section class="cbvc-block">
+  <h2 class="cbvc-block__h">1. Core combobox</h2>
+  <div class="cbvc-grid">
+    <app-catalog-variation-tile label="Default" [snippet]="s.coreDefault">
+      <div class="cbvc-tile-body">
+        <brightrail-combobox
+          [ngModelOptions]="ngModelStandalone"
+          [options]="countryOptions"
+          placeholder="Search or select…"
+          [(ngModel)]="countryCode"
+        />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="With value" [snippet]="s.coreWithValue">
+      <div class="cbvc-tile-body">
+        <brightrail-combobox
+          [ngModelOptions]="ngModelStandalone"
+          [options]="countryOptions"
+          placeholder="Search or select…"
+          [(ngModel)]="countryCode"
+        />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Compact inline" [snippet]="s.coreCompact">
+      <div class="cbvc-tile-body">
+        <brightrail-combobox
+          [ngModelOptions]="ngModelStandalone"
+          [options]="tagOptions"
+          placeholder="Status"
+          [fullWidth]="false"
+          [(ngModel)]="tagCode"
+        />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="cbvc-block">
+  <h2 class="cbvc-block__h">2. Filterable behavior</h2>
+  <div class="cbvc-grid">
+    <app-catalog-variation-tile label="Filterable" [snippet]="s.filterableOn">
+      <div class="cbvc-tile-body">
+        <brightrail-combobox
+          [ngModelOptions]="ngModelStandalone"
+          [options]="assigneeOptions"
+          [filterable]="true"
+          placeholder="Search assignees…"
+          [(ngModel)]="assigneeId"
+        />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Not filterable" [snippet]="s.filterableOff">
+      <div class="cbvc-tile-body">
+        <brightrail-combobox
+          [ngModelOptions]="ngModelStandalone"
+          [options]="priorityOptions"
+          [filterable]="false"
+          placeholder="Priority"
+          [(ngModel)]="priorityCode"
+        />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="cbvc-block">
+  <h2 class="cbvc-block__h">3. Width modes</h2>
+  <div class="cbvc-grid">
+    <app-catalog-variation-tile label="Full width" [snippet]="s.widthFull">
+      <div class="cbvc-tile-body">
+        <brightrail-combobox
+          [ngModelOptions]="ngModelStandalone"
+          [options]="countryOptions"
+          [fullWidth]="true"
+          placeholder="Select region"
+          [(ngModel)]="regionCode"
+        />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Inline width" [snippet]="s.widthInline">
+      <div class="cbvc-tile-body">
+        <brightrail-combobox
+          [ngModelOptions]="ngModelStandalone"
+          [options]="tagOptions"
+          [fullWidth]="false"
+          placeholder="Tag"
+          [(ngModel)]="tagCode"
+        />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="cbvc-block">
+  <h2 class="cbvc-block__h">4. Disabled states</h2>
+  <div class="cbvc-grid">
+    <app-catalog-variation-tile label="Disabled control" [snippet]="s.stateDisabled">
+      <div class="cbvc-tile-body">
+        <brightrail-combobox
+          [ngModelOptions]="ngModelStandalone"
+          [options]="countryOptions"
+          [disabled]="true"
+          placeholder="Search or select…"
+          [(ngModel)]="countryCode"
+        />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Disabled option" [snippet]="s.stateDisabledOption">
+      <div class="cbvc-tile-body">
+        <brightrail-combobox
+          [ngModelOptions]="ngModelStandalone"
+          [options]="countryOptions"
+          placeholder="Select plan"
+          [(ngModel)]="planCode"
+        />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="cbvc-block">
+  <h2 class="cbvc-block__h">5. Form integration</h2>
+  <div class="cbvc-grid">
+    <app-catalog-variation-tile label="Template-driven" [snippet]="s.formTemplate">
+      <div class="cbvc-tile-body">
+        <brightrail-combobox
+          [ngModelOptions]="ngModelStandalone"
+          [options]="assigneeOptions"
+          placeholder="Role"
+          [(ngModel)]="assigneeId"
+        />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Reactive (snippet)" [snippet]="s.formReactive">
+      <div class="cbvc-tile-body">
+        <brightrail-combobox
+          [ngModelOptions]="ngModelStandalone"
+          [options]="priorityOptions"
+          placeholder="Department"
+          [(ngModel)]="priorityCode"
+        />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="cbvc-block">
+  <h2 class="cbvc-block__h">6. Enterprise patterns</h2>
+  <div class="cbvc-grid">
+    <app-catalog-variation-tile label="Country + city" [snippet]="s.enterpriseMultiField">
+      <div class="cbco-form-row">
+        <brightrail-combobox
+          [ngModelOptions]="ngModelStandalone"
+          [options]="countryOptions"
+          placeholder="Country"
+          [(ngModel)]="countryCode"
+        />
+        <brightrail-combobox
+          [ngModelOptions]="ngModelStandalone"
+          [options]="assigneeOptions"
+          placeholder="City"
+          [(ngModel)]="cityCode"
+        />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

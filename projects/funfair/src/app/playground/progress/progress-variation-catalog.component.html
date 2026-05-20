@@ -1,0 +1,171 @@
+<section class="prvc-block">
+  <h2 class="prvc-block__h">1. Core linear progress</h2>
+  <div class="prvc-grid">
+    <app-catalog-variation-tile label="Default" [snippet]="s.linearDefault">
+      <brightrail-progress type="linear" [value]="72" label="Default" [showPercentage]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Success" [snippet]="s.linearSuccess">
+      <brightrail-progress type="linear" [value]="100" label="Success" statusColor="success" [showPercentage]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Warning" [snippet]="s.linearWarning">
+      <brightrail-progress type="linear" [value]="45" label="Warning" statusColor="warning" [showPercentage]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Danger" [snippet]="s.linearDanger">
+      <brightrail-progress type="linear" [value]="28" label="Danger" statusColor="danger" [showPercentage]="true" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="prvc-block">
+  <h2 class="prvc-block__h">2. Circular progress rings</h2>
+  <div class="prvc-grid prvc-grid--rings">
+    <app-catalog-variation-tile label="Small" [snippet]="s.ringSm">
+      <brightrail-progress type="circular" size="sm" [value]="48" [showLabel]="false" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Medium" [snippet]="s.ringMd">
+      <brightrail-progress type="circular" size="md" [value]="75" [showLabel]="false" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Large + complete icon" [snippet]="s.ringLgComplete">
+      <brightrail-progress type="circular" size="lg" [value]="92" [showRingCompleteIcon]="true" [showLabel]="false" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="prvc-block">
+  <h2 class="prvc-block__h">3. Indeterminate &amp; buffered</h2>
+  <div class="prvc-grid">
+    <app-catalog-variation-tile label="Indeterminate" [snippet]="s.indeterminate">
+      <brightrail-progress type="linear" [indeterminate]="true" label="Indeterminate" [showPercentage]="false" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Buffered" [snippet]="s.buffered">
+      <brightrail-progress type="linear" [buffer]="true" [value]="64" [bufferValue]="85" label="Buffered" [showPercentage]="true" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Query buffering" [snippet]="s.queryMode">
+      <brightrail-progress type="linear" mode="query" [value]="50" label="Query buffering" [showPercentage]="false" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="prvc-block">
+  <h2 class="prvc-block__h">4. Segmented / milestone</h2>
+  <app-catalog-variation-tile label="Milestone preset" [snippet]="s.milestoneStepper">
+    <brightrail-stepper [activeStep]="2" preset="milestone" ariaLabel="Milestones">
+      <brightrail-step caption="Complete" />
+      <brightrail-step caption="Complete" />
+      <brightrail-step caption="60%" />
+      <brightrail-step caption="Pending" />
+      <brightrail-step caption="Pending" />
+    </brightrail-stepper>
+  </app-catalog-variation-tile>
+</section>
+
+<section class="prvc-block">
+  <h2 class="prvc-block__h">5. Step workflow</h2>
+  <app-catalog-variation-tile label="Workflow preset" [snippet]="s.workflowStepper">
+    <brightrail-stepper [activeStep]="2" preset="workflow" ariaLabel="Onboarding">
+      <brightrail-step label="Account Created" />
+      <brightrail-step label="Profile Setup" />
+      <brightrail-step label="Verify Email" />
+      <brightrail-step label="Payment Details" />
+      <brightrail-step label="Complete" />
+    </brightrail-stepper>
+  </app-catalog-variation-tile>
+</section>
+
+<section class="prvc-block">
+  <h2 class="prvc-block__h">6. File upload progress</h2>
+  <div class="prvc-file-block">
+    <app-catalog-variation-tile label="Complete" [snippet]="s.fileComplete">
+      <brightrail-progress-file-row fileName="Project_Proposal.pdf" fileSizeLabel="2.4 MB" [value]="100" state="complete">
+        <span class="br-file-icon-slot">📄</span>
+        <span class="br-file-status-slot" aria-label="Done">✓</span>
+      </brightrail-progress-file-row>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Active upload" [snippet]="s.fileActive">
+      <brightrail-progress-file-row fileName="Budget_2024.xlsx" fileSizeLabel="1.2 MB" [value]="78" state="active">
+        <span class="br-file-icon-slot">📊</span>
+      </brightrail-progress-file-row>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Paused" [snippet]="s.filePaused">
+      <brightrail-progress-file-row fileName="Dashboard.png" fileSizeLabel="3.1 MB" [value]="45" state="paused">
+        <span class="br-file-icon-slot">🖼</span>
+        <span class="br-file-status-slot">⏸</span>
+      </brightrail-progress-file-row>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Queued" [snippet]="s.fileQueued">
+      <brightrail-progress-file-row fileName="data_export.csv" fileSizeLabel="650 KB" [value]="0" state="queued">
+        <span class="br-file-icon-slot">📑</span>
+        <span class="br-file-status-slot">⏱</span>
+      </brightrail-progress-file-row>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="prvc-block">
+  <h2 class="prvc-block__h">7. Table row progress</h2>
+  <app-catalog-variation-tile label="Requirements + UI rows" [snippet]="s.tableRowComplete">
+    <table class="prvc-mini-table">
+      <tbody>
+        <tr>
+          <td>Requirements</td>
+          <td>
+            <brightrail-progress type="linear" [value]="100" statusColor="success" [showLabel]="false" [showPercentage]="false" size="sm" />
+          </td>
+          <td><span class="prvc-tag prvc-tag--ok">Complete</span></td>
+        </tr>
+        <tr>
+          <td>UI / UX</td>
+          <td>
+            <brightrail-progress type="linear" [value]="75" [showLabel]="false" [showPercentage]="false" size="sm" />
+          </td>
+          <td><span class="prvc-tag prvc-tag--blue">In progress</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </app-catalog-variation-tile>
+</section>
+
+<section class="prvc-block">
+  <h2 class="prvc-block__h">8. Dashboard KPI rings</h2>
+  <div class="prvc-grid prvc-grid--kpi">
+    <app-catalog-variation-tile label="Revenue" [snippet]="s.kpiRevenue">
+      <brightrail-progress type="circular" size="sm" kpiTitle="Revenue" [value]="82" detailText="$820K / $1M" kpiStatus="On track" [showLabel]="false" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Utilization" [snippet]="s.kpiUtilization">
+      <brightrail-progress type="circular" size="sm" kpiTitle="Utilization" [value]="64" kpiStatus="Good" [showLabel]="false" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="SLA" [snippet]="s.kpiSla">
+      <brightrail-progress type="circular" size="sm" kpiTitle="SLA" [value]="91" statusColor="success" kpiStatus="Excellent" [showLabel]="false" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="NPS" [snippet]="s.kpiNps">
+      <brightrail-progress type="circular" size="sm" kpiTitle="NPS" [value]="68" statusColor="warning" kpiStatus="Improving" [showLabel]="false" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="prvc-block prvc-block--dark">
+  <h2 class="prvc-block__h">9. Futuristic progress</h2>
+  <div class="prvc-grid prvc-grid--futuristic">
+    <app-catalog-variation-tile label="Futuristic glow ring" [snippet]="s.futuristicGlowRing">
+      <brightrail-progress
+        type="circular"
+        variant="futuristic"
+        surface="dark"
+        trackStyle="glow"
+        canvasBackground="rgba(24, 28, 40, 0.55)"
+        [value]="78"
+        label="Loading…"
+        [showPercentage]="true"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Glass linear" [snippet]="s.futuristicGlassLinear">
+      <brightrail-progress type="linear" variant="glass" surface="dark" [value]="65" label="Processing…" [showPercentage]="false" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neon arc" [snippet]="s.futuristicNeonArc">
+      <brightrail-progress type="circular" variant="neon-arc" surface="dark" trackStyle="glow" [value]="60" label="Syncing data" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Compact card" [snippet]="s.futuristicCompactCard">
+      <brightrail-progress variant="compact-card" [value]="60" label="Upload speed 1.2 GB / 2 GB" etaText="ETA 00:16" surface="dark" />
+    </app-catalog-variation-tile>
+  </div>
+</section>

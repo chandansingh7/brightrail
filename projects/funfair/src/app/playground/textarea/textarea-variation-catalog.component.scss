@@ -1,0 +1,25 @@
+:host {
+  display: block;
+}
+
+.tavc-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tavc-block {
+  margin-bottom: 1.35rem;
+}
+
+.tavc-block__h {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.tavc-block__hint {
+  margin: 0 0 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--ff-muted, #64748b);
+}

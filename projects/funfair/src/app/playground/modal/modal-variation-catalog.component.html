@@ -1,0 +1,250 @@
+<section class="mvc-block">
+  <h2 class="mvc-block__h">1. Modal sizes</h2>
+  <p class="mvc-block__hint">All previews use <code>[contain]="true"</code> with static open dialogs inside the tile shell.</p>
+  <div class="mvc-grid mvc-grid--modals">
+    <app-catalog-variation-tile label="Small (sm)" [snippet]="s.sizeSm">
+      <div class="mvc-shell mvc-shell--sm">
+        <brightrail-modal [isOpen]="true" [contain]="true" size="sm" appearance="default">
+          <brightrail-modal-header>
+            <div brightrailModalTitle>Small dialog</div>
+          </brightrail-modal-header>
+          <brightrail-modal-body>
+            <p class="mvc-body-line">Compact confirmation or notice.</p>
+          </brightrail-modal-body>
+        </brightrail-modal>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Medium (md)" [snippet]="s.sizeMd">
+      <div class="mvc-shell">
+        <brightrail-modal [isOpen]="true" [contain]="true" size="md" appearance="default">
+          <brightrail-modal-header>
+            <div brightrailModalTitle>Medium dialog</div>
+          </brightrail-modal-header>
+          <brightrail-modal-body>
+            <p class="mvc-body-line">Default width for most flows.</p>
+          </brightrail-modal-body>
+        </brightrail-modal>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Large (lg)" [snippet]="s.sizeLg">
+      <div class="mvc-shell mvc-shell--tall">
+        <brightrail-modal [isOpen]="true" [contain]="true" size="lg" appearance="default">
+          <brightrail-modal-header>
+            <div brightrailModalTitle>Large dialog</div>
+          </brightrail-modal-header>
+          <brightrail-modal-body>
+            <p class="mvc-body-line">Forms, wizards, and rich content.</p>
+          </brightrail-modal-body>
+        </brightrail-modal>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Extra large (xl)" [snippet]="s.sizeXl">
+      <div class="mvc-shell mvc-shell--tall">
+        <brightrail-modal [isOpen]="true" [contain]="true" size="xl" appearance="default">
+          <brightrail-modal-header>
+            <div brightrailModalTitle>Extra large</div>
+          </brightrail-modal-header>
+          <brightrail-modal-body>
+            <p class="mvc-body-line">Wide layouts and multi-column content.</p>
+          </brightrail-modal-body>
+        </brightrail-modal>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="mvc-block">
+  <h2 class="mvc-block__h">2. Appearances</h2>
+  <div class="mvc-grid mvc-grid--modals">
+    <app-catalog-variation-tile label="Default" [snippet]="s.appearanceDefault">
+      <div class="mvc-shell">
+        <brightrail-modal [isOpen]="true" [contain]="true" size="md" appearance="default">
+          <brightrail-modal-header>
+            <div brightrailModalTitle>Workspace saved</div>
+          </brightrail-modal-header>
+          <brightrail-modal-body>
+            <p class="mvc-body-line">Neutral chrome for informational dialogs.</p>
+          </brightrail-modal-body>
+          <brightrail-modal-footer>
+            <brightrail-button variant="primary" size="sm">Got it</brightrail-button>
+          </brightrail-modal-footer>
+        </brightrail-modal>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Danger" [snippet]="s.appearanceDanger">
+      <div class="mvc-shell">
+        <brightrail-modal [isOpen]="true" [contain]="true" size="md" appearance="danger">
+          <brightrail-modal-header>
+            <div brightrailModalTitle>Delete project?</div>
+          </brightrail-modal-header>
+          <brightrail-modal-body>
+            <p class="mvc-body-line">Destructive accent for irreversible actions.</p>
+          </brightrail-modal-body>
+          <brightrail-modal-footer>
+            <brightrail-button variant="outline" size="sm">Cancel</brightrail-button>
+            <brightrail-button variant="danger" size="sm">Delete</brightrail-button>
+          </brightrail-modal-footer>
+        </brightrail-modal>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="mvc-block">
+  <h2 class="mvc-block__h">3. Confirmation dialogs</h2>
+  <div class="mvc-grid mvc-grid--modals">
+    <app-catalog-variation-tile label="Destructive confirm" [snippet]="s.confirmDestructive">
+      <div class="mvc-shell">
+        <brightrail-modal [isOpen]="true" [contain]="true" size="md" appearance="danger">
+          <brightrail-modal-header>
+            <div brightrailModalTitle>Delete project?</div>
+          </brightrail-modal-header>
+          <brightrail-modal-body>
+            <p class="mvc-body-line">Permanently removes the project and linked files.</p>
+          </brightrail-modal-body>
+          <brightrail-modal-footer>
+            <brightrail-button variant="outline" size="sm">Cancel</brightrail-button>
+            <brightrail-button variant="danger" size="sm">Delete</brightrail-button>
+          </brightrail-modal-footer>
+        </brightrail-modal>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Acknowledge" [snippet]="s.confirmAcknowledge">
+      <div class="mvc-shell mvc-shell--sm">
+        <brightrail-modal [isOpen]="true" [contain]="true" size="sm" appearance="default">
+          <brightrail-modal-header>
+            <div brightrailModalTitle>Invitation sent</div>
+          </brightrail-modal-header>
+          <brightrail-modal-body>
+            <p class="mvc-body-line">Teammates receive email invites with join instructions.</p>
+          </brightrail-modal-body>
+          <brightrail-modal-footer>
+            <brightrail-button variant="primary" size="sm">Got it</brightrail-button>
+          </brightrail-modal-footer>
+        </brightrail-modal>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="mvc-block">
+  <h2 class="mvc-block__h">4. Form modals</h2>
+  <div class="mvc-grid mvc-grid--modals">
+    <app-catalog-variation-tile label="Rename flow" [snippet]="s.formRename">
+      <div class="mvc-shell mvc-shell--tall">
+        <brightrail-modal [isOpen]="true" [contain]="true" size="md" appearance="default">
+          <brightrail-modal-header>
+            <div brightrailModalTitle>Rename project</div>
+          </brightrail-modal-header>
+          <brightrail-modal-body>
+            <p class="mvc-body-line">Pick a concise name for navigation and billing.</p>
+            <label class="mvc-field-label" for="mvc-rename">Project name</label>
+            <input id="mvc-rename" class="mvc-field-input" type="text" value="Northstar rollout" />
+          </brightrail-modal-body>
+          <brightrail-modal-footer>
+            <brightrail-button variant="outline" size="sm">Cancel</brightrail-button>
+            <brightrail-button variant="primary" size="sm">Continue</brightrail-button>
+          </brightrail-modal-footer>
+        </brightrail-modal>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Input + submit" [snippet]="s.formSubmit">
+      <div class="mvc-shell mvc-shell--tall">
+        <brightrail-modal [isOpen]="true" [contain]="true" size="md" appearance="default">
+          <brightrail-modal-header>
+            <div brightrailModalTitle>Create workspace</div>
+          </brightrail-modal-header>
+          <brightrail-modal-body>
+            <label class="mvc-field-label" for="mvc-workspace">Workspace name</label>
+            <input id="mvc-workspace" class="mvc-field-input" type="text" placeholder="Acme workspace" />
+          </brightrail-modal-body>
+          <brightrail-modal-footer>
+            <brightrail-button variant="outline" size="sm">Cancel</brightrail-button>
+            <brightrail-button variant="primary" size="sm">Submit</brightrail-button>
+          </brightrail-modal-footer>
+        </brightrail-modal>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="mvc-block">
+  <h2 class="mvc-block__h">5. Loading &amp; success patterns</h2>
+  <div class="mvc-grid mvc-grid--modals">
+    <app-catalog-variation-tile label="Loading" [snippet]="s.patternLoading">
+      <div class="mvc-shell">
+        <brightrail-modal [isOpen]="true" [contain]="true" size="md" appearance="default">
+          <brightrail-modal-header>
+            <div brightrailModalTitle>Publishing changes</div>
+          </brightrail-modal-header>
+          <brightrail-modal-body>
+            <div class="mvc-loading" role="status" aria-live="polite">
+              <span class="mvc-loading__spin" aria-hidden="true"></span>
+              <p class="mvc-body-line">Hang tight while we apply updates.</p>
+            </div>
+          </brightrail-modal-body>
+          <brightrail-modal-footer>
+            <brightrail-button variant="primary" size="sm" [disabled]="true">Please wait</brightrail-button>
+          </brightrail-modal-footer>
+        </brightrail-modal>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Success" [snippet]="s.patternSuccess">
+      <div class="mvc-shell mvc-shell--sm">
+        <brightrail-modal [isOpen]="true" [contain]="true" size="sm" appearance="default">
+          <brightrail-modal-header>
+            <div brightrailModalTitle>Invitation sent</div>
+          </brightrail-modal-header>
+          <brightrail-modal-body>
+            <p class="mvc-body-line">Teammates receive email invites.</p>
+          </brightrail-modal-body>
+          <brightrail-modal-footer>
+            <brightrail-button variant="primary" size="sm">Done</brightrail-button>
+          </brightrail-modal-footer>
+        </brightrail-modal>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Error + retry" [snippet]="s.patternErrorRetry">
+      <div class="mvc-shell">
+        <brightrail-modal [isOpen]="true" [contain]="true" size="md" appearance="default">
+          <brightrail-modal-header>
+            <div brightrailModalTitle>Sync failed</div>
+          </brightrail-modal-header>
+          <brightrail-modal-body>
+            <p class="mvc-body-line">We could not reach the sync service.</p>
+          </brightrail-modal-body>
+          <brightrail-modal-footer>
+            <brightrail-button variant="outline" size="sm">Cancel</brightrail-button>
+            <brightrail-button variant="primary" size="sm">Retry</brightrail-button>
+          </brightrail-modal-footer>
+        </brightrail-modal>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="mvc-block">
+  <h2 class="mvc-block__h">6. Example modal markup</h2>
+  <app-catalog-variation-tile label="Baseline destructive dialog" [snippet]="s.exampleMarkup">
+    <div class="mvc-shell mvc-shell--example">
+      <brightrail-modal
+        [isOpen]="true"
+        [contain]="true"
+        size="md"
+        appearance="danger"
+        [labelledBy]="'mvc-example-title'"
+      >
+        <brightrail-modal-header>
+          <div brightrailModalTitle id="mvc-example-title">Delete project?</div>
+        </brightrail-modal-header>
+        <brightrail-modal-body>
+          <p class="mvc-body-line">This permanently removes the project and linked integrations.</p>
+        </brightrail-modal-body>
+        <brightrail-modal-footer>
+          <brightrail-button variant="outline" size="sm">Cancel</brightrail-button>
+          <brightrail-button variant="danger" size="sm">Delete</brightrail-button>
+        </brightrail-modal-footer>
+      </brightrail-modal>
+    </div>
+  </app-catalog-variation-tile>
+</section>

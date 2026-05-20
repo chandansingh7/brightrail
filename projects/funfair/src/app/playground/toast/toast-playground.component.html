@@ -1,0 +1,137 @@
+<div class="bp">
+  <div class="bp-grid">
+    <section class="bp-panel bp-panel--settings" aria-labelledby="t-settings-title">
+      <div class="bp-settings-head">
+        <div class="bp-settings-head__start">
+          <h2 id="t-settings-title" class="bp-settings-head__title">Component settings</h2>
+        </div>
+        <button type="button" class="bp-settings-reset" (click)="resetToDefaults()" title="Reset">
+          <span class="bp-sr-only">Reset toast settings</span>
+          <svg class="bp-settings-reset__icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M12 6V3L8 7l4 4V8c2.76 0 5 2.24 5 5 0 1.28-.48 2.45-1.26 3.35l1.41 1.41A6.96 6.96 0 0 0 19 13c0-3.87-3.13-7-7-7zm0 14c-2.76 0-5-2.24-5-5 0-1.28.48-2.45 1.26-3.35L6.85 10.24A6.96 6.96 0 0 0 5 13c0 3.87 3.13 7 7 7v3l4-4-4-4v3z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="bp-settings-block">
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Component</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" disabled><option>Toast</option></select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Scenario group</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" [ngModel]="selectedRecipeGroup()" (ngModelChange)="onRecipeGroupNgModelChange($event)" [ngModelOptions]="ngModelStandalone">
+              @for (g of recipeGroups; track g) {
+                <option [value]="g">{{ g }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Scenario</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" [ngModel]="recipe()" (ngModelChange)="onRecipeNgModelChange($event)" [ngModelOptions]="ngModelStandalone">
+              @for (opt of recipesInGroup(selectedRecipeGroup()); track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Variant</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" [ngModel]="variant()" (ngModelChange)="variant.set($event)" [ngModelOptions]="ngModelStandalone">
+              @for (v of variantOptions; track v) {
+                <option [value]="v">{{ v }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Title</span>
+          <div class="bp-dropdown bp-dropdown--text">
+            <input class="bp-dropdown__text" [ngModel]="title()" (ngModelChange)="title.set($event)" [ngModelOptions]="ngModelStandalone" />
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Message</span>
+          <div class="bp-dropdown bp-dropdown--text">
+            <input class="bp-dropdown__text" [ngModel]="message()" (ngModelChange)="message.set($event)" [ngModelOptions]="ngModelStandalone" />
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Dismissible</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" [ngModel]="dismissible() ? 'yes' : 'no'" (ngModelChange)="dismissible.set($event === 'yes')" [ngModelOptions]="ngModelStandalone">
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Duration (ms)</span>
+          <div class="bp-dropdown bp-dropdown--text">
+            <input type="number" class="bp-dropdown__text" min="0" step="500" [ngModel]="durationMs()" (ngModelChange)="durationMs.set(+$event)" [ngModelOptions]="ngModelStandalone" />
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Theme</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" [ngModel]="themeService.theme()" (ngModelChange)="themeService.setTheme($event)" [ngModelOptions]="ngModelStandalone">
+              @for (opt of themeRowOptions; track opt.id) {
+                <option [value]="opt.id">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bp-panel bp-panel--preview" aria-labelledby="t-preview-title">
+      <h2 id="t-preview-title" class="bp-panel__title bp-panel__title--live">
+        <span class="bp-live-dot" aria-hidden="true"></span>
+        Live preview
+      </h2>
+      <div class="bp-preview-surface bp-preview-surface--stretch">
+        <div class="bp-preview-inner bp-preview-inner--toast">
+          @if (previewStatic()) {
+            <brightrail-toast
+              [variant]="variant()"
+              [title]="title()"
+              [message]="message()"
+              [dismissible]="dismissible()"
+            />
+          }
+          <div class="t-play-actions">
+            <button type="button" class="t-play-btn t-play-btn--primary" (click)="showToastFromSettings()">Show toast</button>
+            <button type="button" class="t-play-btn" (click)="showStackedToasts()">Show stack</button>
+            <button type="button" class="t-play-btn" (click)="dismissAllToasts()">Dismiss all</button>
+          </div>
+          <p class="t-preview-hint bp-preview-caption">Use the buttons to queue toasts via <code>BrightrailToastService</code>; static preview reflects current bindings.</p>
+        </div>
+      </div>
+      <brightrail-toast-container />
+    </section>
+  </div>
+
+  <section class="bp-code" aria-labelledby="t-code-title">
+    <div class="bp-code__head">
+      <h2 id="t-code-title" class="bp-code__title">Generated snippets</h2>
+      <div class="bp-code__tabs" role="tablist">
+        <button type="button" role="tab" class="bp-tab" [class.is-active]="activeTab() === 'html'" [attr.aria-selected]="activeTab() === 'html'" (click)="selectTab('html')">HTML</button>
+        <button type="button" role="tab" class="bp-tab" [class.is-active]="activeTab() === 'ts'" [attr.aria-selected]="activeTab() === 'ts'" (click)="selectTab('ts')">TS</button>
+        <button type="button" role="tab" class="bp-tab" [class.is-active]="activeTab() === 'scss'" [attr.aria-selected]="activeTab() === 'scss'" (click)="selectTab('scss')">SCSS</button>
+      </div>
+      <button type="button" class="bp-copy" (click)="copySnippet()">Copy</button>
+    </div>
+    <pre class="bp-pre" role="tabpanel"><code>{{ activeSnippet() }}</code></pre>
+  </section>
+</div>

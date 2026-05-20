@@ -1,0 +1,102 @@
+@use '../../styles/tokens' as br;
+
+:host {
+  display: inline-block;
+  max-width: 100%;
+}
+
+.br-sw {
+  --sw-track-w: 2.35rem;
+  --sw-track-h: 1.25rem;
+  --sw-thumb: 1rem;
+  --sw-fill: var(--br-color-primary, #{br.$br-color-primary});
+  --sw-off: #{br.$br-color-border-strong};
+  --sw-font: 0.92rem;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--br-color-text, #{br.$br-color-text});
+  cursor: pointer;
+}
+
+.br-sw__input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.br-sw__track {
+  position: relative;
+  flex-shrink: 0;
+  width: var(--sw-track-w);
+  height: var(--sw-track-h);
+  border-radius: 999px;
+  background: var(--sw-off);
+  transition: background 140ms ease;
+}
+
+.br-sw__thumb {
+  position: absolute;
+  top: 50%;
+  left: 0.14rem;
+  width: var(--sw-thumb);
+  height: var(--sw-thumb);
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(60 64 67 / 28%);
+  transform: translateY(-50%);
+  transition: left 140ms ease;
+}
+
+.br-sw__label {
+  font-size: var(--sw-font);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.br-sw--checked .br-sw__track,
+.br-sw:has(.br-sw__input:checked) .br-sw__track {
+  background: var(--sw-fill);
+}
+
+.br-sw--checked .br-sw__thumb,
+.br-sw:has(.br-sw__input:checked) .br-sw__thumb {
+  left: calc(var(--sw-track-w) - var(--sw-thumb) - 0.14rem);
+}
+
+.br-sw:has(.br-sw__input:focus-visible) .br-sw__track {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--sw-fill) 28%, transparent);
+}
+
+.br-sw--sm {
+  --sw-track-w: 2rem;
+  --sw-track-h: 1.05rem;
+  --sw-thumb: 0.82rem;
+  --sw-font: 0.84rem;
+}
+
+.br-sw--lg {
+  --sw-track-w: 2.75rem;
+  --sw-track-h: 1.45rem;
+  --sw-thumb: 1.18rem;
+  --sw-font: 1rem;
+}
+
+.br-sw--success {
+  --sw-fill: var(--br-color-success, #{br.$br-color-success});
+}
+.br-sw--warning {
+  --sw-fill: var(--br-color-warning, #{br.$br-color-warning});
+}
+.br-sw--danger {
+  --sw-fill: var(--br-color-danger, #{br.$br-color-danger});
+}
+.br-sw--neutral {
+  --sw-fill: var(--br-color-text, #{br.$br-color-text});
+}
+
+.br-sw--disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}

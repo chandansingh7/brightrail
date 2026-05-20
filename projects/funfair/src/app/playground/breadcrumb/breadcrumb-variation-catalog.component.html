@@ -1,0 +1,222 @@
+<section class="bvc-block">
+  <h2 class="bvc-block__h">1. Core breadcrumb types</h2>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="Simple text" [snippet]="s.coreAllLinks">
+      <div class="bvc-row-box">
+        <brightrail-breadcrumb [items]="coreAllLinks" separator="chevron" [withIcons]="false" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="With current page" [snippet]="s.coreWithCurrent">
+      <div class="bvc-row-box">
+        <brightrail-breadcrumb [items]="coreWithCurrent" separator="chevron" [withIcons]="false" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="With current page (accent)" [snippet]="s.coreWithCurrentAccent">
+      <div class="bvc-row-box">
+        <brightrail-breadcrumb
+          [items]="coreWithCurrent"
+          separator="chevron"
+          currentItemStyle="accent"
+          [withIcons]="false"
+        />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">2. Separators</h2>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="Chevron (default)" [snippet]="s.separatorChevron">
+      <div class="bvc-row-box">
+        <brightrail-breadcrumb [items]="short" separator="chevron" [withIcons]="false" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="Slash" [snippet]="s.separatorSlash">
+      <div class="bvc-row-box">
+        <brightrail-breadcrumb [items]="short" separator="slash" [withIcons]="false" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="Dot" [snippet]="s.separatorDot">
+      <div class="bvc-row-box">
+        <brightrail-breadcrumb [items]="short" separator="dot" [withIcons]="false" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="Arrow" [snippet]="s.separatorArrow">
+      <div class="bvc-row-box">
+        <brightrail-breadcrumb [items]="short" separator="arrow" [withIcons]="false" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">3. Sizes</h2>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="Large" [snippet]="s.sizeLg">
+      <div class="bvc-row-box">
+        <brightrail-breadcrumb [items]="coreWithCurrent" size="lg" [withIcons]="false" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="Medium (default)" [snippet]="s.sizeMd">
+      <div class="bvc-row-box">
+        <brightrail-breadcrumb [items]="coreWithCurrent" size="md" [withIcons]="false" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="Compact" [snippet]="s.sizeSm">
+      <div class="bvc-row-box">
+        <brightrail-breadcrumb [items]="coreWithCurrent" size="sm" [withIcons]="false" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">4. States</h2>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="Default" [snippet]="s.stateDefault">
+      <div class="bvc-row-box">
+        <brightrail-breadcrumb [items]="coreWithCurrent" [withIcons]="false" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="Hover" [snippet]="s.stateHover">
+      <div class="bvc-row-box bvc-row-box--hover">
+        <brightrail-breadcrumb [items]="coreWithCurrent" [withIcons]="false" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="Disabled" [snippet]="s.stateDisabled">
+      <div class="bvc-row-box bvc-row-box--disabled">
+        <brightrail-breadcrumb [items]="statesDisabled" [withIcons]="false" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="Current page" [snippet]="s.stateCurrentAccent">
+      <div class="bvc-row-box">
+        <brightrail-breadcrumb [items]="coreWithCurrent" currentItemStyle="accent" [withIcons]="false" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">5. With icons</h2>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="Start icon" [snippet]="s.iconStart">
+      <div class="bvc-row-box">
+        <brightrail-breadcrumb [items]="iconStart" separator="chevron" [withIcons]="true" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="Icon before items" [snippet]="s.iconBeforeItems">
+      <div class="bvc-row-box">
+        <brightrail-breadcrumb [items]="iconBeforeItems" separator="chevron" [withIcons]="true" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">6. Truncation &amp; overflow</h2>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="Long path (truncated)" [snippet]="s.truncationLong">
+      <div class="bvc-row-box">
+        <brightrail-breadcrumb [items]="longPath" [maxItems]="4" truncation="collapse-middle" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="With overflow menu" [snippet]="s.truncationOverflowMenu">
+      <div class="bvc-row-box bvc-row-box--with-menu">
+        <brightrail-breadcrumb [items]="longPath" [maxItems]="3" truncation="collapse-middle" />
+        <button type="button" class="bvc-menu-btn" aria-label="More breadcrumb options">⋮</button>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">7. Enterprise patterns</h2>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="Mobile breadcrumb patterns" [snippet]="s.mobilePattern">
+      <div class="bvc-row-box">
+        <brightrail-breadcrumb [items]="mobileBreadcrumb" separator="arrow" [withIcons]="false" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="File path" [snippet]="s.filePath">
+      <div class="bvc-row-box">
+        <brightrail-breadcrumb [items]="filePathBreadcrumb" separator="chevron" [withIcons]="true" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="Multi-level context" [snippet]="s.multiLevel">
+      <div class="bvc-row-box">
+        <brightrail-breadcrumb [items]="multiLevelBreadcrumb" separator="chevron" [withIcons]="true" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">8. Accessibility guidance</h2>
+  <ul class="bvc-a11y">
+    <li>
+      <span class="bvc-a11y__num bvc-a11y__num--blue">1</span>
+      Use breadcrumbs in a landmark so location is discoverable.
+    </li>
+    <li>
+      <span class="bvc-a11y__num bvc-a11y__num--violet">2</span>
+      Ensure current page announces with <code>aria-current="page"</code>.
+    </li>
+    <li>
+      <span class="bvc-a11y__num bvc-a11y__num--blue">3</span>
+      Keep labels concise and descriptive.
+    </li>
+  </ul>
+</section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">9. Futuristic breadcrumb designs</h2>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="Pill style" [snippet]="s.futuristicPill">
+      <div class="bvc-row-box bvc-row-box--futuristic">
+        <brightrail-breadcrumb [items]="futuristicItems" separator="dot" currentItemStyle="pill" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+  <div class="bvc-demo-row">
+    <app-catalog-variation-tile label="Progressive trail" [snippet]="s.futuristicProgressive">
+      <div class="bvc-row-box bvc-row-box--futuristic">
+        <div class="bvc-progress-trail" aria-hidden="true">
+          <span class="dot is-on"></span><span class="line is-on"></span>
+          <span class="dot is-on"></span><span class="line is-on"></span>
+          <span class="dot is-on"></span><span class="line is-on"></span>
+          <span class="dot"></span><span class="line"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

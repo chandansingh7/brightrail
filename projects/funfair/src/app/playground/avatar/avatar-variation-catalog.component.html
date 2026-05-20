@@ -1,0 +1,274 @@
+<section class="avc-block">
+  <h2 class="avc-block__h">1. Core avatar types</h2>
+  <div class="avc-grid">
+    <app-catalog-variation-tile label="Image avatar" [snippet]="s.imageCore">
+      <brightrail-avatar kind="image" shape="circle" size="lg" [imageSrc]="demoImg" imageAlt="Photo" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Initials avatar" [snippet]="s.initialsCore">
+      <brightrail-avatar kind="initials" name="Jamie Doe" shape="circle" size="lg" tone="primary" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Icon avatar" [snippet]="s.iconCore">
+      <brightrail-avatar kind="icon" icon="user" shape="circle" size="lg" tone="neutral" borderStyle="subtle" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="avc-block">
+  <h2 class="avc-block__h">2. Shapes</h2>
+  <div class="avc-grid">
+    <app-catalog-variation-tile label="Circle" [snippet]="s.shapeCircle">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="demoImg" imageAlt="Circle" borderStyle="subtle" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Rounded square" [snippet]="s.shapeRounded">
+      <brightrail-avatar kind="image" shape="rounded-square" size="md" [imageSrc]="demoImg" imageAlt="Rounded" borderStyle="subtle" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Square" [snippet]="s.shapeSquare">
+      <brightrail-avatar kind="image" shape="square" size="md" [imageSrc]="demoImg" imageAlt="Square" borderStyle="subtle" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="avc-block">
+  <h2 class="avc-block__h">3. Sizes</h2>
+  <p class="avc-block__hint">xs 16px · sm 24px · md 32px · lg 48px · xl 64px</p>
+  <div class="avc-grid avc-grid--sizes">
+    @for (item of [
+      { label: 'XS', snippet: s.sizeXs, size: 'xs' },
+      { label: 'Small', snippet: s.sizeSm, size: 'sm' },
+      { label: 'Medium', snippet: s.sizeMd, size: 'md' },
+      { label: 'Large', snippet: s.sizeLg, size: 'lg' },
+      { label: 'XL', snippet: s.sizeXl, size: 'xl' },
+    ]; track item.size) {
+      <app-catalog-variation-tile [label]="item.label" [snippet]="item.snippet">
+        <brightrail-avatar kind="image" shape="circle" [size]="$any(item.size)" [imageSrc]="demoImg" [imageAlt]="item.label" borderStyle="subtle" />
+      </app-catalog-variation-tile>
+    }
+  </div>
+</section>
+
+<section class="avc-block">
+  <h2 class="avc-block__h">4. States</h2>
+  <div class="avc-grid">
+    <app-catalog-variation-tile label="Default" [snippet]="s.stateDefault">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="demoImg" state="default" borderStyle="subtle" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Hover" [snippet]="s.stateHover">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="demoImg" state="hover" borderStyle="subtle" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Active" [snippet]="s.stateActive">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="demoImg" state="active" borderStyle="subtle" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Disabled" [snippet]="s.stateDisabled">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="demoImg" state="disabled" borderStyle="subtle" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="avc-block">
+  <h2 class="avc-block__h">5. Presence &amp; status</h2>
+  <div class="avc-grid">
+    <app-catalog-variation-tile label="Online" [snippet]="s.statusOnline">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="demoImg" status="online" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Away" [snippet]="s.statusAway">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="demoImg" status="away" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Busy" [snippet]="s.statusBusy">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="demoImg" status="busy" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Offline" [snippet]="s.statusOffline">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="demoImg" status="offline" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="avc-block">
+  <h2 class="avc-block__h">6. Group avatars / stacked avatars</h2>
+  <div class="avc-stack-demos">
+    <app-catalog-variation-tile label="Photo stack · +2" [snippet]="s.groupPhotosOverflow2">
+      <brightrail-avatar-group [maxVisible]="3" ariaLabel="Team members">
+        @for (src of groupPhotoStack; track src) {
+          <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="src" imageAlt="Member" borderStyle="subtle" />
+        }
+      </brightrail-avatar-group>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Initials stack · +5" [snippet]="s.groupInitialsOverflow5">
+      <brightrail-avatar-group [maxVisible]="3" ariaLabel="Initials roster">
+        @for (member of groupInitialsRoster; track member.name) {
+          <brightrail-avatar
+            kind="initials"
+            [name]="member.name"
+            shape="circle"
+            size="md"
+            [tone]="member.tone"
+            borderStyle="subtle"
+          />
+        }
+      </brightrail-avatar-group>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Photo stack · +3" [snippet]="s.groupPhotosOverflow3">
+      <brightrail-avatar-group [maxVisible]="4" ariaLabel="Project team">
+        @for (src of groupPhotoStackSeven; track src) {
+          <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="src" imageAlt="Member" borderStyle="subtle" />
+        }
+      </brightrail-avatar-group>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="avc-block">
+  <h2 class="avc-block__h">7. Profile card patterns</h2>
+  <div class="avc-profile-cards">
+    <app-catalog-variation-tile label="Horizontal card + actions" [snippet]="s.profileCardHorizontal">
+      <article class="avc-profile-card avc-profile-card--horizontal">
+        <brightrail-avatar
+          kind="image"
+          shape="circle"
+          size="lg"
+          [imageSrc]="avatarImg.a02"
+          name="Olivia Rhye"
+          imageAlt="Olivia Rhye"
+          status="online"
+          borderStyle="subtle"
+        />
+        <div class="avc-profile-card__body">
+          <div class="avc-profile-card__name">Olivia Rhye</div>
+          <div class="avc-profile-card__role">Product Designer</div>
+          <div class="avc-profile-card__presence avc-profile-card__presence--online">
+            <span class="avc-profile-card__dot" aria-hidden="true"></span>
+            Online
+          </div>
+          <div class="avc-profile-card__actions">
+            <button type="button" class="avc-profile-card__icon-btn" aria-label="Message Olivia">
+              <brightrail-button-icon name="headset" />
+            </button>
+            <button type="button" class="avc-profile-card__icon-btn" aria-label="Schedule with Olivia">
+              <brightrail-button-icon name="calendar" />
+            </button>
+            <button type="button" class="avc-profile-card__icon-btn" aria-label="More actions for Olivia">
+              <brightrail-button-icon name="more" />
+            </button>
+          </div>
+        </div>
+      </article>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Centered meta under glyph" [snippet]="s.profileCardCentered">
+      <div class="avc-profile-card avc-profile-card--centered">
+        <brightrail-avatar
+          kind="image"
+          shape="circle"
+          size="lg"
+          [imageSrc]="demoImg"
+          name="Olivia Rhye"
+          label="Olivia Rhye"
+          subtitle="Product Designer"
+          status="online"
+          [showProfileMeta]="true"
+          borderStyle="subtle"
+        />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="avc-block">
+  <h2 class="avc-block__h">8. Enterprise patterns</h2>
+  <div class="avc-grid">
+    <app-catalog-variation-tile label="Assignee" [snippet]="s.enterpriseAssignee">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="avatarImg.a04" enterpriseRole="assignee" borderStyle="subtle" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Team member" [snippet]="s.enterpriseTeam">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="avatarImg.a05" enterpriseRole="team-member" borderStyle="subtle" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Reviewer" [snippet]="s.enterpriseReviewer">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="avatarImg.a06" enterpriseRole="reviewer" borderStyle="subtle" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Comment" [snippet]="s.enterpriseComment">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="avatarImg.a07" enterpriseRole="comment" borderStyle="subtle" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="avc-block">
+  <h2 class="avc-block__h">9. Futuristic avatar designs</h2>
+  <div class="avc-grid avc-grid--futuristic">
+    <app-catalog-variation-tile label="Neon presence" [snippet]="s.variantNeon">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="avatarImg.a05" variant="neon" status="online" glowColor="#22d3ee" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="AI assistant" [snippet]="s.variantAi">
+      <brightrail-avatar kind="icon" icon="user" shape="circle" size="md" variant="ai-assistant" tone="neutral" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Glassmorphism chip" [snippet]="s.variantGlass">
+      <div class="avc-glass-chip">
+        <brightrail-avatar kind="image" shape="rounded-square" size="md" [imageSrc]="avatarImg.a06" variant="glassmorphism" status="online" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber dashboard" [snippet]="s.variantCyber">
+      <div class="avc-cyber-frame">
+        <span class="avc-cyber-corner avc-cyber-corner--tl" aria-hidden="true"></span>
+        <span class="avc-cyber-corner avc-cyber-corner--tr" aria-hidden="true"></span>
+        <span class="avc-cyber-corner avc-cyber-corner--bl" aria-hidden="true"></span>
+        <span class="avc-cyber-corner avc-cyber-corner--br" aria-hidden="true"></span>
+        <brightrail-avatar kind="image" shape="square" size="md" [imageSrc]="avatarImg.a07" variant="cyber" status="online" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Sci-fi profile badge" [snippet]="s.variantSciFi">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="avatarImg.a08" variant="sci-fi-badge" enterpriseRole="reviewer" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Presence ring" [snippet]="s.variantPresenceRing">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="avatarImg.a05" variant="presence-ring" status="online" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="avc-block avc-block--extended" aria-labelledby="avc-extended-title">
+  <h2 id="avc-extended-title" class="avc-block__h">Extended library API</h2>
+  <p class="avc-block__hint">Additional inputs supported by <code>brightrail-avatar</code> beyond the reference mock.</p>
+
+  <h3 class="avc-block__sub">Border styles</h3>
+  <div class="avc-grid">
+    <app-catalog-variation-tile label="None" [snippet]="s.borderNone">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="demoImg" borderStyle="none" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Subtle" [snippet]="s.borderSubtle">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="demoImg" borderStyle="subtle" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Soft glow" [snippet]="s.borderSoftGlow">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="demoImg" borderStyle="soft-glow" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Ring" [snippet]="s.borderRing">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="demoImg" borderStyle="ring" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Hard edge" [snippet]="s.borderHard">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="demoImg" borderStyle="hard-edge" />
+    </app-catalog-variation-tile>
+  </div>
+
+  <h3 class="avc-block__sub">Status position</h3>
+  <div class="avc-grid">
+    <app-catalog-variation-tile label="Bottom right" [snippet]="s.statusPosBr">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="demoImg" status="online" statusPosition="bottom-right" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Bottom left" [snippet]="s.statusPosBl">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="demoImg" status="online" statusPosition="bottom-left" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Top right" [snippet]="s.statusPosTr">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="demoImg" status="online" statusPosition="top-right" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Top left" [snippet]="s.statusPosTl">
+      <brightrail-avatar kind="image" shape="circle" size="md" [imageSrc]="demoImg" status="online" statusPosition="top-left" />
+    </app-catalog-variation-tile>
+  </div>
+
+  <h3 class="avc-block__sub">Tooltips</h3>
+  <app-catalog-variation-tile label="Roster hint" [snippet]="s.tooltipRoster">
+    <brightrail-avatar
+      kind="image"
+      shape="circle"
+      size="lg"
+      [imageSrc]="demoImg"
+      tooltip="Jamie Doe · Engineering · London"
+      tooltipPlacement="top"
+    />
+  </app-catalog-variation-tile>
+</section>

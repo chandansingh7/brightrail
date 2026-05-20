@@ -1,0 +1,291 @@
+<section class="dvc-block">
+  <h2 class="dvc-block__h">1. Core drawer types</h2>
+  <div class="dvc-grid dvc-grid--drawers">
+    <app-catalog-variation-tile label="Navigation drawer" [snippet]="s.coreNavigation">
+      <div class="dvc-shell dvc-shell--tall">
+        <brightrail-drawer [isOpen]="true" [contain]="true" placement="left" size="narrow" mode="dismissible" [showBackdrop]="false">
+          <brightrail-drawer-header [showCloseButton]="true">
+            <div brightrailDrawerTitle>Projects</div>
+            <div brightrailDrawerSubtitle>Quick links and team navigation.</div>
+          </brightrail-drawer-header>
+          <brightrail-drawer-body>
+            <p class="dvc-body-line">Dashboard</p>
+            <p class="dvc-body-line">Team roster</p>
+          </brightrail-drawer-body>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Settings panel" [snippet]="s.coreSettings">
+      <div class="dvc-shell dvc-shell--tall">
+        <brightrail-drawer [isOpen]="true" [contain]="true" placement="right" size="wide" mode="modal" backdropStyle="blur">
+          <brightrail-drawer-header [showCloseButton]="true">
+            <div brightrailDrawerTitle>Workspace settings</div>
+          </brightrail-drawer-header>
+          <brightrail-drawer-body>
+            <p class="dvc-body-line">Alert defaults and policy.</p>
+          </brightrail-drawer-body>
+          <brightrail-drawer-footer>
+            <brightrail-button variant="primary" size="sm">Apply</brightrail-button>
+          </brightrail-drawer-footer>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Detail inspector" [snippet]="s.coreDetailInspector">
+      <div class="dvc-shell dvc-shell--tall">
+        <brightrail-drawer [isOpen]="true" [contain]="true" placement="right" size="narrow" mode="dismissible" [showBackdrop]="false">
+          <brightrail-drawer-header [showCloseButton]="true">
+            <div brightrailDrawerTitle>Detail inspector</div>
+          </brightrail-drawer-header>
+          <brightrail-drawer-body>
+            <p class="dvc-body-line">Object metadata and activity.</p>
+          </brightrail-drawer-body>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Bottom sheet" [snippet]="s.coreBottomSheet">
+      <div class="dvc-shell dvc-shell--sheet">
+        <brightrail-drawer [isOpen]="true" [contain]="true" placement="bottom" size="medium" mode="modal">
+          <brightrail-drawer-header [showCloseButton]="true">
+            <div brightrailDrawerTitle>Quick actions</div>
+          </brightrail-drawer-header>
+          <brightrail-drawer-body>
+            <p class="dvc-body-line">Run fast actions without leaving context.</p>
+          </brightrail-drawer-body>
+          <brightrail-drawer-footer>
+            <brightrail-button variant="outline" size="sm">Cancel</brightrail-button>
+            <brightrail-button variant="primary" size="sm">Confirm</brightrail-button>
+          </brightrail-drawer-footer>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="dvc-block">
+  <h2 class="dvc-block__h">2. Placements</h2>
+  <p class="dvc-block__hint">All previews use <code>[contain]="true"</code> — open panels or closed shells within the tile.</p>
+  <div class="dvc-grid dvc-grid--drawers">
+    <app-catalog-variation-tile label="Left · open" [snippet]="s.placementLeft">
+      <div class="dvc-shell dvc-shell--tall">
+        <brightrail-drawer [isOpen]="true" [contain]="true" placement="left" size="narrow" mode="modal">
+          <brightrail-drawer-header [showCloseButton]="true">
+            <div brightrailDrawerTitle>Left panel</div>
+          </brightrail-drawer-header>
+          <brightrail-drawer-body><p class="dvc-body-line">Navigation rail.</p></brightrail-drawer-body>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Right · open" [snippet]="s.placementRight">
+      <div class="dvc-shell dvc-shell--tall">
+        <brightrail-drawer [isOpen]="true" [contain]="true" placement="right" size="medium" mode="modal">
+          <brightrail-drawer-header [showCloseButton]="true">
+            <div brightrailDrawerTitle>Right panel</div>
+          </brightrail-drawer-header>
+          <brightrail-drawer-body><p class="dvc-body-line">Form or detail content.</p></brightrail-drawer-body>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Bottom · open" [snippet]="s.placementBottom">
+      <div class="dvc-shell dvc-shell--sheet">
+        <brightrail-drawer [isOpen]="true" [contain]="true" placement="bottom" size="medium" mode="modal">
+          <brightrail-drawer-header [showCloseButton]="true">
+            <div brightrailDrawerTitle>Bottom sheet</div>
+          </brightrail-drawer-header>
+          <brightrail-drawer-body><p class="dvc-body-line">Mobile-first actions.</p></brightrail-drawer-body>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Top · open" [snippet]="s.placementTop">
+      <div class="dvc-shell dvc-shell--top">
+        <brightrail-drawer [isOpen]="true" [contain]="true" placement="top" size="medium" mode="modal">
+          <brightrail-drawer-header [showCloseButton]="true">
+            <div brightrailDrawerTitle>Top panel</div>
+          </brightrail-drawer-header>
+          <brightrail-drawer-body><p class="dvc-body-line">Banner or filters.</p></brightrail-drawer-body>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Right · closed" [snippet]="s.placementLeftClosed" hint="Closed state in contained shell">
+      <div class="dvc-shell dvc-shell--tall">
+        <div class="dvc-fake-app">
+          <span class="dvc-fake-app__title">Projects</span>
+          <span class="dvc-fake-app__sub">Drawer closed — page visible.</span>
+        </div>
+        <brightrail-drawer [isOpen]="false" [contain]="true" placement="right" size="medium" mode="modal">
+          <brightrail-drawer-header [showCloseButton]="true">
+            <div brightrailDrawerTitle>Hidden panel</div>
+          </brightrail-drawer-header>
+          <brightrail-drawer-body></brightrail-drawer-body>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="dvc-block">
+  <h2 class="dvc-block__h">3. Sizes</h2>
+  <p class="dvc-block__hint">narrow 320px · medium 480px · wide 720px</p>
+  <div class="dvc-grid dvc-grid--drawers">
+    <app-catalog-variation-tile label="Narrow" [snippet]="s.sizeNarrow">
+      <div class="dvc-shell dvc-shell--tall">
+        <brightrail-drawer [isOpen]="true" [contain]="true" placement="right" size="narrow" mode="modal">
+          <brightrail-drawer-header [showCloseButton]="true">
+            <div brightrailDrawerTitle>Narrow</div>
+          </brightrail-drawer-header>
+          <brightrail-drawer-body><p class="dvc-body-line">320px rail.</p></brightrail-drawer-body>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Medium" [snippet]="s.sizeMedium">
+      <div class="dvc-shell dvc-shell--tall">
+        <brightrail-drawer [isOpen]="true" [contain]="true" placement="right" size="medium" mode="modal">
+          <brightrail-drawer-header [showCloseButton]="true">
+            <div brightrailDrawerTitle>Medium</div>
+          </brightrail-drawer-header>
+          <brightrail-drawer-body><p class="dvc-body-line">480px form panel.</p></brightrail-drawer-body>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Wide" [snippet]="s.sizeWide">
+      <div class="dvc-shell dvc-shell--tall">
+        <brightrail-drawer [isOpen]="true" [contain]="true" placement="right" size="wide" mode="modal">
+          <brightrail-drawer-header [showCloseButton]="true">
+            <div brightrailDrawerTitle>Wide</div>
+          </brightrail-drawer-header>
+          <brightrail-drawer-body><p class="dvc-body-line">720px settings or wizard.</p></brightrail-drawer-body>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="dvc-block">
+  <h2 class="dvc-block__h">4. Modes &amp; backdrop styles</h2>
+  <div class="dvc-grid dvc-grid--drawers">
+    <app-catalog-variation-tile label="Modal · dim" [snippet]="s.modeModalDim">
+      <div class="dvc-shell dvc-shell--tall">
+        <brightrail-drawer [isOpen]="true" [contain]="true" placement="right" size="medium" mode="modal" [showBackdrop]="true" backdropStyle="dim">
+          <brightrail-drawer-header [showCloseButton]="true">
+            <div brightrailDrawerTitle>Modal dim</div>
+          </brightrail-drawer-header>
+          <brightrail-drawer-body><p class="dvc-body-line">Standard overlay.</p></brightrail-drawer-body>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Modal · blur" [snippet]="s.modeModalBlur">
+      <div class="dvc-shell dvc-shell--tall">
+        <brightrail-drawer [isOpen]="true" [contain]="true" placement="right" size="medium" mode="modal" [showBackdrop]="true" backdropStyle="blur">
+          <brightrail-drawer-header [showCloseButton]="true">
+            <div brightrailDrawerTitle>Modal blur</div>
+          </brightrail-drawer-header>
+          <brightrail-drawer-body><p class="dvc-body-line">Blurred backdrop.</p></brightrail-drawer-body>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Modal · glass" [snippet]="s.modeModalGlass">
+      <div class="dvc-shell dvc-shell--tall">
+        <brightrail-drawer [isOpen]="true" [contain]="true" placement="right" size="medium" mode="modal" [showBackdrop]="true" backdropStyle="glass">
+          <brightrail-drawer-header [showCloseButton]="true">
+            <div brightrailDrawerTitle>Modal glass</div>
+          </brightrail-drawer-header>
+          <brightrail-drawer-body><p class="dvc-body-line">Glass overlay.</p></brightrail-drawer-body>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Dismissible" [snippet]="s.modeDismissible">
+      <div class="dvc-shell dvc-shell--tall">
+        <div class="dvc-fake-app">
+          <span class="dvc-fake-app__title">Page stays interactive</span>
+        </div>
+        <brightrail-drawer [isOpen]="true" [contain]="true" placement="right" size="narrow" mode="dismissible" [showBackdrop]="false">
+          <brightrail-drawer-header [showCloseButton]="true">
+            <div brightrailDrawerTitle>Dismissible</div>
+          </brightrail-drawer-header>
+          <brightrail-drawer-body><p class="dvc-body-line">No backdrop lock.</p></brightrail-drawer-body>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Persistent" [snippet]="s.modePersistent">
+      <div class="dvc-shell dvc-shell--tall">
+        <brightrail-drawer [isOpen]="true" [contain]="true" placement="left" size="narrow" mode="persistent" [showBackdrop]="false">
+          <brightrail-drawer-body><p class="dvc-body-line">Always visible shell.</p></brightrail-drawer-body>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="dvc-block">
+  <h2 class="dvc-block__h">5. Surfaces</h2>
+  <div class="dvc-grid dvc-grid--drawers">
+    <app-catalog-variation-tile label="Default" [snippet]="s.surfaceDefault">
+      <div class="dvc-shell dvc-shell--tall">
+        <brightrail-drawer [isOpen]="true" [contain]="true" placement="right" size="medium" mode="modal" surface="default">
+          <brightrail-drawer-header [showCloseButton]="true">
+            <div brightrailDrawerTitle>Default surface</div>
+          </brightrail-drawer-header>
+          <brightrail-drawer-body><p class="dvc-body-line">Standard panel.</p></brightrail-drawer-body>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Glass" [snippet]="s.surfaceGlass">
+      <div class="dvc-shell dvc-shell--tall dvc-shell--glass-bg">
+        <brightrail-drawer [isOpen]="true" [contain]="true" placement="right" size="medium" mode="modal" surface="glass" backdropStyle="glass">
+          <brightrail-drawer-header [showCloseButton]="true">
+            <div brightrailDrawerTitle>Glass panel</div>
+          </brightrail-drawer-header>
+          <brightrail-drawer-body><p class="dvc-body-line">Glassmorphism treatment.</p></brightrail-drawer-body>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Gradient" [snippet]="s.surfaceGradient">
+      <div class="dvc-shell dvc-shell--tall">
+        <brightrail-drawer [isOpen]="true" [contain]="true" placement="right" size="medium" mode="modal" surface="gradient" backdropStyle="blur">
+          <brightrail-drawer-header [showCloseButton]="true">
+            <div brightrailDrawerTitle>Gradient panel</div>
+          </brightrail-drawer-header>
+          <brightrail-drawer-body><p class="dvc-body-line">Accent gradient edge.</p></brightrail-drawer-body>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="AI command shell" [snippet]="s.surfaceAi">
+      <div class="dvc-shell dvc-shell--tall dvc-shell--ai-bg">
+        <brightrail-drawer [isOpen]="true" [contain]="true" placement="right" size="wide" mode="modal" surface="ai" backdropStyle="glass">
+          <brightrail-drawer-header [showCloseButton]="true">
+            <div brightrailDrawerTitle>AI command center</div>
+          </brightrail-drawer-header>
+          <brightrail-drawer-body><p class="dvc-body-line">Smart suggestions shell.</p></brightrail-drawer-body>
+        </brightrail-drawer>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="dvc-block">
+  <h2 class="dvc-block__h">6. Example drawer markup</h2>
+  <app-catalog-variation-tile label="Baseline form panel" [snippet]="s.exampleMarkup">
+    <div class="dvc-shell dvc-shell--example">
+      <brightrail-drawer
+        [isOpen]="true"
+        [contain]="true"
+        placement="right"
+        size="medium"
+        mode="modal"
+        [showBackdrop]="true"
+        backdropStyle="glass"
+        surface="gradient"
+      >
+        <brightrail-drawer-header [showCloseButton]="true">
+          <div brightrailDrawerTitle>Edit project details</div>
+        </brightrail-drawer-header>
+        <brightrail-drawer-body>
+          <p class="dvc-body-line">Use this baseline markup and tune placement, size, mode, overlay, and surface for your app.</p>
+        </brightrail-drawer-body>
+        <brightrail-drawer-footer>
+          <brightrail-button variant="outline" size="sm">Cancel</brightrail-button>
+          <brightrail-button variant="primary" size="sm">Save changes</brightrail-button>
+        </brightrail-drawer-footer>
+      </brightrail-drawer>
+    </div>
+  </app-catalog-variation-tile>
+</section>

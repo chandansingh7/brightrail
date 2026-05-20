@@ -1,0 +1,17 @@
+@use '../button/button-playground.component.scss' as *;
+@use '../playground-preview-fixes.scss' as *;
+
+.bp-preview-inner--switch {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.sw-play-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-width: 14rem;
+  font-size: 0.875rem;
+}

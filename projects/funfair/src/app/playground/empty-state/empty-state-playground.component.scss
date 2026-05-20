@@ -1,0 +1,19 @@
+@use '../button/button-playground.component.scss' as *;
+@use '../playground-preview-fixes.scss' as *;
+
+:host .bp-preview-surface.bp-preview-surface--stretch {
+  align-items: center;
+  justify-content: center;
+}
+
+:host .bp-preview-inner--es {
+  width: 100%;
+  max-width: 28rem;
+  padding: 0.75rem 1rem;
+  box-sizing: border-box;
+}
+
+.es-preview-hint {
+  margin: 0.75rem 0 0;
+  text-align: center;
+}

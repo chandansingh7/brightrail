@@ -1,0 +1,90 @@
+.vh {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+}
+
+.vh-hero__eyebrow {
+  margin: 0 0 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ff-muted, #64748b);
+}
+
+.vh-hero__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--ff-text-core, #0f172a);
+}
+
+.vh-hero__lead,
+.vh-hero__meta {
+  margin: 0 0 0.65rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--ff-text-core, #334155);
+  max-width: 44rem;
+}
+
+.vh-hero__meta {
+  font-size: 0.82rem;
+  color: var(--ff-muted, #64748b);
+}
+
+.vh-grid {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  margin-top: 1.5rem;
+}
+
+.vh-card {
+  padding: 1rem 1.05rem;
+  border: 1px solid var(--ff-border, #e2e8f0);
+  border-radius: 0.65rem;
+  background: var(--ff-surface, #fff);
+}
+
+.vh-card--muted {
+  opacity: 0.92;
+  border-style: dashed;
+}
+
+.vh-card__title {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.vh-card__selector,
+.vh-card__doc,
+.vh-card__status {
+  margin: 0 0 0.35rem;
+  font-size: 0.78rem;
+  color: var(--ff-muted, #64748b);
+}
+
+.vh-card__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.65rem;
+}
+
+.vh-card__link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ff-brand, #2563eb);
+  text-decoration: none;
+}
+
+.vh-card__link--primary {
+  text-decoration: underline;
+}
+
+.vh-card__link:hover {
+  color: var(--ff-brand-strong, #1d4ed8);
+}

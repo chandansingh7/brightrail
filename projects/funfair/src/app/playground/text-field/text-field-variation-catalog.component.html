@@ -1,0 +1,189 @@
+<section class="tfvc-block">
+  <h2 class="tfvc-block__h">1. Appearances</h2>
+  <div class="tfvc-grid tfvc-grid--wide">
+    <app-catalog-variation-tile label="Filled" [snippet]="s.appearanceFilled">
+      <brightrail-text-field
+        appearance="filled"
+        label="Label"
+        placeholder="Placeholder"
+        [(ngModel)]="appearanceValue"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Outlined" [snippet]="s.appearanceOutlined">
+      <brightrail-text-field
+        appearance="outlined"
+        label="Label"
+        placeholder="Placeholder"
+        [(ngModel)]="appearanceValue"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Underline" [snippet]="s.appearanceUnderline">
+      <brightrail-text-field
+        appearance="underline"
+        label="Label"
+        placeholder="Placeholder"
+        [(ngModel)]="appearanceValue"
+      />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tfvc-block">
+  <h2 class="tfvc-block__h">2. Label positions</h2>
+  <div class="tfvc-grid tfvc-grid--wide">
+    <app-catalog-variation-tile label="Top" [snippet]="s.labelTop">
+      <brightrail-text-field
+        appearance="outlined"
+        labelPosition="top"
+        label="Email"
+        placeholder="you@company.com"
+        [(ngModel)]="labelDemoValue"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Inset (on border)" [snippet]="s.labelInset">
+      <brightrail-text-field
+        appearance="outlined"
+        labelPosition="inset"
+        label="Project name"
+        placeholder=" "
+        [(ngModel)]="insetValue"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Left" [snippet]="s.labelLeft">
+      <brightrail-text-field
+        appearance="outlined"
+        labelPosition="left"
+        label="Amount"
+        suffix="USD"
+        suffixPosition="right"
+        [(ngModel)]="leftLabelValue"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Right" [snippet]="s.labelRight">
+      <brightrail-text-field
+        appearance="outlined"
+        labelPosition="right"
+        label="Notes"
+        [(ngModel)]="rightLabelValue"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="None" [snippet]="s.labelNone">
+      <brightrail-text-field
+        appearance="outlined"
+        labelPosition="none"
+        placeholder="Search…"
+        iconLeft="search"
+        [(ngModel)]="searchValue"
+      />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tfvc-block">
+  <h2 class="tfvc-block__h">3. Sizes</h2>
+  <div class="tfvc-grid tfvc-grid--sizes">
+    @for (item of [
+      { label: 'XS', snippet: s.sizeXs, size: 'xs' },
+      { label: 'Small', snippet: s.sizeSm, size: 'sm' },
+      { label: 'Medium', snippet: s.sizeMd, size: 'md' },
+      { label: 'Large', snippet: s.sizeLg, size: 'lg' },
+      { label: 'XL', snippet: s.sizeXl, size: 'xl' },
+    ]; track item.size) {
+      <app-catalog-variation-tile [label]="item.label" [snippet]="item.snippet">
+        <brightrail-text-field
+          appearance="outlined"
+          [size]="$any(item.size)"
+          [label]="item.label"
+          [(ngModel)]="sizeValue"
+        />
+      </app-catalog-variation-tile>
+    }
+  </div>
+</section>
+
+<section class="tfvc-block">
+  <h2 class="tfvc-block__h">4. Statuses</h2>
+  <div class="tfvc-grid tfvc-grid--wide">
+    <app-catalog-variation-tile label="Success" [snippet]="s.statusSuccess">
+      <brightrail-text-field
+        appearance="outlined"
+        label="Username"
+        status="success"
+        hint="Available"
+        [(ngModel)]="successValue"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Warning" [snippet]="s.statusWarning">
+      <brightrail-text-field appearance="outlined" label="Phone" status="warning" [(ngModel)]="warningValue" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Error" [snippet]="s.statusError">
+      <brightrail-text-field appearance="outlined" label="Email" status="error" [(ngModel)]="errorValue" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Info" [snippet]="s.statusInfo">
+      <brightrail-text-field appearance="outlined" label="Reference" status="info" [(ngModel)]="infoValue" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Disabled" [snippet]="s.statusDisabled">
+      <brightrail-text-field
+        appearance="outlined"
+        label="Account ID"
+        [disabled]="true"
+        [(ngModel)]="disabledValue"
+      />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tfvc-block">
+  <h2 class="tfvc-block__h">5. Shapes</h2>
+  <div class="tfvc-grid">
+    <app-catalog-variation-tile label="Rounded (default)" [snippet]="s.shapeDefault">
+      <brightrail-text-field appearance="outlined" shape="default" label="Rounded" [(ngModel)]="shapeValue" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Square" [snippet]="s.shapeSquare">
+      <brightrail-text-field appearance="outlined" shape="square" label="Square" [(ngModel)]="shapeValue" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Pill" [snippet]="s.shapePill">
+      <brightrail-text-field appearance="outlined" shape="pill" label="Pill" [(ngModel)]="shapeValue" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="tfvc-block">
+  <h2 class="tfvc-block__h">6. Clearable, password &amp; icons</h2>
+  <div class="tfvc-grid tfvc-grid--wide">
+    <app-catalog-variation-tile label="Clearable" [snippet]="s.clearable">
+      <brightrail-text-field
+        appearance="outlined"
+        label="Search"
+        iconLeft="search"
+        [clearable]="true"
+        [(ngModel)]="clearableValue"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Password" [snippet]="s.password">
+      <brightrail-text-field
+        appearance="outlined"
+        label="Password"
+        inputType="password"
+        [showPasswordToggle]="true"
+        [(ngModel)]="passwordValue"
+      />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Icon left" [snippet]="s.iconLeft">
+      <brightrail-text-field appearance="outlined" label="Email" iconLeft="user" [(ngModel)]="iconLeftValue" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Icon right" [snippet]="s.iconRight">
+      <brightrail-text-field appearance="outlined" label="Website" iconRight="info" [(ngModel)]="iconRightValue" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Icons + suffix" [snippet]="s.iconsBoth">
+      <brightrail-text-field
+        appearance="outlined"
+        label="Amount"
+        iconLeft="filter"
+        suffix="kg"
+        suffixPosition="right"
+        [(ngModel)]="iconsBothValue"
+      />
+    </app-catalog-variation-tile>
+  </div>
+</section>

@@ -1,0 +1,117 @@
+<section class="gvc-block">
+  <h2 class="gvc-block__h">1. Line graph</h2>
+  <div class="gvc-grid">
+    <app-catalog-variation-tile label="Default" [snippet]="s.lineDefault">
+      <brightrail-graph kind="line" [series]="salesOverview" yAxisLabel="Revenue (USD)" [height]="220" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Smooth" [snippet]="s.lineSmooth">
+      <brightrail-graph kind="line-smooth" [series]="salesOverview" yAxisLabel="Revenue (USD)" [height]="220" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="With area" [snippet]="s.lineArea">
+      <brightrail-graph kind="line-area" [series]="salesOverview" [showArea]="true" yAxisLabel="Revenue (USD)" [height]="220" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Multi line" [snippet]="s.lineMulti">
+      <brightrail-graph kind="line-multi" [series]="salesMulti" yAxisLabel="Revenue (USD)" [height]="220" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="gvc-block">
+  <h2 class="gvc-block__h">2. Bar chart</h2>
+  <div class="gvc-grid">
+    <app-catalog-variation-tile label="Vertical" [snippet]="s.barVertical">
+      <brightrail-graph kind="bar-vertical" [series]="salesOverview" yAxisLabel="Units" [height]="220" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Stacked" [snippet]="s.barStacked">
+      <brightrail-graph kind="bar-stacked" [series]="channelMix" yAxisLabel="Share" [height]="220" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Horizontal" [snippet]="s.barHorizontal">
+      <brightrail-graph kind="bar-horizontal" [series]="salesOverview" yAxisLabel="Revenue" [height]="220" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Grouped" [snippet]="s.barGrouped">
+      <brightrail-graph kind="bar-grouped" [series]="channelMix" yAxisLabel="Volume" [height]="220" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="gvc-block">
+  <h2 class="gvc-block__h">3. Area graph</h2>
+  <div class="gvc-grid">
+    <app-catalog-variation-tile label="Default" [snippet]="s.areaDefault">
+      <brightrail-graph kind="area" [series]="salesOverview" [showArea]="true" yAxisLabel="Revenue (USD)" [height]="220" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Gradient" [snippet]="s.areaGradient">
+      <brightrail-graph kind="area-gradient" [series]="salesOverview" [showArea]="true" yAxisLabel="Revenue (USD)" [height]="220" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Stacked area" [snippet]="s.areaStacked">
+      <brightrail-graph kind="area-stacked" [series]="channelMix" [showArea]="true" yAxisLabel="Share" [height]="220" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Step area" [snippet]="s.areaStep">
+      <brightrail-graph kind="area-step" [series]="salesOverview" [showArea]="true" yAxisLabel="Revenue (USD)" [height]="220" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="gvc-block">
+  <h2 class="gvc-block__h">4. Donut / pie chart</h2>
+  <div class="gvc-grid">
+    <app-catalog-variation-tile label="Standard donut" [snippet]="s.donutStandard">
+      <brightrail-graph kind="donut" [segments]="channelSegments" [height]="220" ariaLabel="Traffic by channel" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Pie chart" [snippet]="s.pieStandard">
+      <brightrail-graph kind="pie" [segments]="channelSegments" [height]="220" ariaLabel="Channel mix" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="gvc-block">
+  <h2 class="gvc-block__h">5. Radial / gauge chart</h2>
+  <div class="gvc-grid">
+    <app-catalog-variation-tile label="Radial progress" [snippet]="s.radialProgress">
+      <brightrail-graph kind="radial" [radialValue]="68" [height]="220" ariaLabel="Goal completion" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Gauge" [snippet]="s.gauge">
+      <brightrail-graph kind="gauge" [gaugeValue]="72" [height]="220" ariaLabel="Performance gauge" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="gvc-block">
+  <h2 class="gvc-block__h">6. Scatter / bubble chart</h2>
+  <div class="gvc-grid">
+    <app-catalog-variation-tile label="Scatter plot" [snippet]="s.scatterPlot">
+      <brightrail-graph kind="scatter" [series]="scatterSeries" yAxisLabel="Score" [height]="220" />
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Bubble chart" [snippet]="s.bubbleChart">
+      <brightrail-graph kind="bubble" [series]="bubbleSeries" yAxisLabel="Value" [height]="220" />
+    </app-catalog-variation-tile>
+  </div>
+</section>
+
+<section class="gvc-block">
+  <h2 class="gvc-block__h">7. Mixed chart</h2>
+  <app-catalog-variation-tile label="Bar + line" [snippet]="s.mixedChart">
+    <brightrail-graph kind="mixed" [series]="mixedSeries" yAxisLabel="Units / Conversion" [height]="220" />
+  </app-catalog-variation-tile>
+</section>
+
+<section class="gvc-block">
+  <h2 class="gvc-block__h">8. Candlestick chart</h2>
+  <app-catalog-variation-tile label="OHLC" [snippet]="s.candlestick">
+    <brightrail-graph kind="candlestick" [series]="candleSeries" yAxisLabel="Price (USD)" [height]="220" />
+  </app-catalog-variation-tile>
+</section>
+
+<section class="gvc-block">
+  <h2 class="gvc-block__h">9. Heatmap chart</h2>
+  <app-catalog-variation-tile label="Activity grid" [snippet]="s.heatmap">
+    <brightrail-graph kind="heatmap" [heatmapCells]="heatmapCells" [height]="220" ariaLabel="Activity heatmap" />
+  </app-catalog-variation-tile>
+</section>
+
+<section class="gvc-block">
+  <h2 class="gvc-block__h">10. Funnel chart</h2>
+  <app-catalog-variation-tile label="Conversion funnel" [snippet]="s.funnel">
+    <brightrail-graph kind="funnel" [segments]="funnelStages" [height]="240" ariaLabel="Conversion funnel" />
+  </app-catalog-variation-tile>
+</section>

@@ -1,0 +1,81 @@
+:host {
+  display: block;
+}
+
+.prvc-block {
+  margin-bottom: 1.35rem;
+}
+
+.prvc-block__h {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.prvc-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr));
+  align-items: start;
+}
+
+.prvc-grid--rings {
+  grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
+}
+
+.prvc-grid--kpi {
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+}
+
+.prvc-grid--futuristic {
+  grid-template-columns: 1fr;
+}
+
+.prvc-file-block {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--ff-border, #e2e8f0);
+  border-radius: 0.5rem;
+  padding: 0 0.75rem;
+  background: var(--ff-surface, #fff);
+}
+
+.prvc-mini-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+
+.prvc-mini-table td {
+  padding: 0.4rem 0.35rem;
+  border-bottom: 1px solid var(--ff-border, #e2e8f0);
+  vertical-align: middle;
+}
+
+.prvc-tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.12rem 0.4rem;
+  border-radius: 999px;
+}
+
+.prvc-tag--ok {
+  background: rgb(13 159 76 / 14%);
+  color: #0d9f4c;
+}
+
+.prvc-tag--blue {
+  background: rgb(0 98 255 / 12%);
+  color: #0062ff;
+}
+
+.prvc-block--dark {
+  padding: 0.85rem;
+  border-radius: 0.65rem;
+  background: #0f1016;
+  border: 1px solid rgb(255 255 255 / 12%);
+}
+
+.prvc-block--dark .prvc-block__h {
+  color: #e8eaed;
+}

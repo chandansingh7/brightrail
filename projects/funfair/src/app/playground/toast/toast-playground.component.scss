@@ -1,0 +1,55 @@
+@use '../button/button-playground.component.scss' as *;
+@use '../playground-preview-fixes.scss' as *;
+
+:host {
+  position: relative;
+}
+
+:host .bp-preview-surface.bp-preview-surface--stretch {
+  align-items: center;
+  justify-content: flex-start;
+}
+
+:host .bp-preview-inner--toast {
+  width: 100%;
+  max-width: 24rem;
+  padding: 0.75rem 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
+}
+
+.t-play-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.t-play-btn {
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.35rem;
+  border: 1px solid var(--ff-border, #e2e8f0);
+  background: var(--ff-surface, #fff);
+  cursor: pointer;
+}
+
+.t-play-btn--primary {
+  color: #fff;
+  background: var(--ff-accent, #2563eb);
+  border-color: transparent;
+}
+
+.t-preview-hint {
+  margin: 0;
+  text-align: center;
+}
+
+.t-preview-hint code {
+  font-size: 0.85em;
+}

@@ -1,0 +1,80 @@
+@use '../styles/tokens' as br;
+
+:host {
+  display: block;
+  width: var(--br-skel-width, 100%);
+  --br-skel-muted: #{br.$br-color-surface-muted};
+  --br-skel-surface: #{br.$br-color-surface};
+  --br-skel-shimmer-mid: color-mix(in srgb, #{br.$br-color-surface-muted} 35%, #{br.$br-color-surface});
+}
+
+.br-skel__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  width: 100%;
+}
+
+.br-skel__block {
+  display: block;
+  width: var(--br-skel-width, 100%);
+  height: var(--br-skel-height, 0.75rem);
+  border-radius: 0.35rem;
+  background: var(--br-skel-muted);
+}
+
+.br-skel--circular .br-skel__block {
+  border-radius: 999px;
+  width: var(--br-skel-width, 2.5rem);
+  height: var(--br-skel-height, 2.5rem);
+}
+
+.br-skel--rounded .br-skel__block {
+  border-radius: var(--br-radius-md, #{br.$br-radius-md});
+}
+
+.br-skel--rectangular .br-skel__block {
+  border-radius: var(--br-radius-sm, #{br.$br-radius-sm});
+}
+
+.br-skel__block--last {
+  width: min(var(--br-skel-width, 100%), 72%);
+}
+
+.br-skel--anim-pulse .br-skel__block {
+  animation: br-skel-pulse 1.4s ease-in-out infinite;
+}
+
+.br-skel--anim-wave .br-skel__block {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--br-skel-muted) 65%, var(--br-skel-surface)) 0%,
+    var(--br-skel-shimmer-mid) 45%,
+    color-mix(in srgb, var(--br-skel-muted) 65%, var(--br-skel-surface)) 100%
+  );
+  background-size: 240% 100%;
+  animation: br-skel-wave 1.15s ease-in-out infinite;
+}
+
+.br-skel--anim-none .br-skel__block {
+  animation: none;
+}
+
+@keyframes br-skel-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@keyframes br-skel-wave {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}

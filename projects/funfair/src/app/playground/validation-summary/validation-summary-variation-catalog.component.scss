@@ -1,0 +1,19 @@
+:host {
+  display: block;
+}
+
+.vsvc-block {
+  margin-bottom: 1.35rem;
+}
+
+.vsvc-block__h {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.vsvc-empty-hint {
+  margin: 0 0 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--ff-muted, #64748b);
+}

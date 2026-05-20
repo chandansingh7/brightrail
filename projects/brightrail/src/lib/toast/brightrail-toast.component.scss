@@ -1,0 +1,94 @@
+@use '../styles/tokens' as br;
+
+:host {
+  display: block;
+  pointer-events: auto;
+}
+
+.br-toast__shell {
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  min-width: 16rem;
+  max-width: 24rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--br-radius-md, #{br.$br-radius-md});
+  border: 1px solid var(--br-toast-border, #{br.$br-color-border-strong});
+  background: var(--br-toast-bg, #{br.$br-color-surface});
+  color: var(--br-toast-fg, #{br.$br-color-text});
+  box-shadow: 0 8px 24px rgb(60 64 67 / 18%);
+}
+
+.br-toast__icon {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--br-toast-icon-bg, rgb(0 98 255 / 12%));
+  color: var(--br-toast-icon-fg, var(--br-color-primary, #{br.$br-color-primary}));
+}
+
+.br-toast__copy {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.br-toast__title {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--br-toast-title-fg, #{br.$br-color-text-strong});
+}
+
+.br-toast__message {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+.br-toast__title + .br-toast__message {
+  margin-top: 0.15rem;
+}
+
+.br-toast__dismiss {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0.15rem;
+  border: 0;
+  background: transparent;
+  color: var(--br-toast-dismiss-fg, #{br.$br-color-muted});
+  border-radius: br.$br-radius-sm;
+  cursor: pointer;
+}
+
+.br-toast__dismiss:hover {
+  background: rgb(60 64 67 / 8%);
+}
+
+:host(.br-toast--success) {
+  --br-toast-icon-bg: rgb(13 159 76 / 12%);
+  --br-toast-icon-fg: #{br.$br-color-success};
+  --br-toast-border: rgb(13 159 76 / 35%);
+}
+
+:host(.br-toast--warning) {
+  --br-toast-icon-bg: rgb(232 113 10 / 12%);
+  --br-toast-icon-fg: #{br.$br-color-warning};
+  --br-toast-border: rgb(232 113 10 / 35%);
+}
+
+:host(.br-toast--danger) {
+  --br-toast-icon-bg: rgb(217 48 37 / 12%);
+  --br-toast-icon-fg: #{br.$br-color-danger};
+  --br-toast-border: rgb(217 48 37 / 35%);
+}
+
+:host(.br-toast--info) {
+  --br-toast-icon-bg: rgb(0 98 255 / 12%);
+  --br-toast-icon-fg: var(--br-color-primary, #{br.$br-color-primary});
+  --br-toast-border: rgb(0 98 255 / 25%);
+}

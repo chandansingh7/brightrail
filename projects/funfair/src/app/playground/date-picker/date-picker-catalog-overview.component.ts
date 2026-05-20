@@ -1,26 +1,17 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { BrightrailDatePickerComponent, BrightrailDateRange } from 'brightrail';
+
+import { DatePickerVariationCatalogComponent } from './date-picker-variation-catalog.component';
+import { DATE_PICKER_HTML_EXAMPLES } from './date-picker-variation-snippets';
 
 @Component({
   selector: 'app-date-picker-catalog-overview',
   standalone: true,
-  imports: [RouterLink, FormsModule, BrightrailDatePickerComponent],
+  imports: [RouterLink, DatePickerVariationCatalogComponent],
   templateUrl: './date-picker-catalog-overview.component.html',
   styleUrl: './date-picker-catalog-overview.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatePickerCatalogOverviewComponent {
-  readonly singleDate = new Date(2026, 4, 20);
-  readonly monthDate = new Date(2026, 4, 1);
-  readonly rangeDate: BrightrailDateRange = {
-    start: new Date(2026, 4, 12),
-    end: new Date(2026, 4, 20),
-  };
-
-  readonly bookingRange: BrightrailDateRange = {
-    start: new Date(2026, 4, 12),
-    end: new Date(2026, 4, 20),
-  };
+  readonly htmlExamples = DATE_PICKER_HTML_EXAMPLES;
 }

@@ -1,0 +1,95 @@
+<div class="ig">
+  <nav class="ig-breadcrumb" aria-label="Guide location">
+    <a routerLink="/" class="ig-breadcrumb__link">Playground</a>
+    <span class="ig-breadcrumb__sep" aria-hidden="true">/</span>
+    <span class="ig-breadcrumb__here">Library assessment</span>
+  </nav>
+
+  <header class="ig-header">
+    <h1 class="ig-title">Brightrail library assessment</h1>
+    <p class="ig-lead">
+      An honest snapshot of <strong>brightrail v{{ version }}</strong> — what works well today, what is still
+      missing, and what is needed for enterprise-grade applications. Updated from the internal design-system review.
+    </p>
+  </header>
+
+  <section class="ig-panel" aria-labelledby="la-ratings">
+    <h2 id="la-ratings" class="ig-h2">Overall rating</h2>
+    <div class="la-rating-grid">
+      @for (row of ratings; track row.lens) {
+        <article class="la-rating-card">
+          <h3 class="la-rating-card__lens">{{ row.lens }}</h3>
+          <p class="la-rating-card__score">{{ row.score }}</p>
+          <p class="la-rating-card__summary">{{ row.summary }}</p>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="ig-panel la-pros-cons" aria-labelledby="la-pros-cons">
+    <h2 id="la-pros-cons" class="ig-h2">Pros and cons</h2>
+    <div class="la-pros-cons__grid">
+      <article class="la-callout la-callout--pro">
+        <h3 class="la-callout__label">Pro</h3>
+        <h4 class="la-callout__title">{{ pro.title }}</h4>
+        <p class="la-callout__body">{{ pro.body }}</p>
+      </article>
+      <article class="la-callout la-callout--con">
+        <h3 class="la-callout__label">Con</h3>
+        <h4 class="la-callout__title">{{ con.title }}</h4>
+        <p class="la-callout__body">{{ con.body }}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="ig-panel" aria-labelledby="la-shipped">
+    <h2 id="la-shipped" class="ig-h2">What you have today</h2>
+    <ul class="la-list">
+      @for (item of shippedAreas; track item) {
+        <li>{{ item }}</li>
+      }
+    </ul>
+  </section>
+
+  <section class="ig-panel" aria-labelledby="la-missing">
+    <h2 id="la-missing" class="ig-h2">Components still missing</h2>
+    <div class="la-table-wrap">
+      <table class="la-table">
+        <thead>
+          <tr>
+            <th scope="col">Priority</th>
+            <th scope="col">Component</th>
+            <th scope="col">Why it matters</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of missing; track row.name) {
+            <tr>
+              <td><span class="la-priority" [attr.data-priority]="row.priority">{{ row.priority }}</span></td>
+              <td>{{ row.name }}</td>
+              <td>{{ row.why }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="ig-panel" aria-labelledby="la-gaps">
+    <h2 id="la-gaps" class="ig-h2">Enterprise gaps</h2>
+    <ul class="la-list">
+      @for (gap of enterpriseGaps; track gap) {
+        <li>{{ gap }}</li>
+      }
+    </ul>
+  </section>
+
+  <section class="ig-panel" aria-labelledby="la-roadmap">
+    <h2 id="la-roadmap" class="ig-h2">Suggested roadmap</h2>
+    <ol class="la-ordered">
+      @for (step of roadmap; track step; let i = $index) {
+        <li><span class="la-ordered__num">{{ i + 1 }}</span>{{ step }}</li>
+      }
+    </ol>
+  </section>
+</div>
