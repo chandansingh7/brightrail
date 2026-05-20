@@ -1,3 +1,5 @@
+@use '../styles/breakpoints' as bp;
+
 :host {
   display: block;
   width: 100%;
@@ -162,4 +164,20 @@
 
 .br-stepper__workflow-label--upcoming {
   color: var(--br-stepper-muted);
+}
+
+@include bp.br-down(sm) {
+  .br-stepper--horizontal .br-stepper__rail {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.25rem;
+  }
+}
+
+@include bp.br-down(xs) {
+  .br-stepper {
+    --br-stepper-node-size: 1.75rem;
+  }
 }

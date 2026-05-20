@@ -1,9 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   computed,
+  inject,
   input,
   output,
+  viewChild,
 } from '@angular/core';
 
 @Component({
@@ -11,14 +14,16 @@ import {
   standalone: true,
   template: `
     <button
+      #menuButton
       type="button"
       class="br-menu-item"
       [class.br-menu-item--selected]="selected()"
       [class.br-menu-item--disabled]="disabled()"
+      [class.br-menu-item--active]="active"
       role="menuitem"
+      tabindex="-1"
       [disabled]="disabled()"
       [attr.aria-disabled]="disabled() ? 'true' : null"
-      [attr.aria-selected]="selected() ? 'true' : null"
       (click)="onActivate($event)"
     >
       {{ label() }}
@@ -31,6 +36,8 @@ import {
   },
 })
 export class BrightrailMenuItemComponent {
+  private readonly menuButton = viewChild<ElementRef<HTMLButtonElement>>('menuButton');
+
   readonly label = input('Menu item');
   readonly disabled = input(false);
   readonly selected = input(false);
@@ -57,5 +64,10 @@ export class BrightrailMenuItemComponent {
       return;
     }
     this.activate.emit();
+  }
+
+  /** @internal Focus the menuitem button for keyboard navigation. */
+  focus(): void {
+    this.menuButton()?.nativeElement.focus();
   }
 }

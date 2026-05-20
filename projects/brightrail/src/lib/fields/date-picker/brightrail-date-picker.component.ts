@@ -38,6 +38,10 @@ import {
   startOfMonth,
   stripTime,
 } from './date-picker-cal.utils';
+import {
+  isDateGridNavigationKey,
+  stepDateGridIndex,
+} from '../../platform/brightrail-date-grid-keyboard.utils';
 
 export type {
   BrightrailDateFormatId,
@@ -676,5 +680,24 @@ export class BrightrailDatePickerComponent implements ControlValueAccessor {
       return null;
     }
     return mode === 'month' ? firstDayOfMonthFrom(stripTime(val)) : stripTime(val);
+  }
+
+  onDayCellKeydown(ev: KeyboardEvent, cellIndex: number, gridId: string): void {
+    if (!isDateGridNavigationKey(ev.key)) {
+      return;
+    }
+    ev.preventDefault();
+    const grid = this.host.nativeElement.querySelector(`#${CSS.escape(gridId)}`) as HTMLElement | null;
+    if (!grid) {
+      return;
+    }
+    const buttons = Array.from(
+      grid.querySelectorAll('.br-dp__cell'),
+    ) as HTMLButtonElement[];
+    const nextIndex = stepDateGridIndex(cellIndex, ev.key, 7, buttons.length);
+    if (nextIndex == null) {
+      return;
+    }
+    buttons[nextIndex]?.focus();
   }
 }

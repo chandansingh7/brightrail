@@ -1,5 +1,16 @@
 import { TitleCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailButtonComponent,
@@ -36,6 +47,7 @@ type DrawerRecipe =
   selector: 'app-drawer-playground',
   standalone: true,
   imports: [
+    PlaygroundPreviewHeaderComponent,
     FormsModule,
     TitleCasePipe,
     BrightrailDrawerComponent,
@@ -51,6 +63,27 @@ type DrawerRecipe =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrawerPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      recipe: () => this.recipe(),
+      placement: () => this.placement(),
+      size: () => this.size(),
+      mode: () => this.mode(),
+      backdrop: () => this.backdrop(),
+      backdropStyle: () => this.backdropStyle(),
+      surface: () => this.surface(),
+      showCloseButton: () => this.showCloseButton(),
+      headerMode: () => this.headerMode(),
+      stickyFooter: () => this.stickyFooter(),
+      stickyHeader: () => this.stickyHeader(),
+      footerPreset: () => this.footerPreset(),
+      titleText: () => this.titleText(),
+      subtitleText: () => this.subtitleText(),
+    }),
+  );
+
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly ngModelStandalone = { standalone: true };
 
@@ -106,6 +139,7 @@ export class DrawerPlaygroundComponent {
   readonly activeTab = signal<CodeTabId>('html');
 
   constructor() {
+    initPlaygroundA11yPreview('drawer', this.previewOnly);
     this.applyRecipe('form-panel');
   }
 

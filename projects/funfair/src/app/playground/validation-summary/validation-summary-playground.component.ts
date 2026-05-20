@@ -1,4 +1,15 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailValidationSummaryComponent,
@@ -24,12 +35,40 @@ type ValidationSummaryRecipe =
 @Component({
   selector: 'app-validation-summary-playground',
   standalone: true,
-  imports: [FormsModule, BrightrailValidationSummaryComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailValidationSummaryComponent],
   templateUrl: './validation-summary-playground.component.html',
   styleUrl: './validation-summary-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ValidationSummaryPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      recipe: () => this.recipe(),
+      errors: () => this.errors(),
+      title: () => this.title(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('validation-summary', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    
+    restorePlaygroundState(state, {
+      recipe: this.recipe as WritableSignal<unknown>,
+      errors: this.errors as WritableSignal<unknown>,
+      title: this.title as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly ngModelStandalone = { standalone: true };
 

@@ -1,4 +1,5 @@
 @use '../styles/tokens' as br;
+@use '../styles/breakpoints' as bp;
 
 :host {
   display: block;
@@ -309,4 +310,28 @@
 .br-tabs[data-status='info'] .br-tabs__panel {
   border-left: 3px solid var(--br-tab-primary);
   padding-left: 0.65rem;
+}
+
+@include bp.br-down(sm) {
+  .br-tabs--vertical .br-tabs__shell {
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .br-tabs--vertical.br-tabs--contained .br-tabs__list {
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+@include bp.br-down(xs) {
+  .br-tabs--horizontal .br-tabs__list-wrap:not(.br-tabs__list-wrap--scroll) {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+  }
+
+  .br-tabs--horizontal .br-tabs__list-wrap:not(.br-tabs__list-wrap--scroll) .br-tabs__list {
+    flex-wrap: nowrap;
+  }
 }

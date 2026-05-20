@@ -1,4 +1,5 @@
 @use '../styles/tokens' as br;
+@use '../styles/breakpoints' as bp;
 
 /* ----- Shell ----- */
 
@@ -496,4 +497,14 @@
 
 :host(.br-alert--placement-bottom.br-alert--full-width.br-alert--corners-square) .br-alert__shell {
   border-radius: 0;
+}
+
+@include bp.br-down(xs) {
+  :host(.br-alert--placement-bottom) {
+    padding-inline: 0.65rem;
+  }
+
+  .br-alert__shell {
+    flex-wrap: wrap;
+  }
 }

@@ -12,6 +12,7 @@
       [attr.aria-label]="ariaLabel() || null"
       [attr.aria-expanded]="isOpen()"
       [attr.aria-controls]="isOpen() ? listboxId() : null"
+      [attr.aria-activedescendant]="activeDescendantId()"
       [attr.aria-autocomplete]="filterable() ? 'list' : 'none'"
       (focus)="onInputFocus()"
       (input)="onInputInput($any($event.target).value)"
@@ -36,12 +37,14 @@
         role="listbox"
         (keydown)="onPanelKeydown($event)"
       >
-        @for (option of filteredOptions(); track option.value) {
+        @for (option of filteredOptions(); track option.value; let i = $index) {
           <button
             type="button"
             class="br-combobox__option"
             role="option"
+            [id]="controlId() + '-opt-' + i"
             [class.br-combobox__option--selected]="isSelected(option)"
+            [class.br-combobox__option--active]="activeOptionIndex() === i"
             [disabled]="option.disabled"
             [attr.aria-selected]="isSelected(option)"
             (mousedown)="$event.preventDefault()"

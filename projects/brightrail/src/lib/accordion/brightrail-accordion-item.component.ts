@@ -31,9 +31,12 @@ let accordionItemUid = 0;
             class="br-acc-item__trigger"
             [id]="triggerId"
             [disabled]="disabled() || accordionHost.disabled()"
+            [attr.tabindex]="accordionHost.tabIndexForItem(itemIndex())"
             [attr.aria-expanded]="expanded()"
             [attr.aria-controls]="panelId"
+            (focus)="accordionHost.onTriggerFocus(itemIndex())"
             (click)="onToggle()"
+            (keydown)="accordionHost.onTriggerKeydown($event, itemIndex())"
           >
             @if (accordionHost.iconPosition() === 'left') {
               <span
@@ -139,6 +142,12 @@ export class BrightrailAccordionItemComponent {
     }
     return this.accordionHost.expandedIndices().has(idx);
   });
+
+  readonly itemIndex = computed(() => this.accordionHost.indexOfItem(this));
+
+  focusTrigger(): void {
+    document.getElementById(this.triggerId)?.focus();
+  }
 
   readonly useEnterpriseChrome = computed(() => {
     if (this.presentation() === 'enterprise-card') {

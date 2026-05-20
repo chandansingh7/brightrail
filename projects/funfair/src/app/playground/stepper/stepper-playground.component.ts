@@ -1,5 +1,16 @@
 import { TitleCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailStepComponent,
@@ -23,12 +34,30 @@ interface StepDemoItem {
 @Component({
   selector: 'app-stepper-playground',
   standalone: true,
-  imports: [FormsModule, TitleCasePipe, BrightrailStepperComponent, BrightrailStepComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, TitleCasePipe, BrightrailStepperComponent, BrightrailStepComponent],
   templateUrl: './stepper-playground.component.html',
   styleUrl: './stepper-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StepperPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      scenario: () => this.scenario(),
+      orientation: () => this.orientation(),
+      stepStyle: () => this.stepStyle(),
+      currentStep: () => this.currentStep(),
+      labelPlacement: () => this.labelPlacement(),
+      withDescriptions: () => this.withDescriptions(),
+      connectorGap: () => this.connectorGap(),
+      currentColor: () => this.currentColor(),
+      completedColor: () => this.completedColor(),
+      steps: () => this.steps(),
+    }),
+  );
+
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly ngModelStandalone = { standalone: true };
 
@@ -70,6 +99,7 @@ export class StepperPlaygroundComponent {
   ]);
 
   constructor() {
+    initPlaygroundA11yPreview('stepper', this.previewOnly);
     this.applyScenario('standard-flow');
   }
 

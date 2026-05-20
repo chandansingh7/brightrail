@@ -9,6 +9,17 @@ import {
   TemplateRef,
   viewChild,
 } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 
 import type {
   BrightrailTableBadgeTone,
@@ -101,6 +112,7 @@ export type TablePlaygroundRecipe =
   selector: 'app-table-playground',
   standalone: true,
   imports: [
+    PlaygroundPreviewHeaderComponent,
     FormsModule,
     BrightrailModalBodyComponent,
     BrightrailModalComponent,
@@ -118,9 +130,96 @@ export type TablePlaygroundRecipe =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TablePlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      previewRecipe: () => this.previewRecipe(),
+      variant: () => this.variant(),
+      density: () => this.density(),
+      sortingEnabled: () => this.sortingEnabled(),
+      paginationEnabled: () => this.paginationEnabled(),
+      rowSelection: () => this.rowSelection(),
+      expandableEnabled: () => this.expandableEnabled(),
+      stickyHeader: () => this.stickyHeader(),
+      loadingEnabled: () => this.loadingEnabled(),
+      showToolbar: () => this.showToolbar(),
+      previewTheme: () => this.previewTheme(),
+      playgroundColumnSearch: () => this.playgroundColumnSearch(),
+      playgroundColumnFilters: () => this.playgroundColumnFilters(),
+      playgroundShowGlobalFilterButton: () => this.playgroundShowGlobalFilterButton(),
+      advancedAvatarPresentation: () => this.advancedAvatarPresentation(),
+      advancedStatusBadgeTone: () => this.advancedStatusBadgeTone(),
+      advancedRolePresentation: () => this.advancedRolePresentation(),
+      bulkActionsPlacement: () => this.bulkActionsPlacement(),
+      singleActionsPlacement: () => this.singleActionsPlacement(),
+      advancedSingleSelectedIds: () => this.advancedSingleSelectedIds(),
+      advancedMultiRows: () => this.advancedMultiRows(),
+      advancedMultiSelectedIds: () => this.advancedMultiSelectedIds(),
+      bulkEditStatusDraft: () => this.bulkEditStatusDraft(),
+      inlineCellRows: () => this.inlineCellRows(),
+      inlineRowRows: () => this.inlineRowRows(),
+      inlineQtyRows: () => this.inlineQtyRows(),
+      inlineValidRows: () => this.inlineValidRows(),
+      inlineBulkRows: () => this.inlineBulkRows(),
+      inlineBulkSelectedIds: () => this.inlineBulkSelectedIds(),
+      editModalOpen: () => this.editModalOpen(),
+      editNameDraft: () => this.editNameDraft(),
+      pagination: () => this.pagination(),
+      advancedFilter: () => this.advancedFilter(),
+    }),
+  );
+
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    if (typeof snapshot['previewRecipe'] === 'string') {
+      this.previewRecipe.set(snapshot['previewRecipe'] as TablePlaygroundRecipe);
+      this.applyRecipeDefaults(snapshot['previewRecipe'] as TablePlaygroundRecipe);
+      return;
+    }
+    restorePlaygroundState(state, {
+      previewRecipe: this.previewRecipe as WritableSignal<unknown>,
+      variant: this.variant as WritableSignal<unknown>,
+      density: this.density as WritableSignal<unknown>,
+      sortingEnabled: this.sortingEnabled as WritableSignal<unknown>,
+      paginationEnabled: this.paginationEnabled as WritableSignal<unknown>,
+      rowSelection: this.rowSelection as WritableSignal<unknown>,
+      expandableEnabled: this.expandableEnabled as WritableSignal<unknown>,
+      stickyHeader: this.stickyHeader as WritableSignal<unknown>,
+      loadingEnabled: this.loadingEnabled as WritableSignal<unknown>,
+      showToolbar: this.showToolbar as WritableSignal<unknown>,
+      previewTheme: this.previewTheme as WritableSignal<unknown>,
+      playgroundColumnSearch: this.playgroundColumnSearch as WritableSignal<unknown>,
+      playgroundColumnFilters: this.playgroundColumnFilters as WritableSignal<unknown>,
+      playgroundShowGlobalFilterButton: this.playgroundShowGlobalFilterButton as WritableSignal<unknown>,
+      advancedAvatarPresentation: this.advancedAvatarPresentation as WritableSignal<unknown>,
+      advancedStatusBadgeTone: this.advancedStatusBadgeTone as WritableSignal<unknown>,
+      advancedRolePresentation: this.advancedRolePresentation as WritableSignal<unknown>,
+      bulkActionsPlacement: this.bulkActionsPlacement as WritableSignal<unknown>,
+      singleActionsPlacement: this.singleActionsPlacement as WritableSignal<unknown>,
+      advancedSingleSelectedIds: this.advancedSingleSelectedIds as WritableSignal<unknown>,
+      advancedMultiRows: this.advancedMultiRows as WritableSignal<unknown>,
+      advancedMultiSelectedIds: this.advancedMultiSelectedIds as WritableSignal<unknown>,
+      bulkEditStatusDraft: this.bulkEditStatusDraft as WritableSignal<unknown>,
+      inlineCellRows: this.inlineCellRows as WritableSignal<unknown>,
+      inlineRowRows: this.inlineRowRows as WritableSignal<unknown>,
+      inlineQtyRows: this.inlineQtyRows as WritableSignal<unknown>,
+      inlineValidRows: this.inlineValidRows as WritableSignal<unknown>,
+      inlineBulkRows: this.inlineBulkRows as WritableSignal<unknown>,
+      inlineBulkSelectedIds: this.inlineBulkSelectedIds as WritableSignal<unknown>,
+      editModalOpen: this.editModalOpen as WritableSignal<unknown>,
+      editNameDraft: this.editNameDraft as WritableSignal<unknown>,
+      pagination: this.pagination as WritableSignal<unknown>,
+      advancedFilter: this.advancedFilter as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
 
   constructor() {
+    initPlaygroundA11yPreview('table', this.previewOnly, (state) => this.restoreA11yPreviewState(state));
     this.previewTheme.set(this.themeService.theme());
   }
 

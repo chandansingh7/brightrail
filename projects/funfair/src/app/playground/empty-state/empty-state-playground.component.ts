@@ -1,4 +1,15 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import { BrightrailButtonComponent, BrightrailEmptyStateComponent } from 'brightrail';
 
@@ -19,12 +30,50 @@ type EmptyStateRecipe =
 @Component({
   selector: 'app-empty-state-playground',
   standalone: true,
-  imports: [FormsModule, BrightrailEmptyStateComponent, BrightrailButtonComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailEmptyStateComponent, BrightrailButtonComponent],
   templateUrl: './empty-state-playground.component.html',
   styleUrl: './empty-state-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmptyStatePlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      recipe: () => this.recipe(),
+      title: () => this.title(),
+      description: () => this.description(),
+      compact: () => this.compact(),
+      showIcon: () => this.showIcon(),
+      showAction: () => this.showAction(),
+      actionLabel: () => this.actionLabel(),
+      actionVariant: () => this.actionVariant(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('empty-state', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    
+    restorePlaygroundState(state, {
+      recipe: this.recipe as WritableSignal<unknown>,
+      title: this.title as WritableSignal<unknown>,
+      description: this.description as WritableSignal<unknown>,
+      compact: this.compact as WritableSignal<unknown>,
+      showIcon: this.showIcon as WritableSignal<unknown>,
+      showAction: this.showAction as WritableSignal<unknown>,
+      actionLabel: this.actionLabel as WritableSignal<unknown>,
+      actionVariant: this.actionVariant as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly ngModelStandalone = { standalone: true };
 

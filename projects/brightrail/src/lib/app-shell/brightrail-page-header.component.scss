@@ -1,3 +1,4 @@
+@use '../styles/breakpoints' as bp;
 @use '../styles/tokens' as br;
 
 :host {
@@ -49,4 +50,18 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+@include bp.br-down(sm) {
+  .br-page-header {
+    flex-direction: column;
+    align-items: stretch;
+    padding-inline: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .br-page-header__actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
 }

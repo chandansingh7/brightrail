@@ -1,4 +1,5 @@
 @use '../styles/tokens' as br;
+@use '../styles/breakpoints' as bp;
 
 :host {
   @include br.br-host-card;
@@ -213,6 +214,18 @@
   font-size: 0.8125rem;
   font-weight: 600;
   color: #0d9f4c;
+}
+
+@include bp.br-down(sm) {
+  :host(.br-card--horizontal) .br-card__inner {
+    flex-direction: column;
+  }
+
+  :host(.br-card--horizontal) ::ng-deep .br-card-media {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 /* Typography defaults inside structural regions */

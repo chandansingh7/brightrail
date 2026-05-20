@@ -1,10 +1,22 @@
-<div class="pf">
+<div class="pf" [class.pf--nav-open]="navOpen()">
   <header class="pf-header">
     <div class="pf-header__brand">
-      <div class="pf-logo" aria-hidden="true">B</div>
-      <div>
-        <div class="pf-header__name">Brightrail</div>
-        <div class="pf-header__ver">v{{ libraryVersion }}</div>
+      <div class="pf-header__brand-row">
+        <button
+          type="button"
+          class="pf-nav-toggle"
+          [attr.aria-expanded]="navOpen()"
+          aria-controls="pf-playground-nav"
+          (click)="toggleNav()"
+        >
+          <span class="pf-sr-only">{{ navOpen() ? 'Close navigation' : 'Open navigation' }}</span>
+          <span class="pf-nav-toggle__icon" aria-hidden="true"></span>
+        </button>
+        <div class="pf-logo" aria-hidden="true">B</div>
+        <div>
+          <div class="pf-header__name">Brightrail</div>
+          <div class="pf-header__ver">v{{ libraryVersion }}</div>
+        </div>
       </div>
     </div>
 
@@ -37,7 +49,16 @@
   </header>
 
   <div class="pf-body">
-    <aside class="pf-side" aria-label="Playground navigation">
+    @if (navOpen()) {
+      <button
+        type="button"
+        class="pf-nav-backdrop"
+        aria-label="Close navigation"
+        (click)="closeNav()"
+      ></button>
+    }
+
+    <aside id="pf-playground-nav" class="pf-side" aria-label="Playground navigation">
       <nav class="pf-nav">
         <div class="pf-nav__group">
           <div class="pf-nav__heading">Components</div>

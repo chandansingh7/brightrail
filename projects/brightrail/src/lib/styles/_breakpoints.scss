@@ -1,0 +1,59 @@
+// =============================================================================
+// Brightrail responsive breakpoints — single source of truth for viewport tiers.
+// Consumers: `@use 'breakpoints' as bp;` then `@include bp.br-down(md) { … }`
+// Values are also exposed as CSS custom properties via `br-root-breakpoints`.
+// =============================================================================
+
+@use 'sass:map';
+
+$br-bp-xs: 520px !default; // phone portrait
+$br-bp-sm: 720px !default; // phone landscape / small tablet
+$br-bp-md: 960px !default; // tablet / small laptop
+$br-bp-lg: 1280px !default; // desktop
+$br-bp-xl: 1920px !default; // large desktop / TV
+
+$_br-breakpoints: (
+  xs: $br-bp-xs,
+  sm: $br-bp-sm,
+  md: $br-bp-md,
+  lg: $br-bp-lg,
+  xl: $br-bp-xl,
+) !default;
+
+@function br-bp($name) {
+  @if not map.has-key($_br-breakpoints, $name) {
+    @error "Unknown breakpoint `#{$name}`. Use: #{map.keys($_br-breakpoints)}.";
+  }
+
+  @return map.get($_br-breakpoints, $name);
+}
+
+/// Styles apply at widths **≤** the named breakpoint (inclusive).
+@mixin br-down($name) {
+  @media (width <= #{br-bp($name)}) {
+    @content;
+  }
+}
+
+/// Styles apply at widths **>** the named breakpoint.
+@mixin br-up($name) {
+  @media (width > #{br-bp($name)}) {
+    @content;
+  }
+}
+
+/// Styles apply between two breakpoints (exclusive lower, inclusive upper).
+@mixin br-between($from, $to) {
+  @media (width > #{br-bp($from)}) and (width <= #{br-bp($to)}) {
+    @content;
+  }
+}
+
+/// Expose breakpoint values on `:root` for runtime checks / container queries.
+@mixin br-root-breakpoints {
+  --br-bp-xs: #{br-bp(xs)};
+  --br-bp-sm: #{br-bp(sm)};
+  --br-bp-md: #{br-bp(md)};
+  --br-bp-lg: #{br-bp(lg)};
+  --br-bp-xl: #{br-bp(xl)};
+}

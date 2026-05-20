@@ -2,6 +2,13 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: 'a11y-preview/:componentId',
+    loadComponent: () =>
+      import('./playground/shared/playground-a11y-preview-shell.component').then(
+        (m) => m.PlaygroundA11yPreviewShellComponent,
+      ),
+  },
+  {
     path: '',
     loadComponent: () =>
       import('./playground/playground-shell.component').then((m) => m.PlaygroundShellComponent),

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   BrightrailAppShellComponent,
+  BrightrailButtonComponent,
   BrightrailPageHeaderActionsDirective,
   BrightrailPageHeaderComponent,
   BrightrailPageSubtitleDirective,
@@ -23,6 +24,7 @@ import { APP_SHELL_VARIATION_SNIPPETS } from './app-shell-variation-snippets';
     BrightrailPageTitleDirective,
     BrightrailPageSubtitleDirective,
     BrightrailPageHeaderActionsDirective,
+    BrightrailButtonComponent,
     CatalogVariationTileComponent,
   ],
   templateUrl: './app-shell-variation-catalog.component.html',

@@ -103,9 +103,12 @@ describe('BrightrailSelectComponent', () => {
     })
     class ProjHost {}
 
-    const hostFixture = TestBed.configureTestingModule({
+    TestBed.resetTestingModule();
+    await TestBed.configureTestingModule({
       imports: [ProjHost],
-    }).createComponent(ProjHost);
+    }).compileComponents();
+
+    const hostFixture = TestBed.createComponent(ProjHost);
     hostFixture.detectChanges();
     await hostFixture.whenStable();
     hostFixture.detectChanges();

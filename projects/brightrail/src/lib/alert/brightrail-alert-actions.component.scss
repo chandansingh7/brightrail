@@ -1,7 +1,12 @@
+@use '../styles/layout' as layout;
 .br-alert__actions-inner {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
   gap: 0.5rem 0.85rem;
+}
+
+:host {
+  @include layout.br-host-viewport-safe;
 }

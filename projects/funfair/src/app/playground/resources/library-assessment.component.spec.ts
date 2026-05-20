@@ -16,11 +16,21 @@ describe('LibraryAssessmentComponent', () => {
     fixture.detectChanges();
   });
 
-  it('renders the library assessment page', () => {
+  it('renders the library assessment page with brightrail components', () => {
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.querySelector('.ig-title')?.textContent).toContain('Brightrail library assessment');
-    expect(el.querySelector('.la-callout--pro')).toBeTruthy();
-    expect(el.querySelector('.la-callout--con')).toBeTruthy();
-    expect(el.querySelectorAll('.la-table tbody tr').length).toBeGreaterThan(0);
+    expect(el.querySelector('brightrail-breadcrumb')).toBeTruthy();
+    expect(el.querySelector('brightrail-page-header')).toBeTruthy();
+    expect(el.querySelector('brightrail-card')).toBeTruthy();
+    expect(el.querySelector('brightrail-table')).toBeTruthy();
+    expect(el.querySelector('brightrail-timeline')).toBeTruthy();
+    expect(el.querySelector('brightrail-chip')).toBeTruthy();
+  });
+
+  it('renders stats badges and shipped playground links', () => {
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.textContent).toContain('public exports');
+    expect(el.querySelectorAll('.la-chip-link').length).toBeGreaterThan(0);
+    expect(el.textContent).toContain('Production gaps');
+    expect(el.querySelectorAll('.la-pros-cons__list li').length).toBeGreaterThan(0);
   });
 });

@@ -6,7 +6,7 @@
   </div>
 </ng-template>
 
-<div class="bp">
+<div class="bp" [class.bp--a11y-preview-only]="previewOnly">
   <div class="bp-grid">
     <section class="bp-panel bp-panel--settings" aria-labelledby="tooltip-settings-title">
       <div class="bp-settings-head">
@@ -316,15 +316,13 @@
     </section>
 
     <section class="bp-panel bp-panel--preview" aria-labelledby="tooltip-preview-title">
-      <h2 id="tooltip-preview-title" class="bp-panel__title bp-panel__title--live">
-        <span class="bp-live-dot" aria-hidden="true"></span>
-        Live preview
-      </h2>
+      <app-playground-preview-header titleId="tooltip-preview-title" componentId="tooltip" [state]="a11yPreviewState()" />
       <div class="bp-preview-surface bp-preview-surface--stretch">
         <div class="bp-preview-inner tp-preview">
-          <button
-            type="button"
-            class="tp-trigger"
+          <brightrail-button
+            [variant]="triggerButtonVariant()"
+            size="md"
+            [iconLeft]="triggerButtonIcon()"
             [brightrailTooltip]="resolvedTooltip()"
             [brightrailTooltipPlacement]="placement()"
             [brightrailTooltipTrigger]="trigger()"
@@ -339,11 +337,15 @@
             [brightrailTooltipDisabled]="disabled()"
             [brightrailTooltipTheme]="themeToken().trim() || undefined"
           >
-            <brightrail-button-icon name="info" />
-            <span>{{ triggerLabel() }}</span>
-          </button>
+            {{ triggerLabel() }}
+          </brightrail-button>
         </div>
       </div>
+      <p class="bp-preview-caption">
+        The §1–§7 variation catalog is on
+        <a routerLink="/tooltip/catalog" class="tp-catalog-link">Guide: tooltips</a>
+        (import <code>BrightrailTooltipDirective</code> and <code>BrightrailButtonComponent</code> from <code>brightrail</code>).
+      </p>
     </section>
   </div>
 

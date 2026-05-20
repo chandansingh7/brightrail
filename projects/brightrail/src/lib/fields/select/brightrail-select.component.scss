@@ -1,6 +1,8 @@
 @use '../text-field/brightrail-text-field.component.scss' as *;
+@use '../../styles/layout' as layout;
 
 :host {
+  @include layout.br-host-viewport-safe;
   /*
    * Prevent content-length based host resizing when selected option text changes.
    * Select behaves as a block field by default; consumers can still override width with CSS var.

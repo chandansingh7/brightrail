@@ -40,6 +40,23 @@ describe('BrightrailAccordionComponent', () => {
     expect(host.expandedIndices().has(1)).toBe(true);
   });
 
+  it('moves focus and toggles with keyboard on triggers', () => {
+    const host = fixture.debugElement.query(By.directive(BrightrailAccordionComponent))
+      .componentInstance as BrightrailAccordionComponent;
+    const triggers = [
+      ...fixture.nativeElement.querySelectorAll('.br-acc-item__trigger'),
+    ] as HTMLButtonElement[];
+    expect(triggers.length).toBe(2);
+
+    host.onTriggerKeydown(new KeyboardEvent('keydown', { key: 'ArrowDown' }), 0);
+    fixture.detectChanges();
+    expect(host.focusedIndex()).toBe(1);
+
+    host.onTriggerKeydown(new KeyboardEvent('keydown', { key: 'Enter' }), 1);
+    fixture.detectChanges();
+    expect(host.expandedIndices().has(1)).toBe(true);
+  });
+
   it('opens multiple panels when defaultExpandedIndices is set', async () => {
     @Component({
       standalone: true,
@@ -53,6 +70,7 @@ describe('BrightrailAccordionComponent', () => {
     })
     class MultiDef {}
 
+    TestBed.resetTestingModule();
     await TestBed.configureTestingModule({ imports: [MultiDef] }).compileComponents();
     const f = TestBed.createComponent(MultiDef);
     f.detectChanges();

@@ -4,6 +4,7 @@
 // -----------------------------------------------------------------------------
 
 @use './tokens' as t;
+@use './breakpoints' as bp;
 
 $br-tooltip-z: 10800;
 $br-tooltip-arrow: 6px;
@@ -185,4 +186,10 @@ $br-tooltip-arrow: 6px;
   top: calc(50% - #{$br-tooltip-arrow});
   border-top: none;
   border-right: none;
+}
+
+@include bp.br-down(xs) {
+  .br-tooltip {
+    max-width: min(var(--br-tooltip-max-width, 240px), calc(100vw - 2rem));
+  }
 }

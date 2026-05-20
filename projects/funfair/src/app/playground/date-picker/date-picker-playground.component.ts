@@ -1,5 +1,16 @@
 import { TitleCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailDateFormatId,
@@ -33,12 +44,42 @@ type DatePickerScenario =
 @Component({
   selector: 'app-date-picker-playground',
   standalone: true,
-  imports: [FormsModule, TitleCasePipe, BrightrailDatePickerComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, TitleCasePipe, BrightrailDatePickerComponent],
   templateUrl: './date-picker-playground.component.html',
   styleUrl: './date-picker-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatePickerPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      scenario: () => this.scenario(),
+      appearance: () => this.appearance(),
+      status: () => this.status(),
+      size: () => this.size(),
+      shape: () => this.shape(),
+      disabledToggle: () => this.disabledToggle(),
+      labelPosition: () => this.labelPosition(),
+      helperToggle: () => this.helperToggle(),
+      showIconToggle: () => this.showIconToggle(),
+      openPanel: () => this.openPanel(),
+      rangeCommitMode: () => this.rangeCommitMode(),
+      rangeEndStyle: () => this.rangeEndStyle(),
+      rangeEnabled: () => this.rangeEnabled(),
+      tone: () => this.tone(),
+      selectedDateColor: () => this.selectedDateColor(),
+      selectedDateTextColor: () => this.selectedDateTextColor(),
+      rangeColor: () => this.rangeColor(),
+      rangeTextColor: () => this.rangeTextColor(),
+      textAlign: () => this.textAlign(),
+      fieldWidth: () => this.fieldWidth(),
+      format: () => this.format(),
+      weekStartModel: () => this.weekStartModel(),
+    }),
+  );
+
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly ngModelStandalone = { standalone: true };
 
@@ -203,6 +244,7 @@ export class DatePickerPlaygroundComponent {
   });
 
   constructor() {
+    initPlaygroundA11yPreview('date-picker', this.previewOnly);
     this.applyScenario('single-popup');
   }
 

@@ -6,6 +6,7 @@ import {
   afterNextRender,
   afterRenderEffect,
   computed,
+  effect,
   forwardRef,
   inject,
   input,
@@ -29,6 +30,14 @@ import {
   BrightrailTextFieldSize,
   BrightrailTextFieldStatus,
 } from '../text-field/brightrail-text-field.component';
+import {
+  activateListboxOption,
+  clampListboxIndex,
+  ensureListboxOptionIds,
+  queryEnabledListboxOptions,
+  resolveListboxKeyAction,
+  stepListboxIndex,
+} from '../../platform/brightrail-listbox-keyboard.utils';
 
 const DEFAULT_STATUS_HINTS: Record<Exclude<BrightrailTextFieldStatus, 'none'>, string> = {
   success: 'Looks good!',
@@ -92,7 +101,9 @@ const DEFAULT_STATUS_HINTS: Record<Exclude<BrightrailTextFieldStatus, 'none'>, s
             [attr.aria-required]="required() ? 'true' : null"
             [attr.aria-invalid]="status() === 'error' ? 'true' : null"
             [attr.aria-describedby]="resolvedHintText() ? hintId() : null"
+            [attr.aria-activedescendant]="activeDescendantId()"
             (click)="toggleOpen($event)"
+            (keydown)="onTriggerKeydown($event)"
           >
             @if (labelPosition() === 'inset' && showLabel()) {
               <span class="br-tf__label br-tf__label--inset" [attr.id]="insetLabelId()">
@@ -236,12 +247,23 @@ export class BrightrailSelectComponent implements ControlValueAccessor {
   protected readonly valueModel = signal('');
   private readonly disabledFromCva = signal(false);
   protected readonly hasCustomTriggerBody = signal(false);
+  private readonly activeOptionIndex = signal(-1);
+  private listboxOptionsCache: HTMLElement[] = [];
 
   private onChange: (v: string) => void = () => {};
   private onTouched: () => void = () => {};
 
   /** @internal */
   readonly listboxId = computed(() => `${this.fieldControlId()}-listbox`);
+
+  readonly activeDescendantId = computed((): string | null => {
+    if (!this.isOpen()) {
+      return null;
+    }
+    const idx = this.activeOptionIndex();
+    const option = this.listboxOptionsCache[idx];
+    return option?.id ?? null;
+  });
 
   /** @internal */
   readonly triggerAriaLabelledBy = computed((): string | null => {
@@ -338,6 +360,14 @@ export class BrightrailSelectComponent implements ControlValueAccessor {
   );
 
   constructor() {
+    effect(() => {
+      if (this.isOpen()) {
+        untracked(() => queueMicrotask(() => this.syncListboxOptions()));
+      } else {
+        untracked(() => this.activeOptionIndex.set(-1));
+      }
+    });
+
     afterRenderEffect(() => {
       const hostEl = this.host.nativeElement;
       /* Class selector: HTML lowercases arbitrary attributes, so [brSelectValue] is unreliable in the DOM. */
@@ -412,11 +442,120 @@ export class BrightrailSelectComponent implements ControlValueAccessor {
     this.onTouched();
   }
 
+  onTriggerKeydown(ev: KeyboardEvent): void {
+    if (this.effectiveDisabled() || this.loading() || this.appearance() === 'readonly') {
+      return;
+    }
+    this.handleListboxKeydown(ev, true);
+  }
+
   onPanelKeydown(ev: KeyboardEvent): void {
-    if (ev.key === 'Escape') {
-      ev.preventDefault();
-      ev.stopPropagation();
-      this.isOpen.set(false);
+    this.handleListboxKeydown(ev, false);
+  }
+
+  private handleListboxKeydown(ev: KeyboardEvent, fromTrigger: boolean): void {
+    const action = resolveListboxKeyAction(ev.key);
+    if (action === 'none') {
+      return;
+    }
+
+    if (!this.isOpen()) {
+      if (action === 'next' || action === 'prev' || action === 'select') {
+        ev.preventDefault();
+        this.isOpen.set(true);
+        queueMicrotask(() => {
+          this.syncListboxOptions();
+          this.applyListboxAction(action, fromTrigger);
+        });
+      }
+      return;
+    }
+
+    ev.preventDefault();
+    if (action === 'close') {
+      this.closeListbox(fromTrigger);
+      return;
+    }
+    this.applyListboxAction(action, fromTrigger);
+  }
+
+  private applyListboxAction(
+    action: ReturnType<typeof resolveListboxKeyAction>,
+    returnFocusToTrigger: boolean,
+  ): void {
+    const count = this.listboxOptionsCache.length;
+    if (count === 0) {
+      if (action === 'close') {
+        this.closeListbox(returnFocusToTrigger);
+      }
+      return;
+    }
+
+    let index = this.activeOptionIndex();
+
+    switch (action) {
+      case 'next':
+        index = stepListboxIndex(index, 1, count);
+        break;
+      case 'prev':
+        index = stepListboxIndex(index, -1, count);
+        break;
+      case 'first':
+        index = 0;
+        break;
+      case 'last':
+        index = count - 1;
+        break;
+      case 'select': {
+        const option = this.listboxOptionsCache[index];
+        if (option) {
+          activateListboxOption(option);
+        }
+        this.closeListbox(returnFocusToTrigger);
+        return;
+      }
+      case 'close':
+        this.closeListbox(returnFocusToTrigger);
+        return;
+      default:
+        return;
+    }
+
+    this.activeOptionIndex.set(clampListboxIndex(index, count));
+  }
+
+  private syncListboxOptions(): void {
+    const panel = this.host.nativeElement.querySelector(
+      `#${CSS.escape(this.listboxId())}`,
+    ) as HTMLElement | null;
+    if (!panel) {
+      this.listboxOptionsCache = [];
+      this.activeOptionIndex.set(-1);
+      return;
+    }
+
+    const options = queryEnabledListboxOptions(panel);
+    ensureListboxOptionIds(options, this.fieldControlId());
+    this.listboxOptionsCache = options;
+
+    let start = options.findIndex((option) => option.getAttribute('aria-selected') === 'true');
+    if (start < 0) {
+      const label = this.resolvedTriggerLabel().trim();
+      if (label) {
+        start = options.findIndex((option) => option.textContent?.trim() === label);
+      }
+    }
+    this.activeOptionIndex.set(start >= 0 ? start : options.length > 0 ? 0 : -1);
+  }
+
+  private closeListbox(returnFocusToTrigger: boolean): void {
+    this.isOpen.set(false);
+    if (returnFocusToTrigger) {
+      queueMicrotask(() => {
+        (
+          this.host.nativeElement.querySelector('.br-select__trigger') as HTMLButtonElement | null
+        )?.focus();
+      });
     }
   }
 

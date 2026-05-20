@@ -1,8 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
+  HostListener,
   computed,
   effect,
+  inject,
   input,
   output,
   signal,
@@ -15,6 +18,7 @@ import {
   flattenVisibleTreeNodes,
   type BrightrailTreeFlatNode,
 } from './brightrail-tree.utils';
+import { resolveTreeKeyAction, stepTreeIndex } from '../platform/brightrail-tree-keyboard.utils';
 
 export type { BrightrailTreeSelectionMode };
 
@@ -27,9 +31,12 @@ export type { BrightrailTreeSelectionMode };
   host: {
     class: 'br-tree',
     role: 'tree',
+    tabindex: '0',
   },
 })
 export class BrightrailTreeComponent {
+  private readonly host = inject(ElementRef<HTMLElement>);
+
   readonly nodes = input<BrightrailTreeNode[]>([]);
   readonly selectionMode = input<BrightrailTreeSelectionMode>('single');
   readonly selectedId = input<string | null>(null);
@@ -42,6 +49,7 @@ export class BrightrailTreeComponent {
 
   private readonly expandedIdSet = signal<Set<string>>(new Set());
   private readonly activeSelectedId = signal<string | null>(null);
+  protected readonly focusedNodeIndex = signal(0);
   private expandedPrimed = false;
 
   readonly visibleNodes = computed(() =>
@@ -86,6 +94,10 @@ export class BrightrailTreeComponent {
     return `calc(${depth} * ${this.levelIndent()})`;
   }
 
+  isFocused(index: number): boolean {
+    return this.focusedNodeIndex() === index;
+  }
+
   onToggle(event: Event, node: BrightrailTreeFlatNode): void {
     event.stopPropagation();
     if (node.disabled || !node.hasChildren) {
@@ -109,5 +121,81 @@ export class BrightrailTreeComponent {
     this.activeSelectedId.set(node.id);
     this.selectedIdChange.emit(node.id);
     this.nodeSelect.emit(node);
+  }
+
+  @HostListener('keydown', ['$event'])
+  onTreeKeydown(event: KeyboardEvent): void {
+    const nodes = this.visibleNodes();
+    if (!nodes.length) {
+      return;
+    }
+
+    const action = resolveTreeKeyAction(event.key);
+    if (action === 'none') {
+      return;
+    }
+
+    event.preventDefault();
+    const index = this.focusedNodeIndex();
+    const node = nodes[index];
+    if (!node) {
+      return;
+    }
+
+    switch (action) {
+      case 'next':
+        this.focusedNodeIndex.set(stepTreeIndex(index, 1, nodes.length));
+        break;
+      case 'prev':
+        this.focusedNodeIndex.set(stepTreeIndex(index, -1, nodes.length));
+        break;
+      case 'first':
+        this.focusedNodeIndex.set(0);
+        break;
+      case 'last':
+        this.focusedNodeIndex.set(nodes.length - 1);
+        break;
+      case 'expand':
+        if (node.hasChildren && !this.isExpanded(node.id)) {
+          this.onToggle(event, node);
+        } else if (node.hasChildren) {
+          this.focusedNodeIndex.set(Math.min(index + 1, nodes.length - 1));
+        }
+        break;
+      case 'collapse':
+        if (node.hasChildren && this.isExpanded(node.id)) {
+          this.onToggle(event, node);
+        } else if (node.depth > 0) {
+          const parentIndex = nodes.findIndex(
+            (candidate, candidateIndex) =>
+              candidateIndex < index &&
+              candidate.depth === node.depth - 1 &&
+              nodes.slice(candidateIndex + 1, index + 1).every((n) => n.depth > candidate.depth),
+          );
+          if (parentIndex >= 0) {
+            this.focusedNodeIndex.set(parentIndex);
+          }
+        }
+        break;
+      case 'activate':
+        if (node.hasChildren) {
+          this.onToggle(event, node);
+        } else {
+          this.onSelect(event, node);
+        }
+        break;
+      default:
+        break;
+    }
+
+    queueMicrotask(() => this.focusActiveNodeButton());
+  }
+
+  private focusActiveNodeButton(): void {
+    const index = this.focusedNodeIndex();
+    const button = this.host.nativeElement.querySelector(
+      `[data-tree-focus-index="${index}"]`,
+    ) as HTMLButtonElement | null;
+    button?.focus();
   }
 }

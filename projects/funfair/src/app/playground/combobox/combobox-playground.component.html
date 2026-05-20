@@ -1,4 +1,4 @@
-<div class="bp">
+<div class="bp" [class.bp--a11y-preview-only]="previewOnly">
   <div class="bp-grid">
     <section class="bp-panel bp-panel--settings" aria-labelledby="combobox-settings-title">
       <div class="bp-settings-head">
@@ -132,10 +132,7 @@
     </section>
 
     <section class="bp-panel bp-panel--preview" aria-labelledby="combobox-preview-title">
-      <h2 id="combobox-preview-title" class="bp-panel__title bp-panel__title--live">
-        <span class="bp-live-dot" aria-hidden="true"></span>
-        Live preview
-      </h2>
+      <app-playground-preview-header titleId="combobox-preview-title" componentId="combobox" [state]="a11yPreviewState()" />
       <div class="bp-preview-surface bp-preview-surface--stretch">
         <div class="bp-preview-inner bp-preview-inner--combobox">
           @if (recipe() === 'enterprise-pair') {

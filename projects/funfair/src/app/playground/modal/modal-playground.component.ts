@@ -7,6 +7,17 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import {
   BrightrailButtonComponent,
   BrightrailButtonIcon,
@@ -46,6 +57,7 @@ export type ModalRecipe =
   selector: 'app-modal-playground',
   standalone: true,
   imports: [
+    PlaygroundPreviewHeaderComponent,
     FormsModule,
     BrightrailModalComponent,
     BrightrailModalHeaderComponent,
@@ -63,6 +75,60 @@ export type ModalRecipe =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      previewRecipe: () => this.previewRecipe(),
+      size: () => this.size(),
+      appearance: () => this.appearance(),
+      footerPreset: () => this.footerPreset(),
+      headerMode: () => this.headerMode(),
+      backdropDismissAllowed: () => this.backdropDismissAllowed(),
+      closeButtonShown: () => this.closeButtonShown(),
+      demoFieldValue: () => this.demoFieldValue(),
+      scrollBody: () => this.scrollBody(),
+      wizardStep: () => this.wizardStep(),
+      destructivePhraseInput: () => this.destructivePhraseInput(),
+      wizardOwner: () => this.wizardOwner(),
+      wizardProjectName: () => this.wizardProjectName(),
+      advancedPriority: () => this.advancedPriority(),
+      advancedDueDate: () => this.advancedDueDate(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('modal', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    if (typeof snapshot['previewRecipe'] === 'string') {
+      this.applyRecipe(snapshot['previewRecipe'] as ModalRecipe);
+      return;
+    }
+    restorePlaygroundState(state, {
+      previewRecipe: this.previewRecipe as WritableSignal<unknown>,
+      size: this.size as WritableSignal<unknown>,
+      appearance: this.appearance as WritableSignal<unknown>,
+      footerPreset: this.footerPreset as WritableSignal<unknown>,
+      headerMode: this.headerMode as WritableSignal<unknown>,
+      backdropDismissAllowed: this.backdropDismissAllowed as WritableSignal<unknown>,
+      closeButtonShown: this.closeButtonShown as WritableSignal<unknown>,
+      demoFieldValue: this.demoFieldValue as WritableSignal<unknown>,
+      scrollBody: this.scrollBody as WritableSignal<unknown>,
+      wizardStep: this.wizardStep as WritableSignal<unknown>,
+      destructivePhraseInput: this.destructivePhraseInput as WritableSignal<unknown>,
+      wizardOwner: this.wizardOwner as WritableSignal<unknown>,
+      wizardProjectName: this.wizardProjectName as WritableSignal<unknown>,
+      advancedPriority: this.advancedPriority as WritableSignal<unknown>,
+      advancedDueDate: this.advancedDueDate as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
 
   readonly TITLE_ID = 'modal-demo-title';

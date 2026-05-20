@@ -1,5 +1,16 @@
 import { TitleCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailButtonIcon,
@@ -48,6 +59,7 @@ export type SelectPreviewRecipe =
   selector: 'app-select-playground',
   standalone: true,
   imports: [
+    PlaygroundPreviewHeaderComponent,
     BrightrailSelectComponent,
     BrightrailButtonComponent,
     BrightrailButtonGroupComponent,
@@ -60,6 +72,87 @@ export type SelectPreviewRecipe =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      editableOptions: () => this.editableOptions(),
+      previewRecipe: () => this.previewRecipe(),
+      appearance: () => this.appearance(),
+      status: () => this.status(),
+      size: () => this.size(),
+      shape: () => this.shape(),
+      labelPosition: () => this.labelPosition(),
+      fieldState: () => this.fieldState(),
+      fieldLoading: () => this.fieldLoading(),
+      clearable: () => this.clearable(),
+      fullWidth: () => this.fullWidth(),
+      textOverflow: () => this.textOverflow(),
+      selectionMode: () => this.selectionMode(),
+      actionButtonCount: () => this.actionButtonCount(),
+      iconSide: () => this.iconSide(),
+      iconKind: () => this.iconKind(),
+      previewValue: () => this.previewValue(),
+      cascadeParent: () => this.cascadeParent(),
+      cascadeChild: () => this.cascadeChild(),
+      filterStatus: () => this.filterStatus(),
+      filterAssignee: () => this.filterAssignee(),
+      filterPriority: () => this.filterPriority(),
+      segment: () => this.segment(),
+      tagModel: () => this.tagModel(),
+      optionEditorValue: () => this.optionEditorValue(),
+      multiValues: () => this.multiValues(),
+      editingOptionId: () => this.editingOptionId(),
+      editingOptionDraft: () => this.editingOptionDraft(),
+      inlineEditingId: () => this.inlineEditingId(),
+      inlineEditingDraft: () => this.inlineEditingDraft(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('select', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    
+    restorePlaygroundState(state, {
+      editableOptions: this.editableOptions as WritableSignal<unknown>,
+      previewRecipe: this.previewRecipe as WritableSignal<unknown>,
+      appearance: this.appearance as WritableSignal<unknown>,
+      status: this.status as WritableSignal<unknown>,
+      size: this.size as WritableSignal<unknown>,
+      shape: this.shape as WritableSignal<unknown>,
+      labelPosition: this.labelPosition as WritableSignal<unknown>,
+      fieldState: this.fieldState as WritableSignal<unknown>,
+      fieldLoading: this.fieldLoading as WritableSignal<unknown>,
+      clearable: this.clearable as WritableSignal<unknown>,
+      fullWidth: this.fullWidth as WritableSignal<unknown>,
+      textOverflow: this.textOverflow as WritableSignal<unknown>,
+      selectionMode: this.selectionMode as WritableSignal<unknown>,
+      actionButtonCount: this.actionButtonCount as WritableSignal<unknown>,
+      iconSide: this.iconSide as WritableSignal<unknown>,
+      iconKind: this.iconKind as WritableSignal<unknown>,
+      previewValue: this.previewValue as WritableSignal<unknown>,
+      cascadeParent: this.cascadeParent as WritableSignal<unknown>,
+      cascadeChild: this.cascadeChild as WritableSignal<unknown>,
+      filterStatus: this.filterStatus as WritableSignal<unknown>,
+      filterAssignee: this.filterAssignee as WritableSignal<unknown>,
+      filterPriority: this.filterPriority as WritableSignal<unknown>,
+      segment: this.segment as WritableSignal<unknown>,
+      tagModel: this.tagModel as WritableSignal<unknown>,
+      optionEditorValue: this.optionEditorValue as WritableSignal<unknown>,
+      multiValues: this.multiValues as WritableSignal<unknown>,
+      editingOptionId: this.editingOptionId as WritableSignal<unknown>,
+      editingOptionDraft: this.editingOptionDraft as WritableSignal<unknown>,
+      inlineEditingId: this.inlineEditingId as WritableSignal<unknown>,
+      inlineEditingDraft: this.inlineEditingDraft as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
 
   readonly ngModelStandalone = { standalone: true };

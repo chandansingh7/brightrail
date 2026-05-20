@@ -7,7 +7,7 @@ export type BrightrailValidationSummaryError = string | { message: string; field
   standalone: true,
   template: `
     @if (hasErrors()) {
-      <div class="br-val-sum" role="alert" [attr.aria-label]="ariaLabel()">
+      <div class="br-val-sum" role="alert" aria-live="assertive" [attr.aria-label]="ariaLabel()">
         @if (title().trim().length > 0) {
           <p class="br-val-sum__title">{{ title() }}</p>
         }

@@ -7,6 +7,17 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailMenuComponent,
@@ -34,6 +45,7 @@ type MenuRecipe =
   selector: 'app-menu-playground',
   standalone: true,
   imports: [
+    PlaygroundPreviewHeaderComponent,
     FormsModule,
     BrightrailMenuComponent,
     BrightrailMenuItemComponent,
@@ -44,6 +56,25 @@ type MenuRecipe =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      recipe: () => this.recipe(),
+      triggerLabel: () => this.triggerLabel(),
+      item1Label: () => this.item1Label(),
+      item2Label: () => this.item2Label(),
+      item3Label: () => this.item3Label(),
+      item1Selected: () => this.item1Selected(),
+      item2Selected: () => this.item2Selected(),
+      item3Selected: () => this.item3Selected(),
+      item1Disabled: () => this.item1Disabled(),
+      item2Disabled: () => this.item2Disabled(),
+      item3Disabled: () => this.item3Disabled(),
+      lastAction: () => this.lastAction(),
+    }),
+  );
+
+
   private readonly menuRef = viewChild<BrightrailMenuComponent>('menuRef');
   private readonly filterMenuRef = viewChild<BrightrailMenuComponent>('filterMenuRef');
 
@@ -51,6 +82,7 @@ export class MenuPlaygroundComponent {
   readonly ngModelStandalone = { standalone: true };
 
   constructor() {
+    initPlaygroundA11yPreview('menu', this.previewOnly);
     afterNextRender(() => this.openPreviewMenu());
   }
 

@@ -1,4 +1,5 @@
 @use '../styles/tokens' as br;
+@use '../styles/breakpoints' as bp;
 
 :host {
   display: block;
@@ -91,4 +92,12 @@
   --br-toast-icon-bg: rgb(0 98 255 / 12%);
   --br-toast-icon-fg: var(--br-color-primary, #{br.$br-color-primary});
   --br-toast-border: rgb(0 98 255 / 25%);
+}
+
+@include bp.br-down(xs) {
+  .br-toast__shell {
+    min-width: 0;
+    width: 100%;
+    max-width: none;
+  }
 }

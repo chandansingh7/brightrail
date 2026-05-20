@@ -1,4 +1,15 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailSwitchComponent,
@@ -26,12 +37,52 @@ type SwitchRecipe =
 @Component({
   selector: 'app-switch-playground',
   standalone: true,
-  imports: [FormsModule, BrightrailSwitchComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailSwitchComponent],
   templateUrl: './switch-playground.component.html',
   styleUrl: './switch-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SwitchPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      recipe: () => this.recipe(),
+      label: () => this.label(),
+      ariaLabel: () => this.ariaLabel(),
+      tone: () => this.tone(),
+      size: () => this.size(),
+      checked: () => this.checked(),
+      disabled: () => this.disabled(),
+      useNgModel: () => this.useNgModel(),
+      ngModelValue: () => this.ngModelValue(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('switch', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    
+    restorePlaygroundState(state, {
+      recipe: this.recipe as WritableSignal<unknown>,
+      label: this.label as WritableSignal<unknown>,
+      ariaLabel: this.ariaLabel as WritableSignal<unknown>,
+      tone: this.tone as WritableSignal<unknown>,
+      size: this.size as WritableSignal<unknown>,
+      checked: this.checked as WritableSignal<unknown>,
+      disabled: this.disabled as WritableSignal<unknown>,
+      useNgModel: this.useNgModel as WritableSignal<unknown>,
+      ngModelValue: this.ngModelValue as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly ngModelStandalone = { standalone: true };
 

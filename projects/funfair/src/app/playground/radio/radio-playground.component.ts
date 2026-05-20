@@ -1,4 +1,15 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailRadioLabelPosition,
@@ -47,12 +58,72 @@ type RadioRecipe =
 @Component({
   selector: 'app-radio-playground',
   standalone: true,
-  imports: [FormsModule, BrightrailRadioComponent, BrightrailRadioGroupLibComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailRadioComponent, BrightrailRadioGroupLibComponent],
   templateUrl: './radio-playground.component.html',
   styleUrl: './radio-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      recipe: () => this.recipe(),
+      groupLabel: () => this.groupLabel(),
+      errorText: () => this.errorText(),
+      label: () => this.label(),
+      description: () => this.description(),
+      ariaLabel: () => this.ariaLabel(),
+      variant: () => this.variant(),
+      status: () => this.status(),
+      labelPosition: () => this.labelPosition(),
+      tone: () => this.tone(),
+      size: () => this.size(),
+      state: () => this.state(),
+      layout: () => this.layout(),
+      optionIcon: () => this.optionIcon(),
+      required: () => this.required(),
+      invalid: () => this.invalid(),
+      checked: () => this.checked(),
+      selectedId: () => this.selectedId(),
+      groupOptions: () => this.groupOptions(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('radio', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    
+    restorePlaygroundState(state, {
+      recipe: this.recipe as WritableSignal<unknown>,
+      groupLabel: this.groupLabel as WritableSignal<unknown>,
+      errorText: this.errorText as WritableSignal<unknown>,
+      label: this.label as WritableSignal<unknown>,
+      description: this.description as WritableSignal<unknown>,
+      ariaLabel: this.ariaLabel as WritableSignal<unknown>,
+      variant: this.variant as WritableSignal<unknown>,
+      status: this.status as WritableSignal<unknown>,
+      labelPosition: this.labelPosition as WritableSignal<unknown>,
+      tone: this.tone as WritableSignal<unknown>,
+      size: this.size as WritableSignal<unknown>,
+      state: this.state as WritableSignal<unknown>,
+      layout: this.layout as WritableSignal<unknown>,
+      optionIcon: this.optionIcon as WritableSignal<unknown>,
+      required: this.required as WritableSignal<unknown>,
+      invalid: this.invalid as WritableSignal<unknown>,
+      checked: this.checked as WritableSignal<unknown>,
+      selectedId: this.selectedId as WritableSignal<unknown>,
+      groupOptions: this.groupOptions as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly ngModelStandalone = { standalone: true };
 

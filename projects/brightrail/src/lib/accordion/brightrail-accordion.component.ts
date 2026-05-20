@@ -73,6 +73,7 @@ export class BrightrailAccordionComponent implements BrightrailAccordionApi {
   readonly items = contentChildren(BrightrailAccordionItemComponent);
 
   readonly expandedIndices = signal<Set<number>>(new Set());
+  readonly focusedIndex = signal(0);
 
   private selectionPrimed = false;
 
@@ -115,9 +116,11 @@ export class BrightrailAccordionComponent implements BrightrailAccordionApi {
           }
           if (next.size > 0) {
             this.expandedIndices.set(next);
+            this.focusedIndex.set([...next][0] ?? 0);
           }
         } else if (def !== null && def !== undefined && def >= 0 && def < len) {
           this.expandedIndices.set(new Set([def]));
+          this.focusedIndex.set(def);
         }
         this.selectionPrimed = true;
       });
@@ -158,5 +161,96 @@ export class BrightrailAccordionComponent implements BrightrailAccordionApi {
     }
     this.expandedIndices.set(cur);
     this.expandedIndicesChange.emit(new Set(cur));
+  }
+
+  tabIndexForItem(index: number): number {
+    return this.focusedIndex() === index ? 0 : -1;
+  }
+
+  onTriggerFocus(index: number): void {
+    if (index >= 0) {
+      this.focusedIndex.set(index);
+    }
+  }
+
+  onTriggerKeydown(ev: KeyboardEvent, index: number): void {
+    if (this.disabled()) {
+      return;
+    }
+    const list = this.items();
+    const len = list.length;
+    if (!len || index < 0 || index >= len) {
+      return;
+    }
+
+    switch (ev.key) {
+      case 'ArrowDown':
+      case 'ArrowRight':
+        ev.preventDefault();
+        this.focusTrigger(this.stepEnabledIndex(index, 1));
+        break;
+      case 'ArrowUp':
+      case 'ArrowLeft':
+        ev.preventDefault();
+        this.focusTrigger(this.stepEnabledIndex(index, -1));
+        break;
+      case 'Home':
+        ev.preventDefault();
+        this.focusTrigger(this.firstEnabledIndex());
+        break;
+      case 'End':
+        ev.preventDefault();
+        this.focusTrigger(this.lastEnabledIndex());
+        break;
+      case ' ':
+      case 'Enter':
+        ev.preventDefault();
+        this.toggleIndex(index);
+        break;
+      default:
+        break;
+    }
+  }
+
+  focusTrigger(index: number): void {
+    const list = this.items();
+    if (index < 0 || index >= list.length) {
+      return;
+    }
+    this.focusedIndex.set(index);
+    queueMicrotask(() => list[index]?.focusTrigger());
+  }
+
+  private stepEnabledIndex(from: number, delta: 1 | -1): number {
+    const list = this.items();
+    const len = list.length;
+    if (!len) {
+      return 0;
+    }
+    let i = from;
+    for (let n = 0; n < len; n++) {
+      i = (i + delta + len) % len;
+      const item = list[i];
+      if (item && !item.disabled() && !this.disabled()) {
+        return i;
+      }
+    }
+    return from;
+  }
+
+  private firstEnabledIndex(): number {
+    const list = this.items();
+    const ix = list.findIndex((item) => !item.disabled());
+    return ix >= 0 ? ix : 0;
+  }
+
+  private lastEnabledIndex(): number {
+    const list = this.items();
+    for (let i = list.length - 1; i >= 0; i--) {
+      if (!list[i]?.disabled()) {
+        return i;
+      }
+    }
+    return 0;
   }
 }

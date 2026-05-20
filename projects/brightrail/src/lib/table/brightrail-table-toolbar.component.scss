@@ -1,4 +1,5 @@
 @use '../styles/tokens' as br;
+@use '../styles/breakpoints' as bp;
 
 :host {
   display: block;
@@ -13,4 +14,11 @@
   gap: 0.35rem;
   padding: 0.35rem 0 0.65rem;
   border-bottom: 1px solid var(--br-table-border, #{br.$br-color-border});
+}
+
+@include bp.br-down(xs) {
+  .br-table-toolbar {
+    justify-content: flex-start;
+    width: 100%;
+  }
 }

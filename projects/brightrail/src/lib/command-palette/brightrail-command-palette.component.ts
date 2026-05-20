@@ -5,6 +5,7 @@ import {
   HostListener,
   computed,
   effect,
+  inject,
   input,
   output,
   signal,
@@ -12,17 +13,22 @@ import {
   viewChild,
 } from '@angular/core';
 
+import { BrightrailFocusTrapDirective } from '../platform/brightrail-focus-trap.directive';
+import { BrightrailLiveAnnouncerService } from '../platform/brightrail-live-announcer.service';
 import type { BrightrailCommandPaletteItem } from './brightrail-command-palette.types';
 import { filterCommandPaletteItems, groupCommandPaletteItems } from './brightrail-command-palette.utils';
 
 @Component({
   selector: 'brightrail-command-palette',
   standalone: true,
+  imports: [BrightrailFocusTrapDirective],
   templateUrl: './brightrail-command-palette.component.html',
   styleUrl: './brightrail-command-palette.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BrightrailCommandPaletteComponent {
+  private readonly announcer = inject(BrightrailLiveAnnouncerService);
+
   readonly isOpen = input(false);
   readonly commands = input<BrightrailCommandPaletteItem[]>([]);
   readonly placeholder = input('Search commands…');
@@ -69,6 +75,24 @@ export class BrightrailCommandPaletteComponent {
           this.activeId.set(ids[0]);
         }
         queueMicrotask(() => this.queryInput()?.nativeElement.focus());
+      });
+    });
+
+    effect(() => {
+      if (!this.isOpen()) {
+        return;
+      }
+      const query = this.query().trim();
+      const count = this.filteredItems().length;
+      untracked(() => {
+        if (!query) {
+          return;
+        }
+        const message =
+          count === 0
+            ? this.emptyLabel()
+            : `${count} ${count === 1 ? 'result' : 'results'}`;
+        void this.announcer.announce(message, 'polite');
       });
     });
   }

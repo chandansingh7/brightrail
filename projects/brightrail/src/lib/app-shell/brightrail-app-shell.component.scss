@@ -1,16 +1,19 @@
+@use '../styles/breakpoints' as bp;
 @use '../styles/tokens' as br;
 
 :host {
   display: block;
   block-size: 100%;
-  min-block-size: 100%;
+  max-block-size: 100%;
+  min-block-size: 0;
+  overflow: hidden;
 }
 
 .br-app-shell {
   display: grid;
   grid-template-rows: auto 1fr;
   block-size: 100%;
-  min-block-size: 100%;
+  min-block-size: 0;
   background: var(--br-color-surface, #{br.$br-color-surface});
   color: br.$br-color-text;
 }
@@ -60,10 +63,43 @@
   min-width: 0;
   min-block-size: 0;
   overflow: auto;
+  scrollbar-gutter: stable;
 }
 
 .br-app-shell__content {
   flex: 1 1 auto;
-  padding: 1.25rem 1.5rem;
+  padding: clamp(0.875rem, 2vw, 1.25rem) clamp(1rem, 3vw, 1.5rem);
   min-block-size: 0;
+}
+
+@include bp.br-down(sm) {
+  .br-app-shell__body {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .br-app-shell--sidebar-right .br-app-shell__body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .br-app-shell--sidebar-right .br-app-shell__sidebar {
+    order: unset;
+  }
+
+  .br-app-shell__sidebar {
+    max-block-size: min(40dvh, 16rem);
+    border-inline-end: none;
+    border-block-end: 1px solid var(--br-color-border, #{br.$br-color-border});
+  }
+
+  .br-app-shell--sidebar-right .br-app-shell__sidebar {
+    border-inline-start: none;
+    border-block-end: 1px solid var(--br-color-border, #{br.$br-color-border});
+  }
+}
+
+@include bp.br-up(xl) {
+  .br-app-shell__content {
+    padding-inline: clamp(1.5rem, 4vw, 3rem);
+  }
 }

@@ -1,5 +1,11 @@
 import { FormsModule } from '@angular/forms';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
 import {
   BrightrailAvatarBorderStyle,
   BrightrailAvatarComponent,
@@ -53,19 +59,117 @@ type AvatarRecipe =
 
 type PreviewLayout = 'single' | 'group';
 
+type AvatarA11yPreviewState = {
+  previewRecipe: AvatarRecipe;
+  previewLayout: PreviewLayout;
+  kind: BrightrailAvatarKind;
+  shape: BrightrailAvatarShape;
+  size: BrightrailAvatarSize;
+  variant: BrightrailAvatarVariant;
+  borderStyle: BrightrailAvatarBorderStyle;
+  status: BrightrailAvatarStatus;
+  statusPosition: BrightrailAvatarStatusPosition;
+  enterpriseRole: BrightrailAvatarEnterpriseRole;
+  state: BrightrailAvatarState;
+  tone: BrightrailAvatarTone;
+  icon: BrightrailButtonIcon;
+  imageSrc: string;
+  imageAlt: string;
+  displayName: string;
+  initials: string;
+  label: string;
+  subtitle: string;
+  showProfileMeta: boolean;
+  diameter: string;
+  ringColor: string;
+  glowColor: string;
+  badgeScale: number;
+};
+
 @Component({
   selector: 'app-avatar-playground',
   standalone: true,
-  imports: [FormsModule, BrightrailAvatarComponent, BrightrailAvatarGroupComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailAvatarComponent, BrightrailAvatarGroupComponent],
   templateUrl: './avatar-playground.component.html',
   styleUrl: './avatar-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AvatarPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed<AvatarA11yPreviewState>(() => ({
+    previewRecipe: this.previewRecipe(),
+    previewLayout: this.previewLayout(),
+    kind: this.kind(),
+    shape: this.shape(),
+    size: this.size(),
+    variant: this.variant(),
+    borderStyle: this.borderStyle(),
+    status: this.status(),
+    statusPosition: this.statusPosition(),
+    enterpriseRole: this.enterpriseRole(),
+    state: this.state(),
+    tone: this.tone(),
+    icon: this.icon(),
+    imageSrc: this.imageSrc(),
+    imageAlt: this.imageAlt(),
+    displayName: this.displayName(),
+    initials: this.initials(),
+    label: this.label(),
+    subtitle: this.subtitle(),
+    showProfileMeta: this.showProfileMeta(),
+    diameter: this.diameter(),
+    ringColor: this.ringColor(),
+    glowColor: this.glowColor(),
+    badgeScale: this.badgeScale(),
+  }));
+
   readonly themeService = inject(PlaygroundThemeService);
 
   constructor() {
-    this.applyRecipe('user-avatar');
+    let restored = false;
+    initPlaygroundA11yPreview('avatar', this.previewOnly, (state) => {
+      this.restoreA11yPreviewState(state);
+      restored = true;
+    });
+    if (!restored) {
+      this.applyRecipe('user-avatar');
+    }
+  }
+
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const s = state as Partial<AvatarA11yPreviewState>;
+    if (s.previewRecipe) {
+      this.previewRecipe.set(s.previewRecipe);
+      this.applyRecipe(s.previewRecipe);
+      return;
+    }
+    if (s.previewLayout) this.previewLayout.set(s.previewLayout);
+    if (s.kind) this.kind.set(s.kind);
+    if (s.shape) this.shape.set(s.shape);
+    if (s.size) this.size.set(s.size);
+    if (s.variant) this.variant.set(s.variant);
+    if (s.borderStyle) this.borderStyle.set(s.borderStyle);
+    if (s.status) this.status.set(s.status);
+    if (s.statusPosition) this.statusPosition.set(s.statusPosition);
+    if (s.enterpriseRole) this.enterpriseRole.set(s.enterpriseRole);
+    if (s.state) this.state.set(s.state);
+    if (s.tone) this.tone.set(s.tone);
+    if (s.icon) this.icon.set(s.icon);
+    if (typeof s.imageSrc === 'string') this.imageSrc.set(s.imageSrc);
+    if (typeof s.imageAlt === 'string') this.imageAlt.set(s.imageAlt);
+    if (typeof s.displayName === 'string') this.displayName.set(s.displayName);
+    if (typeof s.initials === 'string') this.initials.set(s.initials);
+    if (typeof s.label === 'string') this.label.set(s.label);
+    if (typeof s.subtitle === 'string') this.subtitle.set(s.subtitle);
+    if (typeof s.showProfileMeta === 'boolean') this.showProfileMeta.set(s.showProfileMeta);
+    if (typeof s.diameter === 'string') this.diameter.set(s.diameter);
+    if (typeof s.ringColor === 'string') this.ringColor.set(s.ringColor);
+    if (typeof s.glowColor === 'string') this.glowColor.set(s.glowColor);
+    if (typeof s.badgeScale === 'number') this.badgeScale.set(s.badgeScale);
   }
 
   readonly recipeGroups = ['Profile', 'Reference', 'Enterprise', 'Futuristic'] as const;

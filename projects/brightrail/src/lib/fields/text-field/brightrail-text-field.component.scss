@@ -1,4 +1,5 @@
 @use '../../styles/tokens' as br;
+@use '../../styles/breakpoints' as bp;
 
 :host {
   @include br.br-host-text-field;
@@ -446,4 +447,15 @@ textarea.br-tf__input {
 
 .br-tf__hint--info {
   color: var(--br-tf-info);
+}
+
+@include bp.br-down(sm) {
+  .br-tf__field-row--inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .br-tf__label--side {
+    max-width: 100%;
+  }
 }

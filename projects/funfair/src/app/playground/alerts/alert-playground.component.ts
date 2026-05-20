@@ -7,6 +7,17 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import {
   BrightrailAlertAccent,
   BrightrailAlertActionsComponent,
@@ -55,6 +66,7 @@ export type AlertPreviewRecipe =
   selector: 'app-alert-playground',
   standalone: true,
   imports: [
+    PlaygroundPreviewHeaderComponent,
     FormsModule,
     BrightrailAlertComponent,
     BrightrailAlertTitleDirective,
@@ -68,6 +80,58 @@ export type AlertPreviewRecipe =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlertPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      previewRecipe: () => this.previewRecipe(),
+      appearance: () => this.appearance(),
+      status: () => this.status(),
+      size: () => this.size(),
+      corners: () => this.corners(),
+      dismissible: () => this.dismissible(),
+      showIcon: () => this.showIcon(),
+      actionsPreset: () => this.actionsPreset(),
+      fullWidth: () => this.fullWidth(),
+      inverse: () => this.inverse(),
+      multilineBody: () => this.multilineBody(),
+      accent: () => this.accent(),
+      iconPreset: () => this.iconPreset(),
+      placement: () => this.placement(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('alerts', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    if (typeof snapshot['previewRecipe'] === 'string') {
+      this.applyRecipe(snapshot['previewRecipe'] as AlertPreviewRecipe);
+      return;
+    }
+    restorePlaygroundState(state, {
+      previewRecipe: this.previewRecipe as WritableSignal<unknown>,
+      appearance: this.appearance as WritableSignal<unknown>,
+      status: this.status as WritableSignal<unknown>,
+      size: this.size as WritableSignal<unknown>,
+      corners: this.corners as WritableSignal<unknown>,
+      dismissible: this.dismissible as WritableSignal<unknown>,
+      showIcon: this.showIcon as WritableSignal<unknown>,
+      actionsPreset: this.actionsPreset as WritableSignal<unknown>,
+      fullWidth: this.fullWidth as WritableSignal<unknown>,
+      inverse: this.inverse as WritableSignal<unknown>,
+      multilineBody: this.multilineBody as WritableSignal<unknown>,
+      accent: this.accent as WritableSignal<unknown>,
+      iconPreset: this.iconPreset as WritableSignal<unknown>,
+      placement: this.placement as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
 
   readonly recipeGroups = ['Basics', 'Patterns', 'Catalog'] as const;

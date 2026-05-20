@@ -1,3 +1,5 @@
+@use 'breakpoints' as bp;
+
 :host {
   display: block;
 }
@@ -77,7 +79,7 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-@media (max-width: 520px) {
+@include bp.br-down(xs) {
   .skvc-dashboard__grid {
     grid-template-columns: 1fr;
   }

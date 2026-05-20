@@ -1,3 +1,4 @@
+@use '../styles/breakpoints' as bp;
 @use '../styles/tokens' as br;
 
 .br-modal-root {
@@ -105,4 +106,23 @@
 
 .br-modal__panel--scroll-body ::ng-deep .br-modal__footer {
   flex-shrink: 0;
+}
+
+@include bp.br-down(xs) {
+  .br-modal-root {
+    padding: 0;
+    align-items: stretch;
+  }
+
+  .br-modal__align {
+    max-height: 100%;
+    align-items: stretch;
+  }
+
+  .br-modal__panel {
+    max-height: 100%;
+    min-height: 100%;
+    border-radius: 0;
+    max-width: 100% !important;
+  }
 }

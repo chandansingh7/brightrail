@@ -1,4 +1,5 @@
 @use '../styles/tokens' as br;
+@use '../styles/breakpoints' as bp;
 
 /* ----- Shared shell pieces (header / body / footer components) ----- */
 
@@ -59,4 +60,21 @@
   padding: 0.85rem 1.15rem 1rem;
   border-top: 1px solid br.$br-color-border;
   background: color-mix(in srgb, br.$br-color-surface-muted 55%, br.$br-color-surface);
+}
+
+@include bp.br-down(xs) {
+  .br-modal__header {
+    flex-wrap: wrap;
+    padding-inline: 0.85rem;
+  }
+
+  .br-modal__body,
+  .br-modal__footer {
+    padding-inline: 0.85rem;
+  }
+
+  .br-modal__header-aside {
+    width: 100%;
+    justify-content: flex-start;
+  }
 }

@@ -14,7 +14,7 @@ export const APP_SHELL_VARIATION_SNIPPETS = {
     <h1 brightrailPageTitle>Overview</h1>
     <p brightrailPageSubtitle>Workspace summary</p>
     <div brightrailPageHeaderActions>
-      <button type="button">New project</button>
+      <brightrail-button variant="primary" size="sm">New project</brightrail-button>
     </div>
   </brightrail-page-header>
   <p>Main content area</p>
@@ -46,7 +46,7 @@ export const APP_SHELL_VARIATION_SNIPPETS = {
     <h1 brightrailPageTitle>Reports</h1>
     <p brightrailPageSubtitle>Q1 summary</p>
     <div brightrailPageHeaderActions>
-      <button type="button">Export</button>
+      <brightrail-button variant="outline" size="sm">Export</brightrail-button>
     </div>
   </brightrail-page-header>
   <p>Report table goes here</p>
@@ -56,7 +56,7 @@ export const APP_SHELL_VARIATION_SNIPPETS = {
   <span brightrailTopBarStart>☰ Menu</span>
   <span brightrailTopBarCenter>Search workspace</span>
   <span brightrailTopBarEnd>
-    <button type="button">Profile</button>
+    <brightrail-button variant="ghost" size="sm">Profile</brightrail-button>
   </span>
 </brightrail-top-bar>`,
 
@@ -114,7 +114,7 @@ export const APP_SHELL_HTML_EXAMPLES = `<brightrail-app-shell>
   <brightrail-top-bar>
     <span brightrailTopBarStart>Brand</span>
     <span brightrailTopBarEnd>
-      <button type="button">Sign out</button>
+      <brightrail-button variant="ghost" size="sm">Sign out</brightrail-button>
     </span>
   </brightrail-top-bar>
   <brightrail-sidebar>

@@ -6,6 +6,17 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import {
   BrightrailTabComponent,
   BrightrailTabContentDirective,
@@ -51,6 +62,7 @@ interface TabPlayDef {
   selector: 'app-tabs-playground',
   standalone: true,
   imports: [
+    PlaygroundPreviewHeaderComponent,
     BrightrailTabsComponent,
     BrightrailTabComponent,
     BrightrailTabContentDirective,
@@ -62,6 +74,47 @@ interface TabPlayDef {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      previewRecipe: () => this.previewRecipe(),
+      appearance: () => this.appearance(),
+      orientation: () => this.orientation(),
+      status: () => this.status(),
+      size: () => this.size(),
+      corners: () => this.corners(),
+      barState: () => this.barState(),
+      triggerLayout: () => this.triggerLayout(),
+      scrollable: () => this.scrollable(),
+      closableDefs: () => this.closableDefs(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('tabs', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    
+    restorePlaygroundState(state, {
+      previewRecipe: this.previewRecipe as WritableSignal<unknown>,
+      appearance: this.appearance as WritableSignal<unknown>,
+      orientation: this.orientation as WritableSignal<unknown>,
+      status: this.status as WritableSignal<unknown>,
+      size: this.size as WritableSignal<unknown>,
+      corners: this.corners as WritableSignal<unknown>,
+      barState: this.barState as WritableSignal<unknown>,
+      triggerLayout: this.triggerLayout as WritableSignal<unknown>,
+      scrollable: this.scrollable as WritableSignal<unknown>,
+      closableDefs: this.closableDefs as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
 
   readonly recipeGroups = ['Basics', 'Popular app', 'Layouts & density', 'Enterprise'];

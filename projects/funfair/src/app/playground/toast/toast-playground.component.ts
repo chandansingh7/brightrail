@@ -1,4 +1,15 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailToastComponent,
@@ -26,12 +37,48 @@ type ToastRecipe =
 @Component({
   selector: 'app-toast-playground',
   standalone: true,
-  imports: [FormsModule, BrightrailToastComponent, BrightrailToastContainerComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailToastComponent, BrightrailToastContainerComponent],
   templateUrl: './toast-playground.component.html',
   styleUrl: './toast-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToastPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      recipe: () => this.recipe(),
+      variant: () => this.variant(),
+      title: () => this.title(),
+      message: () => this.message(),
+      dismissible: () => this.dismissible(),
+      durationMs: () => this.durationMs(),
+      previewStatic: () => this.previewStatic(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('toast', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    
+    restorePlaygroundState(state, {
+      recipe: this.recipe as WritableSignal<unknown>,
+      variant: this.variant as WritableSignal<unknown>,
+      title: this.title as WritableSignal<unknown>,
+      message: this.message as WritableSignal<unknown>,
+      dismissible: this.dismissible as WritableSignal<unknown>,
+      durationMs: this.durationMs as WritableSignal<unknown>,
+      previewStatic: this.previewStatic as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly toastService = inject(BrightrailToastService);
   readonly ngModelStandalone = { standalone: true };

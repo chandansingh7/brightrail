@@ -1,5 +1,16 @@
 import { FormsModule } from '@angular/forms';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import {
   BrightrailBadgeColor,
   BrightrailBadgeComponent,
@@ -37,12 +48,57 @@ type BadgeMode = 'text' | 'count' | 'status' | 'dot' | 'notification';
 @Component({
   selector: 'app-badge-playground',
   standalone: true,
-  imports: [FormsModule, BrightrailBadgeComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailBadgeComponent],
   templateUrl: './badge-playground.component.html',
   styleUrl: './badge-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgePlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      previewRecipe: () => this.previewRecipe(),
+      mode: () => this.mode(),
+      variant: () => this.variant(),
+      color: () => this.color(),
+      size: () => this.size(),
+      state: () => this.state(),
+      icon: () => this.icon(),
+      label: () => this.label(),
+      count: () => this.count(),
+      context: () => this.context(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('badge', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    if (typeof snapshot['previewRecipe'] === 'string') {
+      this.applyRecipe(snapshot['previewRecipe'] as BadgeRecipe);
+      return;
+    }
+    restorePlaygroundState(state, {
+      previewRecipe: this.previewRecipe as WritableSignal<unknown>,
+      mode: this.mode as WritableSignal<unknown>,
+      variant: this.variant as WritableSignal<unknown>,
+      color: this.color as WritableSignal<unknown>,
+      size: this.size as WritableSignal<unknown>,
+      state: this.state as WritableSignal<unknown>,
+      icon: this.icon as WritableSignal<unknown>,
+      label: this.label as WritableSignal<unknown>,
+      count: this.count as WritableSignal<unknown>,
+      context: this.context as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
 
   readonly recipeGroups = ['Core', 'Status', 'Appearance & State', 'Enterprise', 'Advanced'] as const;

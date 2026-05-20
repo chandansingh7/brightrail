@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  min-height: 100dvh;
+  width: 100%;
+  overflow: visible;
+  background: var(--ff-bg, #f8fafc);
+  color: var(--ff-fg, #0f172a);
+}
+
+.a11y-shell__error {
+  margin: 2rem;
+  font-size: 0.875rem;
+  color: #b91c1c;
+}

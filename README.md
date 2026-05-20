@@ -4,6 +4,15 @@
 
 **Node:** This repo is developed on **Node 24.x** ([Active LTS “Krypton”](https://nodejs.org/en/about/releases)). Use **`.nvmrc`** (`nvm use`) or install Node 24 locally. The published library’s `engines.node` matches [Angular 21’s supported Node range](https://angular.dev/reference/versions) so apps on those versions can still install it.
 
+### Repository & live demo
+
+| | URL |
+|---|-----|
+| **Repository** | [github.com/chandansingh7/brightrail](https://github.com/chandansingh7/brightrail) |
+| **Live playground (GitHub Pages)** | [chandansingh7.github.io/brightrail](https://chandansingh7.github.io/brightrail/) |
+
+The hosted site is the **Funfair** showcase — browse component playgrounds, variation catalogs, and library assessment without a local install.
+
 ### Access locally (ports)
 
 | App | Default URL | Role |
@@ -29,6 +38,10 @@ You can override ports for the script only: `FUNFAIR_PORT=4300 MIDWAY_PORT=4301 
 | `npm run dev:all` | Build lib + apps, then serve Funfair (**4200**) and Midway (**4201**) together ([`scripts/build-and-run.sh`](scripts/build-and-run.sh)) |
 | `npm run verify:package` | Build `brightrail` → `npm install` → **Midway** app (npm-shaped consumer proof) |
 | `npm run build:all` | Build library + funfair + midway |
+| `npm run deploy:pages` | Build Funfair and publish to [GitHub Pages](https://chandansingh7.github.io/brightrail/) (`gh-pages` branch) |
 | `npm run test:brightrail` | Library unit tests (headless Chrome) |
+| `npm run e2e:a11y` | axe accessibility gate on Funfair a11y-preview routes (Playwright) |
+| `npm run e2e:visual` | Visual regression baselines for every playground preview (Playwright) |
+| `npm run e2e:update-snapshots` | Refresh Playwright screenshot baselines after intentional UI changes |
 
 Planning docs: **[doc/MASTER-PLAN.md](doc/MASTER-PLAN.md)**

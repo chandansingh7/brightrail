@@ -80,7 +80,7 @@ this.toast.show({ variant: 'success', message: 'Second notification' });`,
 </div>`,
 } as const;
 
-export const TOAST_DOC_SECTION_COUNT = 7;
+export const TOAST_DOC_SECTION_COUNT = 6;
 
 export const TOAST_HTML_EXAMPLES = `<brightrail-toast-container />
 

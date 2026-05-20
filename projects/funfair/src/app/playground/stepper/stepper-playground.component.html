@@ -1,4 +1,4 @@
-<div class="bp">
+<div class="bp" [class.bp--a11y-preview-only]="previewOnly">
   <div class="bp-grid">
     <section class="bp-panel bp-panel--settings">
       <div class="bp-settings-head">
@@ -172,10 +172,12 @@
         </div>
       </div>
     </section>
-    <section class="bp-panel bp-panel--preview">
-      <h2 class="bp-panel__title bp-panel__title--live">
-        <span class="bp-live-dot" aria-hidden="true"></span>Live preview
-      </h2>
+    <section class="bp-panel bp-panel--preview" aria-labelledby="stp-preview-title">
+      <app-playground-preview-header
+        titleId="stp-preview-title"
+        componentId="stepper"
+        [state]="a11yPreviewState()"
+      />
       <div class="bp-preview-surface bp-preview-surface--stretch stp-preview">
         <div
           class="stp-preview-inner"

@@ -13,9 +13,16 @@
     "verify:package": "ng build brightrail && npm install && ng build midway",
     "setup": "bash scripts/setup.sh",
     "dev:all": "bash scripts/build-and-run.sh",
+    "deploy:pages": "bash scripts/deploy-gh-pages.sh",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:brightrail": "ng test brightrail --no-watch --browsers=ChromeHeadless"
+    "test:brightrail": "ng test brightrail --no-watch --browsers=ChromeHeadless",
+    "e2e:serve": "npm run build:lib && ng build funfair --configuration=production && npx --yes serve dist/funfair/browser -l ${E2E_PORT:-4321} -s",
+    "e2e": "playwright test",
+    "e2e:a11y": "playwright test e2e/a11y.spec.ts",
+    "e2e:a11y:contrast": "playwright test e2e/a11y-contrast.spec.ts",
+    "e2e:visual": "playwright test e2e/visual.spec.ts",
+    "e2e:update-snapshots": "playwright test e2e/visual.spec.ts --update-snapshots"
   },
   "prettier": {
     "printWidth": 100,
@@ -35,6 +42,8 @@
     "npm": ">=10.0.0"
   },
   "dependencies": {
+    "@angular/aria": "^21.2.11",
+    "@angular/cdk": "^21.2.11",
     "@angular/common": "^21.2.11",
     "@angular/compiler": "^21.2.11",
     "@angular/core": "^21.2.11",
@@ -50,6 +59,8 @@
     "@angular/build": "^21.2.9",
     "@angular/cli": "^21.2.9",
     "@angular/compiler-cli": "^21.2.11",
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.52.0",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",

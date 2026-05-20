@@ -1,4 +1,15 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailFileUploadAppearance,
@@ -54,12 +65,48 @@ type FileListPreset = 'none' | 'single-success' | 'multi-mixed' | 'enterprise';
 @Component({
   selector: 'app-file-upload-playground',
   standalone: true,
-  imports: [FormsModule, BrightrailFileUploadComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailFileUploadComponent],
   templateUrl: './file-upload-playground.component.html',
   styleUrl: './file-upload-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FileUploadPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      scenarioGroup: () => this.scenarioGroup(),
+      scenario: () => this.scenario(),
+      label: () => this.label(),
+      helperText: () => this.helperText(),
+      placeholder: () => this.placeholder(),
+      buttonText: () => this.buttonText(),
+      appearance: () => this.appearance(),
+      variant: () => this.variant(),
+      surface: () => this.surface(),
+      state: () => this.state(),
+      status: () => this.status(),
+      size: () => this.size(),
+      required: () => this.required(),
+      disabled: () => this.disabled(),
+      multiple: () => this.multiple(),
+      accept: () => this.accept(),
+      maxFiles: () => this.maxFiles(),
+      maxFileSizeMb: () => this.maxFileSizeMb(),
+      showFileList: () => this.showFileList(),
+      showCloudIcon: () => this.showCloudIcon(),
+      showUploadProgress: () => this.showUploadProgress(),
+      fileListPreset: () => this.fileListPreset(),
+      previewItems: () => this.previewItems(),
+      enableDragDrop: () => this.enableDragDrop(),
+      showFooterActions: () => this.showFooterActions(),
+      previewImageUrl: () => this.previewImageUrl(),
+      enterprisePattern: () => this.enterprisePattern(),
+      enterpriseSecondaryText: () => this.enterpriseSecondaryText(),
+    }),
+  );
+
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly ngModelStandalone = { standalone: true };
 
@@ -177,6 +224,7 @@ export class FileUploadPlaygroundComponent {
   });
 
   constructor() {
+    initPlaygroundA11yPreview('file-upload', this.previewOnly);
     this.applyScenario('core-compact-file-picker');
   }
 

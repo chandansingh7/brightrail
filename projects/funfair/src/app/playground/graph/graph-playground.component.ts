@@ -1,5 +1,16 @@
 import { FormsModule } from '@angular/forms';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import {
   BRIGHTRAIL_GRAPH_DEFAULT_COLORS,
   BrightrailGraphComponent,
@@ -40,12 +51,44 @@ type GraphRecipe =
 @Component({
   selector: 'app-graph-playground',
   standalone: true,
-  imports: [FormsModule, BrightrailGraphComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailGraphComponent],
   templateUrl: './graph-playground.component.html',
   styleUrl: './graph-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GraphPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      previewRecipe: () => this.previewRecipe(),
+      kind: () => this.kind(),
+      datasetId: () => this.datasetId(),
+      dataPoints: () => this.dataPoints(),
+      showArea: () => this.showArea(),
+      showLegend: () => this.showLegend(),
+      showGrid: () => this.showGrid(),
+      showXAxis: () => this.showXAxis(),
+      showYAxis: () => this.showYAxis(),
+      showTooltip: () => this.showTooltip(),
+      enableZoom: () => this.enableZoom(),
+      enablePan: () => this.enablePan(),
+      lineWidth: () => this.lineWidth(),
+      pointRadius: () => this.pointRadius(),
+      areaOpacity: () => this.areaOpacity(),
+      lineStyle: () => this.lineStyle(),
+      legendPosition: () => this.legendPosition(),
+      colorScheme: () => this.colorScheme(),
+      xAxisLabel: () => this.xAxisLabel(),
+      yAxisLabel: () => this.yAxisLabel(),
+      tooltipPrefix: () => this.tooltipPrefix(),
+      tooltipSuffix: () => this.tooltipSuffix(),
+      radialValue: () => this.radialValue(),
+      gaugeValue: () => this.gaugeValue(),
+    }),
+  );
+
+
   readonly themeService = inject(PlaygroundThemeService);
 
   readonly recipeGroups = ['Line', 'Bar & area', 'Radial', 'Advanced'] as const;
@@ -237,6 +280,7 @@ export class GraphPlaygroundComponent {
   ]);
 
   constructor() {
+    initPlaygroundA11yPreview('graph', this.previewOnly);
     this.applyRecipe('line-core');
   }
 

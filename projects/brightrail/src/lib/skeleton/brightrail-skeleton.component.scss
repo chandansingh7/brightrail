@@ -1,6 +1,8 @@
 @use '../styles/tokens' as br;
+@use '../styles/layout' as layout;
 
 :host {
+  @include layout.br-host-viewport-safe;
   display: block;
   width: var(--br-skel-width, 100%);
   --br-skel-muted: #{br.$br-color-surface-muted};

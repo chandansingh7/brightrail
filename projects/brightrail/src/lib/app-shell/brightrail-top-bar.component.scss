@@ -1,3 +1,4 @@
+@use '../styles/breakpoints' as bp;
 @use '../styles/tokens' as br;
 
 :host {
@@ -37,4 +38,35 @@
   align-items: center;
   gap: 0.5rem;
   justify-self: end;
+}
+
+@include bp.br-down(md) {
+  .br-top-bar {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    row-gap: 0.5rem;
+    padding-inline: clamp(0.75rem, 3vw, 1rem) clamp(0.875rem, 3vw, 1.25rem);
+  }
+
+  .br-top-bar__center {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    order: 3;
+  }
+
+  .br-top-bar__end {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+}
+
+@include bp.br-down(sm) {
+  .br-top-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .br-top-bar__end {
+    justify-self: stretch;
+    justify-content: flex-start;
+  }
 }

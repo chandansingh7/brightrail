@@ -1,4 +1,4 @@
-<div class="bp">
+<div class="bp" [class.bp--a11y-preview-only]="previewOnly">
   <div class="bp-grid">
     <section class="bp-panel bp-panel--settings" aria-labelledby="modal-settings-title">
       <div class="bp-settings-head">
@@ -232,10 +232,7 @@
     </section>
 
     <section class="bp-panel bp-panel--preview" aria-labelledby="modal-preview-title">
-      <h2 id="modal-preview-title" class="bp-panel__title bp-panel__title--live">
-        <span class="bp-live-dot" aria-hidden="true"></span>
-        Live preview
-      </h2>
+      <app-playground-preview-header titleId="modal-preview-title" componentId="modal" [state]="a11yPreviewState()" />
       <div class="bp-preview-surface bp-preview-surface--stretch mp-preview-frame">
         <div class="bp-preview-inner bp-preview-inner--modal">
           @if (!modalOpen()) {

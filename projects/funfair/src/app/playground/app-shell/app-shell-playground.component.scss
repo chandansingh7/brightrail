@@ -1,10 +1,29 @@
-@use '../button/button-playground.component.scss' as *;
+@use '../playground-layout' as *;
 @use '../playground-preview-fixes.scss' as *;
 
-.bp-preview-inner--app-shell {
+/*
+ * Lock preview height only — use width: 100% so the shell fills the panel.
+ * (flex: 0 0 22rem in a row flex parent wrongly capped width at 22rem and crushed main content.)
+ */
+.bp-preview-surface--stretch .bp-preview-inner.bp-preview-inner--app-shell {
+  flex: 1 1 auto;
+  align-self: stretch;
   width: 100%;
-  min-height: 20rem;
-  block-size: 22rem;
+  min-width: 0;
+  height: clamp(16rem, 45dvh, 28rem);
+  min-height: clamp(16rem, 45dvh, 28rem);
+  max-height: clamp(16rem, 45dvh, 28rem);
+  overflow: hidden;
+}
+
+.bp--a11y-preview-only .bp-preview-inner.bp-preview-inner--app-shell {
+  height: auto;
+  min-height: min(24rem, 70dvh);
+  max-height: none;
+  overflow: visible;
+}
+
+.bp-preview-inner--app-shell {
   display: flex;
   flex-direction: column;
 }
@@ -12,7 +31,12 @@
 :host ::ng-deep brightrail-app-shell {
   flex: 1 1 auto;
   min-height: 0;
-  block-size: 100%;
+  max-height: 100%;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  /* Keep sidebar proportional when the preview panel is narrower than a real app. */
+  --br-app-shell-sidebar-width: min(16rem, 34%);
 }
 
 .app-shell-play-content {
@@ -20,4 +44,21 @@
   padding: 1rem;
   font-size: 0.9rem;
   color: var(--ff-muted, #64748b);
+}
+
+:host ::ng-deep .br-page-header__copy {
+  flex: 1 1 12rem;
+  min-width: 0;
+}
+
+:host ::ng-deep .br-page-header__actions-inner {
+  flex-wrap: wrap;
+}
+
+:host ::ng-deep .br-page-header__subtitle {
+  min-height: 1.4em;
+}
+
+:host ::ng-deep .br-page-header {
+  flex-wrap: wrap;
 }

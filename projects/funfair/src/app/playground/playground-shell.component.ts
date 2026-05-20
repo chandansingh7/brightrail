@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map, startWith } from 'rxjs';
@@ -18,6 +18,9 @@ export class PlaygroundShellComponent {
   private readonly router = inject(Router);
   readonly themeService = inject(PlaygroundThemeService);
 
+  /** Mobile drawer nav — collapsed by default on narrow viewports. */
+  readonly navOpen = signal(false);
+
   /** Shipped library version (keep aligned with projects/brightrail/package.json). */
   readonly libraryVersion = '0.0.1';
   readonly midwayHref = midwayDevUrl();
@@ -35,6 +38,20 @@ export class PlaygroundShellComponent {
     ),
     { initialValue: this.router.url },
   );
+
+  constructor() {
+    this.router.events
+      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .subscribe(() => this.navOpen.set(false));
+  }
+
+  toggleNav(): void {
+    this.navOpen.update((open) => !open);
+  }
+
+  closeNav(): void {
+    this.navOpen.set(false);
+  }
 
   readonly sidebarTip = computed(() =>
     this.routeUrl().includes('/table')

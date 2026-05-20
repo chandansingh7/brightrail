@@ -1,5 +1,6 @@
-import { Injectable, Signal, computed, signal } from '@angular/core';
+import { Injectable, Signal, computed, inject, signal } from '@angular/core';
 
+import { BrightrailLiveAnnouncerService } from '../platform/brightrail-live-announcer.service';
 import { BrightrailToastConfig, BrightrailToastEntry } from './brightrail-toast.types';
 
 let nextToastId = 0;
@@ -11,6 +12,7 @@ function createToastId(): string {
 
 @Injectable({ providedIn: 'root' })
 export class BrightrailToastService {
+  private readonly announcer = inject(BrightrailLiveAnnouncerService);
   private readonly queue = signal<BrightrailToastEntry[]>([]);
 
   readonly toasts: Signal<readonly BrightrailToastEntry[]> = computed(() => this.queue());
@@ -26,6 +28,12 @@ export class BrightrailToastService {
     };
 
     this.queue.update((items) => [...items, entry]);
+
+    const announcement = [entry.title, entry.message].filter((part) => part.trim().length > 0).join('. ');
+    if (announcement) {
+      const politeness = entry.variant === 'danger' ? 'assertive' : 'polite';
+      void this.announcer.announce(announcement, politeness);
+    }
 
     const duration = config.durationMs ?? 5000;
     if (duration > 0) {

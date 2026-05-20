@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { provideBrightrailPlatform } from '../platform/brightrail-platform.providers';
 import { BrightrailChipComponent } from './brightrail-chip.component';
 
 describe('BrightrailChipComponent', () => {
@@ -8,6 +9,7 @@ describe('BrightrailChipComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [BrightrailChipComponent],
+      providers: [provideBrightrailPlatform()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(BrightrailChipComponent);
@@ -35,5 +37,19 @@ describe('BrightrailChipComponent', () => {
     const btn = fixture.nativeElement.querySelector('.br-chip__remove') as HTMLButtonElement | null;
     btn?.click();
     expect(onRemove).toHaveBeenCalled();
+  });
+
+  it('should render selectable chip as a toggle button with aria-pressed', () => {
+    const onSelectedChange = jasmine.createSpy('selectedChange');
+    fixture.componentInstance.selectedChange.subscribe(onSelectedChange);
+    fixture.componentRef.setInput('selectable', true);
+    fixture.componentRef.setInput('selected', false);
+    fixture.detectChanges();
+
+    const chip = fixture.nativeElement.querySelector('button.br-chip') as HTMLButtonElement;
+    expect(chip).toBeTruthy();
+    expect(chip.getAttribute('aria-pressed')).toBe('false');
+    chip.click();
+    expect(onSelectedChange).toHaveBeenCalledWith(true);
   });
 });

@@ -1,4 +1,6 @@
+@use '../styles/layout' as layout;
 :host {
+  @include layout.br-host-viewport-safe;
   display: block;
   box-sizing: border-box;
 }

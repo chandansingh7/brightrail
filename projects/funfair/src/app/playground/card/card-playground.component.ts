@@ -1,5 +1,16 @@
 import { TitleCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import {
   BrightrailButtonComponent,
   BrightrailCardActionsAlign,
@@ -41,6 +52,7 @@ export type CardPreviewRecipe =
   selector: 'app-card-playground',
   standalone: true,
   imports: [
+    PlaygroundPreviewHeaderComponent,
     BrightrailCardComponent,
     BrightrailCardMediaComponent,
     BrightrailCardHeaderComponent,
@@ -60,6 +72,45 @@ export type CardPreviewRecipe =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      previewRecipe: () => this.previewRecipe(),
+      appearance: () => this.appearance(),
+      size: () => this.size(),
+      corners: () => this.corners(),
+      headerMode: () => this.headerMode(),
+      mediaLeading: () => this.mediaLeading(),
+      cardState: () => this.cardState(),
+      actionsAlign: () => this.actionsAlign(),
+      showHeaderOverflow: () => this.showHeaderOverflow(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('card', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    
+    restorePlaygroundState(state, {
+      previewRecipe: this.previewRecipe as WritableSignal<unknown>,
+      appearance: this.appearance as WritableSignal<unknown>,
+      size: this.size as WritableSignal<unknown>,
+      corners: this.corners as WritableSignal<unknown>,
+      headerMode: this.headerMode as WritableSignal<unknown>,
+      mediaLeading: this.mediaLeading as WritableSignal<unknown>,
+      cardState: this.cardState as WritableSignal<unknown>,
+      actionsAlign: this.actionsAlign as WritableSignal<unknown>,
+      showHeaderOverflow: this.showHeaderOverflow as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly demoCardImages = CARD_PLAYGROUND_DEMO_IMAGES;
 

@@ -1,4 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailAccordionAppearance,
@@ -36,12 +42,55 @@ type AccordionRecipe =
 @Component({
   selector: 'app-accordion-playground',
   standalone: true,
-  imports: [FormsModule, BrightrailAccordionComponent, BrightrailAccordionItemComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailAccordionComponent, BrightrailAccordionItemComponent],
   templateUrl: './accordion-playground.component.html',
   styleUrl: './accordion-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccordionPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() => ({
+    recipe: this.recipe(),
+    appearance: this.appearance(),
+    size: this.size(),
+    expandMode: this.expandMode(),
+    iconPosition: this.iconPosition(),
+    showDivider: this.showDivider(),
+    defaultExpandedIndex: this.defaultExpandedIndex(),
+    disabledAccordion: this.disabledAccordion(),
+    disabledItemIndex: this.disabledItemIndex(),
+    showHoverState: this.showHoverState(),
+  }));
+
+  constructor() {
+    initPlaygroundA11yPreview('accordion', this.previewOnly, (state) => this.restoreA11yState(state));
+  }
+
+  private restoreA11yState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const s = state as Record<string, unknown>;
+    if (typeof s['recipe'] === 'string') {
+      this.applyRecipe(s['recipe'] as AccordionRecipe);
+      return;
+    }
+    if (typeof s['appearance'] === 'string') this.appearance.set(s['appearance'] as BrightrailAccordionAppearance);
+    if (typeof s['size'] === 'string') this.size.set(s['size'] as 'sm' | 'md' | 'lg');
+    if (typeof s['expandMode'] === 'string') this.expandMode.set(s['expandMode'] as BrightrailAccordionExpandMode);
+    if (typeof s['iconPosition'] === 'string') this.iconPosition.set(s['iconPosition'] as 'left' | 'right');
+    if (typeof s['showDivider'] === 'boolean') this.showDivider.set(s['showDivider']);
+    if (typeof s['defaultExpandedIndex'] === 'number' || s['defaultExpandedIndex'] === null) {
+      this.defaultExpandedIndex.set(s['defaultExpandedIndex'] as number | null);
+    }
+    if (typeof s['disabledAccordion'] === 'boolean') this.disabledAccordion.set(s['disabledAccordion']);
+    if (typeof s['disabledItemIndex'] === 'number' || s['disabledItemIndex'] === null) {
+      this.disabledItemIndex.set(s['disabledItemIndex'] as number | null);
+    }
+    if (typeof s['showHoverState'] === 'boolean') this.showHoverState.set(s['showHoverState']);
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly ngModelStandalone = { standalone: true };
 

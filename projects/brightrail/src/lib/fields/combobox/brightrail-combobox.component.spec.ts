@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
+import { provideBrightrailPlatform } from '../../platform/brightrail-platform.providers';
 import { BrightrailComboboxComponent } from './brightrail-combobox.component';
 import { BrightrailComboboxOption } from './brightrail-combobox.types';
 
@@ -27,6 +28,7 @@ describe('BrightrailComboboxComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [BrightrailComboboxComponent],
+      providers: [provideBrightrailPlatform()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(BrightrailComboboxComponent);
@@ -68,5 +70,23 @@ describe('BrightrailComboboxComponent', () => {
       '.br-combobox__input',
     ) as HTMLInputElement;
     expect(input.value).toBe('Canada');
+  });
+
+  it('should move active option with arrow keys', async () => {
+    const component = fixture.componentInstance;
+    component.onInputFocus();
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    component.onInputKeydown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const input = fixture.nativeElement.querySelector('.br-combobox__input') as HTMLInputElement;
+    expect(input.getAttribute('aria-activedescendant')).toContain('-opt-1');
+
+    component.onInputKeydown(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+    fixture.detectChanges();
+    expect(input.getAttribute('aria-activedescendant')).toContain('-opt-0');
   });
 });

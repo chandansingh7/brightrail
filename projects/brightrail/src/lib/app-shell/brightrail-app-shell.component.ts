@@ -33,6 +33,7 @@ export type BrightrailAppShellSidebarPosition = 'left' | 'right';
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'br-app-shell-host',
+    '[style.--br-app-shell-sidebar-width]': 'sidebarWidth()',
   },
 })
 export class BrightrailAppShellComponent {

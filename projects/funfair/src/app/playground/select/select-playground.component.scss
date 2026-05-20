@@ -1,5 +1,5 @@
 /* Same shell + snippet chrome as button playground; text-field affordances from shared partial. */
-@use '../button/button-playground.component.scss' as *;
+@use '../playground-layout' as *;
 @use '../playground-text-field-extras.scss' as *;
 
 /* Native <select> option styling is limited; headers still read as section labels. */

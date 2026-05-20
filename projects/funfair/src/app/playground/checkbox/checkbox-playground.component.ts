@@ -1,4 +1,15 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import { BrightrailButtonIcon } from '../../../../../brightrail/src/lib/buttons/brightrail-button-icon.component';
 import {
@@ -37,12 +48,76 @@ type CheckboxRecipe =
 @Component({
   selector: 'app-checkbox-playground',
   standalone: true,
-  imports: [FormsModule, BrightrailCheckboxComponent, BrightrailCheckboxGroupLibComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailCheckboxComponent, BrightrailCheckboxGroupLibComponent],
   templateUrl: './checkbox-playground.component.html',
   styleUrl: './checkbox-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      recipe: () => this.recipe(),
+      label: () => this.label(),
+      description: () => this.description(),
+      errorText: () => this.errorText(),
+      ariaLabel: () => this.ariaLabel(),
+      tone: () => this.tone(),
+      variant: () => this.variant(),
+      status: () => this.status(),
+      labelPosition: () => this.labelPosition(),
+      size: () => this.size(),
+      state: () => this.state(),
+      required: () => this.required(),
+      invalid: () => this.invalid(),
+      checked: () => this.checked(),
+      indeterminate: () => this.indeterminate(),
+      checkedIcon: () => this.checkedIcon(),
+      groupLayout: () => this.groupLayout(),
+      showSelectAll: () => this.showSelectAll(),
+      selectAllLabel: () => this.selectAllLabel(),
+      optionCount: () => this.optionCount(),
+      selectedIds: () => this.selectedIds(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('checkbox', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    
+    restorePlaygroundState(state, {
+      recipe: this.recipe as WritableSignal<unknown>,
+      label: this.label as WritableSignal<unknown>,
+      description: this.description as WritableSignal<unknown>,
+      errorText: this.errorText as WritableSignal<unknown>,
+      ariaLabel: this.ariaLabel as WritableSignal<unknown>,
+      tone: this.tone as WritableSignal<unknown>,
+      variant: this.variant as WritableSignal<unknown>,
+      status: this.status as WritableSignal<unknown>,
+      labelPosition: this.labelPosition as WritableSignal<unknown>,
+      size: this.size as WritableSignal<unknown>,
+      state: this.state as WritableSignal<unknown>,
+      required: this.required as WritableSignal<unknown>,
+      invalid: this.invalid as WritableSignal<unknown>,
+      checked: this.checked as WritableSignal<unknown>,
+      indeterminate: this.indeterminate as WritableSignal<unknown>,
+      checkedIcon: this.checkedIcon as WritableSignal<unknown>,
+      groupLayout: this.groupLayout as WritableSignal<unknown>,
+      showSelectAll: this.showSelectAll as WritableSignal<unknown>,
+      selectAllLabel: this.selectAllLabel as WritableSignal<unknown>,
+      optionCount: this.optionCount as WritableSignal<unknown>,
+      selectedIds: this.selectedIds as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly ngModelStandalone = { standalone: true };
 

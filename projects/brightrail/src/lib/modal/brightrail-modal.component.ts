@@ -1,11 +1,14 @@
 import { ChangeDetectionStrategy, Component, HostListener, input, output } from '@angular/core';
 
+import { BrightrailFocusTrapDirective } from '../platform/brightrail-focus-trap.directive';
+
 export type BrightrailModalSize = 'sm' | 'md' | 'lg' | 'xl';
 export type BrightrailModalAppearance = 'default' | 'danger';
 
 @Component({
   selector: 'brightrail-modal',
   standalone: true,
+  imports: [BrightrailFocusTrapDirective],
   template: `
     @if (isOpen()) {
       <div class="br-modal-root" [class.br-modal-root--contain]="contain()">
@@ -20,6 +23,8 @@ export type BrightrailModalAppearance = 'default' | 'danger';
         <div class="br-modal__align">
           <div
             class="br-modal__panel"
+            brightrailFocusTrap
+            brightrailFocusTrapAutoCapture
             [class.br-modal__panel--sm]="size() === 'sm'"
             [class.br-modal__panel--md]="size() === 'md'"
             [class.br-modal__panel--lg]="size() === 'lg'"

@@ -1,4 +1,4 @@
-@use '../button/button-playground.component.scss' as *;
+@use '../playground-layout' as *;
 
 /* Stretch preview mode defaults to start-aligned inner flex; center avatars like accordion/chip. */
 :host .bp-preview-surface.bp-preview-surface--stretch {
@@ -9,6 +9,15 @@
 .bp-preview-surface--stretch .bp-preview-inner.ap-preview {
   justify-content: center;
   align-items: center;
+}
+
+.bp--a11y-preview-only .ap-preview {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: unset !important;
+  padding: 0 !important;
+  width: auto !important;
 }
 
 .ap-preview {

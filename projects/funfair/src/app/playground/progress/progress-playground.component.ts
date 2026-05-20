@@ -1,4 +1,15 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailProgressComponent,
@@ -48,6 +59,7 @@ type TableRowSampleId = 'requirements' | 'uiux' | 'api' | 'testing' | 'deploymen
   selector: 'app-progress-playground',
   standalone: true,
   imports: [
+    PlaygroundPreviewHeaderComponent,
     FormsModule,
     BrightrailProgressComponent,
     BrightrailStepperComponent,
@@ -59,6 +71,79 @@ type TableRowSampleId = 'requirements' | 'uiux' | 'api' | 'testing' | 'deploymen
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      recipe: () => this.recipe(),
+      type: () => this.type(),
+      variant: () => this.variant(),
+      mode: () => this.mode(),
+      indeterminate: () => this.indeterminate(),
+      buffer: () => this.buffer(),
+      value: () => this.value(),
+      bufferValue: () => this.bufferValue(),
+      size: () => this.size(),
+      label: () => this.label(),
+      detailText: () => this.detailText(),
+      kpiTitle: () => this.kpiTitle(),
+      kpiStatus: () => this.kpiStatus(),
+      etaText: () => this.etaText(),
+      showLabel: () => this.showLabel(),
+      showPercentage: () => this.showPercentage(),
+      showRingCompleteIcon: () => this.showRingCompleteIcon(),
+      trackStyle: () => this.trackStyle(),
+      statusColor: () => this.statusColor(),
+      surface: () => this.surface(),
+      compactCardPlate: () => this.compactCardPlate(),
+      canvasBackground: () => this.canvasBackground(),
+      activeStep: () => this.activeStep(),
+      fileRowSample: () => this.fileRowSample(),
+      kpiCardSample: () => this.kpiCardSample(),
+      tableRowSample: () => this.tableRowSample(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('progress', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    
+    restorePlaygroundState(state, {
+      recipe: this.recipe as WritableSignal<unknown>,
+      type: this.type as WritableSignal<unknown>,
+      variant: this.variant as WritableSignal<unknown>,
+      mode: this.mode as WritableSignal<unknown>,
+      indeterminate: this.indeterminate as WritableSignal<unknown>,
+      buffer: this.buffer as WritableSignal<unknown>,
+      value: this.value as WritableSignal<unknown>,
+      bufferValue: this.bufferValue as WritableSignal<unknown>,
+      size: this.size as WritableSignal<unknown>,
+      label: this.label as WritableSignal<unknown>,
+      detailText: this.detailText as WritableSignal<unknown>,
+      kpiTitle: this.kpiTitle as WritableSignal<unknown>,
+      kpiStatus: this.kpiStatus as WritableSignal<unknown>,
+      etaText: this.etaText as WritableSignal<unknown>,
+      showLabel: this.showLabel as WritableSignal<unknown>,
+      showPercentage: this.showPercentage as WritableSignal<unknown>,
+      showRingCompleteIcon: this.showRingCompleteIcon as WritableSignal<unknown>,
+      trackStyle: this.trackStyle as WritableSignal<unknown>,
+      statusColor: this.statusColor as WritableSignal<unknown>,
+      surface: this.surface as WritableSignal<unknown>,
+      compactCardPlate: this.compactCardPlate as WritableSignal<unknown>,
+      canvasBackground: this.canvasBackground as WritableSignal<unknown>,
+      activeStep: this.activeStep as WritableSignal<unknown>,
+      fileRowSample: this.fileRowSample as WritableSignal<unknown>,
+      kpiCardSample: this.kpiCardSample as WritableSignal<unknown>,
+      tableRowSample: this.tableRowSample as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly ngModelStandalone = { standalone: true };
 

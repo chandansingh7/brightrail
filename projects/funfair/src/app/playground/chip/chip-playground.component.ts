@@ -1,5 +1,16 @@
 import { FormsModule } from '@angular/forms';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import {
   BrightrailButtonIcon,
   BrightrailChipColor,
@@ -26,12 +37,61 @@ type ChipRecipe =
 @Component({
   selector: 'app-chip-playground',
   standalone: true,
-  imports: [FormsModule, BrightrailChipComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailChipComponent],
   templateUrl: './chip-playground.component.html',
   styleUrl: './chip-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChipPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      previewRecipe: () => this.previewRecipe(),
+      variant: () => this.variant(),
+      color: () => this.color(),
+      size: () => this.size(),
+      state: () => this.state(),
+      label: () => this.label(),
+      icon: () => this.icon(),
+      removable: () => this.removable(),
+      selectable: () => this.selectable(),
+      selected: () => this.selected(),
+      avatarText: () => this.avatarText(),
+      adjacentText: () => this.adjacentText(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('chip', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    if (typeof snapshot['previewRecipe'] === 'string') {
+      this.applyRecipe(snapshot['previewRecipe'] as ChipRecipe);
+      return;
+    }
+    restorePlaygroundState(state, {
+      previewRecipe: this.previewRecipe as WritableSignal<unknown>,
+      variant: this.variant as WritableSignal<unknown>,
+      color: this.color as WritableSignal<unknown>,
+      size: this.size as WritableSignal<unknown>,
+      state: this.state as WritableSignal<unknown>,
+      label: this.label as WritableSignal<unknown>,
+      icon: this.icon as WritableSignal<unknown>,
+      removable: this.removable as WritableSignal<unknown>,
+      selectable: this.selectable as WritableSignal<unknown>,
+      selected: this.selected as WritableSignal<unknown>,
+      avatarText: this.avatarText as WritableSignal<unknown>,
+      adjacentText: this.adjacentText as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
 
   readonly recipeGroups = ['Status', 'Interactive', 'Enterprise', 'Advanced'] as const;

@@ -1,5 +1,5 @@
 <ul class="br-tree__list" role="group" [attr.aria-label]="ariaLabel() || null">
-  @for (node of visibleNodes(); track node.id) {
+  @for (node of visibleNodes(); track node.id; let i = $index) {
     <li
       class="br-tree__item"
       role="treeitem"
@@ -39,6 +39,9 @@
           class="br-tree__label-btn"
           [class.br-tree__label-btn--disabled]="node.disabled"
           [disabled]="node.disabled || !selectionEnabled()"
+          [attr.data-tree-focus-index]="i"
+          [attr.tabindex]="isFocused(i) ? 0 : -1"
+          (focus)="focusedNodeIndex.set(i)"
           (click)="onSelect($event, node)"
         >
           {{ node.label }}

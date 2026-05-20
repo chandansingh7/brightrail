@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   BrightrailAvatarComponent,
-  BrightrailButtonIconComponent,
+  BrightrailButtonComponent,
+  BrightrailIconButtonComponent,
   BrightrailTooltipDirective,
 } from 'brightrail';
 
@@ -14,7 +15,8 @@ import { TOOLTIP_VARIATION_SNIPPETS } from './tooltip-variation-snippets';
   standalone: true,
   imports: [
     BrightrailTooltipDirective,
-    BrightrailButtonIconComponent,
+    BrightrailButtonComponent,
+    BrightrailIconButtonComponent,
     BrightrailAvatarComponent,
     CatalogVariationTileComponent,
   ],

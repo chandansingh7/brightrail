@@ -17,40 +17,40 @@ export const SKELETON_VARIATION_SNIPPETS = {
   sizeBanner: `<brightrail-skeleton variant="rectangular" width="100%" height="8rem" />`,
   sizeChip: `<brightrail-skeleton variant="rounded" width="5rem" height="1.75rem" />`,
 
-  patternListRow: `<div class="skel-row">
+  patternListRow: `<div class="skvc-row">
   <brightrail-skeleton variant="circular" width="2.5rem" height="2.5rem" />
-  <div class="skel-row__copy">
+  <div class="skvc-row__copy">
     <brightrail-skeleton variant="text" width="40%" />
     <brightrail-skeleton variant="text" width="70%" />
   </div>
 </div>`,
-  patternCard: `<div class="skel-card">
+  patternCard: `<div class="skvc-card">
   <brightrail-skeleton variant="rectangular" width="100%" height="6rem" />
   <brightrail-skeleton variant="text" [lines]="2" />
 </div>`,
-  patternProfile: `<div class="skel-profile">
+  patternProfile: `<div class="skvc-profile">
   <brightrail-skeleton variant="circular" width="4rem" height="4rem" />
   <brightrail-skeleton variant="text" width="55%" />
   <brightrail-skeleton variant="text" width="35%" />
 </div>`,
-  advancedTable: `<div class="skel-table">
+  advancedTable: `<div class="skvc-table">
   @for (row of [0, 1, 2]; track row) {
-    <div class="skel-table__row">
+    <div class="skvc-table__row">
       <brightrail-skeleton variant="text" width="18%" />
       <brightrail-skeleton variant="text" width="32%" />
       <brightrail-skeleton variant="text" width="24%" />
     </div>
   }
 </div>`,
-  advancedDashboard: `<div class="skel-dashboard">
+  advancedDashboard: `<div class="skvc-dashboard">
   <brightrail-skeleton variant="rectangular" width="100%" height="4.5rem" />
-  <div class="skel-dashboard__grid">
+  <div class="skvc-dashboard__grid">
     <brightrail-skeleton variant="rounded" width="100%" height="5rem" />
     <brightrail-skeleton variant="rounded" width="100%" height="5rem" />
     <brightrail-skeleton variant="rounded" width="100%" height="5rem" />
   </div>
 </div>`,
-  advancedArticle: `<div class="skel-article">
+  advancedArticle: `<div class="skvc-article">
   <brightrail-skeleton variant="text" width="60%" height="1.25rem" />
   <brightrail-skeleton variant="text" [lines]="4" />
   <brightrail-skeleton variant="rectangular" width="100%" height="10rem" />
@@ -73,7 +73,7 @@ export const SKELETON_VARIATION_SNIPPETS = {
 
 } as const;
 
-export const SKELETON_DOC_SECTION_COUNT = 7;
+export const SKELETON_DOC_SECTION_COUNT = 6;
 
 export const SKELETON_HTML_EXAMPLES = `<brightrail-skeleton variant="text" animation="wave" [lines]="3" />
 

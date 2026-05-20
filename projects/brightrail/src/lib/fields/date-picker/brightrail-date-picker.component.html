@@ -136,8 +136,8 @@
                       <span class="br-dp__weekday" role="columnheader">{{ d }}</span>
                     }
                   </div>
-                  <div class="br-dp__cells" role="grid">
-                    @for (c of cal.cells; track c.date.getTime()) {
+                  <div class="br-dp__cells" role="grid" [id]="controlId() + '-range-grid-' + $index">
+                    @for (c of cal.cells; track c.date.getTime(); let cellIndex = $index) {
                       <button
                         type="button"
                         class="br-dp__cell"
@@ -151,6 +151,7 @@
                         [class.br-dp__cell--range-between]="rangeState(c.date) === 'between'"
                         [disabled]="!c.inMonth || isDayDisabled(c.date)"
                         (click)="onDayClick(c.date)"
+                        (keydown)="onDayCellKeydown($event, cellIndex, controlId() + '-range-grid-' + $index)"
                       >
                         <span class="br-dp__cell-num">{{ c.date.getDate() }}</span>
                       </button>
@@ -192,8 +193,8 @@
                   <span class="br-dp__weekday" role="columnheader">{{ d }}</span>
                 }
               </div>
-              <div class="br-dp__cells" role="grid">
-                @for (c of leftCells(); track c.date.getTime()) {
+              <div class="br-dp__cells" role="grid" [id]="controlId() + '-single-grid'">
+                @for (c of leftCells(); track c.date.getTime(); let cellIndex = $index) {
                   <button
                     type="button"
                     class="br-dp__cell"
@@ -203,6 +204,7 @@
                     [class.br-dp__cell--selected]="isSelectedSingle(c.date)"
                     [disabled]="!c.inMonth || isDayDisabled(c.date)"
                     (click)="onDayClick(c.date)"
+                    (keydown)="onDayCellKeydown($event, cellIndex, controlId() + '-single-grid')"
                   >
                     <span class="br-dp__cell-num">{{ c.date.getDate() }}</span>
                   </button>

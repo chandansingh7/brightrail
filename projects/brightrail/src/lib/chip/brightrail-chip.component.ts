@@ -5,12 +5,15 @@ import {
   Output,
   computed,
   input,
+  output,
 } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 
 import {
   BrightrailButtonIcon,
   BrightrailButtonIconComponent,
 } from '../buttons/brightrail-button-icon.component';
+import { BrightrailFocusVisibleDirective } from '../platform/brightrail-focus-visible.directive';
 
 export type BrightrailChipVariant = 'filled' | 'outlined' | 'soft' | 'text';
 export type BrightrailChipColor =
@@ -27,9 +30,27 @@ export type BrightrailChipState = 'default' | 'hover' | 'focused' | 'disabled';
 @Component({
   selector: 'brightrail-chip',
   standalone: true,
-  imports: [BrightrailButtonIconComponent],
+  imports: [BrightrailButtonIconComponent, BrightrailFocusVisibleDirective, NgTemplateOutlet],
   template: `
-    <span class="br-chip" [class]="chipClass()">
+    @if (selectable()) {
+      <button
+        type="button"
+        class="br-chip"
+        [class]="chipClass()"
+        brightrailFocusVisible
+        [disabled]="state() === 'disabled'"
+        [attr.aria-pressed]="selected()"
+        (click)="onSelect($event)"
+      >
+        <ng-container *ngTemplateOutlet="chipBody" />
+      </button>
+    } @else {
+      <span class="br-chip" [class]="chipClass()">
+        <ng-container *ngTemplateOutlet="chipBody" />
+      </span>
+    }
+
+    <ng-template #chipBody>
       @if (avatarText().trim().length > 0) {
         <span class="br-chip__avatar" aria-hidden="true">{{ avatarText() }}</span>
       } @else if (avatarSrc().trim().length > 0) {
@@ -44,6 +65,7 @@ export type BrightrailChipState = 'default' | 'hover' | 'focused' | 'disabled';
         <button
           type="button"
           class="br-chip__remove"
+          brightrailFocusVisible
           [disabled]="state() === 'disabled'"
           (click)="onRemove($event)"
           [attr.aria-label]="'Remove ' + label()"
@@ -51,7 +73,7 @@ export type BrightrailChipState = 'default' | 'hover' | 'focused' | 'disabled';
           <brightrail-button-icon name="close" />
         </button>
       }
-    </span>
+    </ng-template>
   `,
   styleUrl: './brightrail-chip.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -71,6 +93,7 @@ export class BrightrailChipComponent {
   readonly avatarText = input('');
 
   @Output() readonly remove = new EventEmitter<void>();
+  readonly selectedChange = output<boolean>();
 
   readonly resolvedVariant = computed(() => this.appearance() ?? this.variant());
   readonly resolvedColor = computed(() => (this.color() === 'critical' ? 'danger' : this.color()));
@@ -87,6 +110,14 @@ export class BrightrailChipComponent {
     if (this.selected()) parts.push('br-chip--selected');
     return parts.join(' ');
   });
+
+  onSelect(event: Event): void {
+    event.stopPropagation();
+    if (this.state() === 'disabled') {
+      return;
+    }
+    this.selectedChange.emit(!this.selected());
+  }
 
   onRemove(event: Event): void {
     event.stopPropagation();

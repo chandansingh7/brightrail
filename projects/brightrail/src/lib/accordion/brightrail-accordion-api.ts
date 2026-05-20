@@ -9,6 +9,9 @@ export interface BrightrailAccordionApi {
   toggleIndex(index: number): void;
   indexOfItem(item: unknown): number;
   readonly expandedIndices: Signal<Set<number>>;
+  tabIndexForItem(index: number): number;
+  onTriggerFocus(index: number): void;
+  onTriggerKeydown(ev: KeyboardEvent, index: number): void;
   iconPosition(): BrightrailAccordionIconPosition;
   size(): BrightrailAccordionSize;
   disabled(): boolean;

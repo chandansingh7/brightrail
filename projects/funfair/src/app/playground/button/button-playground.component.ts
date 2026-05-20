@@ -9,6 +9,11 @@ import {
   BrightrailButtonVariant,
 } from 'brightrail';
 
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
 
 export type CodeTabId = 'html' | 'ts' | 'scss';
@@ -16,16 +21,67 @@ export type IconSide = 'left' | 'right' | 'both';
 /** Playground state: replaces separate disabled toggle + visual state. */
 export type PlaygroundButtonState = 'default' | 'active' | 'disabled';
 
+interface ButtonA11yPreviewState {
+  variant: BrightrailButtonVariant;
+  size: BrightrailButtonSize;
+  shape: BrightrailButtonShape;
+  boundaryStyle: BrightrailButtonBoundaryStyle;
+  buttonState: PlaygroundButtonState;
+  loading: boolean;
+  fullWidth: boolean;
+  dropdownIndicator: boolean;
+  label: string;
+  iconSide: IconSide;
+  iconKind: BrightrailButtonIcon;
+}
+
 @Component({
   selector: 'app-button-playground',
   standalone: true,
-  imports: [BrightrailButtonComponent, TitleCasePipe],
+  imports: [BrightrailButtonComponent, TitleCasePipe, PlaygroundPreviewHeaderComponent],
   templateUrl: './button-playground.component.html',
   styleUrl: './button-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonPlaygroundComponent {
   readonly themeService = inject(PlaygroundThemeService);
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+
+  readonly a11yPreviewState = computed<ButtonA11yPreviewState>(() => ({
+    variant: this.variant(),
+    size: this.size(),
+    shape: this.shape(),
+    boundaryStyle: this.boundaryStyle(),
+    buttonState: this.buttonState(),
+    loading: this.loading(),
+    fullWidth: this.fullWidth(),
+    dropdownIndicator: this.dropdownIndicator(),
+    label: this.label(),
+    iconSide: this.iconSide(),
+    iconKind: this.iconKind(),
+  }));
+
+  constructor() {
+    initPlaygroundA11yPreview('button', this.previewOnly, (state) => this.restoreA11yPreviewState(state));
+  }
+
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const s = state as Partial<ButtonA11yPreviewState>;
+    if (s.variant) this.variant.set(s.variant);
+    if (s.size) this.size.set(s.size);
+    if (s.shape) this.shape.set(s.shape);
+    if (s.boundaryStyle) this.boundaryStyle.set(s.boundaryStyle);
+    if (s.buttonState) this.buttonState.set(s.buttonState);
+    if (typeof s.loading === 'boolean') this.loading.set(s.loading);
+    if (typeof s.fullWidth === 'boolean') this.fullWidth.set(s.fullWidth);
+    if (typeof s.dropdownIndicator === 'boolean') this.dropdownIndicator.set(s.dropdownIndicator);
+    if (typeof s.label === 'string') this.label.set(s.label);
+    if (s.iconSide) this.iconSide.set(s.iconSide);
+    if (s.iconKind) this.iconKind.set(s.iconKind);
+  }
 
   readonly variants: BrightrailButtonVariant[] = [
     'primary',

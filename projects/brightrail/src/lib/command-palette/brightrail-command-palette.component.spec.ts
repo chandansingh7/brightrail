@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideBrightrailPlatform } from '../platform/brightrail-platform.providers';
 
 import { BrightrailCommandPaletteComponent } from './brightrail-command-palette.component';
 
@@ -9,6 +10,7 @@ describe('BrightrailCommandPaletteComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [BrightrailCommandPaletteComponent],
+      providers: [provideBrightrailPlatform()],
     }).compileComponents();
     fixture = TestBed.createComponent(BrightrailCommandPaletteComponent);
     host = fixture.componentInstance;

@@ -14,23 +14,23 @@ import {
   computed,
 } from '@angular/core';
 
-export type BrightrailTooltipPlacement = 'top' | 'bottom' | 'left' | 'right';
-export type BrightrailTooltipTrigger = 'hover' | 'focus' | 'click';
-export type BrightrailTooltipContentVariant =
-  | 'default'
-  | 'success'
-  | 'warning'
-  | 'error'
-  | 'info'
-  | 'neutral';
-export type BrightrailTooltipVariant =
-  | 'default'
-  | 'neon'
-  | 'holographic'
-  | 'glassmorphism'
-  | 'cyber-pulse';
-export type BrightrailTooltipSize = 'sm' | 'md' | 'lg';
-export type BrightrailTooltipWidthMode = 'auto' | 'min-content';
+import {
+  type BrightrailTooltipContentVariant,
+  type BrightrailTooltipPlacement,
+  type BrightrailTooltipSize,
+  type BrightrailTooltipTrigger,
+  type BrightrailTooltipVariant,
+  type BrightrailTooltipWidthMode,
+} from './brightrail-tooltip.types';
+
+export type {
+  BrightrailTooltipContentVariant,
+  BrightrailTooltipPlacement,
+  BrightrailTooltipSize,
+  BrightrailTooltipTrigger,
+  BrightrailTooltipVariant,
+  BrightrailTooltipWidthMode,
+} from './brightrail-tooltip.types';
 
 const GAP = 10;
 const ARROW = 6;

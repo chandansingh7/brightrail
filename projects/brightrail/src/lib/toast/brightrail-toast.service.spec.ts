@@ -1,12 +1,20 @@
 import { TestBed } from '@angular/core/testing';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
+import { provideBrightrailPlatform } from '../platform/brightrail-platform.providers';
 import { BrightrailToastService } from './brightrail-toast.service';
 
 describe('BrightrailToastService', () => {
   let service: BrightrailToastService;
+  let liveAnnouncer: jasmine.SpyObj<LiveAnnouncer>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    liveAnnouncer = jasmine.createSpyObj('LiveAnnouncer', ['announce', 'clear']);
+    liveAnnouncer.announce.and.resolveTo();
+
+    TestBed.configureTestingModule({
+      providers: [provideBrightrailPlatform(), { provide: LiveAnnouncer, useValue: liveAnnouncer }],
+    });
     service = TestBed.inject(BrightrailToastService);
     service.dismissAll();
   });
@@ -34,5 +42,15 @@ describe('BrightrailToastService', () => {
     service.show({ message: 'Two' });
     service.dismissAll();
     expect(service.toasts()).toEqual([]);
+  });
+
+  it('announces toast content via CDK LiveAnnouncer', () => {
+    service.show({ title: 'Saved', message: 'Your changes were saved', variant: 'success' });
+    expect(liveAnnouncer.announce).toHaveBeenCalledWith('Saved. Your changes were saved', 'polite');
+  });
+
+  it('uses assertive politeness for danger toasts', () => {
+    service.show({ message: 'Failed to save', variant: 'danger' });
+    expect(liveAnnouncer.announce).toHaveBeenCalledWith('Failed to save', 'assertive');
   });
 });

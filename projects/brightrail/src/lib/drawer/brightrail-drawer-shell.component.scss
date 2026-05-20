@@ -1,4 +1,5 @@
 @use '../styles/tokens' as br;
+@use '../styles/breakpoints' as bp;
 
 .br-drawer__header {
   display: flex;
@@ -61,4 +62,21 @@
   padding: 0.8rem 1rem 1rem;
   border-top: 1px solid br.$br-color-border;
   background: color-mix(in srgb, br.$br-color-surface-muted 55%, br.$br-color-surface);
+}
+
+@include bp.br-down(xs) {
+  .br-drawer__header {
+    flex-wrap: wrap;
+    padding-inline: 0.85rem;
+  }
+
+  .br-drawer__header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .br-drawer__body,
+  .br-drawer__footer {
+    padding-inline: 0.85rem;
+  }
 }

@@ -1,0 +1,14 @@
+// Funfair global responsive rules — built on Brightrail breakpoint primitives.
+@use 'breakpoints' as bp;
+
+@include bp.br-down(sm) {
+  body {
+    overflow: auto;
+  }
+}
+
+@include bp.br-up(xl) {
+  html {
+    font-size: clamp(16px, 0.45vw + 12px, 18px);
+  }
+}

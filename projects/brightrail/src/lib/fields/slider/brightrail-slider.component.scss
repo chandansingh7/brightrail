@@ -1,4 +1,5 @@
 @use '../../styles/tokens' as br;
+@use '../../styles/breakpoints' as bp;
 
 :host {
   display: inline-flex;
@@ -109,4 +110,22 @@
 
 .br-slider--disabled .br-slider__input {
   cursor: not-allowed;
+}
+
+@include bp.br-down(xs) {
+  :host {
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .br-slider {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .br-slider__value {
+    text-align: left;
+  }
 }

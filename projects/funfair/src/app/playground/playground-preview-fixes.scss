@@ -1,5 +1,5 @@
-// Layout fixes for playgrounds that @use button-playground layout.
-// Include after `@use '../button/button-playground.component.scss' as *;`
+// Layout fixes for playgrounds that @use playground-layout.
+// Include after `@use '../playground-layout' as *;`
 
 :host {
   display: flex;

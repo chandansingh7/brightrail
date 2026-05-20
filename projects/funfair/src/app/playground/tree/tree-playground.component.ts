@@ -1,4 +1,15 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailTreeComponent,
@@ -29,12 +40,50 @@ type TreeRecipe =
 @Component({
   selector: 'app-tree-playground',
   standalone: true,
-  imports: [FormsModule, BrightrailTreeComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailTreeComponent],
   templateUrl: './tree-playground.component.html',
   styleUrl: './tree-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreePlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      recipe: () => this.recipe(),
+      nodes: () => this.nodes(),
+      selectionMode: () => this.selectionMode(),
+      selectedId: () => this.selectedId(),
+      ariaLabel: () => this.ariaLabel(),
+      levelIndent: () => this.levelIndent(),
+      showDual: () => this.showDual(),
+      secondaryNodes: () => this.secondaryNodes(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('tree', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    
+    restorePlaygroundState(state, {
+      recipe: this.recipe as WritableSignal<unknown>,
+      nodes: this.nodes as WritableSignal<unknown>,
+      selectionMode: this.selectionMode as WritableSignal<unknown>,
+      selectedId: this.selectedId as WritableSignal<unknown>,
+      ariaLabel: this.ariaLabel as WritableSignal<unknown>,
+      levelIndent: this.levelIndent as WritableSignal<unknown>,
+      showDual: this.showDual as WritableSignal<unknown>,
+      secondaryNodes: this.secondaryNodes as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly ngModelStandalone = { standalone: true };
 

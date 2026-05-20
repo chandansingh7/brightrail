@@ -1,3 +1,5 @@
+@use '../styles/breakpoints' as bp;
+
 :host {
   display: block;
   box-sizing: border-box;
@@ -65,4 +67,15 @@
   color: #fff;
   font-size: 1.15rem;
   flex-shrink: 0;
+}
+
+@include bp.br-down(sm) {
+  .br-card-header__row,
+  .br-card-header__row--with-leading {
+    grid-template-columns: 1fr;
+  }
+
+  .br-card-header__actions {
+    justify-content: flex-start;
+  }
 }

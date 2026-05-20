@@ -1,3 +1,5 @@
+@use 'breakpoints' as bp;
+
 :host {
   display: flex;
   flex-direction: column;
@@ -22,12 +24,30 @@
   grid-template-columns: minmax(11rem, 14rem) 1fr auto;
   gap: 1.5rem;
   align-items: center;
-  padding: 1rem 1.5rem;
+  padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 3vw, 1.5rem);
   background: var(--ff-surface);
   border-bottom: 1px solid var(--ff-border);
 }
 
-@media (max-width: 960px) {
+@include bp.br-down(md) {
+  .pf-header {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    row-gap: 0.75rem;
+  }
+
+  .pf-header__hero {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+
+  .pf-header__actions {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+}
+
+@include bp.br-down(xs) {
   .pf-header {
     grid-template-columns: 1fr;
   }
@@ -37,6 +57,66 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
+}
+
+.pf-header__brand-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.pf-nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid var(--ff-border);
+  border-radius: 0.5rem;
+  background: var(--ff-surface-2);
+  color: var(--ff-text-core);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.pf-nav-toggle:hover {
+  background: var(--ff-hover);
+}
+
+.pf-nav-toggle:focus-visible {
+  outline: 2px solid var(--ff-brand);
+  outline-offset: 2px;
+}
+
+.pf-nav-toggle__icon {
+  display: block;
+  width: 1.125rem;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+  box-shadow:
+    0 -6px 0 currentColor,
+    0 6px 0 currentColor;
+}
+
+.pf-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@include bp.br-down(sm) {
+  .pf-nav-toggle {
+    display: inline-flex;
+  }
 }
 
 .pf-logo {
@@ -67,7 +147,7 @@
   text-align: left;
 }
 
-@media (min-width: 961px) {
+@include bp.br-up(md) {
   .pf-header__hero {
     text-align: center;
   }
@@ -100,7 +180,7 @@
 }
 
 .pf-field--inline {
-  min-width: 10rem;
+  min-width: min(10rem, 100%);
 }
 
 .pf-field__label {
@@ -118,7 +198,8 @@
   color: var(--ff-text-core);
   padding: 0.4rem 0.65rem;
   font: inherit;
-  min-width: 10.5rem;
+  min-width: min(10.5rem, 100%);
+  max-width: 100%;
 }
 
 .pf-link-external {
@@ -142,12 +223,35 @@
   grid-template-rows: minmax(0, 1fr);
   align-items: stretch;
   overflow: hidden;
+  position: relative;
 }
 
-@media (max-width: 720px) {
+@include bp.br-down(sm) {
   .pf-body {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+  }
+}
+
+.pf-nav-backdrop {
+  display: none;
+}
+
+@include bp.br-down(sm) {
+  .pf-nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    border: none;
+    margin: 0;
+    padding: 0;
+    background: rgb(15 23 42 / 45%);
+    cursor: pointer;
+  }
+
+  .pf--nav-open .pf-nav-backdrop {
+    animation: pf-fade-in 0.2s ease;
   }
 }
 
@@ -163,10 +267,32 @@
   gap: 1rem;
 }
 
-@media (max-width: 720px) {
+@include bp.br-down(sm) {
   .pf-side {
-    border-right: none;
-    border-bottom: 1px solid var(--ff-border);
+    position: fixed;
+    inset-block: 0;
+    inset-inline-start: 0;
+    z-index: 30;
+    width: min(18rem, 88vw);
+    max-width: 100%;
+    transform: translateX(-105%);
+    transition: transform 0.22s ease;
+    box-shadow: 8px 0 24px rgb(15 23 42 / 18%);
+    border-right: 1px solid var(--ff-border);
+  }
+
+  .pf--nav-open .pf-side {
+    transform: translateX(0);
+  }
+}
+
+@keyframes pf-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }
 
@@ -238,10 +364,16 @@
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  padding: 1rem clamp(1rem, 2vw, 1.75rem) 1rem;
+  padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 3vw, 1.75rem);
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
+}
+
+@include bp.br-up(xl) {
+  .pf-main {
+    padding-inline: clamp(1.75rem, 5vw, 4rem);
+  }
 }
 
 /* Routed playground (or section shell) fills main below the header */

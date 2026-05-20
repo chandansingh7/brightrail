@@ -31,7 +31,7 @@ export const VARIATION_CATALOG_ENTRIES: readonly VariationCatalogEntry[] = [
   { label: 'Table', playgroundRoute: 'table', catalogRoute: 'table/catalog', selector: 'brightrail-table', docFolder: 'table', catalogStatus: 'full' },
   { label: 'Tabs', playgroundRoute: 'tabs', catalogRoute: 'tabs/catalog', selector: 'brightrail-tabs', docFolder: 'tabs', catalogStatus: 'full' },
   { label: 'Text field', playgroundRoute: 'text-field', catalogRoute: 'text-field/catalog', selector: 'brightrail-text-field', docFolder: null, catalogStatus: 'full' },
-  { label: 'Tooltip', playgroundRoute: 'tooltip', catalogRoute: 'tooltip/catalog', selector: 'brightrail-tooltip', docFolder: 'tooltip', catalogStatus: 'full' },
+  { label: 'Tooltip', playgroundRoute: 'tooltip', catalogRoute: 'tooltip/catalog', selector: '[brightrailTooltip]', docFolder: 'tooltip', catalogStatus: 'full' },
   { label: 'App shell', playgroundRoute: 'app-shell', catalogRoute: 'app-shell/catalog', selector: 'brightrail-app-shell', docFolder: null, catalogStatus: 'playground-only' },
   { label: 'Combobox', playgroundRoute: 'combobox', catalogRoute: 'combobox/catalog', selector: 'brightrail-combobox', docFolder: null, catalogStatus: 'playground-only' },
   { label: 'Command palette', playgroundRoute: 'command-palette', catalogRoute: 'command-palette/catalog', selector: 'brightrail-command-palette', docFolder: null, catalogStatus: 'playground-only' },

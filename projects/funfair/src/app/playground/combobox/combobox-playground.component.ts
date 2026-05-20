@@ -1,4 +1,15 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailComboboxComponent,
@@ -24,12 +35,48 @@ type ComboboxRecipe =
 @Component({
   selector: 'app-combobox-playground',
   standalone: true,
-  imports: [FormsModule, BrightrailComboboxComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailComboboxComponent],
   templateUrl: './combobox-playground.component.html',
   styleUrl: './combobox-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComboboxPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      recipe: () => this.recipe(),
+      placeholder: () => this.placeholder(),
+      filterable: () => this.filterable(),
+      disabled: () => this.disabled(),
+      fullWidth: () => this.fullWidth(),
+      selectedValue: () => this.selectedValue(),
+      cityValue: () => this.cityValue(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('combobox', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    
+    restorePlaygroundState(state, {
+      recipe: this.recipe as WritableSignal<unknown>,
+      placeholder: this.placeholder as WritableSignal<unknown>,
+      filterable: this.filterable as WritableSignal<unknown>,
+      disabled: this.disabled as WritableSignal<unknown>,
+      fullWidth: this.fullWidth as WritableSignal<unknown>,
+      selectedValue: this.selectedValue as WritableSignal<unknown>,
+      cityValue: this.cityValue as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly ngModelStandalone = { standalone: true };
 

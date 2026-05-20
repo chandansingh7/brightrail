@@ -1,26 +1,12 @@
-@use '../button/button-playground.component.scss' as *;
+@use '../playground-layout' as *;
+
+@include bp-host-desktop-contained;
 
 /*
  * Desktop: the routed shell gives this host a bounded flex height. Without containment, `.bp`
  * can grow and push `.bp-code` below pf-main's fold — sticky fails because overflow ancestors differ.
  * Clip to the slot and let only the preview/settings panes scroll.
  */
-@media (min-width: 961px) {
-  :host {
-    overflow: hidden;
-  }
-
-  .bp {
-    flex: 1 1 0;
-    min-height: 0;
-    overflow: hidden;
-  }
-
-  .bp-grid {
-    flex: 1 1 0;
-    min-height: 0;
-  }
-}
 
 /* Override shared stretch alignment so the alert sits centered in the preview slot */
 :host .bp-preview-surface--stretch {

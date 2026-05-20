@@ -1,3 +1,4 @@
+@use '../styles/breakpoints' as bp;
 @use '../styles/tokens' as br;
 
 .br-acc {
@@ -55,4 +56,10 @@
   border-radius: var(--br-radius-md, #{br.$br-radius-md});
   background: var(--br-color-surface, #{br.$br-color-surface});
   box-shadow: 0 1px 2px rgb(15 23 42 / 6%);
+}
+
+@include bp.br-down(sm) {
+  .br-acc--layout-enterprise {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }

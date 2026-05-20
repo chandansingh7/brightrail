@@ -157,6 +157,7 @@ export class BrightrailMenuComponent implements AfterContentInit {
     enabled.forEach((item, i) => {
       item.active = i === clamped;
     });
+    queueMicrotask(() => enabled[clamped]?.focus());
   }
 
   private clearActive(): void {

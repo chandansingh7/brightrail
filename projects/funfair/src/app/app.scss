@@ -6,6 +6,18 @@
   overflow: hidden;
 }
 
+:host:has(> app-playground-a11y-preview-shell) {
+  height: auto;
+  min-height: 100dvh;
+  overflow: auto;
+}
+
+:host > app-playground-a11y-preview-shell {
+  flex: 1 1 auto;
+  min-height: 100dvh;
+  overflow: visible;
+}
+
 :host > app-playground-shell {
   flex: 1 1 auto;
   min-height: 0;

@@ -1,3 +1,5 @@
+@use '../../styles/breakpoints' as bp;
+
 :host {
   display: block;
 }
@@ -373,4 +375,25 @@
 
 .br-fu--status-success .br-fu__dropzone {
   border-color: #16a34a;
+}
+
+@include bp.br-down(xs) {
+  .br-fu--variant-compact .br-fu__dropzone {
+    grid-template-columns: 1fr;
+  }
+
+  .br-fu__file {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .br-fu__file-progress {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .br-fu__file-progress-bar {
+    flex: 1 1 auto;
+    width: auto;
+  }
 }

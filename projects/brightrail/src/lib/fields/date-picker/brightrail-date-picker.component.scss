@@ -1,4 +1,5 @@
 @use '../../styles/tokens' as br;
+@use '../../styles/breakpoints' as bp;
 @use '../text-field/brightrail-text-field.component.scss' as *;
 
 :host {
@@ -398,4 +399,17 @@ button.br-tf__wrap:disabled {
 
 .br-dp {
   width: 100%;
+}
+
+@include bp.br-down(sm) {
+  .br-dp__cal {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+}
+
+@include bp.br-down(xs) {
+  .br-dp__months-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }

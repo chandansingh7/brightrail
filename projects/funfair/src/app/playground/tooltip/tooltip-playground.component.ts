@@ -1,7 +1,19 @@
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { ChangeDetectionStrategy, Component, computed, inject, signal, TemplateRef, viewChild } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
 import {
-  BrightrailButtonIconComponent,
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
+import {
+  BrightrailButtonComponent,
   BrightrailTooltipContentVariant,
   BrightrailTooltipDirective,
   BrightrailTooltipPlacement,
@@ -43,12 +55,43 @@ type TooltipRecipe =
 @Component({
   selector: 'app-tooltip-playground',
   standalone: true,
-  imports: [FormsModule, BrightrailTooltipDirective, BrightrailButtonIconComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,
+    FormsModule,
+    RouterLink,
+    BrightrailTooltipDirective,
+    BrightrailButtonComponent,
+  ],
   templateUrl: './tooltip-playground.component.html',
   styleUrl: './tooltip-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TooltipPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      previewRecipe: () => this.previewRecipe(),
+      placement: () => this.placement(),
+      trigger: () => this.trigger(),
+      contentVariant: () => this.contentVariant(),
+      variant: () => this.variant(),
+      size: () => this.size(),
+      widthMode: () => this.widthMode(),
+      showArrow: () => this.showArrow(),
+      showDelay: () => this.showDelay(),
+      hideDelay: () => this.hideDelay(),
+      maxWidth: () => this.maxWidth(),
+      disabled: () => this.disabled(),
+      themeToken: () => this.themeToken(),
+      useRichTemplate: () => this.useRichTemplate(),
+      plainText: () => this.plainText(),
+      triggerLabel: () => this.triggerLabel(),
+      triggerButtonVariant: () => this.triggerButtonVariant(),
+      triggerButtonIcon: () => this.triggerButtonIcon(),
+    }),
+  );
+
+
   readonly themeService = inject(PlaygroundThemeService);
 
   readonly richTpl = viewChild<TemplateRef<unknown>>('richTpl');
@@ -138,6 +181,8 @@ export class TooltipPlaygroundComponent {
   readonly useRichTemplate = signal(false);
   readonly plainText = signal('View account information and recent activity.');
   readonly triggerLabel = signal('Account details');
+  readonly triggerButtonVariant = signal<'outline' | 'ghost' | 'primary'>('outline');
+  readonly triggerButtonIcon = signal<'info' | 'help' | 'none'>('info');
 
   readonly activeTab = signal<CodeTabId>('html');
 
@@ -158,6 +203,7 @@ export class TooltipPlaygroundComponent {
   });
 
   constructor() {
+    initPlaygroundA11yPreview('tooltip', this.previewOnly);
     this.applyRecipe('info-account');
   }
 
@@ -181,6 +227,8 @@ export class TooltipPlaygroundComponent {
     this.disabled.set(false);
     this.useRichTemplate.set(false);
     this.triggerLabel.set('Account details');
+    this.triggerButtonVariant.set('outline');
+    this.triggerButtonIcon.set('info');
     switch (recipe) {
       case 'info-account':
         this.placement.set('top');
@@ -200,6 +248,8 @@ export class TooltipPlaygroundComponent {
         this.trigger.set('hover');
         this.plainText.set('This helps you complete the task.');
         this.triggerLabel.set('Need help?');
+        this.triggerButtonVariant.set('ghost');
+        this.triggerButtonIcon.set('help');
         break;
       case 'rich-content':
         this.useRichTemplate.set(true);
@@ -207,6 +257,7 @@ export class TooltipPlaygroundComponent {
         this.trigger.set('hover');
         this.maxWidth.set(280);
         this.triggerLabel.set('System update');
+        this.triggerButtonIcon.set('none');
         break;
       case 'placement-top':
         this.placement.set('top');
@@ -265,18 +316,22 @@ export class TooltipPlaygroundComponent {
       case 'futuristic-neon':
         this.variant.set('neon');
         this.plainText.set('Neon guidance layer for dense dashboards.');
+        this.triggerButtonVariant.set('ghost');
         break;
       case 'futuristic-holo':
         this.variant.set('holographic');
         this.plainText.set('Holographic readout — scan lines are decorative.');
+        this.triggerButtonVariant.set('ghost');
         break;
       case 'futuristic-glass':
         this.variant.set('glassmorphism');
         this.plainText.set('Frosted glass tooltip for layered UIs.');
+        this.triggerButtonVariant.set('ghost');
         break;
       case 'futuristic-cyber':
         this.variant.set('cyber-pulse');
         this.plainText.set('Pulsing frame for high-contrast dark shells.');
+        this.triggerButtonVariant.set('ghost');
         break;
     }
   }
@@ -309,9 +364,12 @@ export class TooltipPlaygroundComponent {
       lines.push('</ng-template>');
       lines.push('');
     }
-    lines.push('<button');
-    lines.push('  type="button"');
-    lines.push('  class="tp-demo-trigger"');
+    lines.push('<brightrail-button');
+    lines.push(`  variant="${this.triggerButtonVariant()}"`);
+    lines.push('  size="md"');
+    if (this.triggerButtonIcon() !== 'none') {
+      lines.push(`  iconLeft="${this.triggerButtonIcon()}"`);
+    }
     if (this.useRichTemplate()) {
       lines.push('  [brightrailTooltip]="richTpl"');
     } else {
@@ -334,9 +392,8 @@ export class TooltipPlaygroundComponent {
       lines.push(`  brightrailTooltipTheme="${this.themeToken()}"`);
     }
     lines.push('>');
-    lines.push('  <brightrail-button-icon name="info" />');
-    lines.push(`  <span>${this.triggerLabel()}</span>`);
-    lines.push('</button>');
+    lines.push(`  ${this.triggerLabel()}`);
+    lines.push('</brightrail-button>');
     return lines.join('\n');
   }
 
@@ -347,6 +404,7 @@ export class TooltipPlaygroundComponent {
     }
     lines.push(
       "import {",
+      '  BrightrailButtonComponent,',
       '  BrightrailTooltipDirective,',
       '  BrightrailTooltipPlacement,',
       '  BrightrailTooltipTrigger,',
@@ -356,7 +414,7 @@ export class TooltipPlaygroundComponent {
       '  BrightrailTooltipWidthMode,',
       "} from 'brightrail';",
       '',
-      '// imports: [BrightrailTooltipDirective, BrightrailButtonIconComponent]',
+      "// imports: [BrightrailButtonComponent, BrightrailTooltipDirective]",
     );
     if (this.useRichTemplate()) {
       lines.push('', "readonly richTpl = viewChild<TemplateRef<unknown>>('richTpl');");
@@ -374,19 +432,8 @@ export class TooltipPlaygroundComponent {
   }
 
   private buildScss(): string {
-    return [
-      '@use "brightrail/styles/brightrail-root";',
-      '',
-      '.tp-demo-trigger {',
-      '  display: inline-flex;',
-      '  flex-direction: column;',
-      '  align-items: center;',
-      '  gap: 0.35rem;',
-      '  padding: 0.5rem 0.75rem;',
-      '  border-radius: 0.75rem;',
-      '  border: 1px solid var(--br-color-border);',
-      '  background: var(--br-color-surface);',
-      '}',
-    ].join('\n');
+    return ['@use "brightrail/styles/brightrail-root";', '', '// Tooltip portal styles ship with brightrail-root.'].join(
+      '\n',
+    );
   }
 }

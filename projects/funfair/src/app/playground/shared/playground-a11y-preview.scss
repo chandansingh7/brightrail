@@ -1,0 +1,26 @@
+/*
+ * Global a11y preview helpers (imported from styles.scss).
+ * Component-scoped overrides live in _playground-layout.scss.
+ */
+
+app-playground-a11y-preview-shell {
+  display: block;
+  min-height: 100dvh;
+  width: 100%;
+}
+
+html:has(.bp--a11y-preview-only),
+body:has(.bp--a11y-preview-only) {
+  height: auto;
+  min-height: 100%;
+  overflow: auto;
+}
+
+[class*='-playground']:has(.bp--a11y-preview-only) {
+  display: block !important;
+  flex: unset !important;
+  min-height: unset !important;
+  height: auto !important;
+  width: 100%;
+  overflow: visible !important;
+}

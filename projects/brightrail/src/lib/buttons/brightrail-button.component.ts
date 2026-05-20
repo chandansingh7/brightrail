@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
+import { BrightrailFocusVisibleDirective } from '../platform/brightrail-focus-visible.directive';
 import {
   BrightrailButtonIcon,
   BrightrailButtonIconComponent,
@@ -30,7 +31,7 @@ export type BrightrailButtonBoundaryStyle = 'none' | 'dotted';
 @Component({
   selector: 'brightrail-button',
   standalone: true,
-  imports: [BrightrailButtonIconComponent],
+  imports: [BrightrailButtonIconComponent, BrightrailFocusVisibleDirective],
   host: {
     '[class.br-host--full]': 'fullWidth()',
   },
@@ -38,6 +39,7 @@ export type BrightrailButtonBoundaryStyle = 'none' | 'dotted';
     <span class="br-root" [class.br-root--full]="fullWidth()">
       <button
         type="button"
+        brightrailFocusVisible
         [class]="buttonClass()"
         [disabled]="disabled() || loading()"
         [attr.aria-busy]="loading() ? 'true' : null"

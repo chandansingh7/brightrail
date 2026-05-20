@@ -1,4 +1,15 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailTimelineComponent,
@@ -22,12 +33,52 @@ type TimelineRecipe =
 @Component({
   selector: 'app-timeline-playground',
   standalone: true,
-  imports: [FormsModule, BrightrailTimelineComponent, BrightrailTimelineItemComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailTimelineComponent, BrightrailTimelineItemComponent],
   templateUrl: './timeline-playground.component.html',
   styleUrl: './timeline-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimelinePlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      recipe: () => this.recipe(),
+      ariaLabel: () => this.ariaLabel(),
+      showWorkflow: () => this.showWorkflow(),
+      showAudit: () => this.showAudit(),
+      showMixed: () => this.showMixed(),
+      showMinimal: () => this.showMinimal(),
+      itemTitle: () => this.itemTitle(),
+      itemDescription: () => this.itemDescription(),
+      itemStatus: () => this.itemStatus(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('timeline', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    
+    restorePlaygroundState(state, {
+      recipe: this.recipe as WritableSignal<unknown>,
+      ariaLabel: this.ariaLabel as WritableSignal<unknown>,
+      showWorkflow: this.showWorkflow as WritableSignal<unknown>,
+      showAudit: this.showAudit as WritableSignal<unknown>,
+      showMixed: this.showMixed as WritableSignal<unknown>,
+      showMinimal: this.showMinimal as WritableSignal<unknown>,
+      itemTitle: this.itemTitle as WritableSignal<unknown>,
+      itemDescription: this.itemDescription as WritableSignal<unknown>,
+      itemStatus: this.itemStatus as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly ngModelStandalone = { standalone: true };
 

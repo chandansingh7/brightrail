@@ -1,3 +1,4 @@
+@use '../styles/breakpoints' as bp;
 @use '../styles/tokens' as br;
 
 .br-drawer-root {
@@ -169,7 +170,7 @@
   z-index: 2;
 }
 
-@media (width <= 720px) {
+@include bp.br-down(sm) {
   .br-drawer__panel--left,
   .br-drawer__panel--right {
     width: min(100vw, var(--br-drawer-width, 100vw));

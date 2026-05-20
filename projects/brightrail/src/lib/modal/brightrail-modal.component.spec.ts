@@ -61,6 +61,7 @@ describe('BrightrailModalComponent', () => {
   it('renders dialog panel while open', () => {
     expect(fixture.nativeElement.querySelector('[role="dialog"]')).toBeTruthy();
     expect(fixture.nativeElement.querySelector('.br-modal__backdrop')).toBeTruthy();
+    expect(fixture.nativeElement.querySelector('[brightrailFocusTrap]')).toBeTruthy();
   });
 
   it('emits backdropDismiss when backdrop clicked and dismiss allowed', () => {

@@ -1,4 +1,15 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailPaginationComponent,
@@ -39,12 +50,72 @@ type PaginationRecipe =
 @Component({
   selector: 'app-pagination-playground',
   standalone: true,
-  imports: [FormsModule, BrightrailPaginationComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailPaginationComponent],
   templateUrl: './pagination-playground.component.html',
   styleUrl: './pagination-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaginationPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      recipe: () => this.recipe(),
+      variant: () => this.variant(),
+      size: () => this.size(),
+      state: () => this.state(),
+      compact: () => this.compact(),
+      length: () => this.length(),
+      pageIndex: () => this.pageIndex(),
+      pageSize: () => this.pageSize(),
+      totalPagesOverride: () => this.totalPagesOverride(),
+      pageSizeOptions: () => this.pageSizeOptions(),
+      pageSizeOptionsText: () => this.pageSizeOptionsText(),
+      showPageSize: () => this.showPageSize(),
+      showFirstLast: () => this.showFirstLast(),
+      showPrevNext: () => this.showPrevNext(),
+      pageSizePosition: () => this.pageSizePosition(),
+      summaryMode: () => this.summaryMode(),
+      summaryItemsLabel: () => this.summaryItemsLabel(),
+      showJumpToPage: () => this.showJumpToPage(),
+      maxPageButtons: () => this.maxPageButtons(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('pagination', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    
+    restorePlaygroundState(state, {
+      recipe: this.recipe as WritableSignal<unknown>,
+      variant: this.variant as WritableSignal<unknown>,
+      size: this.size as WritableSignal<unknown>,
+      state: this.state as WritableSignal<unknown>,
+      compact: this.compact as WritableSignal<unknown>,
+      length: this.length as WritableSignal<unknown>,
+      pageIndex: this.pageIndex as WritableSignal<unknown>,
+      pageSize: this.pageSize as WritableSignal<unknown>,
+      totalPagesOverride: this.totalPagesOverride as WritableSignal<unknown>,
+      pageSizeOptions: this.pageSizeOptions as WritableSignal<unknown>,
+      pageSizeOptionsText: this.pageSizeOptionsText as WritableSignal<unknown>,
+      showPageSize: this.showPageSize as WritableSignal<unknown>,
+      showFirstLast: this.showFirstLast as WritableSignal<unknown>,
+      showPrevNext: this.showPrevNext as WritableSignal<unknown>,
+      pageSizePosition: this.pageSizePosition as WritableSignal<unknown>,
+      summaryMode: this.summaryMode as WritableSignal<unknown>,
+      summaryItemsLabel: this.summaryItemsLabel as WritableSignal<unknown>,
+      showJumpToPage: this.showJumpToPage as WritableSignal<unknown>,
+      maxPageButtons: this.maxPageButtons as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly ngModelStandalone = { standalone: true };
 

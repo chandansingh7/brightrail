@@ -1,5 +1,16 @@
 import { TitleCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailBreadcrumbComponent,
@@ -18,12 +29,29 @@ type BreadcrumbScenario = 'standard' | 'enterprise' | 'mobile' | 'futuristic';
 @Component({
   selector: 'app-breadcrumb-playground',
   standalone: true,
-  imports: [FormsModule, TitleCasePipe, BrightrailBreadcrumbComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, TitleCasePipe, BrightrailBreadcrumbComponent],
   templateUrl: './breadcrumb-playground.component.html',
   styleUrl: './breadcrumb-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      scenario: () => this.scenario(),
+      separator: () => this.separator(),
+      withIcons: () => this.withIcons(),
+      boxed: () => this.boxed(),
+      maxItems: () => this.maxItems(),
+      truncation: () => this.truncation(),
+      currentItemStyle: () => this.currentItemStyle(),
+      size: () => this.size(),
+      items: () => this.items(),
+    }),
+  );
+
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly ngModelStandalone = { standalone: true };
 
@@ -64,6 +92,7 @@ export class BreadcrumbPlaygroundComponent {
   ]);
 
   constructor() {
+    initPlaygroundA11yPreview('breadcrumb', this.previewOnly);
     this.applyScenario('standard');
   }
 

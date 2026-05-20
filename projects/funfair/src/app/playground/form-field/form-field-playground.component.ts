@@ -1,4 +1,15 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailFormFieldComponent,
@@ -28,6 +39,7 @@ type ControlSlot = 'text-field' | 'switch';
   selector: 'app-form-field-playground',
   standalone: true,
   imports: [
+    PlaygroundPreviewHeaderComponent,
     FormsModule,
     BrightrailFormFieldComponent,
     BrightrailTextFieldComponent,
@@ -38,6 +50,49 @@ type ControlSlot = 'text-field' | 'switch';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormFieldPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      recipe: () => this.recipe(),
+      label: () => this.label(),
+      hint: () => this.hint(),
+      error: () => this.error(),
+      required: () => this.required(),
+      invalid: () => this.invalid(),
+      controlSlot: () => this.controlSlot(),
+      textAppearance: () => this.textAppearance(),
+      textValue: () => this.textValue(),
+      lastNameValue: () => this.lastNameValue(),
+      switchValue: () => this.switchValue(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('form-field', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    
+    restorePlaygroundState(state, {
+      recipe: this.recipe as WritableSignal<unknown>,
+      label: this.label as WritableSignal<unknown>,
+      hint: this.hint as WritableSignal<unknown>,
+      error: this.error as WritableSignal<unknown>,
+      required: this.required as WritableSignal<unknown>,
+      invalid: this.invalid as WritableSignal<unknown>,
+      controlSlot: this.controlSlot as WritableSignal<unknown>,
+      textAppearance: this.textAppearance as WritableSignal<unknown>,
+      textValue: this.textValue as WritableSignal<unknown>,
+      lastNameValue: this.lastNameValue as WritableSignal<unknown>,
+      switchValue: this.switchValue as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly ngModelStandalone = { standalone: true };
 

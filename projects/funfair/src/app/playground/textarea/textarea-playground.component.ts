@@ -1,4 +1,15 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailTextareaAppearance,
@@ -29,12 +40,64 @@ type TextareaRecipe =
 @Component({
   selector: 'app-textarea-playground',
   standalone: true,
-  imports: [FormsModule, BrightrailTextareaComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailTextareaComponent],
   templateUrl: './textarea-playground.component.html',
   styleUrl: './textarea-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      recipe: () => this.recipe(),
+      appearance: () => this.appearance(),
+      status: () => this.status(),
+      size: () => this.size(),
+      resize: () => this.resize(),
+      label: () => this.label(),
+      placeholder: () => this.placeholder(),
+      helperText: () => this.helperText(),
+      required: () => this.required(),
+      disabled: () => this.disabled(),
+      loading: () => this.loading(),
+      fullWidth: () => this.fullWidth(),
+      rows: () => this.rows(),
+      value: () => this.value(),
+      useNgModel: () => this.useNgModel(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('textarea', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    
+    restorePlaygroundState(state, {
+      recipe: this.recipe as WritableSignal<unknown>,
+      appearance: this.appearance as WritableSignal<unknown>,
+      status: this.status as WritableSignal<unknown>,
+      size: this.size as WritableSignal<unknown>,
+      resize: this.resize as WritableSignal<unknown>,
+      label: this.label as WritableSignal<unknown>,
+      placeholder: this.placeholder as WritableSignal<unknown>,
+      helperText: this.helperText as WritableSignal<unknown>,
+      required: this.required as WritableSignal<unknown>,
+      disabled: this.disabled as WritableSignal<unknown>,
+      loading: this.loading as WritableSignal<unknown>,
+      fullWidth: this.fullWidth as WritableSignal<unknown>,
+      rows: this.rows as WritableSignal<unknown>,
+      value: this.value as WritableSignal<unknown>,
+      useNgModel: this.useNgModel as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly ngModelStandalone = { standalone: true };
 

@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostListener, computed, input, output } from '@angular/core';
 
+import { BrightrailFocusTrapDirective } from '../platform/brightrail-focus-trap.directive';
+
 export type BrightrailDrawerPlacement = 'left' | 'right' | 'top' | 'bottom';
 export type BrightrailDrawerSize = 'narrow' | 'medium' | 'wide' | 'xwide' | 'full';
 export type BrightrailDrawerMode = 'modal' | 'dismissible' | 'persistent';
@@ -8,6 +10,7 @@ export type BrightrailDrawerBackdropStyle = 'dim' | 'dim-strong' | 'blur' | 'gla
 @Component({
   selector: 'brightrail-drawer',
   standalone: true,
+  imports: [BrightrailFocusTrapDirective],
   template: `
     @if (isOpen()) {
       <div
@@ -36,6 +39,8 @@ export type BrightrailDrawerBackdropStyle = 'dim' | 'dim-strong' | 'blur' | 'gla
 
         <aside
           class="br-drawer__panel"
+          brightrailFocusTrap
+          brightrailFocusTrapAutoCapture
           [class.br-drawer__panel--left]="placement() === 'left'"
           [class.br-drawer__panel--right]="placement() === 'right'"
           [class.br-drawer__panel--top]="placement() === 'top'"

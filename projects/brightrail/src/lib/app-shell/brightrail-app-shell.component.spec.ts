@@ -33,4 +33,10 @@ describe('BrightrailAppShellComponent', () => {
     const shell: HTMLElement = fixture.nativeElement.querySelector('.br-app-shell');
     expect(shell.classList.contains('br-app-shell--no-sidebar')).toBeTrue();
   });
+
+  it('binds sidebar width to the shell CSS variable', () => {
+    fixture.componentRef.setInput('sidebarWidth', '20rem');
+    fixture.detectChanges();
+    expect(fixture.nativeElement.style.getPropertyValue('--br-app-shell-sidebar-width')).toBe('20rem');
+  });
 });

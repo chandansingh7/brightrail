@@ -1,6 +1,17 @@
 import { TitleCasePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailButtonIcon,
@@ -25,12 +36,66 @@ export type PlaygroundSuffixPlacement = 'none' | BrightrailTextFieldSuffixPositi
 @Component({
   selector: 'app-text-field-playground',
   standalone: true,
-  imports: [BrightrailTextFieldComponent, FormsModule, TitleCasePipe, RouterLink],
+  imports: [
+    PlaygroundPreviewHeaderComponent,BrightrailTextFieldComponent, FormsModule, TitleCasePipe, RouterLink],
   templateUrl: './text-field-playground.component.html',
   styleUrl: './text-field-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextFieldPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      appearance: () => this.appearance(),
+      shape: () => this.shape(),
+      status: () => this.status(),
+      size: () => this.size(),
+      rows: () => this.rows(),
+      inputType: () => this.inputType(),
+      fieldState: () => this.fieldState(),
+      fullWidth: () => this.fullWidth(),
+      dropdownIndicator: () => this.dropdownIndicator(),
+      clearable: () => this.clearable(),
+      labelPosition: () => this.labelPosition(),
+      suffixPlacement: () => this.suffixPlacement(),
+      iconSide: () => this.iconSide(),
+      iconKind: () => this.iconKind(),
+      fieldLoading: () => this.fieldLoading(),
+      previewValue: () => this.previewValue(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('text-field', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    
+    restorePlaygroundState(state, {
+      appearance: this.appearance as WritableSignal<unknown>,
+      shape: this.shape as WritableSignal<unknown>,
+      status: this.status as WritableSignal<unknown>,
+      size: this.size as WritableSignal<unknown>,
+      rows: this.rows as WritableSignal<unknown>,
+      inputType: this.inputType as WritableSignal<unknown>,
+      fieldState: this.fieldState as WritableSignal<unknown>,
+      fullWidth: this.fullWidth as WritableSignal<unknown>,
+      dropdownIndicator: this.dropdownIndicator as WritableSignal<unknown>,
+      clearable: this.clearable as WritableSignal<unknown>,
+      labelPosition: this.labelPosition as WritableSignal<unknown>,
+      suffixPlacement: this.suffixPlacement as WritableSignal<unknown>,
+      iconSide: this.iconSide as WritableSignal<unknown>,
+      iconKind: this.iconKind as WritableSignal<unknown>,
+      fieldLoading: this.fieldLoading as WritableSignal<unknown>,
+      previewValue: this.previewValue as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
 
   /** Label copy for the preview / snippet (fixed in code; not edited in the UI). */

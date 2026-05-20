@@ -1,0 +1,54 @@
+// =============================================================================
+// Brightrail layout helpers — fluid sizing, scroll containment, responsive stacks.
+// =============================================================================
+
+@use './breakpoints' as bp;
+
+/// Centered fluid container with optional max width (scales on TV / ultrawide).
+@mixin br-fluid-container($max: 80rem) {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: min(#{$max}, 100%);
+  margin-inline: auto;
+}
+
+/// Prevent flex/grid children from overflowing their track.
+@mixin br-min-size-0 {
+  min-width: 0;
+  min-height: 0;
+}
+
+/// Scrollable region that does not propagate overscroll to the page.
+@mixin br-scroll-contained {
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+/// Vertical stack with consistent gap.
+@mixin br-stack($gap: 1rem) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
+/// Passive responsive safety for atomic components (phone → TV).
+@mixin br-host-viewport-safe {
+  max-width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+/// Desktop workbench overflow containment (playgrounds, dense dashboards).
+@mixin br-desktop-contained {
+  @include bp.br-up(md) {
+    @content;
+  }
+}
+
+/// Cap content width on very large viewports so lines stay readable on TV.
+@mixin br-tv-readable($max: 110rem) {
+  @include bp.br-up(xl) {
+    max-width: min(#{$max}, 92vw);
+    margin-inline: auto;
+  }
+}

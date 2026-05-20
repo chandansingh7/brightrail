@@ -1,28 +1,32 @@
-/** Copy-ready markup for tooltip catalog tiles (import `BrightrailTooltipDirective` from `brightrail`). */
+/** Copy-ready markup for tooltip catalog tiles (import from `brightrail`). */
 export const TOOLTIP_VARIATION_SNIPPETS = {
-  defaultInfo: `<button
-  type="button"
+  defaultInfo: `<brightrail-button
+  variant="outline"
+  size="sm"
+  iconLeft="info"
   brightrailTooltip="Helpful information about this item."
   brightrailTooltipPlacement="top"
 >
-  <brightrail-button-icon name="info" />
   Default info
-</button>`,
-  helper: `<button
-  type="button"
+</brightrail-button>`,
+  helper: `<brightrail-button
+  variant="ghost"
+  size="sm"
+  iconLeft="help"
   brightrailTooltip="This helps you complete the task."
   brightrailTooltipPlacement="top"
 >
   Helper
-</button>`,
-  richContent: `<button
-  type="button"
+</brightrail-button>`,
+  richContent: `<brightrail-button
+  variant="outline"
+  size="sm"
   [brightrailTooltip]="richTooltipTemplate"
   brightrailTooltipPlacement="top"
   [brightrailTooltipMaxWidth]="280"
 >
   Rich content
-</button>
+</brightrail-button>
 
 <ng-template #richTooltipTemplate>
   <div class="tooltip-rich">
@@ -31,44 +35,49 @@ export const TOOLTIP_VARIATION_SNIPPETS = {
     <span class="tooltip-rich__link">Learn more →</span>
   </div>
 </ng-template>`,
-  iconTooltip: `<button
-  type="button"
+  iconTooltip: `<brightrail-icon-button
+  ariaLabel="Add to favorites"
   brightrailTooltip="Add to favorites"
   brightrailTooltipPlacement="top"
 >
-  Icon tooltip
-</button>`,
-  placementTop: `<button type="button" brightrailTooltip="Top" brightrailTooltipPlacement="top">Top</button>`,
-  placementBottom: `<button type="button" brightrailTooltip="Bottom" brightrailTooltipPlacement="bottom">Bottom</button>`,
-  placementLeft: `<button type="button" brightrailTooltip="Left" brightrailTooltipPlacement="left">Left</button>`,
-  placementRight: `<button type="button" brightrailTooltip="Right" brightrailTooltipPlacement="right">Right</button>`,
-  triggerHover: `<button type="button" brightrailTooltip="Hover to open" brightrailTooltipTrigger="hover">Hover</button>`,
-  triggerFocus: `<button type="button" brightrailTooltip="Focused state" brightrailTooltipTrigger="focus">Focus</button>`,
-  triggerClick: `<button type="button" brightrailTooltip="Click outside to dismiss" brightrailTooltipTrigger="click">Click</button>`,
-  triggerDelayed: `<button
-  type="button"
+  ♥
+</brightrail-icon-button>`,
+  placementTop: `<brightrail-button variant="outline" size="sm" brightrailTooltip="Top" brightrailTooltipPlacement="top">Top</brightrail-button>`,
+  placementBottom: `<brightrail-button variant="outline" size="sm" brightrailTooltip="Bottom" brightrailTooltipPlacement="bottom">Bottom</brightrail-button>`,
+  placementLeft: `<brightrail-button variant="outline" size="sm" brightrailTooltip="Left" brightrailTooltipPlacement="left">Left</brightrail-button>`,
+  placementRight: `<brightrail-button variant="outline" size="sm" brightrailTooltip="Right" brightrailTooltipPlacement="right">Right</brightrail-button>`,
+  triggerHover: `<brightrail-button variant="outline" size="sm" brightrailTooltip="Hover to open" brightrailTooltipTrigger="hover">Hover</brightrail-button>`,
+  triggerFocus: `<brightrail-button variant="outline" size="sm" brightrailTooltip="Focused state" brightrailTooltipTrigger="focus">Focus</brightrail-button>`,
+  triggerClick: `<brightrail-button variant="outline" size="sm" brightrailTooltip="Click outside to dismiss" brightrailTooltipTrigger="click">Click</brightrail-button>`,
+  triggerDelayed: `<brightrail-button
+  variant="outline"
+  size="sm"
   brightrailTooltip="Opens after 600ms"
   brightrailTooltipTrigger="hover"
   [brightrailTooltipShowDelay]="600"
 >
   Delayed
-</button>`,
-  sizeSm: `<button type="button" brightrailTooltip="Small tooltip copy." brightrailTooltipSize="sm">Small</button>`,
-  sizeMd: `<button
-  type="button"
+</brightrail-button>`,
+  sizeSm: `<brightrail-button variant="outline" size="sm" iconLeft="info" brightrailTooltip="Small tooltip copy." brightrailTooltipSize="sm">Small</brightrail-button>`,
+  sizeMd: `<brightrail-button
+  variant="outline"
+  size="md"
+  iconLeft="info"
   brightrailTooltip="Medium is the default density for most enterprise surfaces."
   brightrailTooltipSize="md"
 >
   Medium
-</button>`,
-  sizeLg: `<button
-  type="button"
+</brightrail-button>`,
+  sizeLg: `<brightrail-button
+  variant="outline"
+  size="lg"
+  iconLeft="info"
   brightrailTooltip="Large tooltips give you room for multi-line guidance."
   brightrailTooltipSize="lg"
   [brightrailTooltipMaxWidth]="320"
 >
   Large
-</button>`,
+</brightrail-button>`,
   semanticSuccess: `<span
   tabindex="0"
   brightrailTooltip="Everything looks good!"
@@ -127,38 +136,42 @@ export const TOOLTIP_VARIATION_SNIPPETS = {
 >
   CPU: 68%
 </span>`,
-  variantNeon: `<button
-  type="button"
+  variantNeon: `<brightrail-button
+  variant="ghost"
+  size="sm"
   brightrailTooltip="Neon glow tooltip"
   brightrailTooltipVariant="neon"
   brightrailTooltipPlacement="top"
 >
   Neon glow
-</button>`,
-  variantHolographic: `<button
-  type="button"
+</brightrail-button>`,
+  variantHolographic: `<brightrail-button
+  variant="ghost"
+  size="sm"
   brightrailTooltip="Holographic readout"
   brightrailTooltipVariant="holographic"
   brightrailTooltipPlacement="top"
 >
   Holographic
-</button>`,
-  variantGlass: `<button
-  type="button"
+</brightrail-button>`,
+  variantGlass: `<brightrail-button
+  variant="ghost"
+  size="sm"
   brightrailTooltip="Glassmorphism layer"
   brightrailTooltipVariant="glassmorphism"
   brightrailTooltipPlacement="top"
 >
   Glassmorphism
-</button>`,
-  variantCyber: `<button
-  type="button"
+</brightrail-button>`,
+  variantCyber: `<brightrail-button
+  variant="ghost"
+  size="sm"
   brightrailTooltip="Cyber pulse frame"
   brightrailTooltipVariant="cyber-pulse"
   brightrailTooltipPlacement="top"
 >
   Cyber pulse
-</button>`,
+</brightrail-button>`,
 } as const;
 
 export const TOOLTIP_DOC_SECTION_COUNT = 7;
@@ -174,10 +187,12 @@ export const TOOLTIP_HTML_EXAMPLES = `<brightrail-avatar
   tooltipMaxWidth="260"
 />
 
-<button
-  type="button"
+<brightrail-button
+  variant="outline"
+  size="md"
+  iconLeft="info"
   brightrailTooltip="Helpful information about this item."
   brightrailTooltipPlacement="top"
 >
-  Hover me
-</button>`;
+  Account details
+</brightrail-button>`;

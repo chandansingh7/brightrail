@@ -1,6 +1,8 @@
 @use '../styles/tokens' as br;
+@use '../styles/layout' as layout;
 
 :host {
+  @include layout.br-host-viewport-safe;
   display: block;
   block-size: 100%;
 }
@@ -56,5 +58,4 @@
 .br-sidebar__list ::ng-deep .br-sidebar__active {
   background: rgb(0 98 255 / 10%);
   color: var(--br-color-primary, #{br.$br-color-primary});
-  font-weight: 600;
 }

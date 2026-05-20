@@ -90,7 +90,7 @@ export const EMPTY_STATE_VARIATION_SNIPPETS = {
 </div>`,
 } as const;
 
-export const EMPTY_STATE_DOC_SECTION_COUNT = 7;
+export const EMPTY_STATE_DOC_SECTION_COUNT = 6;
 
 export const EMPTY_STATE_HTML_EXAMPLES = `<brightrail-empty-state
   title="No results found"

@@ -1,4 +1,15 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+
+import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
+import {
+  injectPlaygroundA11yPreviewMode,
+  initPlaygroundA11yPreview,
+} from '../shared/playground-a11y-preview.utils';
+import {
+  restorePlaygroundState,
+  snapshotPlaygroundState,
+} from '../shared/playground-a11y-state.utils';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailSliderComponent,
@@ -26,12 +37,56 @@ type SliderRecipe =
 @Component({
   selector: 'app-slider-playground',
   standalone: true,
-  imports: [FormsModule, BrightrailSliderComponent],
+  imports: [
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailSliderComponent],
   templateUrl: './slider-playground.component.html',
   styleUrl: './slider-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SliderPlaygroundComponent {
+  readonly previewOnly = injectPlaygroundA11yPreviewMode();
+  readonly a11yPreviewState = computed(() =>
+    snapshotPlaygroundState({
+      recipe: () => this.recipe(),
+      min: () => this.min(),
+      max: () => this.max(),
+      step: () => this.step(),
+      showValue: () => this.showValue(),
+      disabled: () => this.disabled(),
+      tone: () => this.tone(),
+      size: () => this.size(),
+      ariaLabel: () => this.ariaLabel(),
+      sliderValue: () => this.sliderValue(),
+      useNgModel: () => this.useNgModel(),
+    }),
+  );
+
+  constructor() {
+    initPlaygroundA11yPreview('slider', this.previewOnly, (state) =>
+      this.restoreA11yPreviewState(state),
+    );
+  }
+  private restoreA11yPreviewState(state: unknown): void {
+    if (!state || typeof state !== 'object') {
+      return;
+    }
+    const snapshot = state as Record<string, unknown>;
+    
+    restorePlaygroundState(state, {
+      recipe: this.recipe as WritableSignal<unknown>,
+      min: this.min as WritableSignal<unknown>,
+      max: this.max as WritableSignal<unknown>,
+      step: this.step as WritableSignal<unknown>,
+      showValue: this.showValue as WritableSignal<unknown>,
+      disabled: this.disabled as WritableSignal<unknown>,
+      tone: this.tone as WritableSignal<unknown>,
+      size: this.size as WritableSignal<unknown>,
+      ariaLabel: this.ariaLabel as WritableSignal<unknown>,
+      sliderValue: this.sliderValue as WritableSignal<unknown>,
+      useNgModel: this.useNgModel as WritableSignal<unknown>,
+    });
+  }
+
   readonly themeService = inject(PlaygroundThemeService);
   readonly ngModelStandalone = { standalone: true };
 
