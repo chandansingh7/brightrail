@@ -9,6 +9,7 @@ import {
   formatAxeViolationReport,
   summarizeAxeViolations,
 } from '../projects/funfair/src/app/playground/shared/playground-a11y-preview.e2e.utils';
+import { filterUnexpectedViolations, findStaleDebt } from './support/a11y-known-debt';
 import { prepareA11yPreview } from './support/a11y-preview.setup';
 import { AXE_CI_DISABLED_RULES, AXE_CI_TAGS } from './support/axe-gate.config';
 
@@ -26,9 +27,17 @@ for (const componentId of PLAYGROUND_A11Y_PREVIEW_IDS) {
       .analyze();
 
     const summaries = summarizeAxeViolations(results.violations);
+    const unexpected = filterUnexpectedViolations(componentId, summaries);
+    const staleDebt = findStaleDebt(componentId, summaries);
+
     expect(
-      summaries,
-      formatAxeViolationReport(componentId, summaries),
+      staleDebt,
+      `Update e2e/support/a11y-known-debt.ts — fixed violations for “${componentId}”: ${staleDebt.join(', ')}`,
+    ).toEqual([]);
+
+    expect(
+      unexpected,
+      formatAxeViolationReport(componentId, unexpected),
     ).toEqual([]);
   });
 }

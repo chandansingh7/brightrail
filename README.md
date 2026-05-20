@@ -40,6 +40,7 @@ You can override ports for the script only: `FUNFAIR_PORT=4300 MIDWAY_PORT=4301 
 | `npm run build:all` | Build library + funfair + midway |
 | `npm run deploy:pages` | Build Funfair and publish to [GitHub Pages](https://chandansingh7.github.io/brightrail/) (`gh-pages` branch) |
 | `npm run test:brightrail` | Library unit tests (headless Chrome) |
+| `npm run e2e:gates` | Run all CI gates locally (a11y + contrast report + visual) — [`scripts/e2e-gates.sh`](scripts/e2e-gates.sh) |
 | `npm run e2e:a11y` | axe accessibility gate on Funfair a11y-preview routes (Playwright) |
 | `npm run e2e:visual` | Visual regression baselines for every playground preview (Playwright) |
 | `npm run e2e:update-snapshots` | Refresh Playwright screenshot baselines after intentional UI changes |

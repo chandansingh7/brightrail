@@ -21,9 +21,13 @@ export async function prepareA11yPreview(page: Page, componentId: string): Promi
       break;
     }
     case 'command-palette': {
-      const open = page.getByRole('button', { name: /^open command palette$/i });
-      if (await open.isVisible().catch(() => false)) {
-        await open.click();
+      // Default playground state keeps the palette open; only click when it is closed.
+      const dialog = page.getByRole('dialog');
+      if (!(await dialog.isVisible().catch(() => false))) {
+        const open = page.getByRole('button', { name: /^open command palette$/i });
+        if (await open.isVisible().catch(() => false)) {
+          await open.click({ force: true });
+        }
       }
       break;
     }

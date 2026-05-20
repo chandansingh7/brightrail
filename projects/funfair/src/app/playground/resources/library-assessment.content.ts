@@ -67,7 +67,7 @@ export const LIBRARY_PRO: LibraryProConSection = {
     'Funfair provides settings, live preview, snippets, and variation catalogs',
     'Platform layer ships provideBrightrailPlatform(), CDK focus trap, live announcer, focus-visible directive, and a 100% adoption registry',
     'Every component uses native WAI-ARIA APG keyboard patterns or semantic HTML — consumers do not wire CDK or Aria themselves',
-    'CI gates run axe on every a11y-preview route and Playwright visual baselines on Funfair — regressions in semantics or layout fail the build',
+    'CI gates run axe (semantic rules + known-debt baseline) on every a11y-preview route and Playwright visual baselines on Funfair — new a11y or layout regressions fail the build',
   ],
 };
 

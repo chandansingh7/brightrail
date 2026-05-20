@@ -15,10 +15,16 @@ for (const componentId of PLAYGROUND_A11Y_PREVIEW_IDS) {
     await page.waitForSelector(A11Y_PREVIEW_READY_SELECTOR, { state: 'attached', timeout: 30_000 });
     await prepareA11yPreview(page, componentId);
 
+    const mask = [page.locator('.bp-preview-caption')];
+    if (componentId === 'modal') {
+      const dialog = page.getByRole('dialog');
+      await expect(dialog).toBeVisible({ timeout: 30_000 });
+      await expect(dialog).toHaveScreenshot(`${componentId}.png`, { mask });
+      return;
+    }
+
     const preview = page.locator(A11Y_PREVIEW_SCAN_ROOT);
     await expect(preview).toBeAttached({ timeout: 30_000 });
-    await expect(preview).toHaveScreenshot(`${componentId}.png`, {
-      mask: [page.locator('.bp-preview-caption')],
-    });
+    await expect(preview).toHaveScreenshot(`${componentId}.png`, { mask });
   });
 }

@@ -1,5 +1,7 @@
 import {
   buildA11yPreviewUrl,
+  filterUnexpectedViolations,
+  findStaleDebt,
   formatAxeViolationReport,
   summarizeAxeViolations,
 } from './playground-a11y-preview.e2e.utils';
@@ -48,5 +50,19 @@ describe('playground-a11y-preview.e2e.utils', () => {
 
   it('formatAxeViolationReport returns empty string when clean', () => {
     expect(formatAxeViolationReport('button', [])).toBe('');
+  });
+
+  it('filterUnexpectedViolations removes documented debt', () => {
+    const unexpected = filterUnexpectedViolations('modal', [
+      { id: 'button-name', impact: 'critical', description: 'x', nodes: 1 },
+      { id: 'aria-hidden-body', impact: 'serious', description: 'y', nodes: 1 },
+    ]);
+    expect(unexpected.map((item) => item.id)).toEqual(['aria-hidden-body']);
+  });
+
+  it('findStaleDebt flags fixed issues still listed in the baseline', () => {
+    expect(
+      findStaleDebt('modal', [{ id: 'aria-prohibited-attr', impact: 'serious', description: 'x', nodes: 1 }]),
+    ).toEqual(['button-name']);
   });
 });

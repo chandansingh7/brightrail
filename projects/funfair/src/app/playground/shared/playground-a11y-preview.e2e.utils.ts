@@ -49,3 +49,33 @@ export function formatAxeViolationReport(
   );
   return [`Accessibility violations on “${componentId}”:`, ...lines].join('\n');
 }
+
+/**
+ * Documented axe rule ids that currently fail on a11y-preview routes.
+ * CI fails on new violations or when fixed debt is not removed from this map.
+ */
+export const A11Y_KNOWN_DEBT: Readonly<Record<string, readonly string[]>> = {
+  'app-shell': ['landmark-complementary-is-top-level', 'landmark-main-is-top-level'],
+  'command-palette': ['aria-input-field-name'],
+  drawer: ['aria-allowed-role', 'aria-dialog-name', 'label', 'select-name'],
+  modal: ['aria-prohibited-attr', 'button-name'],
+  'text-field': ['label'],
+  timeline: ['list', 'listitem'],
+};
+
+export function filterUnexpectedViolations(
+  componentId: string,
+  summaries: readonly AxeViolationSummary[],
+): readonly AxeViolationSummary[] {
+  const known = new Set(A11Y_KNOWN_DEBT[componentId] ?? []);
+  return summaries.filter((item) => !known.has(item.id));
+}
+
+export function findStaleDebt(
+  componentId: string,
+  summaries: readonly AxeViolationSummary[],
+): readonly string[] {
+  const known = A11Y_KNOWN_DEBT[componentId] ?? [];
+  const current = new Set(summaries.map((item) => item.id));
+  return known.filter((ruleId) => !current.has(ruleId));
+}

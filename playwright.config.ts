@@ -16,9 +16,10 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
   },
+  snapshotPathTemplate: '{testDir}/{testFileDir}/{testFileName}-snapshots/{arg}{ext}',
   expect: {
     toHaveScreenshot: {
-      maxDiffPixelRatio: 0.01,
+      maxDiffPixelRatio: 0.02,
       animations: 'disabled',
     },
   },

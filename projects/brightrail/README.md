@@ -44,7 +44,7 @@ ng test brightrail
 GitHub Actions runs library unit tests, consumer package verification (`verify:package`), **axe accessibility scans** on every Funfair `a11y-preview/:componentId` route, and **Playwright visual baselines** for each playground preview.
 
 ```bash
-npm run e2e:a11y              # axe on isolated previews
-npm run e2e:visual            # screenshot regression
+npm run e2e:gates             # all gates (same as CI)
+./scripts/e2e-gates.sh --a11y # semantic axe only
 npm run e2e:update-snapshots  # after intentional visual changes
 ```

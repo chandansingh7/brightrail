@@ -22,7 +22,8 @@
     "e2e:a11y": "playwright test e2e/a11y.spec.ts",
     "e2e:a11y:contrast": "playwright test e2e/a11y-contrast.spec.ts",
     "e2e:visual": "playwright test e2e/visual.spec.ts",
-    "e2e:update-snapshots": "playwright test e2e/visual.spec.ts --update-snapshots"
+    "e2e:update-snapshots": "playwright test e2e/visual.spec.ts --update-snapshots",
+    "e2e:gates": "bash scripts/e2e-gates.sh"
   },
   "prettier": {
     "printWidth": 100,
