@@ -12,7 +12,8 @@ describe('textarea-variation-snippets', () => {
   });
 
   it('documents six reference sections', () => {
-    expect(TEXTAREA_DOC_SECTION_COUNT).toBe(6);
+    expect(TEXTAREA_DOC_SECTION_COUNT).toBe(7);
+    expect(TEXTAREA_VARIATION_SNIPPETS.futuristicHolo).toContain('ff-future-shell--holo');
   });
 
   it('includes footer HTML examples', () => {

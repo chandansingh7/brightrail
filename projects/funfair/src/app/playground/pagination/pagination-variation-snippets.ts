@@ -145,9 +145,29 @@ export const PAGINATION_VARIATION_SNIPPETS = {
 <div class="table-footer-strip">
   <brightrail-pagination [length]="200" [pageIndex]="4" [pageSize]="10" variant="numbered" />
 </div>`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+  <brightrail-pagination [length]="240" [pageIndex]="4" [pageSize]="10" variant="numbered" [compact]="true" />
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+  <brightrail-pagination [length]="500" [pageIndex]="12" [pageSize]="10" variant="numbered" />
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+  <div class="ff-future-cyber-frame">
+    <brightrail-pagination [length]="500" [pageIndex]="12" [pageSize]="10" [showJumpToPage]="true" [totalPages]="50" />
+  </div>
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+  <brightrail-pagination [length]="128" [pageIndex]="2" [pageSize]="10" summaryMode="results" summaryItemsLabel="signals" />
+</div>`,
+
 } as const;
 
-export const PAGINATION_DOC_SECTION_COUNT = 9;
+export const PAGINATION_DOC_SECTION_COUNT = 10;
 
 export const PAGINATION_HTML_EXAMPLES = `<brightrail-pagination
   [length]="128"

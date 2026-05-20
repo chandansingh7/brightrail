@@ -147,9 +147,45 @@ export const TEXTAREA_VARIATION_SNIPPETS = {
   [rows]="4"
   [formControl]="commentsControl"
 />`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-textarea
+    appearance="outlined"
+    label="Mission log"
+    placeholder="Record telemetry…"
+    [rows]="3"
+    [(ngModel)]="missionLog"
+  />
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-textarea
+    appearance="filled"
+    label="Signal transcript"
+    [rows]="3"
+    [(ngModel)]="transcript"
+  />
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <brightrail-textarea
+    appearance="outlined"
+    label="Payload"
+    resize="none"
+    [rows]="3"
+    [(ngModel)]="payload"
+  />
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-textarea
+    appearance="underline"
+    label="Operator notes"
+    [rows]="4"
+    [fullWidth]="true"
+    [(ngModel)]="operatorNotes"
+  />
+</div>`,
 } as const;
 
-export const TEXTAREA_DOC_SECTION_COUNT = 6;
+export const TEXTAREA_DOC_SECTION_COUNT = 7;
 
 export const TEXTAREA_HTML_EXAMPLES = `<brightrail-textarea
   appearance="outlined"

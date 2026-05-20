@@ -8,7 +8,8 @@ describe('toast-variation-snippets', () => {
   });
 
   it('documents six reference sections in the mock', () => {
-    expect(TOAST_DOC_SECTION_COUNT).toBe(6);
+    expect(TOAST_DOC_SECTION_COUNT).toBe(7);
+    expect(TOAST_VARIATION_SNIPPETS.futuristicGlass).toContain('ff-future-shell--glass');
   });
 
   it('includes footer HTML examples', () => {

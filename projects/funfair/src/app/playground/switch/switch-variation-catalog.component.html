@@ -103,3 +103,39 @@
     </app-catalog-variation-tile>
   </div>
 </section>
+<section class="swvc-block">
+  <h2 class="swvc-block__h">7. Futuristic switch designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Glass shield" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+        <brightrail-switch label="Glass shield" tone="primary" [checked]="true" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neon relay" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+        <brightrail-switch label="Neon relay" tone="primary" [checked]="true" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber override" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+        <div class="ff-future-cyber-frame">
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--tl" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--tr" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--bl" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--br" aria-hidden="true"></span>
+          <brightrail-switch label="Cyber override" tone="danger" [checked]="true" />
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holo sync" [snippet]="s.futuristicHolo">
+      <div class="ff-future-shell ff-future-shell--holo">
+        <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+        <brightrail-switch label="Holo sync" tone="success" [checked]="true" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+

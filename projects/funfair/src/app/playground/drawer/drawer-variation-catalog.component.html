@@ -289,3 +289,67 @@
     </div>
   </app-catalog-variation-tile>
 </section>
+
+<section class="dvc-block">
+  <h2 class="dvc-block__h">7. Futuristic drawer designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Glass panel" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+        <div class="dvc-shell dvc-shell--tall">
+          <brightrail-drawer [isOpen]="true" [contain]="true" placement="right" size="medium" mode="modal" surface="glass" backdropStyle="glass">
+            <brightrail-drawer-header [showCloseButton]="true">
+              <div brightrailDrawerTitle>Glass panel</div>
+            </brightrail-drawer-header>
+            <brightrail-drawer-body><p class="dvc-body-line">Glassmorphism drawer with frosted backdrop.</p></brightrail-drawer-body>
+          </brightrail-drawer>
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neon AI shell" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+        <div class="dvc-shell dvc-shell--tall dvc-shell--ai-bg">
+          <brightrail-drawer [isOpen]="true" [contain]="true" placement="right" size="wide" mode="modal" surface="ai" backdropStyle="glass">
+            <brightrail-drawer-header [showCloseButton]="true">
+              <div brightrailDrawerTitle>AI command center</div>
+            </brightrail-drawer-header>
+            <brightrail-drawer-body><p class="dvc-body-line">Neon AI shell with smart suggestions.</p></brightrail-drawer-body>
+          </brightrail-drawer>
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber inspector" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+        <div class="dvc-shell dvc-shell--tall">
+          <div class="ff-future-cyber-frame">
+            <span class="ff-future-cyber-corner ff-future-cyber-corner--tl" aria-hidden="true"></span>
+            <span class="ff-future-cyber-corner ff-future-cyber-corner--tr" aria-hidden="true"></span>
+            <span class="ff-future-cyber-corner ff-future-cyber-corner--bl" aria-hidden="true"></span>
+            <span class="ff-future-cyber-corner ff-future-cyber-corner--br" aria-hidden="true"></span>
+            <brightrail-drawer [isOpen]="true" [contain]="true" placement="right" size="medium" mode="modal" surface="ai" backdropStyle="glass">
+              <brightrail-drawer-header [showCloseButton]="true">
+                <div brightrailDrawerTitle>Cyber inspector</div>
+              </brightrail-drawer-header>
+              <brightrail-drawer-body><p class="dvc-body-line">Grid-framed AI detail panel.</p></brightrail-drawer-body>
+            </brightrail-drawer>
+          </div>
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holo gradient" [snippet]="s.futuristicHolo">
+      <div class="ff-future-shell ff-future-shell--holo">
+        <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+        <div class="dvc-shell dvc-shell--tall">
+          <brightrail-drawer [isOpen]="true" [contain]="true" placement="right" size="medium" mode="modal" surface="gradient" backdropStyle="blur">
+            <brightrail-drawer-header [showCloseButton]="true">
+              <div brightrailDrawerTitle>Holo settings</div>
+            </brightrail-drawer-header>
+            <brightrail-drawer-body><p class="dvc-body-line">Gradient edge with holographic shell.</p></brightrail-drawer-body>
+          </brightrail-drawer>
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

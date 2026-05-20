@@ -65,9 +65,22 @@ this.toast.show({ variant: 'success', message: 'Second notification' });`,
   dismissible: true,
   durationMs: 0,
 });`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-toast variant="info" title="Sync queued" message="Replication will begin shortly." />
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-toast variant="success" title="Link established" message="Neural bridge online." [dismissible]="true" />
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <brightrail-toast variant="warning" title="Anomaly" message="Review sector 7 telemetry." [dismissible]="true" />
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-toast variant="info" message="Holographic preview ready." />
+</div>`,
 } as const;
 
-export const TOAST_DOC_SECTION_COUNT = 6;
+export const TOAST_DOC_SECTION_COUNT = 7;
 
 export const TOAST_HTML_EXAMPLES = `<brightrail-toast-container />
 

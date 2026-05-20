@@ -111,9 +111,46 @@ export const FORM_FIELD_VARIATION_SNIPPETS = {
   layoutSettings: `<brightrail-form-field label="Public profile" hint="Visible to anyone with the link.">
   <brightrail-switch label="Make profile public" [(ngModel)]="isPublic" />
 </brightrail-form-field>`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-form-field label="Access token" hint="Scoped to read-only operations.">
+    <brightrail-text-field
+      appearance="outlined"
+      labelPosition="none"
+      placeholder="br_live_…"
+      [(ngModel)]="apiKey"
+    />
+  </brightrail-form-field>
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-form-field label="Node alias" [required]="true">
+    <brightrail-text-field
+      appearance="outlined"
+      labelPosition="none"
+      placeholder="alpha-01"
+      [(ngModel)]="displayName"
+    />
+  </brightrail-form-field>
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <brightrail-form-field label="Encryption key" hint="Rotates every 24 hours.">
+    <brightrail-text-field
+      appearance="outlined"
+      labelPosition="none"
+      inputType="password"
+      placeholder="••••••••"
+      [(ngModel)]="password"
+    />
+  </brightrail-form-field>
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-form-field label="Telemetry stream" hint="Enable real-time metrics.">
+    <brightrail-switch label="Stream active" [(ngModel)]="notificationsOn" />
+  </brightrail-form-field>
+</div>`,
 } as const;
 
-export const FORM_FIELD_DOC_SECTION_COUNT = 6;
+export const FORM_FIELD_DOC_SECTION_COUNT = 7;
 
 export const FORM_FIELD_HTML_EXAMPLES = `<brightrail-form-field label="Email" hint="Work email for invites." [required]="true">
   <brightrail-text-field

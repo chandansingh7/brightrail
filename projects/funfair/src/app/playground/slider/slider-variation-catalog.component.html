@@ -100,3 +100,39 @@
     </app-catalog-variation-tile>
   </div>
 </section>
+<section class="slvc-block">
+  <h2 class="slvc-block__h">7. Futuristic slider designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Glass output" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+        <brightrail-slider [min]="0" [max]="100" [step]="1" [showValue]="true" tone="primary" ariaLabel="Glass output" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neon gain" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+        <brightrail-slider [min]="0" [max]="100" [step]="1" [showValue]="true" tone="primary" ariaLabel="Neon gain" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber throttle" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+        <div class="ff-future-cyber-frame">
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--tl" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--tr" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--bl" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--br" aria-hidden="true"></span>
+          <brightrail-slider [min]="0" [max]="100" [step]="5" [showValue]="true" tone="danger" ariaLabel="Cyber throttle" />
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holo blend" [snippet]="s.futuristicHolo">
+      <div class="ff-future-shell ff-future-shell--holo">
+        <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+        <brightrail-slider [min]="0" [max]="100" [step]="1" [showValue]="true" tone="success" ariaLabel="Holo blend" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+

@@ -18,12 +18,14 @@ describe('RadioVariationCatalogComponent', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('renders six doc-mirror sections', () => {
+  it('renders seven doc-mirror sections including futuristic shells', () => {
     const headings = Array.from(
       fixture.nativeElement.querySelectorAll('.rvc-block__h') as NodeListOf<HTMLElement>,
     ).map((el) => el.textContent?.trim());
     expect(headings).toContain('1. Core radio');
     expect(headings).toContain('6. Validation / error');
-    expect(headings.length).toBe(6);
+    expect(headings).toContain('7. Futuristic radio designs');
+    expect(headings.length).toBe(7);
+    expect(fixture.nativeElement.querySelector('.ff-future-shell--cyber')).toBeTruthy();
   });
 });

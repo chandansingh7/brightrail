@@ -101,3 +101,37 @@
     </app-catalog-variation-tile>
   </div>
 </section>
+
+<section class="esvc-block">
+  <h2 class="esvc-block__h">7. Futuristic empty state designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Glass void" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+        <brightrail-empty-state title="No signals detected" description="Adjust filters or scan a new sector." />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neon queue" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+        <brightrail-empty-state title="Queue empty" description="All sync jobs completed." [compact]="true" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber grid" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+        <brightrail-empty-state title="No nodes online" description="Waiting for fleet heartbeat.">
+          <span brightrailEmptyStateIcon aria-hidden="true">⬡</span>
+        </brightrail-empty-state>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holo archive" [snippet]="s.futuristicHolo">
+      <div class="ff-future-shell ff-future-shell--holo">
+        <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+        <brightrail-empty-state title="Archive void" description="Upload artifacts to populate this view.">
+          <brightrail-button brightrailEmptyStateAction variant="outline">Initialize</brightrail-button>
+        </brightrail-empty-state>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

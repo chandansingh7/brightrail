@@ -47,3 +47,33 @@
     <brightrail-command-palette [isOpen]="true" [commands]="demoCommands" placeholder="Type to filter…" ariaLabel="Workspace command palette" />
   </app-catalog-variation-tile>
 </section>
+
+<section class="cpvc-block">
+  <h2 class="cpvc-block__h">7. Futuristic command palette designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Glass overlay" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+        <brightrail-command-palette [isOpen]="true" [commands]="demoCommands" placeholder="Search commands…" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neon launcher" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+        <brightrail-command-palette [isOpen]="true" [commands]="groupedCommands" placeholder="Jump to…" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber console" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+        <brightrail-command-palette [isOpen]="true" [commands]="demoCommands" placeholder="Type to filter…" ariaLabel="Workspace command palette" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holo palette" [snippet]="s.futuristicHolo">
+      <div class="ff-future-shell ff-future-shell--holo">
+        <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+        <brightrail-command-palette [isOpen]="true" [commands]="demoCommands" placeholder="Run command…" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

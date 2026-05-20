@@ -8,6 +8,6 @@ describe('accordion-variation-snippets', () => {
   });
 
   it('documents six reference sections', () => {
-    expect(ACCORDION_DOC_SECTION_COUNT).toBe(6);
+    expect(ACCORDION_DOC_SECTION_COUNT).toBe(7);
   });
 });

@@ -99,9 +99,25 @@ export const SLIDER_VARIATION_SNIPPETS = {
     [(ngModel)]="volume"
   />
 </div>`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-slider [min]="0" [max]="100" [step]="1" [showValue]="true" tone="primary" ariaLabel="Glass output" />
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-slider [min]="0" [max]="100" [step]="1" [showValue]="true" tone="primary" ariaLabel="Neon gain" />
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <div class="ff-future-cyber-frame">
+    <brightrail-slider [min]="0" [max]="100" [step]="5" [showValue]="true" tone="danger" ariaLabel="Cyber throttle" />
+  </div>
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-slider [min]="0" [max]="100" [step]="1" [showValue]="true" tone="success" ariaLabel="Holo blend" />
+</div>`,
+
 } as const;
 
-export const SLIDER_DOC_SECTION_COUNT = 6;
+export const SLIDER_DOC_SECTION_COUNT = 7;
 
 export const SLIDER_HTML_EXAMPLES = `<brightrail-slider
   [min]="0"

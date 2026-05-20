@@ -187,3 +187,56 @@
     </app-catalog-variation-tile>
   </div>
 </section>
+
+<section class="tfvc-block">
+  <h2 class="tfvc-block__h">7. Futuristic text field designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Glass shell" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+        <brightrail-text-field
+          appearance="outlined"
+          label="Command channel"
+          placeholder="Transmit signal…"
+          [(ngModel)]="futuristicGlassValue"
+        />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neon search" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+        <brightrail-text-field
+          appearance="filled"
+          label="Node ID"
+          iconLeft="search"
+          placeholder="Search cluster…"
+          [(ngModel)]="futuristicNeonValue"
+        />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber key" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+        <brightrail-text-field
+          appearance="outlined"
+          label="Access key"
+          inputType="password"
+          [showPasswordToggle]="true"
+          [(ngModel)]="futuristicCyberValue"
+        />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holo frequency" [snippet]="s.futuristicHolo">
+      <div class="ff-future-shell ff-future-shell--holo">
+        <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+        <brightrail-text-field
+          appearance="underline"
+          label="Beacon frequency"
+          suffix="GHz"
+          suffixPosition="right"
+          [(ngModel)]="futuristicHoloValue"
+        />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

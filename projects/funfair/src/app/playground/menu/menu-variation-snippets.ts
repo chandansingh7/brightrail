@@ -90,9 +90,38 @@ export const MENU_VARIATION_SNIPPETS = {
   <brightrail-menu-item label="Download" (activate)="onDownload()" />
   <brightrail-menu-item label="Print" (activate)="onPrint()" />
 </brightrail-menu>`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <button type="button" [brightrailMenuTrigger]="menu">Actions</button>
+  <brightrail-menu #menu>
+    <brightrail-menu-item label="Edit" />
+    <brightrail-menu-item label="Duplicate" />
+  </brightrail-menu>
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <button type="button" [brightrailMenuTrigger]="menu" aria-label="More options">⋯</button>
+  <brightrail-menu #menu>
+    <brightrail-menu-item label="Open" />
+    <brightrail-menu-item label="Assign" />
+  </brightrail-menu>
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <button type="button" [brightrailMenuTrigger]="menu">Command</button>
+  <brightrail-menu #menu>
+    <brightrail-menu-item label="Deploy" />
+    <brightrail-menu-item label="Rollback" />
+  </brightrail-menu>
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <button type="button" [brightrailMenuTrigger]="menu">View</button>
+  <brightrail-menu #menu>
+    <brightrail-menu-item label="Grid" [selected]="true" />
+    <brightrail-menu-item label="Orbit" />
+  </brightrail-menu>
+</div>`,
 } as const;
 
-export const MENU_DOC_SECTION_COUNT = 6;
+export const MENU_DOC_SECTION_COUNT = 7;
 
 export const MENU_HTML_EXAMPLES = `<button type="button" [brightrailMenuTrigger]="menu">Actions</button>
 <brightrail-menu #menu>

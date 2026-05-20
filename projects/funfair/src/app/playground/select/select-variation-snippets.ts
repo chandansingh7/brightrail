@@ -101,9 +101,25 @@ export const SELECT_VARIATION_SNIPPETS = {
     <button type="button" class="br-select-option" (click)="pick('ca')">Canada</button>
   </div>
 </brightrail-select>`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-select appearance="outlined" size="md" label="Sector" displayText="Alpha quadrant" [(ngModel)]="countryCode" />
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-select appearance="outlined" size="md" label="Sector" displayText="Neon relay" [(ngModel)]="countryCode" />
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <div class="ff-future-cyber-frame">
+    <brightrail-select appearance="outlined" size="md" label="Sector" displayText="Ops channel" [(ngModel)]="countryCode" />
+  </div>
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-select appearance="outlined" size="md" label="Sector" displayText="Orion belt" [(ngModel)]="countryCode" />
+</div>`,
+
 } as const;
 
-export const SELECT_DOC_SECTION_COUNT = 6;
+export const SELECT_DOC_SECTION_COUNT = 7;
 
 export const SELECT_HTML_EXAMPLES = `<brightrail-select
   appearance="outlined"

@@ -12,8 +12,9 @@ describe('timeline-variation-snippets', () => {
     expect(TIMELINE_VARIATION_SNIPPETS.auditTrail).toContain('ariaLabel="Audit trail"');
   });
 
-  it('documents six reference sections', () => {
-    expect(TIMELINE_DOC_SECTION_COUNT).toBe(6);
+  it('documents seven reference sections', () => {
+    expect(TIMELINE_DOC_SECTION_COUNT).toBe(7);
+    expect(TIMELINE_VARIATION_SNIPPETS.futuristicCyber).toContain('ff-future-shell--cyber');
   });
 
   it('includes footer HTML examples', () => {

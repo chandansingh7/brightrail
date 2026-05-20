@@ -146,3 +146,49 @@
     </app-catalog-variation-tile>
   </div>
 </section>
+
+<section class="mvc-block">
+  <h2 class="mvc-block__h">7. Futuristic menu designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Glass actions" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+        <button type="button" [brightrailMenuTrigger]="futureGlassMenu">Actions</button>
+        <brightrail-menu #futureGlassMenu>
+          <brightrail-menu-item label="Edit" />
+          <brightrail-menu-item label="Duplicate" />
+        </brightrail-menu>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neon overflow" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+        <button type="button" [brightrailMenuTrigger]="futureNeonMenu" aria-label="More options">⋯</button>
+        <brightrail-menu #futureNeonMenu>
+          <brightrail-menu-item label="Open" />
+          <brightrail-menu-item label="Assign" />
+        </brightrail-menu>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber command" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+        <button type="button" [brightrailMenuTrigger]="futureCyberMenu">Command</button>
+        <brightrail-menu #futureCyberMenu>
+          <brightrail-menu-item label="Deploy" />
+          <brightrail-menu-item label="Rollback" />
+        </brightrail-menu>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holo view" [snippet]="s.futuristicHolo">
+      <div class="ff-future-shell ff-future-shell--holo">
+        <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+        <button type="button" [brightrailMenuTrigger]="futureHoloMenu">View</button>
+        <brightrail-menu #futureHoloMenu>
+          <brightrail-menu-item label="Grid" [selected]="true" />
+          <brightrail-menu-item label="Orbit" />
+        </brightrail-menu>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

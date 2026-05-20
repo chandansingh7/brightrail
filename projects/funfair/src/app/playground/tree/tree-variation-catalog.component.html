@@ -73,3 +73,33 @@
     </app-catalog-variation-tile>
   </div>
 </section>
+
+<section class="trvc-block">
+  <h2 class="trvc-block__h">7. Futuristic tree designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Glass workspace" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+        <brightrail-tree [nodes]="workspaceNodes" selectionMode="single" selectedId="projects" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neon files" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+        <brightrail-tree [nodes]="fileNodes" selectionMode="single" selectedId="app" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber org" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+        <brightrail-tree [nodes]="orgNodes" selectionMode="single" selectedId="platform" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holo lanes" [snippet]="s.futuristicHolo">
+      <div class="ff-future-shell ff-future-shell--holo">
+        <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+        <brightrail-tree [nodes]="flatNodes" selectionMode="single" selectedId="inbox" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

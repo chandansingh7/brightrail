@@ -18,7 +18,7 @@ describe('DrawerVariationCatalogComponent', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('renders six catalog sections with live drawer previews', () => {
+  it('renders seven catalog sections with live drawer previews', () => {
     const headings = Array.from(
       fixture.nativeElement.querySelectorAll('.dvc-block__h') as NodeListOf<HTMLElement>,
     ).map((el) => el.textContent?.trim());
@@ -26,6 +26,8 @@ describe('DrawerVariationCatalogComponent', () => {
     expect(headings).toContain('2. Placements');
     expect(headings).toContain('5. Surfaces');
     expect(headings).toContain('6. Example drawer markup');
+    expect(headings).toContain('7. Futuristic drawer designs');
+    expect(headings.length).toBe(7);
   });
 
   it('includes click-to-copy tiles for placement and mode variants', () => {

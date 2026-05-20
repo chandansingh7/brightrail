@@ -88,9 +88,40 @@ export const COMBOBOX_VARIATION_SNIPPETS = {
     [(ngModel)]="cityCode"
   />
 </div>`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-combobox
+    [options]="regionOptions"
+    placeholder="Select region"
+    [(ngModel)]="regionCode"
+  />
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-combobox
+    [options]="assigneeOptions"
+    [filterable]="true"
+    placeholder="Search assignees…"
+    [(ngModel)]="assigneeId"
+  />
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <brightrail-combobox
+    [options]="priorityOptions"
+    placeholder="Priority"
+    [(ngModel)]="priorityCode"
+  />
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-combobox
+    [options]="tagOptions"
+    placeholder="Tag"
+    [fullWidth]="false"
+    [(ngModel)]="tagCode"
+  />
+</div>`,
 } as const;
 
-export const COMBOBOX_DOC_SECTION_COUNT = 6;
+export const COMBOBOX_DOC_SECTION_COUNT = 7;
 
 export const COMBOBOX_HTML_EXAMPLES = `<brightrail-combobox
   [options]="[

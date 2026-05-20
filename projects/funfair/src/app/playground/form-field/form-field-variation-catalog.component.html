@@ -184,3 +184,68 @@
     </app-catalog-variation-tile>
   </div>
 </section>
+
+<section class="ffvc-block">
+  <h2 class="ffvc-block__h">7. Futuristic form field designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Glass token" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+        <div class="ffvc-tile-body">
+          <brightrail-form-field label="Access token" hint="Scoped to read-only operations.">
+            <brightrail-text-field
+              appearance="outlined"
+              labelPosition="none"
+              placeholder="br_live_…"
+              [(ngModel)]="apiKey"
+              [ngModelOptions]="ngModelStandalone"
+            />
+          </brightrail-form-field>
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neon alias" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+        <div class="ffvc-tile-body">
+          <brightrail-form-field label="Node alias" [required]="true">
+            <brightrail-text-field
+              appearance="outlined"
+              labelPosition="none"
+              placeholder="alpha-01"
+              [(ngModel)]="displayName"
+              [ngModelOptions]="ngModelStandalone"
+            />
+          </brightrail-form-field>
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber key" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+        <div class="ffvc-tile-body">
+          <brightrail-form-field label="Encryption key" hint="Rotates every 24 hours.">
+            <brightrail-text-field
+              appearance="outlined"
+              labelPosition="none"
+              inputType="password"
+              placeholder="••••••••"
+              [(ngModel)]="password"
+              [ngModelOptions]="ngModelStandalone"
+            />
+          </brightrail-form-field>
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holo telemetry" [snippet]="s.futuristicHolo">
+      <div class="ff-future-shell ff-future-shell--holo">
+        <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+        <div class="ffvc-tile-body">
+          <brightrail-form-field label="Telemetry stream" hint="Enable real-time metrics.">
+            <brightrail-switch label="Stream active" [(ngModel)]="notificationsOn" [ngModelOptions]="ngModelStandalone" />
+          </brightrail-form-field>
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

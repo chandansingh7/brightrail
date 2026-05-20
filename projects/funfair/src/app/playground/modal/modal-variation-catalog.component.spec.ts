@@ -18,13 +18,15 @@ describe('ModalVariationCatalogComponent', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('renders six doc-mirror sections', () => {
+  it('renders seven doc-mirror sections including futuristic shells', () => {
     const headings = Array.from(
       fixture.nativeElement.querySelectorAll('.mvc-block__h') as NodeListOf<HTMLElement>,
     ).map((el) => el.textContent?.trim());
     expect(headings).toContain('1. Modal sizes');
     expect(headings).toContain('6. Example modal markup');
-    expect(headings.length).toBe(6);
+    expect(headings).toContain('7. Futuristic modal designs');
+    expect(headings.length).toBe(7);
+    expect(fixture.nativeElement.querySelector('.ff-future-shell--neon')).toBeTruthy();
   });
 
   it('renders contained open modals in preview shells', () => {

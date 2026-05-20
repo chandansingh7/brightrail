@@ -12,7 +12,7 @@ describe('checkbox-variation-snippets', () => {
   });
 
   it('documents six reference sections', () => {
-    expect(CHECKBOX_DOC_SECTION_COUNT).toBe(6);
+    expect(CHECKBOX_DOC_SECTION_COUNT).toBe(7);
   });
 
   it('includes footer HTML examples', () => {

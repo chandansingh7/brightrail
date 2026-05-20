@@ -248,3 +248,88 @@
     </div>
   </app-catalog-variation-tile>
 </section>
+
+<section class="mvc-block">
+  <h2 class="mvc-block__h">7. Futuristic modal designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Glass command center" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+        <div class="mvc-shell mvc-shell--sm">
+          <brightrail-modal [isOpen]="true" [contain]="true" size="sm" appearance="default">
+            <brightrail-modal-header>
+              <div brightrailModalTitle>Workspace saved</div>
+            </brightrail-modal-header>
+            <brightrail-modal-body>
+              <p class="mvc-body-line">Glassmorphism shell for lightweight confirmations.</p>
+            </brightrail-modal-body>
+            <brightrail-modal-footer>
+              <brightrail-button variant="primary" size="sm">Got it</brightrail-button>
+            </brightrail-modal-footer>
+          </brightrail-modal>
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neon sync alert" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+        <div class="mvc-shell mvc-shell--sm">
+          <brightrail-modal [isOpen]="true" [contain]="true" size="sm" appearance="default">
+            <brightrail-modal-header>
+              <div brightrailModalTitle>Sync node online</div>
+            </brightrail-modal-header>
+            <brightrail-modal-body>
+              <p class="mvc-body-line">Fleet telemetry is streaming in real time.</p>
+            </brightrail-modal-body>
+            <brightrail-modal-footer>
+              <brightrail-button variant="primary" size="sm">Acknowledge</brightrail-button>
+            </brightrail-modal-footer>
+          </brightrail-modal>
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber deploy gate" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+        <div class="ff-future-cyber-frame">
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--tl" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--tr" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--bl" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--br" aria-hidden="true"></span>
+          <div class="mvc-shell mvc-shell--sm">
+            <brightrail-modal [isOpen]="true" [contain]="true" size="sm" appearance="danger">
+              <brightrail-modal-header>
+                <div brightrailModalTitle>Deploy to production?</div>
+              </brightrail-modal-header>
+              <brightrail-modal-body>
+                <p class="mvc-body-line">This pushes the current build to all edge nodes.</p>
+              </brightrail-modal-body>
+              <brightrail-modal-footer>
+                <brightrail-button variant="outline" size="sm">Abort</brightrail-button>
+                <brightrail-button variant="danger" size="sm">Deploy</brightrail-button>
+              </brightrail-modal-footer>
+            </brightrail-modal>
+          </div>
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holo briefing" [snippet]="s.futuristicHolo">
+      <div class="ff-future-shell ff-future-shell--holo">
+        <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+        <div class="mvc-shell mvc-shell--sm">
+          <brightrail-modal [isOpen]="true" [contain]="true" size="sm" appearance="default">
+            <brightrail-modal-header>
+              <div brightrailModalTitle>Mission briefing</div>
+            </brightrail-modal-header>
+            <brightrail-modal-body>
+              <p class="mvc-body-line">Holographic panel for immersive status readouts.</p>
+            </brightrail-modal-body>
+            <brightrail-modal-footer>
+              <brightrail-button variant="primary" size="sm">Continue</brightrail-button>
+            </brightrail-modal-footer>
+          </brightrail-modal>
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

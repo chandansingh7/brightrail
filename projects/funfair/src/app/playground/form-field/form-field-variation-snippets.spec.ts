@@ -12,8 +12,9 @@ describe('form-field-variation-snippets', () => {
     expect(FORM_FIELD_VARIATION_SNIPPETS.layoutStack).toContain('ffco-stack');
   });
 
-  it('documents six reference sections', () => {
-    expect(FORM_FIELD_DOC_SECTION_COUNT).toBe(6);
+  it('documents seven reference sections', () => {
+    expect(FORM_FIELD_DOC_SECTION_COUNT).toBe(7);
+    expect(FORM_FIELD_VARIATION_SNIPPETS.futuristicHolo).toContain('ff-future-shell--holo');
   });
 
   it('includes footer HTML examples', () => {

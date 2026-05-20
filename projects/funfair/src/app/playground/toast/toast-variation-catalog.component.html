@@ -69,3 +69,33 @@
     </app-catalog-variation-tile>
   </div>
 </section>
+
+<section class="tvc-block">
+  <h2 class="tvc-block__h">7. Futuristic toast designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Glass shell" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+        <brightrail-toast variant="info" title="Sync queued" message="Replication will begin shortly." />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neon link" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+        <brightrail-toast variant="success" title="Link established" message="Neural bridge online." [dismissible]="true" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber alert" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+        <brightrail-toast variant="warning" title="Anomaly" message="Review sector 7 telemetry." [dismissible]="true" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holo preview" [snippet]="s.futuristicHolo">
+      <div class="ff-future-shell ff-future-shell--holo">
+        <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+        <brightrail-toast variant="info" message="Holographic preview ready." />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

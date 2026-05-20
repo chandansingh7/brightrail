@@ -12,8 +12,13 @@ describe('skeleton-variation-snippets', () => {
     expect(SKELETON_VARIATION_SNIPPETS.advancedTable).toContain('skel-table');
   });
 
-  it('documents six reference sections in the mock', () => {
-    expect(SKELETON_DOC_SECTION_COUNT).toBe(6);
+  it('exports futuristic shell snippets', () => {
+    expect(SKELETON_VARIATION_SNIPPETS.futuristicGlass).toContain('ff-future-shell--glass');
+    expect(SKELETON_VARIATION_SNIPPETS.futuristicCyber).toContain('animation="wave"');
+  });
+
+  it('documents seven reference sections in the mock', () => {
+    expect(SKELETON_DOC_SECTION_COUNT).toBe(7);
   });
 
   it('includes footer HTML examples', () => {

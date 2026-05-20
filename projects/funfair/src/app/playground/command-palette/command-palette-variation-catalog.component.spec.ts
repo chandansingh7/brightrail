@@ -15,12 +15,13 @@ describe('CommandPaletteVariationCatalogComponent', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('renders six doc-mirror sections', () => {
+  it('renders seven doc-mirror sections', () => {
     const headings = Array.from(
       fixture.nativeElement.querySelectorAll('.cpvc-block__h') as NodeListOf<HTMLElement>,
     ).map((el) => el.textContent?.trim());
-    expect(headings?.length).toBe(6);
+    expect(headings?.length).toBe(7);
     expect(headings?.[0]).toContain('1.');
-    expect(headings?.[5]).toContain('6.');
+    expect(headings?.[6]).toContain('7.');
+    expect(headings).toContain('7. Futuristic command palette designs');
   });
 });

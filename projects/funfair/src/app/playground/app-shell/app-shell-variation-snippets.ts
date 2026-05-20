@@ -70,9 +70,45 @@ export const APP_SHELL_VARIATION_SNIPPETS = {
   </brightrail-page-header>
   <p>Compact shell for embedded admin panels</p>
 </brightrail-app-shell>`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-app-shell sidebarWidth="10rem" [showTopBar]="false">
+    <brightrail-sidebar>
+      <li><a href="#" aria-current="page">Ops</a></li>
+      <li><a href="#">Systems</a></li>
+    </brightrail-sidebar>
+    <p>Glass command surface</p>
+  </brightrail-app-shell>
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-app-shell sidebarWidth="10rem" [showTopBar]="false">
+    <brightrail-sidebar>
+      <li><a href="#" class="br-sidebar__active">Live</a></li>
+      <li><a href="#">Alerts</a></li>
+    </brightrail-sidebar>
+    <p>Neon operations deck</p>
+  </brightrail-app-shell>
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <brightrail-app-shell [showSidebar]="false" [showTopBar]="false">
+    <brightrail-page-header [bordered]="false">
+      <h1 brightrailPageTitle>Grid</h1>
+    </brightrail-page-header>
+    <p>Cyber control panel</p>
+  </brightrail-app-shell>
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-app-shell sidebarPosition="right" sidebarWidth="9rem" [showTopBar]="false">
+    <brightrail-sidebar>
+      <li><a href="#">Alpha</a></li>
+      <li><a href="#">Beta</a></li>
+    </brightrail-sidebar>
+    <p>Holo workspace</p>
+  </brightrail-app-shell>
+</div>`,
 } as const;
 
-export const APP_SHELL_DOC_SECTION_COUNT = 6;
+export const APP_SHELL_DOC_SECTION_COUNT = 7;
 
 export const APP_SHELL_HTML_EXAMPLES = `<brightrail-app-shell>
   <brightrail-top-bar>

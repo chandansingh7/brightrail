@@ -54,9 +54,36 @@ export const CHIP_VARIATION_SNIPPETS = {
   <brightrail-chip variant="outlined" color="neutral" size="small" [removable]="true" label="Important" />
   <brightrail-chip variant="outlined" color="warning" size="small" [removable]="true" label="Review" />
 </span>`,
+
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <span class="cco-group">
+    <brightrail-chip variant="filled" color="primary" size="small" [selectable]="true" [selected]="true" label="All" />
+    <brightrail-chip variant="outlined" color="info" size="small" label="Live" />
+    <brightrail-chip variant="outlined" color="neutral" size="small" label="Archive" />
+  </span>
+</div>`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <span class="cco-group">
+    <brightrail-chip variant="outlined" color="neutral" size="small" [removable]="true" label="Neural" />
+    <brightrail-chip variant="outlined" color="primary" size="small" [removable]="true" label="Quantum" />
+  </span>
+</div>`,
+
+  futuristicCyber: `<div class="ff-future-cyber-frame">
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--tl" aria-hidden="true"></span>
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--tr" aria-hidden="true"></span>
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--bl" aria-hidden="true"></span>
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--br" aria-hidden="true"></span>
+  <brightrail-chip variant="filled" color="success" size="small" label="Sector 7G" />
+</div>`,
+
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-chip variant="soft" color="primary" size="small" [selectable]="true" [selected]="true" label="Holo filter" />
+</div>`,
 } as const;
 
-export const CHIP_DOC_SECTION_COUNT = 10;
+export const CHIP_DOC_SECTION_COUNT = 11;
 
 export const CHIP_HTML_EXAMPLES = `<brightrail-chip variant="filled" color="primary" label="Product" />
 

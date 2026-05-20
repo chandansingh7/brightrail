@@ -21,7 +21,8 @@ describe('validation-summary-variation-snippets', () => {
   });
 
   it('documents six reference sections', () => {
-    expect(VALIDATION_SUMMARY_DOC_SECTION_COUNT).toBe(6);
+    expect(VALIDATION_SUMMARY_DOC_SECTION_COUNT).toBe(7);
+    expect(VALIDATION_SUMMARY_VARIATION_SNIPPETS.futuristicHolo).toContain('ff-future-shell--holo');
   });
 
   it('includes footer HTML examples', () => {

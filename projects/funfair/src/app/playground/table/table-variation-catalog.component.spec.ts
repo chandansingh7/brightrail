@@ -22,6 +22,15 @@ describe('TableVariationCatalogComponent', () => {
     fixture.componentRef.setInput('focusSection', 0);
     expect(fixture.componentInstance.sectionVisible(1)).toBeTrue();
     expect(fixture.componentInstance.sectionVisible(7)).toBeTrue();
+    expect(fixture.componentInstance.sectionVisible(9)).toBeTrue();
+  });
+
+  it('renders futuristic table section when focus is 9', () => {
+    fixture.componentRef.setInput('focusSection', 9);
+    fixture.detectChanges();
+    const heading = fixture.nativeElement.querySelector('.alert-catalog__h') as HTMLElement;
+    expect(heading?.textContent?.trim()).toBe('9. Futuristic table designs');
+    expect(fixture.nativeElement.querySelector('.ff-future-grid')).toBeTruthy();
   });
 
   it('sectionVisible filters to a single section', () => {

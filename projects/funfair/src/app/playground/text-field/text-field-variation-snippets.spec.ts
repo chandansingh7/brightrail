@@ -12,7 +12,8 @@ describe('text-field-variation-snippets', () => {
   });
 
   it('documents six reference sections', () => {
-    expect(TEXT_FIELD_DOC_SECTION_COUNT).toBe(6);
+    expect(TEXT_FIELD_DOC_SECTION_COUNT).toBe(7);
+    expect(TEXT_FIELD_VARIATION_SNIPPETS.futuristicNeon).toContain('ff-future-shell--neon');
   });
 
   it('includes footer HTML examples', () => {

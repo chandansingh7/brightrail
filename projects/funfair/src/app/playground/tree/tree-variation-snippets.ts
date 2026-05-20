@@ -123,9 +123,42 @@ export const TREE_VARIATION_SNIPPETS = {
   <brightrail-tree [nodes]="leftNodes" selectionMode="single" [selectedId]="'docs'" />
   <brightrail-tree [nodes]="rightNodes" selectionMode="single" [selectedId]="'queue'" />
 </span>`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-tree
+    ariaLabel="Workspace"
+    [nodes]="workspaceNodes"
+    selectionMode="single"
+    [selectedId]="'projects'"
+  />
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-tree
+    ariaLabel="Systems"
+    [nodes]="fileNodes"
+    selectionMode="single"
+    [selectedId]="'app'"
+  />
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <brightrail-tree
+    ariaLabel="Network"
+    [nodes]="orgNodes"
+    selectionMode="single"
+    [selectedId]="'platform'"
+  />
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-tree
+    ariaLabel="Lanes"
+    [nodes]="flatNodes"
+    selectionMode="single"
+    [selectedId]="'inbox'"
+  />
+</div>`,
 } as const;
 
-export const TREE_DOC_SECTION_COUNT = 6;
+export const TREE_DOC_SECTION_COUNT = 7;
 
 export const TREE_HTML_EXAMPLES = `<brightrail-tree
   [nodes]="nodes"

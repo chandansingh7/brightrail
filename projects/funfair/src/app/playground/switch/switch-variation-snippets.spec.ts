@@ -11,8 +11,13 @@ describe('switch-variation-snippets', () => {
     expect(SWITCH_VARIATION_SNIPPETS.formNgModel).toContain('[(ngModel)]');
   });
 
-  it('documents six reference sections', () => {
-    expect(SWITCH_DOC_SECTION_COUNT).toBe(6);
+  it('exports futuristic shell snippets', () => {
+    expect(SWITCH_VARIATION_SNIPPETS.futuristicGlass).toContain('ff-future-shell--glass');
+    expect(SWITCH_VARIATION_SNIPPETS.futuristicCyber).toContain('Cyber override');
+  });
+
+  it('documents seven reference sections', () => {
+    expect(SWITCH_DOC_SECTION_COUNT).toBe(7);
   });
 
   it('includes footer HTML examples', () => {

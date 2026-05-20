@@ -12,7 +12,8 @@ describe('tabs-variation-snippets', () => {
   });
 
   it('documents six reference sections', () => {
-    expect(TABS_DOC_SECTION_COUNT).toBe(6);
+    expect(TABS_DOC_SECTION_COUNT).toBe(7);
+    expect(TABS_VARIATION_SNIPPETS.futuristicGlass).toContain('ff-future-shell--glass');
   });
 
   it('includes footer HTML examples', () => {

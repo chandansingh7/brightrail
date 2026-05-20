@@ -55,9 +55,25 @@ export const SKELETON_VARIATION_SNIPPETS = {
   <brightrail-skeleton variant="text" [lines]="4" />
   <brightrail-skeleton variant="rectangular" width="100%" height="10rem" />
 </div>`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-skeleton variant="text" animation="wave" [lines]="3" />
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-skeleton variant="rounded" width="100%" height="1.25rem" animation="pulse" />
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <div class="ff-future-cyber-frame">
+    <brightrail-skeleton variant="rectangular" width="100%" height="4rem" animation="wave" />
+  </div>
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-skeleton variant="circular" width="3rem" height="3rem" animation="pulse" />
+</div>`,
+
 } as const;
 
-export const SKELETON_DOC_SECTION_COUNT = 6;
+export const SKELETON_DOC_SECTION_COUNT = 7;
 
 export const SKELETON_HTML_EXAMPLES = `<brightrail-skeleton variant="text" animation="wave" [lines]="3" />
 

@@ -22,4 +22,11 @@ describe('AlertVariationCatalogComponent', () => {
     const alerts = fixture.nativeElement.querySelectorAll('brightrail-alert');
     expect(alerts.length).toBeGreaterThan(10);
   });
+
+  it('renders futuristic alert section heading', () => {
+    const headings = Array.from(
+      fixture.nativeElement.querySelectorAll('.alert-catalog__h') as NodeListOf<HTMLElement>,
+    ).map((el) => el.textContent?.trim());
+    expect(headings).toContain('9. Futuristic alert designs');
+  });
 });

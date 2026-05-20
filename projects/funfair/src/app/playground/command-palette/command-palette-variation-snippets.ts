@@ -67,9 +67,39 @@ export const COMMAND_PALETTE_VARIATION_SNIPPETS = {
   [closeOnEscape]="true"
   [closeOnBackdrop]="true"
 />`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-command-palette
+    [isOpen]="true"
+    [commands]="commands"
+    placeholder="Search commands…"
+  />
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-command-palette
+    [isOpen]="true"
+    [commands]="groupedCommands"
+    placeholder="Jump to…"
+  />
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <brightrail-command-palette
+    [isOpen]="true"
+    [commands]="commands"
+    placeholder="Type to filter…"
+    ariaLabel="Workspace command palette"
+  />
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-command-palette
+    [isOpen]="true"
+    [commands]="commandsWithShortcuts"
+    placeholder="Run command…"
+  />
+</div>`,
 } as const;
 
-export const COMMAND_PALETTE_DOC_SECTION_COUNT = 6;
+export const COMMAND_PALETTE_DOC_SECTION_COUNT = 7;
 
 export const COMMAND_PALETTE_HTML_EXAMPLES = `<brightrail-command-palette
   [isOpen]="isOpen()"

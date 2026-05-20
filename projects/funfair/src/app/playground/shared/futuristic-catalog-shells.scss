@@ -1,0 +1,128 @@
+/* Shared decorative shells for futuristic variation-catalog tiles. */
+
+.ff-future-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  align-items: stretch;
+}
+
+.ff-future-shell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5.5rem;
+  padding: 1rem 1.1rem;
+  border-radius: 0.85rem;
+  overflow: hidden;
+}
+
+.ff-future-shell--dark {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgb(34 211 238 / 18%), transparent 55%),
+    linear-gradient(160deg, #0f172a 0%, #1e1b4b 48%, #0f172a 100%);
+  border: 1px solid rgb(34 211 238 / 22%);
+  box-shadow:
+    0 0 24px rgb(34 211 238 / 12%),
+    inset 0 1px 0 rgb(255 255 255 / 6%);
+}
+
+.ff-future-shell--glass {
+  background: linear-gradient(145deg, rgb(255 255 255 / 55%), rgb(255 255 255 / 18%));
+  border: 1px solid rgb(255 255 255 / 45%);
+  box-shadow:
+    0 4px 24px rgb(15 23 42 / 10%),
+    inset 0 1px 0 rgb(255 255 255 / 55%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.ff-future-shell--neon {
+  background: #0a0f1e;
+  border: 1px solid rgb(34 211 238 / 55%);
+  box-shadow:
+    0 0 18px rgb(34 211 238 / 35%),
+    inset 0 0 12px rgb(34 211 238 / 8%);
+}
+
+.ff-future-shell--gradient {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 45%, #06b6d4 100%);
+  border: 1px solid rgb(255 255 255 / 25%);
+  box-shadow: 0 8px 32px rgb(99 102 241 / 28%);
+  color: #fff;
+}
+
+.ff-future-shell--cyber {
+  background:
+    linear-gradient(rgb(34 211 238 / 6%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(34 211 238 / 6%) 1px, transparent 1px),
+    #0b1220;
+  background-size: 18px 18px;
+  border: 1px solid rgb(34 211 238 / 30%);
+}
+
+.ff-future-shell--holo {
+  background:
+    linear-gradient(120deg, rgb(99 102 241 / 35%), rgb(34 211 238 / 25%), rgb(236 72 153 / 30%)),
+    #0f172a;
+  border: 1px solid rgb(255 255 255 / 18%);
+  box-shadow: 0 0 28px rgb(139 92 246 / 22%);
+}
+
+.ff-future-shell__label {
+  position: absolute;
+  top: 0.45rem;
+  left: 0.55rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(34 211 238 / 85%);
+  pointer-events: none;
+}
+
+.ff-future-shell--gradient .ff-future-shell__label {
+  color: rgb(255 255 255 / 85%);
+}
+
+.ff-future-cyber-frame {
+  position: relative;
+  display: inline-flex;
+  padding: 0.35rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.ff-future-cyber-corner {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-color: rgb(34 211 238 / 85%);
+  border-style: solid;
+  pointer-events: none;
+}
+
+.ff-future-cyber-corner--tl {
+  top: 0;
+  left: 0;
+  border-width: 2px 0 0 2px;
+}
+
+.ff-future-cyber-corner--tr {
+  top: 0;
+  right: 0;
+  border-width: 2px 2px 0 0;
+}
+
+.ff-future-cyber-corner--bl {
+  bottom: 0;
+  left: 0;
+  border-width: 0 0 2px 2px;
+}
+
+.ff-future-cyber-corner--br {
+  bottom: 0;
+  right: 0;
+  border-width: 0 2px 2px 0;
+}

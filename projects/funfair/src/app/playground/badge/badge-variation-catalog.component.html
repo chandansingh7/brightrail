@@ -227,3 +227,41 @@
     </app-catalog-variation-tile>
   </div>
 </section>
+
+<section class="bvc-block">
+  <h2 class="bvc-block__h">10. Futuristic badge designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Neon LIVE" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label">Neon</span>
+        <brightrail-badge variant="filled" color="info" label="LIVE" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Glass tag pair" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label">Glass</span>
+        <span class="bco-pill bco-pill--grouped">
+          <brightrail-badge variant="soft" color="primary" size="small" label="Alpha" />
+          <brightrail-badge variant="soft" color="success" size="small" label="Beta" />
+        </span>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber presence" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <div class="ff-future-cyber-frame">
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--tl" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--tr" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--bl" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--br" aria-hidden="true"></span>
+          <brightrail-badge variant="filled" color="success" [dot]="true" label="Online" />
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holo tier" [snippet]="s.futuristicHolo">
+      <div class="ff-future-shell ff-future-shell--holo">
+        <span class="ff-future-shell__label">Holo</span>
+        <brightrail-badge variant="outlined" color="primary" label="Holo tier" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

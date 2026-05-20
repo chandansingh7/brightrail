@@ -64,9 +64,29 @@ export const LIBRARY_MISSING: readonly LibraryMissingItem[] = [
     why: 'Lightweight contextual panels without full modal or drawer chrome.',
   },
   {
+    priority: 'Medium',
+    name: 'Holographic data panel',
+    why: 'Glassmorphism KPI tiles and neon-accent dashboards for AI command centers.',
+  },
+  {
+    priority: 'Medium',
+    name: 'Neural network graph',
+    why: 'Interactive node-link visualizations for ML pipelines and dependency maps.',
+  },
+  {
     priority: 'Lower',
     name: 'Rating / star input',
     why: 'Reviews, feedback forms, and preference pickers.',
+  },
+  {
+    priority: 'Lower',
+    name: 'Cyber status badge',
+    why: 'Animated presence indicators and sci-fi role badges for futuristic admin UIs.',
+  },
+  {
+    priority: 'Lower',
+    name: 'Quantum stepper',
+    why: 'Multi-phase workflow with glowing connectors for onboarding and AI setup wizards.',
   },
 ];
 
@@ -83,9 +103,11 @@ export const LIBRARY_ENTERPRISE_GAPS: readonly string[] = [
 
 export const LIBRARY_ROADMAP: readonly string[] = [
   'Tree-table and popover for dense admin UIs',
+  'Futuristic catalog shells across all variation pages (glass, neon, cyber)',
   'Design token doc + theme contract',
   'Harnesses + axe CI + visual baselines',
   'Rich text editor for content workflows',
+  'Holographic data panel and neural network graph components',
   'Table virtualization and server-driven data APIs',
   'ng add / ng update schematics and semver policy',
 ];

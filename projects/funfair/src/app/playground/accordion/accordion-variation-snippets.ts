@@ -57,6 +57,44 @@ export const ACCORDION_VARIATION_SNIPPETS = {
     <p>Actions in the header row.</p>
   </brightrail-accordion-item>
 </brightrail-accordion>`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-accordion appearance="bordered" size="md" [defaultExpandedIndex]="0">
+    <brightrail-accordion-item title="System status" icon="info">
+      <p>All regions operational.</p>
+    </brightrail-accordion-item>
+    <brightrail-accordion-item title="Telemetry"><p>Latency within SLA.</p></brightrail-accordion-item>
+  </brightrail-accordion>
+</div>`,
+
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-accordion appearance="subtle" size="md" [defaultExpandedIndex]="0">
+    <brightrail-accordion-item title="Neural link" icon="info">
+      <p>Secure channel established.</p>
+    </brightrail-accordion-item>
+    <brightrail-accordion-item title="Diagnostics"><p>Run full scan.</p></brightrail-accordion-item>
+  </brightrail-accordion>
+</div>`,
+
+  futuristicCyber: `<div class="ff-future-cyber-frame">
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--tl" aria-hidden="true"></span>
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--tr" aria-hidden="true"></span>
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--bl" aria-hidden="true"></span>
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--br" aria-hidden="true"></span>
+  <brightrail-accordion appearance="compact" size="sm" expandMode="single" [defaultExpandedIndex]="0">
+    <brightrail-accordion-item title="Sector A"><p>Grid online.</p></brightrail-accordion-item>
+    <brightrail-accordion-item title="Sector B"><p>Standby.</p></brightrail-accordion-item>
+  </brightrail-accordion>
+</div>`,
+
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-accordion appearance="standard" size="md" iconPosition="left" [defaultExpandedIndex]="0">
+    <brightrail-accordion-item title="Holo briefing" icon="info">
+      <p>Mission parameters synced.</p>
+    </brightrail-accordion-item>
+    <brightrail-accordion-item title="Crew roster"><p>4 members active.</p></brightrail-accordion-item>
+  </brightrail-accordion>
+</div>`,
 } as const;
 
-export const ACCORDION_DOC_SECTION_COUNT = 6;
+export const ACCORDION_DOC_SECTION_COUNT = 7;

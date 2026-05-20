@@ -171,9 +171,74 @@ export const DRAWER_VARIATION_SNIPPETS = {
     <brightrail-button variant="primary" size="sm">Save changes</brightrail-button>
   </brightrail-drawer-footer>
 </brightrail-drawer>`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-drawer
+    [isOpen]="true"
+    [contain]="true"
+    placement="right"
+    size="medium"
+    mode="modal"
+    surface="glass"
+    backdropStyle="glass"
+  >
+    <brightrail-drawer-header [showCloseButton]="true">
+      <div brightrailDrawerTitle>Glass panel</div>
+    </brightrail-drawer-header>
+    <brightrail-drawer-body><!-- glass drawer content --></brightrail-drawer-body>
+  </brightrail-drawer>
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-drawer
+    [isOpen]="true"
+    [contain]="true"
+    placement="right"
+    size="wide"
+    mode="modal"
+    surface="ai"
+    backdropStyle="glass"
+  >
+    <brightrail-drawer-header [showCloseButton]="true">
+      <div brightrailDrawerTitle>AI command center</div>
+    </brightrail-drawer-header>
+    <brightrail-drawer-body><!-- neon AI shell --></brightrail-drawer-body>
+  </brightrail-drawer>
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <brightrail-drawer
+    [isOpen]="true"
+    [contain]="true"
+    placement="right"
+    size="medium"
+    mode="modal"
+    surface="ai"
+    backdropStyle="glass"
+  >
+    <brightrail-drawer-header [showCloseButton]="true">
+      <div brightrailDrawerTitle>Cyber inspector</div>
+    </brightrail-drawer-header>
+    <brightrail-drawer-body><!-- cyber drawer content --></brightrail-drawer-body>
+  </brightrail-drawer>
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-drawer
+    [isOpen]="true"
+    [contain]="true"
+    placement="right"
+    size="medium"
+    mode="modal"
+    surface="gradient"
+    backdropStyle="blur"
+  >
+    <brightrail-drawer-header [showCloseButton]="true">
+      <div brightrailDrawerTitle>Holo settings</div>
+    </brightrail-drawer-header>
+    <brightrail-drawer-body><!-- holo drawer content --></brightrail-drawer-body>
+  </brightrail-drawer>
+</div>`,
 } as const;
 
-export const DRAWER_DOC_SECTION_COUNT = 6;
+export const DRAWER_DOC_SECTION_COUNT = 7;
 
 export const DRAWER_HTML_EXAMPLES = `<brightrail-drawer
   [isOpen]="drawerOpen()"

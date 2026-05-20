@@ -64,9 +64,33 @@ export const EMPTY_STATE_VARIATION_SNIPPETS = {
     <brightrail-button variant="ghost">View guide</brightrail-button>
   </div>
 </brightrail-empty-state>`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-empty-state
+    title="No signals detected"
+    description="Adjust filters or scan a new sector."
+  />
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-empty-state
+    title="Queue empty"
+    description="All sync jobs completed."
+    [compact]="true"
+  />
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <brightrail-empty-state title="No nodes online" description="Waiting for fleet heartbeat.">
+    <span brightrailEmptyStateIcon aria-hidden="true">⬡</span>
+  </brightrail-empty-state>
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-empty-state title="Archive void" description="Upload artifacts to populate this view.">
+    <brightrail-button brightrailEmptyStateAction variant="outline">Initialize</brightrail-button>
+  </brightrail-empty-state>
+</div>`,
 } as const;
 
-export const EMPTY_STATE_DOC_SECTION_COUNT = 6;
+export const EMPTY_STATE_DOC_SECTION_COUNT = 7;
 
 export const EMPTY_STATE_HTML_EXAMPLES = `<brightrail-empty-state
   title="No results found"

@@ -292,3 +292,53 @@
     </ul>
   </section>
 }
+
+@if (sectionVisible(9)) {
+  <section class="alert-catalog__block">
+    <h4 class="alert-catalog__h">9. Futuristic alert designs</h4>
+    <p class="alert-catalog__explain">Glass, neon, cyber, and holo shells for dashboard and command-center feedback.</p>
+    <div class="ff-future-grid">
+      <app-catalog-variation-tile label="Glass channel" [snippet]="s.futuristicGlass">
+        <div class="ff-future-shell ff-future-shell--glass">
+          <span class="ff-future-shell__label">Glass</span>
+          <brightrail-alert appearance="soft" status="info" size="md">
+            <div brightrailAlertTitle>Glass channel</div>
+            <div brightrailAlertMessage>Telemetry stream is stable across all nodes.</div>
+          </brightrail-alert>
+        </div>
+      </app-catalog-variation-tile>
+      <app-catalog-variation-tile label="Neon sync toast" [snippet]="s.futuristicNeon">
+        <div class="ff-future-shell ff-future-shell--neon">
+          <span class="ff-future-shell__label">Neon</span>
+          <brightrail-alert appearance="filled" status="success" size="sm" [inverse]="true" [dismissible]="true">
+            <div brightrailAlertTitle>Sync complete</div>
+            <div brightrailAlertMessage>Replica cluster is online.</div>
+          </brightrail-alert>
+        </div>
+      </app-catalog-variation-tile>
+      <app-catalog-variation-tile label="Cyber sector breach" [snippet]="s.futuristicCyber">
+        <div class="ff-future-shell ff-future-shell--cyber">
+          <div class="ff-future-cyber-frame">
+            <span class="ff-future-cyber-corner ff-future-cyber-corner--tl" aria-hidden="true"></span>
+            <span class="ff-future-cyber-corner ff-future-cyber-corner--tr" aria-hidden="true"></span>
+            <span class="ff-future-cyber-corner ff-future-cyber-corner--bl" aria-hidden="true"></span>
+            <span class="ff-future-cyber-corner ff-future-cyber-corner--br" aria-hidden="true"></span>
+            <brightrail-alert appearance="outlined" status="warning" size="md">
+              <div brightrailAlertTitle>Sector breach</div>
+              <div brightrailAlertMessage>Authorize override to continue uplink.</div>
+            </brightrail-alert>
+          </div>
+        </div>
+      </app-catalog-variation-tile>
+      <app-catalog-variation-tile label="Holo briefing" [snippet]="s.futuristicHolo">
+        <div class="ff-future-shell ff-future-shell--holo">
+          <span class="ff-future-shell__label">Holo</span>
+          <brightrail-alert appearance="tonal" status="info" size="md" [dismissible]="true">
+            <div brightrailAlertTitle>Holo briefing ready</div>
+            <div brightrailAlertMessage>Mission timeline updated for crew review.</div>
+          </brightrail-alert>
+        </div>
+      </app-catalog-variation-tile>
+    </div>
+  </section>
+}

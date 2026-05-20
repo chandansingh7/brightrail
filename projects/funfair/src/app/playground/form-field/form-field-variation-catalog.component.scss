@@ -1,4 +1,5 @@
 :host { display: block; }
+:host .ff-future-shell { width: 100%; flex-direction: column; align-items: stretch; }
 .ffvc-grid { display: grid; gap: 0.65rem; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); }
 .ffvc-block { margin-bottom: 1.35rem; }
 .ffvc-block__h { margin: 0 0 0.5rem; font-size: 0.95rem; font-weight: 700; }

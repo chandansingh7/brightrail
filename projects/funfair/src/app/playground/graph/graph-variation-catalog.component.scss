@@ -2,6 +2,12 @@
   margin-bottom: 2rem;
 }
 
+:host .ff-future-shell {
+  width: 100%;
+  flex-direction: column;
+  align-items: stretch;
+}
+
 .gvc-block__h {
   margin: 0 0 0.75rem;
   font-size: 1rem;

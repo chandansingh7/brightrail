@@ -13,7 +13,7 @@ describe('chip-variation-snippets', () => {
   });
 
   it('documents ten reference sections in the mock', () => {
-    expect(CHIP_DOC_SECTION_COUNT).toBe(10);
+    expect(CHIP_DOC_SECTION_COUNT).toBe(11);
   });
 
   it('includes footer HTML examples', () => {

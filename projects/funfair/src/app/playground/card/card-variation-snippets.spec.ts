@@ -15,7 +15,7 @@ describe('card-variation-snippets', () => {
   });
 
   it('documents six reference sections', () => {
-    expect(CARD_DOC_SECTION_COUNT).toBe(6);
+    expect(CARD_DOC_SECTION_COUNT).toBe(7);
   });
 
   it('includes footer HTML examples', () => {

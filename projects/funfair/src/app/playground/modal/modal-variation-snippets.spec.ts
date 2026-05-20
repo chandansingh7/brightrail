@@ -13,8 +13,14 @@ describe('modal-variation-snippets', () => {
     expect(MODAL_VARIATION_SNIPPETS.patternLoading).toContain('Publishing changes');
   });
 
-  it('documents six reference sections', () => {
-    expect(MODAL_DOC_SECTION_COUNT).toBe(6);
+  it('exports futuristic shell snippets', () => {
+    expect(MODAL_VARIATION_SNIPPETS.futuristicGlass).toContain('ff-future-shell--glass');
+    expect(MODAL_VARIATION_SNIPPETS.futuristicCyber).toContain('ff-future-cyber-frame');
+    expect(MODAL_VARIATION_SNIPPETS.futuristicHolo).toContain('ff-future-shell--holo');
+  });
+
+  it('documents seven reference sections', () => {
+    expect(MODAL_DOC_SECTION_COUNT).toBe(7);
   });
 
   it('includes footer HTML examples', () => {

@@ -40,3 +40,39 @@
     <brightrail-validation-summary [errors]="[]" />
   </app-catalog-variation-tile>
 </section>
+
+<section class="vsvc-block">
+  <h2 class="vsvc-block__h">7. Futuristic validation summary designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Glass calibration" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+        <brightrail-validation-summary title="Calibration required" [errors]="fieldErrors" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neon signal" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+        <brightrail-validation-summary title="Signal integrity" [errors]="['Uplink unstable', 'Checksum mismatch']" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber security" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+        <brightrail-validation-summary
+          title="Security review"
+          [errors]="[
+            { field: 'token', message: 'Rotate API token' },
+            { field: 'scope', message: 'Restrict permissions' }
+          ]"
+        />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holo checklist" [snippet]="s.futuristicHolo">
+      <div class="ff-future-shell ff-future-shell--holo">
+        <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+        <brightrail-validation-summary title="Mission checklist" [errors]="manyErrors" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

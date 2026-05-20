@@ -18,14 +18,15 @@ describe('BadgeVariationCatalogComponent', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('renders nine doc-mirror sections', () => {
+  it('renders ten doc-mirror sections including futuristic designs', () => {
     const headings = Array.from(
       fixture.nativeElement.querySelectorAll('.bvc-block__h') as NodeListOf<HTMLElement>,
     ).map((el) => el.textContent?.trim());
     expect(headings).toContain('1. Core badge types');
     expect(headings).toContain('8. Enterprise patterns');
     expect(headings).toContain('9. Advanced patterns');
-    expect(headings.length).toBe(9);
+    expect(headings).toContain('10. Futuristic badge designs');
+    expect(headings.length).toBe(10);
   });
 
   it('includes click-to-copy tiles with enterprise pill wrappers', () => {

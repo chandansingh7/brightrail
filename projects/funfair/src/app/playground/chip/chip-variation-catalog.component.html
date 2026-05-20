@@ -178,3 +178,45 @@
     </app-catalog-variation-tile>
   </div>
 </section>
+
+<section class="cvc-block">
+  <h2 class="cvc-block__h">11. Futuristic chip designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Neon filter row" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label">Neon</span>
+        <span class="cco-group">
+          <brightrail-chip variant="filled" color="primary" size="small" [selectable]="true" [selected]="true" label="All" />
+          <brightrail-chip variant="outlined" color="info" size="small" label="Live" />
+          <brightrail-chip variant="outlined" color="neutral" size="small" label="Archive" />
+        </span>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Glass tags" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label">Glass</span>
+        <span class="cco-group">
+          <brightrail-chip variant="outlined" color="neutral" size="small" [removable]="true" label="Neural" />
+          <brightrail-chip variant="outlined" color="primary" size="small" [removable]="true" label="Quantum" />
+        </span>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber sector chip" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <div class="ff-future-cyber-frame">
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--tl" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--tr" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--bl" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--br" aria-hidden="true"></span>
+          <brightrail-chip variant="filled" color="success" size="small" label="Sector 7G" />
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holo filter" [snippet]="s.futuristicHolo">
+      <div class="ff-future-shell ff-future-shell--holo">
+        <span class="ff-future-shell__label">Holo</span>
+        <brightrail-chip variant="soft" color="primary" size="small" [selectable]="true" [selected]="true" label="Holo filter" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

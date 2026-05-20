@@ -19,6 +19,8 @@ describe('library-assessment.content', () => {
     expect(LIBRARY_SHIPPED_AREAS.some((s) => s.toLowerCase().includes('tree'))).toBe(true);
     expect(LIBRARY_MISSING.some((m) => m.name.includes('Rich text'))).toBe(true);
     expect(LIBRARY_MISSING.some((m) => m.name.includes('Skeleton'))).toBe(false);
+    expect(LIBRARY_MISSING.some((m) => m.name.includes('Holographic'))).toBe(true);
+    expect(LIBRARY_MISSING.some((m) => m.name.includes('Neural network'))).toBe(true);
   });
 
   it('includes a practical roadmap', () => {

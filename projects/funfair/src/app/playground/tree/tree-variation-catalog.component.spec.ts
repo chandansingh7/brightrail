@@ -15,12 +15,11 @@ describe('TreeVariationCatalogComponent', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('renders six doc-mirror sections', () => {
+  it('renders seven sections including futuristic designs', () => {
     const headings = Array.from(
       fixture.nativeElement.querySelectorAll('.trvc-block__h') as NodeListOf<HTMLElement>,
     ).map((el) => el.textContent?.trim());
-    expect(headings).toContain('1. Core hierarchy');
-    expect(headings).toContain('6. Advanced patterns');
-    expect(headings?.length).toBe(6);
+    expect(headings?.length).toBe(7);
+    expect(headings).toContain('7. Futuristic tree designs');
   });
 });

@@ -45,9 +45,37 @@ export const VALIDATION_SUMMARY_VARIATION_SNIPPETS = {
 
   hiddenWhenEmpty: `<!-- Renders nothing when errors array is empty -->
 <brightrail-validation-summary [errors]="[]" />`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-validation-summary
+    title="Calibration required"
+    [errors]="fieldErrors"
+  />
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-validation-summary
+    title="Signal integrity"
+    [errors]="['Uplink unstable', 'Checksum mismatch']"
+  />
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <brightrail-validation-summary
+    title="Security review"
+    [errors]="[
+      { field: 'token', message: 'Rotate API token' },
+      { field: 'scope', message: 'Restrict permissions' }
+    ]"
+  />
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-validation-summary
+    title="Mission checklist"
+    [errors]="manyErrors"
+  />
+</div>`,
 } as const;
 
-export const VALIDATION_SUMMARY_DOC_SECTION_COUNT = 6;
+export const VALIDATION_SUMMARY_DOC_SECTION_COUNT = 7;
 
 export const VALIDATION_SUMMARY_HTML_EXAMPLES = `<brightrail-validation-summary
   title="Please fix the following errors:"

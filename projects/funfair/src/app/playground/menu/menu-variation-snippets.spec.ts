@@ -12,8 +12,9 @@ describe('menu-variation-snippets', () => {
     expect(MENU_VARIATION_SNIPPETS.layoutSplit).toContain('mco-split');
   });
 
-  it('documents six reference sections', () => {
-    expect(MENU_DOC_SECTION_COUNT).toBe(6);
+  it('documents seven reference sections', () => {
+    expect(MENU_DOC_SECTION_COUNT).toBe(7);
+    expect(MENU_VARIATION_SNIPPETS.futuristicGlass).toContain('ff-future-shell--glass');
   });
 
   it('includes footer HTML examples', () => {

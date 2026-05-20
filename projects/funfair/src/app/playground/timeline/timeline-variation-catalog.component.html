@@ -64,3 +64,48 @@
     </brightrail-timeline>
   </app-catalog-variation-tile>
 </section>
+
+<section class="tlvc-block">
+  <h2 class="tlvc-block__h">7. Futuristic timeline designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Glass pipeline" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+        <brightrail-timeline ariaLabel="Deployment pipeline">
+          <brightrail-timeline-item title="Build" description="CI #4821" status="completed" />
+          <brightrail-timeline-item title="Test" description="Running suites" status="current" />
+          <brightrail-timeline-item title="Deploy" status="pending" />
+        </brightrail-timeline>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neon sync" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+        <brightrail-timeline ariaLabel="Sync status">
+          <brightrail-timeline-item title="Uplink" description="Connected" status="completed" />
+          <brightrail-timeline-item title="Streaming" description="1.2 GB/s" status="current" />
+        </brightrail-timeline>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber scan" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+        <brightrail-timeline ariaLabel="Security scan">
+          <brightrail-timeline-item title="Perimeter" status="completed" />
+          <brightrail-timeline-item title="Threat detected" status="error" />
+          <brightrail-timeline-item title="Quarantine" status="current" />
+        </brightrail-timeline>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holo mission" [snippet]="s.futuristicHolo">
+      <div class="ff-future-shell ff-future-shell--holo">
+        <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+        <brightrail-timeline ariaLabel="Mission phases">
+          <brightrail-timeline-item title="Launch" status="completed" />
+          <brightrail-timeline-item title="Orbit" status="current" />
+          <brightrail-timeline-item title="Dock" status="pending" />
+        </brightrail-timeline>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

@@ -12,8 +12,9 @@ describe('empty-state-variation-snippets', () => {
     expect(EMPTY_STATE_VARIATION_SNIPPETS.fullSearch).toContain('Clear filters');
   });
 
-  it('documents six reference sections in the mock', () => {
-    expect(EMPTY_STATE_DOC_SECTION_COUNT).toBe(6);
+  it('documents seven reference sections in the mock', () => {
+    expect(EMPTY_STATE_DOC_SECTION_COUNT).toBe(7);
+    expect(EMPTY_STATE_VARIATION_SNIPPETS.futuristicCyber).toContain('ff-future-shell--cyber');
   });
 
   it('includes footer HTML examples', () => {

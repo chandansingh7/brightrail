@@ -2,6 +2,13 @@
   display: block;
 }
 
+:host .ff-future-shell {
+  width: 100%;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
 .mvc-grid {
   display: grid;
   gap: 0.65rem;

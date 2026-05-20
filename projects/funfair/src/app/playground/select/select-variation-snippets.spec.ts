@@ -15,8 +15,13 @@ describe('select-variation-snippets', () => {
     expect(SELECT_VARIATION_SNIPPETS.stateLoading).toContain('[loading]="true"');
   });
 
-  it('documents six reference sections', () => {
-    expect(SELECT_DOC_SECTION_COUNT).toBe(6);
+  it('exports futuristic shell snippets', () => {
+    expect(SELECT_VARIATION_SNIPPETS.futuristicGlass).toContain('ff-future-shell--glass');
+    expect(SELECT_VARIATION_SNIPPETS.futuristicCyber).toContain('ff-future-cyber-frame');
+  });
+
+  it('documents seven reference sections', () => {
+    expect(SELECT_DOC_SECTION_COUNT).toBe(7);
   });
 
   it('includes footer HTML examples with displayText', () => {

@@ -223,9 +223,47 @@ export const CARD_VARIATION_SNIPPETS = {
     <brightrail-button variant="primary">View details</brightrail-button>
   </brightrail-card-actions>
 </brightrail-card>`,
+
+  futuristicGlassKpi: `<div class="ff-future-shell ff-future-shell--dark">
+  <brightrail-card appearance="stats" size="md">
+    <brightrail-card-header><p class="br-card-stat-label">Throughput</p></brightrail-card-header>
+    <brightrail-card-content>
+      <p class="br-card-stat-value">2.4 TB/s</p>
+      <p class="br-card-stat-trend">▲ 8.2% vs baseline</p>
+    </brightrail-card-content>
+  </brightrail-card>
+</div>`,
+
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-card appearance="elevated" size="sm">
+    <brightrail-card-header><h3>Sync queue</h3></brightrail-card-header>
+    <brightrail-card-content><p>12 nodes replicating.</p></brightrail-card-content>
+  </brightrail-card>
+</div>`,
+
+  futuristicCyber: `<div class="ff-future-cyber-frame">
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--tl" aria-hidden="true"></span>
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--tr" aria-hidden="true"></span>
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--bl" aria-hidden="true"></span>
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--br" aria-hidden="true"></span>
+  <brightrail-card appearance="outlined" size="md">
+    <brightrail-card-header><h3>Sector lock</h3></brightrail-card-header>
+    <brightrail-card-content><p>Authorization required.</p></brightrail-card-content>
+  </brightrail-card>
+</div>`,
+
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-card appearance="elevated" size="md">
+    <brightrail-card-header><h3>Holo briefing</h3></brightrail-card-header>
+    <brightrail-card-content><p>Mission timeline updated.</p></brightrail-card-content>
+    <brightrail-card-actions align="end">
+      <brightrail-button variant="link">Open</brightrail-button>
+    </brightrail-card-actions>
+  </brightrail-card>
+</div>`,
 } as const;
 
-export const CARD_DOC_SECTION_COUNT = 6;
+export const CARD_DOC_SECTION_COUNT = 7;
 
 export const CARD_HTML_EXAMPLES = `<brightrail-card appearance="elevated" size="md">
   <brightrail-card-header [withTitle]="true" [showLeading]="true">

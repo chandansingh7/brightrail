@@ -289,6 +289,66 @@
   </section>
 }
 
+@if (sectionVisible(9)) {
+  <section class="alert-catalog__block">
+    <h4 class="alert-catalog__h">9. Futuristic table designs</h4>
+    <p class="alert-catalog__explain">
+      Data grids inside shared futuristic shells for glass, neon, cyber, and holo dashboards.
+    </p>
+    <div class="ff-future-grid">
+      <app-catalog-variation-tile label="Glass metrics" [snippet]="s.futuristicGlass">
+        <div class="ff-future-shell ff-future-shell--glass">
+          <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+          <brightrail-table
+            variant="bordered"
+            density="compact"
+            [data]="miniRows"
+            [columns]="miniCols"
+            ariaLabel="Glass metrics table"
+          />
+        </div>
+      </app-catalog-variation-tile>
+      <app-catalog-variation-tile label="Neon feed" [snippet]="s.futuristicNeon">
+        <div class="ff-future-shell ff-future-shell--neon">
+          <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+          <brightrail-table
+            variant="striped"
+            density="compact"
+            [data]="miniRows"
+            [columns]="miniCols"
+            ariaLabel="Neon feed table"
+          />
+        </div>
+      </app-catalog-variation-tile>
+      <app-catalog-variation-tile label="Cyber registry" [snippet]="s.futuristicCyber">
+        <div class="ff-future-shell ff-future-shell--cyber">
+          <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+          <brightrail-table
+            variant="basic"
+            density="compact"
+            [data]="miniRows"
+            [columns]="miniCols"
+            [sorting]="mirrorSorting()"
+            ariaLabel="Cyber registry table"
+          />
+        </div>
+      </app-catalog-variation-tile>
+      <app-catalog-variation-tile label="Holo roster" [snippet]="s.futuristicHolo">
+        <div class="ff-future-shell ff-future-shell--holo">
+          <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+          <brightrail-table
+            [variant]="mirrorVariant()"
+            density="medium"
+            [data]="miniRows"
+            [columns]="miniCols"
+            ariaLabel="Holo roster table"
+          />
+        </div>
+      </app-catalog-variation-tile>
+    </div>
+  </section>
+}
+
 @if (sectionVisible(8)) {
   <section class="alert-catalog__block alert-catalog__block--tips">
     <h4 class="alert-catalog__h">8. Usage tips</h4>

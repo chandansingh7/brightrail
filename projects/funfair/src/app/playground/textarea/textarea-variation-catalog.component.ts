@@ -36,4 +36,8 @@ export class TextareaVariationCatalogComponent {
   readonly demoBoth = 'Both axes resize enabled.';
   readonly demoProject = 'A comprehensive platform for team collaboration.';
   readonly demoDraft = 'Saving draft…';
+  futuristicGlassValue = '';
+  futuristicNeonValue = '';
+  futuristicCyberValue = '';
+  futuristicHoloValue = '';
 }

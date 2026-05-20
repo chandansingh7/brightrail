@@ -350,3 +350,87 @@
     </app-catalog-variation-tile>
   </div>
 </section>
+<section class="svc-block">
+  <h2 class="svc-block__h">7. Futuristic select designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Glass sector picker" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+        <div class="svc-tile-body">
+          <brightrail-select
+            [ngModelOptions]="ngModelStandalone"
+            appearance="outlined"
+            size="md"
+            label="Sector"
+            labelPosition="top"
+            displayText="Alpha quadrant"
+            [(ngModel)]="countryCode"
+          >
+            <div class="br-select-panel svc-panel"></div>
+          </brightrail-select>
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neon routing" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+        <div class="svc-tile-body">
+          <brightrail-select
+            [ngModelOptions]="ngModelStandalone"
+            appearance="outlined"
+            size="md"
+            label="Sector"
+            labelPosition="top"
+            displayText="Neon relay"
+            [(ngModel)]="countryCode"
+          >
+            <div class="br-select-panel svc-panel"></div>
+          </brightrail-select>
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber command" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+        <div class="ff-future-cyber-frame">
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--tl" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--tr" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--bl" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--br" aria-hidden="true"></span>
+          <div class="svc-tile-body">
+          <brightrail-select
+            [ngModelOptions]="ngModelStandalone"
+            appearance="outlined"
+            size="md"
+            label="Sector"
+            labelPosition="top"
+            displayText="Ops channel"
+            [(ngModel)]="countryCode"
+          >
+            <div class="br-select-panel svc-panel"></div>
+          </brightrail-select>
+        </div>
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holo destination" [snippet]="s.futuristicHolo">
+      <div class="ff-future-shell ff-future-shell--holo">
+        <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+        <div class="svc-tile-body">
+          <brightrail-select
+            [ngModelOptions]="ngModelStandalone"
+            appearance="outlined"
+            size="md"
+            label="Sector"
+            labelPosition="top"
+            displayText="Orion belt"
+            [(ngModel)]="countryCode"
+          >
+            <div class="br-select-panel svc-panel"></div>
+          </brightrail-select>
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>
+

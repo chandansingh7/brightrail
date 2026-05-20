@@ -208,3 +208,61 @@
     </app-catalog-variation-tile>
   </div>
 </section>
+
+<section class="tbvc-block">
+  <h2 class="tbvc-block__h">7. Futuristic tabs designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Glass shell" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+        <brightrail-tabs appearance="pill" size="md">
+          <brightrail-tab label="Ops" [active]="true">
+            <ng-template brightrailTabContent><p>Operational metrics.</p></ng-template>
+          </brightrail-tab>
+          <brightrail-tab label="Systems">
+            <ng-template brightrailTabContent><p>Subsystem health.</p></ng-template>
+          </brightrail-tab>
+        </brightrail-tabs>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neon strip" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+        <brightrail-tabs appearance="underline" size="sm">
+          <brightrail-tab label="Live" [active]="true">
+            <ng-template brightrailTabContent><p>Real-time feed.</p></ng-template>
+          </brightrail-tab>
+          <brightrail-tab label="Alerts" [badge]="2">
+            <ng-template brightrailTabContent><p>Open incidents.</p></ng-template>
+          </brightrail-tab>
+        </brightrail-tabs>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber grid" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+        <brightrail-tabs appearance="contained" size="md">
+          <brightrail-tab label="Nodes" icon="filter" [active]="true">
+            <ng-template brightrailTabContent><p>Cluster nodes.</p></ng-template>
+          </brightrail-tab>
+          <brightrail-tab label="Logs" icon="copy">
+            <ng-template brightrailTabContent><p>Event stream.</p></ng-template>
+          </brightrail-tab>
+        </brightrail-tabs>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holo lanes" [snippet]="s.futuristicHolo">
+      <div class="ff-future-shell ff-future-shell--holo">
+        <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+        <brightrail-tabs appearance="pill" size="lg">
+          <brightrail-tab label="Alpha" [active]="true">
+            <ng-template brightrailTabContent><p>Primary lane.</p></ng-template>
+          </brightrail-tab>
+          <brightrail-tab label="Beta">
+            <ng-template brightrailTabContent><p>Secondary lane.</p></ng-template>
+          </brightrail-tab>
+        </brightrail-tabs>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

@@ -124,3 +124,33 @@
     </app-catalog-variation-tile>
   </div>
 </section>
+
+<section class="tavc-block">
+  <h2 class="tavc-block__h">7. Futuristic textarea designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Glass log" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+        <brightrail-textarea appearance="outlined" label="Mission log" placeholder="Record telemetry…" [rows]="3" [(ngModel)]="futuristicGlassValue" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neon transcript" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+        <brightrail-textarea appearance="filled" label="Signal transcript" [rows]="3" [(ngModel)]="futuristicNeonValue" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber payload" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+        <brightrail-textarea appearance="outlined" label="Payload" resize="none" [rows]="3" [(ngModel)]="futuristicCyberValue" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holo notes" [snippet]="s.futuristicHolo">
+      <div class="ff-future-shell ff-future-shell--holo">
+        <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+        <brightrail-textarea appearance="underline" label="Operator notes" [rows]="4" [fullWidth]="true" [(ngModel)]="futuristicHoloValue" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

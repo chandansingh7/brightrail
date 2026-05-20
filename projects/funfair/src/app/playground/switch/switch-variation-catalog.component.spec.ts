@@ -18,12 +18,14 @@ describe('SwitchVariationCatalogComponent', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('renders six doc-mirror sections', () => {
+  it('renders seven doc-mirror sections including futuristic shells', () => {
     const headings = Array.from(
       fixture.nativeElement.querySelectorAll('.swvc-block__h') as NodeListOf<HTMLElement>,
     ).map((el) => el.textContent?.trim());
     expect(headings).toContain('1. Core switch types');
     expect(headings).toContain('6. Form integration');
-    expect(headings.length).toBe(6);
+    expect(headings).toContain('7. Futuristic switch designs');
+    expect(headings.length).toBe(7);
+    expect(fixture.nativeElement.querySelector('.ff-future-cyber-frame')).toBeTruthy();
   });
 });

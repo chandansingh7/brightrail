@@ -10,6 +10,9 @@ import {
   BrightrailButtonComponent,
 } from 'brightrail';
 
+import { CatalogVariationTileComponent } from '../shared/catalog-variation-tile.component';
+import { ALERT_VARIATION_SNIPPETS } from './alert-variation-snippets';
+
 /**
  * §1–§8 reference tiles. Mirror inputs tint non-varying dimensions; each section still swaps the
  * dimension it illustrates (status grid, appearance grid, etc.). Used from the alerts resource guide.
@@ -23,12 +26,15 @@ import {
     BrightrailAlertMessageDirective,
     BrightrailAlertActionsComponent,
     BrightrailButtonComponent,
+    CatalogVariationTileComponent,
   ],
   templateUrl: './alert-variation-catalog.component.html',
   styleUrl: './alert-variation-catalog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlertVariationCatalogComponent {
+  readonly s = ALERT_VARIATION_SNIPPETS;
+
   readonly mirrorAppearance = input<BrightrailAlertAppearance>('soft');
   readonly mirrorStatus = input<BrightrailAlertStatus>('info');
   readonly mirrorSize = input<'sm' | 'md' | 'lg'>('md');

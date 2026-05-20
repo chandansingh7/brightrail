@@ -121,3 +121,43 @@
     </app-catalog-variation-tile>
   </div>
 </section>
+
+<section class="cbvc-block">
+  <h2 class="cbvc-block__h">7. Futuristic checkbox designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Dark neural sync" [snippet]="s.futuristicDark">
+      <div class="ff-future-shell ff-future-shell--dark">
+        <span class="ff-future-shell__label">Dark</span>
+        <brightrail-checkbox label="Enable neural sync" tone="primary" [checked]="true" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Glass consent" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label">Glass</span>
+        <brightrail-checkbox label="Glass consent" variant="outlined" [checked]="true" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neon option group" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label">Neon</span>
+        <brightrail-checkbox-group
+          layout="vertical"
+          [options]="verticalOptions"
+          [selectedIds]="verticalSelected()"
+          (selectedIdsChange)="onVerticalChange($event)"
+        />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber uplink" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <div class="ff-future-cyber-frame">
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--tl" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--tr" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--bl" aria-hidden="true"></span>
+          <span class="ff-future-cyber-corner ff-future-cyber-corner--br" aria-hidden="true"></span>
+          <brightrail-checkbox label="Authorize uplink" tone="success" [checked]="true" />
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

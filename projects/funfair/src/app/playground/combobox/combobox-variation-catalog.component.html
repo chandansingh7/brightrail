@@ -165,3 +165,63 @@
     </app-catalog-variation-tile>
   </div>
 </section>
+
+<section class="cbvc-block">
+  <h2 class="cbvc-block__h">7. Futuristic combobox designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Glass shell" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+        <div class="cbvc-tile-body">
+          <brightrail-combobox
+            [ngModelOptions]="ngModelStandalone"
+            [options]="countryOptions"
+            placeholder="Select region"
+            [(ngModel)]="regionCode"
+          />
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neon filter" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+        <div class="cbvc-tile-body">
+          <brightrail-combobox
+            [ngModelOptions]="ngModelStandalone"
+            [options]="assigneeOptions"
+            [filterable]="true"
+            placeholder="Search assignees…"
+            [(ngModel)]="assigneeId"
+          />
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber grid" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+        <div class="cbvc-tile-body">
+          <brightrail-combobox
+            [ngModelOptions]="ngModelStandalone"
+            [options]="priorityOptions"
+            placeholder="Priority"
+            [(ngModel)]="priorityCode"
+          />
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holo chip" [snippet]="s.futuristicHolo">
+      <div class="ff-future-shell ff-future-shell--holo">
+        <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+        <div class="cbvc-tile-body">
+          <brightrail-combobox
+            [ngModelOptions]="ngModelStandalone"
+            [options]="tagOptions"
+            placeholder="Tag"
+            [fullWidth]="false"
+            [(ngModel)]="tagCode"
+          />
+        </div>
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

@@ -56,9 +56,25 @@ export const SWITCH_VARIATION_SNIPPETS = {
     (checkedChange)="pushEnabled = $event"
   />
 </div>`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-switch label="Glass shield" tone="primary" [checked]="true" />
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-switch label="Neon relay" tone="primary" [checked]="true" />
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <div class="ff-future-cyber-frame">
+    <brightrail-switch label="Cyber override" tone="danger" [checked]="true" />
+  </div>
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-switch label="Holo sync" tone="success" [checked]="true" />
+</div>`,
+
 } as const;
 
-export const SWITCH_DOC_SECTION_COUNT = 6;
+export const SWITCH_DOC_SECTION_COUNT = 7;
 
 export const SWITCH_HTML_EXAMPLES = `<brightrail-switch
   label="Enable notifications"

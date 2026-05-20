@@ -18,7 +18,8 @@ describe('tree-variation-snippets', () => {
   });
 
   it('documents six reference sections', () => {
-    expect(TREE_DOC_SECTION_COUNT).toBe(6);
+    expect(TREE_DOC_SECTION_COUNT).toBe(7);
+    expect(TREE_VARIATION_SNIPPETS.futuristicNeon).toContain('ff-future-shell--neon');
   });
 
   it('includes footer HTML examples', () => {

@@ -148,9 +148,61 @@ export const MODAL_VARIATION_SNIPPETS = {
     <brightrail-button variant="danger" size="sm" (click)="modalOpen.set(false)">Delete</brightrail-button>
   </brightrail-modal-footer>
 </brightrail-modal>`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+  <brightrail-modal [isOpen]="true" [contain]="true" size="sm" appearance="default">
+    <brightrail-modal-header>
+      <div brightrailModalTitle>Workspace saved</div>
+    </brightrail-modal-header>
+    <brightrail-modal-body><p>Glassmorphism shell for lightweight confirmations.</p></brightrail-modal-body>
+    <brightrail-modal-footer>
+      <brightrail-button variant="primary" size="sm">Got it</brightrail-button>
+    </brightrail-modal-footer>
+  </brightrail-modal>
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+  <brightrail-modal [isOpen]="true" [contain]="true" size="sm" appearance="default">
+    <brightrail-modal-header>
+      <div brightrailModalTitle>Sync node online</div>
+    </brightrail-modal-header>
+    <brightrail-modal-body><p>Fleet telemetry is streaming in real time.</p></brightrail-modal-body>
+    <brightrail-modal-footer>
+      <brightrail-button variant="primary" size="sm">Acknowledge</brightrail-button>
+    </brightrail-modal-footer>
+  </brightrail-modal>
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+  <div class="ff-future-cyber-frame">
+    <brightrail-modal [isOpen]="true" [contain]="true" size="sm" appearance="danger">
+      <brightrail-modal-header>
+        <div brightrailModalTitle>Deploy to production?</div>
+      </brightrail-modal-header>
+      <brightrail-modal-body><p>This pushes the current build to all edge nodes.</p></brightrail-modal-body>
+      <brightrail-modal-footer>
+        <brightrail-button variant="outline" size="sm">Abort</brightrail-button>
+        <brightrail-button variant="danger" size="sm">Deploy</brightrail-button>
+      </brightrail-modal-footer>
+    </brightrail-modal>
+  </div>
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+  <brightrail-modal [isOpen]="true" [contain]="true" size="sm" appearance="default">
+    <brightrail-modal-header>
+      <div brightrailModalTitle>Mission briefing</div>
+    </brightrail-modal-header>
+    <brightrail-modal-body><p>Holographic panel for immersive status readouts.</p></brightrail-modal-body>
+    <brightrail-modal-footer>
+      <brightrail-button variant="primary" size="sm">Continue</brightrail-button>
+    </brightrail-modal-footer>
+  </brightrail-modal>
+</div>`,
 } as const;
 
-export const MODAL_DOC_SECTION_COUNT = 6;
+export const MODAL_DOC_SECTION_COUNT = 7;
 
 export const MODAL_HTML_EXAMPLES = `<brightrail-modal
   [isOpen]="modalOpen()"

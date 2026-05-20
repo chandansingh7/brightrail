@@ -15,12 +15,11 @@ describe('AppShellVariationCatalogComponent', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('renders six doc-mirror sections', () => {
+  it('renders seven sections including futuristic designs', () => {
     const headings = Array.from(
       fixture.nativeElement.querySelectorAll('.asvc-block__h') as NodeListOf<HTMLElement>,
     ).map((el) => el.textContent?.trim());
-    expect(headings).toContain('1. Core layout');
-    expect(headings).toContain('6. Compact shell');
-    expect(headings?.length).toBe(6);
+    expect(headings?.length).toBe(7);
+    expect(headings).toContain('7. Futuristic app shell designs');
   });
 });

@@ -11,8 +11,13 @@ describe('radio-variation-snippets', () => {
     expect(RADIO_VARIATION_SNIPPETS.validationGroup).toContain('[invalid]="true"');
   });
 
-  it('documents six reference sections', () => {
-    expect(RADIO_DOC_SECTION_COUNT).toBe(6);
+  it('exports futuristic shell snippets', () => {
+    expect(RADIO_VARIATION_SNIPPETS.futuristicNeon).toContain('ff-future-shell--neon');
+    expect(RADIO_VARIATION_SNIPPETS.futuristicHolo).toContain('brightrail-radio');
+  });
+
+  it('documents seven reference sections', () => {
+    expect(RADIO_DOC_SECTION_COUNT).toBe(7);
   });
 
   it('includes footer HTML examples', () => {

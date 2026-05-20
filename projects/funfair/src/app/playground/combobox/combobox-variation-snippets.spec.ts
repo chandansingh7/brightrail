@@ -11,8 +11,9 @@ describe('combobox-variation-snippets', () => {
     expect(COMBOBOX_VARIATION_SNIPPETS.enterpriseMultiField).toContain('cbco-form-row');
   });
 
-  it('documents six reference sections', () => {
-    expect(COMBOBOX_DOC_SECTION_COUNT).toBe(6);
+  it('documents seven reference sections', () => {
+    expect(COMBOBOX_DOC_SECTION_COUNT).toBe(7);
+    expect(COMBOBOX_VARIATION_SNIPPETS.futuristicGlass).toContain('ff-future-shell--glass');
   });
 
   it('includes footer HTML examples', () => {

@@ -11,8 +11,13 @@ describe('pagination-variation-snippets', () => {
     expect(PAGINATION_VARIATION_SNIPPETS.advancedJumpToPage).toContain('[showJumpToPage]="true"');
   });
 
-  it('documents nine reference sections', () => {
-    expect(PAGINATION_DOC_SECTION_COUNT).toBe(9);
+  it('exports futuristic shell snippets', () => {
+    expect(PAGINATION_VARIATION_SNIPPETS.futuristicGlass).toContain('ff-future-shell--glass');
+    expect(PAGINATION_VARIATION_SNIPPETS.futuristicCyber).toContain('ff-future-cyber-frame');
+  });
+
+  it('documents ten reference sections', () => {
+    expect(PAGINATION_DOC_SECTION_COUNT).toBe(10);
   });
 
   it('includes footer HTML examples', () => {

@@ -18,7 +18,8 @@ describe('app-shell-variation-snippets', () => {
   });
 
   it('documents six reference sections', () => {
-    expect(APP_SHELL_DOC_SECTION_COUNT).toBe(6);
+    expect(APP_SHELL_DOC_SECTION_COUNT).toBe(7);
+    expect(APP_SHELL_VARIATION_SNIPPETS.futuristicGlass).toContain('ff-future-shell--glass');
   });
 
   it('includes footer HTML examples', () => {

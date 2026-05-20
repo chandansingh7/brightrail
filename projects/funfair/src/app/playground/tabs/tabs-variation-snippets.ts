@@ -135,9 +135,50 @@ export const TABS_VARIATION_SNIPPETS = {
     <ng-template brightrailTabContent><p>SSO and session policy.</p></ng-template>
   </brightrail-tab>
 </brightrail-tabs>`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-tabs appearance="pill" size="md">
+    <brightrail-tab label="Ops" [active]="true">
+      <ng-template brightrailTabContent><p>Operational metrics.</p></ng-template>
+    </brightrail-tab>
+    <brightrail-tab label="Systems">
+      <ng-template brightrailTabContent><p>Subsystem health.</p></ng-template>
+    </brightrail-tab>
+  </brightrail-tabs>
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-tabs appearance="underline" size="sm">
+    <brightrail-tab label="Live" [active]="true">
+      <ng-template brightrailTabContent><p>Real-time feed.</p></ng-template>
+    </brightrail-tab>
+    <brightrail-tab label="Alerts" [badge]="2">
+      <ng-template brightrailTabContent><p>Open incidents.</p></ng-template>
+    </brightrail-tab>
+  </brightrail-tabs>
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <brightrail-tabs appearance="contained" size="md">
+    <brightrail-tab label="Nodes" icon="filter" [active]="true">
+      <ng-template brightrailTabContent><p>Cluster nodes.</p></ng-template>
+    </brightrail-tab>
+    <brightrail-tab label="Logs" icon="copy">
+      <ng-template brightrailTabContent><p>Event stream.</p></ng-template>
+    </brightrail-tab>
+  </brightrail-tabs>
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-tabs appearance="pill" size="lg">
+    <brightrail-tab label="Alpha" [active]="true">
+      <ng-template brightrailTabContent><p>Primary lane.</p></ng-template>
+    </brightrail-tab>
+    <brightrail-tab label="Beta">
+      <ng-template brightrailTabContent><p>Secondary lane.</p></ng-template>
+    </brightrail-tab>
+  </brightrail-tabs>
+</div>`,
 } as const;
 
-export const TABS_DOC_SECTION_COUNT = 6;
+export const TABS_DOC_SECTION_COUNT = 7;
 
 export const TABS_HTML_EXAMPLES = `<brightrail-tabs appearance="underline" orientation="horizontal" size="md">
   <brightrail-tab label="Overview" [active]="true">

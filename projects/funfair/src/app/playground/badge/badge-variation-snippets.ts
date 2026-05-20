@@ -81,9 +81,32 @@ export const BADGE_VARIATION_SNIPPETS = {
 </span>`,
   advancedOrderStatus: `<span class="bco-pill">Order #12345 <brightrail-badge variant="tonal" color="primary" size="small" label="In progress" /></span>`,
   advancedCriticalHigh: `<span class="bco-pill"><brightrail-badge appearance="tonal" color="critical" size="small" label="High" /></span>`,
+
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-badge variant="filled" color="info" label="LIVE" />
+</div>`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <span class="bco-pill bco-pill--grouped">
+    <brightrail-badge variant="soft" color="primary" size="small" label="Alpha" />
+    <brightrail-badge variant="soft" color="success" size="small" label="Beta" />
+  </span>
+</div>`,
+
+  futuristicCyber: `<div class="ff-future-cyber-frame">
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--tl" aria-hidden="true"></span>
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--tr" aria-hidden="true"></span>
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--bl" aria-hidden="true"></span>
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--br" aria-hidden="true"></span>
+  <brightrail-badge variant="filled" color="success" [dot]="true" label="Online" />
+</div>`,
+
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-badge variant="outlined" color="primary" label="Holo tier" />
+</div>`,
 } as const;
 
-export const BADGE_DOC_SECTION_COUNT = 9;
+export const BADGE_DOC_SECTION_COUNT = 10;
 
 export const BADGE_HTML_EXAMPLES = `<brightrail-badge variant="filled" color="primary" label="Primary" />
 

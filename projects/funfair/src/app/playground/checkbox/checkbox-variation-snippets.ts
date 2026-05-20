@@ -51,9 +51,29 @@ export const CHECKBOX_VARIATION_SNIPPETS = {
   [selectedIds]="selectedIds"
   (selectedIdsChange)="selectedIds = $event"
 />`,
+
+  futuristicDark: `<div class="ff-future-shell ff-future-shell--dark">
+  <brightrail-checkbox label="Enable neural sync" tone="primary" [checked]="true" />
+</div>`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-checkbox label="Glass consent" variant="outlined" [checked]="true" />
+</div>`,
+
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-checkbox-group layout="vertical" [options]="options" [selectedIds]="selectedIds" />
+</div>`,
+
+  futuristicCyber: `<div class="ff-future-cyber-frame">
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--tl" aria-hidden="true"></span>
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--tr" aria-hidden="true"></span>
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--bl" aria-hidden="true"></span>
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--br" aria-hidden="true"></span>
+  <brightrail-checkbox label="Authorize uplink" tone="success" [checked]="true" />
+</div>`,
 } as const;
 
-export const CHECKBOX_DOC_SECTION_COUNT = 6;
+export const CHECKBOX_DOC_SECTION_COUNT = 7;
 
 export const CHECKBOX_HTML_EXAMPLES = `<brightrail-checkbox
   label="Receive notifications"

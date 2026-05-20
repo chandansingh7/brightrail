@@ -115,3 +115,33 @@
     <brightrail-graph kind="funnel" [segments]="funnelStages" [height]="240" ariaLabel="Conversion funnel" />
   </app-catalog-variation-tile>
 </section>
+
+<section class="gvc-block">
+  <h2 class="gvc-block__h">11. Futuristic graph designs</h2>
+  <div class="ff-future-grid">
+    <app-catalog-variation-tile label="Glass gradient area" [snippet]="s.futuristicGlass">
+      <div class="ff-future-shell ff-future-shell--glass">
+        <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+        <brightrail-graph kind="area-gradient" [series]="salesOverview" [showArea]="true" yAxisLabel="Revenue (USD)" [height]="180" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Neon line" [snippet]="s.futuristicNeon">
+      <div class="ff-future-shell ff-future-shell--neon">
+        <span class="ff-future-shell__label" aria-hidden="true">Neon</span>
+        <brightrail-graph kind="line-smooth" surface="dark" [series]="salesOverview" yAxisLabel="Throughput" [height]="180" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Cyber radial" [snippet]="s.futuristicCyber">
+      <div class="ff-future-shell ff-future-shell--cyber">
+        <span class="ff-future-shell__label" aria-hidden="true">Cyber</span>
+        <brightrail-graph kind="radial" surface="dark" [radialValue]="72" [height]="180" ariaLabel="System load" />
+      </div>
+    </app-catalog-variation-tile>
+    <app-catalog-variation-tile label="Holo donut" [snippet]="s.futuristicHolo">
+      <div class="ff-future-shell ff-future-shell--holo">
+        <span class="ff-future-shell__label" aria-hidden="true">Holo</span>
+        <brightrail-graph kind="donut" surface="dark" [segments]="channelSegments" [height]="180" ariaLabel="Channel mix" />
+      </div>
+    </app-catalog-variation-tile>
+  </div>
+</section>

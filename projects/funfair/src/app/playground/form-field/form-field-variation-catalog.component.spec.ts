@@ -14,7 +14,11 @@ describe('FormFieldVariationCatalogComponent', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('renders six sections', () => {
-    expect(fixture.nativeElement.querySelectorAll('.ffvc-block__h').length).toBe(6);
+  it('renders seven sections including futuristic designs', () => {
+    const headings = Array.from(
+      fixture.nativeElement.querySelectorAll('.ffvc-block__h') as NodeListOf<HTMLElement>,
+    ).map((el) => el.textContent?.trim());
+    expect(headings.length).toBe(7);
+    expect(headings).toContain('7. Futuristic form field designs');
   });
 });

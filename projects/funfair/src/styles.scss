@@ -1,5 +1,6 @@
 /* Brightrail `:root` tokens — resolved via stylePreprocessorOptions.includePaths (angular.json). */
 @use 'brightrail-root';
+@use 'app/playground/shared/futuristic-catalog-shells';
 
 html {
   box-sizing: border-box;

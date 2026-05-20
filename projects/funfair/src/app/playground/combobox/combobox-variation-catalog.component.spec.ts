@@ -14,7 +14,11 @@ describe('ComboboxVariationCatalogComponent', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('renders six sections', () => {
-    expect(fixture.nativeElement.querySelectorAll('.cbvc-block__h').length).toBe(6);
+  it('renders seven sections including futuristic designs', () => {
+    const headings = Array.from(
+      fixture.nativeElement.querySelectorAll('.cbvc-block__h') as NodeListOf<HTMLElement>,
+    ).map((el) => el.textContent?.trim());
+    expect(headings.length).toBe(7);
+    expect(headings).toContain('7. Futuristic combobox designs');
   });
 });

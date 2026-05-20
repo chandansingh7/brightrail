@@ -50,9 +50,37 @@ export const TIMELINE_VARIATION_SNIPPETS = {
   <brightrail-timeline-item title="Validation error" status="error" />
   <brightrail-timeline-item title="Resubmit" status="pending" />
 </brightrail-timeline>`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-timeline ariaLabel="Deployment pipeline">
+    <brightrail-timeline-item title="Build" description="CI #4821" status="completed" />
+    <brightrail-timeline-item title="Test" description="Running suites" status="current" />
+    <brightrail-timeline-item title="Deploy" status="pending" />
+  </brightrail-timeline>
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-timeline ariaLabel="Sync status">
+    <brightrail-timeline-item title="Uplink" description="Connected" status="completed" />
+    <brightrail-timeline-item title="Streaming" description="1.2 GB/s" status="current" />
+  </brightrail-timeline>
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <brightrail-timeline ariaLabel="Security scan">
+    <brightrail-timeline-item title="Perimeter" status="completed" />
+    <brightrail-timeline-item title="Threat detected" status="error" />
+    <brightrail-timeline-item title="Quarantine" status="current" />
+  </brightrail-timeline>
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-timeline ariaLabel="Mission phases">
+    <brightrail-timeline-item title="Launch" status="completed" />
+    <brightrail-timeline-item title="Orbit" status="current" />
+    <brightrail-timeline-item title="Dock" status="pending" />
+  </brightrail-timeline>
+</div>`,
 } as const;
 
-export const TIMELINE_DOC_SECTION_COUNT = 6;
+export const TIMELINE_DOC_SECTION_COUNT = 7;
 
 export const TIMELINE_HTML_EXAMPLES = `<brightrail-timeline ariaLabel="Order status">
   <brightrail-timeline-item

@@ -16,6 +16,8 @@ import {
   BrightrailTableComponent,
 } from 'brightrail';
 
+import { CatalogVariationTileComponent } from '../shared/catalog-variation-tile.component';
+import { TABLE_VARIATION_SNIPPETS } from './table-variation-snippets';
 import {
   buildDemoUsers,
   PLAYGROUND_USER_COLUMNS,
@@ -43,12 +45,15 @@ import {
   standalone: true,
   imports: [
     BrightrailTableComponent,
+    CatalogVariationTileComponent,
   ],
   templateUrl: './table-variation-catalog.component.html',
   styleUrl: './table-variation-catalog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableVariationCatalogComponent {
+  readonly s = TABLE_VARIATION_SNIPPETS;
+
   readonly mirrorVariant = input<BrightrailTableVariant>('basic');
   readonly mirrorDensity = input<BrightrailTableDensity>('medium');
   readonly mirrorSorting = input(false);
@@ -58,7 +63,7 @@ export class TableVariationCatalogComponent {
   readonly stickyDemoRows = buildDemoUsers(40);
   readonly stickyCols = PLAYGROUND_USER_COLUMNS_FIVE;
 
-  /** 0 = show every section; 1–8 = show only that numbered section */
+  /** 0 = show every section; 1–9 = show only that numbered section */
   readonly focusSection = input(0);
 
   readonly catalogExpandTpl = viewChild<TemplateRef<{ $implicit: BrightrailTableRow }>>(

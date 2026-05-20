@@ -13,7 +13,7 @@ describe('badge-variation-snippets', () => {
   });
 
   it('documents nine reference sections in the mock', () => {
-    expect(BADGE_DOC_SECTION_COUNT).toBe(9);
+    expect(BADGE_DOC_SECTION_COUNT).toBe(10);
   });
 
   it('includes footer HTML examples', () => {

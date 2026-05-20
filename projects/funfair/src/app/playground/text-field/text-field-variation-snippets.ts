@@ -131,9 +131,45 @@ export const TEXT_FIELD_VARIATION_SNIPPETS = {
   suffixPosition="right"
   [(ngModel)]="weight"
 />`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-text-field
+    appearance="outlined"
+    label="Command channel"
+    placeholder="Transmit signal…"
+    [(ngModel)]="channel"
+  />
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-text-field
+    appearance="filled"
+    label="Node ID"
+    iconLeft="search"
+    placeholder="Search cluster…"
+    [(ngModel)]="nodeId"
+  />
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <brightrail-text-field
+    appearance="outlined"
+    label="Access key"
+    inputType="password"
+    [showPasswordToggle]="true"
+    [(ngModel)]="accessKey"
+  />
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-text-field
+    appearance="underline"
+    label="Beacon frequency"
+    suffix="GHz"
+    suffixPosition="right"
+    [(ngModel)]="frequency"
+  />
+</div>`,
 } as const;
 
-export const TEXT_FIELD_DOC_SECTION_COUNT = 6;
+export const TEXT_FIELD_DOC_SECTION_COUNT = 7;
 
 export const TEXT_FIELD_HTML_EXAMPLES = `<brightrail-text-field
   appearance="outlined"

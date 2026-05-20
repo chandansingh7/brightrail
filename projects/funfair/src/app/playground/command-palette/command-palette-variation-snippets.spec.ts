@@ -18,8 +18,9 @@ describe('command-palette-variation-snippets', () => {
     expect(COMMAND_PALETTE_DEMO_COMMANDS[0]?.id).toBeTruthy();
   });
 
-  it('documents six reference sections', () => {
-    expect(COMMAND_PALETTE_DOC_SECTION_COUNT).toBe(6);
+  it('documents seven reference sections', () => {
+    expect(COMMAND_PALETTE_DOC_SECTION_COUNT).toBe(7);
+    expect(COMMAND_PALETTE_VARIATION_SNIPPETS.futuristicNeon).toContain('ff-future-shell--neon');
   });
 
   it('includes footer HTML examples', () => {

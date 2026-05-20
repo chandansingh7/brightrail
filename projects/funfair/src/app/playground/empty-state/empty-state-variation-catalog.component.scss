@@ -2,6 +2,12 @@
   display: block;
 }
 
+:host .ff-future-shell {
+  width: 100%;
+  flex-direction: column;
+  align-items: stretch;
+}
+
 .esvc-block {
   margin-bottom: 1.35rem;
 }

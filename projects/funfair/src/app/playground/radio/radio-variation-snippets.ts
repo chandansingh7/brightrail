@@ -61,9 +61,26 @@ export const RADIO_VARIATION_SNIPPETS = {
   [selectedId]="selectedId"
   (selectedIdChange)="selectedId = $event"
 />`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <span class="ff-future-shell__label" aria-hidden="true">Glass</span>
+  <brightrail-radio name="channel" value="glass" label="Neural sync" tone="primary" [checked]="true" />
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-radio name="channel" value="neon" label="Quantum uplink" tone="primary" [checked]="true" />
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <div class="ff-future-cyber-frame">
+    <brightrail-radio name="channel" value="cyber" label="Deploy override" tone="danger" [checked]="true" />
+  </div>
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-radio name="channel" value="holo" label="Holo beacon" tone="success" [checked]="true" />
+</div>`,
+
 } as const;
 
-export const RADIO_DOC_SECTION_COUNT = 6;
+export const RADIO_DOC_SECTION_COUNT = 7;
 
 export const RADIO_HTML_EXAMPLES = `<brightrail-radio
   name="notification-preference"

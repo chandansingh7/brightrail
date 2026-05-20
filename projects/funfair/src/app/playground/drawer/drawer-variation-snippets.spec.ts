@@ -13,8 +13,9 @@ describe('drawer-variation-snippets', () => {
     expect(DRAWER_VARIATION_SNIPPETS.surfaceAi).toContain('surface="ai"');
   });
 
-  it('documents six reference sections', () => {
-    expect(DRAWER_DOC_SECTION_COUNT).toBe(6);
+  it('documents seven reference sections', () => {
+    expect(DRAWER_DOC_SECTION_COUNT).toBe(7);
+    expect(DRAWER_VARIATION_SNIPPETS.futuristicNeon).toContain('surface="ai"');
   });
 
   it('includes footer HTML examples', () => {

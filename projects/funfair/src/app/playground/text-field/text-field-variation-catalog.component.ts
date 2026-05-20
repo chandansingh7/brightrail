@@ -35,4 +35,8 @@ export class TextFieldVariationCatalogComponent {
   iconLeftValue = '';
   iconRightValue = '';
   iconsBothValue = '42';
+  futuristicGlassValue = '';
+  futuristicNeonValue = '';
+  futuristicCyberValue = '';
+  futuristicHoloValue = '5.8';
 }

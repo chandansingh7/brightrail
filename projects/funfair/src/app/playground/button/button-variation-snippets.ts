@@ -31,9 +31,29 @@ export const BUTTON_VARIATION_SNIPPETS = {
   stateLoading: `<brightrail-button variant="primary" [loading]="true">Saving…</brightrail-button>`,
   stateDisabled: `<brightrail-button variant="primary" [disabled]="true">Disabled</brightrail-button>`,
   stateFullWidth: `<brightrail-button variant="primary" [fullWidth]="true">Continue</brightrail-button>`,
+
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-button variant="primary" shape="pill" iconLeft="plus">Launch mission</brightrail-button>
+</div>`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-button variant="ghost" shape="pill">Glass pill</brightrail-button>
+</div>`,
+
+  futuristicGradient: `<div class="ff-future-shell ff-future-shell--gradient">
+  <brightrail-button variant="secondary">Deploy fleet</brightrail-button>
+</div>`,
+
+  futuristicCyber: `<div class="ff-future-cyber-frame">
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--tl" aria-hidden="true"></span>
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--tr" aria-hidden="true"></span>
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--bl" aria-hidden="true"></span>
+  <span class="ff-future-cyber-corner ff-future-cyber-corner--br" aria-hidden="true"></span>
+  <brightrail-button variant="outline">Authorize</brightrail-button>
+</div>`,
 } as const;
 
-export const BUTTON_DOC_SECTION_COUNT = 6;
+export const BUTTON_DOC_SECTION_COUNT = 7;
 
 export const BUTTON_HTML_EXAMPLES = `<brightrail-button variant="primary" size="md" iconLeft="check">
   Save changes

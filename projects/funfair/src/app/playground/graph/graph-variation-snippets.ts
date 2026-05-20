@@ -146,9 +146,46 @@ export const GRAPH_VARIATION_SNIPPETS = {
   [showLegend]="true"
   ariaLabel="Conversion funnel"
 />`,
+
+  futuristicGlass: `<div class="ff-future-shell ff-future-shell--glass">
+  <brightrail-graph
+    kind="area-gradient"
+    [series]="chartSeries"
+    [showArea]="true"
+    yAxisLabel="Revenue (USD)"
+    [height]="200"
+  />
+</div>`,
+  futuristicNeon: `<div class="ff-future-shell ff-future-shell--neon">
+  <brightrail-graph
+    kind="line-smooth"
+    surface="dark"
+    [series]="chartSeries"
+    yAxisLabel="Throughput"
+    [height]="200"
+  />
+</div>`,
+  futuristicCyber: `<div class="ff-future-shell ff-future-shell--cyber">
+  <brightrail-graph
+    kind="radial"
+    surface="dark"
+    [radialValue]="72"
+    [height]="200"
+    ariaLabel="System load"
+  />
+</div>`,
+  futuristicHolo: `<div class="ff-future-shell ff-future-shell--holo">
+  <brightrail-graph
+    kind="donut"
+    surface="dark"
+    [segments]="channelSegments"
+    [height]="200"
+    ariaLabel="Channel mix"
+  />
+</div>`,
 } as const;
 
-export const GRAPH_DOC_SECTION_COUNT = 10;
+export const GRAPH_DOC_SECTION_COUNT = 11;
 
 export const GRAPH_HTML_EXAMPLES = `<!-- Your component owns the data -->
 <brightrail-graph
