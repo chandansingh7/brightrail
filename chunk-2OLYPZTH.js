@@ -1,0 +1,1 @@
+function a(n){let o={};for(let[r,e]of Object.entries(n))o[r]=e();return o}function c(n,o){if(!n||typeof n!="object")return!1;let r=n,e=!1;for(let[t,s]of Object.entries(o))Object.prototype.hasOwnProperty.call(r,t)&&(s.set(r[t]),e=!0);return e}export{a,c as b};

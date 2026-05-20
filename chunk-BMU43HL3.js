@@ -1,0 +1,88 @@
+import{a as v}from"./chunk-ZPUNR46Q.js";import{a as h}from"./chunk-M6LXW2BJ.js";import"./chunk-IDAQBNPQ.js";import{e as m}from"./chunk-B3LO3J2X.js";import{d as u,g as f,p as b}from"./chunk-3JJTVFT5.js";import"./chunk-GGN7H5D7.js";import{Ca as d,Ua as n,Va as a,Wa as t,Xa as r,rb as l,sb as g,ta as e}from"./chunk-GSG23AZM.js";var k={typeInline:`<brightrail-date-picker
+  type="inline"
+  [labelPosition]="'none'"
+  [fullWidth]="true"
+  [(ngModel)]="singleDate"
+/>`,typePopup:`<brightrail-date-picker
+  [labelPosition]="'none'"
+  [fullWidth]="true"
+  [(ngModel)]="singleDate"
+/>`,typeRange:`<brightrail-date-picker
+  type="range"
+  [labelPosition]="'none'"
+  [fullWidth]="true"
+  [(ngModel)]="rangeDate"
+/>`,typeMonth:`<brightrail-date-picker
+  type="month"
+  [labelPosition]="'none'"
+  [fullWidth]="true"
+  [(ngModel)]="monthDate"
+/>`,appearanceFilled:`<brightrail-date-picker appearance="filled" [labelPosition]="'none'" [fullWidth]="true" [(ngModel)]="singleDate" />`,appearanceSoft:`<brightrail-date-picker appearance="soft" [labelPosition]="'none'" [fullWidth]="true" [(ngModel)]="singleDate" />`,appearanceOutlined:`<brightrail-date-picker appearance="outlined" [labelPosition]="'none'" [fullWidth]="true" [(ngModel)]="singleDate" />`,appearanceTonal:`<brightrail-date-picker appearance="tonal" [labelPosition]="'none'" [fullWidth]="true" [(ngModel)]="singleDate" />`,sizeSm:`<brightrail-date-picker size="sm" [labelPosition]="'none'" [fullWidth]="true" [(ngModel)]="singleDate" />`,sizeMd:`<brightrail-date-picker size="md" [labelPosition]="'none'" [fullWidth]="true" [(ngModel)]="singleDate" />`,sizeLg:`<brightrail-date-picker size="lg" [labelPosition]="'none'" [fullWidth]="true" [(ngModel)]="singleDate" />`,stateDefault:`<brightrail-date-picker [labelPosition]="'none'" [fullWidth]="true" [(ngModel)]="singleDate" />`,stateHover:`<brightrail-date-picker class="dp-hover" [labelPosition]="'none'" [fullWidth]="true" [(ngModel)]="singleDate" />`,stateFocused:`<brightrail-date-picker class="dp-focus" [labelPosition]="'none'" [fullWidth]="true" [(ngModel)]="singleDate" />`,stateDisabled:`<brightrail-date-picker [disabled]="true" [labelPosition]="'none'" [fullWidth]="true" [(ngModel)]="singleDate" />`,singleOpen:`<brightrail-date-picker
+  [labelPosition]="'none'"
+  [open]="true"
+  [fullWidth]="true"
+  [(ngModel)]="singleDate"
+/>`,rangeOpen:`<brightrail-date-picker
+  type="range"
+  [labelPosition]="'none'"
+  [open]="true"
+  [fullWidth]="true"
+  [(ngModel)]="rangeDate"
+/>`,timePickerMock:`<!-- Time picker companion field -->
+<div class="time-field">
+  <label>Time</label>
+  <input type="time" value="10:30" />
+</div>`,dateTimeMock:`<!-- Date & time composite -->
+<div class="datetime-field">
+  <brightrail-date-picker [labelPosition]="'none'" [(ngModel)]="singleDate" />
+  <input type="time" value="10:30" />
+</div>`,time24HourMock:`<div class="time-field time-field--24h">
+  <label>24-hour time</label>
+  <input type="time" value="22:30" />
+</div>`,validationError:`<brightrail-date-picker
+  status="error"
+  helperText="Please enter a valid date."
+  [labelPosition]="'none'"
+  [fullWidth]="true"
+  [(ngModel)]="singleDate"
+/>`,validationHelper:`<brightrail-date-picker
+  helperText="Select a check-out date."
+  [labelPosition]="'none'"
+  [fullWidth]="true"
+  [(ngModel)]="singleDate"
+/>`,validationDisabledDates:`<brightrail-date-picker
+  [disableWeekends]="true"
+  [open]="true"
+  [labelPosition]="'none'"
+  [fullWidth]="true"
+  [(ngModel)]="singleDate"
+/>`,enterpriseBooking:`<brightrail-date-picker
+  type="range"
+  label="Check-in / Check-out"
+  helperText="7 nights selected"
+  [fullWidth]="true"
+  [(ngModel)]="bookingRange"
+/>`,enterpriseReportFilters:`<brightrail-date-picker
+  type="range"
+  label="From / To"
+  [fullWidth]="true"
+  [(ngModel)]="rangeDate"
+/>`,enterpriseRenewal:`<brightrail-date-picker
+  type="month"
+  label="Next renewal"
+  helperText="You will be billed on this date."
+  [fullWidth]="true"
+  [(ngModel)]="monthDate"
+/>`,futuristicGlass:`<div class="dp-glass-shell">
+  <brightrail-date-picker [labelPosition]="'none'" [fullWidth]="true" [(ngModel)]="singleDate" />
+</div>`,futuristicGradient:`<div class="dp-gradient-shell">
+  <brightrail-date-picker [labelPosition]="'none'" [fullWidth]="true" [(ngModel)]="singleDate" />
+</div>`};var M=`<brightrail-date-picker
+  type="range"
+  appearance="outlined"
+  label="Check-in / Check-out"
+  helperText="7 nights selected"
+  [open]="true"
+  [fullWidth]="true"
+  [(ngModel)]="bookingRange"
+/>`;var s=class p{s=k;singleDate=new Date(2026,4,20);monthDate=new Date(2026,4,1);rangeDate={start:new Date(2026,4,12),end:new Date(2026,4,20)};bookingRange={start:new Date(2026,4,12),end:new Date(2026,4,20)};static \u0275fac=function(o){return new(o||p)};static \u0275cmp=d({type:p,selectors:[["app-date-picker-variation-catalog"]],decls:112,vars:105,consts:[[1,"dpvc-block"],[1,"dpvc-block__h"],[1,"dpvc-grid"],["label","Inline calendar",3,"snippet"],["type","inline",3,"labelPosition","fullWidth","ngModel"],["label","Input with popup",3,"snippet"],[3,"labelPosition","fullWidth","ngModel"],["label","Range picker",3,"snippet"],["type","range",3,"labelPosition","fullWidth","ngModel"],["label","Month picker",3,"snippet"],["type","month",3,"labelPosition","fullWidth","ngModel"],["label","Filled",3,"snippet"],["appearance","filled",3,"labelPosition","fullWidth","ngModel"],["label","Soft",3,"snippet"],["appearance","soft",3,"labelPosition","fullWidth","ngModel"],["label","Outlined",3,"snippet"],["appearance","outlined",3,"labelPosition","fullWidth","ngModel"],["label","Tonal",3,"snippet"],["appearance","tonal",3,"labelPosition","fullWidth","ngModel"],["label","Compact",3,"snippet"],["size","sm",3,"labelPosition","fullWidth","ngModel"],["label","Medium (default)",3,"snippet"],["size","md",3,"labelPosition","fullWidth","ngModel"],["label","Large",3,"snippet"],["size","lg",3,"labelPosition","fullWidth","ngModel"],["label","Default",3,"snippet"],["label","Hover","hint","Simulated hover class",3,"snippet"],[1,"dpvc-hover",3,"labelPosition","fullWidth","ngModel"],["label","Focused","hint","Simulated focus class",3,"snippet"],[1,"dpvc-focus",3,"labelPosition","fullWidth","ngModel"],["label","Disabled",3,"snippet"],[3,"disabled","labelPosition","fullWidth","ngModel"],["label","Open calendar",3,"snippet"],[3,"labelPosition","open","fullWidth","ngModel"],["label","Open range calendar",3,"snippet"],["type","range",3,"labelPosition","open","fullWidth","ngModel"],["label","Time picker",3,"snippet"],[1,"dpvc-mock-field"],["label","Date & time picker",3,"snippet"],["label","24-hour time",3,"snippet"],[1,"dpvc-grid","dpvc-grid--wide"],["label","Error state",3,"snippet"],["status","error","helperText","Please enter a valid date.",3,"labelPosition","fullWidth","ngModel"],["label","Helper text",3,"snippet"],["helperText","Select a check-out date.",3,"labelPosition","fullWidth","ngModel"],["label","Disabled dates",3,"snippet"],[3,"disableWeekends","open","labelPosition","fullWidth","ngModel"],[1,"dpvc-stack"],["label","Booking form",3,"snippet"],["type","range","label","Check-in / Check-out","helperText","7 nights selected",3,"fullWidth","ngModel"],["label","Report filters",3,"snippet"],["type","range","label","From / To",3,"fullWidth","ngModel"],["label","Subscription / renewal",3,"snippet"],["type","month","label","Next renewal","helperText","You will be billed on this date.",3,"fullWidth","ngModel"],["label","Glassmorphism",3,"snippet"],[1,"dpvc-future","dpvc-future--glass"],[1,"dpvc-future__title"],["label","Gradient accent",3,"snippet"],[1,"dpvc-future","dpvc-future--gradient"]],template:function(o,i){o&1&&(a(0,"section",0)(1,"h2",1),l(2,"1. Core date picker types"),t(),a(3,"div",2)(4,"app-catalog-variation-tile",3),r(5,"brightrail-date-picker",4),t(),a(6,"app-catalog-variation-tile",5),r(7,"brightrail-date-picker",6),t(),a(8,"app-catalog-variation-tile",7),r(9,"brightrail-date-picker",8),t(),a(10,"app-catalog-variation-tile",9),r(11,"brightrail-date-picker",10),t()()(),a(12,"section",0)(13,"h2",1),l(14,"2. Appearances"),t(),a(15,"div",2)(16,"app-catalog-variation-tile",11),r(17,"brightrail-date-picker",12),t(),a(18,"app-catalog-variation-tile",13),r(19,"brightrail-date-picker",14),t(),a(20,"app-catalog-variation-tile",15),r(21,"brightrail-date-picker",16),t(),a(22,"app-catalog-variation-tile",17),r(23,"brightrail-date-picker",18),t()()(),a(24,"section",0)(25,"h2",1),l(26,"3. Sizes"),t(),a(27,"div",2)(28,"app-catalog-variation-tile",19),r(29,"brightrail-date-picker",20),t(),a(30,"app-catalog-variation-tile",21),r(31,"brightrail-date-picker",22),t(),a(32,"app-catalog-variation-tile",23),r(33,"brightrail-date-picker",24),t()()(),a(34,"section",0)(35,"h2",1),l(36,"4. States"),t(),a(37,"div",2)(38,"app-catalog-variation-tile",25),r(39,"brightrail-date-picker",6),t(),a(40,"app-catalog-variation-tile",26),r(41,"brightrail-date-picker",27),t(),a(42,"app-catalog-variation-tile",28),r(43,"brightrail-date-picker",29),t(),a(44,"app-catalog-variation-tile",30),r(45,"brightrail-date-picker",31),t()()(),a(46,"section",0)(47,"h2",1),l(48,"5. Single date"),t(),a(49,"app-catalog-variation-tile",32),r(50,"brightrail-date-picker",33),t()(),a(51,"section",0)(52,"h2",1),l(53,"6. Date range"),t(),a(54,"app-catalog-variation-tile",34),r(55,"brightrail-date-picker",35),t()(),a(56,"section",0)(57,"h2",1),l(58,"7. With time / date & time"),t(),a(59,"div",2)(60,"app-catalog-variation-tile",36)(61,"div",37)(62,"span"),l(63,"Time picker"),t(),a(64,"span"),l(65,"10:30 AM"),t()()(),a(66,"app-catalog-variation-tile",38)(67,"div",37)(68,"span"),l(69,"Date & time picker"),t(),a(70,"span"),l(71,"May 20, 2026 \xB7 10:30 AM"),t()()(),a(72,"app-catalog-variation-tile",39)(73,"div",37)(74,"span"),l(75,"24-hour time"),t(),a(76,"span"),l(77,"22:30"),t()()()()(),a(78,"section",0)(79,"h2",1),l(80,"8. Validation & disabled dates"),t(),a(81,"div",40)(82,"app-catalog-variation-tile",41),r(83,"brightrail-date-picker",42),t(),a(84,"app-catalog-variation-tile",43),r(85,"brightrail-date-picker",44),t(),a(86,"app-catalog-variation-tile",45),r(87,"brightrail-date-picker",46),t()()(),a(88,"section",0)(89,"h2",1),l(90,"9. Enterprise patterns"),t(),a(91,"div",47)(92,"app-catalog-variation-tile",48),r(93,"brightrail-date-picker",49),t(),a(94,"app-catalog-variation-tile",50),r(95,"brightrail-date-picker",51),t(),a(96,"app-catalog-variation-tile",52),r(97,"brightrail-date-picker",53),t()()(),a(98,"section",0)(99,"h2",1),l(100,"10. Futuristic date picker designs"),t(),a(101,"div",2)(102,"app-catalog-variation-tile",54)(103,"div",55)(104,"div",56),l(105,"Glassmorphism"),t(),r(106,"brightrail-date-picker",6),t()(),a(107,"app-catalog-variation-tile",57)(108,"div",58)(109,"div",56),l(110,"Gradient accent"),t(),r(111,"brightrail-date-picker",6),t()()()()),o&2&&(e(4),n("snippet",i.s.typeInline),e(),n("labelPosition","none")("fullWidth",!0)("ngModel",i.singleDate),e(),n("snippet",i.s.typePopup),e(),n("labelPosition","none")("fullWidth",!0)("ngModel",i.singleDate),e(),n("snippet",i.s.typeRange),e(),n("labelPosition","none")("fullWidth",!0)("ngModel",i.rangeDate),e(),n("snippet",i.s.typeMonth),e(),n("labelPosition","none")("fullWidth",!0)("ngModel",i.monthDate),e(5),n("snippet",i.s.appearanceFilled),e(),n("labelPosition","none")("fullWidth",!0)("ngModel",i.singleDate),e(),n("snippet",i.s.appearanceSoft),e(),n("labelPosition","none")("fullWidth",!0)("ngModel",i.singleDate),e(),n("snippet",i.s.appearanceOutlined),e(),n("labelPosition","none")("fullWidth",!0)("ngModel",i.singleDate),e(),n("snippet",i.s.appearanceTonal),e(),n("labelPosition","none")("fullWidth",!0)("ngModel",i.singleDate),e(5),n("snippet",i.s.sizeSm),e(),n("labelPosition","none")("fullWidth",!0)("ngModel",i.singleDate),e(),n("snippet",i.s.sizeMd),e(),n("labelPosition","none")("fullWidth",!0)("ngModel",i.singleDate),e(),n("snippet",i.s.sizeLg),e(),n("labelPosition","none")("fullWidth",!0)("ngModel",i.singleDate),e(5),n("snippet",i.s.stateDefault),e(),n("labelPosition","none")("fullWidth",!0)("ngModel",i.singleDate),e(),n("snippet",i.s.stateHover),e(),n("labelPosition","none")("fullWidth",!0)("ngModel",i.singleDate),e(),n("snippet",i.s.stateFocused),e(),n("labelPosition","none")("fullWidth",!0)("ngModel",i.singleDate),e(),n("snippet",i.s.stateDisabled),e(),n("disabled",!0)("labelPosition","none")("fullWidth",!0)("ngModel",i.singleDate),e(4),n("snippet",i.s.singleOpen),e(),n("labelPosition","none")("open",!0)("fullWidth",!0)("ngModel",i.singleDate),e(4),n("snippet",i.s.rangeOpen),e(),n("labelPosition","none")("open",!0)("fullWidth",!0)("ngModel",i.rangeDate),e(5),n("snippet",i.s.timePickerMock),e(6),n("snippet",i.s.dateTimeMock),e(6),n("snippet",i.s.time24HourMock),e(10),n("snippet",i.s.validationError),e(),n("labelPosition","none")("fullWidth",!0)("ngModel",i.singleDate),e(),n("snippet",i.s.validationHelper),e(),n("labelPosition","none")("fullWidth",!0)("ngModel",i.singleDate),e(),n("snippet",i.s.validationDisabledDates),e(),n("disableWeekends",!0)("open",!0)("labelPosition","none")("fullWidth",!0)("ngModel",i.singleDate),e(5),n("snippet",i.s.enterpriseBooking),e(),n("fullWidth",!0)("ngModel",i.bookingRange),e(),n("snippet",i.s.enterpriseReportFilters),e(),n("fullWidth",!0)("ngModel",i.rangeDate),e(),n("snippet",i.s.enterpriseRenewal),e(),n("fullWidth",!0)("ngModel",i.monthDate),e(5),n("snippet",i.s.futuristicGlass),e(4),n("labelPosition","none")("fullWidth",!0)("ngModel",i.singleDate),e(),n("snippet",i.s.futuristicGradient),e(4),n("labelPosition","none")("fullWidth",!0)("ngModel",i.singleDate))},dependencies:[b,u,f,h,v],styles:["[_nghost-%COMP%]{display:block}.dpvc-block[_ngcontent-%COMP%]{margin-bottom:1.35rem}.dpvc-block__h[_ngcontent-%COMP%]{margin:0 0 .5rem;font-size:.95rem;font-weight:700}.dpvc-grid[_ngcontent-%COMP%]{display:grid;gap:.65rem;grid-template-columns:repeat(auto-fill,minmax(13rem,1fr))}.dpvc-grid--wide[_ngcontent-%COMP%]{grid-template-columns:repeat(auto-fill,minmax(16rem,1fr))}.dpvc-stack[_ngcontent-%COMP%]{display:flex;flex-direction:column;gap:.75rem}.dpvc-mock-field[_ngcontent-%COMP%]{width:100%;border:1px solid var(--ff-border, #e2e8f0);border-radius:.55rem;padding:.55rem .65rem;display:flex;align-items:center;justify-content:space-between;gap:.6rem;font-size:.78rem;color:var(--ff-text-core, #334155);background:var(--ff-surface, #fff)}.dpvc-future[_ngcontent-%COMP%]{width:100%;border:1px solid var(--ff-border, #e2e8f0);border-radius:.6rem;padding:.55rem}.dpvc-future__title[_ngcontent-%COMP%]{font-size:.73rem;color:var(--ff-muted, #64748b);margin-bottom:.35rem}.dpvc-future--glass[_ngcontent-%COMP%]{background:linear-gradient(135deg,#ffffffb3,#e9f0ffb8);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}.dpvc-future--gradient[_ngcontent-%COMP%]{background:linear-gradient(90deg,#f3e8ffa6,#e9f4ffa6)}[_nghost-%COMP%]     .dpvc-hover .br-date-picker-field{background:var(--ff-surface-muted, #f8fbff)}[_nghost-%COMP%]     .dpvc-focus .br-date-picker-field{outline:2px solid var(--ff-brand, #2563eb);outline-offset:1px}"],changeDetection:0})};var P=class p{htmlExamples=M;static \u0275fac=function(o){return new(o||p)};static \u0275cmp=d({type:p,selectors:[["app-date-picker-catalog-overview"]],decls:31,vars:1,consts:[[1,"cco"],[1,"cco-hero"],[1,"cco-hero__eyebrow"],[1,"cco-hero__links"],["routerLink","..",1,"cco-link"],["routerLink","/variations",1,"cco-link"],["aria-labelledby","cco-dp-html",1,"cco-code-block"],["id","cco-dp-html"],[1,"cco-code-block__hint"],[1,"cco-pre"]],template:function(o,i){o&1&&(a(0,"div",0)(1,"header",1)(2,"p",2),l(3,"Brightrail \xB7 Date picker \xB7 Variation catalog"),t(),a(4,"h1"),l(5,"Date picker types & variations"),t(),a(6,"p"),l(7," Ten reference sections with live ngModel demos, open calendar states, and enterprise patterns. Click any tile for "),a(8,"strong"),l(9,"View code"),t(),l(10,", then "),a(11,"strong"),l(12,"Copy code"),t(),l(13," (import from "),a(14,"code"),l(15,"brightrail"),t(),l(16,"). "),t(),a(17,"p",3)(18,"a",4),l(19,"\u2190 Date picker playground (live settings)"),t(),a(20,"a",5),l(21,"All variation catalogs"),t()()(),r(22,"app-date-picker-variation-catalog"),a(23,"section",6)(24,"h2",7),l(25,"Date picker HTML examples"),t(),a(26,"p",8),l(27,"Typical booking range picker with helper text and open calendar."),t(),a(28,"pre",9)(29,"code"),l(30),t()()()()),o&2&&(e(30),g(i.htmlExamples))},dependencies:[m,s],styles:["[_nghost-%COMP%]{flex:1 1 auto;min-height:0;overflow:auto}.cco[_ngcontent-%COMP%]{padding:1rem 1.25rem 1.5rem}.cco-hero__eyebrow[_ngcontent-%COMP%]{margin:0 0 .25rem;font-size:.75rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ff-muted, #64748b)}.cco-hero[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%]{margin:0;font-size:1.5rem}.cco-hero[_ngcontent-%COMP%]   p[_ngcontent-%COMP%]{margin:.35rem 0 .5rem;color:var(--ff-muted, #64748b)}.cco-hero__links[_ngcontent-%COMP%]{display:flex;flex-wrap:wrap;gap:.75rem 1.25rem}.cco-link[_ngcontent-%COMP%]{color:var(--ff-accent, #2563eb);text-decoration:none;font-weight:600}.cco-code-block[_ngcontent-%COMP%]{margin:1.5rem 0 0;padding-top:1rem;border-top:1px solid var(--ff-border, #e2e8f0)}.cco-code-block[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%]{font-size:1.1rem;margin:0 0 .35rem}.cco-code-block__hint[_ngcontent-%COMP%]{margin:0 0 .65rem;font-size:.8125rem;color:var(--ff-muted, #64748b)}.cco-pre[_ngcontent-%COMP%]{margin:0;padding:.85rem;border-radius:.5rem;background:var(--ff-surface-muted, #f1f3f4);border:1px solid var(--ff-border, #e2e8f0);overflow:auto;font-size:.8rem}"],changeDetection:0})};export{P as DatePickerCatalogOverviewComponent};
