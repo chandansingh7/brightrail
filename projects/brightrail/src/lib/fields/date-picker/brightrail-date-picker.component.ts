@@ -5,11 +5,13 @@ import {
   ElementRef,
   afterNextRender,
   computed,
+  effect,
   forwardRef,
   inject,
   input,
   output,
   signal,
+  untracked,
 } from '@angular/core';
 import { BRIGHTRAIL_FX_SHELL_HOST } from '../../futuristic/brightrail-futuristic-host';
 import { DOCUMENT, NgStyle } from '@angular/common';
@@ -43,6 +45,7 @@ import {
   isDateGridNavigationKey,
   stepDateGridIndex,
 } from '../../platform/brightrail-date-grid-keyboard.utils';
+import { BrightrailAnchoredPanelController } from '../../platform/brightrail-anchored-panel.controller';
 
 export type {
   BrightrailDateFormatId,
@@ -106,6 +109,7 @@ export class BrightrailDatePickerComponent implements ControlValueAccessor {
   private readonly host = inject(ElementRef<HTMLElement>);
   private readonly document = inject(DOCUMENT);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly anchoredPanel = new BrightrailAnchoredPanelController(this.document, this.destroyRef);
 
   /** `single` — one day; `range` — start/end; `month` — month+year; `inline` — always-visible calendar. */
   readonly type = input<BrightrailDatePickerType>('single');
@@ -342,6 +346,36 @@ export class BrightrailDatePickerComponent implements ControlValueAccessor {
   readonly monthPickerYear = computed(() => this.viewMonth().getFullYear());
 
   constructor() {
+    effect(() => {
+      const popupVisible =
+        this.type() !== 'inline' && (this.panelOpen() || this.open());
+      if (!popupVisible) {
+        this.anchoredPanel.detach();
+        return;
+      }
+      untracked(() => {
+        queueMicrotask(() => {
+          const stillVisible =
+            this.type() !== 'inline' && (this.panelOpen() || this.open());
+          if (!stillVisible) {
+            return;
+          }
+          const control = this.host.nativeElement.querySelector('.br-dp__control') as HTMLElement | null;
+          const panel = this.host.nativeElement.querySelector(
+            '.br-dp__panel:not(.br-dp__panel--inline)',
+          ) as HTMLElement | null;
+          if (control && panel) {
+            this.anchoredPanel.attach(control, panel, {
+              gap: 6,
+              maxHeight: 420,
+              zIndex: 1100,
+              viewportPadding: 8,
+            });
+          }
+        });
+      });
+    });
+
     afterNextRender(() => {
       fromEvent(this.document, 'click', { capture: true })
         .pipe(takeUntilDestroyed(this.destroyRef))
@@ -356,7 +390,10 @@ export class BrightrailDatePickerComponent implements ControlValueAccessor {
           if (!(t instanceof Node)) {
             return;
           }
-          if (!this.host.nativeElement.contains(t)) {
+          const inside = this.anchoredPanel.isAttached()
+            ? this.anchoredPanel.contains(t)
+            : this.anchoredPanel.contains(t, this.host.nativeElement);
+          if (!inside) {
             this.closePanelWithoutCommit();
           }
         });

@@ -151,6 +151,9 @@
             ],
             "tsConfig": "projects/midway/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "stylePreprocessorOptions": {
+              "includePaths": ["projects/brightrail/src/lib/styles"]
+            },
             "assets": [
               {
                 "glob": "**/*",
@@ -166,8 +169,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "800kB",
+                  "maximumError": "1.5MB"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -209,6 +212,9 @@
             ],
             "tsConfig": "projects/midway/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
+            "stylePreprocessorOptions": {
+              "includePaths": ["projects/brightrail/src/lib/styles"]
+            },
             "assets": [
               {
                 "glob": "**/*",

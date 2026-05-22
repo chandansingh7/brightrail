@@ -6,11 +6,9 @@ import {
 } from '@angular/core';
 
 import { BrightrailMenuComponent } from './brightrail-menu.component';
-import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 @Directive({
   selector: '[brightrailMenuTrigger]',
-  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   host: {
     '[attr.aria-haspopup]': "'menu'",

@@ -39,6 +39,7 @@ import {
   resolveListboxKeyAction,
   stepListboxIndex,
 } from '../../platform/brightrail-listbox-keyboard.utils';
+import { BrightrailAnchoredPanelController } from '../../platform/brightrail-anchored-panel.controller';
 
 const DEFAULT_STATUS_HINTS: Record<Exclude<BrightrailTextFieldStatus, 'none'>, string> = {
   success: 'Looks good!',
@@ -181,6 +182,7 @@ const DEFAULT_STATUS_HINTS: Record<Exclude<BrightrailTextFieldStatus, 'none'>, s
               [id]="listboxId()"
               role="listbox"
               (keydown)="onPanelKeydown($event)"
+              (click)="onPanelClick($event)"
             >
               <ng-content select=".br-select-panel" />
             </div>
@@ -216,6 +218,7 @@ export class BrightrailSelectComponent implements ControlValueAccessor {
   private readonly host = inject(ElementRef<HTMLElement>);
   private readonly document = inject(DOCUMENT);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly anchoredPanel = new BrightrailAnchoredPanelController(this.document, this.destroyRef);
 
   readonly appearance = input<BrightrailTextFieldAppearance>('outlined');
   readonly status = input<BrightrailTextFieldStatus>('none');
@@ -363,6 +366,31 @@ export class BrightrailSelectComponent implements ControlValueAccessor {
 
   constructor() {
     effect(() => {
+      const open = this.isOpen();
+      if (!open) {
+        this.anchoredPanel.detach();
+        return;
+      }
+      untracked(() => {
+        queueMicrotask(() => {
+          if (!this.isOpen()) {
+            return;
+          }
+          const control = this.host.nativeElement.querySelector('.br-select__control') as HTMLElement | null;
+          const panel = this.document.getElementById(this.listboxId()) as HTMLElement | null;
+          if (control && panel) {
+            this.anchoredPanel.attach(control, panel, {
+              gap: 2,
+              maxHeight: 256,
+              zIndex: 1100,
+              viewportPadding: 8,
+            });
+          }
+        });
+      });
+    });
+
+    effect(() => {
       if (this.isOpen()) {
         untracked(() => queueMicrotask(() => this.syncListboxOptions()));
       } else {
@@ -392,7 +420,7 @@ export class BrightrailSelectComponent implements ControlValueAccessor {
           if (!(t instanceof Node)) {
             return;
           }
-          if (!this.host.nativeElement.contains(t)) {
+          if (!this.anchoredPanel.contains(t, this.host.nativeElement)) {
             this.isOpen.set(false);
           }
         });
@@ -453,6 +481,14 @@ export class BrightrailSelectComponent implements ControlValueAccessor {
 
   onPanelKeydown(ev: KeyboardEvent): void {
     this.handleListboxKeydown(ev, false);
+  }
+
+  onPanelClick(ev: MouseEvent): void {
+    const option = (ev.target as HTMLElement | null)?.closest('.br-select-option, [role="option"]');
+    if (option) {
+      this.isOpen.set(false);
+      this.onTouched();
+    }
   }
 
   private handleListboxKeydown(ev: KeyboardEvent, fromTrigger: boolean): void {
@@ -527,9 +563,7 @@ export class BrightrailSelectComponent implements ControlValueAccessor {
   }
 
   private syncListboxOptions(): void {
-    const panel = this.host.nativeElement.querySelector(
-      `#${CSS.escape(this.listboxId())}`,
-    ) as HTMLElement | null;
+    const panel = this.document.getElementById(this.listboxId()) as HTMLElement | null;
     if (!panel) {
       this.listboxOptionsCache = [];
       this.activeOptionIndex.set(-1);

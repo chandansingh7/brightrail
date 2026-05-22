@@ -29,6 +29,7 @@ import {
   resolveListboxKeyAction,
   stepListboxIndex,
 } from '../../platform/brightrail-listbox-keyboard.utils';
+import { BrightrailAnchoredPanelController } from '../../platform/brightrail-anchored-panel.controller';
 
 @Component({
   selector: 'brightrail-combobox',
@@ -57,6 +58,7 @@ export class BrightrailComboboxComponent implements ControlValueAccessor {
   private readonly host = inject(ElementRef<HTMLElement>);
   private readonly document = inject(DOCUMENT);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly anchoredPanel = new BrightrailAnchoredPanelController(this.document, this.destroyRef);
 
   readonly options = input<BrightrailComboboxOption[]>([]);
   readonly placeholder = input('Search or select…');
@@ -118,6 +120,31 @@ export class BrightrailComboboxComponent implements ControlValueAccessor {
 
   constructor() {
     effect(() => {
+      const open = this.isOpen();
+      if (!open) {
+        this.anchoredPanel.detach();
+        return;
+      }
+      untracked(() => {
+        queueMicrotask(() => {
+          if (!this.isOpen()) {
+            return;
+          }
+          const control = this.host.nativeElement.querySelector('.br-combobox__control') as HTMLElement | null;
+          const panel = this.document.getElementById(this.listboxId()) as HTMLElement | null;
+          if (control && panel) {
+            this.anchoredPanel.attach(control, panel, {
+              gap: 4,
+              maxHeight: 224,
+              zIndex: 1100,
+              viewportPadding: 8,
+            });
+          }
+        });
+      });
+    });
+
+    effect(() => {
       this.filteredOptions();
       if (this.isOpen()) {
         untracked(() => queueMicrotask(() => this.syncListboxOptions()));
@@ -140,7 +167,7 @@ export class BrightrailComboboxComponent implements ControlValueAccessor {
             return;
           }
           const target = ev.target;
-          if (!(target instanceof Node) || !this.host.nativeElement.contains(target)) {
+          if (!(target instanceof Node) || !this.anchoredPanel.contains(target, this.host.nativeElement)) {
             this.closePanel();
           }
         });
@@ -280,9 +307,7 @@ export class BrightrailComboboxComponent implements ControlValueAccessor {
   }
 
   private syncListboxOptions(): void {
-    const panel = this.host.nativeElement.querySelector(
-      `#${CSS.escape(this.listboxId())}`,
-    ) as HTMLElement | null;
+    const panel = this.document.getElementById(this.listboxId()) as HTMLElement | null;
     if (!panel) {
       this.listboxOptionsCache = [];
       this.activeOptionIndex.set(-1);

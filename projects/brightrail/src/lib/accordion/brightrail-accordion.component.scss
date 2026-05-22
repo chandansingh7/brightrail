@@ -13,7 +13,7 @@
 .br-acc--bordered {
   border: 1px solid var(--br-color-border-strong, #{br.$br-color-border-strong});
   border-radius: var(--br-radius-md, #{br.$br-radius-md});
-  overflow: hidden;
+  overflow: visible;
 }
 
 .br-acc--subtle .br-acc-item {

@@ -1,11 +1,9 @@
 import { Directive, ElementRef, HostBinding, HostListener, OnInit, inject, input } from '@angular/core';
 
 import { BrightrailPopoverComponent } from './brightrail-popover.component';
-import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 @Directive({
   selector: '[brightrailPopoverTrigger]',
-  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   host: { '[attr.aria-haspopup]': "'dialog'" },
 })

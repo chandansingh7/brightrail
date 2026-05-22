@@ -76,6 +76,13 @@
   box-shadow: 0 8px 24px rgb(60 64 67 / 16%);
 }
 
+.br-combobox__panel.br-anchored-panel {
+  position: fixed;
+  top: auto;
+  left: auto;
+  right: auto;
+}
+
 .br-combobox__option {
   display: block;
   width: 100%;

@@ -111,11 +111,46 @@ button.br-tf__wrap:disabled {
     0 0 0 1px rgba(0, 0, 0, 0.04);
 }
 
+.br-select__panel .br-select-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.br-select__panel.br-anchored-panel {
+  position: fixed;
+  top: auto;
+  left: auto;
+  right: auto;
+}
+
 /* Consumers can mark projected option rows with `.br-select-option` for standardized overflow behavior. */
 .br-select__panel .br-select-option {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0.45rem 0.6rem;
+  border: 0;
+  border-radius: var(--br-radius-sm, 0.25rem);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.875rem;
+  text-align: left;
+  cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.br-select__panel .br-select-option:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--br-color-primary, #1e6bdd) 10%, transparent);
+}
+
+.br-select__panel .br-select-option:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 .br-select__panel--wrap .br-select-option {
