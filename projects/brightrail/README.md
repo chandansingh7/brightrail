@@ -17,14 +17,34 @@ Brightrail ships CDK focus trap, live announcer, and WAI-ARIA keyboard patterns 
 
 ```ts
 import { ApplicationConfig } from '@angular/core';
-import { provideBrightrailPlatform } from 'brightrail';
+import { provideBrightrailI18n, provideBrightrailPlatform } from 'brightrail';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideBrightrailPlatform()],
+  providers: [
+    provideBrightrailPlatform(),
+    provideBrightrailI18n({ locale: 'en', direction: 'ltr' }),
+  ],
 };
 ```
 
 You do **not** need to wire focus traps, ARIA roles, or listbox keyboard handlers yourself — use Brightrail components as documented.
+
+## Secondary entry points
+
+| Import | Purpose |
+|--------|---------|
+| `brightrail` | Components, platform, i18n |
+| `brightrail/testing` | Unit-test harnesses (`BrightrailButtonHarness`, …) |
+| `brightrail/governance` | Adoption checklist, semver policy, operational CI gates |
+| `brightrail/styles/brightrail-root.scss` | Global tokens + RTL helpers |
+
+## ng-add schematic
+
+```bash
+ng add brightrail
+```
+
+Wires `provideBrightrailPlatform()` and `provideBrightrailI18n()` into `app.config.ts` when possible and documents the stylesheet import.
 
 ## Build & publish
 
@@ -41,9 +61,10 @@ ng test brightrail
 
 ### CI quality gates
 
-GitHub Actions runs library unit tests, consumer package verification (`verify:package`), **axe accessibility scans** on every Funfair `a11y-preview/:componentId` route, and **Playwright visual baselines** for each playground preview.
+GitHub Actions runs library unit tests, consumer package verification (`verify:package`), claims verification (`verify:claims`), **axe accessibility scans** on every Funfair `a11y-preview/:componentId` route, and **Playwright visual baselines** for each playground preview.
 
 ```bash
+npm run verify:claims         # platform registry, CI wiring, secondary entries
 npm run e2e:gates             # all gates (same as CI)
 ./scripts/e2e-gates.sh --a11y # semantic axe only
 npm run e2e:update-snapshots  # after intentional visual changes

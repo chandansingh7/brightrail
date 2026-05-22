@@ -29,6 +29,9 @@ jobs:
       - name: Consumer package verification
         run: npm run verify:package
 
+      - name: Library claims verification (platform, CI, secondary entries)
+        run: npm run verify:claims
+
   a11y:
     runs-on: ubuntu-latest
     steps:

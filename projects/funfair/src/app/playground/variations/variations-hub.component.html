@@ -15,6 +15,9 @@
   <section class="vh-grid" aria-label="Component variation catalogs">
     @for (entry of entries; track entry.playgroundRoute) {
       <article class="vh-card" [class.vh-card--muted]="entry.catalogStatus === 'playground-only'">
+        <div class="vh-card__preview" aria-hidden="true">
+          <app-variation-catalog-hub-preview [playgroundRoute]="entry.playgroundRoute" />
+        </div>
         <h2 class="vh-card__title">{{ entry.label }}</h2>
         <p class="vh-card__selector"><code>{{ entry.selector }}</code></p>
         @if (entry.docFolder) {

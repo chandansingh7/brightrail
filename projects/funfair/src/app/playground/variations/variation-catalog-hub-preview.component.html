@@ -1,0 +1,208 @@
+<div
+  class="vchp"
+  [class.vchp--fallback]="usesFallbackIcon(playgroundRoute())"
+  [class.vchp--wide]="playgroundRoute() === 'table' || playgroundRoute() === 'graph'"
+  [class.vchp--tall]="playgroundRoute() === 'accordion' || playgroundRoute() === 'timeline'"
+>
+  @switch (playgroundRoute()) {
+    @case ('accordion') {
+      <brightrail-accordion appearance="compact" size="sm" [defaultExpandedIndex]="null">
+        <brightrail-accordion-item title="Section one"><p>Collapsed preview.</p></brightrail-accordion-item>
+      </brightrail-accordion>
+    }
+    @case ('alerts') {
+      <brightrail-alert appearance="soft" status="info" size="sm" corners="rounded">
+        <div brightrailAlertTitle>Info</div>
+        <div brightrailAlertMessage>Informational alert preview.</div>
+      </brightrail-alert>
+    }
+    @case ('avatar') {
+      <brightrail-avatar kind="initials" name="Jamie Doe" shape="circle" size="lg" tone="primary" />
+    }
+    @case ('badge') {
+      <brightrail-badge variant="soft" color="primary" label="New" />
+    }
+    @case ('breadcrumb') {
+      <brightrail-breadcrumb [items]="breadcrumbItems" separator="chevron" [withIcons]="false" />
+    }
+    @case ('button') {
+      <brightrail-button variant="primary" size="sm">Save</brightrail-button>
+    }
+    @case ('card') {
+      <brightrail-card appearance="elevated" size="sm">
+        <brightrail-card-header><h3>Card</h3></brightrail-card-header>
+        <brightrail-card-content><p>Preview surface.</p></brightrail-card-content>
+      </brightrail-card>
+    }
+    @case ('checkbox') {
+      <brightrail-checkbox label="Remember me" [checked]="true" />
+    }
+    @case ('chip') {
+      <brightrail-chip variant="filled" color="primary" label="Product" />
+    }
+    @case ('combobox') {
+      <brightrail-combobox
+        [ngModelOptions]="ngModelStandalone"
+        [options]="comboboxOptions"
+        placeholder="Search…"
+        [(ngModel)]="hubComboboxValue"
+      />
+    }
+    @case ('date-picker') {
+      <brightrail-date-picker
+        type="month"
+        [labelPosition]="'none'"
+        [fullWidth]="true"
+        [ngModel]="hubDateValue"
+        [ngModelOptions]="ngModelStandalone"
+      />
+    }
+    @case ('file-upload') {
+      <brightrail-file-upload variant="compact" placeholder="Choose file" [showCloudIcon]="false" [showFileList]="false" />
+    }
+    @case ('empty-state') {
+      <brightrail-empty-state title="No results" description="Try adjusting filters." [compact]="true" />
+    }
+    @case ('form-field') {
+      <brightrail-form-field label="Email" hint="Work email only.">
+        <brightrail-text-field
+          appearance="outlined"
+          labelPosition="none"
+          placeholder="you@example.com"
+          [(ngModel)]="hubTextValue"
+          [ngModelOptions]="ngModelStandalone"
+        />
+      </brightrail-form-field>
+    }
+    @case ('graph') {
+      <brightrail-graph kind="line" [series]="graphSeries" [height]="72" [showLegend]="false" />
+    }
+    @case ('menu') {
+      <button type="button" class="vchp__menu-trigger" [brightrailMenuTrigger]="hubMenu">Actions</button>
+      <brightrail-menu #hubMenu>
+        <brightrail-menu-item label="Edit" />
+        <brightrail-menu-item label="Duplicate" />
+      </brightrail-menu>
+    }
+    @case ('pagination') {
+      <brightrail-pagination [length]="48" [pageIndex]="1" [pageSize]="10" variant="numbered" [compact]="true" />
+    }
+    @case ('progress') {
+      <brightrail-progress type="linear" [value]="68" label="Upload" [showPercentage]="true" />
+    }
+    @case ('radio') {
+      <brightrail-radio name="hub-radio" value="a" label="Option A" [checked]="true" />
+    }
+    @case ('select') {
+      <brightrail-select
+        [ngModelOptions]="ngModelStandalone"
+        appearance="outlined"
+        size="sm"
+        label="Country"
+        labelPosition="top"
+        placeholder="Select"
+        [displayText]="selectDisplayText"
+        [(ngModel)]="hubSelectValue"
+      />
+    }
+    @case ('skeleton') {
+      <div class="vchp__skeleton-row">
+        <brightrail-skeleton variant="circular" />
+        <brightrail-skeleton variant="text" />
+      </div>
+    }
+    @case ('slider') {
+      <brightrail-slider [min]="0" [max]="100" [step]="1" [showValue]="true" ariaLabel="Volume" />
+    }
+    @case ('stepper') {
+      <brightrail-stepper [currentStep]="1">
+        <brightrail-step label="Details" />
+        <brightrail-step label="Review" />
+        <brightrail-step label="Done" />
+      </brightrail-stepper>
+    }
+    @case ('switch') {
+      <brightrail-switch label="Notifications" [checked]="true" />
+    }
+    @case ('table') {
+      <brightrail-table
+        variant="bordered"
+        density="compact"
+        [data]="tableRows"
+        [columns]="tableColumns"
+        ariaLabel="Table preview"
+      />
+    }
+    @case ('tabs') {
+      <brightrail-tabs appearance="underline" size="sm">
+        <brightrail-tab label="Overview" [active]="true">
+          <ng-template brightrailTabContent><p>Tab content.</p></ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Details">
+          <ng-template brightrailTabContent><p>More details.</p></ng-template>
+        </brightrail-tab>
+      </brightrail-tabs>
+    }
+    @case ('text-field') {
+      <brightrail-text-field
+        appearance="outlined"
+        label="Label"
+        placeholder="Placeholder"
+        [(ngModel)]="hubTextValue"
+        [ngModelOptions]="ngModelStandalone"
+      />
+    }
+    @case ('textarea') {
+      <brightrail-textarea
+        appearance="outlined"
+        label="Notes"
+        placeholder="Add notes…"
+        [rows]="2"
+        [(ngModel)]="hubTextareaValue"
+        [ngModelOptions]="ngModelStandalone"
+      />
+    }
+    @case ('timeline') {
+      <brightrail-timeline ariaLabel="Timeline preview">
+        <brightrail-timeline-item title="Started" status="completed" />
+        <brightrail-timeline-item title="In progress" status="current" />
+      </brightrail-timeline>
+    }
+    @case ('toast') {
+      <brightrail-toast variant="success" title="Saved" message="Changes published." />
+    }
+    @case ('tooltip') {
+      <brightrail-button
+        variant="outline"
+        size="sm"
+        iconLeft="info"
+        brightrailTooltip="Helpful tooltip preview."
+        brightrailTooltipPlacement="top"
+      >
+        Hover me
+      </brightrail-button>
+    }
+    @case ('tree') {
+      <brightrail-tree [nodes]="treeNodes" selectionMode="single" selectedId="project" />
+    }
+    @case ('popover') {
+      <brightrail-button variant="outline" size="sm" [brightrailPopoverTrigger]="hubPopover">Opts</brightrail-button>
+      <brightrail-popover #hubPopover><span>Filter panel</span></brightrail-popover>
+    }
+    @case ('rating') {
+      <brightrail-rating label="Score" [max]="5" />
+    }
+    @case ('rich-text-editor') {
+      <brightrail-rich-text-editor label="Notes" placeholder="Write…" />
+    }
+    @case ('tree-table') {
+      <brightrail-tree-table [nodes]="treeTableNodes" selectedId="proj" ariaLabel="Preview" />
+    }
+    @case ('validation-summary') {
+      <brightrail-validation-summary [errors]="validationErrors" />
+    }
+    @default {
+      <brightrail-button-icon class="vchp__fallback-icon" [name]="$any(fallbackIcon(playgroundRoute()))" />
+    }
+  }
+</div>

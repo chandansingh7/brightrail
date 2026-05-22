@@ -6,6 +6,11 @@
       "glob": "**/*.scss",
       "input": "./src/lib/styles",
       "output": "/styles"
+    },
+    {
+      "glob": "**/*",
+      "input": "./schematics",
+      "output": "/schematics"
     }
   ],
   "lib": {

@@ -8,6 +8,7 @@
 @use './tokens' as *;
 @use './breakpoints' as bp;
 @use './tooltip-portal';
+@use './rtl';
 
 :root {
   @include br-root-theme;

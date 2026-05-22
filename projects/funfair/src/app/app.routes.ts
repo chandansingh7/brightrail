@@ -775,6 +775,120 @@ export const routes: Routes = [
         ],
       },
       {
+        path: 'popover',
+        loadComponent: () =>
+          import('./playground/popover/popover-section.component').then((m) => m.PopoverSectionComponent),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./playground/popover/popover-playground.component').then((m) => m.PopoverPlaygroundComponent),
+          },
+        ],
+      },
+      {
+        path: 'rating',
+        loadComponent: () =>
+          import('./playground/rating/rating-section.component').then((m) => m.RatingSectionComponent),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./playground/rating/rating-playground.component').then((m) => m.RatingPlaygroundComponent),
+          },
+        ],
+      },
+      {
+        path: 'rich-text-editor',
+        loadComponent: () =>
+          import('./playground/rich-text-editor/rich-text-editor-section.component').then(
+            (m) => m.RichTextEditorSectionComponent,
+          ),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./playground/rich-text-editor/rich-text-editor-playground.component').then(
+                (m) => m.RichTextEditorPlaygroundComponent,
+              ),
+          },
+        ],
+      },
+      {
+        path: 'tree-table',
+        loadComponent: () =>
+          import('./playground/tree-table/tree-table-section.component').then((m) => m.TreeTableSectionComponent),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./playground/tree-table/tree-table-playground.component').then(
+                (m) => m.TreeTablePlaygroundComponent,
+              ),
+          },
+        ],
+      },
+      {
+        path: 'holographic-panel',
+        loadComponent: () =>
+          import('./playground/holographic-panel/holographic-panel-section.component').then(
+            (m) => m.HolographicPanelSectionComponent,
+          ),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./playground/holographic-panel/holographic-panel-playground.component').then(
+                (m) => m.HolographicPanelPlaygroundComponent,
+              ),
+          },
+        ],
+      },
+      {
+        path: 'neural-graph',
+        loadComponent: () =>
+          import('./playground/neural-graph/neural-graph-section.component').then((m) => m.NeuralGraphSectionComponent),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./playground/neural-graph/neural-graph-playground.component').then(
+                (m) => m.NeuralGraphPlaygroundComponent,
+              ),
+          },
+        ],
+      },
+      {
+        path: 'cyber-badge',
+        loadComponent: () =>
+          import('./playground/cyber-badge/cyber-badge-section.component').then((m) => m.CyberBadgeSectionComponent),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./playground/cyber-badge/cyber-badge-playground.component').then(
+                (m) => m.CyberBadgePlaygroundComponent,
+              ),
+          },
+        ],
+      },
+      {
+        path: 'quantum-stepper',
+        loadComponent: () =>
+          import('./playground/quantum-stepper/quantum-stepper-section.component').then(
+            (m) => m.QuantumStepperSectionComponent,
+          ),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./playground/quantum-stepper/quantum-stepper-playground.component').then(
+                (m) => m.QuantumStepperPlaygroundComponent,
+              ),
+          },
+        ],
+      },
+      {
         path: 'validation-summary',
         loadComponent: () =>
           import('./playground/validation-summary/validation-summary-section.component').then(

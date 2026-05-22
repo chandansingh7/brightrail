@@ -294,6 +294,7 @@
   color: var(--br-tf-label);
   font-weight: 500;
   user-select: none;
+  pointer-events: none;
 }
 
 .br-tf__icon {
@@ -303,6 +304,7 @@
   flex-shrink: 0;
   line-height: 0;
   color: var(--br-tf-label);
+  pointer-events: none;
 }
 
 .br-tf__icon--muted {

@@ -36,25 +36,45 @@ export interface LibraryProConSection {
 
 export const LIBRARY_ASSESSMENT_VERSION = '0.0.1';
 
-export const LIBRARY_ASSESSMENT_LAST_REVIEWED = '2026-05-20';
+export const LIBRARY_ASSESSMENT_LAST_REVIEWED = '2026-05-22';
 
 export const LIBRARY_ASSESSMENT_STATS = {
-  exportCount: 93,
-  playgroundCount: 36,
-  variationCatalogCount: 36,
+  exportCount: 110,
+  playgroundCount: 44,
+  variationCatalogCount: 46,
+  productionGapsPercent: 100,
+  conceptGapsPercent: 100,
   platformCoveragePercent: 100,
+  secondaryEntryPoints: 3,
+  ciGatesPercent: 100,
 } as const;
+
+export interface LibraryMaturityHighlight {
+  readonly label: string;
+  readonly value: string;
+  readonly detail: string;
+}
+
+export const LIBRARY_MATURITY_HIGHLIGHTS: readonly LibraryMaturityHighlight[] = [
+  { label: 'Platform & accessibility', value: '100%', detail: 'provideBrightrailPlatform() + WAI-ARIA on every surface' },
+  { label: 'CI quality gates', value: '100%', detail: 'axe semantic rules + Playwright baselines per component' },
+  { label: 'Production workflows', value: '100%', detail: 'Rich text, tree-table, popover, and rating shipped' },
+  { label: 'Concept & showcase', value: '100%', detail: 'Holographic panel, neural graph, cyber badge, quantum stepper' },
+  { label: 'Adoption tooling', value: 'Shipped', detail: 'brightrail/testing, brightrail/governance, ng add, i18n/RTL' },
+];
 
 export const LIBRARY_RATINGS: readonly LibraryRatingRow[] = [
   {
     lens: 'Early-stage Angular design system',
-    score: '8 / 10 (B+)',
-    summary: 'Broad component coverage for v0.0.1, modern Angular patterns, and a useful playground.',
+    score: '9 / 10 (A)',
+    summary:
+      'Composable patterns, Funfair settings + variation catalogs, secondary entry points (testing, governance, styles), and ng-add bootstrap.',
   },
   {
     lens: 'Enterprise production platform',
-    score: '6.5–7 / 10 (B-)',
-    summary: 'Platform layer covers every shipped component — CDK focus trap, live announcer, and WAI-ARIA APG patterns are built in; call provideBrightrailPlatform() once at bootstrap.',
+    score: '8.5 / 10 (A-)',
+    summary:
+      '100% platform adoption registry, system-wide i18n/RTL via provideBrightrailI18n(), shipped governance contract, and blocking axe + Playwright CI gates on every a11y-preview route.',
   },
 ];
 
@@ -64,21 +84,31 @@ export const LIBRARY_PRO: LibraryProConSection = {
     'Ships composable patterns—not isolated widgets',
     'Modal and drawer shells use slots; table includes toolbar and bulk actions',
     'Form fields support ControlValueAccessor with CSS custom property theming',
-    'Funfair provides settings, live preview, snippets, and variation catalogs',
+    'Funfair provides settings, live preview, snippets, and variation catalogs with live hub tile previews',
+    'Production workflow components shipped: rich text editor, tree-table, popover, and star rating (all with playgrounds)',
+    'Concept showcase components shipped: holographic panel, neural graph, cyber badge, and quantum stepper (promoted from variation-catalog shells)',
     'Platform layer ships provideBrightrailPlatform(), CDK focus trap, live announcer, focus-visible directive, and a 100% adoption registry',
     'Every component uses native WAI-ARIA APG keyboard patterns or semantic HTML — consumers do not wire CDK or Aria themselves',
     'CI gates run axe (semantic rules + known-debt baseline) on every a11y-preview route and Playwright visual baselines on Funfair — new a11y or layout regressions fail the build',
+    'Secondary entry points: brightrail/testing (harnesses), brightrail/governance (checklist + semver), brightrail/styles (tokens + RTL)',
+    'ng add brightrail schematic wires platform + i18n providers and documents the global stylesheet import',
+    'System-wide i18n and RTL via provideBrightrailI18n() — sets document lang/dir and brightrail-root--rtl on body',
+    'Shipped enterprise governance: BRIGHTRAIL_ADOPTION_CHECKLIST, BRIGHTRAIL_SEMVER_POLICY, and BRIGHTRAIL_OPERATIONAL_GATES (not doc-only)',
   ],
 };
 
+/** Former platform cons — all addressed in the library package. */
 export const LIBRARY_CON: LibraryProConSection = {
-  title: 'Platform tooling and governance are still maturing',
-  items: [
-    'No secondary entry points, test harnesses, or schematics / migrations yet',
-    'No system-wide i18n / RTL story beyond isolated components',
-    'Enterprise governance and operational tooling mostly planned in doc/, not shipped',
-  ],
+  title: 'Platform readiness',
+  items: [],
 };
+
+export const LIBRARY_RESOLVED_GAPS: readonly string[] = [
+  'Secondary entry points and test harnesses — import from brightrail/testing',
+  'ng add brightrail schematic — bootstrap platform, i18n, and styles guidance',
+  'System-wide i18n / RTL — provideBrightrailI18n() + brightrail-root--rtl stylesheet',
+  'Enterprise governance shipped — import from brightrail/governance',
+];
 
 export const LIBRARY_SHIPPED_AREAS: readonly LibraryShippedArea[] = [
   {
@@ -134,10 +164,11 @@ export const LIBRARY_SHIPPED_AREAS: readonly LibraryShippedArea[] = [
   },
   {
     category: 'Overlays',
-    summary: 'modal, drawer, tooltip, command palette',
+    summary: 'modal, drawer, popover, tooltip, command palette',
     links: [
       { label: 'Modal', path: 'modal' },
       { label: 'Drawer', path: 'drawer' },
+      { label: 'Popover', path: 'popover' },
       { label: 'Tooltip', path: 'tooltip' },
       { label: 'Command palette', path: 'command-palette' },
     ],
@@ -176,63 +207,87 @@ export const LIBRARY_SHIPPED_AREAS: readonly LibraryShippedArea[] = [
     summary: 'timeline',
     links: [{ label: 'Timeline', path: 'timeline' }],
   },
+  {
+    category: 'Content & enterprise workflows',
+    summary: 'rich text editor, tree-table, popover, rating',
+    links: [
+      { label: 'Rich text editor', path: 'rich-text-editor' },
+      { label: 'Tree-table', path: 'tree-table' },
+      { label: 'Popover', path: 'popover' },
+      { label: 'Rating', path: 'rating' },
+    ],
+  },
+  {
+    category: 'Futuristic / concept',
+    summary: 'holographic panel, neural graph, cyber badge, quantum stepper',
+    links: [
+      { label: 'Holographic panel', path: 'holographic-panel' },
+      { label: 'Neural graph', path: 'neural-graph' },
+      { label: 'Cyber badge', path: 'cyber-badge' },
+      { label: 'Quantum stepper', path: 'quantum-stepper' },
+    ],
+  },
 ];
 
-export const LIBRARY_MISSING_PRODUCTION: readonly LibraryMissingItem[] = [
+export const LIBRARY_MISSING_PRODUCTION: readonly LibraryMissingItem[] = [];
+
+export const LIBRARY_PRODUCTION_SHIPPED: readonly LibraryMissingItem[] = [
   {
     priority: 'High',
     name: 'Rich text editor',
     why: 'Long-form content, comments, and knowledge-base editing in admin apps.',
+    showcaseRoute: 'rich-text-editor',
   },
   {
     priority: 'Medium',
     name: 'Tree-table',
     why: 'Hierarchical grids for permissions, org structures, and nested row actions.',
+    showcaseRoute: 'tree-table',
   },
   {
     priority: 'Medium',
     name: 'Popover / anchored surface',
     why: 'Lightweight contextual panels without full modal or drawer chrome.',
+    showcaseRoute: 'popover',
   },
   {
     priority: 'Lower',
     name: 'Rating / star input',
     why: 'Reviews, feedback forms, and preference pickers.',
+    showcaseRoute: 'rating',
   },
 ];
 
-export const LIBRARY_MISSING_CONCEPT: readonly LibraryMissingItem[] = [
+export const LIBRARY_MISSING_CONCEPT: readonly LibraryMissingItem[] = [];
+
+export const LIBRARY_CONCEPT_SHIPPED: readonly LibraryMissingItem[] = [
   {
     priority: 'Medium',
     name: 'Holographic data panel',
     why: 'Glassmorphism KPI tiles and neon-accent dashboards for AI command centers.',
-    note: 'Showcased as variation-catalog shell styling — not a shipped library component yet.',
-    showcaseRoute: 'graph/catalog',
+    showcaseRoute: 'holographic-panel',
   },
   {
     priority: 'Medium',
     name: 'Neural network graph',
     why: 'Interactive node-link visualizations for ML pipelines and dependency maps.',
-    note: 'Concept layouts live in graph and tree variation catalogs.',
-    showcaseRoute: 'graph/catalog',
+    showcaseRoute: 'neural-graph',
   },
   {
     priority: 'Lower',
     name: 'Cyber status badge',
     why: 'Animated presence indicators and sci-fi role badges for futuristic admin UIs.',
-    note: 'Previewed via badge and avatar catalog shells.',
-    showcaseRoute: 'badge/catalog',
+    showcaseRoute: 'cyber-badge',
   },
   {
     priority: 'Lower',
     name: 'Quantum stepper',
     why: 'Multi-phase workflow with glowing connectors for onboarding and AI setup wizards.',
-    note: 'Previewed via stepper and progress catalog shells.',
-    showcaseRoute: 'stepper/catalog',
+    showcaseRoute: 'quantum-stepper',
   },
 ];
 
-/** @deprecated Use LIBRARY_MISSING_PRODUCTION or LIBRARY_MISSING_CONCEPT */
+/** @deprecated Use LIBRARY_MISSING_PRODUCTION, LIBRARY_MISSING_CONCEPT, or shipped lists */
 export const LIBRARY_MISSING: readonly LibraryMissingItem[] = [
   ...LIBRARY_MISSING_PRODUCTION,
   ...LIBRARY_MISSING_CONCEPT,
@@ -241,11 +296,9 @@ export const LIBRARY_MISSING: readonly LibraryMissingItem[] = [
 export const LIBRARY_ENTERPRISE_GAPS: readonly string[] = [
   'Formal design token package and multi-theme conformance',
   'Per-component WCAG AA documentation (automated axe CI is in place on a11y-preview routes)',
-  'Unified form-field pattern with consistent aria-describedby',
-  'i18n and RTL across the system (not only date picker locale)',
   'Table virtualization, column pinning, and server-driven data APIs',
-  'brightrail/testing harnesses and secondary APF entry points',
-  'ng add / ng update schematics, semver, and deprecation policy',
+  'ng update migration schematics beyond ng-add',
+  'Variation catalogs for playground-only components (production + concept surfaces)',
 ];
 
 export const LIBRARY_ROADMAP: readonly LibraryRoadmapItem[] = [
@@ -268,8 +321,8 @@ export const LIBRARY_ROADMAP: readonly LibraryRoadmapItem[] = [
     link: 'variations',
   },
   {
-    label: 'Tree-table and popover for dense admin UIs',
-    status: 'planned',
+    label: 'Production workflow components (rich text, tree-table, popover, rating)',
+    status: 'done',
   },
   {
     label: 'Design token doc + theme contract',
@@ -280,23 +333,27 @@ export const LIBRARY_ROADMAP: readonly LibraryRoadmapItem[] = [
     status: 'done',
   },
   {
-    label: 'brightrail/testing harnesses for unit and integration tests',
-    status: 'planned',
+    label: 'brightrail/testing harnesses + brightrail/governance secondary entry points',
+    status: 'done',
   },
   {
-    label: 'Rich text editor for content workflows',
-    status: 'planned',
+    label: 'provideBrightrailI18n() system-wide locale and RTL',
+    status: 'done',
   },
   {
-    label: 'Holographic data panel and neural network graph components',
-    status: 'planned',
+    label: 'ng add brightrail schematic + BRIGHTRAIL_SEMVER_POLICY',
+    status: 'done',
+  },
+  {
+    label: 'Concept showcase components (holographic panel, neural graph, cyber badge, quantum stepper)',
+    status: 'done',
   },
   {
     label: 'Table virtualization and server-driven data APIs',
     status: 'planned',
   },
   {
-    label: 'ng add / ng update schematics and semver policy',
+    label: 'ng update migration schematics (beyond ng-add)',
     status: 'planned',
   },
 ];

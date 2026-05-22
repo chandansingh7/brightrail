@@ -1,0 +1,8 @@
+@use '../playground-snippet-panel.scss' as *;
+
+:host {
+  display: block;
+  width: 100%;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+}

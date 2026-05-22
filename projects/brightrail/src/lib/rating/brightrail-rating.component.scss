@@ -1,0 +1,41 @@
+.br-rating {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.br-rating__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--br-color-text, #0f172a);
+}
+
+.br-rating__stars {
+  display: inline-flex;
+  gap: 0.15rem;
+}
+
+.br-rating__star {
+  border: none;
+  background: transparent;
+  font-size: 1.35rem;
+  line-height: 1;
+  color: var(--br-color-border-strong, #cbd5e1);
+  cursor: pointer;
+  padding: 0.1rem;
+}
+
+.br-rating__star--active {
+  color: var(--br-color-warning, #f59e0b);
+}
+
+.br-rating__star:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.br-rating__star:focus-visible {
+  outline: 2px solid var(--br-color-primary, #2563eb);
+  outline-offset: 2px;
+  border-radius: 0.2rem;
+}

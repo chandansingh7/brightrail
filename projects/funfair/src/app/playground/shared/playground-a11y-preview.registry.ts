@@ -21,10 +21,26 @@ export const PLAYGROUND_A11Y_PREVIEW_LOADERS: Record<string, () => Promise<Type<
   'file-upload': () => import('../file-upload/file-upload-playground.component').then((m) => m.FileUploadPlaygroundComponent),
   'form-field': () => import('../form-field/form-field-playground.component').then((m) => m.FormFieldPlaygroundComponent),
   graph: () => import('../graph/graph-playground.component').then((m) => m.GraphPlaygroundComponent),
+  'holographic-panel': () =>
+    import('../holographic-panel/holographic-panel-playground.component').then(
+      (m) => m.HolographicPanelPlaygroundComponent,
+    ),
+  'neural-graph': () =>
+    import('../neural-graph/neural-graph-playground.component').then((m) => m.NeuralGraphPlaygroundComponent),
+  'cyber-badge': () =>
+    import('../cyber-badge/cyber-badge-playground.component').then((m) => m.CyberBadgePlaygroundComponent),
+  'quantum-stepper': () =>
+    import('../quantum-stepper/quantum-stepper-playground.component').then((m) => m.QuantumStepperPlaygroundComponent),
   menu: () => import('../menu/menu-playground.component').then((m) => m.MenuPlaygroundComponent),
   modal: () => import('../modal/modal-playground.component').then((m) => m.ModalPlaygroundComponent),
   pagination: () => import('../pagination/pagination-playground.component').then((m) => m.PaginationPlaygroundComponent),
   progress: () => import('../progress/progress-playground.component').then((m) => m.ProgressPlaygroundComponent),
+  popover: () => import('../popover/popover-playground.component').then((m) => m.PopoverPlaygroundComponent),
+  rating: () => import('../rating/rating-playground.component').then((m) => m.RatingPlaygroundComponent),
+  'rich-text-editor': () =>
+    import('../rich-text-editor/rich-text-editor-playground.component').then(
+      (m) => m.RichTextEditorPlaygroundComponent,
+    ),
   radio: () => import('../radio/radio-playground.component').then((m) => m.RadioPlaygroundComponent),
   select: () => import('../select/select-playground.component').then((m) => m.SelectPlaygroundComponent),
   skeleton: () => import('../skeleton/skeleton-playground.component').then((m) => m.SkeletonPlaygroundComponent),
@@ -39,6 +55,8 @@ export const PLAYGROUND_A11Y_PREVIEW_LOADERS: Record<string, () => Promise<Type<
   toast: () => import('../toast/toast-playground.component').then((m) => m.ToastPlaygroundComponent),
   tooltip: () => import('../tooltip/tooltip-playground.component').then((m) => m.TooltipPlaygroundComponent),
   tree: () => import('../tree/tree-playground.component').then((m) => m.TreePlaygroundComponent),
+  'tree-table': () =>
+    import('../tree-table/tree-table-playground.component').then((m) => m.TreeTablePlaygroundComponent),
   'validation-summary': () =>
     import('../validation-summary/validation-summary-playground.component').then(
       (m) => m.ValidationSummaryPlaygroundComponent,

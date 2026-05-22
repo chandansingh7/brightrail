@@ -42,10 +42,20 @@
 }
 
 .vh-card {
+  display: flex;
+  flex-direction: column;
   padding: 1rem 1.05rem;
   border: 1px solid var(--ff-border, #e2e8f0);
   border-radius: 0.65rem;
   background: var(--ff-surface, #fff);
+}
+
+.vh-card__preview {
+  margin: 0 0 0.75rem;
+}
+
+.vh-card__preview app-variation-catalog-hub-preview {
+  display: block;
 }
 
 .vh-card--muted {

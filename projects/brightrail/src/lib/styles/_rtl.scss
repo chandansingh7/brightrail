@@ -1,0 +1,16 @@
+// System-wide RTL helpers — applied when provideBrightrailI18n({ direction: 'rtl' }) runs.
+
+body.brightrail-root--rtl {
+  direction: rtl;
+}
+
+body.brightrail-root--rtl brightrail-breadcrumb,
+body.brightrail-root--rtl brightrail-pagination,
+body.brightrail-root--rtl .br-tf__field-row--inline {
+  direction: rtl;
+}
+
+body.brightrail-root--rtl .br-select__panel,
+body.brightrail-root--rtl .br-combobox__panel {
+  text-align: right;
+}

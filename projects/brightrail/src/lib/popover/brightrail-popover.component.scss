@@ -1,0 +1,18 @@
+:host.br-popover-host {
+  position: fixed;
+  z-index: 1200;
+  inset: 0;
+  pointer-events: none;
+}
+
+.br-popover {
+  position: fixed;
+  pointer-events: auto;
+  min-width: 10rem;
+  max-width: 20rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--br-tf-border, #e2e8f0);
+  border-radius: var(--br-tf-radius, 0.5rem);
+  background: var(--br-color-surface, #fff);
+  box-shadow: 0 8px 24px rgb(15 23 42 / 12%);
+}

@@ -6,11 +6,12 @@ import {
   catalogRouteSegments,
   variationCatalogCoveragePercent,
 } from './variation-catalog-registry';
+import { VariationCatalogHubPreviewComponent } from './variation-catalog-hub-preview.component';
 
 @Component({
   selector: 'app-variations-hub',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, VariationCatalogHubPreviewComponent],
   templateUrl: './variations-hub.component.html',
   styleUrl: './variations-hub.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

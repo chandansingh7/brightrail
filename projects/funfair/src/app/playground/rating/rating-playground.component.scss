@@ -1,0 +1,7 @@
+@use '../playground-layout' as *;
+
+.rt-score {
+  margin: 0.75rem 0 0;
+  font-size: 0.82rem;
+  color: var(--ff-muted, #64748b);
+}

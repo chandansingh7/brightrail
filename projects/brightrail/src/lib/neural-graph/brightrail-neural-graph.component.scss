@@ -1,0 +1,40 @@
+.br-neural-graph {
+  margin: 0;
+  padding: 0.75rem;
+  border-radius: 0.85rem;
+  background: #0b1220;
+  border: 1px solid rgb(34 211 238 / 28%);
+  box-shadow: 0 0 20px rgb(34 211 238 / 12%);
+}
+
+.br-neural-graph__svg {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.br-neural-graph__edges {
+  stroke: rgb(34 211 238 / 55%);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.br-neural-graph__node-ring {
+  fill: rgb(15 23 42 / 95%);
+  stroke: rgb(139 92 246 / 85%);
+  stroke-width: 2;
+}
+
+.br-neural-graph__node-label {
+  font-size: 9px;
+  font-weight: 700;
+  fill: #e2e8f0;
+  pointer-events: none;
+}
+
+.br-neural-graph__caption {
+  margin: 0.5rem 0 0;
+  font-size: 0.75rem;
+  color: rgb(148 163 184 / 95%);
+}

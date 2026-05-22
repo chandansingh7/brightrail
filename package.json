@@ -11,6 +11,7 @@
     "build:midway": "ng build midway",
     "build:all": "ng build brightrail && ng build funfair && ng build midway",
     "verify:package": "ng build brightrail && npm install && ng build midway",
+    "verify:claims": "node scripts/verify-library-claims.mjs",
     "setup": "bash scripts/setup.sh",
     "dev:all": "bash scripts/build-and-run.sh",
     "deploy:pages": "bash scripts/deploy-gh-pages.sh",

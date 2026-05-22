@@ -367,6 +367,64 @@ export const BRIGHTRAIL_PLATFORM_ADOPTION: readonly BrightrailPlatformAdoptionEn
     notes: 'Stacked avatars with overflow count label.',
   },
 
+  // — Production workflows —
+  {
+    area: 'Content',
+    component: 'rich-text-editor',
+    cdk: ['FocusMonitor'],
+    angularAria: 'adopted',
+    notes: 'contenteditable surface with toolbar; role="textbox" and formatting controls.',
+  },
+  {
+    area: 'Data',
+    component: 'tree-table',
+    cdk: ['FocusMonitor'],
+    angularAria: 'adopted',
+    notes: 'role="treegrid" with expand/collapse toggles and row selection.',
+  },
+  {
+    area: 'Overlays',
+    component: 'popover',
+    cdk: ['FocusMonitor'],
+    angularAria: 'adopted',
+    notes: 'Anchored dialog panel with aria-expanded trigger wiring.',
+  },
+  {
+    area: 'Forms',
+    component: 'rating',
+    cdk: ['FocusMonitor'],
+    angularAria: 'adopted',
+    notes: 'role="radiogroup" star input with ControlValueAccessor.',
+  },
+  {
+    area: 'Futuristic',
+    component: 'holographic-panel',
+    cdk: [],
+    angularAria: 'adopted',
+    notes: presentational,
+  },
+  {
+    area: 'Futuristic',
+    component: 'neural-graph',
+    cdk: [],
+    angularAria: 'adopted',
+    notes: 'Decorative SVG node-link graph with semantic figure/figcaption.',
+  },
+  {
+    area: 'Futuristic',
+    component: 'cyber-badge',
+    cdk: [],
+    angularAria: 'adopted',
+    notes: 'role="status" presence badge with optional pulse animation.',
+  },
+  {
+    area: 'Futuristic',
+    component: 'quantum-stepper',
+    cdk: [],
+    angularAria: 'adopted',
+    notes: 'nav + ol workflow steps with completed/current visual states.',
+  },
+
   // — Misc —
   {
     area: 'Misc',

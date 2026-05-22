@@ -1,0 +1,39 @@
+<section class="bp-code" [attr.aria-labelledby]="headingId()">
+  <div class="bp-code__head">
+    <h2 [id]="headingId()" class="bp-code__title">Generated snippets</h2>
+    <div class="bp-code__tabs" role="tablist">
+      <button
+        type="button"
+        role="tab"
+        class="bp-tab"
+        [class.is-active]="activeTab() === 'html'"
+        [attr.aria-selected]="activeTab() === 'html'"
+        (click)="selectTab('html')"
+      >
+        HTML
+      </button>
+      <button
+        type="button"
+        role="tab"
+        class="bp-tab"
+        [class.is-active]="activeTab() === 'ts'"
+        [attr.aria-selected]="activeTab() === 'ts'"
+        (click)="selectTab('ts')"
+      >
+        TS
+      </button>
+      <button
+        type="button"
+        role="tab"
+        class="bp-tab"
+        [class.is-active]="activeTab() === 'scss'"
+        [attr.aria-selected]="activeTab() === 'scss'"
+        (click)="selectTab('scss')"
+      >
+        SCSS
+      </button>
+    </div>
+    <button type="button" class="bp-copy" (click)="copySnippet()">Copy</button>
+  </div>
+  <pre class="bp-pre" role="tabpanel"><code>{{ activeSnippet() }}</code></pre>
+</section>

@@ -1,0 +1,54 @@
+<div class="bp" [class.bp--a11y-preview-only]="previewOnly">
+  <div class="bp-grid">
+    <section class="bp-panel bp-panel--settings" aria-labelledby="tt-settings-title">
+      <div class="bp-settings-head">
+        <div class="bp-settings-head__start">
+          <h2 id="tt-settings-title" class="bp-settings-head__title">Component settings</h2>
+        </div>
+        <button type="button" class="bp-settings-reset" (click)="resetToDefaults()" title="Reset">
+          <span class="bp-sr-only">Reset tree-table settings</span>
+          <svg class="bp-settings-reset__icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M12 6V3L8 7l4 4V8c2.76 0 5 2.24 5 5 0 1.28-.48 2.45-1.26 3.35l1.41 1.41A6.96 6.96 0 0 0 19 13c0-3.87-3.13-7-7-7zm0 14c-2.76 0-5-2.24-5-5 0-1.28.48-2.45 1.26-3.35L6.85 10.24A6.96 6.96 0 0 0 5 13c0 3.87 3.13 7 7 7v3l4-4-4-4v3z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="bp-settings-block">
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Component</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" disabled><option>Tree-table</option></select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="bp-setting-row">
+          <span class="bp-setting-row__label">Theme</span>
+          <div class="bp-dropdown">
+            <select class="bp-dropdown__select" [ngModel]="themeService.theme()" (ngModelChange)="themeService.setTheme($event)" [ngModelOptions]="ngModelStandalone">
+              @for (opt of themeRowOptions; track opt.id) {
+                <option [value]="opt.id">{{ opt.label }}</option>
+              }
+            </select>
+            <span class="bp-dropdown__chev" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bp-panel bp-panel--preview" aria-labelledby="tt-preview-title">
+      <app-playground-preview-header titleId="tt-preview-title" componentId="tree-table" />
+      <div class="bp-preview-surface bp-preview-surface--stretch">
+        <div class="bp-preview-inner tt-preview-inner">
+          <brightrail-tree-table
+            ariaLabel="Organization permissions"
+            [nodes]="nodes"
+            [selectedId]="selectedId()"
+            (selectedIdChange)="selectedId.set($event)"
+          />
+          <p class="tt-selected">Selected row: {{ selectedId() }}</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <app-playground-snippet-dock headingId="tt-code-title" [htmlSnippet]="htmlSnippet()" [tsSnippet]="tsSnippet" />
+</div>

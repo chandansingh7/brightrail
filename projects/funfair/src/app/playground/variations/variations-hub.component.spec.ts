@@ -26,6 +26,11 @@ describe('VariationsHubComponent', () => {
     expect(fixture.nativeElement.textContent).toContain('brightrail-alert');
   });
 
+  it('shows a live preview on each catalog card', () => {
+    const previews = fixture.nativeElement.querySelectorAll('.vh-card__preview app-variation-catalog-hub-preview');
+    expect(previews.length).toBe(fixture.componentInstance.entries.length);
+  });
+
   it('builds multi-segment catalog router links', () => {
     expect(fixture.componentInstance.catalogRouteSegments('button/catalog')).toEqual([
       '/',

@@ -1,0 +1,32 @@
+.br-tt {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.br-tt th,
+.br-tt td {
+  padding: 0.45rem 0.65rem;
+  border-bottom: 1px solid var(--br-tf-border, #e2e8f0);
+  text-align: left;
+}
+
+.br-tt__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  margin-inline-end: 0.35rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--br-color-muted, #64748b);
+}
+
+.br-tt__toggle--spacer {
+  pointer-events: none;
+}
+
+.br-tt__row--selected {
+  background: color-mix(in srgb, var(--br-color-primary, #2563eb) 8%, transparent);
+}

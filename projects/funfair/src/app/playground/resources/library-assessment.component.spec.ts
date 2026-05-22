@@ -32,7 +32,10 @@ describe('LibraryAssessmentComponent', () => {
     expect(el.textContent).toContain('Library showcase');
     expect(el.querySelector('.res-page__stats')).toBeTruthy();
     expect(el.querySelectorAll('.la-chip-link').length).toBeGreaterThan(0);
-    expect(el.textContent).toContain('Production gaps');
+    expect(el.textContent).toContain('Production workflows');
+    expect(el.textContent).toContain('Concept & showcase');
+    expect(el.textContent).toContain('Platform readiness');
+    expect(el.querySelector('.la-maturity-grid')).toBeTruthy();
     expect(el.querySelectorAll('.la-pros-cons__list li').length).toBeGreaterThan(0);
   });
 });

@@ -1,6 +1,6 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withHashLocation } from '@angular/router';
-import { provideBrightrailPlatform } from 'brightrail';
+import { provideBrightrailI18n, provideBrightrailPlatform } from 'brightrail';
 
 import { routes } from './app.routes';
 
@@ -9,6 +9,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideBrightrailPlatform(),
+    provideBrightrailI18n(),
     // Hash routing avoids GitHub Pages "deep path" 404s for client-side routes.
     provideRouter(routes, withHashLocation())
   ]

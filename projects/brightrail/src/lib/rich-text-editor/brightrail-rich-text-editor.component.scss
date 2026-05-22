@@ -1,0 +1,53 @@
+.br-rte {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.br-rte__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.br-rte__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.br-rte__tool {
+  min-width: 2rem;
+  padding: 0.25rem 0.45rem;
+  border: 1px solid var(--br-tf-border, #e2e8f0);
+  border-radius: 0.35rem;
+  background: var(--br-color-surface-muted, #f8fafc);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.br-rte__surface {
+  min-height: 6rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--br-tf-border, #e2e8f0);
+  border-radius: var(--br-tf-radius, 0.5rem);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  outline: none;
+}
+
+.br-rte__surface:focus {
+  border-color: var(--br-color-primary, #2563eb);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--br-color-primary, #2563eb) 25%, transparent);
+}
+
+.br-rte__surface:empty::before {
+  content: attr(data-placeholder);
+  color: var(--br-tf-placeholder, #94a3b8);
+}
+
+.br-rte--disabled .br-rte__surface {
+  background: var(--br-tf-disabled-bg, #f1f5f9);
+  cursor: not-allowed;
+}

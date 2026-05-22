@@ -1,0 +1,98 @@
+:host {
+  display: block;
+}
+
+.vchp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5.25rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: 0.45rem;
+  background: color-mix(in srgb, var(--ff-muted, #64748b) 7%, transparent);
+  overflow: hidden;
+}
+
+.vchp--fallback {
+  background: color-mix(in srgb, var(--ff-brand, #2563eb) 8%, var(--ff-surface, #fff));
+}
+
+.vchp--wide,
+.vchp--tall {
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.vchp__fallback-icon {
+  width: 2rem;
+  height: 2rem;
+  font-size: 2rem;
+  color: var(--ff-brand, #2563eb);
+}
+
+.vchp__menu-trigger {
+  border: 1px solid var(--ff-border, #e2e8f0);
+  border-radius: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: var(--ff-surface, #fff);
+  color: var(--ff-text-core, #0f172a);
+  cursor: default;
+}
+
+.vchp__skeleton-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+}
+
+.vchp__skeleton-row brightrail-skeleton:last-child {
+  flex: 1;
+}
+
+:host ::ng-deep .vchp brightrail-accordion,
+:host ::ng-deep .vchp brightrail-breadcrumb,
+:host ::ng-deep .vchp brightrail-tabs,
+:host ::ng-deep .vchp brightrail-stepper,
+:host ::ng-deep .vchp brightrail-table,
+:host ::ng-deep .vchp brightrail-graph,
+:host ::ng-deep .vchp brightrail-timeline,
+:host ::ng-deep .vchp brightrail-tree,
+:host ::ng-deep .vchp brightrail-alert,
+:host ::ng-deep .vchp brightrail-card,
+:host ::ng-deep .vchp brightrail-text-field,
+:host ::ng-deep .vchp brightrail-select,
+:host ::ng-deep .vchp brightrail-combobox,
+:host ::ng-deep .vchp brightrail-form-field,
+:host ::ng-deep .vchp brightrail-textarea,
+:host ::ng-deep .vchp brightrail-date-picker,
+:host ::ng-deep .vchp brightrail-file-upload,
+:host ::ng-deep .vchp brightrail-pagination,
+:host ::ng-deep .vchp brightrail-progress,
+:host ::ng-deep .vchp brightrail-slider,
+:host ::ng-deep .vchp brightrail-validation-summary,
+:host ::ng-deep .vchp brightrail-empty-state {
+  width: 100%;
+  max-width: 100%;
+}
+
+:host ::ng-deep .vchp--wide brightrail-graph {
+  min-height: 4.5rem;
+}
+
+:host ::ng-deep .vchp--tall brightrail-accordion-item p,
+:host ::ng-deep .vchp--tall brightrail-timeline-item {
+  font-size: 0.72rem;
+}
+
+:host ::ng-deep .vchp brightrail-card h3 {
+  margin: 0;
+  font-size: 0.82rem;
+}
+
+:host ::ng-deep .vchp brightrail-card p {
+  margin: 0;
+  font-size: 0.72rem;
+}

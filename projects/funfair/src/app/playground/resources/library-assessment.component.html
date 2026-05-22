@@ -18,8 +18,8 @@
   <brightrail-page-header [bordered]="false">
     <h1 brightrailPageTitle>Brightrail library assessment</h1>
     <p brightrailPageSubtitle>
-      An honest snapshot of brightrail v{{ version }} — what works well today, what is still missing, and
-      what is needed for enterprise-grade applications.
+      Snapshot of brightrail v{{ version }} — shipped components, platform maturity, production workflows at
+      100%, and remaining enterprise-scale investments.
     </p>
   </brightrail-page-header>
 
@@ -38,8 +38,43 @@
       size="small"
       [label]="stats.platformCoveragePercent + '% platform a11y coverage'"
     />
-    <brightrail-badge variant="soft" color="primary" size="small" label="axe + visual CI gates" />
+    <brightrail-badge
+      variant="soft"
+      color="success"
+      size="small"
+      [label]="stats.ciGatesPercent + '% CI gates (axe + visual)'"
+    />
+    <brightrail-badge
+      variant="soft"
+      color="info"
+      size="small"
+      [label]="stats.secondaryEntryPoints + ' secondary entry points'"
+    />
+    <brightrail-badge
+      variant="soft"
+      color="success"
+      size="small"
+      [label]="stats.productionGapsPercent + '% production workflows'"
+    />
+    <brightrail-badge
+      variant="soft"
+      color="success"
+      size="small"
+      [label]="stats.conceptGapsPercent + '% concept & showcase'"
+    />
     <span class="res-page__stats-reviewed">Last reviewed {{ lastReviewed }}</span>
+  </div>
+
+  <div class="la-maturity-grid">
+    @for (pillar of maturityHighlights; track pillar.label) {
+      <brightrail-card appearance="filled" size="sm" [fullWidth]="true">
+        <brightrail-card-content>
+          <p class="la-maturity__label">{{ pillar.label }}</p>
+          <p class="la-maturity__value">{{ pillar.value }}</p>
+          <p class="la-maturity__detail">{{ pillar.detail }}</p>
+        </brightrail-card-content>
+      </brightrail-card>
+    }
   </div>
 
   <div class="res-page__stack la-stack">
@@ -64,7 +99,7 @@
 
     <brightrail-card appearance="outlined" [fullWidth]="true">
       <brightrail-card-header [withTitle]="true">
-        <span brightrailCardHeaderTitle>Pros and cons</span>
+        <span brightrailCardHeaderTitle>Strengths &amp; platform readiness</span>
       </brightrail-card-header>
       <brightrail-card-content>
         <div class="la-pros-cons__grid">
@@ -81,14 +116,27 @@
           </div>
           <div class="la-pros-cons__col la-pros-cons__col--con">
             <div class="la-pros-cons__head">
-              <brightrail-badge variant="soft" color="warning" size="small" label="Con" />
+              @if (con.items.length === 0) {
+                <brightrail-badge variant="soft" color="success" size="small" label="100% addressed" />
+              } @else {
+                <brightrail-badge variant="soft" color="warning" size="small" label="Con" />
+              }
               <h3 class="la-pros-cons__title">{{ con.title }}</h3>
             </div>
-            <ul class="la-pros-cons__list">
-              @for (item of con.items; track item) {
-                <li>{{ item }}</li>
-              }
-            </ul>
+            @if (con.items.length === 0) {
+              <p class="la-pros-cons__complete">All former platform gaps are shipped in the library package.</p>
+              <ul class="la-pros-cons__list la-pros-cons__list--resolved">
+                @for (item of resolvedGaps; track item) {
+                  <li>{{ item }}</li>
+                }
+              </ul>
+            } @else {
+              <ul class="la-pros-cons__list">
+                @for (item of con.items; track item) {
+                  <li>{{ item }}</li>
+                }
+              </ul>
+            }
           </div>
         </div>
       </brightrail-card-content>
@@ -114,9 +162,11 @@
                   <a [routerLink]="link.path" class="la-chip-link">
                     <brightrail-chip variant="soft" color="primary" size="compact" [label]="link.label" />
                   </a>
-                  <a [routerLink]="link.path + '/catalog'" class="la-chip-link">
-                    <brightrail-chip variant="outlined" color="neutral" size="compact" label="catalog" />
-                  </a>
+                  @if (hasCatalog(link.path)) {
+                    <a [routerLink]="link.path + '/catalog'" class="la-chip-link">
+                      <brightrail-chip variant="outlined" color="neutral" size="compact" label="catalog" />
+                    </a>
+                  }
                 }
               </div>
             </li>
@@ -127,19 +177,32 @@
 
     <brightrail-card appearance="outlined" [fullWidth]="true">
       <brightrail-card-header [withTitle]="true">
-        <span brightrailCardHeaderTitle>Production gaps</span>
+        <span brightrailCardHeaderTitle>Production workflows</span>
       </brightrail-card-header>
       <brightrail-card-content>
-        <p class="res-page__section-lead la-section-lead">
-          Components needed for typical enterprise admin and content workflows.
-        </p>
-        <brightrail-table
-          variant="bordered"
-          density="compact"
-          [columns]="productionColumns"
-          [data]="productionRows()"
-          [cellTemplates]="tableCellTemplates()"
-        />
+        @if (missingProduction.length === 0) {
+          <p class="res-page__section-lead la-section-lead">
+            All typical enterprise admin and content workflow components are shipped — open a playground below.
+          </p>
+          <brightrail-table
+            variant="bordered"
+            density="compact"
+            [columns]="productionShippedColumns"
+            [data]="productionShippedRows()"
+            [cellTemplates]="tableCellTemplates()"
+          />
+        } @else {
+          <p class="res-page__section-lead la-section-lead">
+            Components still needed for typical enterprise admin and content workflows.
+          </p>
+          <brightrail-table
+            variant="bordered"
+            density="compact"
+            [columns]="productionColumns"
+            [data]="productionRows()"
+            [cellTemplates]="tableCellTemplates()"
+          />
+        }
       </brightrail-card-content>
     </brightrail-card>
 
@@ -148,18 +211,31 @@
         <span brightrailCardHeaderTitle>Concept &amp; showcase ideas</span>
       </brightrail-card-header>
       <brightrail-card-content>
-        <p class="res-page__section-lead la-section-lead">
-          Futuristic patterns previewed in
-          <brightrail-button variant="link" size="sm" (click)="navigate('variations')">variation catalogs</brightrail-button>
-          — not shipped as library components yet.
-        </p>
-        <brightrail-table
-          variant="bordered"
-          density="compact"
-          [columns]="conceptColumns"
-          [data]="conceptRows()"
-          [cellTemplates]="tableCellTemplates()"
-        />
+        @if (missingConcept.length === 0) {
+          <p class="res-page__section-lead la-section-lead">
+            Futuristic patterns from variation catalogs are now first-class library components — open a playground below.
+          </p>
+          <brightrail-table
+            variant="bordered"
+            density="compact"
+            [columns]="conceptShippedColumns"
+            [data]="conceptShippedRows()"
+            [cellTemplates]="tableCellTemplates()"
+          />
+        } @else {
+          <p class="res-page__section-lead la-section-lead">
+            Futuristic patterns previewed in
+            <brightrail-button variant="link" size="sm" (click)="navigate('variations')">variation catalogs</brightrail-button>
+            — not shipped as library components yet.
+          </p>
+          <brightrail-table
+            variant="bordered"
+            density="compact"
+            [columns]="conceptColumns"
+            [data]="conceptRows()"
+            [cellTemplates]="tableCellTemplates()"
+          />
+        }
       </brightrail-card-content>
     </brightrail-card>
 
@@ -225,6 +301,14 @@
   @if (row['showcaseRoute']) {
     <brightrail-button variant="link" size="sm" (click)="navigate($any(row['showcaseRoute']))">
       View shell
+    </brightrail-button>
+  }
+</ng-template>
+
+<ng-template #playgroundCell let-row let-column="column">
+  @if (row['showcaseRoute']) {
+    <brightrail-button variant="link" size="sm" (click)="navigate($any(row['showcaseRoute']))">
+      Playground
     </brightrail-button>
   }
 </ng-template>

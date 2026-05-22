@@ -1,0 +1,11 @@
+@use '../playground-layout' as *;
+
+.qs-preview-surface {
+  background: #0b1220;
+  border-color: rgb(34 211 238 / 22%);
+}
+
+.qs-preview-inner {
+  width: 100%;
+  max-width: 32rem;
+}

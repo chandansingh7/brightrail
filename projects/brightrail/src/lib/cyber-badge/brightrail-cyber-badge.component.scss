@@ -1,0 +1,119 @@
+.br-cyber-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.45rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #e2e8f0;
+}
+
+.br-cyber-badge__frame {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.br-cyber-badge__corner {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-color: rgb(34 211 238 / 85%);
+  border-style: solid;
+}
+
+.br-cyber-badge__corner--tl {
+  top: 0;
+  left: 0;
+  border-width: 2px 0 0 2px;
+}
+
+.br-cyber-badge__corner--tr {
+  top: 0;
+  right: 0;
+  border-width: 2px 2px 0 0;
+}
+
+.br-cyber-badge__corner--bl {
+  bottom: 0;
+  left: 0;
+  border-width: 0 0 2px 2px;
+}
+
+.br-cyber-badge__corner--br {
+  bottom: 0;
+  right: 0;
+  border-width: 0 2px 2px 0;
+}
+
+.br-cyber-badge__dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: rgb(34 211 238);
+  box-shadow: 0 0 8px rgb(34 211 238 / 80%);
+}
+
+.br-cyber-badge__dot[data-status='offline'] {
+  background: #64748b;
+  box-shadow: none;
+}
+
+.br-cyber-badge__dot[data-status='busy'] {
+  background: #f43f5e;
+  box-shadow: 0 0 8px rgb(244 63 94 / 70%);
+}
+
+.br-cyber-badge__dot[data-status='away'] {
+  background: #f59e0b;
+  box-shadow: 0 0 8px rgb(245 158 11 / 70%);
+}
+
+.br-cyber-badge--pulse .br-cyber-badge__dot[data-status='online'] {
+  animation: br-cyber-badge-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes br-cyber-badge-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(0.85);
+  }
+}
+
+.br-cyber-badge--neon {
+  background: #0a0f1e;
+  border: 1px solid rgb(34 211 238 / 55%);
+  box-shadow: 0 0 14px rgb(34 211 238 / 30%);
+}
+
+.br-cyber-badge--holo {
+  background:
+    linear-gradient(120deg, rgb(99 102 241 / 35%), rgb(34 211 238 / 25%)),
+    #0f172a;
+  border: 1px solid rgb(255 255 255 / 18%);
+}
+
+.br-cyber-badge--glass {
+  background: linear-gradient(145deg, rgb(255 255 255 / 55%), rgb(255 255 255 / 18%));
+  border: 1px solid rgb(255 255 255 / 45%);
+  color: #0f172a;
+}
+
+.br-cyber-badge--cyber {
+  background:
+    linear-gradient(rgb(34 211 238 / 6%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(34 211 238 / 6%) 1px, transparent 1px),
+    #0b1220;
+  background-size: 14px 14px;
+  border: 1px solid rgb(34 211 238 / 30%);
+  padding: 0.45rem 0.75rem;
+}
