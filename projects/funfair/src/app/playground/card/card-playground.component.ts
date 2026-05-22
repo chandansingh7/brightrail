@@ -29,7 +29,7 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 /** Files in `projects/funfair/public/images`; copied to the app root as `/images/*`. */
@@ -235,7 +235,7 @@ export class CardPlaygroundComponent {
     }));
   }
 
-  readonly htmlSnippet = computed(() => this.buildHtml());
+  readonly htmlSnippet = computed(() => playgroundFxHtml(this.buildHtml(), this.previewFx()));
   readonly tsSnippet = computed(() => this.buildTs());
   readonly scssSnippet = computed(() => this.buildScss());
 
@@ -629,7 +629,7 @@ export class CardPlaygroundComponent {
   }
 
   private buildTs(): string {
-    return [
+    return playgroundFxTs([
       `import {`,
       `  BrightrailButtonComponent,`,
       `  BrightrailCardActionsComponent,`,
@@ -648,7 +648,7 @@ export class CardPlaygroundComponent {
       `// imports: [/* symbols above */]`,
       ``,
       this.buildHtml(),
-    ].join('\n');
+    ].join('\n'), this.previewFx(), this.themeService.fxShell());
   }
 
   private buildScss(): string {

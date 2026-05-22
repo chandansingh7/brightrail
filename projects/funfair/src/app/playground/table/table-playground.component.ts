@@ -108,7 +108,7 @@ export type TablePlaygroundRecipe =
   | 'inlineValidate'
   | 'inlineBulk';
 
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 @Component({
   selector: 'app-table-playground',
@@ -588,7 +588,7 @@ export class TablePlaygroundComponent {
     return 'Users data table';
   });
 
-  readonly htmlSnippet = computed(() => this.buildHtml());
+  readonly htmlSnippet = computed(() => playgroundFxHtml(this.buildHtml(), this.previewFx()));
   readonly tsSnippet = computed(() => this.buildTs());
   readonly scssSnippet = computed(() => this.buildScss());
 
@@ -1350,7 +1350,7 @@ export class TablePlaygroundComponent {
     console.log('selection', ids);
   }`;
 
-    return `${coreImport}
+    return playgroundFxTs(`${coreImport}
 import {
   BrightrailTableColumn,
   BrightrailTablePageEvent,
@@ -1385,7 +1385,7 @@ ${singleSelectionField}${inlineSaveMethod}  onSortChange(event: BrightrailTableS
   }
 
 ${selectionHandler}
-}`;
+}`, this.previewFx(), this.themeService.fxShell());
   }
 
   private snippetDataVar(): string {

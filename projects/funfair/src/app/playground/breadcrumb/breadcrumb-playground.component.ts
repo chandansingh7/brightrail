@@ -22,7 +22,7 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
@@ -192,7 +192,7 @@ export class BreadcrumbPlaygroundComponent {
   }
 
   private buildHtml(): string {
-    return [
+    return playgroundFxHtml([
       `<brightrail-breadcrumb`,
       `  [boxed]="${this.boxed()}"`,
       `  separator="${this.separator()}"`,
@@ -203,11 +203,11 @@ export class BreadcrumbPlaygroundComponent {
       `  size="${this.size()}"`,
       `  [items]="breadcrumbItems"`,
       `/>`,
-    ].join('\n');
+    ].join('\n'), this.previewFx());
   }
 
   private buildTs(): string {
-    return [
+    return playgroundFxTs([
       `import { BrightrailBreadcrumbItem } from 'brightrail';`,
       ``,
       `breadcrumbItems: BrightrailBreadcrumbItem[] = [`,
@@ -216,7 +216,7 @@ export class BreadcrumbPlaygroundComponent {
       `  { label: 'Design system', href: '/design-system' },`,
       `  { label: 'Component library', current: true },`,
       `];`,
-    ].join('\n');
+    ].join('\n'), this.previewFx(), this.themeService.fxShell());
   }
 
   private buildScss(): string {

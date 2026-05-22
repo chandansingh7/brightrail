@@ -26,7 +26,7 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
@@ -272,16 +272,16 @@ export class MenuPlaygroundComponent {
     const trigger = `<button type="button" [brightrailMenuTrigger]="menu">${escapeAttr(this.triggerLabel())}</button>`;
     const menu = `<brightrail-menu #menu>\n  ${items}\n</brightrail-menu>`;
     if (this.recipe() === 'split-save') {
-      return [
+      return playgroundFxHtml([
         '<span class="menu-split">',
         '  <button type="button" class="menu-split__primary">Save</button>',
         `  <button type="button" [brightrailMenuTrigger]="menu" aria-label="More save options">${escapeAttr(this.triggerLabel())}</button>`,
         '</span>',
         menu,
-      ].join('\n');
+      ].join('\n'), this.previewFx());
     }
     if (this.recipe() === 'toolbar-pair') {
-      return [
+      return playgroundFxHtml([
         '<span class="menu-toolbar">',
         `  <button type="button" [brightrailMenuTrigger]="filterMenu">${escapeAttr(this.triggerLabel())}</button>`,
         '  <button type="button" [brightrailMenuTrigger]="sortMenu">Sort</button>',
@@ -294,7 +294,7 @@ export class MenuPlaygroundComponent {
         '  <brightrail-menu-item label="Newest" [selected]="true" />',
         '  <brightrail-menu-item label="Oldest" />',
         '</brightrail-menu>',
-      ].join('\n');
+      ].join('\n'), this.previewFx());
     }
     return `${trigger}\n${menu}`;
   }
@@ -316,7 +316,7 @@ export class MenuPlaygroundComponent {
   }
 
   private buildTs(): string {
-    return [
+    return playgroundFxTs([
       "import {",
       '  BrightrailMenuComponent,',
       '  BrightrailMenuItemComponent,',
@@ -325,7 +325,7 @@ export class MenuPlaygroundComponent {
       '',
       '// imports: [BrightrailMenuComponent, BrightrailMenuItemComponent, BrightrailMenuTriggerDirective]',
       'onEdit(): void { /* handle menu activate */ }',
-    ].join('\n');
+    ].join('\n'), this.previewFx(), this.themeService.fxShell());
   }
 
   private buildScss(): string {

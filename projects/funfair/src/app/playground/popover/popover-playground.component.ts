@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   BrightrailButtonComponent,
@@ -10,7 +10,7 @@ import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.s
 import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
 import { PlaygroundSnippetDockComponent } from '../shared/playground-snippet-dock.component';
 import { injectPlaygroundA11yPreviewMode } from '../shared/playground-a11y-preview.utils';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 @Component({
@@ -40,16 +40,16 @@ export class PopoverPlaygroundComponent {
     { id: 'dark', label: 'Material dark' },
   ];
 
-  readonly htmlSnippet = `<brightrail-button variant="outline" [brightrailPopoverTrigger]="filters">
+  readonly htmlSnippet = computed(() => playgroundFxHtml(`<brightrail-button variant="outline" [brightrailPopoverTrigger]="filters">
   Filter options
 </brightrail-button>
 <brightrail-popover #filters>
   <p class="pp-pop__title">Quick filters</p>
   <label><input type="checkbox" checked /> Active only</label>
   <label><input type="checkbox" /> Include archived</label>
-</brightrail-popover>`;
+</brightrail-popover>`, this.previewFx()));
 
-  readonly tsSnippet = `import { Component } from '@angular/core';
+  readonly tsSnippet = computed(() => playgroundFxTs(`import { Component } from '@angular/core';
 import {
   BrightrailButtonComponent,
   BrightrailPopoverComponent,
@@ -61,7 +61,7 @@ import {
   imports: [BrightrailButtonComponent, BrightrailPopoverComponent, BrightrailPopoverTriggerDirective],
   templateUrl: './filter-toolbar.component.html',
 })
-export class FilterToolbarComponent {}`;
+export class FilterToolbarComponent {}`, this.previewFx(), this.themeService.fxShell()));
 
   resetToDefaults(): void {
     this.previewFx.set('inherit');

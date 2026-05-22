@@ -6,7 +6,7 @@ import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.s
 import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
 import { PlaygroundSnippetDockComponent } from '../shared/playground-snippet-dock.component';
 import { injectPlaygroundA11yPreviewMode } from '../shared/playground-a11y-preview.utils';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 @Component({
@@ -41,15 +41,13 @@ export class HolographicPanelPlaygroundComponent {
     { label: 'Nodes', value: '1.2', unit: 'k', trend: 'flat' as const },
   ];
 
-  readonly htmlSnippet = computed(
-    () => `<brightrail-holographic-panel
+  readonly htmlSnippet = computed(() => playgroundFxHtml(`<brightrail-holographic-panel
   title="Command center"
   appearance="${this.appearance()}"
   [metrics]="metrics"
-/>`,
-  );
+/>`, this.previewFx()));
 
-  readonly tsSnippet = `import { Component } from '@angular/core';
+  readonly tsSnippet = computed(() => playgroundFxTs(`import { Component } from '@angular/core';
 import { BrightrailHolographicPanelComponent } from 'brightrail';
 
 @Component({
@@ -62,7 +60,7 @@ export class DashboardKpisComponent {
     { label: 'Latency', value: '12', unit: 'ms', trend: 'down' as const },
     { label: 'Throughput', value: '98', unit: '%', trend: 'up' as const },
   ];
-}`;
+}`, this.previewFx(), this.themeService.fxShell()));
 
   resetToDefaults(): void {
     this.previewFx.set('inherit');

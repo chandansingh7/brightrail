@@ -18,7 +18,7 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
@@ -282,7 +282,7 @@ export class SliderPlaygroundComponent {
   }
 
   buildTs(): string {
-    return [
+    return playgroundFxTs([
       "import { BrightrailSliderComponent } from 'brightrail';",
       '',
       '// imports: [BrightrailSliderComponent, FormsModule]',
@@ -291,7 +291,7 @@ export class SliderPlaygroundComponent {
       'onValueChange(value: number): void {',
       '  this.sliderValue = value;',
       '}',
-    ].join('\n');
+    ].join('\n'), this.previewFx(), this.themeService.fxShell());
   }
 
   buildScss(): string {

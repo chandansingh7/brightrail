@@ -21,7 +21,7 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
@@ -201,7 +201,7 @@ export class StepperPlaygroundComponent {
           `  <brightrail-step label="${s.label}" description="${s.description}" status="${s.status}" />`,
       )
       .join('\n');
-    return [
+    return playgroundFxHtml([
       `<brightrail-stepper`,
       `  orientation="${this.orientation()}"`,
       `  stepStyle="${this.stepStyle()}"`,
@@ -213,11 +213,11 @@ export class StepperPlaygroundComponent {
       `  completedColor="${this.completedColor()}">`,
       stepLines,
       `</brightrail-stepper>`,
-    ].join('\n');
+    ].join('\n'), this.previewFx());
   }
 
   private buildTs(): string {
-    return `import { BrightrailStepComponent, BrightrailStepperComponent } from 'brightrail';`;
+    return playgroundFxTs(`import { BrightrailStepComponent, BrightrailStepperComponent } from 'brightrail';`, this.previewFx(), this.themeService.fxShell());
   }
 
   private buildScss(): string {

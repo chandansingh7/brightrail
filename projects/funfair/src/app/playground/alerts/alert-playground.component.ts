@@ -32,7 +32,7 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 export type CodeTabId = 'html' | 'ts' | 'scss';
@@ -728,7 +728,7 @@ export class AlertPlaygroundComponent {
   }
 
   private buildTs(): string {
-    return [
+    return playgroundFxTs([
       `import {`,
       `  BrightrailAlertActionsComponent,`,
       `  BrightrailAlertComponent,`,
@@ -741,7 +741,7 @@ export class AlertPlaygroundComponent {
       `onDismiss(): void {`,
       `  console.info('Alert dismissed');`,
       `}`,
-    ].join('\n');
+    ].join('\n'), this.previewFx(), this.themeService.fxShell());
   }
 
   private buildScss(): string {

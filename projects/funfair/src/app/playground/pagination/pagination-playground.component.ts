@@ -21,7 +21,7 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
@@ -380,7 +380,7 @@ export class PaginationPlaygroundComponent {
   }
 
   buildTs(): string {
-    return `// Recipe: ${this.recipe()}
+    return playgroundFxTs(`// Recipe: ${this.recipe()}
 import { Component, signal } from '@angular/core';
 import { BrightrailPaginationComponent } from 'brightrail';
 
@@ -400,7 +400,7 @@ export class ExampleComponent {
   onPageSize(size: number): void {
     /* update collection page size */
   }
-}`;
+}`, this.previewFx(), this.themeService.fxShell());
   }
 
   buildScss(): string {

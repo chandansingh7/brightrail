@@ -26,7 +26,7 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
@@ -487,7 +487,7 @@ export class ProgressPlaygroundComponent {
   buildTs(): string {
     const r = this.recipe();
     if (r === 'file-upload') {
-      return `import { Component } from '@angular/core';
+      return playgroundFxTs(`import { Component } from '@angular/core';
 import { BrightrailProgressFileRowComponent } from 'brightrail';
 
 @Component({
@@ -495,7 +495,7 @@ import { BrightrailProgressFileRowComponent } from 'brightrail';
   imports: [BrightrailProgressFileRowComponent],
   templateUrl: './example.component.html',
 })
-export class ExampleComponent {}`;
+export class ExampleComponent {}`, this.previewFx(), this.themeService.fxShell());
     }
     if (r === 'kpi-dashboard') {
       return `import { Component } from '@angular/core';

@@ -26,7 +26,7 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 export type CodeTabId = 'html' | 'ts' | 'scss';
@@ -565,7 +565,7 @@ export class SelectPlaygroundComponent {
   );
 
   readonly activeTab = signal<CodeTabId>('html');
-  readonly htmlSnippet = computed(() => this.buildHtml());
+  readonly htmlSnippet = computed(() => playgroundFxHtml(this.buildHtml(), this.previewFx()));
   readonly tsSnippet = computed(() => this.buildTs());
   readonly scssSnippet = computed(() => this.buildScss());
   readonly activeSnippet = computed(() => {
@@ -859,29 +859,29 @@ export class SelectPlaygroundComponent {
           '</div>',
         ].join('\n');
       case 'selectPlusAction':
-        return [
+        return playgroundFxHtml([
           '<div class="sel-row-actions">',
           '  <brightrail-select class="sel-flex" ...></brightrail-select>',
           '  <brightrail-button variant="primary" size="sm">Export</brightrail-button>',
           '</div>',
-        ].join('\n');
+        ].join('\n'), this.previewFx());
       case 'compactFilters':
-        return [
+        return playgroundFxHtml([
           '<div class="sel-filter-bar">',
           '  <brightrail-select size="xs" labelPosition="none" ariaLabel="Status" ... />',
           '  <brightrail-select size="xs" labelPosition="none" ariaLabel="Assignee" ... />',
           '  <brightrail-select size="xs" labelPosition="none" ariaLabel="Priority" ... />',
           '</div>',
-        ].join('\n');
+        ].join('\n'), this.previewFx());
       case 'segmented':
-        return [
+        return playgroundFxHtml([
           '<brightrail-button-group mode="segmented">',
           '  <brightrail-button variant="secondary" size="sm" [visualState]="active === \'day\' ? \'active\' : \'default\'">Day</brightrail-button>',
           '  <!-- Week, Month, Year -->',
           '</brightrail-button-group>',
-        ].join('\n');
+        ].join('\n'), this.previewFx());
       case 'optionEditSave':
-        return [
+        return playgroundFxHtml([
           '<brightrail-select ... [(ngModel)]="selectedId">',
           '  <div class="br-select-panel demo-sel-panel">',
           '    <div class="sel-opt-row">',
@@ -891,9 +891,9 @@ export class SelectPlaygroundComponent {
           '    <!-- Repeat rows / wire save + delete to your data source -->',
           '  </div>',
           '</brightrail-select>',
-        ].join('\n');
+        ].join('\n'), this.previewFx());
       case 'inlineEditActions':
-        return [
+        return playgroundFxHtml([
           '<div class="sel-inline-actions">',
           '  <div class="sel-opt-row">',
           '    <span class="br-select-option" (dblclick)="beginInlineEdit(row.id)">Canada</span>',
@@ -904,9 +904,9 @@ export class SelectPlaygroundComponent {
           '    </div>',
           '  </div>',
           '</div>',
-        ].join('\n');
+        ].join('\n'), this.previewFx());
       case 'multiSelect':
-        return [
+        return playgroundFxHtml([
           '<brightrail-select ... [displayText]="selectedLabels.join(\', \')" [ariaLabel]="\'Countries\'">',
           '  <span class="br-select-value-slot sel-tag-row">',
           '    <span class="sel-tag-pill" *ngFor="let id of selectedIds">{{ labelFor(id) }}</span>',
@@ -915,9 +915,9 @@ export class SelectPlaygroundComponent {
           '    <button type="button" class="demo-sel-panel__opt br-select-option" (click)="toggleMultiValue(\'us\')">United States</button>',
           '  </div>',
           '</brightrail-select>',
-        ].join('\n');
+        ].join('\n'), this.previewFx());
       case 'multiSelectCheckboxCount':
-        return [
+        return playgroundFxHtml([
           '<brightrail-select ... [displayText]="`Countries (${selectedIds.length} selected)`">',
           '  <div class="br-select-panel demo-sel-panel">',
           '    <label class="sel-check-opt" *ngFor="let opt of options">',
@@ -926,9 +926,9 @@ export class SelectPlaygroundComponent {
           '    </label>',
           '  </div>',
           '</brightrail-select>',
-        ].join('\n');
+        ].join('\n'), this.previewFx());
       case 'tagMulti':
-        return this.buildSingleSelectSnippet({
+        return playgroundFxHtml(this.buildSingleSelectSnippet({
           includeTagSlot: true,
           includeCountryPrefix: false,
           includeGlobe: false,
@@ -937,9 +937,9 @@ export class SelectPlaygroundComponent {
           includeCalendarSuffix: false,
           includeFlag: false,
           includeAvatar: false,
-        });
+        }), this.previewFx());
       case 'country':
-        return this.buildSingleSelectSnippet({
+        return playgroundFxHtml(this.buildSingleSelectSnippet({
           includeTagSlot: false,
           includeCountryPrefix: true,
           includeGlobe: false,
@@ -948,9 +948,9 @@ export class SelectPlaygroundComponent {
           includeCalendarSuffix: false,
           includeFlag: false,
           includeAvatar: false,
-        });
+        }), this.previewFx());
       case 'language':
-        return this.buildSingleSelectSnippet({
+        return playgroundFxHtml(this.buildSingleSelectSnippet({
           includeTagSlot: false,
           includeCountryPrefix: false,
           includeGlobe: true,
@@ -959,9 +959,9 @@ export class SelectPlaygroundComponent {
           includeCalendarSuffix: false,
           includeFlag: false,
           includeAvatar: false,
-        });
+        }), this.previewFx());
       case 'assignee':
-        return this.buildSingleSelectSnippet({
+        return playgroundFxHtml(this.buildSingleSelectSnippet({
           includeTagSlot: false,
           includeCountryPrefix: false,
           includeGlobe: false,
@@ -970,9 +970,9 @@ export class SelectPlaygroundComponent {
           includeCalendarSuffix: false,
           includeFlag: false,
           includeAvatar: true,
-        });
+        }), this.previewFx());
       case 'utilityFilter':
-        return this.buildSingleSelectSnippet({
+        return playgroundFxHtml(this.buildSingleSelectSnippet({
           includeTagSlot: false,
           includeCountryPrefix: false,
           includeGlobe: false,
@@ -981,9 +981,9 @@ export class SelectPlaygroundComponent {
           includeCalendarSuffix: false,
           includeFlag: false,
           includeAvatar: false,
-        });
+        }), this.previewFx());
       case 'utilitySearch':
-        return this.buildSingleSelectSnippet({
+        return playgroundFxHtml(this.buildSingleSelectSnippet({
           includeTagSlot: false,
           includeCountryPrefix: false,
           includeGlobe: false,
@@ -992,9 +992,9 @@ export class SelectPlaygroundComponent {
           includeCalendarSuffix: false,
           includeFlag: false,
           includeAvatar: false,
-        });
+        }), this.previewFx());
       case 'utilityCalendarTrail':
-        return this.buildSingleSelectSnippet({
+        return playgroundFxHtml(this.buildSingleSelectSnippet({
           includeTagSlot: false,
           includeCountryPrefix: false,
           includeGlobe: false,
@@ -1003,9 +1003,9 @@ export class SelectPlaygroundComponent {
           includeCalendarSuffix: true,
           includeFlag: false,
           includeAvatar: false,
-        });
+        }), this.previewFx());
       default:
-        return this.buildSingleSelectSnippet({
+        return playgroundFxHtml(this.buildSingleSelectSnippet({
           includeTagSlot: false,
           includeCountryPrefix: false,
           includeGlobe: false,
@@ -1014,7 +1014,7 @@ export class SelectPlaygroundComponent {
           includeCalendarSuffix: false,
           includeFlag: false,
           includeAvatar: false,
-        });
+        }), this.previewFx());
     }
   }
 
@@ -1042,7 +1042,7 @@ export class SelectPlaygroundComponent {
     ].filter((line): line is string => line !== null);
 
     if (r === 'optionEditSave') {
-      return [
+      return playgroundFxTs([
         ...imports,
         '',
         `editableOptions = [`,
@@ -1074,7 +1074,7 @@ export class SelectPlaygroundComponent {
         `  }`,
         `  if (this.editingId === id) this.editingId = null;`,
         `}`,
-      ].join('\n');
+      ].join('\n'), this.previewFx(), this.themeService.fxShell());
     }
 
     if (r === 'inlineEditActions') {

@@ -28,7 +28,7 @@ import {
 } from '../../../../../brightrail/src/lib/fields/checkbox/brightrail-checkbox-group.component';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
@@ -390,12 +390,12 @@ export class CheckboxPlaygroundComponent {
   }
 
   private buildTs(): string {
-    return [
+    return playgroundFxTs([
       `checked = false;`,
       `onCheckedChange(next: boolean): void {`,
       `  this.checked = next;`,
       `}`,
-    ].join('\n');
+    ].join('\n'), this.previewFx(), this.themeService.fxShell());
   }
 
   private buildScss(): string {

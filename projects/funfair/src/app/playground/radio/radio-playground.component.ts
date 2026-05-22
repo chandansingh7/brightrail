@@ -28,7 +28,7 @@ import {
 } from '../../../../../brightrail/src/lib/fields/radio/brightrail-radio-group.component';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
@@ -384,7 +384,7 @@ export class RadioPlaygroundComponent {
         .map((opt) => {
           const iconPart = opt.icon && opt.icon !== 'none' ? `, icon: '${opt.icon}'` : '';
           const helperPart = opt.helperText ? `, helperText: '${escapeAttr(opt.helperText)}'` : '';
-          return `    { id: '${opt.id}', label: '${escapeAttr(opt.label)}'${helperPart}${iconPart} }`;
+          return playgroundFxHtml(`    { id: '${opt.id}', label: '${escapeAttr(opt.label)}'${helperPart}${iconPart} }`, this.previewFx());
         })
         .join('\n');
       return `<brightrail-radio-group
@@ -435,7 +435,7 @@ ${optionsLiteral}
         return `  { id: '${opt.id}', label: '${escapeAttr(opt.label)}'${helperPart}${iconPart} },`;
       })
       .join('\n');
-    return [
+    return playgroundFxTs([
       `// Recipe: ${this.recipe()}`,
       `selectedId = '${this.selectedId()}';`,
       `groupLabel = '${escapeAttr(this.groupLabel())}';`,
@@ -443,7 +443,7 @@ ${optionsLiteral}
       optionsTs,
       `];`,
       `onSelect(id: string): void { this.selectedId = id; }`,
-    ].join('\n');
+    ].join('\n'), this.previewFx(), this.themeService.fxShell());
   }
 
   private buildScss(): string {

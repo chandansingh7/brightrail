@@ -6,7 +6,7 @@ import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.s
 import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
 import { PlaygroundSnippetDockComponent } from '../shared/playground-snippet-dock.component';
 import { injectPlaygroundA11yPreviewMode } from '../shared/playground-a11y-preview.utils';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 @Component({
@@ -46,15 +46,13 @@ export class NeuralGraphPlaygroundComponent {
     { source: 'core', target: 'output' },
   ];
 
-  readonly htmlSnippet = computed(
-    () => `<brightrail-neural-graph
+  readonly htmlSnippet = computed(() => playgroundFxHtml(`<brightrail-neural-graph
   caption="ML pipeline"
   [nodes]="nodes"
   [links]="links"
-/>`,
-  );
+/>`, this.previewFx()));
 
-  readonly tsSnippet = `import { Component } from '@angular/core';
+  readonly tsSnippet = computed(() => playgroundFxTs(`import { Component } from '@angular/core';
 import { BrightrailNeuralGraphComponent } from 'brightrail';
 
 @Component({
@@ -72,7 +70,7 @@ export class PipelineGraphComponent {
     { source: 'input', target: 'core' },
     { source: 'core', target: 'output' },
   ];
-}`;
+}`, this.previewFx(), this.themeService.fxShell()));
 
   resetToDefaults(): void {
     this.previewFx.set('inherit');

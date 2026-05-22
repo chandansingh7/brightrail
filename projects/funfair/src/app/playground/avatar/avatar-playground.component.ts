@@ -86,7 +86,7 @@ type AvatarA11yPreviewState = {
   badgeScale: number;
 };
 
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 @Component({
   selector: 'app-avatar-playground',
@@ -578,14 +578,14 @@ export class AvatarPlaygroundComponent {
 
   private buildHtml(): string {
     if (this.previewLayout() === 'group') {
-      return [
+      return playgroundFxHtml([
         '<brightrail-avatar-group maxVisible="3" ariaLabel="Team members">',
         '  <brightrail-avatar shape="circle" size="md" imageSrc="' + this.stackDemoImage + '" imageAlt="One" />',
         '  <brightrail-avatar kind="initials" initials="B" shape="circle" size="md" tone="success" />',
         '  <brightrail-avatar kind="initials" initials="C" shape="circle" size="md" tone="warning" />',
         '  <brightrail-avatar kind="initials" initials="D" shape="circle" size="md" tone="neutral" />',
         '</brightrail-avatar-group>',
-      ].join('\n');
+      ].join('\n'), this.previewFx());
     }
 
     const lines: string[] = ['<brightrail-avatar'];
@@ -678,11 +678,11 @@ export class AvatarPlaygroundComponent {
   }
 
   private buildTs(): string {
-    return [
+    return playgroundFxTs([
       "import { BrightrailAvatarComponent, BrightrailAvatarGroupComponent } from 'brightrail';",
       '',
       '// imports: [BrightrailAvatarComponent, BrightrailAvatarGroupComponent]',
-    ].join('\n');
+    ].join('\n'), this.previewFx(), this.themeService.fxShell());
   }
 
   private buildScss(): string {

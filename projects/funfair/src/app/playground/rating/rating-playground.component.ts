@@ -6,7 +6,7 @@ import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.s
 import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
 import { PlaygroundSnippetDockComponent } from '../shared/playground-snippet-dock.component';
 import { injectPlaygroundA11yPreviewMode } from '../shared/playground-a11y-preview.utils';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 @Component({
@@ -38,15 +38,13 @@ export class RatingPlaygroundComponent {
   readonly max = signal(5);
   readonly label = signal('Overall satisfaction');
 
-  readonly htmlSnippet = computed(
-    () => `<brightrail-rating
+  readonly htmlSnippet = computed(() => playgroundFxHtml(`<brightrail-rating
   label="${this.label()}"
   [max]="${this.max()}"
   [(ngModel)]="score"
-/>`,
-  );
+/>`, this.previewFx()));
 
-  readonly tsSnippet = `import { Component, signal } from '@angular/core';
+  readonly tsSnippet = computed(() => playgroundFxTs(`import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrightrailRatingComponent } from 'brightrail';
 
@@ -58,7 +56,7 @@ import { BrightrailRatingComponent } from 'brightrail';
 export class FeedbackFormComponent {
   readonly score = signal(4);
   readonly max = signal(5);
-}`;
+}`, this.previewFx(), this.themeService.fxShell()));
 
   resetToDefaults(): void {
     this.previewFx.set('inherit');

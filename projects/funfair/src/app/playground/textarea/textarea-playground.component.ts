@@ -20,7 +20,7 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
@@ -303,12 +303,12 @@ export class TextareaPlaygroundComponent {
   }
 
   buildTs(): string {
-    return [
+    return playgroundFxTs([
       "import { BrightrailTextareaComponent } from 'brightrail';",
       '',
       '// imports: [BrightrailTextareaComponent, FormsModule]',
       "textareaValue = '';",
-    ].join('\n');
+    ].join('\n'), this.previewFx(), this.themeService.fxShell());
   }
 
   buildScss(): string {

@@ -6,7 +6,7 @@ import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.s
 import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
 import { PlaygroundSnippetDockComponent } from '../shared/playground-snippet-dock.component';
 import { injectPlaygroundA11yPreviewMode } from '../shared/playground-a11y-preview.utils';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 @Component({
@@ -39,17 +39,14 @@ export class CyberBadgePlaygroundComponent {
   readonly label = signal('Neural link');
   readonly pulse = signal(true);
 
-  readonly htmlSnippet = computed(
-    () => `<brightrail-cyber-badge
+  readonly htmlSnippet = computed(() => playgroundFxHtml(`<brightrail-cyber-badge
   label="${this.label()}"
   appearance="${this.appearance()}"
   status="${this.status()}"
   [pulse]="${this.pulse()}"
-/>`,
-  );
+/>`, this.previewFx()));
 
-  readonly tsSnippet = computed(
-    () => `import { Component, signal } from '@angular/core';
+  readonly tsSnippet = computed(() => playgroundFxTs(`import { Component, signal } from '@angular/core';
 import { BrightrailCyberBadgeComponent } from 'brightrail';
 
 @Component({
@@ -68,8 +65,7 @@ export class StatusRowComponent {
   readonly appearance = signal<'cyber' | 'neon' | 'holo' | 'glass'>('${this.appearance()}');
   readonly status = signal<'online' | 'offline' | 'busy' | 'away'>('${this.status()}');
   readonly pulse = signal(${this.pulse()});
-}`,
-  );
+}`, this.previewFx(), this.themeService.fxShell()));
 
   readonly scssSnippet = computed(
     () => `.status-row {

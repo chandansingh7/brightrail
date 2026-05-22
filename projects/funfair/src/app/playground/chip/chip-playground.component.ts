@@ -21,7 +21,7 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
@@ -325,16 +325,16 @@ export class ChipPlaygroundComponent {
     lines.push('/>');
     const adjacent = this.adjacentText().trim();
     if (!adjacent) return lines.join('\n');
-    return ['<span class="chip-with-context">', ...lines.map((l) => `  ${l}`), `  <span>${adjacent}</span>`, '</span>'].join('\n');
+    return playgroundFxHtml(['<span class="chip-with-context">', ...lines.map((l) => `  ${l}`), `  <span>${adjacent}</span>`, '</span>'].join('\n'), this.previewFx());
   }
 
   private buildTs(): string {
-    return [
+    return playgroundFxTs([
       "import { BrightrailChipComponent } from 'brightrail';",
       '',
       '// imports: [BrightrailChipComponent]',
       "onChipRemove(): void { console.info('Chip removed'); }",
-    ].join('\n');
+    ].join('\n'), this.previewFx(), this.themeService.fxShell());
   }
 
   private buildScss(): string {

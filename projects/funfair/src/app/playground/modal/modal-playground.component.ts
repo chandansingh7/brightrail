@@ -34,7 +34,7 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 export type CodeTabId = 'html' | 'ts' | 'scss';
@@ -822,7 +822,7 @@ export class ModalPlaygroundComponent {
   }
 
   private buildTs(): string {
-    return [
+    return playgroundFxTs([
       `import { FormsModule } from '@angular/forms';`,
       `import { signal } from '@angular/core';`,
       `import {`,
@@ -856,7 +856,7 @@ export class ModalPlaygroundComponent {
       `onEscapeClose(): void {`,
       `  this.dismissModal();`,
       `}`,
-    ].join('\n');
+    ].join('\n'), this.previewFx(), this.themeService.fxShell());
   }
 
   private buildScss(): string {

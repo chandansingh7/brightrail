@@ -6,7 +6,7 @@ import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.s
 import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
 import { PlaygroundSnippetDockComponent } from '../shared/playground-snippet-dock.component';
 import { injectPlaygroundA11yPreviewMode } from '../shared/playground-a11y-preview.utils';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 @Component({
@@ -42,15 +42,13 @@ export class QuantumStepperPlaygroundComponent {
     { label: 'Deploy', description: 'Ship to edge nodes' },
   ];
 
-  readonly htmlSnippet = computed(
-    () => `<brightrail-quantum-stepper
+  readonly htmlSnippet = computed(() => playgroundFxHtml(`<brightrail-quantum-stepper
   appearance="${this.appearance()}"
   [currentStep]="${this.currentStep()}"
   [steps]="steps"
-/>`,
-  );
+/>`, this.previewFx()));
 
-  readonly tsSnippet = `import { Component, signal } from '@angular/core';
+  readonly tsSnippet = computed(() => playgroundFxTs(`import { Component, signal } from '@angular/core';
 import { BrightrailQuantumStepperComponent } from 'brightrail';
 
 @Component({
@@ -65,7 +63,7 @@ export class OnboardingFlowComponent {
     { label: 'Train', description: 'Fit model weights' },
     { label: 'Deploy', description: 'Ship to edge nodes' },
   ];
-}`;
+}`, this.previewFx(), this.themeService.fxShell()));
 
   resetToDefaults(): void {
     this.previewFx.set('inherit');

@@ -17,7 +17,7 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 import {
   VALIDATION_SUMMARY_DEMO_ERRORS,
@@ -178,7 +178,7 @@ export class ValidationSummaryPlaygroundComponent {
   }
 
   buildTs(): string {
-    return `// Recipe: ${this.recipe()}
+    return playgroundFxTs(`// Recipe: ${this.recipe()}
 import { Component, signal } from '@angular/core';
 import {
   BrightrailValidationSummaryComponent,
@@ -193,7 +193,7 @@ import {
 })
 export class ExampleComponent {
   readonly errors = signal<BrightrailValidationSummaryError[]>([]);
-}`;
+}`, this.previewFx(), this.themeService.fxShell());
   }
 
   buildScss(): string {

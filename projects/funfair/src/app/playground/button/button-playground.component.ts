@@ -15,7 +15,7 @@ import {
   initPlaygroundA11yPreview,
 } from '../shared/playground-a11y-preview.utils';
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 export type CodeTabId = 'html' | 'ts' | 'scss';
@@ -223,7 +223,7 @@ export class ButtonPlaygroundComponent {
 
   readonly activeTab = signal<CodeTabId>('html');
 
-  readonly htmlSnippet = computed(() => this.buildHtml());
+  readonly htmlSnippet = computed(() => playgroundFxHtml(this.buildHtml(), this.previewFx()));
   readonly tsSnippet = computed(() => this.buildTs());
   readonly scssSnippet = computed(() => this.buildScss());
 
@@ -357,7 +357,7 @@ export class ButtonPlaygroundComponent {
   }
 
   private buildTs(): string {
-    return [
+    return playgroundFxTs([
       `import { BrightrailButtonComponent } from 'brightrail';`,
       ``,
       `// In your standalone component:`,
@@ -365,7 +365,7 @@ export class ButtonPlaygroundComponent {
       ``,
       `// Template`,
       this.buildHtml(),
-    ].join('\n');
+    ].join('\n'), this.previewFx(), this.themeService.fxShell());
   }
 
   private buildScss(): string {

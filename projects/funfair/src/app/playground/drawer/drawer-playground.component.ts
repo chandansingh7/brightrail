@@ -27,7 +27,7 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
@@ -383,7 +383,7 @@ export class DrawerPlaygroundComponent {
   }
 
   private buildTs(): string {
-    return [
+    return playgroundFxTs([
       `import { signal } from '@angular/core';`,
       `import {`,
       `  BrightrailDrawerComponent, BrightrailDrawerHeaderComponent, BrightrailDrawerBodyComponent,`,
@@ -394,7 +394,7 @@ export class DrawerPlaygroundComponent {
       `drawerOpen = signal(true);`,
       `onBackdropDismiss(): void { this.drawerOpen.set(false); }`,
       `onClosed(): void { this.drawerOpen.set(false); }`,
-    ].join('\n');
+    ].join('\n'), this.previewFx(), this.themeService.fxShell());
   }
 
   private buildScss(): string {

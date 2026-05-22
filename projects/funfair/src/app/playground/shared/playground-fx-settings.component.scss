@@ -1,0 +1,6 @@
+@use '../playground-setting-controls' as *;
+
+/* Let the two setting rows participate in the parent settings panel layout. */
+:host {
+  display: contents;
+}

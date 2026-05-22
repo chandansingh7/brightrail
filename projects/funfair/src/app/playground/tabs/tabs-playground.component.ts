@@ -32,7 +32,7 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 export type CodeTabId = 'html' | 'ts' | 'scss';
@@ -268,7 +268,7 @@ export class TabsPlaygroundComponent {
     }
   });
 
-  readonly htmlSnippet = computed(() => this.buildHtml());
+  readonly htmlSnippet = computed(() => playgroundFxHtml(this.buildHtml(), this.previewFx()));
   readonly tsSnippet = computed(() => this.buildTs());
   readonly scssSnippet = computed(() => this.buildScss());
 
@@ -495,11 +495,11 @@ export class TabsPlaygroundComponent {
   }
 
   private buildTs(): string {
-    return [
+    return playgroundFxTs([
       `import { BrightrailTabsComponent, BrightrailTabComponent, BrightrailTabContentDirective } from 'brightrail';`,
       ``,
       `// Recipe: "${this.previewRecipe()}" — mirror the HTML tab in your standalone component imports.`,
-    ].join('\n');
+    ].join('\n'), this.previewFx(), this.themeService.fxShell());
   }
 
   private buildScss(): string {

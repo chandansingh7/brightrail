@@ -1,0 +1,23 @@
+// Shared futuristic shell tokens (cyber / neon / holo / glass).
+
+$br-fx-cyber-bg: #0b1220;
+$br-fx-cyber-border: rgb(34 211 238 / 55%);
+$br-fx-cyber-glow: rgb(34 211 238 / 35%);
+$br-fx-cyber-accent: #22d3ee;
+$br-fx-cyber-fg: #e2e8f0;
+
+$br-fx-neon-bg: #0a0f1e;
+$br-fx-neon-border: rgb(34 211 238 / 55%);
+$br-fx-neon-glow: rgb(34 211 238 / 35%);
+
+$br-fx-holo-bg: linear-gradient(
+  120deg,
+  rgb(99 102 241 / 35%),
+  rgb(34 211 238 / 25%),
+  rgb(236 72 153 / 30%)
+);
+$br-fx-holo-base: #0f172a;
+
+$br-fx-glass-bg: linear-gradient(145deg, rgb(255 255 255 / 55%), rgb(255 255 255 / 18%));
+$br-fx-glass-border: rgb(255 255 255 / 45%);
+$br-fx-glass-fg: #0f172a;

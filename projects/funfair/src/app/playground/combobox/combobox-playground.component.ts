@@ -17,7 +17,7 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
@@ -242,7 +242,7 @@ export class ComboboxPlaygroundComponent {
   }
 
   private buildHtml(): string {
-    return [
+    return playgroundFxHtml([
       '<brightrail-combobox',
       '  [options]="options"',
       `  placeholder="${escapeAttr(this.placeholder())}"`,
@@ -252,11 +252,11 @@ export class ComboboxPlaygroundComponent {
       '  [(ngModel)]="value"',
       '  (valueChange)="onValueChange($event)"',
       '/>',
-    ].join('\n');
+    ].join('\n'), this.previewFx());
   }
 
   private buildTs(): string {
-    return [
+    return playgroundFxTs([
       "import { BrightrailComboboxComponent, BrightrailComboboxOption } from 'brightrail';",
       '',
       'readonly options: BrightrailComboboxOption[] = [',
@@ -264,7 +264,7 @@ export class ComboboxPlaygroundComponent {
       "  { value: 'ca', label: 'Canada' },",
       '];',
       "value = 'us';",
-    ].join('\n');
+    ].join('\n'), this.previewFx(), this.themeService.fxShell());
   }
 
   private buildScss(): string {

@@ -21,7 +21,7 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
@@ -447,7 +447,7 @@ export class BadgePlaygroundComponent {
   private buildHtml(): string {
     const adjacent = this.context().trim();
     if (this.mode() === 'notification') {
-      return [
+      return playgroundFxHtml([
         '<div class="notification-badge-anchor">',
         '  <span class="notification-bell" aria-hidden="true">Bell</span>',
         '  <brightrail-badge',
@@ -459,7 +459,7 @@ export class BadgePlaygroundComponent {
         '  />',
         ...(adjacent ? [`  <span class="badge-context">${adjacent}</span>`] : []),
         '</div>',
-      ].join('\n');
+      ].join('\n'), this.previewFx());
     }
 
     const lines = [
@@ -476,12 +476,12 @@ export class BadgePlaygroundComponent {
     if (!adjacent) {
       return lines.join('\n');
     }
-    return [
+    return playgroundFxHtml([
       '<span class="badge-with-context">',
       ...lines.map((l) => `  ${l}`),
       `  <span class="badge-context">${adjacent}</span>`,
       '</span>',
-    ].join('\n');
+    ].join('\n'), this.previewFx());
   }
 
   private buildTs(): string {

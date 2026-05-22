@@ -24,7 +24,7 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
@@ -354,7 +354,7 @@ export class AppShellPlaygroundComponent {
   }
 
   buildTs(): string {
-    return `// Recipe: ${this.recipe()}
+    return playgroundFxTs(`// Recipe: ${this.recipe()}
 import { Component } from '@angular/core';
 import {
   BrightrailAppShellComponent,
@@ -382,7 +382,7 @@ import {
   ],
   templateUrl: './example.component.html',
 })
-export class ExampleComponent {}`;
+export class ExampleComponent {}`, this.previewFx(), this.themeService.fxShell());
   }
 
   buildScss(): string {

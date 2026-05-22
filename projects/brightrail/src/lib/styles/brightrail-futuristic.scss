@@ -1,0 +1,248 @@
+// Global futuristic shells — bundled in brightrail-root.scss
+@use './futuristic-tokens' as t;
+
+@mixin br-fx-surface-cyber {
+  color: t.$br-fx-cyber-fg;
+  background:
+    linear-gradient(rgb(34 211 238 / 6%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(34 211 238 / 6%) 1px, transparent 1px),
+    t.$br-fx-cyber-bg;
+  background-size: 18px 18px;
+  border-color: t.$br-fx-cyber-border;
+  box-shadow: 0 0 20px t.$br-fx-cyber-glow;
+}
+
+@mixin br-fx-surface-neon {
+  color: t.$br-fx-cyber-fg;
+  background: t.$br-fx-neon-bg;
+  border-color: t.$br-fx-neon-border;
+  box-shadow: 0 0 18px t.$br-fx-neon-glow, inset 0 0 12px rgb(34 211 238 / 8%);
+}
+
+@mixin br-fx-surface-holo {
+  color: t.$br-fx-cyber-fg;
+  background: t.$br-fx-holo-bg, t.$br-fx-holo-base;
+  border-color: rgb(255 255 255 / 18%);
+  box-shadow: 0 0 28px rgb(139 92 246 / 22%);
+}
+
+@mixin br-fx-surface-glass {
+  color: t.$br-fx-glass-fg;
+  background: t.$br-fx-glass-bg;
+  border-color: t.$br-fx-glass-border;
+  box-shadow: 0 4px 24px rgb(15 23 42 / 10%), inset 0 1px 0 rgb(255 255 255 / 55%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+@mixin br-fx-button-cyber {
+  background: t.$br-fx-cyber-bg !important;
+  border-color: t.$br-fx-cyber-border !important;
+  color: t.$br-fx-cyber-accent !important;
+  box-shadow: 0 0 14px t.$br-fx-cyber-glow;
+}
+
+@mixin br-fx-button-neon {
+  background: t.$br-fx-neon-bg !important;
+  border-color: t.$br-fx-neon-border !important;
+  color: #67e8f9 !important;
+  box-shadow: 0 0 16px t.$br-fx-neon-glow;
+}
+
+@mixin br-fx-button-holo {
+  background: t.$br-fx-holo-base !important;
+  border-color: rgb(139 92 246 / 55%) !important;
+  color: #e9d5ff !important;
+  box-shadow: 0 0 20px rgb(139 92 246 / 35%);
+}
+
+@mixin br-fx-button-glass {
+  background: rgb(255 255 255 / 35%) !important;
+  border-color: t.$br-fx-glass-border !important;
+  color: t.$br-fx-glass-fg !important;
+}
+
+@mixin br-fx-surfaces {
+  brightrail-card,
+  brightrail-alert .br-alert__shell,
+  brightrail-badge .br-badge,
+  brightrail-chip .br-chip,
+  brightrail-text-field .br-tf__control,
+  brightrail-textarea .br-textarea__control,
+  brightrail-select .br-select__control,
+  brightrail-combobox .br-combobox__control,
+  brightrail-tabs .br-tabs__list,
+  brightrail-menu .br-menu__panel,
+  brightrail-modal .br-modal__panel,
+  brightrail-drawer .br-drawer__panel,
+  brightrail-toast .br-toast,
+  brightrail-table,
+  brightrail-progress .br-progress__track,
+  brightrail-pagination,
+  brightrail-empty-state,
+  brightrail-graph,
+  brightrail-tree,
+  brightrail-popover .br-popover__panel,
+  brightrail-rich-text-editor .br-rte,
+  brightrail-tree-table,
+  brightrail-command-palette .br-cmd__panel,
+  brightrail-app-shell,
+  brightrail-checkbox .br-checkbox__box,
+  brightrail-switch .br-switch__track,
+  brightrail-radio .br-radio__dot,
+  brightrail-slider .br-slider__track,
+  brightrail-accordion .br-accordion__item,
+  brightrail-breadcrumb,
+  brightrail-avatar .br-avatar,
+  brightrail-skeleton,
+  brightrail-validation-summary,
+  brightrail-file-upload .br-fu__dropzone,
+  brightrail-date-picker .br-dp__control,
+  brightrail-rating .br-rating,
+  brightrail-stepper,
+  brightrail-neural-graph,
+  brightrail-holographic-panel,
+  brightrail-cyber-badge,
+  brightrail-quantum-stepper,
+  brightrail-timeline,
+  brightrail-timeline-item,
+  brightrail-form-field,
+  brightrail-button-group,
+  brightrail-button-icon,
+  brightrail-icon,
+  brightrail-welcome,
+  brightrail-sidebar,
+  brightrail-top-bar,
+  brightrail-page-header,
+  brightrail-toast-container,
+  brightrail-progress-file-row,
+  brightrail-step,
+  brightrail-tab,
+  brightrail-menu-item,
+  brightrail-avatar-group,
+  brightrail-checkbox-group,
+  brightrail-radio-group,
+  brightrail-table-toolbar,
+  brightrail-table-toolbar-actions,
+  brightrail-table-bulk-actions,
+  brightrail-table-single-actions,
+  brightrail-accordion-item,
+  brightrail-alert-actions,
+  brightrail-card-header,
+  brightrail-card-content,
+  brightrail-card-footer,
+  brightrail-card-actions,
+  brightrail-card-media,
+  brightrail-modal-header,
+  brightrail-modal-body,
+  brightrail-modal-footer,
+  brightrail-drawer-header,
+  brightrail-drawer-body,
+  brightrail-drawer-footer {
+    @content;
+  }
+}
+
+@mixin br-fx-buttons {
+  brightrail-button .br-button,
+  brightrail-icon-button .br-button,
+  brightrail-split-button .br-button,
+  brightrail-button-icon .br-button {
+    @content;
+  }
+}
+
+@mixin br-fx-host-surfaces($appearance) {
+  @if $appearance == cyber {
+    @include br-fx-surface-cyber;
+  } @else if $appearance == neon {
+    @include br-fx-surface-neon;
+  } @else if $appearance == holo {
+    @include br-fx-surface-holo;
+  } @else {
+    @include br-fx-surface-glass;
+  }
+}
+
+@mixin br-fx-host-buttons($appearance) {
+  @if $appearance == cyber {
+    @include br-fx-button-cyber;
+  } @else if $appearance == neon {
+    @include br-fx-button-neon;
+  } @else if $appearance == holo {
+    @include br-fx-button-holo;
+  } @else {
+    @include br-fx-button-glass;
+  }
+}
+
+[data-br-fx='cyber'] {
+  @include br-fx-surfaces {
+    @include br-fx-surface-cyber;
+  }
+  @include br-fx-buttons {
+    @include br-fx-button-cyber;
+  }
+}
+
+.br-fx--cyber {
+  @include br-fx-surface-cyber;
+}
+
+[data-br-fx='neon'] {
+  @include br-fx-surfaces {
+    @include br-fx-surface-neon;
+  }
+  @include br-fx-buttons {
+    @include br-fx-button-neon;
+  }
+}
+
+.br-fx--neon {
+  @include br-fx-surface-neon;
+}
+
+[data-br-fx='holo'] {
+  @include br-fx-surfaces {
+    @include br-fx-surface-holo;
+  }
+  @include br-fx-buttons {
+    @include br-fx-button-holo;
+  }
+}
+
+.br-fx--holo {
+  @include br-fx-surface-holo;
+}
+
+[data-br-fx='glass'] {
+  @include br-fx-surfaces {
+    @include br-fx-surface-glass;
+  }
+  @include br-fx-buttons {
+    @include br-fx-button-glass;
+  }
+}
+
+.br-fx--glass {
+  @include br-fx-surface-glass;
+}
+
+@each $fx in cyber, neon, holo, glass {
+  @include br-fx-surfaces {
+    &.br-fx--#{$fx} {
+      @include br-fx-host-surfaces($fx);
+    }
+  }
+
+  brightrail-button.br-fx--#{$fx} .br-button,
+  brightrail-icon-button.br-fx--#{$fx} .br-button,
+  brightrail-split-button.br-fx--#{$fx} .br-button,
+  brightrail-button-icon.br-fx--#{$fx} .br-button {
+    @include br-fx-host-buttons($fx);
+  }
+
+  .br-fx--#{$fx}.br-fx-host {
+    @include br-fx-host-surfaces($fx);
+  }
+}

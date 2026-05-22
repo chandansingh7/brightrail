@@ -34,7 +34,7 @@ type CommandPaletteRecipe =
   | 'disabled'
   | 'filtered';
 
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 @Component({
   selector: 'app-command-palette-playground',
@@ -207,7 +207,7 @@ export class CommandPalettePlaygroundComponent {
   }
 
   buildTs(): string {
-    return `// Recipe: ${this.recipe()}
+    return playgroundFxTs(`// Recipe: ${this.recipe()}
 import { Component, signal } from '@angular/core';
 import {
   BrightrailCommandPaletteComponent,
@@ -228,7 +228,7 @@ export class ExampleComponent {
     this.isOpen.set(false);
     console.log(item.id);
   }
-}`;
+}`, this.previewFx(), this.themeService.fxShell());
   }
 
   buildScss(): string {

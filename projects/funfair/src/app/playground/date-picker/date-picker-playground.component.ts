@@ -29,7 +29,7 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
@@ -404,14 +404,14 @@ export class DatePickerPlaygroundComponent {
 
   private buildTs(): string {
     if (this.effectiveType() === 'range') {
-      return [
+      return playgroundFxTs([
         `import { BrightrailDateRange } from 'brightrail';`,
         ``,
         `travelDates: BrightrailDateRange = {`,
         `  start: new Date(${this.fmtIsoArg(this.rangeValue.start)}),`,
         `  end: new Date(${this.fmtIsoArg(this.rangeValue.end)}),`,
         `};`,
-      ].join('\n');
+      ].join('\n'), this.previewFx(), this.themeService.fxShell());
     }
 
     if (this.effectiveType() === 'month') {

@@ -33,7 +33,7 @@ import {
   formatGraphSegmentsLiteral,
   formatGraphSeriesLiteral,
 } from './graph-snippet-format';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
@@ -260,7 +260,7 @@ export class GraphPlaygroundComponent {
     return '';
   });
 
-  readonly htmlSnippet = computed(() => this.buildHtml());
+  readonly htmlSnippet = computed(() => playgroundFxHtml(this.buildHtml(), this.previewFx()));
   readonly activeSnippet = computed(() => {
     switch (this.activeTab()) {
       case 'ts':
@@ -503,7 +503,7 @@ export class GraphPlaygroundComponent {
 
     bodyLines.push(`}`);
 
-    return [...imports, ...bodyLines].join('\n');
+    return playgroundFxTs([...imports, ...bodyLines].join('\n'), this.previewFx(), this.themeService.fxShell());
   }
 
   private buildScss(): string {

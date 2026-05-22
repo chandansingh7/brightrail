@@ -19,7 +19,7 @@ import {
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
 import { TREE_DEMO_FILES, TREE_DEMO_ORG, TREE_DEMO_WORKSPACE } from './tree-variation-snippets';
-import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { createPlaygroundPreviewFx, playgroundFxHtml, playgroundFxTs } from '../shared/playground-fx.util';
 import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
@@ -303,7 +303,7 @@ export class TreePlaygroundComponent {
   }
 
   buildTs(): string {
-    return `// Recipe: ${this.recipe()}
+    return playgroundFxTs(`// Recipe: ${this.recipe()}
 import { Component, signal } from '@angular/core';
 import { BrightrailTreeComponent, BrightrailTreeNode } from 'brightrail';
 
@@ -320,7 +320,7 @@ export class ExampleComponent {
   onSelectedIdChange(id: string): void {
     this.selectedId.set(id);
   }
-}`;
+}`, this.previewFx(), this.themeService.fxShell());
   }
 
   buildScss(): string {
