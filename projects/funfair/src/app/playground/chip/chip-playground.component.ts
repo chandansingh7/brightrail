@@ -21,6 +21,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 type ChipRecipe =
@@ -38,7 +40,7 @@ type ChipRecipe =
   selector: 'app-chip-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailChipComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailChipComponent, PlaygroundFxSettingsComponent],
   templateUrl: './chip-playground.component.html',
   styleUrl: './chip-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -93,6 +95,9 @@ export class ChipPlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
 
   readonly recipeGroups = ['Status', 'Interactive', 'Enterprise', 'Advanced'] as const;
   readonly recipeOptions: { value: ChipRecipe; label: string; group: string }[] = [
@@ -287,6 +292,7 @@ export class ChipPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Status');
     this.previewRecipe.set('status-filled');
     this.applyRecipe('status-filled');

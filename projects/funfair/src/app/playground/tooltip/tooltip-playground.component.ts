@@ -24,6 +24,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 
@@ -60,8 +62,7 @@ type TooltipRecipe =
     FormsModule,
     RouterLink,
     BrightrailTooltipDirective,
-    BrightrailButtonComponent,
-  ],
+    BrightrailButtonComponent, PlaygroundFxSettingsComponent],
   templateUrl: './tooltip-playground.component.html',
   styleUrl: './tooltip-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -93,6 +94,9 @@ export class TooltipPlaygroundComponent {
 
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
 
   readonly richTpl = viewChild<TemplateRef<unknown>>('richTpl');
 
@@ -341,6 +345,7 @@ export class TooltipPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Basics');
     this.onRecipeNgModelChange('info-account');
     this.themeService.setTheme('light');

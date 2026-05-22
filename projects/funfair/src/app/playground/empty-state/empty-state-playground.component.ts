@@ -14,6 +14,8 @@ import { FormsModule } from '@angular/forms';
 import { BrightrailButtonComponent, BrightrailEmptyStateComponent } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 
@@ -31,7 +33,7 @@ type EmptyStateRecipe =
   selector: 'app-empty-state-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailEmptyStateComponent, BrightrailButtonComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailEmptyStateComponent, BrightrailButtonComponent, PlaygroundFxSettingsComponent],
   templateUrl: './empty-state-playground.component.html',
   styleUrl: './empty-state-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -75,6 +77,9 @@ export class EmptyStatePlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly recipeGroups = ['Basics', 'Slots', 'Patterns', 'Advanced'] as const;
@@ -180,6 +185,7 @@ export class EmptyStatePlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Basics');
     this.onRecipeNgModelChange('core-default');
   }

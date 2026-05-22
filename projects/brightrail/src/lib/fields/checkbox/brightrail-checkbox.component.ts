@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, forwardRef, input, output } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../../futuristic/brightrail-futuristic-host';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
   BrightrailButtonIcon,
@@ -14,6 +15,7 @@ export type BrightrailCheckboxState = 'default' | 'hover' | 'focused' | 'disable
 
 @Component({
   selector: 'brightrail-checkbox',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   imports: [BrightrailButtonIconComponent],
   providers: [

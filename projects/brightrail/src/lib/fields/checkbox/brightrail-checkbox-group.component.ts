@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../../futuristic/brightrail-futuristic-host';
 import { BrightrailButtonIcon } from '../../buttons/brightrail-button-icon.component';
 
 import {
@@ -23,6 +24,7 @@ export interface BrightrailCheckboxGroupOption {
 
 @Component({
   selector: 'brightrail-checkbox-group',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   imports: [BrightrailCheckboxComponent],
   template: `

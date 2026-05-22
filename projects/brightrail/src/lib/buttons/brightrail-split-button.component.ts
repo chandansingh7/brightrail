@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 import type { BrightrailButtonIcon } from './brightrail-button-icon.component';
 import {
@@ -10,6 +11,7 @@ import {
 
 @Component({
   selector: 'brightrail-split-button',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   imports: [BrightrailButtonComponent],
   host: {

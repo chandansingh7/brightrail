@@ -13,6 +13,7 @@ import {
   signal,
   untracked,
 } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../../futuristic/brightrail-futuristic-host';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DOCUMENT } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -31,6 +32,7 @@ import {
 
 @Component({
   selector: 'brightrail-combobox',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   imports: [BrightrailButtonIconComponent],
   providers: [

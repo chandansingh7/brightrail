@@ -1,4 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 import {
   Directive,
   ElementRef,
@@ -39,6 +40,7 @@ let nextTooltipId = 0;
 
 @Directive({
   selector: '[brightrailTooltip]',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   host: {
     '[attr.tabindex]': 'resolvedTabindex()',

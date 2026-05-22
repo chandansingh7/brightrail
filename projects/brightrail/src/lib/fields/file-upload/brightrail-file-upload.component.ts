@@ -7,6 +7,7 @@ import {
   output,
   signal,
 } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../../futuristic/brightrail-futuristic-host';
 import { NgStyle } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -46,6 +47,7 @@ const STATUS_HINTS: Record<Exclude<BrightrailFileUploadStatus, 'default' | 'none
 
 @Component({
   selector: 'brightrail-file-upload',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   imports: [NgStyle],
   providers: [

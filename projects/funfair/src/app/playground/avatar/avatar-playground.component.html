@@ -572,6 +572,8 @@
             }
           </div>
         </details>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -580,7 +582,7 @@
       <div class="bp-preview-surface bp-preview-surface--stretch">
         <div class="bp-preview-inner ap-preview">
           @if (previewLayout() === 'group') {
-            <brightrail-avatar-group [maxVisible]="3" ariaLabel="Team members">
+            <brightrail-avatar-group [fxShell]="resolvedFxShell()" [maxVisible]="3" ariaLabel="Team members">
               <brightrail-avatar shape="circle" size="md" [imageSrc]="stackDemoImage" imageAlt="One" />
               <brightrail-avatar kind="initials" initials="B" shape="circle" size="md" tone="success" />
               <brightrail-avatar kind="initials" initials="C" shape="circle" size="md" tone="warning" />

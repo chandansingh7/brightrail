@@ -26,6 +26,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 
@@ -49,8 +51,7 @@ type MenuRecipe =
     FormsModule,
     BrightrailMenuComponent,
     BrightrailMenuItemComponent,
-    BrightrailMenuTriggerDirective,
-  ],
+    BrightrailMenuTriggerDirective, PlaygroundFxSettingsComponent],
   templateUrl: './menu-playground.component.html',
   styleUrl: './menu-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -79,6 +80,9 @@ export class MenuPlaygroundComponent {
   private readonly filterMenuRef = viewChild<BrightrailMenuComponent>('filterMenuRef');
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   constructor() {
@@ -244,6 +248,7 @@ export class MenuPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Core');
     this.onRecipeNgModelChange('basic-actions');
     this.themeService.setTheme('light');

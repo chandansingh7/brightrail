@@ -1,8 +1,10 @@
 import { Directive } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 /** Marks projected title region inside {@link BrightrailCardHeaderComponent} (`withTitle` layout). */
 @Directive({
   selector: '[brightrailCardHeaderTitle]',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
 })
 export class BrightrailCardHeaderTitleDirective {}

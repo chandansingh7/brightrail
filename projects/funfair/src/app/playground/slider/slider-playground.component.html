@@ -197,6 +197,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -208,7 +210,7 @@
             <div class="sl-play-row">
               <label>Volume</label>
               @if (useNgModel()) {
-                <brightrail-slider
+                <brightrail-slider [fxShell]="resolvedFxShell()"
                   [min]="min()"
                   [max]="max()"
                   [step]="step()"

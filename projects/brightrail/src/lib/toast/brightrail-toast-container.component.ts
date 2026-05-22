@@ -2,9 +2,11 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { BrightrailToastComponent } from './brightrail-toast.component';
 import { BrightrailToastService } from './brightrail-toast.service';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 @Component({
   selector: 'brightrail-toast-container',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   imports: [BrightrailToastComponent],
   template: `

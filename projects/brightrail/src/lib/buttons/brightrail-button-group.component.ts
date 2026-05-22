@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 export type BrightrailButtonGroupMode = 'segmented' | 'pill' | 'compact';
 
 @Component({
   selector: 'brightrail-button-group',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   template: `
     <div

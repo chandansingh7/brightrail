@@ -13,6 +13,7 @@ import {
   BrightrailButtonIcon,
   BrightrailButtonIconComponent,
 } from '../buttons/brightrail-button-icon.component';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 import { BrightrailFocusVisibleDirective } from '../platform/brightrail-focus-visible.directive';
 
 export type BrightrailChipVariant = 'filled' | 'outlined' | 'soft' | 'text';
@@ -30,6 +31,7 @@ export type BrightrailChipState = 'default' | 'hover' | 'focused' | 'disabled';
 @Component({
   selector: 'brightrail-chip',
   standalone: true,
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   imports: [BrightrailButtonIconComponent, BrightrailFocusVisibleDirective, NgTemplateOutlet],
   template: `
     @if (selectable()) {

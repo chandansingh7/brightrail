@@ -14,6 +14,7 @@ import {
   signal,
   untracked,
 } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../../futuristic/brightrail-futuristic-host';
 import { DOCUMENT } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -49,6 +50,7 @@ const DEFAULT_STATUS_HINTS: Record<Exclude<BrightrailTextFieldStatus, 'none'>, s
 @Component({
   selector: 'brightrail-select',
   standalone: true,
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   imports: [BrightrailButtonIconComponent],
   providers: [
     {

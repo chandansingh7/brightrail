@@ -5,6 +5,7 @@ import {
   computed,
   input,
 } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 export type BrightrailProgressType = 'linear' | 'circular';
 export type BrightrailProgressMode = 'determinate' | 'indeterminate' | 'buffer' | 'query';
@@ -31,6 +32,7 @@ function clampPct(n: number): number {
 
 @Component({
   selector: 'brightrail-progress',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   templateUrl: './brightrail-progress.component.html',
   styleUrl: './brightrail-progress.component.scss',

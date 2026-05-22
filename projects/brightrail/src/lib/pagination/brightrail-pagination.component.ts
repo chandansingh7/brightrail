@@ -9,6 +9,7 @@ import {
 import { FormsModule } from '@angular/forms';
 
 import { BrightrailButtonIconComponent } from '../buttons/brightrail-button-icon.component';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 export type BrightrailPaginationVariant =
   | 'numbered'
@@ -77,6 +78,7 @@ function buildPageList(
 
 @Component({
   selector: 'brightrail-pagination',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   imports: [FormsModule, BrightrailButtonIconComponent],
   template: `

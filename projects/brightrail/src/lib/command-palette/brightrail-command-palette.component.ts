@@ -17,9 +17,11 @@ import { BrightrailFocusTrapDirective } from '../platform/brightrail-focus-trap.
 import { BrightrailLiveAnnouncerService } from '../platform/brightrail-live-announcer.service';
 import type { BrightrailCommandPaletteItem } from './brightrail-command-palette.types';
 import { filterCommandPaletteItems, groupCommandPaletteItems } from './brightrail-command-palette.utils';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 @Component({
   selector: 'brightrail-command-palette',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   imports: [BrightrailFocusTrapDirective],
   templateUrl: './brightrail-command-palette.component.html',

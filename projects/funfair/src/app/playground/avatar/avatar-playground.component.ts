@@ -86,11 +86,13 @@ type AvatarA11yPreviewState = {
   badgeScale: number;
 };
 
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 @Component({
   selector: 'app-avatar-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailAvatarComponent, BrightrailAvatarGroupComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailAvatarComponent, BrightrailAvatarGroupComponent, PlaygroundFxSettingsComponent],
   templateUrl: './avatar-playground.component.html',
   styleUrl: './avatar-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -125,6 +127,9 @@ export class AvatarPlaygroundComponent {
   }));
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
 
   constructor() {
     let restored = false;
@@ -553,6 +558,7 @@ export class AvatarPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Profile');
     this.onRecipeNgModelChange('user-avatar');
     this.themeService.setTheme('light');

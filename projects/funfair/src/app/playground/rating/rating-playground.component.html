@@ -47,6 +47,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -54,7 +56,7 @@
       <app-playground-preview-header titleId="rating-preview-title" componentId="rating" />
       <div class="bp-preview-surface bp-preview-surface--stretch">
         <div class="bp-preview-inner">
-          <brightrail-rating [label]="label()" [max]="max()" [ngModel]="score()" (ngModelChange)="score.set($event)" />
+          <brightrail-rating [fxShell]="resolvedFxShell()" [label]="label()" [max]="max()" [ngModel]="score()" (ngModelChange)="score.set($event)" />
           <p class="rt-score">Selected: {{ score() }} / {{ max() }}</p>
         </div>
       </div>

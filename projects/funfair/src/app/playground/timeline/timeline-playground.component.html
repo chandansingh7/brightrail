@@ -59,6 +59,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -67,7 +69,7 @@
       <div class="bp-preview-surface bp-preview-surface--stretch">
         <div class="bp-preview-inner bp-preview-inner--timeline">
           @if (showWorkflow()) {
-            <brightrail-timeline [ariaLabel]="ariaLabel()">
+            <brightrail-timeline [fxShell]="resolvedFxShell()" [ariaLabel]="ariaLabel()">
               <brightrail-timeline-item title="Build started" description="CI pipeline #4821" status="completed" />
               <brightrail-timeline-item title="Running tests" description="Unit and integration suites" status="current" />
               <brightrail-timeline-item title="Deploy to production" status="pending" />

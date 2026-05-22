@@ -170,6 +170,8 @@
             </select>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
     <section class="bp-panel bp-panel--preview" aria-labelledby="stp-preview-title">
@@ -183,7 +185,7 @@
           class="stp-preview-inner"
           [class.stp-preview-inner--vertical]="orientation() === 'vertical'"
         >
-          <brightrail-stepper
+          <brightrail-stepper [fxShell]="resolvedFxShell()"
             [orientation]="orientation()"
             [stepStyle]="stepStyle()"
             [currentStep]="toApiCurrentStep()"

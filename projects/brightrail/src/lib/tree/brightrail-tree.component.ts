@@ -19,11 +19,13 @@ import {
   type BrightrailTreeFlatNode,
 } from './brightrail-tree.utils';
 import { resolveTreeKeyAction, stepTreeIndex } from '../platform/brightrail-tree-keyboard.utils';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 export type { BrightrailTreeSelectionMode };
 
 @Component({
   selector: 'brightrail-tree',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   templateUrl: './brightrail-tree.component.html',
   styleUrl: './brightrail-tree.component.scss',

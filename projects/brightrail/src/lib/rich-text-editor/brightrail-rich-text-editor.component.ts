@@ -10,6 +10,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type BrightrailRichTextEditorToolbarItem = 'bold' | 'italic' | 'underline' | 'bulletList';
@@ -17,6 +18,7 @@ export type BrightrailRichTextEditorToolbarItem = 'bold' | 'italic' | 'underline
 @Component({
   selector: 'brightrail-rich-text-editor',
   standalone: true,
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

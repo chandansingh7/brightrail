@@ -198,6 +198,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -217,7 +219,7 @@
             </div>
           }
 
-          <brightrail-drawer
+          <brightrail-drawer [fxShell]="resolvedFxShell()"
             [isOpen]="drawerOpen()"
             [contain]="true"
             [placement]="placement()"

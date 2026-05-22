@@ -29,6 +29,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 /** Files in `projects/funfair/public/images`; copied to the app root as `/images/*`. */
 export const CARD_PLAYGROUND_DEMO_IMAGES = {
@@ -65,8 +67,7 @@ export type CardPreviewRecipe =
     BrightrailButtonComponent,
     BrightrailIconComponent,
     BrightrailIconButtonComponent,
-    TitleCasePipe,
-  ],
+    TitleCasePipe, PlaygroundFxSettingsComponent],
   templateUrl: './card-playground.component.html',
   styleUrl: './card-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -112,6 +113,9 @@ export class CardPlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly demoCardImages = CARD_PLAYGROUND_DEMO_IMAGES;
 
   readonly recipeGroups: string[] = ['Basics', 'Layouts', 'Data displays'];
@@ -314,6 +318,7 @@ export class CardPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Basics');
     this.previewRecipe.set('elevatedTeam');
     this.applyRecipeDefaults('elevatedTeam');

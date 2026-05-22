@@ -69,6 +69,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -82,7 +84,7 @@
               <p class="cmd-play-last">Last command: {{ lastSelected() }}</p>
             }
           </div>
-          <brightrail-command-palette
+          <brightrail-command-palette [fxShell]="resolvedFxShell()"
             [isOpen]="isOpen()"
             [commands]="commands()"
             [placeholder]="placeholder()"

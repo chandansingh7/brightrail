@@ -262,6 +262,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -269,7 +271,7 @@
       <app-playground-preview-header titleId="fu-preview-title" componentId="file-upload" [state]="a11yPreviewState()" />
       <div class="bp-preview-surface bp-preview-surface--stretch">
         <div class="bp-preview-inner bp-preview-inner--file-upload">
-          <brightrail-file-upload
+          <brightrail-file-upload [fxShell]="resolvedFxShell()"
             [label]="label()"
             [appearance]="appearance()"
             [variant]="variant()"

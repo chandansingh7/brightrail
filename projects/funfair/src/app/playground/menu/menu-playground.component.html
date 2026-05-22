@@ -163,6 +163,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -182,7 +184,7 @@
                 {{ triggerLabel() }}
               </button>
             </span>
-            <brightrail-menu #menuRef>
+            <brightrail-menu [fxShell]="resolvedFxShell()" #menuRef>
               <brightrail-menu-item
                 [label]="item1Label()"
                 [disabled]="item1Disabled()"

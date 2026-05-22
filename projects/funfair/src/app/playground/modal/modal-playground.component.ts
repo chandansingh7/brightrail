@@ -34,6 +34,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 export type CodeTabId = 'html' | 'ts' | 'scss';
 
@@ -68,8 +70,7 @@ export type ModalRecipe =
     BrightrailButtonComponent,
     BrightrailButtonIconComponent,
     BrightrailIconButtonComponent,
-    TitleCasePipe,
-  ],
+    TitleCasePipe, PlaygroundFxSettingsComponent],
   templateUrl: './modal-playground.component.html',
   styleUrl: './modal-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -130,6 +131,9 @@ export class ModalPlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
 
   readonly TITLE_ID = 'modal-demo-title';
 
@@ -414,6 +418,7 @@ export class ModalPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Basics');
     this.previewRecipe.set('confirmDelete');
     this.applyRecipe('confirmDelete');

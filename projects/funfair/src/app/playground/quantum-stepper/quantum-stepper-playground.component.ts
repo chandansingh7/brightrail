@@ -6,6 +6,8 @@ import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.s
 import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
 import { PlaygroundSnippetDockComponent } from '../shared/playground-snippet-dock.component';
 import { injectPlaygroundA11yPreviewMode } from '../shared/playground-a11y-preview.utils';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 @Component({
   selector: 'app-quantum-stepper-playground',
@@ -14,8 +16,7 @@ import { injectPlaygroundA11yPreviewMode } from '../shared/playground-a11y-previ
     FormsModule,
     PlaygroundPreviewHeaderComponent,
     PlaygroundSnippetDockComponent,
-    BrightrailQuantumStepperComponent,
-  ],
+    BrightrailQuantumStepperComponent, PlaygroundFxSettingsComponent],
   templateUrl: './quantum-stepper-playground.component.html',
   styleUrl: './quantum-stepper-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,6 +24,9 @@ import { injectPlaygroundA11yPreviewMode } from '../shared/playground-a11y-previ
 export class QuantumStepperPlaygroundComponent {
   readonly previewOnly = injectPlaygroundA11yPreviewMode();
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly themeRowOptions: { id: PlaygroundThemeId; label: string }[] = [
@@ -64,6 +68,7 @@ export class OnboardingFlowComponent {
 }`;
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.appearance.set('glow');
     this.currentStep.set(1);
     this.themeService.setTheme('light');

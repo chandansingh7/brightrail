@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../../futuristic/brightrail-futuristic-host';
 
 import {
   BrightrailRadioComponent,
@@ -22,6 +23,7 @@ export interface BrightrailRadioGroupOption {
 
 @Component({
   selector: 'brightrail-radio-group',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   imports: [BrightrailRadioComponent],
   template: `

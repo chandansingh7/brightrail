@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 /**
  * One step inside `brightrail-stepper`. Optional projected content is rendered in workflow layout.
  */
 @Component({
   selector: 'brightrail-step',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   template: '<ng-content />',
   changeDetection: ChangeDetectionStrategy.OnPush,

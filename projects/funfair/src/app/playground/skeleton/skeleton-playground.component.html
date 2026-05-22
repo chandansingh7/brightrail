@@ -93,6 +93,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -102,7 +104,7 @@
         <div class="bp-preview-inner bp-preview-inner--skel">
           @if (showListPattern()) {
             <div class="sk-play-row">
-              <brightrail-skeleton variant="circular" width="2.5rem" height="2.5rem" [animation]="animation()" />
+              <brightrail-skeleton [fxShell]="resolvedFxShell()" variant="circular" width="2.5rem" height="2.5rem" [animation]="animation()" />
               <div class="sk-play-row__copy">
                 <brightrail-skeleton variant="text" width="40%" [animation]="animation()" />
                 <brightrail-skeleton variant="text" width="70%" [animation]="animation()" />

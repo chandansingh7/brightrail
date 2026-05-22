@@ -18,6 +18,7 @@ import {
   type BrightrailAccordionLayout,
 } from './brightrail-accordion-api';
 import { BrightrailAccordionItemComponent } from './brightrail-accordion-item.component';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 export type BrightrailAccordionAppearance = 'standard' | 'bordered' | 'subtle' | 'compact';
 export type BrightrailAccordionExpandMode = 'single' | 'multi';
@@ -26,6 +27,7 @@ export type { BrightrailAccordionLayout, BrightrailAccordionHeaderChevron };
 
 @Component({
   selector: 'brightrail-accordion',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   providers: [{ provide: BRIGHTRAIL_ACCORDION, useExisting: forwardRef(() => BrightrailAccordionComponent) }],
   template: `

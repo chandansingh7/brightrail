@@ -28,6 +28,8 @@ import {
 } from '../../../../../brightrail/src/lib/fields/radio/brightrail-radio-group.component';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 type RadioRecipe =
@@ -59,7 +61,7 @@ type RadioRecipe =
   selector: 'app-radio-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailRadioComponent, BrightrailRadioGroupLibComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailRadioComponent, BrightrailRadioGroupLibComponent, PlaygroundFxSettingsComponent],
   templateUrl: './radio-playground.component.html',
   styleUrl: './radio-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -125,6 +127,9 @@ export class RadioPlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly recipeGroups = ['Core', 'Sizes', 'States', 'Labels', 'Group patterns', 'Enterprise', 'Advanced'] as const;
@@ -356,6 +361,7 @@ export class RadioPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Core');
     this.recipe.set('core-default');
     this.applyRecipe('core-default');

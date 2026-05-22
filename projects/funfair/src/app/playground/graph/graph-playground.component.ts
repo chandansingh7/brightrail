@@ -33,6 +33,8 @@ import {
   formatGraphSegmentsLiteral,
   formatGraphSeriesLiteral,
 } from './graph-snippet-format';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 
@@ -52,7 +54,7 @@ type GraphRecipe =
   selector: 'app-graph-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailGraphComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailGraphComponent, PlaygroundFxSettingsComponent],
   templateUrl: './graph-playground.component.html',
   styleUrl: './graph-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -90,6 +92,9 @@ export class GraphPlaygroundComponent {
 
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
 
   readonly recipeGroups = ['Line', 'Bar & area', 'Radial', 'Advanced'] as const;
   readonly recipeOptions: { value: GraphRecipe; label: string; group: string }[] = [
@@ -354,6 +359,7 @@ export class GraphPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.applyRecipe('line-core');
     this.dataPoints.set(6);
     this.showLegend.set(true);

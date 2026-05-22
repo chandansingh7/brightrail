@@ -17,6 +17,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 import {
   VALIDATION_SUMMARY_DEMO_ERRORS,
   VALIDATION_SUMMARY_FIELD_ERRORS,
@@ -36,7 +38,7 @@ type ValidationSummaryRecipe =
   selector: 'app-validation-summary-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailValidationSummaryComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailValidationSummaryComponent, PlaygroundFxSettingsComponent],
   templateUrl: './validation-summary-playground.component.html',
   styleUrl: './validation-summary-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -70,6 +72,9 @@ export class ValidationSummaryPlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly recipeGroups = ['Basics', 'Fields', 'Titles', 'Advanced'] as const;
@@ -157,6 +162,7 @@ export class ValidationSummaryPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Basics');
     this.onRecipeNgModelChange('core-strings');
     this.themeService.setTheme('light');

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 import { BrightrailFocusVisibleDirective } from '../platform/brightrail-focus-visible.directive';
 import {
   BrightrailButtonIcon,
@@ -31,6 +32,7 @@ export type BrightrailButtonBoundaryStyle = 'none' | 'dotted';
 @Component({
   selector: 'brightrail-button',
   standalone: true,
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   imports: [BrightrailButtonIconComponent, BrightrailFocusVisibleDirective],
   host: {
     '[class.br-host--full]': 'fullWidth()',

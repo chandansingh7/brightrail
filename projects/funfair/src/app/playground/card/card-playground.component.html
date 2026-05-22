@@ -264,6 +264,8 @@
             <span class="bp-switch__track" aria-hidden="true"></span>
           </label>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -273,7 +275,7 @@
         <div class="bp-preview-inner bp-preview-inner--card">
           @switch (previewRecipe()) {
             @case ('horizontalBrief') {
-              <brightrail-card
+              <brightrail-card [fxShell]="resolvedFxShell()"
                 [appearance]="appearance()"
                 [size]="size()"
                 [corners]="corners()"

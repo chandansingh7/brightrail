@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 export type BrightrailValidationSummaryError = string | { message: string; field?: string };
 
 @Component({
   selector: 'brightrail-validation-summary',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   template: `
     @if (hasErrors()) {

@@ -25,6 +25,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 export type CodeTabId = 'html' | 'ts' | 'scss';
 export type IconSide = 'left' | 'right' | 'both';
@@ -37,7 +39,7 @@ export type PlaygroundSuffixPlacement = 'none' | BrightrailTextFieldSuffixPositi
   selector: 'app-text-field-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,BrightrailTextFieldComponent, FormsModule, TitleCasePipe, RouterLink],
+    PlaygroundPreviewHeaderComponent,BrightrailTextFieldComponent, FormsModule, TitleCasePipe, RouterLink, PlaygroundFxSettingsComponent],
   templateUrl: './text-field-playground.component.html',
   styleUrl: './text-field-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -97,6 +99,9 @@ export class TextFieldPlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
 
   /** Label copy for the preview / snippet (fixed in code; not edited in the UI). */
   readonly previewLabel = 'Label';
@@ -291,6 +296,7 @@ export class TextFieldPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.appearance.set('outlined');
     this.shape.set('default');
     this.status.set('none');

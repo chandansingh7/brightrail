@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 @Component({
   selector: 'brightrail-sidebar',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   template: `
     <nav class="br-sidebar" [attr.aria-label]="ariaLabel() || null">

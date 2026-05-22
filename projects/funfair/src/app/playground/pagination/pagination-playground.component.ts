@@ -21,6 +21,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 
@@ -51,7 +53,7 @@ type PaginationRecipe =
   selector: 'app-pagination-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailPaginationComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailPaginationComponent, PlaygroundFxSettingsComponent],
   templateUrl: './pagination-playground.component.html',
   styleUrl: './pagination-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -117,6 +119,9 @@ export class PaginationPlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly recipeGroups = [
@@ -306,6 +311,7 @@ export class PaginationPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Basics');
     this.onRecipeNgModelChange('basics-standard');
   }

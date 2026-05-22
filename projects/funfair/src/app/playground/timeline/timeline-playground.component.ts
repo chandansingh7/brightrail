@@ -18,6 +18,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 
@@ -34,7 +36,7 @@ type TimelineRecipe =
   selector: 'app-timeline-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailTimelineComponent, BrightrailTimelineItemComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailTimelineComponent, BrightrailTimelineItemComponent, PlaygroundFxSettingsComponent],
   templateUrl: './timeline-playground.component.html',
   styleUrl: './timeline-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -80,6 +82,9 @@ export class TimelinePlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly recipeGroups = ['Basics', 'Statuses', 'Enterprise', 'Advanced'] as const;
@@ -194,6 +199,7 @@ export class TimelinePlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Basics');
     this.onRecipeNgModelChange('core-workflow');
     this.themeService.setTheme('light');

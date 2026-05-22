@@ -6,6 +6,8 @@ import {
   output,
 } from '@angular/core';
 
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
+
 /** Visual chrome for {@link BrightrailCardComponent}. */
 export type BrightrailCardAppearance =
   | 'basic'
@@ -19,6 +21,7 @@ export type BrightrailCardAppearance =
 @Component({
   selector: 'brightrail-card',
   standalone: true,
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   template: `
     @if (dismissible()) {
       <button

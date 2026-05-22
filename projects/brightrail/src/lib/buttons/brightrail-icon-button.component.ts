@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 import { BrightrailFocusVisibleDirective } from '../platform/brightrail-focus-visible.directive';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 @Component({
   selector: 'brightrail-icon-button',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   imports: [BrightrailFocusVisibleDirective],
   template: `

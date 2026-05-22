@@ -1,8 +1,10 @@
 import { Directive } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 /** Primary page title inside {@link BrightrailPageHeaderComponent}. */
 @Directive({
   selector: '[brightrailPageTitle]',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   host: { class: 'br-page-header__title' },
 })

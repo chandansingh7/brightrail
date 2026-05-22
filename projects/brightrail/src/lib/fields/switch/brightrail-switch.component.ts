@@ -8,12 +8,14 @@ import {
   signal,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../../futuristic/brightrail-futuristic-host';
 
 export type BrightrailSwitchSize = 'sm' | 'md' | 'lg';
 export type BrightrailSwitchTone = 'primary' | 'success' | 'warning' | 'danger' | 'neutral';
 
 @Component({
   selector: 'brightrail-switch',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   providers: [
     {

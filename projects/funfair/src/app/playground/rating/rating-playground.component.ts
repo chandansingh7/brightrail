@@ -6,6 +6,8 @@ import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.s
 import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
 import { PlaygroundSnippetDockComponent } from '../shared/playground-snippet-dock.component';
 import { injectPlaygroundA11yPreviewMode } from '../shared/playground-a11y-preview.utils';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 @Component({
   selector: 'app-rating-playground',
@@ -14,8 +16,7 @@ import { injectPlaygroundA11yPreviewMode } from '../shared/playground-a11y-previ
     FormsModule,
     PlaygroundPreviewHeaderComponent,
     PlaygroundSnippetDockComponent,
-    BrightrailRatingComponent,
-  ],
+    BrightrailRatingComponent, PlaygroundFxSettingsComponent],
   templateUrl: './rating-playground.component.html',
   styleUrl: './rating-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,6 +24,9 @@ import { injectPlaygroundA11yPreviewMode } from '../shared/playground-a11y-previ
 export class RatingPlaygroundComponent {
   readonly previewOnly = injectPlaygroundA11yPreviewMode();
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly themeRowOptions: { id: PlaygroundThemeId; label: string }[] = [
@@ -57,6 +61,7 @@ export class FeedbackFormComponent {
 }`;
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.score.set(4);
     this.max.set(5);
     this.label.set('Overall satisfaction');

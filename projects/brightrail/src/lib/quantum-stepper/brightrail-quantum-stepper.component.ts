@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 import {
   BrightrailQuantumStep,
   BrightrailQuantumStepperAppearance,
@@ -7,6 +7,7 @@ import {
 
 @Component({
   selector: 'brightrail-quantum-stepper',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   template: `
     <nav class="br-quantum-stepper" [class]="hostClass()" [attr.aria-label]="ariaLabel() || 'Workflow steps'">

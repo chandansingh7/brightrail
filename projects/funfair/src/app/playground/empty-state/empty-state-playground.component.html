@@ -114,6 +114,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -121,7 +123,7 @@
       <app-playground-preview-header titleId="es-preview-title" componentId="empty-state" [state]="a11yPreviewState()" />
       <div class="bp-preview-surface bp-preview-surface--stretch">
         <div class="bp-preview-inner bp-preview-inner--es">
-          <brightrail-empty-state [title]="title()" [description]="description()" [compact]="compact()">
+          <brightrail-empty-state [fxShell]="resolvedFxShell()" [title]="title()" [description]="description()" [compact]="compact()">
             @if (showIcon()) {
               <span brightrailEmptyStateIcon aria-hidden="true">📭</span>
             }

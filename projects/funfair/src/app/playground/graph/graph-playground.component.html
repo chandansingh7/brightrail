@@ -287,6 +287,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -294,7 +296,7 @@
       <app-playground-preview-header titleId="graph-preview-title" componentId="graph" [state]="a11yPreviewState()" />
       <div class="bp-preview-surface bp-preview-surface--stretch">
         <div class="gp-preview">
-          <brightrail-graph
+          <brightrail-graph [fxShell]="resolvedFxShell()"
             [kind]="kind()"
             [series]="usesSeries() ? series() : []"
             [segments]="kind() === 'donut' || kind() === 'pie' || kind() === 'funnel' ? segments() : []"

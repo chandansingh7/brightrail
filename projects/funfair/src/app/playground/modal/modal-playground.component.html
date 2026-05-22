@@ -228,6 +228,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -242,7 +244,7 @@
             </div>
           }
 
-          <brightrail-modal
+          <brightrail-modal [fxShell]="resolvedFxShell()"
             [isOpen]="modalOpen()"
             [size]="size()"
             [appearance]="appearance()"

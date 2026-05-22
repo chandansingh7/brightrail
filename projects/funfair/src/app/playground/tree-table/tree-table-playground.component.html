@@ -31,6 +31,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -38,7 +40,7 @@
       <app-playground-preview-header titleId="tt-preview-title" componentId="tree-table" />
       <div class="bp-preview-surface bp-preview-surface--stretch">
         <div class="bp-preview-inner tt-preview-inner">
-          <brightrail-tree-table
+          <brightrail-tree-table [fxShell]="resolvedFxShell()"
             ariaLabel="Organization permissions"
             [nodes]="nodes"
             [selectedId]="selectedId()"

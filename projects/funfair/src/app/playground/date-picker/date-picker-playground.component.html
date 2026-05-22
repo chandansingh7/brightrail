@@ -106,13 +106,15 @@
           <span class="bp-setting-row__label">Theme</span>
           <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="themeService.theme()" (ngModelChange)="themeService.setTheme($event)" [ngModelOptions]="ngModelStandalone">@for (opt of themeRowOptions; track opt.id) {<option [value]="opt.id">{{ opt.label }}</option>}</select></div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
     <section class="bp-panel bp-panel--preview" aria-labelledby="dp-preview-title">
       <app-playground-preview-header titleId="dp-preview-title" componentId="date-picker" [state]="a11yPreviewState()" />
       <div class="bp-preview-surface bp-preview-surface--stretch dp-preview">
         @if (effectiveType() === 'range') {
-          <brightrail-date-picker
+          <brightrail-date-picker [fxShell]="resolvedFxShell()"
             type="range"
             [appearance]="appearance()"
             [status]="status()"

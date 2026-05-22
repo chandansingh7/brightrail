@@ -26,6 +26,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 export type CodeTabId = 'html' | 'ts' | 'scss';
 export type IconSide = 'left' | 'right' | 'both';
@@ -65,8 +67,7 @@ export type SelectPreviewRecipe =
     BrightrailButtonGroupComponent,
     BrightrailButtonIconComponent,
     FormsModule,
-    TitleCasePipe,
-  ],
+    TitleCasePipe, PlaygroundFxSettingsComponent],
   templateUrl: './select-playground.component.html',
   styleUrl: './select-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -154,6 +155,9 @@ export class SelectPlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
 
   readonly ngModelStandalone = { standalone: true };
 
@@ -621,6 +625,7 @@ export class SelectPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.previewRecipe.set('standard');
     this.appearance.set('outlined');
     this.status.set('none');

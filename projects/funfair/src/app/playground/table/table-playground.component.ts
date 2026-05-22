@@ -108,6 +108,8 @@ export type TablePlaygroundRecipe =
   | 'inlineValidate'
   | 'inlineBulk';
 
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 @Component({
   selector: 'app-table-playground',
   standalone: true,
@@ -123,8 +125,7 @@ export type TablePlaygroundRecipe =
     BrightrailTableToolbarComponent,
     BrightrailTableToolbarActionsComponent,
     BrightrailTableBulkActionsComponent,
-    BrightrailTableSingleActionsComponent,
-  ],
+    BrightrailTableSingleActionsComponent, PlaygroundFxSettingsComponent],
   templateUrl: './table-playground.component.html',
   styleUrl: './table-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -217,6 +218,9 @@ export class TablePlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
 
   constructor() {
     initPlaygroundA11yPreview('table', this.previewOnly, (state) => this.restoreA11yPreviewState(state));
@@ -674,6 +678,7 @@ export class TablePlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Basics');
     this.advancedAvatarPresentation.set('full');
     this.advancedStatusBadgeTone.set('auto');

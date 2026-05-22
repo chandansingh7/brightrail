@@ -24,6 +24,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 
@@ -83,8 +85,7 @@ const APP_SHELL_NAV_ITEMS: AppShellNavItem[] = [
     BrightrailPageHeaderComponent,
     BrightrailPageTitleDirective,
     BrightrailPageSubtitleDirective,
-    BrightrailPageHeaderActionsDirective,
-  ],
+    BrightrailPageHeaderActionsDirective, PlaygroundFxSettingsComponent],
   templateUrl: './app-shell-playground.component.html',
   styleUrl: './app-shell-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -151,6 +152,9 @@ export class AppShellPlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
   readonly shellNavItems = APP_SHELL_NAV_ITEMS;
 
@@ -287,6 +291,7 @@ export class AppShellPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Basics');
     this.onRecipeNgModelChange('core-full');
     this.themeService.setTheme('light');

@@ -40,6 +40,20 @@
           }
         </select>
       </label>
+      <label class="pf-field pf-field--inline">
+        <span class="pf-field__label">Futuristic shell</span>
+        <select
+          class="pf-select"
+          title="Site-wide cyber / neon / holo / glass"
+          (change)="themeService.setFxShell($any($event.target).value)"
+        >
+          @for (opt of headerFxOptions; track opt.id) {
+            <option [value]="opt.id" [selected]="themeService.fxShell() === opt.id">
+              {{ opt.label }}
+            </option>
+          }
+        </select>
+      </label>
       <a class="pf-link-external" [href]="midwayHref" target="_blank" rel="noopener noreferrer">
         Midway (packaged)
       </a>

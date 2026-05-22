@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 @Component({
   selector: 'brightrail-top-bar',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   template: `
     <div class="br-top-bar" [class.br-top-bar--bordered]="bordered()">

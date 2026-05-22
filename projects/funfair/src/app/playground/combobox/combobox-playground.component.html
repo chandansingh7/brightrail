@@ -128,6 +128,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -137,7 +139,7 @@
         <div class="bp-preview-inner bp-preview-inner--combobox">
           @if (recipe() === 'enterprise-pair') {
             <div class="combobox-play-pair">
-              <brightrail-combobox
+              <brightrail-combobox [fxShell]="resolvedFxShell()"
                 [options]="countryOptions"
                 [placeholder]="placeholder()"
                 [filterable]="filterable()"

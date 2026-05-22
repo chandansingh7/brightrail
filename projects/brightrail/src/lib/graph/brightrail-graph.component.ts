@@ -6,6 +6,7 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 import {
   BRIGHTRAIL_GRAPH_DEFAULT_COLORS,
@@ -83,6 +84,7 @@ export interface BrightrailGraphTooltipView {
 @Component({
   selector: 'brightrail-graph',
   standalone: true,
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   templateUrl: './brightrail-graph.component.html',
   styleUrl: './brightrail-graph.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

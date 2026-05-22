@@ -1,4 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -33,6 +34,7 @@ type PageTile =
 @Component({
   selector: 'brightrail-table',
   standalone: true,
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   imports: [NgTemplateOutlet],
   templateUrl: './brightrail-table.component.html',
   styleUrl: './brightrail-table.component.scss',

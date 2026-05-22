@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostListener, computed, input, output } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 import { BrightrailFocusTrapDirective } from '../platform/brightrail-focus-trap.directive';
 
@@ -10,6 +11,7 @@ export type BrightrailDrawerBackdropStyle = 'dim' | 'dim-strong' | 'blur' | 'gla
 @Component({
   selector: 'brightrail-drawer',
   standalone: true,
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   imports: [BrightrailFocusTrapDirective],
   template: `
     @if (isOpen()) {

@@ -82,6 +82,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -91,7 +93,7 @@
         <div class="bp-preview-inner bp-preview-inner--tree">
           @if (showDual()) {
             <div class="tree-play-dual">
-              <brightrail-tree
+              <brightrail-tree [fxShell]="resolvedFxShell()"
                 [nodes]="nodes()"
                 [selectionMode]="selectionMode()"
                 [selectedId]="selectedId()"

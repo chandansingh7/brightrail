@@ -10,6 +10,7 @@ import {
 import type { BrightrailButtonIcon } from '../buttons/brightrail-button-icon.component';
 
 import { BrightrailTabContentDirective } from './brightrail-tab-content.directive';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 export type BrightrailTabIconName = Exclude<BrightrailButtonIcon, 'none'>;
 
@@ -17,6 +18,7 @@ let brightrailTabUid = 0;
 
 @Component({
   selector: 'brightrail-tab',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   template: '<ng-content />',
   host: {

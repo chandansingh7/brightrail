@@ -9,6 +9,7 @@ import {
   signal,
   untracked,
 } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 /**
  * Horizontal stack of avatars with optional overflow counter.
@@ -18,6 +19,7 @@ import {
  */
 @Component({
   selector: 'brightrail-avatar-group',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   template: `
     <div

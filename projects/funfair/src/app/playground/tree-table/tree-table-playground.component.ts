@@ -6,6 +6,8 @@ import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.s
 import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
 import { PlaygroundSnippetDockComponent } from '../shared/playground-snippet-dock.component';
 import { injectPlaygroundA11yPreviewMode } from '../shared/playground-a11y-preview.utils';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 @Component({
   selector: 'app-tree-table-playground',
@@ -14,8 +16,7 @@ import { injectPlaygroundA11yPreviewMode } from '../shared/playground-a11y-previ
     FormsModule,
     PlaygroundPreviewHeaderComponent,
     PlaygroundSnippetDockComponent,
-    BrightrailTreeTableComponent,
-  ],
+    BrightrailTreeTableComponent, PlaygroundFxSettingsComponent],
   templateUrl: './tree-table-playground.component.html',
   styleUrl: './tree-table-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,6 +24,9 @@ import { injectPlaygroundA11yPreviewMode } from '../shared/playground-a11y-previ
 export class TreeTablePlaygroundComponent {
   readonly previewOnly = injectPlaygroundA11yPreviewMode();
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly themeRowOptions: { id: PlaygroundThemeId; label: string }[] = [
@@ -75,6 +79,7 @@ export class PermissionsTreeComponent {
 }`;
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedId.set('eng');
     this.themeService.setTheme('light');
   }

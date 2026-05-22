@@ -21,6 +21,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 type BadgeRecipe =
@@ -49,7 +51,7 @@ type BadgeMode = 'text' | 'count' | 'status' | 'dot' | 'notification';
   selector: 'app-badge-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailBadgeComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailBadgeComponent, PlaygroundFxSettingsComponent],
   templateUrl: './badge-playground.component.html',
   styleUrl: './badge-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -100,6 +102,9 @@ export class BadgePlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
 
   readonly recipeGroups = ['Core', 'Status', 'Appearance & State', 'Enterprise', 'Advanced'] as const;
   readonly recipeOptions: { value: BadgeRecipe; label: string; group: string }[] = [
@@ -427,6 +432,7 @@ export class BadgePlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Core');
     this.previewRecipe.set('notification');
     this.applyRecipe('notification');

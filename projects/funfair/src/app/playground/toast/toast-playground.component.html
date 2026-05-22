@@ -92,6 +92,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -100,7 +102,7 @@
       <div class="bp-preview-surface bp-preview-surface--stretch">
         <div class="bp-preview-inner bp-preview-inner--toast">
           @if (previewStatic()) {
-            <brightrail-toast
+            <brightrail-toast [fxShell]="resolvedFxShell()"
               [variant]="variant()"
               [title]="title()"
               [message]="message()"

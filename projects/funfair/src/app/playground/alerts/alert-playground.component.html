@@ -360,6 +360,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -376,7 +378,7 @@
             [class.alert-play-live--dock-bottom]="placement() === 'bottom'"
             aria-label="Configured alert demo"
           >
-            <brightrail-alert
+            <brightrail-alert [fxShell]="resolvedFxShell()"
               [appearance]="appearance()"
               [status]="status()"
               [size]="size()"

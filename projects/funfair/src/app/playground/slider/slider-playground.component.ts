@@ -18,6 +18,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 type SliderRecipe =
@@ -38,7 +40,7 @@ type SliderRecipe =
   selector: 'app-slider-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailSliderComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailSliderComponent, PlaygroundFxSettingsComponent],
   templateUrl: './slider-playground.component.html',
   styleUrl: './slider-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -88,6 +90,9 @@ export class SliderPlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly recipeGroups = ['Core', 'Ranges', 'Tones', 'Advanced'] as const;
@@ -236,6 +241,7 @@ export class SliderPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Core');
     this.onRecipeNgModelChange('basic');
     this.themeService.setTheme('light');

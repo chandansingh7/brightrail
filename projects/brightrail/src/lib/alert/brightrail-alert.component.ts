@@ -6,6 +6,7 @@ import {
   output,
 } from '@angular/core';
 
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 import {
   BrightrailButtonIcon,
   BrightrailButtonIconComponent,
@@ -20,6 +21,7 @@ export type BrightrailAlertPlacement = 'inline' | 'bottom';
 @Component({
   selector: 'brightrail-alert',
   standalone: true,
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   imports: [BrightrailButtonIconComponent],
   template: `
     <div class="br-alert__shell">

@@ -1,7 +1,9 @@
 import { Directive } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 @Directive({
   selector: '[brightrailDrawerTitle]',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   host: {
     class: 'br-drawer__header-title',

@@ -246,6 +246,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -253,7 +255,7 @@
       <app-playground-preview-header titleId="ta-preview-title" componentId="textarea" [state]="a11yPreviewState()" />
       <div class="bp-preview-surface bp-preview-surface--stretch">
         <div class="bp-preview-inner bp-preview-inner--textarea" [class.ta-play--full]="fullWidth()">
-          <brightrail-textarea
+          <brightrail-textarea [fxShell]="resolvedFxShell()"
             [appearance]="appearance()"
             [label]="label()"
             [placeholder]="placeholder()"

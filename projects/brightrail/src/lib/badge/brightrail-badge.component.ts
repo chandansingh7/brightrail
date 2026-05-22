@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 import {
   BrightrailButtonIcon,
@@ -21,6 +22,7 @@ export type BrightrailBadgeState = 'default' | 'hover' | 'active' | 'disabled';
 @Component({
   selector: 'brightrail-badge',
   standalone: true,
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   imports: [BrightrailButtonIconComponent],
   template: `
     <span class="br-badge" [class]="badgeClass()" [attr.aria-label]="computedAriaLabel()">

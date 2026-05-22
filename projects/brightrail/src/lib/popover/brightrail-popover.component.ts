@@ -6,6 +6,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DOCUMENT } from '@angular/common';
 import { fromEvent } from 'rxjs';
@@ -13,6 +14,7 @@ import { fromEvent } from 'rxjs';
 @Component({
   selector: 'brightrail-popover',
   standalone: true,
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   template: `
     <div
       class="br-popover"

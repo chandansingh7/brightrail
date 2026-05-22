@@ -47,12 +47,14 @@
           <span class="bp-setting-row__label">Theme</span>
           <div class="bp-dropdown"><select class="bp-dropdown__select" [ngModel]="themeService.theme()" (ngModelChange)="themeService.setTheme($event)" [ngModelOptions]="ngModelStandalone">@for (opt of themeRowOptions; track opt.id) {<option [value]="opt.id">{{ opt.label }}</option>}</select></div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
     <section class="bp-panel bp-panel--preview" aria-labelledby="bc-preview-title">
       <app-playground-preview-header titleId="bc-preview-title" componentId="breadcrumb" [state]="a11yPreviewState()" />
       <div class="bp-preview-surface bp-preview-surface--stretch bc-preview">
-        <brightrail-breadcrumb
+        <brightrail-breadcrumb [fxShell]="resolvedFxShell()"
           [boxed]="boxed()"
           [items]="items()"
           [separator]="separator()"

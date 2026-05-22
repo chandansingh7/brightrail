@@ -29,6 +29,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 
@@ -45,7 +47,7 @@ type DatePickerScenario =
   selector: 'app-date-picker-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, TitleCasePipe, BrightrailDatePickerComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, TitleCasePipe, BrightrailDatePickerComponent, PlaygroundFxSettingsComponent],
   templateUrl: './date-picker-playground.component.html',
   styleUrl: './date-picker-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -81,6 +83,9 @@ export class DatePickerPlaygroundComponent {
 
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly recipeGroups = ['Basics', 'Validation', 'Enterprise', 'Futuristic'] as const;
@@ -328,6 +333,7 @@ export class DatePickerPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Basics');
     this.onScenarioNgModelChange('single-popup');
     this.themeService.setTheme('light');

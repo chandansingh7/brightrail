@@ -152,6 +152,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -162,7 +164,7 @@
           <div class="acc-play-preview">
           @switch (recipe()) {
             @case ('expand-single') {
-              <brightrail-accordion
+              <brightrail-accordion [fxShell]="resolvedFxShell()"
                 class="acc-preview"
                 [appearance]="appearance()"
                 [size]="size()"

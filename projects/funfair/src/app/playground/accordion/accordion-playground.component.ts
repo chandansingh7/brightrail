@@ -14,6 +14,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 
@@ -43,7 +45,7 @@ type AccordionRecipe =
   selector: 'app-accordion-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailAccordionComponent, BrightrailAccordionItemComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailAccordionComponent, BrightrailAccordionItemComponent, PlaygroundFxSettingsComponent],
   templateUrl: './accordion-playground.component.html',
   styleUrl: './accordion-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -92,6 +94,9 @@ export class AccordionPlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly recipeGroups = ['Basics', 'Sizes', 'States', 'Expand', 'Icons', 'Enterprise', 'Advanced'] as const;
@@ -213,6 +218,7 @@ export class AccordionPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Basics');
     this.onRecipeNgModelChange('core-standard');
   }

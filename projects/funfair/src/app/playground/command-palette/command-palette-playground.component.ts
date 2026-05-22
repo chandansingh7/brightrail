@@ -34,11 +34,13 @@ type CommandPaletteRecipe =
   | 'disabled'
   | 'filtered';
 
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 @Component({
   selector: 'app-command-palette-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailCommandPaletteComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailCommandPaletteComponent, PlaygroundFxSettingsComponent],
   templateUrl: './command-palette-playground.component.html',
   styleUrl: './command-palette-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -74,6 +76,9 @@ export class CommandPalettePlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly recipeGroups = ['Basics', 'Content', 'States', 'Advanced'] as const;
@@ -181,6 +186,7 @@ export class CommandPalettePlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Basics');
     this.onRecipeNgModelChange('core-open');
     this.themeService.setTheme('light');

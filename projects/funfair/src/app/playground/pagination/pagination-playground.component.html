@@ -200,6 +200,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -208,7 +210,7 @@
       <div class="bp-preview-surface bp-preview-surface--pagination">
         <div class="bp-preview-inner bp-preview-inner--pag">
           <div class="pag-play-preview">
-          <brightrail-pagination
+          <brightrail-pagination [fxShell]="resolvedFxShell()"
             [length]="length()"
             [pageIndex]="pageIndex()"
             [pageSize]="pageSize()"

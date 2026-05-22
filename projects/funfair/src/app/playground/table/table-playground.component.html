@@ -408,6 +408,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -418,7 +420,7 @@
           class="bp-preview-inner bp-preview-inner--table tp-preview-frame"
           [class.tp-preview--dark]="previewTheme() === 'dark'"
         >
-          <brightrail-table
+          <brightrail-table [fxShell]="resolvedFxShell()"
             class="tp-table-host"
             [data]="tableRows()"
             [columns]="previewTableColumns()"

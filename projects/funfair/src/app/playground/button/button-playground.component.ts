@@ -15,6 +15,8 @@ import {
   initPlaygroundA11yPreview,
 } from '../shared/playground-a11y-preview.utils';
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 export type CodeTabId = 'html' | 'ts' | 'scss';
 export type IconSide = 'left' | 'right' | 'both';
@@ -38,13 +40,16 @@ interface ButtonA11yPreviewState {
 @Component({
   selector: 'app-button-playground',
   standalone: true,
-  imports: [BrightrailButtonComponent, TitleCasePipe, PlaygroundPreviewHeaderComponent],
+  imports: [BrightrailButtonComponent, TitleCasePipe, PlaygroundPreviewHeaderComponent, PlaygroundFxSettingsComponent],
   templateUrl: './button-playground.component.html',
   styleUrl: './button-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonPlaygroundComponent {
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly previewOnly = injectPlaygroundA11yPreviewMode();
 
   readonly a11yPreviewState = computed<ButtonA11yPreviewState>(() => ({
@@ -261,6 +266,7 @@ export class ButtonPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.variant.set('primary');
     this.size.set('md');
     this.shape.set('default');

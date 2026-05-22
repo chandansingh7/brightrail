@@ -208,6 +208,8 @@
             ><span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -216,7 +218,7 @@
       <div class="bp-preview-surface bp-preview-surface--stretch">
         <div class="bp-preview-inner bp-preview-inner--radio">
           @if (usesGroup()) {
-            <brightrail-radio-group
+            <brightrail-radio-group [fxShell]="resolvedFxShell()"
               class="rd-preview-group"
               name="notification-preference"
               [groupLabel]="groupLabel()"

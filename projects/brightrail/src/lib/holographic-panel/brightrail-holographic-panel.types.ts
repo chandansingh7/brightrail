@@ -1,4 +1,6 @@
-export type BrightrailHolographicPanelAppearance = 'glass' | 'neon' | 'holo' | 'cyber';
+import type { BrightrailFuturisticAppearance } from '../futuristic/brightrail-futuristic-appearance.types';
+
+export type BrightrailHolographicPanelAppearance = BrightrailFuturisticAppearance;
 
 export type BrightrailHolographicMetricTrend = 'up' | 'down' | 'flat';
 

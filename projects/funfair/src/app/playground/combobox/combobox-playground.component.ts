@@ -17,6 +17,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 
@@ -36,7 +38,7 @@ type ComboboxRecipe =
   selector: 'app-combobox-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailComboboxComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailComboboxComponent, PlaygroundFxSettingsComponent],
   templateUrl: './combobox-playground.component.html',
   styleUrl: './combobox-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -78,6 +80,9 @@ export class ComboboxPlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly recipeGroups = ['Core', 'Behavior', 'Layout', 'Forms'] as const;
@@ -221,6 +226,7 @@ export class ComboboxPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Core');
     this.onRecipeNgModelChange('default-country');
     this.themeService.setTheme('light');

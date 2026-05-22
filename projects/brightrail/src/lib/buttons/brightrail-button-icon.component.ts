@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 /** Icons available on `BrightrailButtonComponent` (`iconLeft` / `iconRight`). */
 export type BrightrailButtonIcon =
@@ -35,6 +36,7 @@ export type BrightrailButtonIcon =
 
 @Component({
   selector: 'brightrail-button-icon',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   template: `
     @switch (name()) {

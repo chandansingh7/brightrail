@@ -6,6 +6,7 @@ import {
   output,
   signal,
 } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 import { flattenTreeTableRows } from './brightrail-tree-table.utils';
 import type { BrightrailTreeTableColumn, BrightrailTreeTableNode } from './brightrail-tree-table.types';
@@ -13,6 +14,7 @@ import type { BrightrailTreeTableColumn, BrightrailTreeTableNode } from './brigh
 @Component({
   selector: 'brightrail-tree-table',
   standalone: true,
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   template: `
     <table class="br-tt" role="treegrid" [attr.aria-label]="ariaLabel()">
       <thead>

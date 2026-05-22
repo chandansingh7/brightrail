@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 /**
  * Slot for bulk row actions (multi-select). Project `<button>` elements; style with:
@@ -11,6 +12,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
  */
 @Component({
   selector: 'brightrail-table-bulk-actions',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   template: `<div class="br-table-bulk-actions" role="group"><ng-content /></div>`,
   styleUrl: './brightrail-table-bulk-actions.component.scss',

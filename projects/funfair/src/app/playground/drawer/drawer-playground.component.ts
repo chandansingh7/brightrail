@@ -27,6 +27,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 type FooterPreset = 'none' | 'primarySecondary' | 'singlePrimary' | 'destructive';
@@ -56,8 +58,7 @@ type DrawerRecipe =
     BrightrailDrawerFooterComponent,
     BrightrailDrawerTitleDirective,
     BrightrailDrawerSubtitleDirective,
-    BrightrailButtonComponent,
-  ],
+    BrightrailButtonComponent, PlaygroundFxSettingsComponent],
   templateUrl: './drawer-playground.component.html',
   styleUrl: './drawer-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -85,6 +86,9 @@ export class DrawerPlaygroundComponent {
 
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly recipeGroups = ['Basics', 'Enterprise', 'Advanced', 'Futuristic'] as const;
@@ -301,6 +305,7 @@ export class DrawerPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Basics');
     this.recipe.set('form-panel');
     this.applyRecipe('form-panel');

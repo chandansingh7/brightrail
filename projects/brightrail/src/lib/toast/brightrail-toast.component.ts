@@ -5,6 +5,7 @@ import {
   input,
   output,
 } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 import {
   BrightrailButtonIcon,
@@ -15,6 +16,7 @@ import { BrightrailToastVariant } from './brightrail-toast.types';
 @Component({
   selector: 'brightrail-toast',
   standalone: true,
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   imports: [BrightrailButtonIconComponent],
   template: `
     <div class="br-toast__shell" role="status" [attr.aria-live]="ariaLive()">

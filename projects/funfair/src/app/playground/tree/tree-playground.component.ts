@@ -19,6 +19,8 @@ import {
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
 import { TREE_DEMO_FILES, TREE_DEMO_ORG, TREE_DEMO_WORKSPACE } from './tree-variation-snippets';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 
@@ -41,7 +43,7 @@ type TreeRecipe =
   selector: 'app-tree-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailTreeComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailTreeComponent, PlaygroundFxSettingsComponent],
   templateUrl: './tree-playground.component.html',
   styleUrl: './tree-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -85,6 +87,9 @@ export class TreePlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly recipeGroups = ['Basics', 'Selection', 'Expand', 'States', 'Enterprise', 'Advanced'] as const;
@@ -278,6 +283,7 @@ export class TreePlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Basics');
     this.onRecipeNgModelChange('core-workspace');
     this.themeService.setTheme('light');

@@ -43,6 +43,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -50,7 +52,7 @@
       <app-playground-preview-header titleId="hp-preview-title" componentId="holographic-panel" />
       <div class="bp-preview-surface bp-preview-surface--stretch hp-preview-surface">
         <div class="bp-preview-inner hp-preview-inner">
-          <brightrail-holographic-panel title="Command center" [appearance]="appearance()" [metrics]="metrics" />
+          <brightrail-holographic-panel [fxShell]="resolvedFxShell()" title="Command center" [appearance]="appearance()" [metrics]="metrics" />
         </div>
       </div>
     </section>

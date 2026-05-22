@@ -312,6 +312,8 @@
             </div>
           </div>
         </details>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -319,7 +321,7 @@
       <app-playground-preview-header titleId="tooltip-preview-title" componentId="tooltip" [state]="a11yPreviewState()" />
       <div class="bp-preview-surface bp-preview-surface--stretch">
         <div class="bp-preview-inner tp-preview">
-          <brightrail-button
+          <brightrail-button [fxShell]="resolvedFxShell()"
             [variant]="triggerButtonVariant()"
             size="md"
             [iconLeft]="triggerButtonIcon()"

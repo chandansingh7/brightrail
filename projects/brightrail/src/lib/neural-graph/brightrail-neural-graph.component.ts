@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-
 import {
   BrightrailNeuralGraphLink,
   BrightrailNeuralGraphNode,
 } from './brightrail-neural-graph.types';
 import { layoutNeuralGraphNodes, neuralGraphEdges } from './brightrail-neural-graph.utils';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 @Component({
   selector: 'brightrail-neural-graph',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   template: `
     <figure class="br-neural-graph" [attr.aria-label]="ariaLabel() || 'Neural network graph'">

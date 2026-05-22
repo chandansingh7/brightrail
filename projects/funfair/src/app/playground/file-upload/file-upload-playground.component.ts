@@ -23,6 +23,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 type FileUploadScenarioGroup =
@@ -66,7 +68,7 @@ type FileListPreset = 'none' | 'single-success' | 'multi-mixed' | 'enterprise';
   selector: 'app-file-upload-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailFileUploadComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailFileUploadComponent, PlaygroundFxSettingsComponent],
   templateUrl: './file-upload-playground.component.html',
   styleUrl: './file-upload-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -108,6 +110,9 @@ export class FileUploadPlaygroundComponent {
 
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly scenarioGroupOptions: { value: FileUploadScenarioGroup; label: string }[] = [
@@ -451,6 +456,7 @@ export class FileUploadPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.scenarioGroup.set('core-upload-types');
     this.scenario.set('core-compact-file-picker');
     this.applyScenario('core-compact-file-picker');

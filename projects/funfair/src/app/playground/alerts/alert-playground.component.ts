@@ -32,6 +32,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 export type CodeTabId = 'html' | 'ts' | 'scss';
 
@@ -73,8 +75,7 @@ export type AlertPreviewRecipe =
     BrightrailAlertMessageDirective,
     BrightrailAlertActionsComponent,
     BrightrailButtonComponent,
-    TitleCasePipe,
-  ],
+    TitleCasePipe, PlaygroundFxSettingsComponent],
   templateUrl: './alert-playground.component.html',
   styleUrl: './alert-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -133,6 +134,9 @@ export class AlertPlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
 
   readonly recipeGroups = ['Basics', 'Patterns', 'Catalog'] as const;
 
@@ -591,6 +595,7 @@ export class AlertPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Basics');
     this.previewRecipe.set('inlineSuccess');
     this.applyRecipe('inlineSuccess');

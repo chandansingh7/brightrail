@@ -19,6 +19,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 
@@ -38,7 +40,7 @@ type ToastRecipe =
   selector: 'app-toast-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailToastComponent, BrightrailToastContainerComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailToastComponent, BrightrailToastContainerComponent, PlaygroundFxSettingsComponent],
   templateUrl: './toast-playground.component.html',
   styleUrl: './toast-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -80,6 +82,9 @@ export class ToastPlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly toastService = inject(BrightrailToastService);
   readonly ngModelStandalone = { standalone: true };
 
@@ -187,6 +192,7 @@ export class ToastPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.toastService.dismissAll();
     this.selectedRecipeGroup.set('Basics');
     this.onRecipeNgModelChange('core-info');

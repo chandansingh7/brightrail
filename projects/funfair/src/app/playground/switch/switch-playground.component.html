@@ -172,6 +172,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -182,7 +184,7 @@
           @if (recipe() === 'settings-row') {
             <div class="sw-play-row">
               <span>Push notifications</span>
-              <brightrail-switch
+              <brightrail-switch [fxShell]="resolvedFxShell()"
                 [ariaLabel]="ariaLabel()"
                 [tone]="tone()"
                 [size]="size()"

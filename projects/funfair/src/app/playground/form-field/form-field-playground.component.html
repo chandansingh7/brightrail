@@ -166,6 +166,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -175,7 +177,7 @@
         <div class="bp-preview-inner bp-preview-inner--form-field">
           @if (showStackedPreview()) {
             <div class="ff-play-stack">
-              <brightrail-form-field label="First name" [required]="true">
+              <brightrail-form-field [fxShell]="resolvedFxShell()" label="First name" [required]="true">
                 <brightrail-text-field
                   appearance="outlined"
                   labelPosition="none"

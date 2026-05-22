@@ -22,6 +22,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 type BreadcrumbScenario = 'standard' | 'enterprise' | 'mobile' | 'futuristic';
@@ -30,7 +32,7 @@ type BreadcrumbScenario = 'standard' | 'enterprise' | 'mobile' | 'futuristic';
   selector: 'app-breadcrumb-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, TitleCasePipe, BrightrailBreadcrumbComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, TitleCasePipe, BrightrailBreadcrumbComponent, PlaygroundFxSettingsComponent],
   templateUrl: './breadcrumb-playground.component.html',
   styleUrl: './breadcrumb-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -53,6 +55,9 @@ export class BreadcrumbPlaygroundComponent {
 
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly recipeGroups = ['Basics', 'Enterprise', 'Futuristic'] as const;
@@ -171,6 +176,7 @@ export class BreadcrumbPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Basics');
     this.onScenarioNgModelChange('standard');
     this.themeService.setTheme('light');

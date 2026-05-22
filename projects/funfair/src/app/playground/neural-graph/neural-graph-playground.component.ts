@@ -6,6 +6,8 @@ import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.s
 import { PlaygroundPreviewHeaderComponent } from '../shared/playground-preview-header.component';
 import { PlaygroundSnippetDockComponent } from '../shared/playground-snippet-dock.component';
 import { injectPlaygroundA11yPreviewMode } from '../shared/playground-a11y-preview.utils';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 @Component({
   selector: 'app-neural-graph-playground',
@@ -14,8 +16,7 @@ import { injectPlaygroundA11yPreviewMode } from '../shared/playground-a11y-previ
     FormsModule,
     PlaygroundPreviewHeaderComponent,
     PlaygroundSnippetDockComponent,
-    BrightrailNeuralGraphComponent,
-  ],
+    BrightrailNeuralGraphComponent, PlaygroundFxSettingsComponent],
   templateUrl: './neural-graph-playground.component.html',
   styleUrl: './neural-graph-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,6 +24,9 @@ import { injectPlaygroundA11yPreviewMode } from '../shared/playground-a11y-previ
 export class NeuralGraphPlaygroundComponent {
   readonly previewOnly = injectPlaygroundA11yPreviewMode();
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly themeRowOptions: { id: PlaygroundThemeId; label: string }[] = [
@@ -71,6 +75,7 @@ export class PipelineGraphComponent {
 }`;
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.themeService.setTheme('light');
   }
 }

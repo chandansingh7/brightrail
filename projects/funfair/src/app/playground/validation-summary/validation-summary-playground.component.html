@@ -59,6 +59,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -66,7 +68,7 @@
       <app-playground-preview-header titleId="vs-preview-title" componentId="validation-summary" [state]="a11yPreviewState()" />
       <div class="bp-preview-surface bp-preview-surface--stretch">
         <div class="bp-preview-inner bp-preview-inner--validation-summary">
-          <brightrail-validation-summary [title]="title()" [errors]="errors()" />
+          <brightrail-validation-summary [fxShell]="resolvedFxShell()" [title]="title()" [errors]="errors()" />
         </div>
       </div>
     </section>

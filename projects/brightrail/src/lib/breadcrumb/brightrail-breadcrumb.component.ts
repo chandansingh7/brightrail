@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 export type BrightrailBreadcrumbSeparator = 'chevron' | 'slash' | 'dot' | 'arrow';
 export type BrightrailBreadcrumbSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -16,6 +17,7 @@ type BrightrailBreadcrumbDisplayItem = BrightrailBreadcrumbItem & { __ellipsis?:
 
 @Component({
   selector: 'brightrail-breadcrumb',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   template: `
     <nav class="br-breadcrumb" [class.br-breadcrumb--boxed]="boxed()" aria-label="Breadcrumb">

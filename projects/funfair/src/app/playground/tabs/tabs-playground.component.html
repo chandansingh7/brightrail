@@ -224,6 +224,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -231,7 +233,7 @@
       <app-playground-preview-header titleId="tabs-preview-title" componentId="tabs" [state]="a11yPreviewState()" />
       <div class="bp-preview-surface">
         <div class="bp-preview-inner">
-          <brightrail-tabs
+          <brightrail-tabs [fxShell]="resolvedFxShell()"
             [appearance]="appearance()"
             [orientation]="orientation()"
             [size]="size()"

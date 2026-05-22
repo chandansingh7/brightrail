@@ -43,6 +43,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -50,7 +52,7 @@
       <app-playground-preview-header titleId="rte-preview-title" componentId="rich-text-editor" />
       <div class="bp-preview-surface bp-preview-surface--stretch">
         <div class="bp-preview-inner rte-preview-inner">
-          <brightrail-rich-text-editor
+          <brightrail-rich-text-editor [fxShell]="resolvedFxShell()"
             [label]="label()"
             [placeholder]="placeholder()"
             [ngModel]="body()"

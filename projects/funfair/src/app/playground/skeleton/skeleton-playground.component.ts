@@ -18,6 +18,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 
@@ -40,7 +42,7 @@ type SkeletonRecipe =
   selector: 'app-skeleton-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailSkeletonComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailSkeletonComponent, PlaygroundFxSettingsComponent],
   templateUrl: './skeleton-playground.component.html',
   styleUrl: './skeleton-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -80,6 +82,9 @@ export class SkeletonPlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly recipeGroups = ['Basics', 'Animation', 'Layout', 'Patterns', 'Advanced'] as const;
@@ -181,6 +186,7 @@ export class SkeletonPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Basics');
     this.onRecipeNgModelChange('core-text');
   }

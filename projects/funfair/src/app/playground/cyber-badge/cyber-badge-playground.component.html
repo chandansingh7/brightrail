@@ -71,6 +71,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -78,7 +80,7 @@
       <app-playground-preview-header titleId="cb-preview-title" componentId="cyber-badge" [state]="a11yPreviewState()" />
       <div class="bp-preview-surface bp-preview-surface--stretch cb-preview-surface">
         <div class="bp-preview-inner">
-          <brightrail-cyber-badge
+          <brightrail-cyber-badge [fxShell]="resolvedFxShell()"
             [label]="label()"
             [appearance]="appearance()"
             [status]="status()"

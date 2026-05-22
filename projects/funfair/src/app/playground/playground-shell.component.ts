@@ -30,6 +30,14 @@ export class PlaygroundShellComponent {
     { id: 'dark' as const, label: 'Material dark' },
   ];
 
+  readonly headerFxOptions = [
+    { id: 'none' as const, label: 'None (default)' },
+    { id: 'cyber' as const, label: 'Cyber site' },
+    { id: 'neon' as const, label: 'Neon site' },
+    { id: 'holo' as const, label: 'Holo site' },
+    { id: 'glass' as const, label: 'Glass site' },
+  ];
+
   private readonly routeUrl = toSignal(
     this.router.events.pipe(
       filter((e): e is NavigationEnd => e instanceof NavigationEnd),

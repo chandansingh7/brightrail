@@ -6,6 +6,7 @@ import {
   BrightrailButtonIconComponent,
 } from '../buttons/brightrail-button-icon.component';
 import { BrightrailTooltipDirective } from '../tooltip/brightrail-tooltip.directive';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 export type BrightrailAvatarKind = 'image' | 'initials' | 'icon';
 export type BrightrailAvatarShape = 'circle' | 'rounded-square' | 'square';
@@ -58,6 +59,7 @@ export function brightrailAvatarInitialsFromName(name: string): string {
   standalone: true,
   imports: [BrightrailButtonIconComponent, NgTemplateOutlet],
   hostDirectives: [
+    BRIGHTRAIL_FX_SHELL_HOST,
     {
       directive: BrightrailTooltipDirective,
       inputs: [

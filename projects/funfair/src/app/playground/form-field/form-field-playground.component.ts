@@ -18,6 +18,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 
@@ -43,8 +45,7 @@ type ControlSlot = 'text-field' | 'switch';
     FormsModule,
     BrightrailFormFieldComponent,
     BrightrailTextFieldComponent,
-    BrightrailSwitchComponent,
-  ],
+    BrightrailSwitchComponent, PlaygroundFxSettingsComponent],
   templateUrl: './form-field-playground.component.html',
   styleUrl: './form-field-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -94,6 +95,9 @@ export class FormFieldPlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly recipeGroups = ['Core', 'Validation', 'Controls', 'Layout'] as const;
@@ -230,6 +234,7 @@ export class FormFieldPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Core');
     this.onRecipeNgModelChange('label-hint');
     this.themeService.setTheme('light');

@@ -8,6 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../../futuristic/brightrail-futuristic-host';
 
 export type BrightrailSliderSize = 'sm' | 'md' | 'lg';
 export type BrightrailSliderTone = 'primary' | 'success' | 'warning' | 'danger' | 'neutral';
@@ -22,6 +23,7 @@ function toNumber(v: number | string, fallback: number): number {
 
 @Component({
   selector: 'brightrail-slider',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   providers: [
     {

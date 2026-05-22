@@ -32,6 +32,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 export type CodeTabId = 'html' | 'ts' | 'scss';
 
@@ -67,8 +69,7 @@ interface TabPlayDef {
     BrightrailTabComponent,
     BrightrailTabContentDirective,
     TitleCasePipe,
-    UpperCasePipe,
-  ],
+    UpperCasePipe, PlaygroundFxSettingsComponent],
   templateUrl: './tabs-playground.component.html',
   styleUrl: './tabs-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -116,6 +117,9 @@ export class TabsPlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
 
   readonly recipeGroups = ['Basics', 'Popular app', 'Layouts & density', 'Enterprise'];
 
@@ -350,6 +354,7 @@ export class TabsPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.previewRecipe.set('standardTabs');
     this.applyRecipeDefaults('standardTabs');
     this.selectedRecipeGroup.set('Basics');

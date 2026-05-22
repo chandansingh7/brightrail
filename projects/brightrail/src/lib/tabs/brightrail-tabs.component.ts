@@ -1,4 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -26,6 +27,7 @@ export type BrightrailTabsTriggerLayout = 'inline' | 'stacked';
 @Component({
   selector: 'brightrail-tabs',
   standalone: true,
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   imports: [NgTemplateOutlet, BrightrailButtonIconComponent],
   template: `
     <div [class]="hostClass()" [attr.data-status]="status() !== 'none' ? status() : null">

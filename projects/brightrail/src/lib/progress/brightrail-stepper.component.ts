@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 
 import { BrightrailStepComponent } from './brightrail-step.component';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 export type BrightrailStepperPreset = 'milestone' | 'workflow';
 export type BrightrailStepperOrientation = 'horizontal' | 'vertical';
@@ -15,6 +16,7 @@ export type BrightrailStepperLabelPlacement = 'below' | 'top';
 
 @Component({
   selector: 'brightrail-stepper',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   imports: [],
   templateUrl: './brightrail-stepper.component.html',

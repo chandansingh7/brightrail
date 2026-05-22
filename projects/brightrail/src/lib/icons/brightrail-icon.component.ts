@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 /** Icons used outside buttons (e.g. card headers). */
 export type BrightrailIconName = 'more_vert' | 'show_chart';
 
 @Component({
   selector: 'brightrail-icon',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   template: `
     @switch (name()) {

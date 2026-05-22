@@ -20,6 +20,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 type TextareaRecipe =
@@ -41,7 +43,7 @@ type TextareaRecipe =
   selector: 'app-textarea-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailTextareaComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailTextareaComponent, PlaygroundFxSettingsComponent],
   templateUrl: './textarea-playground.component.html',
   styleUrl: './textarea-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -99,6 +101,9 @@ export class TextareaPlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly recipeGroups = ['Core', 'Validation', 'Layout', 'Advanced'] as const;
@@ -255,6 +260,7 @@ export class TextareaPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Core');
     this.onRecipeNgModelChange('basic-outlined');
     this.themeService.setTheme('light');

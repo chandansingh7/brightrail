@@ -271,6 +271,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -281,7 +283,7 @@
           @switch (previewPanel()) {
             @case ('stepper') {
               @if (recipe() === 'step-milestone') {
-                <brightrail-stepper [activeStep]="activeStep()" preset="milestone" ariaLabel="Milestone progress">
+                <brightrail-stepper [fxShell]="resolvedFxShell()" [activeStep]="activeStep()" preset="milestone" ariaLabel="Milestone progress">
                   <brightrail-step caption="Complete" />
                   <brightrail-step caption="Complete" />
                   <brightrail-step caption="60%" />

@@ -4,9 +4,11 @@ import {
   computed,
   input,
 } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../../futuristic/brightrail-futuristic-host';
 
 @Component({
   selector: 'brightrail-form-field',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   templateUrl: './brightrail-form-field.component.html',
   styleUrl: './brightrail-form-field.component.scss',

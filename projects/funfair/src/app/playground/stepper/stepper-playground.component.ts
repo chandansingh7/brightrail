@@ -21,6 +21,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 type StepperScenario = 'standard-flow' | 'vertical-details' | 'compact' | 'error-state' | 'futuristic';
@@ -35,7 +37,7 @@ interface StepDemoItem {
   selector: 'app-stepper-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, TitleCasePipe, BrightrailStepperComponent, BrightrailStepComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, TitleCasePipe, BrightrailStepperComponent, BrightrailStepComponent, PlaygroundFxSettingsComponent],
   templateUrl: './stepper-playground.component.html',
   styleUrl: './stepper-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -59,6 +61,9 @@ export class StepperPlaygroundComponent {
 
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly recipeGroups = ['Basics', 'Workflow', 'States', 'Futuristic'] as const;
@@ -174,6 +179,7 @@ export class StepperPlaygroundComponent {
 
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Basics');
     this.onScenarioNgModelChange('standard-flow');
     this.themeService.setTheme('light');

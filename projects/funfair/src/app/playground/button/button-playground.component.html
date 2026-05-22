@@ -302,6 +302,8 @@
             <span class="bp-switch__track" aria-hidden="true"></span>
           </label>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -313,7 +315,7 @@
       />
       <div class="bp-preview-surface" [class.bp-preview-surface--stretch]="fullWidth()">
         <div class="bp-preview-inner">
-          <brightrail-button
+          <brightrail-button [fxShell]="resolvedFxShell()"
             [variant]="variant()"
             [size]="size()"
             [shape]="shape()"

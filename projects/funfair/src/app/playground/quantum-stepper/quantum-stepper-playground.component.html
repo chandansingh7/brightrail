@@ -53,6 +53,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -60,7 +62,7 @@
       <app-playground-preview-header titleId="qs-preview-title" componentId="quantum-stepper" />
       <div class="bp-preview-surface bp-preview-surface--stretch qs-preview-surface">
         <div class="bp-preview-inner qs-preview-inner">
-          <brightrail-quantum-stepper [appearance]="appearance()" [currentStep]="currentStep()" [steps]="steps" />
+          <brightrail-quantum-stepper [fxShell]="resolvedFxShell()" [appearance]="appearance()" [currentStep]="currentStep()" [steps]="steps" />
         </div>
       </div>
     </section>

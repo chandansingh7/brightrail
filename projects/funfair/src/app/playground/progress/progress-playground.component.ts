@@ -26,6 +26,8 @@ import {
 } from 'brightrail';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 
@@ -64,8 +66,7 @@ type TableRowSampleId = 'requirements' | 'uiux' | 'api' | 'testing' | 'deploymen
     BrightrailProgressComponent,
     BrightrailStepperComponent,
     BrightrailStepComponent,
-    BrightrailProgressFileRowComponent,
-  ],
+    BrightrailProgressFileRowComponent, PlaygroundFxSettingsComponent],
   templateUrl: './progress-playground.component.html',
   styleUrl: './progress-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -145,6 +146,9 @@ export class ProgressPlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   /** Example copy for generated HTML snippets (`detailText`, `kpiTitle`, `kpiStatus`, `etaText` on `brightrail-progress`). */
@@ -408,6 +412,7 @@ export class ProgressPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Basics');
     this.onRecipeNgModelChange('linear-core');
   }

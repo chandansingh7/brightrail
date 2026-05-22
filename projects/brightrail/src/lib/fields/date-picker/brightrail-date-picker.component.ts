@@ -11,6 +11,7 @@ import {
   output,
   signal,
 } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../../futuristic/brightrail-futuristic-host';
 import { DOCUMENT, NgStyle } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -82,6 +83,7 @@ export type BrightrailDatePickerChange =
 
 @Component({
   selector: 'brightrail-date-picker',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   imports: [BrightrailButtonIconComponent, NgStyle],
   providers: [

@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 export type BrightrailSkeletonVariant = 'text' | 'circular' | 'rectangular' | 'rounded';
 export type BrightrailSkeletonAnimation = 'pulse' | 'wave' | 'none';
 
 @Component({
   selector: 'brightrail-skeleton',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   templateUrl: './brightrail-skeleton.component.html',
   styleUrl: './brightrail-skeleton.component.scss',

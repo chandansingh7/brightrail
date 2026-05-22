@@ -302,6 +302,8 @@
             ><span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -310,7 +312,7 @@
       <div class="bp-preview-surface bp-preview-surface--stretch">
         <div class="bp-preview-inner bp-preview-inner--check">
           @if (usesGroup()) {
-            <brightrail-checkbox-group
+            <brightrail-checkbox-group [fxShell]="resolvedFxShell()"
               class="cb-preview-group"
               [options]="groupOptions()"
               [selectedIds]="selectedIds()"

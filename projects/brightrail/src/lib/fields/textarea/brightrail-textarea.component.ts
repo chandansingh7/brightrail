@@ -7,6 +7,7 @@ import {
   output,
   signal,
 } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../../futuristic/brightrail-futuristic-host';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import {
@@ -34,6 +35,7 @@ const DEFAULT_STATUS_HINTS: Record<Exclude<BrightrailTextareaStatus, 'none'>, st
 
 @Component({
   selector: 'brightrail-textarea',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   imports: [BrightrailButtonIconComponent],
   providers: [

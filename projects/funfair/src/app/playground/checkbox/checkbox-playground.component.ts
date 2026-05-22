@@ -28,6 +28,8 @@ import {
 } from '../../../../../brightrail/src/lib/fields/checkbox/brightrail-checkbox-group.component';
 
 import { PlaygroundThemeId, PlaygroundThemeService } from '../playground-theme.service';
+import { createPlaygroundPreviewFx } from '../shared/playground-fx.util';
+import { PlaygroundFxSettingsComponent } from '../shared/playground-fx-settings.component';
 
 type CodeTabId = 'html' | 'ts' | 'scss';
 type CheckboxRecipe =
@@ -49,7 +51,7 @@ type CheckboxRecipe =
   selector: 'app-checkbox-playground',
   standalone: true,
   imports: [
-    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailCheckboxComponent, BrightrailCheckboxGroupLibComponent],
+    PlaygroundPreviewHeaderComponent,FormsModule, BrightrailCheckboxComponent, BrightrailCheckboxGroupLibComponent, PlaygroundFxSettingsComponent],
   templateUrl: './checkbox-playground.component.html',
   styleUrl: './checkbox-playground.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -119,6 +121,9 @@ export class CheckboxPlaygroundComponent {
   }
 
   readonly themeService = inject(PlaygroundThemeService);
+  private readonly _playgroundFx = createPlaygroundPreviewFx();
+  readonly previewFx = this._playgroundFx.previewFx;
+  readonly resolvedFxShell = this._playgroundFx.resolvedFxShell;
   readonly ngModelStandalone = { standalone: true };
 
   readonly recipeGroups = ['Core', 'Validation', 'Enterprise', 'Advanced'] as const;
@@ -330,6 +335,7 @@ export class CheckboxPlaygroundComponent {
   }
 
   resetToDefaults(): void {
+    this.previewFx.set('inherit');
     this.selectedRecipeGroup.set('Core');
     this.recipe.set('basic');
     this.applyRecipe('basic');

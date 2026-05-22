@@ -9,6 +9,7 @@
 @use './breakpoints' as bp;
 @use './tooltip-portal';
 @use './rtl';
+@use './brightrail-futuristic';
 
 :root {
   @include br-root-theme;

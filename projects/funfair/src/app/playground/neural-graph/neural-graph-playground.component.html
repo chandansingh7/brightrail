@@ -31,6 +31,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -38,7 +40,7 @@
       <app-playground-preview-header titleId="ng-preview-title" componentId="neural-graph" />
       <div class="bp-preview-surface bp-preview-surface--stretch">
         <div class="bp-preview-inner ng-preview-inner">
-          <brightrail-neural-graph caption="ML pipeline — decorative node-link layout" [nodes]="nodes" [links]="links" />
+          <brightrail-neural-graph [fxShell]="resolvedFxShell()" caption="ML pipeline — decorative node-link layout" [nodes]="nodes" [links]="links" />
         </div>
       </div>
     </section>

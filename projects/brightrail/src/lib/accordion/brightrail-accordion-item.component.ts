@@ -12,6 +12,7 @@ import { BrightrailBadgeComponent } from '../badge/brightrail-badge.component';
 import { BrightrailButtonIconComponent, type BrightrailButtonIcon } from '../buttons/brightrail-button-icon.component';
 
 import { BRIGHTRAIL_ACCORDION } from './brightrail-accordion-api';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 export type BrightrailAccordionItemIcon = BrightrailButtonIcon;
 export type BrightrailAccordionItemPresentation = 'default' | 'enterprise-card';
@@ -20,6 +21,7 @@ let accordionItemUid = 0;
 
 @Component({
   selector: 'brightrail-accordion-item',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   imports: [BrightrailButtonIconComponent, BrightrailBadgeComponent],
   template: `

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostListener, input, output } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 import { BrightrailFocusTrapDirective } from '../platform/brightrail-focus-trap.directive';
 
@@ -8,6 +9,7 @@ export type BrightrailModalAppearance = 'default' | 'danger';
 @Component({
   selector: 'brightrail-modal',
   standalone: true,
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   imports: [BrightrailFocusTrapDirective],
   template: `
     @if (isOpen()) {

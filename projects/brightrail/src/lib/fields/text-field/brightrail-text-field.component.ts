@@ -7,6 +7,7 @@ import {
   output,
   signal,
 } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../../futuristic/brightrail-futuristic-host';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import {
@@ -41,6 +42,7 @@ export type BrightrailTextFieldSuffixPosition = 'none' | 'left' | 'right';
 @Component({
   selector: 'brightrail-text-field',
   standalone: true,
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   imports: [BrightrailButtonIconComponent],
   providers: [
     {

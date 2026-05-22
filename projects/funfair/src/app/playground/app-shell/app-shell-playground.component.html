@@ -96,6 +96,8 @@
             <span class="bp-dropdown__chev" aria-hidden="true"></span>
           </div>
         </div>
+        <app-playground-fx-settings [(previewFx)]="previewFx" />
+
       </div>
     </section>
 
@@ -103,7 +105,7 @@
       <app-playground-preview-header titleId="app-shell-preview-title" componentId="app-shell" [state]="a11yPreviewState()" />
       <div class="bp-preview-surface bp-preview-surface--stretch">
         <div class="bp-preview-inner bp-preview-inner--app-shell">
-          <brightrail-app-shell
+          <brightrail-app-shell [fxShell]="resolvedFxShell()"
             [sidebarPosition]="sidebarPosition()"
             [showSidebar]="showSidebar()"
             [showTopBar]="showTopBar()"

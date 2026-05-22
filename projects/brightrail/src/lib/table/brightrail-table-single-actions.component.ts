@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { BRIGHTRAIL_FX_SHELL_HOST } from '../futuristic/brightrail-futuristic-host';
 
 /**
  * Slot for **single-select** row actions. Shown when exactly one row is selected.
@@ -11,6 +12,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
  */
 @Component({
   selector: 'brightrail-table-single-actions',
+  hostDirectives: [BRIGHTRAIL_FX_SHELL_HOST],
   standalone: true,
   template: `<div class="br-table-single-actions" role="group"><ng-content /></div>`,
   styleUrl: './brightrail-table-single-actions.component.scss',
