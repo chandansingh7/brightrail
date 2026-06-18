@@ -86,17 +86,36 @@ Use a token that has **publish** permission for the `brightrail` package name.
 
 No code changes are needed after this — the next tag push will publish.
 
-### 4. Trigger a publish
+### 4. Future releases (every new npm version)
 
-Bump version in `projects/brightrail/package.json` (and root `package.json` if kept in sync), commit, tag, push:
+| Action | What happens |
+|--------|----------------|
+| `git push origin main` | Updates GitHub code + runs CI tests — **does not publish to npm** |
+| `git push origin vX.Y.Z` | Triggers **Publish npm package** workflow → `npm publish` |
+
+**Step-by-step** (example bump `0.1.0` → `0.1.1`):
+
+**1.** Bump `"version"` in `projects/brightrail/package.json` and root `package.json`.
+
+**2.** Commit and push:
 
 ```bash
-# example for 0.1.0
 git add projects/brightrail/package.json package.json
-git commit -m "chore: release brightrail v0.1.0"
-git tag v0.1.0
+git commit -m "chore: release brightrail v0.1.1"
 git push origin main
-git push origin v0.1.0
+```
+
+**3.** Tag and push the tag:
+
+```bash
+git tag v0.1.1
+git push origin v0.1.1
+```
+
+**4.** Verify:
+
+```bash
+npm view brightrail version
 ```
 
 Watch the **Publish npm package** workflow under **Actions** on GitHub.

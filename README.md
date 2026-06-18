@@ -6,18 +6,18 @@
 
 ---
 
-## Use in your Angular app
+## Install in any Angular 21 app
 
-Install Brightrail from **npm** in any **Angular 21** project:
+**npm package:** [npmjs.com/package/brightrail](https://www.npmjs.com/package/brightrail) (current: **v0.1.1**)
+
+In a new or existing **Angular 21** project:
 
 ```bash
-ng new my-app --standalone
-cd my-app
 npm install brightrail @angular/cdk @angular/aria
 ng add brightrail
 ```
 
-Then import components where you need them:
+`ng add brightrail` wires platform providers and the global stylesheet when possible. Then use components in standalone components:
 
 ```ts
 import { BrightrailButtonComponent } from 'brightrail';
@@ -30,12 +30,80 @@ import { BrightrailButtonComponent } from 'brightrail';
 export class MyPageComponent {}
 ```
 
+More detail (manual setup, styles, local tarball): **[doc/CONSUMING.md](doc/CONSUMING.md)**
+
+---
+
+## Future releases (maintainers)
+
+Publishing to npm is **tag-driven**. Pushing to `main` updates the repo and runs CI tests, but **does not** publish. You must push a version tag matching `v*.*.*` (see `.github/workflows/publish.yml`).
+
+### Step-by-step
+
+**1. Bump the version** in both files (keep them in sync):
+
+- `projects/brightrail/package.json` → `"version"`
+- `package.json` (repo root) → `"version"`
+
+Example: `0.1.0` → `0.1.1`
+
+**2. Commit and push to `main`:**
+
+```bash
+git add projects/brightrail/package.json package.json
+git commit -m "chore: release brightrail v0.1.1"
+git push origin main
+```
+
+**3. Tag and push the tag** (this triggers npm publish via GitHub Actions):
+
+```bash
+git tag v0.1.1
+git push origin v0.1.1
+```
+
+The **Publish npm package** workflow will build, test, and run `npm publish`. Requires GitHub secret **`NPM_TOKEN`** (see **[doc/PUBLISHING.md](doc/PUBLISHING.md)**).
+
+**4. Verify on npm:**
+
+```bash
+npm view brightrail version
+```
+
+Or open [npmjs.com/package/brightrail](https://www.npmjs.com/package/brightrail).
+
+### Publish manually (optional)
+
+Skip CI and publish from your machine:
+
+```bash
+npm login
+npm run publish:lib
+```
+
+### Quick reference
+
+| Goal | Command |
+|------|---------|
+| Update code only | `git push origin main` |
+| Publish new npm version | `git tag vX.Y.Z && git push origin vX.Y.Z` |
+| Local publish test | `PACK_DRY_RUN=1 npm run publish:lib` |
+
+---
+
+## New Angular project (from scratch)
+
+```bash
+ng new my-app --standalone
+cd my-app
+npm install brightrail @angular/cdk @angular/aria
+ng add brightrail
+```
+
 | Doc | Audience |
 |-----|----------|
 | **[doc/CONSUMING.md](doc/CONSUMING.md)** | App developers — install, manual setup, styles, providers, examples |
-| **[doc/PUBLISHING.md](doc/PUBLISHING.md)** | Maintainers — npm publish, **`NPM_TOKEN`** for GitHub Actions, tagging releases |
-
-**Before the first npm publish**, consumers can install a local build: `npm run pack:lib` → `npm install ./dist/brightrail-0.1.0.tgz` in their app (see CONSUMING.md).
+| **[doc/PUBLISHING.md](doc/PUBLISHING.md)** | Maintainers — npm publish, **`NPM_TOKEN`**, tagging releases |
 
 ---
 
