@@ -1,0 +1,223 @@
+<section class="coverage" aria-labelledby="coverage-title">
+  <header class="coverage__head">
+    <h2 id="coverage-title" class="coverage__title">Complete library coverage</h2>
+    <p class="coverage__lead">Every exported Brightrail UI component and directive on this page.</p>
+    <brightrail-welcome />
+  </header>
+
+  <brightrail-accordion appearance="subtle">
+    <brightrail-accordion-item title="Actions &amp; icons">
+      <div class="coverage__grid">
+        <brightrail-button variant="primary" iconLeft="plus">Button</brightrail-button>
+        <brightrail-split-button variant="outline" menuButtonAriaLabel="Split options">Split</brightrail-split-button>
+        <brightrail-button-group mode="pill">
+          <brightrail-button variant="secondary" visualState="active">A</brightrail-button>
+          <brightrail-button variant="secondary">B</brightrail-button>
+        </brightrail-button-group>
+        <brightrail-icon-button variant="ghost" icon="gear" ariaLabel="Settings" />
+        <brightrail-icon name="show_chart" />
+        <span class="coverage__glyph" aria-hidden="true">
+          <brightrail-button-icon name="check" />
+        </span>
+        <brightrail-button variant="outline" brightrailTooltip="Tooltip directive">Tooltip</brightrail-button>
+        <brightrail-button variant="ghost" (click)="showToast()">Toast service</brightrail-button>
+      </div>
+    </brightrail-accordion-item>
+
+    <brightrail-accordion-item title="Form fields">
+      <div class="coverage__stack">
+        <brightrail-validation-summary [errors]="validationErrors()" />
+        <brightrail-form-field label="Wrapped field">
+          <brightrail-text-field placeholder="Text field" [(ngModel)]="textValue" />
+        </brightrail-form-field>
+        <brightrail-textarea label="Notes" [(ngModel)]="textareaValue" />
+        <brightrail-combobox label="Combobox" [options]="categories" [(ngModel)]="comboboxValue" />
+        <brightrail-select label="Select" labelPosition="top" ariaLabel="Sample select" displayText="Option A" [(ngModel)]="selectValue">
+          <div class="br-select-panel">
+            <button type="button" class="br-select-option" (click)="selectValue = 'a'">Option A</button>
+            <button type="button" class="br-select-option" (click)="selectValue = 'b'">Option B</button>
+          </div>
+        </brightrail-select>
+        <brightrail-date-picker label="Date" [(ngModel)]="dateValue" />
+        <brightrail-file-upload label="Upload" />
+        <brightrail-switch label="Switch" [(ngModel)]="switchOn" />
+        <brightrail-slider label="Slider" [(ngModel)]="sliderValue" [min]="0" [max]="100" />
+        <brightrail-radio-group
+          groupLabel="Radio"
+          [selectedId]="radioValue"
+          (selectedIdChange)="radioValue = $event"
+          [options]="radioOptions"
+        />
+        <brightrail-checkbox-group
+          groupLabel="Checks"
+          [selectedIds]="checkboxValues"
+          (selectedIdsChange)="checkboxValues = $event"
+          [options]="checkboxOptions"
+        />
+        <brightrail-rating [(ngModel)]="ratingValue" [max]="5" />
+        <brightrail-rich-text-editor label="Rich text" [(ngModel)]="richText" />
+      </div>
+    </brightrail-accordion-item>
+
+    <brightrail-accordion-item title="Cards &amp; feedback">
+      <brightrail-card appearance="outlined" size="sm">
+        <brightrail-card-media><div class="coverage__media">Media</div></brightrail-card-media>
+        <brightrail-card-header>
+          <span brightrailCardHeaderLeading aria-hidden="true">◆</span>
+          <h3 brightrailCardHeaderTitle>Card header</h3>
+          <div brightrailCardHeaderActions>
+            <brightrail-badge color="primary" label="New" />
+          </div>
+        </brightrail-card-header>
+        <brightrail-card-content><p>Card content slot.</p></brightrail-card-content>
+        <brightrail-card-actions align="end">
+          <brightrail-button size="sm" variant="primary">Action</brightrail-button>
+        </brightrail-card-actions>
+        <brightrail-card-footer><span>Card footer</span></brightrail-card-footer>
+      </brightrail-card>
+      <div class="coverage__grid">
+        <brightrail-alert status="info">
+          <div brightrailAlertTitle>Alert title</div>
+          <div brightrailAlertMessage>Alert message directive.</div>
+          <brightrail-alert-actions>
+            <brightrail-button size="sm" variant="outline">Act</brightrail-button>
+          </brightrail-alert-actions>
+        </brightrail-alert>
+        <brightrail-chip>Chip</brightrail-chip>
+        <brightrail-skeleton variant="rectangular" height="2rem" />
+        <brightrail-empty-state icon="info" title="Empty" description="Empty state component." />
+        <brightrail-toast variant="success" title="Inline toast" message="Standalone toast component." />
+      </div>
+      <brightrail-avatar-group [maxVisible]="2" ariaLabel="Team">
+        <brightrail-avatar kind="initials" name="Alex" size="sm" />
+        <brightrail-avatar kind="initials" name="Jordan" size="sm" />
+        <brightrail-avatar kind="initials" name="Sam" size="sm" />
+      </brightrail-avatar-group>
+    </brightrail-accordion-item>
+
+    <brightrail-accordion-item title="Tabs &amp; data">
+      <brightrail-tabs appearance="contained">
+        <brightrail-tab label="Tab A" [active]="true">
+          <ng-template brightrailTabContent>
+            <brightrail-table
+              [data]="tableRows"
+              [columns]="tableColumns"
+              variant="bordered"
+              density="compact"
+              [pagination]="pagination"
+              rowSelection="single"
+              ariaLabel="Coverage table"
+            >
+              <brightrail-table-toolbar>
+                <span>Toolbar</span>
+                <brightrail-table-toolbar-actions>
+                  <brightrail-button size="sm" variant="ghost">Filter</brightrail-button>
+                </brightrail-table-toolbar-actions>
+              </brightrail-table-toolbar>
+              <brightrail-table-bulk-actions>
+                <brightrail-button size="sm" variant="outline">Bulk</brightrail-button>
+              </brightrail-table-bulk-actions>
+              <brightrail-table-single-actions>
+                <brightrail-icon-button variant="ghost" icon="edit" ariaLabel="Edit row" />
+              </brightrail-table-single-actions>
+            </brightrail-table>
+            <brightrail-pagination [pageIndex]="pageIndex()" [length]="12" [pageSize]="6" (pageChange)="pageIndex.set($event)" />
+          </ng-template>
+        </brightrail-tab>
+        <brightrail-tab label="Tab B">
+          <ng-template brightrailTabContent>
+            <brightrail-tree [nodes]="treeNodes" selectionMode="single" selectedId="l1" ariaLabel="Tree" />
+            <brightrail-tree-table ariaLabel="Tree table" [nodes]="treeTableNodes" selectedId="cohort-a" />
+          </ng-template>
+        </brightrail-tab>
+      </brightrail-tabs>
+    </brightrail-accordion-item>
+
+    <brightrail-accordion-item title="Progress &amp; charts">
+      <div class="coverage__stack">
+        <brightrail-progress [value]="55" label="Progress" />
+        <brightrail-progress-file-row fileName="bundle.zip" [value]="40" fileSizeLabel="1 MB" />
+        <brightrail-stepper [activeStep]="1" orientation="horizontal">
+          <brightrail-step label="One" description="First" />
+          <brightrail-step label="Two" description="Second" />
+        </brightrail-stepper>
+        <brightrail-graph kind="line" [series]="graphSeries" ariaLabel="Graph" />
+        <brightrail-timeline>
+          <brightrail-timeline-item title="Event" description="Timeline item" status="completed" />
+        </brightrail-timeline>
+      </div>
+    </brightrail-accordion-item>
+
+    <brightrail-accordion-item title="Futuristic">
+      <div class="coverage__stack">
+        <brightrail-cyber-badge status="online" label="Node" appearance="cyber" [pulse]="true" />
+        <brightrail-holographic-panel appearance="glass" title="Holo panel" [metrics]="holoMetrics" />
+        <brightrail-neural-graph caption="Neural graph" [nodes]="neuralNodes" [links]="neuralLinks" />
+        <brightrail-quantum-stepper appearance="glow" [currentStep]="quantumStep()" [steps]="quantumSteps" />
+      </div>
+    </brightrail-accordion-item>
+
+    <brightrail-accordion-item title="Overlays &amp; platform">
+      <div class="coverage__grid">
+        <brightrail-button variant="outline" (click)="modalOpen.set(true)">Open modal</brightrail-button>
+        <brightrail-button variant="outline" (click)="drawerOpen.set(true)">Open drawer</brightrail-button>
+        <brightrail-button variant="outline" (click)="paletteOpen.set(true)">Command palette</brightrail-button>
+        <brightrail-button variant="outline" #popoverBtn [brightrailPopoverTrigger]="coveragePopover">Popover</brightrail-button>
+        <brightrail-menu #coverageMenu>
+          <brightrail-menu-item icon="list">Menu item</brightrail-menu-item>
+        </brightrail-menu>
+        <brightrail-button variant="outline" [brightrailMenuTrigger]="coverageMenu">Menu</brightrail-button>
+      </div>
+      <div class="coverage__focus" brightrailFocusVisible brightrailFocusTrap tabindex="0">
+        Focus visible + focus trap host
+      </div>
+      <span hidden aria-hidden="true" class="coverage__marker-ref">
+        brightrailFxShell brightrailTabContent brightrailAlertTitle brightrailAlertMessage
+        brightrailCardHeaderTitle brightrailCardHeaderActions brightrailCardHeaderLeading
+        brightrailModalTitle brightrailModalHeaderActions brightrailDrawerTitle brightrailDrawerSubtitle
+        brightrailDrawerHeaderActions brightrailTooltip brightrailMenuTrigger brightrailPopoverTrigger
+        brightrailPageTitle brightrailPageSubtitle brightrailPageHeaderActions
+        brightrailTopBarStart brightrailTopBarCenter brightrailTopBarEnd
+      </span>
+    </brightrail-accordion-item>
+  </brightrail-accordion>
+
+  <brightrail-popover #coveragePopover>
+    <p>Popover content</p>
+  </brightrail-popover>
+
+  <brightrail-modal [isOpen]="modalOpen()" (closed)="modalOpen.set(false)">
+    <brightrail-modal-header>
+      <h3 brightrailModalTitle>Modal title</h3>
+      <div brightrailModalHeaderActions>
+        <brightrail-icon-button variant="ghost" icon="close" ariaLabel="Close" (click)="modalOpen.set(false)" />
+      </div>
+    </brightrail-modal-header>
+    <brightrail-modal-body><p>Modal body content.</p></brightrail-modal-body>
+    <brightrail-modal-footer>
+      <brightrail-button variant="primary" (click)="modalOpen.set(false)">Done</brightrail-button>
+    </brightrail-modal-footer>
+  </brightrail-modal>
+
+  <brightrail-drawer [isOpen]="drawerOpen()" (openChange)="drawerOpen.set($event)">
+    <brightrail-drawer-header>
+      <h3 brightrailDrawerTitle>Drawer title</h3>
+      <p brightrailDrawerSubtitle>Drawer subtitle directive</p>
+      <div brightrailDrawerHeaderActions>
+        <brightrail-button size="sm" variant="ghost">Act</brightrail-button>
+      </div>
+    </brightrail-drawer-header>
+    <brightrail-drawer-body><p>Drawer body.</p></brightrail-drawer-body>
+    <brightrail-drawer-footer>
+      <brightrail-button variant="primary" (click)="drawerOpen.set(false)">Close</brightrail-button>
+    </brightrail-drawer-footer>
+  </brightrail-drawer>
+
+  <brightrail-command-palette
+    [isOpen]="paletteOpen()"
+    [commands]="commands"
+    placeholder="Commands…"
+    (closed)="paletteOpen.set(false)"
+    (commandSelect)="paletteOpen.set(false)"
+  />
+</section>

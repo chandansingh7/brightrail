@@ -1,0 +1,46 @@
+.site-panel {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--br-color-border, #e2e8f0);
+  background: var(--br-color-surface, #fff);
+}
+
+.site-panel__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.site-panel__title {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.site-panel__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.site-panel__row {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(12rem, 1fr) auto auto;
+  align-items: end;
+}
+
+.site-popover__title {
+  margin: 0 0 0.35rem;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .site-panel__row {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,74 @@
+@use './tokens' as br;
+
+// Panels portaled to document.body leave component encapsulation — styles must be global.
+.br-anchored-panel {
+  position: fixed;
+  box-sizing: border-box;
+}
+
+.br-select__panel.br-anchored-panel {
+  max-height: 16rem;
+  overflow: auto;
+  padding: 0.35rem;
+  border-radius: var(--br-tf-radius, #{br.$br-radius-md});
+  border: 1px solid var(--br-tf-border, #{br.$br-color-border});
+  background: var(--br-color-surface, #{br.$br-color-surface});
+  box-shadow:
+    0 4px 12px rgb(0 0 0 / 12%),
+    0 0 0 1px rgb(0 0 0 / 4%);
+
+  .br-select-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .br-select-option {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0.45rem 0.6rem;
+    border: 0;
+    border-radius: var(--br-radius-sm, #{br.$br-radius-sm});
+    background: transparent;
+    color: var(--br-tf-fg, #{br.$br-color-text});
+    font: inherit;
+    font-size: 0.875rem;
+    text-align: left;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .br-select-option:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--br-color-primary, #{br.$br-color-primary}) 10%, transparent);
+  }
+
+  .br-select-option:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+}
+
+.br-combobox__panel.br-anchored-panel {
+  max-height: 14rem;
+  overflow: auto;
+  padding: 0.35rem;
+  border: 1px solid var(--br-tf-border, #{br.$br-color-border});
+  border-radius: var(--br-tf-radius, #{br.$br-radius-md});
+  background: var(--br-color-surface, #{br.$br-color-surface});
+  box-shadow: 0 8px 24px rgb(60 64 67 / 16%);
+}
+
+.br-dp__panel.br-anchored-panel {
+  padding: 0.75rem;
+  background: var(--br-color-surface, #{br.$br-color-surface});
+  border: 1px solid var(--br-tf-border, #{br.$br-color-border});
+  border-radius: var(--br-tf-radius, #{br.$br-radius-md});
+  box-shadow:
+    0 4px 16px rgb(60 64 67 / 12%),
+    0 12px 32px rgb(60 64 67 / 14%);
+  min-width: min(280px, 100%);
+}

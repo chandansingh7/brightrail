@@ -1,0 +1,86 @@
+<app-demo-shell
+  [site]="site"
+  pageTitle="SOC command center"
+  pageSubtitle="Real-time threat correlation with cyber-native visual language"
+  [breadcrumbs]="breadcrumbs"
+>
+  <div class="cyber-grid">
+    <section class="cyber-grid__status" aria-label="System status">
+      <brightrail-cyber-badge status="online" label="Core mesh" [pulse]="true" appearance="cyber" />
+      <brightrail-cyber-badge status="busy" label="Inference lane" appearance="cyber" />
+      <brightrail-cyber-badge status="away" label="Backup node" appearance="cyber" />
+      <brightrail-chip>TLS 1.3 enforced</brightrail-chip>
+      <brightrail-chip>Zero-trust active</brightrail-chip>
+    </section>
+
+    <brightrail-holographic-panel
+      appearance="cyber"
+      title="Threat surface"
+      ariaLabel="Threat surface metrics"
+      [metrics]="holoMetrics"
+    />
+
+    <section class="site-panel cyber-panel" aria-labelledby="cyber-graph-title">
+      <h2 id="cyber-graph-title" class="site-panel__title">Intrusion telemetry</h2>
+      <brightrail-graph
+        kind="area"
+        [series]="telemetrySeries"
+        [showGrid]="true"
+        ariaLabel="Intrusion attempts over time"
+      />
+    </section>
+
+    <section class="site-panel cyber-panel" aria-labelledby="cyber-neural-title">
+      <h2 id="cyber-neural-title" class="site-panel__title">Neural pipeline</h2>
+      <brightrail-neural-graph
+        caption="SOC inference graph — decorative layout"
+        [nodes]="neuralNodes"
+        [links]="neuralLinks"
+      />
+    </section>
+
+    <section class="site-panel cyber-grid__wide" aria-labelledby="cyber-stepper-title">
+      <h2 id="cyber-stepper-title" class="site-panel__title">Incident response</h2>
+      <brightrail-quantum-stepper appearance="glow" [currentStep]="scanStep()" [steps]="quantumSteps" />
+      <div class="cyber-actions">
+        <brightrail-button-group mode="segmented">
+          <brightrail-button variant="outline" [visualState]="liveFeed() ? 'active' : 'default'" (click)="liveFeed.set(true)">
+            Live
+          </brightrail-button>
+          <brightrail-button variant="outline" [visualState]="!liveFeed() ? 'active' : 'default'" (click)="liveFeed.set(false)">
+            Replay
+          </brightrail-button>
+        </brightrail-button-group>
+        <brightrail-button variant="danger" iconLeft="warning" (click)="runPlaybook()">Run playbook</brightrail-button>
+      </div>
+      <brightrail-progress [value]="scanStep() === 2 ? 100 : scanStep() === 1 ? 62 : 28" label="Response progress" />
+    </section>
+
+    <section class="site-panel" aria-labelledby="cyber-threats-title">
+      <h2 id="cyber-threats-title" class="site-panel__title">Active threats</h2>
+      @if (liveFeed()) {
+        <brightrail-table
+          [data]="threats"
+          [columns]="columns"
+          variant="basic"
+          density="compact"
+          [sorting]="true"
+          ariaLabel="Threat registry"
+        />
+      } @else {
+        <brightrail-skeleton variant="rectangular" height="10rem" />
+      }
+    </section>
+
+    <section class="site-panel" aria-labelledby="cyber-alert-title">
+      <h2 id="cyber-alert-title" class="site-panel__title">Escalations</h2>
+      <brightrail-alert appearance="outlined" status="error" [dismissible]="true">
+        <div brightrailAlertTitle>Lateral movement detected</div>
+        <div brightrailAlertMessage>3 hosts in segment DMZ-2 communicating with known C2 range.</div>
+      </brightrail-alert>
+      <brightrail-badge color="danger" label="SEV-1" />
+    </section>
+  </div>
+
+  <app-library-coverage-host />
+</app-demo-shell>

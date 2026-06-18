@@ -1,0 +1,16 @@
+.health-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+}
+
+.health-form {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .health-grid {
+    grid-template-columns: 1fr;
+  }
+}

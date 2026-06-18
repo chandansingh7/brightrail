@@ -1,0 +1,109 @@
+<app-demo-shell
+  [site]="site"
+  pageTitle="Product catalog"
+  pageSubtitle="Manage inventory, pricing, and storefront visibility"
+  [breadcrumbs]="breadcrumbs"
+>
+  <brightrail-tabs appearance="underline" (selectedIndexChange)="activeTabIndex.set($event)">
+    <brightrail-tab label="Catalog" [active]="true">
+      <ng-template brightrailTabContent>
+        <div class="site-stack">
+          <section class="site-panel" aria-label="Catalog filters">
+            <div class="site-panel__filters">
+              <brightrail-combobox
+                label="Category"
+                [options]="categories"
+                [(ngModel)]="category"
+                placeholder="Filter by category"
+              />
+              <brightrail-select
+                label="Status"
+                labelPosition="top"
+                ariaLabel="Product status"
+                [displayText]="statusFilter === 'all' ? 'All statuses' : statusFilter"
+                [(ngModel)]="statusFilter"
+              >
+                <div class="br-select-panel">
+                  <button type="button" class="br-select-option" (click)="statusFilter = 'all'">All statuses</button>
+                  <button type="button" class="br-select-option" (click)="statusFilter = 'In Stock'">In stock</button>
+                  <button type="button" class="br-select-option" (click)="statusFilter = 'Low Stock'">Low stock</button>
+                </div>
+              </brightrail-select>
+              <brightrail-button-group mode="segmented">
+                <brightrail-button variant="outline" visualState="active">Grid</brightrail-button>
+                <brightrail-button variant="outline">Table</brightrail-button>
+              </brightrail-button-group>
+            </div>
+            <div class="site-panel__chips">
+              @for (product of products; track product.id) {
+                <brightrail-chip [removable]="true">{{ product.name }}</brightrail-chip>
+              }
+            </div>
+          </section>
+
+          @if (loading()) {
+            <div class="site-grid" aria-busy="true" aria-label="Loading products">
+              @for (i of [1, 2, 3]; track i) {
+                <brightrail-skeleton variant="rectangular" height="8rem" />
+              }
+            </div>
+          } @else {
+            <div class="site-grid" role="list" aria-label="Products">
+              @for (product of products; track product.id) {
+                <article class="product-card" role="listitem">
+                  <div class="product-card__head">
+                    <brightrail-icon name="show_chart" />
+                    <brightrail-badge color="info" [label]="product.stockLabel" />
+                  </div>
+                  <h3 class="product-card__title">{{ product.name }}</h3>
+                  <p class="product-card__meta">{{ product.sku }} · ${{ product.price }}</p>
+                  <brightrail-rating [(ngModel)]="rating" [max]="5" />
+                  <brightrail-button variant="outline" size="sm" [fullWidth]="true">Edit listing</brightrail-button>
+                </article>
+              }
+            </div>
+          }
+
+          <brightrail-pagination
+            [pageIndex]="pageIndex()"
+            [length]="48"
+            [pageSize]="12"
+            summaryMode="range"
+            (pageChange)="pageIndex.set($event)"
+          />
+        </div>
+      </ng-template>
+    </brightrail-tab>
+
+    <brightrail-tab label="Bulk upload">
+      <ng-template brightrailTabContent>
+        <div class="site-stack">
+          <brightrail-progress-file-row
+            fileName="spring-catalog.csv"
+            [value]="72"
+            state="active"
+            fileSizeLabel="2.4 MB"
+          />
+          <brightrail-empty-state
+            icon="upload"
+            title="No recent imports"
+            description="Drag a CSV here or browse files to update inventory in bulk."
+            actionLabel="Browse files"
+          />
+        </div>
+      </ng-template>
+    </brightrail-tab>
+
+    <brightrail-tab label="Reviews">
+      <ng-template brightrailTabContent>
+        <brightrail-empty-state
+          icon="star"
+          title="Review moderation queue is clear"
+          description="New customer ratings will appear here for approval."
+        />
+      </ng-template>
+    </brightrail-tab>
+  </brightrail-tabs>
+
+  <app-library-coverage-host />
+</app-demo-shell>

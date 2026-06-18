@@ -1,0 +1,55 @@
+<brightrail-app-shell sidebarWidth="15rem" sidebarAriaLabel="Demo site navigation">
+  <brightrail-top-bar>
+    <a brightrailTopBarStart class="demo-shell__brand" routerLink="/" aria-label="Back to Midway hub">
+      <span class="demo-shell__brand-mark" aria-hidden="true"></span>
+      {{ site().name }}
+    </a>
+    <span brightrailTopBarCenter class="demo-shell__domain">{{ site().domain }}</span>
+    <span brightrailTopBarEnd class="demo-shell__top-actions">
+      <brightrail-icon-button variant="ghost" icon="search" ariaLabel="Search" />
+      <brightrail-icon-button variant="ghost" icon="bell" ariaLabel="Notifications" />
+      <brightrail-avatar kind="initials" name="Demo User" size="sm" status="online" />
+    </span>
+  </brightrail-top-bar>
+
+  <brightrail-sidebar>
+    <nav aria-label="Site sections">
+      <ul class="demo-shell__nav">
+        <li>
+          <a routerLink="/" class="demo-shell__nav-link demo-shell__nav-link--hub">← All demos</a>
+        </li>
+        @for (entry of allSites; track entry.id) {
+          <li>
+            <a
+              [routerLink]="entry.route"
+              class="demo-shell__nav-link"
+              [class.demo-shell__nav-link--active]="entry.id === site().id"
+              [attr.aria-current]="entry.id === site().id ? 'page' : null"
+            >
+              {{ entry.name }}
+              <span class="demo-shell__nav-domain">{{ entry.domain }}</span>
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+  </brightrail-sidebar>
+
+  <brightrail-page-header>
+    @if (breadcrumbs().length) {
+      <brightrail-breadcrumb [items]="breadcrumbs()" />
+    }
+    <h1 brightrailPageTitle>{{ pageTitle() }}</h1>
+    @if (pageSubtitle()) {
+      <p brightrailPageSubtitle>{{ pageSubtitle() }}</p>
+    }
+    <div brightrailPageHeaderActions>
+      <brightrail-button variant="outline" size="sm" iconLeft="download">Export</brightrail-button>
+      <brightrail-button variant="primary" size="sm" iconLeft="plus">New</brightrail-button>
+    </div>
+  </brightrail-page-header>
+
+  <div class="demo-shell__content">
+    <ng-content />
+  </div>
+</brightrail-app-shell>

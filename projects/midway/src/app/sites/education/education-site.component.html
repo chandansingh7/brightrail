@@ -1,0 +1,57 @@
+<app-demo-shell
+  [site]="site"
+  pageTitle="Course builder"
+  pageSubtitle="Structure content, track cohorts, and publish assignments"
+  [breadcrumbs]="breadcrumbs"
+>
+  <div class="edu-grid">
+    <section class="site-panel" aria-labelledby="edu-outline-title">
+      <h2 id="edu-outline-title" class="site-panel__title">Course outline</h2>
+      <brightrail-tree
+        ariaLabel="Course modules"
+        [nodes]="courseTree"
+        selectionMode="single"
+        [selectedId]="selectedLesson()"
+        (selectedIdChange)="selectedLesson.set($event)"
+      />
+    </section>
+
+    <section class="site-panel" aria-labelledby="edu-editor-title">
+      <h2 id="edu-editor-title" class="site-panel__title">Lesson content</h2>
+      <brightrail-rich-text-editor
+        label="Instructor notes"
+        [(ngModel)]="lessonNotes"
+        placeholder="Write lesson guidance for TAs…"
+      />
+      <brightrail-progress [value]="68" label="Module completion" />
+    </section>
+
+    <section class="site-panel edu-grid__wide" aria-labelledby="edu-cohort-title">
+      <h2 id="edu-cohort-title" class="site-panel__title">Cohort permissions</h2>
+      <brightrail-tree-table
+        ariaLabel="Program cohorts"
+        [nodes]="orgTree"
+        [selectedId]="'cohort-a'"
+      />
+    </section>
+
+    <section class="site-panel edu-grid__wide" aria-labelledby="edu-assign-title">
+      <h2 id="edu-assign-title" class="site-panel__title">Assignment workflow</h2>
+      <brightrail-stepper [activeStep]="assignmentStep()" orientation="horizontal">
+        <brightrail-step label="Draft" description="Author prompts" />
+        <brightrail-step label="Review" description="Peer review" />
+        <brightrail-step label="Publish" description="Release to learners" />
+      </brightrail-stepper>
+      <div class="edu-actions">
+        <brightrail-button variant="outline" size="sm" (click)="assignmentStep.set(math.max(0, assignmentStep() - 1))">
+          Previous
+        </brightrail-button>
+        <brightrail-button variant="primary" size="sm" (click)="assignmentStep.set(math.min(2, assignmentStep() + 1))">
+          Next step
+        </brightrail-button>
+      </div>
+    </section>
+  </div>
+
+  <app-library-coverage-host />
+</app-demo-shell>

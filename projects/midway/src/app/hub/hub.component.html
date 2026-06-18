@@ -1,0 +1,38 @@
+<main class="hub" aria-labelledby="hub-title">
+  <header class="hub__hero">
+    <h1 id="hub-title" class="hub__title">Midway Demo Websites</h1>
+    <p class="hub__lead">
+      Pick a domain experience below. Each site uses <strong>100% of the Brightrail library</strong> — layout,
+      forms, data surfaces, overlays, and futuristic components.
+    </p>
+  </header>
+
+  <ul class="hub__tiles" role="list" aria-label="Demo websites">
+    @for (site of sites; track site.id) {
+      <li class="hub__tile-item" role="listitem">
+        <a [routerLink]="site.route" class="hub__tile" [attr.aria-label]="'Open ' + site.name + ' — ' + site.domain">
+          <div
+            class="hub__tile-media"
+            [class.hub__tile-media--cyber]="site.id === 'cyber'"
+            [style.--site-accent]="site.accent"
+          >
+            <brightrail-icon [name]="siteIcon(site.id)" />
+          </div>
+          <div class="hub__tile-body">
+            <div class="hub__tile-head">
+              <h2 class="hub__tile-title">{{ site.name }}</h2>
+              <brightrail-badge [color]="site.id === 'cyber' ? 'danger' : 'primary'" [label]="site.domain" />
+            </div>
+            <p class="hub__tile-tagline">{{ site.tagline }}</p>
+            <p class="hub__tile-desc">{{ site.description }}</p>
+            <span class="hub__tile-meta">Theme: {{ site.theme }} · FX: {{ site.fx ?? 'standard' }}</span>
+          </div>
+          <span class="hub__tile-cta" aria-hidden="true">
+            Open
+            <brightrail-icon name="more_vert" />
+          </span>
+        </a>
+      </li>
+    }
+  </ul>
+</main>

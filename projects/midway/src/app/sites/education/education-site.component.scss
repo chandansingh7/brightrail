@@ -1,0 +1,23 @@
+.edu-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: minmax(14rem, 0.8fr) minmax(0, 1.2fr);
+}
+
+.edu-grid__wide {
+  grid-column: span 2;
+}
+
+.edu-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 900px) {
+  .edu-grid,
+  .edu-grid__wide {
+    grid-column: auto;
+    grid-template-columns: 1fr;
+  }
+}

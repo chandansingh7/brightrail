@@ -1,0 +1,22 @@
+.fintech-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.fintech-grid__chart {
+  grid-column: span 2;
+}
+
+.fintech-grid__full {
+  grid-column: span 2;
+}
+
+@media (max-width: 900px) {
+  .fintech-grid,
+  .fintech-grid__chart,
+  .fintech-grid__full {
+    grid-column: auto;
+    grid-template-columns: 1fr;
+  }
+}

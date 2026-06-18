@@ -1,0 +1,88 @@
+<app-demo-shell
+  [site]="site"
+  pageTitle="Portfolio overview"
+  pageSubtitle="Track performance, approvals, and market activity"
+  [breadcrumbs]="breadcrumbs"
+>
+  <div class="fintech-grid">
+    <section class="site-panel fintech-grid__chart" aria-labelledby="fintech-chart-title">
+      <h2 id="fintech-chart-title" class="site-panel__title">Revenue trend</h2>
+      <brightrail-graph
+        kind="line"
+        [series]="revenueSeries"
+        [showLegend]="true"
+        [showGrid]="true"
+        ariaLabel="Monthly revenue chart"
+      />
+    </section>
+
+    <section class="site-panel" aria-labelledby="fintech-controls-title">
+      <h2 id="fintech-controls-title" class="site-panel__title">Investment preferences</h2>
+      <brightrail-switch label="Auto-invest dividends" [(ngModel)]="autoInvest" />
+      <brightrail-slider
+        label="Risk tolerance"
+        [(ngModel)]="riskTolerance"
+        [min]="0"
+        [max]="100"
+        helperText="Higher values allocate more to growth assets"
+      />
+      <brightrail-progress [value]="riskTolerance" label="Portfolio rebalance" />
+    </section>
+
+    <section class="site-panel fintech-grid__full" aria-labelledby="fintech-onboard-title">
+      <h2 id="fintech-onboard-title" class="site-panel__title">Onboarding checklist</h2>
+      <brightrail-stepper [activeStep]="onboardingStep()" orientation="horizontal">
+        <brightrail-step label="Identity" description="KYC verified" />
+        <brightrail-step label="Funding" description="Link accounts" />
+        <brightrail-step label="Strategy" description="Set allocation" />
+      </brightrail-stepper>
+    </section>
+
+    <section class="site-panel fintech-grid__full" aria-labelledby="fintech-alert-title">
+      <h2 id="fintech-alert-title" class="site-panel__title">Compliance notice</h2>
+      <brightrail-alert appearance="soft" status="warning" [dismissible]="true">
+        <div brightrailAlertTitle>Large transfer pending approval</div>
+        <div brightrailAlertMessage>A $25,000 wire requires dual authorization before 5 PM ET.</div>
+        <brightrail-alert-actions>
+          <brightrail-button variant="outline" size="sm" (click)="approvalOpen.set(true)">Review</brightrail-button>
+        </brightrail-alert-actions>
+      </brightrail-alert>
+    </section>
+
+    <section class="site-panel" aria-labelledby="fintech-holdings-title">
+      <h2 id="fintech-holdings-title" class="site-panel__title">Holdings</h2>
+      <brightrail-table
+        [data]="holdings"
+        [columns]="columns"
+        variant="striped"
+        density="compact"
+        ariaLabel="Portfolio holdings"
+      />
+    </section>
+
+    <section class="site-panel" aria-labelledby="fintech-timeline-title">
+      <h2 id="fintech-timeline-title" class="site-panel__title">Activity feed</h2>
+      <brightrail-timeline>
+        <brightrail-timeline-item title="Dividend reinvested" description="10:24 AM · ACME $142.30" status="completed" />
+        <brightrail-timeline-item title="Order filled" description="Yesterday · Bought 12 shares of BRGT" status="current" />
+        <brightrail-timeline-item title="Risk review due" description="In 2 days · Quarterly questionnaire" status="pending" />
+      </brightrail-timeline>
+    </section>
+  </div>
+
+  <brightrail-modal [isOpen]="approvalOpen()" (closed)="approvalOpen.set(false)">
+    <brightrail-modal-header>
+      <h2 brightrailModalTitle>Approve wire transfer</h2>
+    </brightrail-modal-header>
+    <brightrail-modal-body>
+      <p>Confirm authorization for transfer TRX-8842 to operating account ending 4410.</p>
+      <brightrail-badge color="warning" label="Requires 2nd approver" />
+    </brightrail-modal-body>
+    <brightrail-modal-footer>
+      <brightrail-button variant="ghost" (click)="approvalOpen.set(false)">Cancel</brightrail-button>
+      <brightrail-button variant="approve" iconLeft="check">Approve</brightrail-button>
+    </brightrail-modal-footer>
+  </brightrail-modal>
+
+  <app-library-coverage-host />
+</app-demo-shell>

@@ -1,0 +1,87 @@
+<app-demo-shell
+  [site]="site"
+  pageTitle="Patient intake"
+  pageSubtitle="Collect information with clear validation and progressive disclosure"
+  [breadcrumbs]="breadcrumbs"
+>
+  <div class="health-grid">
+    <section class="site-panel" aria-labelledby="health-form-title">
+      <h2 id="health-form-title" class="site-panel__title">Intake form</h2>
+
+      @if (errors().length) {
+        <brightrail-validation-summary [errors]="errors()" title="Please fix the following" />
+      }
+
+      <form class="health-form" (ngSubmit)="submitIntake()">
+        <brightrail-text-field
+          label="Full name"
+          labelPosition="top"
+          placeholder="Legal name"
+          [(ngModel)]="patientName"
+          name="patientName"
+          [required]="true"
+        />
+        <brightrail-date-picker label="Date of birth" labelPosition="top" [(ngModel)]="dob" name="dob" />
+        <brightrail-textarea
+          label="Primary symptoms"
+          labelPosition="top"
+          placeholder="Describe reason for visit"
+          [(ngModel)]="symptoms"
+          name="symptoms"
+          [rows]="4"
+        />
+        <brightrail-radio-group
+          groupLabel="Visit type"
+          name="visitType"
+          [selectedId]="visitType"
+          (selectedIdChange)="visitType = $event"
+          [options]="visitTypeOptions"
+        />
+        <brightrail-checkbox-group
+          groupLabel="Contact preferences"
+          name="contactPrefs"
+          [selectedIds]="contactPrefs"
+          (selectedIdsChange)="contactPrefs = $event"
+          [options]="contactOptions"
+        />
+        <brightrail-checkbox [(ngModel)]="consent" name="consent" label="I consent to HIPAA-compliant record handling" />
+        <brightrail-file-upload label="Insurance card" helperText="PDF or JPG up to 5 MB" />
+        <brightrail-button variant="primary" type="submit" iconLeft="check">Submit intake</brightrail-button>
+      </form>
+    </section>
+
+    <section class="site-panel" aria-labelledby="health-care-title">
+      <h2 id="health-care-title" class="site-panel__title">Care plan summary</h2>
+      <brightrail-accordion>
+        <brightrail-accordion-item title="Medications">
+          Lisinopril 10mg daily · Vitamin D weekly
+        </brightrail-accordion-item>
+        <brightrail-accordion-item title="Allergies">
+          Penicillin (rash) · Peanuts (anaphylaxis)
+        </brightrail-accordion-item>
+        <brightrail-accordion-item title="Upcoming visits">
+          Annual physical — Jun 12 · Cardiology follow-up — Jul 3
+        </brightrail-accordion-item>
+      </brightrail-accordion>
+      <brightrail-alert appearance="soft" status="info">
+        <div brightrailAlertMessage>
+          Care team responds within 2 business hours. For emergencies, call 911.
+        </div>
+      </brightrail-alert>
+    </section>
+  </div>
+
+  <brightrail-drawer [isOpen]="drawerOpen()" (openChange)="drawerOpen.set($event)">
+    <brightrail-drawer-header>
+      <h2 brightrailDrawerTitle>Intake submitted</h2>
+    </brightrail-drawer-header>
+    <brightrail-drawer-body>
+      <p>Thank you. A nurse will review your information and confirm your appointment slot.</p>
+    </brightrail-drawer-body>
+    <brightrail-drawer-footer>
+      <brightrail-button variant="primary" (click)="drawerOpen.set(false)">Done</brightrail-button>
+    </brightrail-drawer-footer>
+  </brightrail-drawer>
+
+  <app-library-coverage-host />
+</app-demo-shell>

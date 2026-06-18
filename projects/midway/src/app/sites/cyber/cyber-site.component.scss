@@ -1,0 +1,39 @@
+.cyber-panel {
+  border-color: color-mix(in srgb, var(--mw-accent, #00ffaa) 35%, #1e293b);
+  background: color-mix(in srgb, var(--mw-accent, #00ffaa) 6%, #0f172a);
+}
+
+.cyber-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cyber-grid__status {
+  grid-column: span 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.cyber-grid__wide {
+  grid-column: span 2;
+}
+
+.cyber-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+@media (max-width: 900px) {
+  .cyber-grid,
+  .cyber-grid__status,
+  .cyber-grid__wide {
+    grid-column: auto;
+    grid-template-columns: 1fr;
+  }
+}

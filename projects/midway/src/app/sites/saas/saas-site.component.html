@@ -1,0 +1,113 @@
+<app-demo-shell
+  [site]="site"
+  pageTitle="Team directory"
+  pageSubtitle="Manage members, roles, and workspace access"
+  [breadcrumbs]="breadcrumbs"
+>
+  <section class="site-panel" aria-labelledby="saas-actions-title">
+    <div class="site-panel__toolbar">
+      <h2 id="saas-actions-title" class="site-panel__title">Quick actions</h2>
+      <div class="site-panel__actions">
+        <brightrail-button variant="primary" iconLeft="plus">Invite member</brightrail-button>
+        <brightrail-split-button variant="outline" menuButtonAriaLabel="More invite options">
+          Invite
+        </brightrail-split-button>
+        <brightrail-button
+          variant="ghost"
+          iconLeft="search"
+          brightrailTooltip="Open command palette (⌘K)"
+          (click)="openPalette()"
+        >
+          Commands
+        </brightrail-button>
+        <brightrail-icon-button variant="outline" icon="filter" ariaLabel="Filter members" />
+        <brightrail-menu #actionsMenu>
+          <brightrail-menu-item icon="export">Export CSV</brightrail-menu-item>
+          <brightrail-menu-item icon="upload">Import users</brightrail-menu-item>
+          <brightrail-menu-item icon="trash" [disabled]="true">Bulk remove</brightrail-menu-item>
+        </brightrail-menu>
+        <brightrail-button variant="outline" [brightrailMenuTrigger]="actionsMenu" iconRight="chevron">
+          Actions
+        </brightrail-button>
+      </div>
+    </div>
+
+    <div class="site-panel__row">
+      <brightrail-form-field label="Search directory" labelPosition="top">
+        <brightrail-text-field
+          placeholder="Name, email, or role"
+          iconLeft="search"
+          name="searchQuery"
+          [(ngModel)]="searchQuery"
+        />
+      </brightrail-form-field>
+      <brightrail-avatar-group [maxVisible]="3" ariaLabel="Online teammates">
+        <brightrail-avatar kind="initials" name="Alex Rivera" size="sm" />
+        <brightrail-avatar kind="initials" name="Jordan Lee" size="sm" />
+        <brightrail-avatar kind="initials" name="Sam Patel" size="sm" />
+        <brightrail-avatar kind="initials" name="Morgan Chen" size="sm" />
+      </brightrail-avatar-group>
+      <brightrail-button-group mode="pill">
+        <brightrail-button
+          variant="secondary"
+          [visualState]="viewMode() === 'list' ? 'active' : 'default'"
+          (click)="viewMode.set('list')"
+        >
+          List
+        </brightrail-button>
+        <brightrail-button
+          variant="secondary"
+          [visualState]="viewMode() === 'grid' ? 'active' : 'default'"
+          (click)="viewMode.set('grid')"
+        >
+          Grid
+        </brightrail-button>
+      </brightrail-button-group>
+    </div>
+  </section>
+
+  <section class="site-panel" aria-labelledby="saas-table-title">
+    <h2 id="saas-table-title" class="site-panel__title">Members</h2>
+    <brightrail-table
+      [data]="users"
+      [columns]="columns"
+      variant="bordered"
+      density="medium"
+      [sorting]="true"
+      [pagination]="pagination"
+      rowSelection="multiple"
+      ariaLabel="Workspace members"
+    >
+      <brightrail-table-toolbar>
+        <span>4 members · 2 active sessions</span>
+        <brightrail-table-toolbar-actions>
+          <brightrail-button variant="ghost" size="sm" iconLeft="download">Sync</brightrail-button>
+        </brightrail-table-toolbar-actions>
+      </brightrail-table-toolbar>
+      <brightrail-table-bulk-actions>
+        <brightrail-button variant="outline" size="sm">Assign role</brightrail-button>
+        <brightrail-button variant="danger" size="sm" iconLeft="trash">Remove</brightrail-button>
+      </brightrail-table-bulk-actions>
+      <brightrail-table-single-actions>
+        <brightrail-icon-button variant="ghost" icon="edit" ariaLabel="Edit member" />
+        <brightrail-icon-button variant="ghost" icon="more" ariaLabel="More options" />
+      </brightrail-table-single-actions>
+    </brightrail-table>
+  </section>
+
+  <brightrail-popover #rolePopover>
+    <p class="site-popover__title">Role permissions</p>
+    <p>Admins can manage billing. Editors can publish. Viewers are read-only.</p>
+  </brightrail-popover>
+  <brightrail-button variant="link" [brightrailPopoverTrigger]="rolePopover">View role matrix</brightrail-button>
+
+  <brightrail-command-palette
+    [isOpen]="paletteOpen()"
+    [commands]="commands"
+    placeholder="Search workspace commands…"
+    (commandSelect)="onCommand($event)"
+    (closed)="paletteOpen.set(false)"
+  />
+
+  <app-library-coverage-host />
+</app-demo-shell>
