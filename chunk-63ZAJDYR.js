@@ -1,0 +1,1 @@
+import{c as e}from"./chunk-M22WAZLT.js";function a(r){return e(this,null,function*(){if(!r||typeof navigator>"u")return!1;try{if(navigator.clipboard?.writeText)return yield navigator.clipboard.writeText(r),!0}catch(t){return!1}return!1})}export{a};

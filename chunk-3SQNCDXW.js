@@ -1,0 +1,1 @@
+import{Q as i}from"./chunk-M22WAZLT.js";var l=new i("BRIGHTRAIL_FUTURISTIC_APPEARANCE",{factory:()=>null}),e="data-br-fx";function c(r,t){if(t===null){r.documentElement.removeAttribute(e);return}r.documentElement.setAttribute(e,t)}export{l as a,c as b};

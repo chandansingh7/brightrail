@@ -1,0 +1,1 @@
+import{c as i}from"./chunk-NNTI4JQ5.js";import{N as o,S as t}from"./chunk-M22WAZLT.js";var a=class n{announcer=t(i);announce(r,e="polite"){return this.announcer.announce(r,e)}clear(){this.announcer.clear()}static \u0275fac=function(e){return new(e||n)};static \u0275prov=o({token:n,factory:n.\u0275fac,providedIn:"root"})};export{a};
