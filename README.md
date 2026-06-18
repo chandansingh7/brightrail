@@ -4,6 +4,41 @@
 
 **Node:** This repo is developed on **Node 24.x** ([Active LTS “Krypton”](https://nodejs.org/en/about/releases)). Use **`.nvmrc`** (`nvm use`) or install Node 24 locally. The published library’s `engines.node` matches [Angular 21’s supported Node range](https://angular.dev/reference/versions) so apps on those versions can still install it.
 
+---
+
+## Use in your Angular app
+
+Install Brightrail from **npm** in any **Angular 21** project:
+
+```bash
+ng new my-app --standalone
+cd my-app
+npm install brightrail @angular/cdk @angular/aria
+ng add brightrail
+```
+
+Then import components where you need them:
+
+```ts
+import { BrightrailButtonComponent } from 'brightrail';
+
+@Component({
+  standalone: true,
+  imports: [BrightrailButtonComponent],
+  template: `<button brightrail-button variant="primary">Save</button>`,
+})
+export class MyPageComponent {}
+```
+
+| Doc | Audience |
+|-----|----------|
+| **[doc/CONSUMING.md](doc/CONSUMING.md)** | App developers — install, manual setup, styles, providers, examples |
+| **[doc/PUBLISHING.md](doc/PUBLISHING.md)** | Maintainers — npm publish, **`NPM_TOKEN`** for GitHub Actions, tagging releases |
+
+**Before the first npm publish**, consumers can install a local build: `npm run pack:lib` → `npm install ./dist/brightrail-0.1.0.tgz` in their app (see CONSUMING.md).
+
+---
+
 ### Repository & live demo
 
 | | URL |
@@ -39,10 +74,13 @@ You can override ports for the script only: `FUNFAIR_PORT=4300 MIDWAY_PORT=4301 
 | `npm run verify:package` | Build `brightrail` → `npm install` → **Midway** app (npm-shaped consumer proof) |
 | `npm run build:all` | Build library + funfair + midway |
 | `npm run deploy:pages` | Build Funfair and publish to [GitHub Pages](https://chandansingh7.github.io/brightrail/) (`gh-pages` branch) |
+| `npm run build:lib` | Build publishable npm package → `dist/brightrail` |
+| `npm run pack:lib` | Create installable `.tgz` tarball for local consumer testing |
+| `npm run publish:lib` | Build and publish `brightrail` to [npm](https://www.npmjs.com/) — see [doc/PUBLISHING.md](doc/PUBLISHING.md) for **`NPM_TOKEN`** setup |
 | `npm run test:brightrail` | Library unit tests (headless Chrome) |
 | `npm run e2e:gates` | Run all CI gates locally (a11y + contrast report + visual) — [`scripts/e2e-gates.sh`](scripts/e2e-gates.sh) |
 | `npm run e2e:a11y` | axe accessibility gate on Funfair a11y-preview routes (Playwright) |
 | `npm run e2e:visual` | Visual regression baselines for every playground preview (Playwright) |
 | `npm run e2e:update-snapshots` | Refresh Playwright screenshot baselines after intentional UI changes |
 
-Planning docs: **[doc/MASTER-PLAN.md](doc/MASTER-PLAN.md)**
+Planning docs: **[doc/MASTER-PLAN.md](doc/MASTER-PLAN.md)** · Consumer guide: **[doc/CONSUMING.md](doc/CONSUMING.md)** · Publish & CI token: **[doc/PUBLISHING.md](doc/PUBLISHING.md)**

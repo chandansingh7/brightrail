@@ -1,0 +1,43 @@
+name: Publish npm package
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Library unit tests
+        run: npm run test:brightrail
+
+      - name: Consumer package verification
+        run: npm run verify:package
+
+      - name: Patch manifest tests
+        run: node --test scripts/patch-package-manifest.spec.mjs
+
+      - name: Build publishable package
+        run: npm run build:lib
+
+      - name: Publish to npm
+        # Authenticates via NODE_AUTH_TOKEN ← secrets.NPM_TOKEN (see doc/PUBLISHING.md)
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public
+        working-directory: dist/brightrail

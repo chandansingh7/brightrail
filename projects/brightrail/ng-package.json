@@ -3,6 +3,11 @@
   "dest": "../../dist/brightrail",
   "assets": [
     {
+      "glob": "LICENSE",
+      "input": "./",
+      "output": "/"
+    },
+    {
       "glob": "**/*.scss",
       "input": "./src/lib/styles",
       "output": "/styles"

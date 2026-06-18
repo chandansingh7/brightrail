@@ -46,12 +46,59 @@ ng add brightrail
 
 Wires `provideBrightrailPlatform()` and `provideBrightrailI18n()` into `app.config.ts` when possible and documents the stylesheet import.
 
+## Install in any Angular 21 app
+
+```bash
+npm install brightrail @angular/cdk @angular/aria
+ng add brightrail
+```
+
+**Guides:**
+
+| Doc | Contents |
+|-----|----------|
+| **[doc/CONSUMING.md](../../doc/CONSUMING.md)** | Full install guide — `ng add`, manual providers/styles, component imports, local tarball |
+| **[doc/PUBLISHING.md](../../doc/PUBLISHING.md)** | Publish to npm, create **`NPM_TOKEN`**, GitHub Actions releases |
+
+### Minimal manual wiring
+
+**Styles** (`src/styles.scss`):
+
+```scss
+@use 'brightrail/styles/brightrail-root.scss';
+```
+
+**Providers** (`src/app/app.config.ts`):
+
+```ts
+import { provideBrightrailI18n, provideBrightrailPlatform } from 'brightrail';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideBrightrailPlatform(),
+    provideBrightrailI18n({ locale: 'en', direction: 'ltr' }),
+  ],
+};
+```
+
+**Component:**
+
+```ts
+import { BrightrailButtonComponent } from 'brightrail';
+// add to standalone imports: [BrightrailButtonComponent]
+```
+
 ## Build & publish
 
 ```bash
-ng build brightrail
-cd dist/brightrail && npm publish
+npm run build:lib      # outputs dist/brightrail with patched exports
+npm run pack:lib       # create .tgz for local testing
+npm run publish:lib    # publish to npm (requires npm login or NPM_TOKEN)
 ```
+
+Recommended registry: **[npmjs.com](https://www.npmjs.com/)** as unscoped `brightrail`.
+
+**CI publish:** push a version tag (e.g. `v0.1.0`). GitHub Actions needs an npm access token stored as repository secret **`NPM_TOKEN`**. Step-by-step: **[doc/PUBLISHING.md](../../doc/PUBLISHING.md)**.
 
 ## Tests
 

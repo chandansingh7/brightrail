@@ -57,6 +57,21 @@ assert(adoption.includes('provideBrightrailPlatform') || read('projects/brightra
 assert(read('projects/brightrail/src/lib/i18n/brightrail-i18n.providers.ts').includes('provideBrightrailI18n'), 'Missing provideBrightrailI18n');
 assert(read('projects/brightrail/src/lib/styles/_rtl.scss').includes('brightrail-root--rtl'), 'Missing RTL stylesheet');
 
+// Publishable package manifest (style subpath exports)
+const patchSource = read('scripts/patch-package-manifest.mjs');
+assert(patchSource.includes('./styles/brightrail-root.scss'), 'patch-package-manifest must export style subpaths');
+assert(exists('scripts/publish-lib.sh'), 'Missing scripts/publish-lib.sh');
+assert(exists('doc/CONSUMING.md'), 'Missing doc/CONSUMING.md');
+assert(exists('doc/PUBLISHING.md'), 'Missing doc/PUBLISHING.md');
+
+if (exists('dist/brightrail/package.json')) {
+  const distPkg = JSON.parse(read('dist/brightrail/package.json'));
+  assert(
+    distPkg.exports?.['./styles/brightrail-root.scss'],
+    'dist/brightrail must export brightrail-root.scss (run npm run build:lib)',
+  );
+}
+
 // Composable patterns (modal/drawer slots, table toolbar)
 const api = read('projects/brightrail/src/public-api.ts');
 assert(api.includes('./lib/modal/brightrail-modal.component'), 'Modal exports missing');
