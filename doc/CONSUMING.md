@@ -181,6 +181,27 @@ cd ../my-app && npm install
 
 ---
 
+## Package layout (npm)
+
+| Path | Purpose |
+|------|---------|
+| `fesm2022/brightrail.mjs` | Runtime bundle — **import from here** via `'brightrail'` |
+| `types/` | TypeScript definitions |
+| `styles/` | Global SCSS |
+| `lib/` | **Source folder tree** (accordion, table, fields, …) for browsing only |
+
+Always import components from the package entry:
+
+```ts
+import { BrightrailTableComponent } from 'brightrail';
+```
+
+Do **not** import from `brightrail/lib/table/...` — those paths are not part of the public API.
+
+Component map and limitations: **[COMPONENTS.md](./COMPONENTS.md)** · **[LIMITATIONS.md](./LIMITATIONS.md)** · **[CONSUMER-PATTERNS.md](./CONSUMER-PATTERNS.md)**
+
+---
+
 ## Requirements checklist
 
 - [ ] Angular **21.x** app (`@angular/core` `>=21.0.0 <22.0.0`)
@@ -214,4 +235,5 @@ npm run publish:lib
 npm run verify:package   # build → npm install → compile Midway consumer app
 npm run verify:claims    # exports, schematics, CI gates
 node --test scripts/patch-package-manifest.spec.mjs
+node --test scripts/copy-lib-sources.spec.mjs
 ```

@@ -59,16 +59,16 @@ export interface BrightrailTableColumn<
   avatarSubtitleField?: keyof R & string;
   /** When format is `avatar`, show only the initials circle (name/subtitle stay screen-reader only). */
   avatarIconOnly?: boolean;
-  /** When the table has `columnSearch`, show an inline text filter for this column. */
+  /** When `columnSearch` is true, show search on all columns with `searchable: true`. Per-column `searchable` alone also enables search. */
   searchable?: boolean;
-  /** When the table has `columnFilters`, show a dropdown; include `{ value: '', label: 'All …' }` for “no filter”. */
+  /** When `columnFilters` is true, show dropdown on columns with `filterOptions`. `filterOptions` alone also enables the control. */
   filterOptions?: BrightrailTableFilterOption[];
   /** Date filter (YYYY-MM-DD) matching the start of the cell value (ISO date strings supported). */
   dateFilter?: boolean;
   /** Placeholder for search inputs (`columnSearch`); defaults to `Search {header}`. */
   filterPlaceholder?: string;
 
-  /** Built-in actions column (row edit affordances) when `inlineEditMode` is `row`. */
+  /** Built-in row edit affordances when `inlineEditMode` is `row`, or use `cellTemplateKey` for custom cancel/revoke buttons (no row selection required). */
   columnRole?: BrightrailTableColumnRole;
   /** Allow inline editing when {@link BrightrailTableComponent.inlineEdit} is enabled. */
   editable?: boolean;

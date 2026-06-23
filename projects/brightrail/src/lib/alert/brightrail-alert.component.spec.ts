@@ -81,3 +81,53 @@ describe('BrightrailAlertComponent', () => {
     expect(host.classList.contains('br-alert--placement-bottom')).toBeFalse();
   });
 });
+
+@Component({
+  standalone: true,
+  imports: [BrightrailAlertComponent],
+  template: `<brightrail-alert status="info">Plain alert copy</brightrail-alert>`,
+})
+class PlainTextHostComponent {}
+
+@Component({
+  standalone: true,
+  imports: [
+    BrightrailAlertComponent,
+    BrightrailAlertTitleDirective,
+    BrightrailAlertMessageDirective,
+  ],
+  template: `
+    <brightrail-alert status="warning">
+      <span brightrailAlertTitle>Headline</span>
+      Unmarked body copy
+    </brightrail-alert>
+  `,
+})
+class MixedProjectionHostComponent {}
+
+describe('BrightrailAlertComponent content projection', () => {
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [PlainTextHostComponent, MixedProjectionHostComponent],
+    }).compileComponents();
+  });
+
+  it('projects plain text between tags into the message body', () => {
+    const fixture = TestBed.createComponent(PlainTextHostComponent);
+    fixture.detectChanges();
+    const fallback = fixture.nativeElement.querySelector('.br-alert__message--fallback');
+    expect(fallback?.textContent?.trim()).toBe('Plain alert copy');
+    expect(fixture.nativeElement.querySelector('.br-alert__message-slot')?.textContent?.trim()).toBe(
+      'Plain alert copy',
+    );
+  });
+
+  it('projects unmarked nodes into fallback while titled content uses the title slot', () => {
+    const fixture = TestBed.createComponent(MixedProjectionHostComponent);
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.br-alert__title')?.textContent?.trim()).toBe('Headline');
+    expect(fixture.nativeElement.querySelector('.br-alert__message--fallback')?.textContent?.trim()).toBe(
+      'Unmarked body copy',
+    );
+  });
+});

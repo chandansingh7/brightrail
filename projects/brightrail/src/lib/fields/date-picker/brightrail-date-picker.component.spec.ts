@@ -49,6 +49,18 @@ describe('BrightrailDatePickerComponent', () => {
     expect((fixture.componentInstance as any).rangeDraft()).toEqual({ start: null, end: null });
   });
 
+  it('disables days outside enabledDates allowlist', async () => {
+    const fixture = await create();
+    fixture.componentRef.setInput('type', 'inline');
+    fixture.componentRef.setInput('enabledDates', ['2026-05-07', '2026-05-09']);
+    fixture.detectChanges();
+
+    const allowed = new Date(2026, 4, 7);
+    const blocked = new Date(2026, 4, 8);
+    expect(fixture.componentInstance.isDayDisabled(allowed)).toBeFalse();
+    expect(fixture.componentInstance.isDayDisabled(blocked)).toBeTrue();
+  });
+
   it('applies pill shape class when appearance is pill', async () => {
     const fixture = await create();
     fixture.componentRef.setInput('appearance', 'pill');

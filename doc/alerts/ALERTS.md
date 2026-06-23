@@ -50,8 +50,8 @@ Optional later: `fullWidth`, `role` override for edge cases (prefer sensible def
 
 | Slot | Mechanism | Purpose |
 |------|-----------|---------|
-| Title | **`brightrailAlertTitle`** directive on an element | Short headline (“Changes saved”). Optional; omit for compact inline lines. |
-| Body | Default `<ng-content>` | Primary message (supports inline markup sparingly). |
+| Title | **`[brightrailAlertTitle]`** directive on an element | Short headline (“Changes saved”). Optional. |
+| Body | **`[brightrailAlertMessage]`** or **default `<ng-content>` fallback** | Primary message. Unmarked text/HTML projects into the message body when no directive is used. |
 | Actions | **`brightrail-alert-actions`** (component or directive matching card patterns) | Links / buttons (“Retry”, “Learn more”). |
 
 Example (canonical snippet shape):

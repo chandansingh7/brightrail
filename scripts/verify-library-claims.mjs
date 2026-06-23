@@ -63,6 +63,10 @@ assert(patchSource.includes('./styles/brightrail-root.scss'), 'patch-package-man
 assert(exists('scripts/publish-lib.sh'), 'Missing scripts/publish-lib.sh');
 assert(exists('doc/CONSUMING.md'), 'Missing doc/CONSUMING.md');
 assert(exists('doc/PUBLISHING.md'), 'Missing doc/PUBLISHING.md');
+assert(exists('CHANGELOG.md'), 'Missing CHANGELOG.md');
+assert(exists('doc/COMPONENTS.md'), 'Missing doc/COMPONENTS.md');
+assert(exists('doc/LIMITATIONS.md'), 'Missing doc/LIMITATIONS.md');
+assert(exists('scripts/copy-lib-sources.mjs'), 'Missing scripts/copy-lib-sources.mjs');
 
 if (exists('dist/brightrail/package.json')) {
   const distPkg = JSON.parse(read('dist/brightrail/package.json'));

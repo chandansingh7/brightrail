@@ -35,13 +35,12 @@
     </nav>
   </brightrail-sidebar>
 
-  <brightrail-page-header>
+  <brightrail-page-header
+    [title]="pageTitle()"
+    [subtitle]="pageSubtitle() || undefined"
+  >
     @if (breadcrumbs().length) {
       <brightrail-breadcrumb [items]="breadcrumbs()" />
-    }
-    <h1 brightrailPageTitle>{{ pageTitle() }}</h1>
-    @if (pageSubtitle()) {
-      <p brightrailPageSubtitle>{{ pageSubtitle() }}</p>
     }
     <div brightrailPageHeaderActions>
       <brightrail-button variant="outline" size="sm" iconLeft="download">Export</brightrail-button>

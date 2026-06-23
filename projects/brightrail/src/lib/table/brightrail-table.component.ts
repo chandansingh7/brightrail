@@ -81,7 +81,7 @@ export class BrightrailTableComponent {
     'Try adjusting search or filter controls.',
   );
 
-  /** Show the second header row with search / dropdown / date controls (per-column metadata). */
+  /** Show the filter row. Per-column `searchable` / `filterOptions` also enable controls without these flags. */
   readonly columnSearch = input(false);
   readonly columnFilters = input(false);
   /** Two-way filter state; keys are column `id` values. */
@@ -109,8 +109,16 @@ export class BrightrailTableComponent {
   readonly trackByField = input('id');
   readonly disabledRowIds = input<string[]>([]);
 
-  /** Controlled selection (omit for internal selection state). */
-  readonly selectedIds = input<string[] | undefined>(undefined);
+  /**
+   * Selected row ids — supports `[(selectedIds)]` two-way binding (replaces manual `(selectionChange)` wiring).
+   * `selectionChange` still emits for backward compatibility.
+   */
+  readonly selectedIds = model<string[]>([]);
+
+  /** When true, skip client-side filter/sort/paginate; parent supplies `data` and handles events. */
+  readonly serverMode = input(false);
+  /** Total rows for pagination summary when `serverMode` is true (defaults to `data.length`). */
+  readonly totalRowCount = input<number | undefined>(undefined);
 
   readonly emptyAction = output<void>();
   readonly globalFilterClick = output<void>();
@@ -139,7 +147,6 @@ export class BrightrailTableComponent {
   readonly expandedIds = signal(new Set<string>());
   readonly internalPageIndex = signal(0);
 
-  readonly internalSelection = signal(new Set<string>());
   readonly sortState = signal<{ columnId: string; direction: 'asc' | 'desc' } | null>(null);
 
   readonly editingCell = signal<{ rowId: string; columnId: string } | null>(null);
@@ -219,6 +226,9 @@ export class BrightrailTableComponent {
   });
 
   readonly filteredRows = computed(() => {
+    if (this.serverMode()) {
+      return this.data();
+    }
     const rows = this.data();
     const cols = this.columns();
     const state = this.filterState();
@@ -238,9 +248,9 @@ export class BrightrailTableComponent {
           const cell = String(row[field] ?? '');
           return cell.slice(0, 10) === v.slice(0, 10);
         });
-      } else if (this.columnFilters() && col.filterOptions?.length) {
+      } else if (col.filterOptions?.length) {
         out = out.filter((row) => String(row[field] ?? '') === v);
-      } else if (this.columnSearch() && col.searchable) {
+      } else if (col.searchable) {
         out = out.filter((row) =>
           String(row[field] ?? '')
             .toLowerCase()
@@ -259,6 +269,9 @@ export class BrightrailTableComponent {
 
   readonly sortedRows = computed(() => {
     const rows = [...this.filteredRows()];
+    if (this.serverMode()) {
+      return rows;
+    }
     const sort = this.sortState();
     if (!this.sorting() || !sort) {
       return rows;
@@ -272,7 +285,12 @@ export class BrightrailTableComponent {
     return rows.sort((a, b) => compareUnknown(a[field], b[field]) * dir);
   });
 
-  readonly totalRows = computed(() => this.sortedRows().length);
+  readonly totalRows = computed(() => {
+    if (this.serverMode()) {
+      return this.totalRowCount() ?? this.data().length;
+    }
+    return this.sortedRows().length;
+  });
 
   readonly pageSize = computed(() => this.pagination()?.pageSize ?? 10);
 
@@ -304,7 +322,7 @@ export class BrightrailTableComponent {
   readonly pagedRows = computed(() => {
     const pag = this.pagination();
     const rows = this.sortedRows();
-    if (!pag) {
+    if (!pag || this.serverMode()) {
       return rows;
     }
     const size = Math.max(1, pag.pageSize);
@@ -329,13 +347,7 @@ export class BrightrailTableComponent {
     return `Showing ${start} to ${end} of ${total} results`;
   });
 
-  readonly effectiveSelectedIds = computed(() => {
-    const external = this.selectedIds();
-    if (external !== undefined) {
-      return new Set(external);
-    }
-    return this.internalSelection();
-  });
+  readonly effectiveSelectedIds = computed(() => new Set(this.selectedIds()));
 
   readonly selectionCount = computed(() => this.effectiveSelectedIds().size);
 
@@ -385,10 +397,10 @@ export class BrightrailTableComponent {
     if (col.dateFilter) {
       return 'date';
     }
-    if (this.columnFilters() && col.filterOptions?.length) {
+    if (col.filterOptions?.length) {
       return 'select';
     }
-    if (this.columnSearch() && col.searchable) {
+    if (col.searchable) {
       return 'search';
     }
     return 'none';
@@ -793,10 +805,7 @@ export class BrightrailTableComponent {
     }
     const checked = (event.target as HTMLInputElement | null)?.checked ?? false;
     const ids = this.pageRowIds().filter((id) => id && !this.disabledSet().has(id));
-    const base =
-      this.selectedIds() !== undefined
-        ? new Set(this.effectiveSelectedIds())
-        : new Set(this.internalSelection());
+    const base = new Set(this.effectiveSelectedIds());
     if (checked) {
       for (const id of ids) {
         base.add(id);
@@ -958,10 +967,7 @@ export class BrightrailTableComponent {
     if (mode !== 'multiple') {
       return;
     }
-    const next =
-      this.selectedIds() !== undefined
-        ? new Set(this.effectiveSelectedIds())
-        : new Set(this.internalSelection());
+    const next = new Set(this.effectiveSelectedIds());
     if (checked) {
       next.add(id);
     } else {
@@ -971,10 +977,9 @@ export class BrightrailTableComponent {
   }
 
   private commitSelection(next: Set<string>): void {
-    if (this.selectedIds() === undefined) {
-      this.internalSelection.set(next);
-    }
-    this.selectionChange.emit([...next]);
+    const arr = [...next];
+    this.selectedIds.set(arr);
+    this.selectionChange.emit(arr);
   }
 }
 

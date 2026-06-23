@@ -37,6 +37,9 @@ export type BrightrailAlertPlacement = 'inline' | 'bottom';
         </div>
         <div class="br-alert__message-slot">
           <ng-content select="[brightrailAlertMessage]" />
+          <div class="br-alert__message br-alert__message--fallback">
+            <ng-content />
+          </div>
         </div>
       </div>
 

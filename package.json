@@ -1,12 +1,12 @@
 {
   "name": "brightrail",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve funfair",
     "serve:funfair": "ng serve funfair",
     "build": "ng build",
-    "build:lib": "ng build brightrail && node scripts/patch-package-manifest.mjs",
+    "build:lib": "ng build brightrail && node scripts/patch-package-manifest.mjs && node scripts/copy-lib-sources.mjs",
     "pack:lib": "npm run build:lib && cd dist/brightrail && npm pack --pack-destination ../..",
     "publish:lib": "bash scripts/publish-lib.sh",
     "build:funfair": "ng build funfair",

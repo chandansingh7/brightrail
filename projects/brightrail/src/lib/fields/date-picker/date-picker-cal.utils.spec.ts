@@ -5,6 +5,7 @@ import {
   daysInMonth,
   firstDayOfMonthFrom,
   formatBrightrailDate,
+  formatIsoDate,
   isSameDay,
   startOfMonth,
   stripTime,
@@ -60,6 +61,10 @@ describe('date-picker-cal.utils', () => {
     const d = new Date(2026, 7, 19);
     expect(startOfMonth(d).getDate()).toBe(1);
     expect(+firstDayOfMonthFrom(d)).toBe(+startOfMonth(d));
+  });
+
+  it('formatIsoDate returns YYYY-MM-DD', () => {
+    expect(formatIsoDate(new Date(2026, 4, 7))).toBe('2026-05-07');
   });
 
   it('formatBrightrailDate supports tokens', () => {

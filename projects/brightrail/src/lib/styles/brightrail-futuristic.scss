@@ -60,6 +60,20 @@
   background: rgb(255 255 255 / 35%) !important;
   border-color: t.$br-fx-glass-border !important;
   color: t.$br-fx-glass-fg !important;
+
+  &:disabled {
+    background: rgb(15 23 42 / 22%) !important;
+    border-color: rgb(255 255 255 / 28%) !important;
+    color: rgb(15 23 42 / 50%) !important;
+    opacity: 1;
+    box-shadow: none;
+  }
+
+  &.br-button--primary:disabled {
+    background: rgb(30 107 221 / 28%) !important;
+    border-color: rgb(30 107 221 / 35%) !important;
+    color: rgb(255 255 255 / 72%) !important;
+  }
 }
 
 @mixin br-fx-surfaces {
@@ -226,6 +240,22 @@
 
 .br-fx--glass {
   @include br-fx-surface-glass;
+}
+
+// Card header/content/footer/actions share the outer card shell — avoid stacked glass/cyber panels.
+@mixin br-fx-flatten-card-slots {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+brightrail-card .br-card__main > brightrail-card-header,
+brightrail-card .br-card__main > brightrail-card-content,
+brightrail-card .br-card__main > brightrail-card-footer,
+brightrail-card .br-card__main > brightrail-card-actions {
+  @include br-fx-flatten-card-slots;
 }
 
 @each $fx in cyber, neon, holo, glass {

@@ -8,7 +8,23 @@
 
 ## Install in any Angular 21 app
 
-**npm package:** [npmjs.com/package/brightrail](https://www.npmjs.com/package/brightrail) (current: **v0.1.1**)
+**npm package:** [npmjs.com/package/brightrail](https://www.npmjs.com/package/brightrail) (published: **v0.1.1** · next: **[v0.1.2](./CHANGELOG.md#012--unreleased-on-npm)**)
+
+### Upcoming in v0.1.2 (on `main`, not on npm yet)
+
+| Area | Change |
+|------|--------|
+| **Alert** | Plain text between tags works (fallback projection) |
+| **Cards** | No double glass/fx panels on nested header + content |
+| **Table** | `[serverMode]`, `[(selectedIds)]`, column filters, actions via `cellTemplateKey` |
+| **Date picker** | `[enabledDates]` allowlist for booking slots |
+| **Page header** | `[title]` / `[subtitle]` inputs |
+| **npm package** | `lib/` source folder for browsing |
+| **Docs** | `COMPONENTS.md`, `LIMITATIONS.md`, `CONSUMER-PATTERNS.md` |
+
+Full notes: **[CHANGELOG.md](./CHANGELOG.md)** · Consumer recipes: **[doc/CONSUMER-PATTERNS.md](doc/CONSUMER-PATTERNS.md)**
+
+To publish v0.1.2 to npm: commit to `main`, then `git tag v0.1.2 && git push origin v0.1.2`.
 
 In a new or existing **Angular 21** project:
 
@@ -31,6 +47,31 @@ export class MyPageComponent {}
 ```
 
 More detail (manual setup, styles, local tarball): **[doc/CONSUMING.md](doc/CONSUMING.md)**
+
+**Component folders, imports, and limitations:** **[doc/COMPONENTS.md](doc/COMPONENTS.md)** · **[doc/LIMITATIONS.md](doc/LIMITATIONS.md)** · **[doc/CONSUMER-PATTERNS.md](doc/CONSUMER-PATTERNS.md)**
+
+---
+
+## Known limitations (summary)
+
+### Table
+
+- **Client-side by default** — filter, sort, and paginate run in the browser on `[data]`. Use `[serverMode]="true"` and handle `(sortChange)` / `(pageChange)` / `[(filterState)]` for large or remote datasets.
+- **Row actions** — no preset “Actions column”; use `columnRole: 'actions'` + `cellTemplateKey`, or `rowSelection="single"` + `<brightrail-table-single-actions>`.
+- **Selection** — `[(selectedIds)]` or `[selectedIds]` + `(selectionChange)`.
+- **Rows** — `BrightrailTableRow = Record<string, unknown>`; map API types yourself.
+- **Badge tone** — per-column static tone, or auto-inferred from cell text.
+- **No built-in fetch** — you load `[data]` from your API.
+
+### Alert
+
+- **Plain text** — works via fallback projection (unmarked content → message body). Use `[brightrailAlertMessage]` for explicit structure.
+- **Setup checklists** — prefer lists inside `brightrail-card-content` over info alerts when you don't need banner semantics.
+
+### Package layout
+
+- **npm ships compiled JS** in `fesm2022/` plus a **`lib/` source tree** (folder structure for browsing — import only from `'brightrail'`).
+- See **[doc/COMPONENTS.md](doc/COMPONENTS.md)** for every folder under `projects/brightrail/src/lib/` and limitations for fields, toast, graph, etc.
 
 ---
 
@@ -151,4 +192,4 @@ You can override ports for the script only: `FUNFAIR_PORT=4300 MIDWAY_PORT=4301 
 | `npm run e2e:visual` | Visual regression baselines for every playground preview (Playwright) |
 | `npm run e2e:update-snapshots` | Refresh Playwright screenshot baselines after intentional UI changes |
 
-Planning docs: **[doc/MASTER-PLAN.md](doc/MASTER-PLAN.md)** · Consumer guide: **[doc/CONSUMING.md](doc/CONSUMING.md)** · Publish & CI token: **[doc/PUBLISHING.md](doc/PUBLISHING.md)**
+Planning docs: **[doc/MASTER-PLAN.md](doc/MASTER-PLAN.md)** · **[CHANGELOG.md](CHANGELOG.md)** · **[doc/COMPONENTS.md](doc/COMPONENTS.md)** · **[doc/LIMITATIONS.md](doc/LIMITATIONS.md)** · **[doc/CONSUMING.md](doc/CONSUMING.md)** · **[doc/PUBLISHING.md](doc/PUBLISHING.md)**

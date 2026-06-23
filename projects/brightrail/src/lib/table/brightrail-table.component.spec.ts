@@ -454,3 +454,127 @@ describe('BrightrailTableComponent single-select actions bar', () => {
     expect(bar!.textContent).toContain('Edit');
   });
 });
+
+describe('BrightrailTableComponent library DX improvements', () => {
+  @Component({
+    standalone: true,
+    imports: [BrightrailTableComponent],
+    template: `
+      <brightrail-table
+        [(selectedIds)]="selected"
+        [data]="rows"
+        [columns]="columns"
+        [rowSelection]="'multiple'"
+      />
+    `,
+  })
+  class TwoWaySelectionHarnessComponent {
+    rows: BrightrailTableRow[] = [
+      { id: '1', name: 'Ada' },
+      { id: '2', name: 'Lin' },
+    ];
+    columns: BrightrailTableColumn[] = [{ id: 'name', header: 'Name', field: 'name' }];
+    selected: string[] = [];
+  }
+
+  it('two-way binds selectedIds without manual selectionChange handler', () => {
+    TestBed.configureTestingModule({ imports: [TwoWaySelectionHarnessComponent] });
+    const fixture = TestBed.createComponent(TwoWaySelectionHarnessComponent);
+    fixture.detectChanges();
+
+    const cell = fixture.nativeElement.querySelector('tbody tr.br-table__tr td:not(.br-table__td--select)');
+    cell.click();
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.selected).toEqual(['1']);
+  });
+
+  @Component({
+    standalone: true,
+    imports: [BrightrailTableComponent],
+    template: `
+      <ng-template #actions let-row>
+        <button type="button" class="cancel-btn">Cancel {{ row.id }}</button>
+      </ng-template>
+      <brightrail-table
+        [data]="rows"
+        [columns]="columns"
+        [cellTemplates]="{ actions: actions }"
+      />
+    `,
+  })
+  class ActionsColumnHarnessComponent {
+    rows: BrightrailTableRow[] = [{ id: 'b-1', name: 'Booking' }];
+    columns: BrightrailTableColumn[] = [
+      { id: 'name', header: 'Guest', field: 'name' },
+      { id: 'actions', header: '', columnRole: 'actions', cellTemplateKey: 'actions' },
+    ];
+  }
+
+  it('renders inline actions column template without rowSelection', () => {
+    TestBed.configureTestingModule({ imports: [ActionsColumnHarnessComponent] });
+    const fixture = TestBed.createComponent(ActionsColumnHarnessComponent);
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('.cancel-btn')?.textContent?.trim()).toBe('Cancel b-1');
+    expect(fixture.nativeElement.querySelector('.br-table__single')).toBeFalsy();
+  });
+
+  @Component({
+    standalone: true,
+    imports: [BrightrailTableComponent],
+    template: `
+      <brightrail-table
+        [data]="rows"
+        [columns]="columns"
+        [filterState]="filters"
+        (filterStateChange)="filters = $event"
+      />
+    `,
+  })
+  class ColumnSearchHarnessComponent {
+    rows: BrightrailTableRow[] = [
+      { id: '1', name: 'Ada', status: 'active' },
+      { id: '2', name: 'Lin', status: 'paused' },
+    ];
+    columns: BrightrailTableColumn[] = [
+      { id: 'name', header: 'Name', field: 'name', searchable: true },
+    ];
+    filters: Record<string, string> = { name: 'Ada' };
+  }
+
+  it('shows column search when only column.searchable is set', () => {
+    TestBed.configureTestingModule({ imports: [ColumnSearchHarnessComponent] });
+    const fixture = TestBed.createComponent(ColumnSearchHarnessComponent);
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('.br-table__control--search')).toBeTruthy();
+    expect(fixture.nativeElement.querySelectorAll('tbody tr.br-table__tr').length).toBe(1);
+  });
+
+  @Component({
+    standalone: true,
+    imports: [BrightrailTableComponent],
+    template: `
+      <brightrail-table
+        [serverMode]="true"
+        [totalRowCount]="100"
+        [data]="rows"
+        [columns]="columns"
+        [pagination]="{ pageSize: 10, pageIndex: 2 }"
+      />
+    `,
+  })
+  class ServerModeHarnessComponent {
+    rows: BrightrailTableRow[] = [{ id: '1', name: 'Server row' }];
+    columns: BrightrailTableColumn[] = [{ id: 'name', header: 'Name', field: 'name' }];
+  }
+
+  it('uses totalRowCount in serverMode for pagination summary', () => {
+    TestBed.configureTestingModule({ imports: [ServerModeHarnessComponent] });
+    const fixture = TestBed.createComponent(ServerModeHarnessComponent);
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.textContent).toContain('Showing 21 to 30 of 100 results');
+  });
+});

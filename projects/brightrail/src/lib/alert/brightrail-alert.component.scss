@@ -52,8 +52,13 @@
   display: none;
 }
 
-.br-alert__message-slot:not(:has(.br-alert__message)) {
+.br-alert__message-slot:empty {
   display: none;
+}
+
+.br-alert__message--fallback:empty {
+  display: none;
+  margin: 0;
 }
 
 .br-alert__title {

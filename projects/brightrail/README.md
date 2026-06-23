@@ -2,7 +2,8 @@
 
 Fun Angular component library for **Angular 21.x** apps.
 
-**npm:** [npmjs.com/package/brightrail](https://www.npmjs.com/package/brightrail)  
+**npm:** [npmjs.com/package/brightrail](https://www.npmjs.com/package/brightrail) (published: **v0.1.1**)  
+**Next release:** [CHANGELOG.md — v0.1.2](https://github.com/chandansingh7/brightrail/blob/main/CHANGELOG.md#012--unreleased-on-npm) (alert fallback, glass card fix, table server mode, `lib/` folder, docs)
 **Repository:** [github.com/chandansingh7/brightrail](https://github.com/chandansingh7/brightrail)  
 **Live playground:** [chandansingh7.github.io/brightrail](https://chandansingh7.github.io/brightrail/)
 
@@ -17,36 +18,59 @@ npm install brightrail @angular/cdk @angular/aria
 ng add brightrail
 ```
 
-`ng add brightrail` wires `provideBrightrailPlatform()`, `provideBrightrailI18n()`, and the global stylesheet when possible.
-
-### Use a component
+Import components from the package entry (not from subpaths):
 
 ```ts
-import { Component } from '@angular/core';
-import { BrightrailButtonComponent } from 'brightrail';
-
-@Component({
-  standalone: true,
-  imports: [BrightrailButtonComponent],
-  template: `<button brightrail-button variant="primary">Save</button>`,
-})
-export class MyPageComponent {}
+import { BrightrailButtonComponent, BrightrailTableComponent } from 'brightrail';
 ```
 
-Full install guide (manual setup, styles, local tarball):  
-[github.com/chandansingh7/brightrail/blob/main/doc/CONSUMING.md](https://github.com/chandansingh7/brightrail/blob/main/doc/CONSUMING.md)
+---
+
+## Component folder structure
+
+Source lives under **`projects/brightrail/src/lib/`** (accordion, buttons, fields, table, …).
+
+The npm package includes the same tree at **`node_modules/brightrail/lib/`** for browsing. Runtime code is compiled in `fesm2022/brightrail.mjs`.
+
+Full map: [COMPONENTS.md on GitHub](https://github.com/chandansingh7/brightrail/blob/main/doc/COMPONENTS.md)
+
+```
+lib/
+├── buttons/       button, icon-button, split-button, …
+├── fields/        select, combobox, date-picker, text-field, …
+├── table/         data table, toolbar, bulk/single actions
+├── app-shell/     sidebar, top-bar, page-header
+├── modal/ drawer/ card/ toast/ menu/ …
+└── styles/        design tokens (also brightrail/styles/*.scss)
+```
 
 ---
 
-## Requirements
+## Known limitations
 
-**Angular 21.x only** — not compatible with Angular 20 or earlier.
+### Table
 
-Peer dependencies: `@angular/core`, `@angular/common`, `@angular/forms`, `@angular/cdk`, `@angular/aria`, `rxjs` ^7.4.0.
+- **Client-side by default** — filter, sort, paginate on `[data]` in the browser. Use `[serverMode]="true"` + `(sortChange)` / `(pageChange)` / `[(filterState)]` for remote data.
+- **Row actions** — use `columnRole: 'actions'` + `cellTemplateKey`, or `rowSelection="single"` + `<brightrail-table-single-actions>`; no preset actions column.
+- **Selection** — `[(selectedIds)]` or `[selectedIds]` + `(selectionChange)`.
+- **Rows** — `BrightrailTableRow = Record<string, unknown>`; you type API mappings.
+- **Badge tone** — column-level static tone or auto-inference from cell text.
+- **No HTTP** — you fetch and pass `[data]`.
+
+### Other components
+
+| Area | Note |
+|------|------|
+| Select | Projected `br-select-option` buttons; combobox has `[options]` |
+| Date picker | `[enabledDates]` for booking slots; not a full scheduler |
+| Toast | Service + container; needs `provideBrightrailPlatform()` |
+| Graph / tree | You supply data; no built-in fetch |
+
+Full list: [LIMITATIONS.md](https://github.com/chandansingh7/brightrail/blob/main/doc/LIMITATIONS.md) · Patterns: [CONSUMER-PATTERNS.md](https://github.com/chandansingh7/brightrail/blob/main/doc/CONSUMER-PATTERNS.md)
 
 ---
 
-## Manual setup (if you skip `ng add`)
+## Manual setup
 
 **Styles** — `src/styles.scss`:
 
@@ -57,7 +81,6 @@ Peer dependencies: `@angular/core`, `@angular/common`, `@angular/forms`, `@angul
 **Providers** — `src/app/app.config.ts`:
 
 ```ts
-import { ApplicationConfig } from '@angular/core';
 import { provideBrightrailI18n, provideBrightrailPlatform } from 'brightrail';
 
 export const appConfig: ApplicationConfig = {
@@ -68,8 +91,6 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-`provideBrightrailPlatform()` registers CDK LiveAnnouncer and FocusMonitor (required for toasts, command palette, focus-visible styling).
-
 ---
 
 ## Secondary entry points
@@ -77,31 +98,16 @@ export const appConfig: ApplicationConfig = {
 | Import | Purpose |
 |--------|---------|
 | `brightrail` | Components, platform, i18n |
-| `brightrail/testing` | Unit-test harnesses (`BrightrailButtonHarness`, …) |
-| `brightrail/governance` | Adoption checklist & semver policy |
-| `brightrail/styles/brightrail-root.scss` | Design tokens + RTL helpers |
+| `brightrail/testing` | Test harnesses |
+| `brightrail/governance` | Adoption checklist |
+| `brightrail/styles/brightrail-root.scss` | Global tokens |
 
 ---
 
-## Accessibility
+## Docs on GitHub
 
-Brightrail ships CDK focus trap, live announcer, and WAI-ARIA keyboard patterns inside every component. Call **`provideBrightrailPlatform()` once** at bootstrap — you do not need to wire focus traps or listbox keyboard handlers yourself.
-
----
-
-## Maintainers — releases
-
-npm publish is **tag-driven** (pushing `main` alone does not publish).
-
-```bash
-# 1. Bump version in projects/brightrail/package.json + root package.json
-git add projects/brightrail/package.json package.json
-git commit -m "chore: release brightrail v0.1.1"
-git push origin main
-
-# 2. Tag triggers GitHub Actions → npm publish
-git tag v0.1.1
-git push origin v0.1.1
-```
-
-Details: [doc/PUBLISHING.md on GitHub](https://github.com/chandansingh7/brightrail/blob/main/doc/PUBLISHING.md)
+- [CHANGELOG.md](https://github.com/chandansingh7/brightrail/blob/main/CHANGELOG.md) — release notes  
+- [CONSUMING.md](https://github.com/chandansingh7/brightrail/blob/main/doc/CONSUMING.md) — install & setup  
+- [COMPONENTS.md](https://github.com/chandansingh7/brightrail/blob/main/doc/COMPONENTS.md) — folder map  
+- [LIMITATIONS.md](https://github.com/chandansingh7/brightrail/blob/main/doc/LIMITATIONS.md) — constraints  
+- [PUBLISHING.md](https://github.com/chandansingh7/brightrail/blob/main/doc/PUBLISHING.md) — npm releases  

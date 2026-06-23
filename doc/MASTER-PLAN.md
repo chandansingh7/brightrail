@@ -63,6 +63,9 @@ Detailed phased checklist: [ENTERPRISE-RESEARCH-ALIGNMENT.md § Phased plan](./E
 | [MASTER-PLAN.md](./MASTER-PLAN.md) | **This file** — entry point, roadmap, index. |
 | [PLAN.md](./PLAN.md) | Workspace goals, layout, workflow, testing, publishing, a11y baseline, checklist, **Funfair playground standard layout** (settings-driven pages). |
 | [CONSUMING.md](./CONSUMING.md) | **App developers** — install Brightrail in any Angular 21 project (`ng add`, styles, providers, imports). |
+| [COMPONENTS.md](./COMPONENTS.md) | **Component map** — `lib/` folder structure, imports, per-area limitations. |
+| [LIMITATIONS.md](./LIMITATIONS.md) | **Quick limitation index** — table constraints and summary table. |
+| [CONSUMER-PATTERNS.md](./CONSUMER-PATTERNS.md) | **Recipes** — select, table server mode, booking dates, row actions. |
 | [PUBLISHING.md](./PUBLISHING.md) | **Maintainers** — npm publish, **`NPM_TOKEN`** GitHub secret, tag-based CI releases. |
 | [COMPONENT-VARIATIONS-PLAN.md](./COMPONENT-VARIATIONS-PLAN.md) | One component per funfair page; variants & use cases; snippets; a11y requirements; funfair UI patterns. |
 | [ENTERPRISE-RESEARCH-ALIGNMENT.md](./ENTERPRISE-RESEARCH-ALIGNMENT.md) | Grades the research report; maps enterprise ideas to this library; phased adoption. |

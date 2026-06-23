@@ -37,6 +37,7 @@ import {
   compareDay,
   firstDayOfMonthFrom,
   formatBrightrailDate,
+  formatIsoDate,
   isSameDay,
   startOfMonth,
   stripTime,
@@ -154,6 +155,11 @@ export class BrightrailDatePickerComponent implements ControlValueAccessor {
   readonly disableWeekends = input(false);
   readonly minDate = input<Date | null>(null);
   readonly maxDate = input<Date | null>(null);
+  /**
+   * When non-empty, only these ISO dates (`YYYY-MM-DD`) are selectable (slot-based booking).
+   * Still respects `minDate`, `maxDate`, `disableWeekends`, and `dateFilter`.
+   */
+  readonly enabledDates = input<readonly string[]>([]);
 
   readonly inputId = input<string | undefined>(undefined);
   readonly ariaLabel = input<string | undefined>(undefined);
@@ -185,6 +191,10 @@ export class BrightrailDatePickerComponent implements ControlValueAccessor {
   );
 
   readonly effectiveDisabled = computed(() => this.disabled() || this.disabledFromCva());
+
+  private readonly enabledDateSet = computed(
+    () => new Set(this.enabledDates().map((iso) => iso.trim()).filter(Boolean)),
+  );
 
   readonly resolvedHintText = computed((): string | undefined => {
     const custom = this.helperText()?.trim();
@@ -608,6 +618,10 @@ export class BrightrailDatePickerComponent implements ControlValueAccessor {
       if (w === 0 || w === 6) {
         return true;
       }
+    }
+    const allowlist = this.enabledDateSet();
+    if (allowlist.size > 0 && !allowlist.has(formatIsoDate(day))) {
+      return true;
     }
     try {
       return this.dateFilter()(day);

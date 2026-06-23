@@ -17,6 +17,15 @@ export function compareDay(a: Date, b: Date): number {
   return stripTime(a).getTime() - stripTime(b).getTime();
 }
 
+/** Local calendar date as `YYYY-MM-DD` (for booking allowlists). */
+export function formatIsoDate(d: Date): string {
+  const day = stripTime(d);
+  const y = day.getFullYear();
+  const m = String(day.getMonth() + 1).padStart(2, '0');
+  const dd = String(day.getDate()).padStart(2, '0');
+  return `${y}-${m}-${dd}`;
+}
+
 export function isSameDay(a: Date, b: Date): boolean {
   return compareDay(a, b) === 0;
 }
