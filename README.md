@@ -8,9 +8,9 @@
 
 ## Install in any Angular 21 app
 
-**npm package:** [npmjs.com/package/brightrail](https://www.npmjs.com/package/brightrail) (published: **v0.1.1** · next: **[v0.1.2](./CHANGELOG.md#012--unreleased-on-npm)**)
+**npm package:** [npmjs.com/package/brightrail](https://www.npmjs.com/package/brightrail) (current: **v0.1.2** · see **[CHANGELOG.md](./CHANGELOG.md)**)
 
-### Upcoming in v0.1.2 (on `main`, not on npm yet)
+### v0.1.2 highlights
 
 | Area | Change |
 |------|--------|
@@ -23,8 +23,6 @@
 | **Docs** | `COMPONENTS.md`, `LIMITATIONS.md`, `CONSUMER-PATTERNS.md` |
 
 Full notes: **[CHANGELOG.md](./CHANGELOG.md)** · Consumer recipes: **[doc/CONSUMER-PATTERNS.md](doc/CONSUMER-PATTERNS.md)**
-
-To publish v0.1.2 to npm: commit to `main`, then `git tag v0.1.2 && git push origin v0.1.2`.
 
 In a new or existing **Angular 21** project:
 

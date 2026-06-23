@@ -2,8 +2,7 @@
 
 Fun Angular component library for **Angular 21.x** apps.
 
-**npm:** [npmjs.com/package/brightrail](https://www.npmjs.com/package/brightrail) (published: **v0.1.1**)  
-**Next release:** [CHANGELOG.md — v0.1.2](https://github.com/chandansingh7/brightrail/blob/main/CHANGELOG.md#012--unreleased-on-npm) (alert fallback, glass card fix, table server mode, `lib/` folder, docs)
+**npm:** [npmjs.com/package/brightrail](https://www.npmjs.com/package/brightrail) (current: **v0.1.2**)
 **Repository:** [github.com/chandansingh7/brightrail](https://github.com/chandansingh7/brightrail)  
 **Live playground:** [chandansingh7.github.io/brightrail](https://chandansingh7.github.io/brightrail/)
 

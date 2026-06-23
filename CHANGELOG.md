@@ -6,9 +6,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
-## [0.1.2] — unreleased on npm
+## [0.1.2] — 2026-06-23
 
-> **Status:** Merged on `main`. Publish by tagging `v0.1.2` (see [README — Future releases](./README.md#future-releases-maintainers)).
+> Published to npm as **`brightrail@0.1.2`** (tag `v0.1.2`).
 
 ### Added
 
